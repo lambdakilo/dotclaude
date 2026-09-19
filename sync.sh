@@ -1,11 +1,20 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# Copies the mirrored files from the local Claude Code configuration directory
-# into this checkout, then scans everything that would be published for values
-# that must stay private: the local user name and home path, the git identity,
-# email addresses, and strings that look like credentials. Exits non-zero when
-# the scan finds any, so nothing gets committed by reflex.
+# Keeps the mirrored files in sync between the local Claude Code configuration
+# directory and this checkout, in both directions, then scans everything that
+# would be published for values that must stay private. Exits non-zero on a
+# conflict or a scan hit, so nothing gets committed by reflex.
+#
+#   sync.sh            pull, reconcile, scan, show git status
+#   sync.sh --install  copy every mirrored file from the checkout into the
+#                      configuration directory (first run on a new machine);
+#                      an existing file that differs is kept as <file>.bak
+#
+# Reconciling: a file the pull changed is installed locally, a file changed
+# locally is copied into the checkout, and a file changed on both sides stops
+# the run. Literals listed one per line in sync-allow.txt are exempt from the
+# scan.
 
 set -euo pipefail
 
@@ -18,30 +27,79 @@ mirrored=(
   hooks/git-fetch-prune.sh
 )
 
+install_file() {
+  mkdir -p "$(dirname "$2")"
+  cp "$1" "$2"
+}
+
+if [ "${1:-}" = "--install" ]; then
+  for path in "${mirrored[@]}"; do
+    target="$source_dir/$path"
+    if [ -f "$target" ] && ! cmp -s "$checkout/$path" "$target"; then
+      cp "$target" "$target.bak"
+    fi
+    install_file "$checkout/$path" "$target"
+  done
+  exit 0
+fi
+
+cd "$checkout"
+before="$(git rev-parse HEAD)"
+if ! git pull --ff-only --quiet 2>/dev/null; then
+  echo "sync: pull failed, reconciling against the local HEAD only" >&2
+fi
+
+same_as_commit() {
+  git cat-file -e "$1:$2" 2>/dev/null && git show "$1:$2" | cmp -s - "$3"
+}
+
+failed=0
 for path in "${mirrored[@]}"; do
-  mkdir -p "$checkout/$(dirname "$path")"
-  cp "$source_dir/$path" "$checkout/$path"
+  local_file="$source_dir/$path"
+  repo_file="$checkout/$path"
+  if [ ! -f "$local_file" ]; then
+    install_file "$repo_file" "$local_file"
+    continue
+  fi
+  if git diff --quiet "$before" HEAD -- "$path"; then
+    cmp -s "$local_file" "$repo_file" || install_file "$local_file" "$repo_file"
+  elif same_as_commit "$before" "$path" "$local_file"; then
+    install_file "$repo_file" "$local_file"
+  elif ! cmp -s "$local_file" "$repo_file"; then
+    echo "sync: $path changed both locally and in the pulled commits, merge by hand" >&2
+    failed=1
+  fi
 done
 
-if command -v jq >/dev/null 2>&1; then
-  jq empty "$checkout/settings.json"
+allow_args=()
+if [ -f "$checkout/sync-allow.txt" ]; then
+  while IFS= read -r line || [ -n "$line" ]; do
+    if [ -n "$line" ]; then
+      allow_args+=(-e "$line")
+    fi
+  done < "$checkout/sync-allow.txt"
 fi
 
 files=()
 while IFS= read -r -d '' path; do
-  case "$path" in LICENSE*) continue ;; esac
+  case "$path" in LICENSE*|sync-allow.txt) continue ;; esac
   files+=("$path")
-done < <(cd "$checkout" && git ls-files -z --cached --others --exclude-standard)
-[ "${#files[@]}" -gt 0 ] || exit 0
+done < <(git ls-files -z --cached --others --exclude-standard)
+if [ "${#files[@]}" -eq 0 ]; then
+  exit "$failed"
+fi
 
-failed=0
 scan() {
   local label="$1"
   shift
   local hits
-  if hits="$(cd "$checkout" && grep -n "$@" -- "${files[@]}" 2>/dev/null | cut -d: -f1,2)"; then
+  hits="$(grep -n "$@" -- "${files[@]}" 2>/dev/null || true)"
+  if [ -n "$hits" ] && [ "${#allow_args[@]}" -gt 0 ]; then
+    hits="$(printf '%s\n' "$hits" | grep -v -F "${allow_args[@]}" || true)"
+  fi
+  if [ -n "$hits" ]; then
     printf 'sync: %s in\n' "$label" >&2
-    printf '%s\n' "$hits" | sed 's/^/  /' >&2
+    printf '%s\n' "$hits" | cut -d: -f1,2 | sed 's/^/  /' >&2
     failed=1
   fi
 }
@@ -71,5 +129,5 @@ scan "credential-like string" -E \
 scan "credential-like assignment" -i -E \
   -e '(api[_-]?key|secret|token|passw(or)?d)[^A-Za-z0-9]{0,3}[:=][^A-Za-z0-9]{0,3}[A-Za-z0-9/+_.-]{16,}'
 
-(cd "$checkout" && git status --short)
+git status --short
 exit "$failed"

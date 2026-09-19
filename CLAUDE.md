@@ -23,6 +23,23 @@ apply to one repository belong in that repository's project memory.
   pruning at most once every 15 minutes per repository, with every credential prompt disabled so
   it can never hang a prompt. It is a safety net, not a substitute for fetching before a decision.
 
+## Commit messages
+
+- Every commit message carries the prompts behind it. After the subject line and a blank line
+  comes the line `LLM prompts behind this commit (Claude Code, model <id>, effort <level>):`
+  with the model id and effort level of the running session, taken from the session or from
+  `model` and `modelSettings` in `~/.claude/settings.json`, never from memory. Then come the
+  prompts given since the session's previous commit, or since the start of the session for its
+  first commit, numbered as in the session, each as its number on its own line followed by the
+  prompt as `>` quoted lines, verbatim, typos and lowercase included. Mark answers to questions
+  with a short parenthetical, and put AskUserQuestion selections as nested `>` lines under the
+  prompt. When those prompts use abbreviations, an `Abbreviations:` section follows with one
+  line per abbreviation and its expansion.
+- The PR rules on exclusion and redaction apply to commit messages too: leave out meta prompts,
+  and in public and upstream repositories redact downstream project, client and customer names
+  with square brackets. The one exception is the public configuration repository, where prompts
+  about this file or about Claude Code settings are the prompts behind the change and stay in.
+
 ## Pull requests
 
 - Open PRs as drafts.
@@ -114,23 +131,31 @@ apply to one repository belong in that repository's project memory.
 
 - The parts of `~/.claude` that help other people learn this workflow are mirrored in a public
   git repository. Its checkout lives at `~/src/dotclaude`. Mirrored today: this file,
-  `settings.json` and `hooks/`. The checkout also holds its own `README.md`, licence texts and
-  `sync.sh`, which copies the mirrored files in from `~/.claude` and exits non-zero when it finds
-  the local user name, a home path, the git identity, an email address, or anything that looks
-  like a credential.
+  `settings.json` and `hooks/`. The checkout also holds its own `README.md` (licence only),
+  licence texts, `sync.sh` and `sync-allow.txt`.
+- `sync.sh` pulls the checkout fast-forward, then reconciles each mirrored file: one the pull
+  changed is installed into `~/.claude`, one changed locally is copied into the checkout, and one
+  changed on both sides stops the run for a manual merge. It then scans everything that would be
+  published for the local user name, home paths, the git identity, email addresses and
+  credential-shaped strings, exits non-zero on a hit, and prints `git status`. Literals listed
+  in `sync-allow.txt`, such as the address the user chose to publish, are exempt.
 - Whenever a session changes a mirrored file, run `sync.sh`, read the diff, commit and push to
   the default branch in the same turn. No PR: the checkout has one owner. When a new file under
   `~/.claude` would help other people (a hook, a skill, a command, an agent), add it to the list
   in `sync.sh` first.
-- That repository never contains a personal name, an email address, an employer, client or
-  customer name, a project name, a secret, or anything else that discloses what the user works
-  on. Redact quoted prompts with square brackets where needed, as for upstream PRs.
-- Commit messages there quote the prompts behind the change: the subject line, a blank line, then
-  every prompt of the session in order, each as a number on its own line followed by the prompt
-  as `>` quoted lines, verbatim, typos and lowercase included. An `Abbreviations:` section with
-  one line per abbreviation and its expansion follows when the prompts use any. The meta-prompt
-  exclusion for PRs does not apply: prompts about this file or about Claude Code settings are
-  the prompts behind the change.
+- New machine: clone the repository to `~/src/dotclaude`, run `./sync.sh --install` to copy the
+  mirrored files into `~/.claude` (existing files that differ are kept as `.bak`), and set the
+  repository-local git identity to match the existing history, from
+  `git log -1 --format='%an <%ae>'`, before the first commit. Restart Claude Code so the hook
+  loads.
+- Commits there carry the repository-local identity the user set in the checkout: the public
+  account handle and a disposable address, so no personal name lands in the history. That is the
+  configured identity for that repository, and the rule above about never overriding the author
+  applies to it as it stands.
+- That repository never contains a personal name, an employer, client or customer name, a
+  project name, a secret, or anything else that discloses what the user works on. Email
+  addresses only when listed in `sync-allow.txt`. Redact quoted prompts with square brackets
+  where needed, as for upstream PRs.
 
 ## Memory hygiene
 
