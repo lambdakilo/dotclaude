@@ -1,0 +1,69 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "deny": [
+      "mcp__plugin_figma_figma__use_figma",
+      "mcp__plugin_figma_figma__generate_figma_design",
+      "mcp__plugin_figma_figma__generate_diagram",
+      "mcp__plugin_figma_figma__create_new_file",
+      "mcp__plugin_figma_figma__create_generative_plugin",
+      "mcp__plugin_figma_figma__update_generative_plugin",
+      "mcp__plugin_figma_figma__create_shader",
+      "mcp__plugin_figma_figma__update_shader",
+      "mcp__plugin_figma_figma__upload_assets",
+      "mcp__plugin_figma_figma__add_code_connect_map",
+      "mcp__plugin_figma_figma__send_code_connect_mappings",
+      "mcp__plugin_figma_figma__weave_run_tool",
+      "mcp__plugin_figma_figma__weave_upload_asset",
+      "mcp__plugin_figma_figma__weave_cancel_tool_run",
+      "mcp__plugin_figma_figma__weave_list_tools",
+      "mcp__plugin_figma_figma__weave_get_tool_inputs",
+      "mcp__plugin_figma_figma__weave_get_tool_run_output",
+      "mcp__figma__use_figma",
+      "mcp__figma__generate_figma_design",
+      "mcp__figma__generate_diagram",
+      "mcp__figma__create_new_file",
+      "mcp__figma__create_generative_plugin",
+      "mcp__figma__update_generative_plugin",
+      "mcp__figma__create_shader",
+      "mcp__figma__update_shader",
+      "mcp__figma__upload_assets",
+      "mcp__figma__add_code_connect_map",
+      "mcp__figma__send_code_connect_mappings",
+      "mcp__figma__weave_run_tool",
+      "mcp__figma__weave_upload_asset",
+      "mcp__figma__weave_cancel_tool_run",
+      "mcp__figma__weave_list_tools",
+      "mcp__figma__weave_get_tool_inputs",
+      "mcp__figma__weave_get_tool_run_output"
+    ]
+  },
+  "model": "claude-fable-5-1[1m]",
+  "enabledPlugins": {
+    "figma@claude-plugins-official": true
+  },
+  "modelSettings": {
+    "claude-opus-5": {},
+    "claude-fable-5-1": {
+      "effortLevel": "xhigh"
+    }
+  },
+  "theme": "dark",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/git-fetch-prune.sh\"",
+            "async": true,
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}
