@@ -29,8 +29,9 @@ apply to one repository belong in that repository's project memory.
   comes the line `LLM prompts behind this commit (Claude Code, model <id>, effort <level>):`
   with the model id and effort level of the running session, taken from the session or from
   `model` and `modelSettings` in `~/.claude/settings.json`, never from memory. Then come the
-  prompts given since the session's previous commit, or since the start of the session for its
-  first commit, numbered as in the session, each as its number on its own line followed by the
+  prompts behind the change: those given since the session's previous commit, every prompt of
+  the session for its first commit, and for a follow-up to a commit made under the same prompt
+  that prompt again. They keep their session numbers, each on its own line followed by the
   prompt as `>` quoted lines, verbatim, typos and lowercase included. Mark answers to questions
   with a short parenthetical, and put AskUserQuestion selections as nested `>` lines under the
   prompt. When those prompts use abbreviations, an `Abbreviations:` section follows with one

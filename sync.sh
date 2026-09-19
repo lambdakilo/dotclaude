@@ -32,10 +32,18 @@ install_file() {
   cp "$1" "$2"
 }
 
+same_file() {
+  [ "$(git hash-object "$1")" = "$(git hash-object "$2")" ]
+}
+
+same_as_commit() {
+  [ "$(git rev-parse --verify --quiet "$1:$2")" = "$(git hash-object "$3")" ]
+}
+
 if [ "${1:-}" = "--install" ]; then
   for path in "${mirrored[@]}"; do
     target="$source_dir/$path"
-    if [ -f "$target" ] && ! cmp -s "$checkout/$path" "$target"; then
+    if [ -f "$target" ] && ! same_file "$checkout/$path" "$target"; then
       cp "$target" "$target.bak"
     fi
     install_file "$checkout/$path" "$target"
@@ -49,10 +57,6 @@ if ! git pull --ff-only --quiet 2>/dev/null; then
   echo "sync: pull failed, reconciling against the local HEAD only" >&2
 fi
 
-same_as_commit() {
-  git cat-file -e "$1:$2" 2>/dev/null && git show "$1:$2" | cmp -s - "$3"
-}
-
 failed=0
 for path in "${mirrored[@]}"; do
   local_file="$source_dir/$path"
@@ -62,10 +66,10 @@ for path in "${mirrored[@]}"; do
     continue
   fi
   if git diff --quiet "$before" HEAD -- "$path"; then
-    cmp -s "$local_file" "$repo_file" || install_file "$local_file" "$repo_file"
+    same_file "$local_file" "$repo_file" || install_file "$local_file" "$repo_file"
   elif same_as_commit "$before" "$path" "$local_file"; then
     install_file "$repo_file" "$local_file"
-  elif ! cmp -s "$local_file" "$repo_file"; then
+  elif ! same_file "$local_file" "$repo_file"; then
     echo "sync: $path changed both locally and in the pulled commits, merge by hand" >&2
     failed=1
   fi
@@ -104,7 +108,11 @@ scan() {
   fi
 }
 
-private_values=("$HOME" "$(id -un)")
+private_values=("$HOME")
+login="$(id -un)"
+if [ "$login" != root ]; then
+  private_values+=("$login")
+fi
 for key in user.name user.email; do
   value="$(git config --global "$key" 2>/dev/null || true)"
   if [ -n "$value" ]; then
