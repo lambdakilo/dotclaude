@@ -25,17 +25,27 @@ apply to one repository belong in that repository's project memory.
 
 ## Commit messages
 
-- Every commit message carries the prompts behind it. After the subject line and a blank line
-  comes the line `LLM prompts behind this commit (Claude Code, model <id>, effort <level>):`
-  with the model id and effort level of the running session, taken from the session or from
-  `model` and `modelSettings` in `~/.claude/settings.json`, never from memory. Then come the
-  prompts behind the change: those given since the session's previous commit, every prompt of
-  the session for its first commit, and for a follow-up to a commit made under the same prompt
-  that prompt again. They keep their session numbers, each on its own line followed by the
-  prompt as `>` quoted lines, verbatim, typos and lowercase included. Mark answers to questions
-  with a short parenthetical, and put AskUserQuestion selections as nested `>` lines under the
-  prompt. When those prompts use abbreviations, an `Abbreviations:` section follows with one
-  line per abbreviation and its expansion.
+- Wrap every line of a commit message at 72 columns, the subject included. Neither GitHub nor
+  `git log` reflows long lines, so they break the rendering.
+- The message proper comes first: the subject, a blank line, then a body that says what changed
+  and why. The prompts follow after another blank line, never before the body. PR bodies are the
+  other way round, as described below.
+- The prompt section opens with two lines. The first is
+  `LLM prompts behind this commit, as given to Claude Code` and the second is
+  `(model <id>, effort <level>):`, with the model id and effort level of the running session,
+  taken from the session or from `model` and `modelSettings` in `~/.claude/settings.json`,
+  never from memory. Then come the prompts behind the change: those given since the session's
+  previous commit, every prompt of the session for its first commit, and for a follow-up to a
+  commit made under the same prompt that prompt again. They keep their session numbers, each on
+  its own line followed by the prompt as `>` quoted lines, verbatim, typos and lowercase
+  included, wrapped onto further `>` lines at 72 columns. Mark answers to questions with a short
+  parenthetical, and put AskUserQuestion selections as nested `>` lines under the prompt. When
+  those prompts use abbreviations, an `Abbreviations:` section follows with one line per
+  abbreviation and its expansion.
+- Text the user pasted into a prompt (a pasted block: a log, code, a file, an address, a message
+  from someone else) is never quoted, in a commit message or in a PR body. Replace it where it
+  stood with a bracketed description of what it was, such as `[pasted: an email address]` or
+  `[pasted: 40 lines of test output]`.
 - The PR rules on exclusion and redaction apply to commit messages too: leave out meta prompts,
   and in public and upstream repositories redact downstream project, client and customer names
   with square brackets. The one exception is the public configuration repository, where prompts
@@ -67,6 +77,8 @@ apply to one repository belong in that repository's project memory.
   quoted prompts with its expansion, one per line, so a reader who does not know one can open
   the list and check. The block is always present. When the prompts use none, its only line is
   `None.`
+- Pasted text inside a quoted prompt is replaced by a bracketed description, as the commit
+  message rules say. The prompts may come before the rest of the body here, unlike in a commit.
 - Leave out meta prompts: anything about Claude Code itself, its memory, this rules file, or how
   to format the PR, even when the same prompt also asks for a small fix to the PR. Only prompts
   about the change under review belong in the PR.
@@ -132,14 +144,18 @@ apply to one repository belong in that repository's project memory.
 
 - The parts of `~/.claude` that help other people learn this workflow are mirrored in a public
   git repository. Its checkout lives at `~/src/dotclaude`. Mirrored today: this file,
-  `settings.json` and `hooks/`. The checkout also holds its own `README.md` (licence only),
-  licence texts, `sync.sh` and `sync-allow.txt`.
+  `settings.json` and `hooks/`. The checkout also holds its own `README.md`, licence texts and
+  `sync.sh`.
+- The mirrored copy keeps the name `CLAUDE.md`. A session started inside the checkout would load
+  it as project memory on top of the global file, so `settings.json` lists
+  `**/dotclaude/CLAUDE.md` in `claudeMdExcludes`. Claude Code reads no other mirrored file from
+  a repository root, so nothing else needs a different name.
 - `sync.sh` pulls the checkout fast-forward, then reconciles each mirrored file: one the pull
   changed is installed into `~/.claude`, one changed locally is copied into the checkout, and one
   changed on both sides stops the run for a manual merge. It then scans everything that would be
   published for the local user name, home paths, the git identity, email addresses and
   credential-shaped strings, exits non-zero on a hit, and prints `git status`. Literals listed
-  in `sync-allow.txt`, such as the address the user chose to publish, are exempt.
+  one per line in `sync-allow.txt`, when that file exists, are exempt.
 - Whenever a session changes a mirrored file, run `sync.sh`, read the diff, commit and push to
   the default branch in the same turn. No PR: the checkout has one owner. When a new file under
   `~/.claude` would help other people (a hook, a skill, a command, an agent), add it to the list
@@ -154,9 +170,9 @@ apply to one repository belong in that repository's project memory.
   configured identity for that repository, and the rule above about never overriding the author
   applies to it as it stands.
 - That repository never contains a personal name, an employer, client or customer name, a
-  project name, a secret, or anything else that discloses what the user works on. Email
-  addresses only when listed in `sync-allow.txt`. Redact quoted prompts with square brackets
-  where needed, as for upstream PRs.
+  project name, a secret, or anything else that discloses what the user works on. No email
+  address either: the disposable address lives in the checkout's git config and nowhere else.
+  Redact quoted prompts with square brackets where needed, as for upstream PRs.
 
 ## Memory hygiene
 

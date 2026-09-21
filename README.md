@@ -1,6 +1,11 @@
-# License
+# dotclaude
 
-Copyright (C) 2026 finnishprogrammer@pm.me
+A public mirror of `~/.claude`, the global Claude Code configuration directory: the rules file,
+the user settings and the hooks, with the script that keeps the two in sync.
+
+## License
+
+Copyright (C) 2026 lambdakilo
 
 Prose, meaning `CLAUDE.md` and this README, is licensed under Creative Commons
 Attribution-ShareAlike 4.0 International. See [`LICENSE-CC-BY-SA-4.0`](LICENSE-CC-BY-SA-4.0).
