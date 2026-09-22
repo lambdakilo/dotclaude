@@ -50,6 +50,9 @@ apply to one repository belong in that repository's project memory.
   and in public and upstream repositories redact downstream project, client and customer names
   with square brackets. The one exception is the public configuration repository, where prompts
   about this file or about Claude Code settings are the prompts behind the change and stay in.
+- Re-read this file from disk before writing a commit message or a PR body. A session loads it
+  once at start, so an edit made from another session while this one runs stays invisible until
+  the file is read again.
 
 ## Pull requests
 
