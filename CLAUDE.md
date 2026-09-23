@@ -57,9 +57,10 @@ apply to one repository belong in that repository's project memory.
 ## Pull requests
 
 - Open PRs as drafts.
-- Never write the pull request description. The user writes it themselves. Claude's part of the
-  body is the two collapsed blocks below and nothing else: no summary, no test plan, no
-  filled-in template sections.
+- Claude's part of the body is the two collapsed blocks below, then the repository's pull
+  request template filled in as described further down. Nothing else: no free-form summary or
+  test plan outside the template. Without a template the body ends after the blocks and the
+  user writes the description.
 - The PR body starts with two collapsed `<details>` blocks, directly under the title and above
   everything else. They are a TL;DR for the reviewer.
 - First block: `<details><summary>~/.claude/CLAUDE.md</summary>`. Inside it, put the full contents
@@ -85,18 +86,22 @@ apply to one repository belong in that repository's project memory.
 - Leave out meta prompts: anything about Claude Code itself, its memory, this rules file, or how
   to format the PR, even when the same prompt also asks for a small fix to the PR. Only prompts
   about the change under review belong in the PR.
-- Below the blocks, paste the repository's pull request template verbatim and unfilled when it
-  has one, so the user has it in place to fill in. Look in `.github/` for
-  `pull_request_template.md` or `PULL_REQUEST_TEMPLATE.md`, a `PULL_REQUEST_TEMPLATE/` directory,
-  and the same names at the repository root and under `docs/`. `gh pr create` applies the
-  template only when it composes the body interactively. `--body` and `--body-file` replace it
-  silently, so the body file has to contain the template text. Without a template the body ends
-  after the blocks.
+- Below the blocks, fill in the repository's pull request template when it has one. Look in
+  `.github/` for `pull_request_template.md` or `PULL_REQUEST_TEMPLATE.md`, a
+  `PULL_REQUEST_TEMPLATE/` directory, and the same names at the repository root and under
+  `docs/`. Keep the template's headings, comments and order, and answer each section briefly:
+  one sentence on what has changed, the issue links (`Closes #n`) and any related documents,
+  and the manual steps a reviewer follows to verify the change in the running app. A section
+  that asks a yes/no question with a checkbox for each answer, such as "Added tests?" or "Is
+  documentation up-to-date?", gets only the box that applies ticked: nothing more when the
+  answer is yes, one sentence saying why when it is no. `gh pr create` applies the template
+  only when it composes the body interactively. `--body` and `--body-file` replace it
+  silently, so the body file has to contain the template text.
 - Update the blocks after every commit and push, and also at the end of every session that
   added a prompt about the change under review, even when the session made no commit. Read
   the live body with `gh pr view <n> --json body --jq .body`, edit it as a file, write it back
-  with `gh pr edit <n> --body-file`, and re-read to confirm. Change nothing below the blocks.
-  That part of the body belongs to the user.
+  with `gh pr edit <n> --body-file`, and re-read to confirm. Below the blocks, change only a
+  template answer that a later commit made wrong, and keep every edit the user has made there.
 - Public and upstream repositories: never name a downstream project, its client or its
   customer. Say "a downstream project". Redact them in quoted prompts with square brackets, and
   redact absolute paths and container names that carry them.
