@@ -31,7 +31,7 @@ apply to one repository belong in that repository's project memory.
   and why. The prompts follow after another blank line, never before the body. PR bodies are the
   other way round, as described below.
 - The prompt section opens with two lines. The first is
-  `LLM prompts behind this commit, as given to Claude Code` and the second is
+  `Prompts behind this commit, as given to Claude Code` and the second is
   `(model <id>, effort <level>):`, with the model id and effort level of the running session,
   taken from the session or from `model` and `modelSettings` in `~/.claude/settings.json`,
   never from memory. Then come the prompts behind the change: those given since the session's
