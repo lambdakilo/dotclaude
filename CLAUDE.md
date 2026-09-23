@@ -127,6 +127,13 @@ apply to one repository belong in that repository's project memory.
   "theirs" standing in for a company. The names that apply to a repository live in its project
   memory.
 
+## Prompt feedback
+
+- End every reply with a short section headed `Prompt feedback` that says how the prompt behind
+  it could have been better: what was missing, what was ambiguous, what was unnecessary, and a
+  rewritten prompt when the change is more than a word. Keep it to a few lines. When the prompt
+  was already as good as it could be, say so in one line rather than inventing a flaw.
+
 ## Comments
 
 - Match the comment density of the file being edited and the files beside it. Look before writing
