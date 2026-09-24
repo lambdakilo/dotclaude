@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# SPDX-License-Identifier: AGPL-3.0-or-later
-#
+
 # Keeps the mirrored files in sync between the local Claude Code configuration
 # directory and this checkout, in both directions, then scans everything that
 # would be published for values that must stay private. Exits non-zero on a

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# SPDX-License-Identifier: AGPL-3.0-or-later
-#
+
 # Claude Code UserPromptSubmit hook. Inside a repository that has remotes it
 # fetches all of them with pruning, at most once per interval per repository,
 # so remote-tracking refs stay fresh without a prompt ever waiting on the
