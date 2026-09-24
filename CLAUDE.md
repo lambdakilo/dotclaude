@@ -41,7 +41,7 @@ apply to one repository belong in that repository's project memory.
   included, wrapped onto further `>` lines at 72 columns. Mark answers to questions with a short
   parenthetical, and put AskUserQuestion selections as nested `>` lines under the prompt. When
   those prompts use abbreviations, an `Abbreviations:` section follows with one line per
-  abbreviation and its expansion.
+  abbreviation and its expansion. When they use none, there is no such section.
 - Text the user pasted into a prompt (a pasted block: a log, code, a file, an address, a message
   from someone else) is never quoted, in a commit message or in a PR body. Replace it where it
   stood with a bracketed description of what it was, such as `[pasted: an email address]` or
@@ -79,8 +79,7 @@ apply to one repository belong in that repository's project memory.
 - Directly under the model line, before the first prompt, a nested
   `<details><summary>Abbreviations</summary>` block lists every abbreviation used anywhere in the
   quoted prompts with its expansion, one per line, so a reader who does not know one can open
-  the list and check. The block is always present. When the prompts use none, its only line is
-  `None.`
+  the list and check. When the prompts use none, leave the block out.
 - Pasted text inside a quoted prompt is replaced by a bracketed description, as the commit
   message rules say. The prompts may come before the rest of the body here, unlike in a commit.
 - Leave out meta prompts: anything about Claude Code itself, its memory, this rules file, or how
