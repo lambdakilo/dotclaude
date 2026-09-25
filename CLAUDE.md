@@ -96,11 +96,12 @@ apply to one repository belong in that repository's project memory.
   answer is yes, one sentence saying why when it is no. `gh pr create` applies the template
   only when it composes the body interactively. `--body` and `--body-file` replace it
   silently, so the body file has to contain the template text.
-- Update the blocks after every commit and push, and also at the end of every session that
-  added a prompt about the change under review, even when the session made no commit. Read
-  the live body with `gh pr view <n> --json body --jq .body`, edit it as a file, write it back
-  with `gh pr edit <n> --body-file`, and re-read to confirm. Below the blocks, change only a
-  template answer that a later commit made wrong, and keep every edit the user has made there.
+- Add a prompt about the change under review to the PR's prompts block in the same turn it is
+  answered, whether or not anything is committed, and refresh both blocks again after every
+  commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
+  a file, write it back with `gh pr edit <n> --body-file`, and re-read to confirm. Below the
+  blocks, change only a template answer that a later commit made wrong, and keep every edit
+  the user has made there.
 - Public and upstream repositories: never name a downstream project, its client or its
   customer. Say "a downstream project". Redact them in quoted prompts with square brackets, and
   redact absolute paths and container names that carry them.
