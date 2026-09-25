@@ -11,6 +11,12 @@ apply to one repository belong in that repository's project memory.
   (check with `git config user.email`). Never pass `-c user.email=...` or guess an address.
 - Never add `Co-Authored-By: Claude`, "Generated with Claude Code", or any Claude or Anthropic
   attribution to commits, PR bodies, or issues. The `attribution` setting also enforces this.
+- When squashing a pull request, by squash merge or by squashing its commits into one before
+  merging, add a `Co-authored-by: <name> <address>` trailer to the squashed commit for every human
+  account whose commits are being squashed, apart from the author the squashed commit already
+  carries. Take each name and address from `git log --format='%an <%ae>'` over the squashed range,
+  never from memory. GitHub drafts these trailers in its squash-merge dialog: keep them. The rule
+  above still holds, so no trailer ever names Claude or Anthropic.
 
 ## Remote state
 
