@@ -29,6 +29,14 @@ apply to one repository belong in that repository's project memory.
   pruning at most once every 15 minutes per repository, with every credential prompt disabled so
   it can never hang a prompt. It is a safety net, not a substitute for fetching before a decision.
 
+## Git commands
+
+- Use `git switch` to change branches and `git switch -c` to create one, in commands run and in
+  commands given to the user, whenever it can do the job. `git checkout` also restores files
+  from the index or another commit, so a typo or a stray path in a checkout can overwrite work
+  where a switch would refuse. Reach for `checkout` only for what `switch` and `restore`
+  cannot do, such as checking out a pathspec from a commit into the work tree.
+
 ## Commit messages
 
 - Wrap every line of a commit message at 72 columns, the subject included. Neither GitHub nor
