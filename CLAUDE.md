@@ -140,11 +140,16 @@ apply to one repository belong in that repository's project memory.
 - Name an organisation by its full registered name every time. Never "we", "ours", "they" or
   "theirs" standing in for a company. The names that apply to a repository live in its project
   memory.
-- A command the reader is meant to run goes in a fenced code block tagged with its shell, one
-  command per line, never inline in a sentence. A fenced block reads as a command and copies as
-  one, an inline span hides in the prose and breaks at the first backtick. This holds for every
-  Markdown a session writes: PR bodies, docs, memory files and chat. Naming a command in
-  passing, as this file does, stays inline.
+- A command the reader is meant to run goes in a fenced code block tagged with its shell, never
+  inline in a sentence. A fenced block reads as a command and copies as one, an inline span
+  hides in the prose and breaks at the first backtick. One command per block. Several commands
+  share a block only joined with `&&`, when they form one sequence in which each step needs the
+  one before it to have succeeded, so a paste stops at the first failure. Independent commands,
+  and alternatives, get a block each. Decide which of the two it is every time, never list
+  unjoined commands on separate lines of one block. This holds for every Markdown a session
+  writes: PR bodies, docs, memory files and chat. A command that a sentence describes rather
+  than asks the reader to run, such as the note on `gh pr create` under Pull requests above,
+  stays inline.
 
 ## Prompt feedback
 
