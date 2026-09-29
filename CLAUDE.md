@@ -157,6 +157,14 @@ apply to one repository belong in that repository's project memory.
   writes: PR bodies, docs, memory files and chat. A command that a sentence describes rather
   than asks the reader to run, such as the note on `gh pr create` under Pull requests above,
   stays inline.
+- A step in a list is no exception, and the "How to verify" steps of a PR body are where this
+  slips: the fenced block goes under the step, indented to it, not inline in the step's
+  sentence. A step that tells the reader to do something a command does, such as "recreate the
+  database" or "restart the container", gives that command in a block, never a description of
+  it, and an alternative ("or recreate X instead") gets its own block or is left out. The
+  reader of a verify step is at a terminal and pastes, so a step without its block sends them
+  to look the command up. Slipped on 2026-09-29: one verify step held a start command inline
+  and named a recreate that takes three commands without giving any.
 
 ## Prompt feedback
 
