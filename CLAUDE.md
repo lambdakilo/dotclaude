@@ -78,17 +78,22 @@ apply to one repository belong in that repository's project memory.
 ## Pull requests
 
 - Open PRs as drafts.
-- Claude's part of the body is the two collapsed blocks below, then the repository's pull
-  request template filled in as described further down. Nothing else: no free-form summary or
-  test plan outside the template. Without a template the body ends after the blocks and the
-  user writes the description.
-- The PR body starts with two collapsed `<details>` blocks, directly under the title and above
-  everything else. They are a TL;DR for the reviewer.
-- First block: `<details><summary>~/.claude/CLAUDE.md</summary>`. Inside it, put the full contents
-  of this file verbatim in a fenced ```` ```markdown ```` code block, so teammates can copy it as
-  is. It comes first because it is what gets read first. Refresh it
-  whenever this file changes. Keep it free of personal names, emails, organisation and customer
-  names and absolute home paths, as this file itself is.
+- Claude's part of the body is the two blocks below, then the repository's pull request
+  template filled in as described further down. Nothing else: no free-form summary or test
+  plan outside the template. Without a template the body ends after the blocks and the user
+  writes the description.
+- The two blocks come directly under the title and above everything else. They are a TL;DR
+  for the reviewer.
+- First block: a fenced code block holding the URL of the public configuration repository
+  described under Public configuration repository below, so teammates can read and copy the
+  rules at their source. Take the URL at runtime from the checkout's `origin` remote, with
+  `git -C ~/src/dotclaude remote get-url origin`, rewritten from the SSH form to https and
+  without the `.git` suffix, never from memory. A code block and not a Markdown link: a link's
+  visible text can differ from where it goes, while a URL the reader pastes is one they see in
+  the address bar before they go. Nothing in Markdown keeps invisible or look-alike characters
+  out of a code block, so the safeguards are the reader's look at the pasted URL and the
+  description's edit history, which names every account that changed it. This block replaced
+  a verbatim copy of this file on 2026-09-30, which went stale with every edit.
 - Second block: `<details><summary>Prompts behind this PR</summary>`. Its first line names the
   model and effort level the session ran with, for example `Model: claude-fable-5-1, effort:
   medium`. Take them from the running session, or from `model` and `modelSettings` in
@@ -118,8 +123,8 @@ apply to one repository belong in that repository's project memory.
   only when it composes the body interactively. `--body` and `--body-file` replace it
   silently, so the body file has to contain the template text.
 - Add a prompt about the change under review to the PR's prompts block in the same turn it is
-  answered, whether or not anything is committed, and refresh both blocks again after every
-  commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
+  answered, whether or not anything is committed, and refresh the prompts block again after
+  every commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
   a file, write it back with `gh pr edit <n> --body-file`, and re-read to confirm. Below the
   blocks, change only a template answer that a later commit made wrong, and keep every edit
   the user has made there.
