@@ -143,7 +143,9 @@ apply to one repository belong in that repository's project memory.
   with `--head <branch>` against that default branch.
 - Upstream PRs only when asked. First check what is already open with
   `gh pr list --repo <upstream-owner>/<repo> --author @me` and prefer adding to an open PR.
-- In a direct checkout, one draft PR at a time. Push follow-ups to it, do not open a second.
+- In a direct checkout, one draft PR per feature. Follow-ups to the work under review, including
+  tooling or docs it needs, go to that PR's branch. A different feature gets its own branch and
+  draft, even while other drafts are open.
 
 ## Prose
 
