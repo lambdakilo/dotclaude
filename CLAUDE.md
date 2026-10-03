@@ -177,10 +177,12 @@ apply to one repository belong in that repository's project memory.
   it could have been better: what was missing, what was ambiguous, what was unnecessary, and a
   rewritten prompt when the change is more than a word. Keep it to a few lines. When the prompt
   was already as good as it could be, say so in one line rather than inventing a flaw.
-- Write the rewritten prompt as the user would type it: all lowercase, names included, and
-  without characters that need the shift key when a plain one does the job, so commas and full
-  stops in place of colons, quotes, question marks and parentheses. Make it as short as it can
-  be while still being a good prompt, and never longer than a few lines.
+- Write the rewritten prompt itself as the user would type it: all lowercase, names included,
+  and without characters that need the shift key when a plain one does the job, so commas and
+  full stops in place of colons, quotes, question marks and parentheses. Make it as short as it
+  can be while still being a good prompt, and never longer than a few lines. The rest of the
+  section keeps normal capitals and punctuation, so `Rewritten: "pull pr 94 and redo the
+  review"` is right and `Rewritten: "Pull PR 94, redo the review!"` is not.
 
 ## Comments
 
