@@ -147,8 +147,9 @@ apply to one repository belong in that repository's project memory.
 
 ## Prose
 
-- No em dashes, no en dashes used as dashes, no semicolons as connectors. Use a full stop, a
-  comma, or a colon. Applies to chat, commits, PR bodies, comments, and docs.
+- No em dashes, no en dashes used as dashes. Use a full stop, a comma, a colon or a semicolon.
+  Applies to chat, commits, PR bodies, comments, and docs. Semicolons were banned too until
+  2026-10-03.
 - Name an organisation by its full registered name every time. Never "we", "ours", "they" or
   "theirs" standing in for a company. The names that apply to a repository live in its project
   memory.
