@@ -67,6 +67,18 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|fork",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/git-prune-gone-branches.sh\"",
+            "timeout": 60
+          }
+        ]
+      }
     ]
   },
   "claudeMdExcludes": [

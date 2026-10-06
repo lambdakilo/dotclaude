@@ -35,6 +35,14 @@ apply to one repository belong in that repository's project memory.
   in the background on every prompt. Inside a repository with remotes it fetches all of them with
   pruning at most once every 15 minutes per repository, with every credential prompt disabled so
   it can never hang a prompt. It is a safety net, not a substitute for fetching before a decision.
+- A `SessionStart` hook runs `~/.claude/hooks/git-prune-gone-branches.sh` when a session starts,
+  resumes, is cleared or is forked. Inside a repository with remotes it runs the fetch above, then
+  deletes every local branch whose upstream branch is gone, as long as nothing on it would be
+  lost: every commit is already on the base remote's default branch, or the branch tip is the
+  head of a pull request GitHub still holds. Every other gone branch stays, and the hook names it
+  in the session's context: mention those once in the first reply and delete only the ones the
+  user names. Deleted names and hashes go to `claude-code-deleted-branches.log` in the git
+  directory, and `git branch <name> <hash>` brings one back.
 
 ## Git commands
 
