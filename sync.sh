@@ -24,6 +24,7 @@ mirrored=(
   CLAUDE.md
   settings.json
   hooks/git-fetch-prune.sh
+  hooks/git-prune-gone-branches.sh
 )
 
 install_file() {
@@ -32,7 +33,7 @@ install_file() {
 }
 
 same_file() {
-  [ "$(git hash-object "$1")" = "$(git hash-object "$2")" ]
+  [ "$(git hash-object "$1" 2>/dev/null)" = "$(git hash-object "$2" 2>/dev/null)" ]
 }
 
 same_as_commit() {
