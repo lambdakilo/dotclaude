@@ -210,6 +210,13 @@ apply to one repository belong in that repository's project memory.
 - Run the repo's verify command (lint, typecheck, unit tests) after meaningful edits, not only at
   commit time.
 - Starting a local stack to debug is fine. Nothing may still be running when the turn ends.
+- A command that changes directory puts the change in a subshell, `(cd client && npm ci)`, or
+  uses the tool's own directory flag, such as `git -C` or `npm --prefix`, so the shell is where
+  it started when the command ends. This holds in commands run and in commands given to the
+  user. The working directory persists from one command to the next, and a later command
+  written for the project root then runs in the wrong place. Slipped on 2026-10-06: a
+  `cd playwright && npx playwright test` left the shell in `playwright/` for the rest of the
+  session.
 - Never run environment or deployment tooling against a remote environment. Confirm before
   destructive commands.
 - Prefer official features over custom glue that wraps unstable internals. If only custom works,
