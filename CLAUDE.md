@@ -138,6 +138,10 @@ apply to one repository belong in that repository's project memory.
   answer is yes, one sentence saying why when it is no. `gh pr create` applies the template
   only when it composes the body interactively. `--body` and `--body-file` replace it
   silently, so the body file has to contain the template text.
+- Test steps for a change under review, in a PR body's "How to verify" or given in chat, end
+  with the last check. No step switches the checkout back to the branch it was on before: the
+  next review's checkout replaces the branch anyway, and where to go next is the reader's call.
+  Added 2026-10-07 after review steps closed with a switch back to the previous branch.
 - Add a prompt about the change under review to the PR's prompts block in the same turn it is
   answered, whether or not anything is committed, and refresh the prompts block again after
   every commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
