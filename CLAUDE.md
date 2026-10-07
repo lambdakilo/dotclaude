@@ -141,7 +141,10 @@ apply to one repository belong in that repository's project memory.
 - Test steps for a change under review, in a PR body's "How to verify" or given in chat, end
   with the last check. No step switches the checkout back to the branch it was on before: the
   next review's checkout replaces the branch anyway, and where to go next is the reader's call.
-  Added 2026-10-07 after review steps closed with a switch back to the previous branch.
+  Automated checks come first, the verify command and then end to end, and the manual pass comes
+  last, unless the user says otherwise: a failing spec shows before the slow part, and end to end
+  never follows the manual steps. Added 2026-10-07 after review steps closed with a switch back to
+  the previous branch and put the specs after the manual pass.
 - Add a prompt about the change under review to the PR's prompts block in the same turn it is
   answered, whether or not anything is committed, and refresh the prompts block again after
   every commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
