@@ -196,6 +196,10 @@ apply to one repository belong in that repository's project memory.
   reader of a verify step is at a terminal and pastes, so a step without its block sends them
   to look the command up. Slipped on 2026-09-29: one verify step held a start command inline
   and named a recreate that takes three commands without giving any.
+- Answer first, then only what changes what the reader does next, then stop. No recap, no
+  "check by hand" section, and no numbered steps unless they are commands run in order. When
+  asked for a list, give the list and nothing around it. Added 2026-10-07 after a pass over a
+  month of transcripts found eight complaints about length and none about level.
 
 ## Prompt feedback
 
