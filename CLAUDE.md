@@ -51,13 +51,14 @@ apply to one repository belong in that repository's project memory.
   from the index or another commit, so a typo or a stray path in a checkout can overwrite work
   where a switch would refuse. Reach for `checkout` only for what `switch` and `restore`
   cannot do, such as checking out a pathspec from a commit into the work tree.
-- A branch switch moves a submodule's pin in the index but leaves its work tree where it was, so
-  after every switch in a repository with submodules run `git submodule update --init` and
-  confirm with `git status` that no submodule shows as modified. Until then a stack that
-  bind-mounts the submodule keeps running the old code, and a cache built by the previous pin
-  can fail in ways nothing logs. `gh pr checkout` is a switch too and leaves submodules alone
-  unless given `--recurse-submodules`. This holds for switches run and for switch commands given
-  to the user. Added 2026-10-07 after a review's test steps gave a branch switch without it.
+- After every branch switch in a repository with submodules, run `git submodule update --init`.
+  The switch moves each submodule's pin in the index but leaves its work tree where it was, so a
+  stack that bind-mounts the submodule keeps running the old code, and a cache built by the
+  previous pin can fail in ways nothing logs. Run the update every time, without checking first
+  whether the pin moved. `gh pr checkout` is a switch too and leaves submodules alone unless
+  given `--recurse-submodules`. This holds for switches run and for switch commands given to the
+  user. Added 2026-10-07 after a review's test steps gave a branch switch without it, and made
+  unconditional the same day.
 
 ## Commit messages
 
