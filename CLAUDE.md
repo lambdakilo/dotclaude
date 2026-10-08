@@ -251,6 +251,30 @@ apply to one repository belong in that repository's project memory.
   say so and name the drift risk before building it.
 - Probe before spending quota on rate-limited APIs. Read retry-after, no blind retry loops.
 
+## Permissions
+
+- Auto mode blocks a session from editing its own permissions, so when the auto mode
+  classifier refuses an action that an allow rule in `~/.claude/settings.json` would let
+  through, finish everything that does not depend on it, then give the user the script that
+  adds the rule, in a fenced `bash` block in the same reply, and stop. The script is a
+  `python3 - <<'EOF'` heredoc that loads the file, appends each missing rule to
+  `permissions.allow`, and writes it back with
+  `json.dumps(d, indent=2, ensure_ascii=False) + '\n'`, which round-trips the file byte for
+  byte so the diff is the rules alone. One script names every rule the turn needs:
+  `Bash(<prefix>:*)` with the prefix the refused command started with, such as
+  `Bash(gh pr reopen:*)`, or `Edit(<path>)` for a refused file edit, such as
+  `Edit(~/.claude/CLAUDE.md)`. The reply says in a line what each rule unlocks. The user
+  runs the script; after that the mirrored `settings.json` has changed, so run `sync.sh`,
+  commit and push as under Public configuration repository. Added 2026-10-08 after a
+  session in which four refusals each cost a round trip.
+- A rule matches the literal start of the command, so once it exists the session runs the
+  allowed command bare: not behind `cd ... &&`, not in a pipe, and with `~` unexpanded where
+  the rule has it. Paths in rules use `~`, never the home directory spelled out, which the
+  mirror's scan rejects. No rule gets past the classifier's self-modification and instruction
+  poisoning refusals: on 2026-10-08 an `Edit` rule for this file did not take, so an edit of
+  this file and a commit in the mirror both went to the user as a script, the edit as a
+  `python3` heredoc that inserts the text at a named anchor.
+
 ## Public configuration repository
 
 - The parts of `~/.claude` that help other people learn this workflow are mirrored in a public
