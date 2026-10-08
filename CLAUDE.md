@@ -151,6 +151,11 @@ apply to one repository belong in that repository's project memory.
   a file, write it back with `gh pr edit <n> --body-file`, and re-read to confirm. Below the
   blocks, change only a template answer that a later commit made wrong, and keep every edit
   the user has made there.
+- When a PR, draft or not, closes an issue, assign the user to that issue, with
+  `gh issue edit <n> --add-assignee <handle>` and the handle from `gh api user --jq .login`.
+  Do it when the PR is opened and again whenever its `Closes` list changes, and skip the
+  issue silently when the edit is refused for lack of permission. The board then shows who
+  holds the work without a separate step. Added 2026-10-08.
 - Public and upstream repositories: never name a downstream project, its client or its
   customer. Say "a downstream project". Redact them in quoted prompts with square brackets, and
   redact absolute paths and container names that carry them.
