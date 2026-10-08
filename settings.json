@@ -41,7 +41,10 @@
       "mcp__figma__weave_get_tool_run_output"
     ],
     "allow": [
-      "Bash(gh repo create:*)"
+      "Bash(gh repo create:*)",
+      "Bash(gh issue edit:*)",
+      "Bash(gh pr edit:*)",
+      "Bash(gh pr reopen:*)"
     ]
   },
   "model": "claude-fable-5-1[1m]",
