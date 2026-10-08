@@ -46,7 +46,9 @@
       "Bash(taito stop:local*)",
       "Bash(gh issue edit:*)",
       "Bash(gh pr edit:*)",
-      "Bash(gh pr reopen:*)"
+      "Bash(gh pr reopen:*)",
+      "Edit(~/.claude/CLAUDE.md)",
+      "Bash(git push --force-with-lease:*)"
     ]
   },
   "model": "claude-fable-5-1[1m]",
