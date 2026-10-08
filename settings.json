@@ -41,7 +41,9 @@
       "mcp__figma__weave_get_tool_run_output"
     ],
     "allow": [
-      "Bash(gh repo create:*)"
+      "Bash(gh repo create:*)",
+      "Bash(taito start:local*)",
+      "Bash(taito stop:local*)"
     ]
   },
   "model": "claude-fable-5-1[1m]",
