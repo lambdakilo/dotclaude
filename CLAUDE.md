@@ -151,6 +151,9 @@ apply to one repository belong in that repository's project memory.
   a file, write it back with `gh pr edit <n> --body-file`, and re-read to confirm. Below the
   blocks, change only a template answer that a later commit made wrong, and keep every edit
   the user has made there.
+- The prompt that says to merge is a prompt about the change too. Add it to the PR's prompts
+  block before merging, and to the prompts section of the squash commit, which is the commit
+  that prompt creates. Added 2026-10-08 after a merge prompt was left out of a PR body.
 - When a PR, draft or not, closes an issue, assign the user to that issue, with
   `gh issue edit <n> --add-assignee <handle>` and the handle from `gh api user --jq .login`.
   Do it when the PR is opened and again whenever its `Closes` list changes, and skip the
