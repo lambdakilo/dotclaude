@@ -159,6 +159,20 @@ apply to one repository belong in that repository's project memory.
   Do it when the PR is opened and again whenever its `Closes` list changes, and skip the
   issue silently when the edit is refused for lack of permission. The board then shows who
   holds the work without a separate step. Added 2026-10-08.
+- Screenshots and recordings go into the PR body when the change is visual, anything that
+  alters what a page renders, and the repository's pull request template carries the
+  `[!IMPORTANT]` alert asking for a recording or screenshots. Capture them from the local
+  stack on fixture data with a scratch Playwright script in the scratchpad, on the
+  repository's Playwright install, never a config change in the repository: one PNG per
+  manual step of "How to verify", in the state that step describes, named after the step,
+  and a WebM only where motion is the point. Upload the set through GitHub's own editor in
+  Claude in Chrome, where the user is signed in, with the user's go for the set: drop the
+  files into the PR's comment box, copy the markdown GitHub puts there, and clear the box
+  without posting. Put that markdown under the alert in a
+  `<details><summary>Screenshots</summary>` block, a blank line after the summary so the
+  images render, one line per file naming the step it shows, and write the body back with
+  `gh pr edit`. Redo the set after every push that changes what is on screen, the way the
+  prompts block is refreshed, so no reviewer judges a stale picture. Added 2026-10-09.
 - Public and upstream repositories: never name a downstream project, its client or its
   customer. Say "a downstream project". Redact them in quoted prompts with square brackets, and
   redact absolute paths and container names that carry them.
