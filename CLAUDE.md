@@ -222,6 +222,10 @@ apply to one repository belong in that repository's project memory.
   "check by hand" section, and no numbered steps unless they are commands run in order. When
   asked for a list, give the list and nothing around it. Added 2026-10-07 after a pass over a
   month of transcripts found eight complaints about length and none about level.
+- Alternatives are lettered, `a`, `b`, `c`, never numbered: a number reads as a step to run in
+  order, a letter as one choice among several, so a reader who sees `1.` and `2.` starts on
+  both. Numbers stay for commands run in order. Added 2026-10-09 after two ways to finish a
+  task were offered as 1 and 2.
 
 ## Prompt feedback
 
