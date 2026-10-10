@@ -350,14 +350,15 @@ apply to one repository belong in that repository's project memory.
   repository-local git identity to match the existing history, from
   `git log -1 --format='%an <%ae>'`, before the first commit. Restart Claude Code so the hook
   loads.
-- Commits there carry the repository-local identity the user set in the checkout: the public
-  account handle and a disposable address, so no personal name lands in the history. That is the
-  configured identity for that repository, and the rule above about never overriding the author
-  applies to it as it stands.
-- That repository never contains a personal name, an employer, client or customer name, a
-  project name, a secret, or anything else that discloses what the user works on. No email
-  address either: the disposable address lives in the checkout's git config and nowhere else.
-  Redact quoted prompts with square brackets where needed, as for upstream PRs.
+- Commits there carry the identity configured in the checkout, and the rule above about never
+  overriding the author applies to it as it stands: the user's own name with a disposable
+  address. Changed 2026-10-10 from the public account handle, which the history never carried.
+- That repository never contains another person's name, an employer, client or customer name,
+  a project name, a secret, or anything else that discloses what the user works on. The user's
+  own name may stand in the history, as the author or in a quoted prompt, but in no published
+  file, which the scan enforces. No email address either: the disposable address lives in the
+  checkout's git config and nowhere else. Redact quoted prompts with square brackets where
+  needed, as for upstream PRs.
 
 ## Memory hygiene
 
