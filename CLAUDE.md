@@ -145,6 +145,19 @@ apply to one repository belong in that repository's project memory.
   last, unless the user says otherwise: a failing spec shows before the slow part, and end to end
   never follows the manual steps. Added 2026-10-07 after review steps closed with a switch back to
   the previous branch and put the specs after the manual pass.
+- Manual steps follow the screen. Before writing one, open the component or the running page and
+  take the order of fields and clicks from it, so a dialog that shows type, then name, then
+  company is filled in that order and never in the order the step's purpose brings them to mind.
+  Every control is named by the label the reader sees, in bold, in the locale the app renders
+  (the catalog's `msgstr`, or the `msgid` when that is empty), never by what it does for the
+  flow: click **Lisää sisältö**, search for C and click its card, not "pick a content"; the
+  row's **Poista**, not "remove it". A verb alone never stands for a control. When a label is on
+  more than one control, say which: the row's, the dialog's, the bottom bar's. One action per
+  sentence, followed by what the reader should now see, and two actions that each trigger the
+  same thing get a sentence each, never "both ask too". Added 2026-10-10 after the PR 109 steps
+  put Yritys before Nimi, wrote "pick" for a three-click flow and joined two checks into one
+  sentence, so the reader made no change, saw no dialog and looked for a Takaisin that was not
+  there.
 - Add a prompt about the change under review to the PR's prompts block in the same turn it is
   answered, whether or not anything is committed, and refresh the prompts block again after
   every commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
