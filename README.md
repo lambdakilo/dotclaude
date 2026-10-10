@@ -23,10 +23,14 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   branch is the head of a pull request GitHub still holds. Other gone branches are named for the
   user to decide. Deleted names and hashes are logged in the git directory for recovery.
 - [`sync.sh`](sync.sh): pulls this checkout, copies each mirrored file whichever way it changed,
-  stops on a file changed on both sides, and scans everything for private names, paths,
-  addresses and credentials before anything gets committed. With `--install` it copies the
+  stops on a file changed on both sides, scans everything for private names, paths, addresses
+  and credentials before anything gets committed, and after a clean scan copies every published
+  file into the directories listed in `sync-mirrors.txt`. With `--install` it copies the
   mirrored files into `~/.claude` on a new machine.
 - `sync-allow.txt`: optional and absent here, one literal per line that the scan ignores.
+- `sync-mirrors.txt`: optional and ignored by git, one directory per line that gets a copy of
+  every published file, for a second copy kept in another repository. A leading `~/` stands for
+  the home directory.
 - [`LICENSE`](LICENSE) and [`LICENSE-CC-BY-SA-4.0`](LICENSE-CC-BY-SA-4.0): the licence texts,
   see below.
 

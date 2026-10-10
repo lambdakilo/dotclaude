@@ -339,6 +339,12 @@ apply to one repository belong in that repository's project memory.
   the default branch in the same turn. No PR: the checkout has one owner. When a new file under
   `~/.claude` would help other people (a hook, a skill, a command, an agent), add it to the list
   in `sync.sh` first.
+- `sync.sh` also copies every published file into each directory listed in `sync-mirrors.txt`, an
+  optional file beside it that git ignores, and prints each directory it copied into. When it
+  reports one, commit and push in that repository too, in the same turn. Which directories those
+  are and what each is for lives in the dotclaude checkout's project memory, never in this file
+  or in a tracked file, so the public repository shows the mechanism and nothing it points at.
+  Added 2026-10-10.
 - New machine: clone the repository to `~/src/dotclaude`, run `./sync.sh --install` to copy the
   mirrored files into `~/.claude` (existing files that differ are kept as `.bak`), and set the
   repository-local git identity to match the existing history, from

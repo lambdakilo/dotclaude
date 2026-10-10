@@ -14,6 +14,11 @@
 # locally is copied into the checkout, and a file changed on both sides stops
 # the run. Literals listed one per line in sync-allow.txt are exempt from the
 # scan.
+#
+# Mirrors: directories listed one per line in sync-mirrors.txt, which git
+# ignores, get a copy of every published file after a clean scan, for a second
+# copy kept in another repository. A leading ~/ stands for the home directory.
+# A file removed from this checkout is not removed from a mirror.
 
 set -euo pipefail
 
@@ -84,12 +89,25 @@ if [ -f "$checkout/sync-allow.txt" ]; then
   done < "$checkout/sync-allow.txt"
 fi
 
+mirror_dirs=()
+if [ -f "$checkout/sync-mirrors.txt" ]; then
+  while IFS= read -r line || [ -n "$line" ]; do
+    case "$line" in
+      "") ;;
+      "~/"*) mirror_dirs+=("$HOME/${line#"~/"}") ;;
+      *) mirror_dirs+=("$line") ;;
+    esac
+  done < "$checkout/sync-mirrors.txt"
+fi
+
 files=()
+scan_files=()
 while IFS= read -r -d '' path; do
-  case "$path" in LICENSE*|sync-allow.txt) continue ;; esac
   files+=("$path")
+  case "$path" in LICENSE*|sync-allow.txt) continue ;; esac
+  scan_files+=("$path")
 done < <(git ls-files -z --cached --others --exclude-standard)
-if [ "${#files[@]}" -eq 0 ]; then
+if [ "${#scan_files[@]}" -eq 0 ]; then
   exit "$failed"
 fi
 
@@ -97,7 +115,7 @@ scan() {
   local label="$1"
   shift
   local hits
-  hits="$(grep -n "$@" -- "${files[@]}" 2>/dev/null || true)"
+  hits="$(grep -n "$@" -- "${scan_files[@]}" 2>/dev/null || true)"
   if [ -n "$hits" ] && [ "${#allow_args[@]}" -gt 0 ]; then
     hits="$(printf '%s\n' "$hits" | grep -v -F "${allow_args[@]}" || true)"
   fi
@@ -136,6 +154,20 @@ scan "credential-like string" -E \
   -e '-----BEGIN [A-Z ]*PRIVATE KEY-----'
 scan "credential-like assignment" -i -E \
   -e '(api[_-]?key|secret|token|passw(or)?d)[^A-Za-z0-9]{0,3}[:=][^A-Za-z0-9]{0,3}[A-Za-z0-9/+_.-]{16,}'
+
+if [ "$failed" -eq 0 ] && [ "${#mirror_dirs[@]}" -gt 0 ]; then
+  for dir in "${mirror_dirs[@]}"; do
+    if [ ! -d "$dir" ]; then
+      echo "sync: mirror directory $dir does not exist" >&2
+      failed=1
+      continue
+    fi
+    for path in "${files[@]}"; do
+      install_file "$checkout/$path" "$dir/$path"
+    done
+    echo "sync: published files copied into $dir, commit there too"
+  done
+fi
 
 git status --short
 exit "$failed"
