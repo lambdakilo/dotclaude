@@ -154,10 +154,16 @@ apply to one repository belong in that repository's project memory.
   row's **Poista**, not "remove it". A verb alone never stands for a control. When a label is on
   more than one control, say which: the row's, the dialog's, the bottom bar's. One action per
   sentence, followed by what the reader should now see, and two actions that each trigger the
-  same thing get a sentence each, never "both ask too". Added 2026-10-10 after the PR 109 steps
-  put Yritys before Nimi, wrote "pick" for a three-click flow and joined two checks into one
-  sentence, so the reader made no change, saw no dialog and looked for a Takaisin that was not
-  there.
+  same thing get a sentence each, never "both ask too". Test data the reader creates gets the
+  shortest name that works, a, b, c or 1, 2, 3, never a prefix like pr109. A step that searches
+  by name says what to type and uses the shortest string the seed data does not contain, checked
+  with a search in the grid first. Every action the reader takes is written down, also the ones
+  that feel obvious: copy the address before pasting it, open the new tab before pasting into
+  it, log in again after logging out. A step never relies on something the reader has not been
+  told to do. Added 2026-10-10 after the PR 109 steps put Yritys before Nimi, wrote "pick" for a
+  three-click flow and joined two checks into one sentence, so the reader made no change, saw no
+  dialog and looked for a Takaisin that was not there. The same day the steps named the test
+  data pr109 a, b and c, and pasted an address the reader had never been told to copy.
 - Add a prompt about the change under review to the PR's prompts block in the same turn it is
   answered, whether or not anything is committed, and refresh the prompts block again after
   every commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
@@ -210,6 +216,13 @@ apply to one repository belong in that repository's project memory.
 - No em dashes, no en dashes used as dashes. Use a full stop, a comma, a colon or a semicolon.
   Applies to chat, commits, PR bodies, comments, and docs. Semicolons were banned too until
   2026-10-03.
+- Plain keyboard characters only, in every text a session writes: straight quotes and
+  apostrophes, `>` or the word "then" between the clicks of a path or the items of a breadcrumb,
+  three dots for an ellipsis. No typographic quotes or apostrophes, no angle quotation marks
+  such as the chevron between breadcrumbs, no guillemets, no arrow or ellipsis characters. A
+  character outside ASCII belongs only inside a word that needs it, such as ä or ö, or inside a
+  label quoted from the screen. Added 2026-10-10 after breadcrumbs were written with a chevron
+  character between them, which the reader could neither read nor type.
 - Name an organisation by its full registered name every time. Never "we", "ours", "they" or
   "theirs" standing in for a company. The names that apply to a repository live in its project
   memory.
