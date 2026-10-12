@@ -87,6 +87,12 @@ apply to one repository belong in that repository's project memory.
   and in public and upstream repositories redact downstream project, client and customer names
   with square brackets. The one exception is the public configuration repository, where prompts
   about this file or about Claude Code settings are the prompts behind the change and stay in.
+  There, and in every directory `sync.sh` mirrors into, internal or not, a quoted prompt keeps
+  only the part about the rules or the settings; the rest becomes a bracketed note such as
+  `[an ask about a downstream project left out]`, and what stays is redacted as for upstream
+  PRs, a content type's name in the project's language included, since it names the project
+  as surely as the project's name does. Added 2026-10-12 after a mirror commit quoted a whole
+  prompt that named a customer's content type and their backend vendor.
 - Re-read this file from disk before writing a commit message or a PR body. A session loads it
   once at start, so an edit made from another session while this one runs stays invisible until
   the file is read again.
@@ -374,7 +380,8 @@ apply to one repository belong in that repository's project memory.
   own name may stand in the history, as the author or in a quoted prompt, but in no published
   file, which the scan enforces. No email address either: the disposable address lives in the
   checkout's git config and nowhere else. Redact quoted prompts with square brackets where
-  needed, as for upstream PRs.
+  needed, as for upstream PRs, and quote only the part of a prompt that is about the
+  configuration, as the Commit messages section says; the mirrors follow the same rule.
 
 ## Memory hygiene
 
