@@ -170,7 +170,11 @@ apply to one repository belong in that repository's project memory.
   the verify command and the end to end run. Then only what the author's steps need: a label
   that is not on screen, a click left out, a step the seed data cannot do, a change the steps do
   not cover, a check that failed. When the steps are right as they stand, say so in a line.
-  Added 2026-10-12 after a review answered six author steps with twenty-eight of its own.
+  The reply then gives the PR's "How to verify" section rewritten with those corrections
+  applied, ready to paste over the original, and after it the places where the rest of the
+  description should have said something else: a change the body leaves out, a claim the run
+  disproved, a step that needs data the seed does not have. Added 2026-10-12 after a review
+  answered six author steps with twenty-eight of its own, and extended the same day.
 - Add a prompt about the change under review to the PR's prompts block in the same turn it is
   answered, whether or not anything is committed, and refresh the prompts block again after
   every commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
@@ -307,11 +311,10 @@ apply to one repository belong in that repository's project memory.
 - Auto mode blocks a session from editing its own permissions, so when the auto mode
   classifier refuses an action that an allow rule in `~/.claude/settings.json` would let
   through, finish everything that does not depend on it, then give the user the script that
-  adds the rule, in a fenced `bash` block in the same reply, and stop. The script is a
-  `python3 - <<'EOF'` heredoc that loads the file, appends each missing rule to
-  `permissions.allow`, and writes it back with
-  `json.dumps(d, indent=2, ensure_ascii=False) + '\n'`, which round-trips the file byte for
-  byte so the diff is the rules alone. One script names every rule the turn needs:
+  adds the rule, in a fenced `bash` block in the same reply, and stop. The script is shell:
+  `jq` appends each missing rule to `permissions.allow` and writes the file back with its
+  default two-space indent, which round-trips the file byte for byte (checked 2026-10-12), so
+  the diff is the rules alone. One script names every rule the turn needs:
   `Bash(<prefix>:*)` with the prefix the refused command started with, such as
   `Bash(gh pr reopen:*)`, or `Edit(<path>)` for a refused file edit, such as
   `Edit(~/.claude/CLAUDE.md)`. The reply says in a line what each rule unlocks. The user
@@ -323,8 +326,12 @@ apply to one repository belong in that repository's project memory.
   the rule has it. Paths in rules use `~`, never the home directory spelled out, which the
   mirror's scan rejects. No rule gets past the classifier's self-modification and instruction
   poisoning refusals: on 2026-10-08 an `Edit` rule for this file did not take, so an edit of
-  this file and a commit in the mirror both went to the user as a script, the edit as a
-  `python3` heredoc that inserts the text at a named anchor.
+  this file and a commit in the mirror both went to the user as a script, the edit as a `sed`
+  insert at a named anchor.
+- Every script handed to the user is shell, never Python or another interpreter: a `cat`
+  heredoc for a file or a block of text, `sed` for an insert at an anchor, `jq` for JSON, and
+  `git commit -F - <<'EOF'` for a commit message. Added 2026-10-12 after a rules edit went
+  out as a python3 heredoc.
 
 ## Public configuration repository
 
