@@ -164,6 +164,13 @@ apply to one repository belong in that repository's project memory.
   three-click flow and joined two checks into one sentence, so the reader made no change, saw no
   dialog and looked for a Back that was not there. The same day the steps named the test
   data pr12 a, b and c, and pasted an address the reader had never been told to copy.
+- A PR review runs the PR's own "How to verify" steps and hands back corrections to them, never a
+  test script of the reviewer's own, however complete. The reply gives the commands first, each
+  in its fenced block: the branch switch with the submodule update, whatever starts the stack,
+  the verify command and the end to end run. Then only what the author's steps need: a label
+  that is not on screen, a click left out, a step the seed data cannot do, a change the steps do
+  not cover, a check that failed. When the steps are right as they stand, say so in a line.
+  Added 2026-10-12 after a review answered six author steps with twenty-eight of its own.
 - Add a prompt about the change under review to the PR's prompts block in the same turn it is
   answered, whether or not anything is committed, and refresh the prompts block again after
   every commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
