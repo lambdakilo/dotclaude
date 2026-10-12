@@ -182,12 +182,18 @@ apply to one repository belong in that repository's project memory.
   then the manual steps in the standing form, taken from the screen and no wider than the PR's
   own steps plus the changes those steps skip. A manual step that runs a command carries that
   command in a block under it, never a description of it. Where the PR's step has a screenshot
-  or video, the matching step says to compare with it, named by the PR step it sits under. The
-  list ends with what the PR's instructions missed: state the reviewer builds by hand through
-  a workflow the specs already cover, which the PR should have seeded; a change without a
-  step; a claim the run disproved. Nothing in the reply is written to be pasted into the PR.
-  Added 2026-10-12 after a review answered six author steps with twenty-eight of its own,
-  then handed back a paste-ready section, then steps without their commands, the same day.
+  or video, the matching step names it at its start, "the PR's screenshot under step 3 shows
+  this dialog", and the comparison comes before the click that closes what the picture shows;
+  a PR that puts the picture after the OK or the save gets a line for it under what the
+  instructions missed. The list ends with what the PR's instructions missed: state the
+  reviewer builds by hand through a workflow the specs already cover, which the PR should have
+  seeded; a change without a step; a claim the run disproved; a picture placed after the step
+  it shows. That section ends with the command steps of the list, from the switch to the end
+  to end run, as GitHub markdown inside a four-backtick fence, numbered as in the reply, so
+  the PR's "How to verify" can take them over unchanged. That block is the one thing in the
+  reply written to be pasted into the PR. Added 2026-10-12 after a review answered six author
+  steps with twenty-eight of its own, then handed back a paste-ready section, then steps
+  without their commands, the same day; the picture and markdown rules came that evening.
 - Add a prompt about the change under review to the PR's prompts block in the same turn it is
   answered, whether or not anything is committed, and refresh the prompts block again after
   every commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
