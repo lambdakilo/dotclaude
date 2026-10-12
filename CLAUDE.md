@@ -176,13 +176,18 @@ apply to one repository belong in that repository's project memory.
   the verify command and the end to end run. Then only what the author's steps need: a label
   that is not on screen, a click left out, a step the seed data cannot do, a change the steps do
   not cover, a check that failed. When the steps are right as they stand, say so in a line.
-  The corrections are a few short lines of prose, one per step that needs one, and nothing in
-  the reply is written to be pasted into the PR: no rewritten "How to verify" section, no
-  replacement step, no body text. The same goes for the rest of the description: a short
-  line for each place it should have said something else, a change the body leaves out, a
-  claim the run disproved, a step that needs data the seed does not have. Added 2026-10-12
-  after a review answered six author steps with twenty-eight of its own, then handed back a
-  paste-ready section the same day.
+  The reply is one numbered list the reader follows from a cold start: the branch switch with
+  the submodule update, whatever starts the stack, the cache clear, the verify command and the
+  end to end run come first, each as its own step with its command in a fenced block under it,
+  then the manual steps in the standing form, taken from the screen and no wider than the PR's
+  own steps plus the changes those steps skip. A manual step that runs a command carries that
+  command in a block under it, never a description of it. Where the PR's step has a screenshot
+  or video, the matching step says to compare with it, named by the PR step it sits under. The
+  list ends with what the PR's instructions missed: state the reviewer builds by hand through
+  a workflow the specs already cover, which the PR should have seeded; a change without a
+  step; a claim the run disproved. Nothing in the reply is written to be pasted into the PR.
+  Added 2026-10-12 after a review answered six author steps with twenty-eight of its own,
+  then handed back a paste-ready section, then steps without their commands, the same day.
 - Add a prompt about the change under review to the PR's prompts block in the same turn it is
   answered, whether or not anything is committed, and refresh the prompts block again after
   every commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
@@ -300,14 +305,13 @@ apply to one repository belong in that repository's project memory.
 - Run the repo's verify command (lint, typecheck, unit tests) after meaningful edits, not only at
   commit time.
 - Starting a local stack to debug is fine. Nothing may still be running when the turn ends.
-- A `cd` is paired with its `cd` back at the end of the same command,
-  `cd playwright && npx playwright test; cd ..`, with the return joined by `;` so it runs
-  whether or not the step succeeded. A subshell does not count: the reader sees no return in
-  it. A tool's own directory flag, such as `git -C` or `npm --prefix`, avoids the question.
-  This holds in commands run and in commands given to the user. The working directory persists
-  from one command to the next, and a later command written for the project root then runs in
-  the wrong place. Slipped on 2026-10-06 with a bare `cd playwright && npx playwright test`,
-  and on 2026-10-07 with the same inside a subshell.
+- A command that must run in another directory uses the tool's own directory flag, such as
+  `git -C` or `npm --prefix`, and otherwise a subshell, `(cd playwright && npx playwright test)`,
+  which returns on its own. Never `cd playwright && npx playwright test; cd ..`: when the `cd`
+  fails, the return still runs and leaves the reader one level above the project. This holds
+  in commands run and in commands given to the user, since the working directory persists from
+  one command to the next. The subshell replaced the paired return on 2026-10-12, after a PR's
+  own steps showed it; the paired return had stood since 2026-10-06.
 - Never run environment or deployment tooling against a remote environment. Confirm before
   destructive commands.
 - Prefer official features over custom glue that wraps unstable internals. If only custom works,
