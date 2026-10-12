@@ -170,11 +170,13 @@ apply to one repository belong in that repository's project memory.
   the verify command and the end to end run. Then only what the author's steps need: a label
   that is not on screen, a click left out, a step the seed data cannot do, a change the steps do
   not cover, a check that failed. When the steps are right as they stand, say so in a line.
-  The reply then gives the PR's "How to verify" section rewritten with those corrections
-  applied, ready to paste over the original, and after it the places where the rest of the
-  description should have said something else: a change the body leaves out, a claim the run
-  disproved, a step that needs data the seed does not have. Added 2026-10-12 after a review
-  answered six author steps with twenty-eight of its own, and extended the same day.
+  The corrections are a few short lines of prose, one per step that needs one, and nothing in
+  the reply is written to be pasted into the PR: no rewritten "How to verify" section, no
+  replacement step, no body text. The same goes for the rest of the description: a short
+  line for each place it should have said something else, a change the body leaves out, a
+  claim the run disproved, a step that needs data the seed does not have. Added 2026-10-12
+  after a review answered six author steps with twenty-eight of its own, then handed back a
+  paste-ready section the same day.
 - Add a prompt about the change under review to the PR's prompts block in the same turn it is
   answered, whether or not anything is committed, and refresh the prompts block again after
   every commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
