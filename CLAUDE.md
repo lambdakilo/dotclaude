@@ -140,9 +140,10 @@ apply to one repository belong in that repository's project memory.
   one sentence on what has changed, the issue links (`Closes #n`) and any related documents,
   and the manual steps a reviewer follows to verify the change in the running app. A section
   that asks a yes/no question with a checkbox for each answer, such as "Added tests?" or "Is
-  documentation up-to-date?", gets only the box that applies ticked: nothing more when the
-  answer is yes, one sentence saying why when it is no. `gh pr create` applies the template
-  only when it composes the body interactively. `--body` and `--body-file` replace it
+  documentation up-to-date?", keeps only the box that applies, ticked, and the other box's
+  line is deleted rather than left empty: nothing more when the answer is yes, one sentence
+  saying why when it is no. Changed 2026-10-13 from ticking one and leaving the other.
+  `gh pr create` applies the template only when it composes the body interactively. `--body` and `--body-file` replace it
   silently, so the body file has to contain the template text.
 - Test steps for a change under review, in a PR body's "How to verify" or given in chat, end
   with the last check. No step switches the checkout back to the branch it was on before: the
