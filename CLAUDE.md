@@ -325,7 +325,12 @@ apply to one repository belong in that repository's project memory.
 
 - Run the repo's verify command (lint, typecheck, unit tests) after meaningful edits, not only at
   commit time.
-- Starting a local stack to debug is fine. Nothing may still be running when the turn ends.
+- Starting a local stack to debug is fine. Nothing may still be running when the turn ends:
+  stop the project's container stack with the project's own stop command before the reply,
+  every turn, even when the next turn will start it again, and say in the reply that it is
+  stopped. A project memory that says to keep a stack up does not override this. Made explicit
+  2026-10-13 after a turn ended with a stack up on a project memory from 2026-10-08 that said to
+  keep it up.
 - A command that must run in another directory uses the tool's own directory flag, such as
   `git -C` or `npm --prefix`, and otherwise a subshell, `(cd playwright && npx playwright test)`,
   which returns on its own. Never `cd playwright && npx playwright test; cd ..`: when the `cd`
