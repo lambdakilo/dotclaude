@@ -214,14 +214,20 @@ apply to one repository belong in that repository's project memory.
   stack on fixture data with a scratch Playwright script in the scratchpad, on the
   repository's Playwright install, never a config change in the repository: one PNG per
   manual step of "How to verify", in the state that step describes, named after the step,
-  and a WebM only where motion is the point. Upload the set through GitHub's own editor in
-  Claude in Chrome, where the user is signed in, with the user's go for the set: drop the
-  files into the PR's comment box, copy the markdown GitHub puts there, and clear the box
-  without posting. Put that markdown under the alert in a
-  `<details><summary>Screenshots</summary>` block, a blank line after the summary so the
-  images render, one line per file naming the step it shows, and write the body back with
-  `gh pr edit`. Redo the set after every push that changes what is on screen, the way the
-  prompts block is refreshed, so no reviewer judges a stale picture. Added 2026-10-09.
+  and a WebM only where motion is the point. A recording is made with `slowMo` of about 400 ms
+  on the browser launch and a pause of two or three seconds at every state a step describes,
+  since a Playwright run at full speed is too fast to follow. Upload the set through GitHub's
+  own editor in Claude in Chrome, where the user is signed in, with the user's go for the set:
+  drop the files into the PR's comment box, copy the markdown GitHub puts there, and clear the
+  box without posting. Each picture goes at the start of the step it shows, as the step's first
+  line after the number with the step's text under it, so the reader sees what to look for
+  before acting; a recording goes the same way under the first step it covers, as a bare
+  attachment URL on its own line, which GitHub renders as a player where a `[name](url)` link
+  does not. Write the body back with `gh pr edit`. Redo the set after every push that changes
+  what is on screen, the way the prompts block is refreshed, so no reviewer judges a stale
+  picture. Added 2026-10-09; the pictures moved from a details block under the alert to the
+  start of their steps on 2026-10-13, since a reader wants to know what a step looks like
+  before doing it.
 - Public and upstream repositories: never name a downstream project, its client or its
   customer. Say "a downstream project". Redact them in quoted prompts with square brackets, and
   redact absolute paths and container names that carry them.
