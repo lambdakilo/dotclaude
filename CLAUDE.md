@@ -166,10 +166,14 @@ apply to one repository belong in that repository's project memory.
   with a search in the grid first. Every action the reader takes is written down, also the ones
   that feel obvious: copy the address before pasting it, open the new tab before pasting into
   it, log in again after logging out. A step never relies on something the reader has not been
-  told to do. Added 2026-10-10 after the PR 12 steps put Company before Name, wrote "pick" for a
-  three-click flow and joined two checks into one sentence, so the reader made no change, saw no
-  dialog and looked for a Back that was not there. The same day the steps named the test
-  data pr12 a, b and c, and pasted an address the reader had never been told to copy.
+  told to do. A step that opens a page gives its full local address, such as
+  `http://localhost:3000/items`, never the page's name alone, so the reader pastes instead
+  of hunting through the navigation. Added 2026-10-10 after the PR 12 steps put Company before
+  Name, wrote "pick" for a three-click flow and joined two checks into one sentence, so the
+  reader made no change, saw no dialog and looked for a Back that was not there. The same
+  day the steps named the test data pr12 a, b and c, and pasted an address the reader had
+  never been told to copy. The address rule came on 2026-10-13, after a step said "Open Items"
+  with no URL.
 - A PR review runs the PR's own "How to verify" steps and hands back corrections to them, never a
   test script of the reviewer's own, however complete. The reply gives the commands first, each
   in its fenced block: the branch switch with the submodule update, whatever starts the stack,
