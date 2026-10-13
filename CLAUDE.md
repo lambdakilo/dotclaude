@@ -199,6 +199,13 @@ apply to one repository belong in that repository's project memory.
   reply written to be pasted into the PR. Added 2026-10-12 after a review answered six author
   steps with twenty-eight of its own, then handed back a paste-ready section, then steps
   without their commands, the same day; the picture and markdown rules came that evening.
+- Never post a comment, a review thread reply, a review or an issue comment on GitHub: every
+  word posted goes out under the user's name, and the user writes those. A review finding is
+  answered by the commit that fixes it, and the reply to the user lists, per thread, what
+  changed and in which commit, so the user can answer and resolve the threads themselves.
+  Editing a PR body or an issue the user owns, assigning, reopening and closing stay allowed,
+  as above. Added 2026-10-13 after a session answered and resolved five review threads as the
+  user.
 - Add a prompt about the change under review to the PR's prompts block in the same turn it is
   answered, whether or not anything is committed, and refresh the prompts block again after
   every commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
