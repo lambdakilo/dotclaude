@@ -219,15 +219,17 @@ apply to one repository belong in that repository's project memory.
   since a Playwright run at full speed is too fast to follow. Upload the set through GitHub's
   own editor in Claude in Chrome, where the user is signed in, with the user's go for the set:
   drop the files into the PR's comment box, copy the markdown GitHub puts there, and clear the
-  box without posting. Each picture goes at the start of the step it shows, as the step's first
-  line after the number with the step's text under it, so the reader sees what to look for
-  before acting; a recording goes the same way under the first step it covers, as a bare
-  attachment URL on its own line, which GitHub renders as a player where a `[name](url)` link
-  does not. Write the body back with `gh pr edit`. Redo the set after every push that changes
-  what is on screen, the way the prompts block is refreshed, so no reviewer judges a stale
-  picture. Added 2026-10-09; the pictures moved from a details block under the alert to the
-  start of their steps on 2026-10-13, since a reader wants to know what a step looks like
-  before doing it.
+  box without posting. Each picture goes at the start of the step it shows, never on the line
+  with the number: that line holds the number and one short clause naming what the picture
+  shows, the picture follows on its own line under it, indented to the step, and the step's
+  text comes after the picture, so the reader sees what to look for before acting. A
+  recording goes the same way under the first step it covers, as a bare attachment URL on its
+  own line, which GitHub renders as a player where a `[name](url)` link does not. Write the
+  body back with `gh pr edit`. Redo the set after every push that changes what is on screen,
+  the way the prompts block is refreshed, so no reviewer judges a stale picture. Added
+  2026-10-09; the pictures moved from a details block under the alert to the start of their
+  steps on 2026-10-13, since a reader wants to know what a step looks like before doing it,
+  and off the number's line the same day.
 - Public and upstream repositories: never name a downstream project, its client or its
   customer. Say "a downstream project". Redact them in quoted prompts with square brackets, and
   redact absolute paths and container names that carry them.
