@@ -237,9 +237,11 @@ apply to one repository belong in that repository's project memory.
   with `--head <branch>` against that default branch.
 - Upstream PRs only when asked. First check what is already open with
   `gh pr list --repo <upstream-owner>/<repo> --author @me` and prefer adding to an open PR.
-- In a direct checkout, one draft PR per feature. Follow-ups to the work under review, including
-  tooling or docs it needs, go to that PR's branch. A different feature gets its own branch and
-  draft, even while other drafts are open.
+- One draft PR per session. Everything a session is asked to change goes to the branch of the
+  PR in play, follow-ups to the work under review and unrelated small changes alike, and a
+  second PR is opened only when the user says so in that session. Until 2026-10-13 a different
+  feature got its own branch and draft, and a one-paragraph docs change went out as a second
+  draft beside the feature PR the session was on; the user closed it and had the change moved.
 
 ## Prose
 
