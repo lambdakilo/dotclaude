@@ -1,13 +1,13 @@
 export const meta = {
   name: 'weekly-review',
   description: 'Review a week of Claude Code use and propose changes to the global setup',
-  whenToUse: 'At the end of a week with tokens to spare. Optional args: {since: "YYYY-MM-DD", only: ["transcripts", "config", "doctor", "anthropic", "skills", "github"], out: "<report directory>"}. Skill repositories to compare against are listed one per line in ~/.claude/weekly-review/skill-repos.txt as "owner/repo[/path] optional note".',
+  whenToUse: 'At the end of a week with tokens to spare. Optional args: {since: "YYYY-MM-DD", only: ["transcripts", "config", "doctor", "anthropic", "skills", "github"], out: "<report directory>", margin: <usage percentage points to leave free, default 5>}. Skill repositories to compare against are listed one per line in ~/.claude/weekly-review/skill-repos.txt as "owner/repo[/path] optional note". The run reads the plan usage card between chunks of work and stops adding work before a limit would fill, using what earlier runs cost, as kept in ~/.claude/weekly-review/usage-history.jsonl.',
   phases: [
-    { title: 'Scout', detail: 'date, time window, transcripts to read' },
-    { title: 'Gather', detail: 'one agent per source, transcripts in batches' },
+    { title: 'Scout', detail: 'date, time window, transcripts to read, usage and its history' },
+    { title: 'Gather', detail: 'one agent per source, transcripts in batches, in chunks while usage allows' },
     { title: 'Merge', detail: 'dedupe and rank across sources' },
-    { title: 'Verify', detail: 'check evidence and fit of each proposal' },
-    { title: 'Report', detail: 'write the report file' },
+    { title: 'Verify', detail: 'check evidence and fit of each proposal, in chunks while usage allows' },
+    { title: 'Report', detail: 'write the report file and record what the run cost' },
   ],
 }
 
@@ -21,6 +21,15 @@ const unknown = only.filter(s => !SOURCES.includes(s))
 if (unknown.length) log(`Ignoring unknown sources: ${unknown.join(', ')}`)
 const MAX_BATCHES = 24
 const MAX_PROPOSALS = 30
+const HISTORY_FILE = '~/.claude/weekly-review/usage-history.jsonl'
+const HISTORY_RUNS = 6
+const MARGIN = typeof opts.margin === 'number' ? opts.margin : 5
+const GATHER_CHUNK = 10
+const SOURCE_ORDER = ['transcripts', 'config', 'doctor', 'github', 'anthropic', 'skills']
+const VERIFY_CHUNK = 6
+const MIN_VERIFY = 3
+// Percentage points per unit of work before anything is measured; deliberately high, replaced by measurements.
+const DEFAULT_COST = { gather: 1, merge: 1, verify: 1, report: 1 }
 
 const GROUND = `
 Ground rules for this run:
@@ -66,8 +75,12 @@ const FINDINGS = {
 
 const SCOUT = {
   type: 'object',
-  required: ['today', 'since', 'installedVersion', 'previousReports', 'sessions', 'skillRepos'],
+  required: ['today', 'since', 'installedVersion', 'previousReports', 'sessions', 'skillRepos', 'model', 'effort', 'usage', 'historyLines'],
   properties: {
+    model: { type: 'string' },
+    effort: { type: 'string' },
+    usage: { type: 'object' },
+    historyLines: { type: 'array', items: { type: 'string' } },
     skillRepos: {
       type: 'array',
       items: { type: 'object', required: ['repo', 'note'], properties: { repo: { type: 'string' }, note: { type: 'string' } } },
@@ -131,6 +144,24 @@ const REPORT = {
   properties: { path: { type: 'string' }, summary: { type: 'string' } },
 }
 
+const USAGE = {
+  type: 'object',
+  required: ['available', 'windows'],
+  properties: {
+    available: { type: 'boolean' },
+    windows: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['label', 'percentUsed', 'resetsAt'],
+        properties: { label: { type: 'string' }, percentUsed: { type: 'number' }, resetsAt: { type: 'string' } },
+      },
+    },
+  },
+}
+
+const READ_USAGE = `Load the tool mcp__ccd_session_mgmt__get_usage with ToolSearch and call it with no arguments. Return available true and its plan windows exactly as reported: label, percentUsed and resetsAt. Return available false with no windows when the tool cannot be found or its plan status is not "ok".`
+
 phase('Scout')
 const scout = await agent(`Set the time window for a weekly review of this user's Claude Code use.
 1. Run date +%F for today's date.
@@ -139,11 +170,86 @@ const scout = await agent(`Set the time window for a weekly review of this user'
 4. Run "$CLAUDE_CODE_EXECPATH" --version, the Claude Code build this session runs on, or claude --version when that variable is unset, and return the version number.
 5. ${only.includes('transcripts') ? `List the main session transcripts modified on or after since: files matching ~/.claude/projects/*/*.jsonl at depth one only, not the subagent folders below them. The project directory names start with a dash, so give find and ls ./name or absolute paths, never a bare name. Return each with its absolute path, its project directory name and its size in bytes.` : 'Transcripts are out of scope for this run. Return an empty sessions list.'}
 6. ${only.includes('skills') ? `Read ${REPOS_FILE} if it exists. Each non-empty line not starting with # names a GitHub repository as owner/repo, optionally followed by /path to a folder inside it, then optionally a note after whitespace. Return each as repo and note, the note empty when there is none. Return an empty list when the file is missing.` : 'Skill repositories are out of scope for this run. Return an empty skillRepos list.'}
+7. Return as model the model id you run on, from your own system prompt, and as effort the value of $CLAUDE_EFFORT, or "unknown" when it is unset.
+8. ${READ_USAGE} Put the result in usage, an object with available and windows.
+9. Return the lines of ${HISTORY_FILE} verbatim as historyLines, oldest first, or an empty list when the file does not exist.
 ${GROUND}`, { label: 'scout', effort: 'low', schema: SCOUT })
 
 if (!scout) return { error: 'The scout agent failed, nothing ran.' }
 log(`Window ${scout.since} to ${scout.today} (${scout.sinceReason || 'default'}), Claude Code ${scout.installedVersion}, ${scout.sessions.length} transcripts, ${scout.skillRepos.length} skill repositories`)
 if (only.includes('skills') && !scout.skillRepos.length) log(`No skill repositories listed in ${REPOS_FILE}, skipping that source`)
+
+const history = scout.historyLines
+  .map(line => { try { return JSON.parse(line) } catch (e) { return null } })
+  .filter(r => r && r.ledger)
+const sameModel = history.filter(r => r.model === scout.model)
+const sameEffort = sameModel.filter(r => r.effort === scout.effort)
+const pastRuns = (sameEffort.length ? sameEffort : sameModel).slice(-HISTORY_RUNS)
+
+const readable = u => u && u.available && Array.isArray(u.windows) && u.windows.length > 0
+let usage = readable(scout.usage) ? scout.usage : null
+const startUsage = usage
+const ledger = {}
+const showUsage = u => u.windows.map(w => `${w.label} ${w.percentUsed}%`).join(', ')
+if (usage) log(`Usage at start: ${showUsage(usage)}. Estimating from ${pastRuns.length} earlier runs on ${scout.model}, leaving ${MARGIN} points free`)
+else log('The usage card is not readable here, so the run goes without the usage guard')
+
+const sameWindow = (a, b) => a.label === b.label && Math.abs(Date.parse(a.resetsAt) - Date.parse(b.resetsAt)) < 5 * 60 * 1000
+
+function binds(label) {
+  const perModel = label.match(/^weekly[^a-z]+(.+)$/i)
+  if (!perModel || /all models/i.test(perModel[1])) return true
+  return scout.model.toLowerCase().includes(perModel[1].trim().split(/\s+/)[0].toLowerCase())
+}
+
+function record(kind, units, before, after) {
+  const byLabel = ledger[kind] = ledger[kind] || {}
+  for (const w of after.windows) {
+    const prior = before.windows.find(x => sameWindow(x, w))
+    if (!prior) continue
+    const entry = byLabel[w.label] = byLabel[w.label] || { units: 0, delta: 0 }
+    entry.units += units
+    entry.delta += Math.max(0, w.percentUsed - prior.percentUsed)
+  }
+}
+
+function estimate(kind, label) {
+  const own = ledger[kind] && ledger[kind][label]
+  if (own && own.units) return Math.max(own.delta, 1) / own.units
+  let units = 0
+  let delta = 0
+  for (const r of pastRuns) {
+    const entry = r.ledger[kind] && r.ledger[kind][label]
+    if (entry) {
+      units += entry.units
+      delta += entry.delta
+    }
+  }
+  return units ? Math.max(delta, 1) / units : DEFAULT_COST[kind]
+}
+
+function fitCount(kind, wanted, reserve) {
+  let n = wanted
+  for (const w of usage.windows) {
+    if (!binds(w.label)) continue
+    let room = 100 - MARGIN - w.percentUsed
+    for (const r in reserve) room -= reserve[r] * estimate(r, w.label)
+    n = Math.min(n, Math.max(0, Math.floor(room / estimate(kind, w.label))))
+  }
+  return n
+}
+
+async function measure(kind, units, phaseName, label) {
+  if (!usage) return
+  const after = await agent(READ_USAGE, { label, phase: phaseName, model: 'haiku', effort: 'low', schema: USAGE })
+  if (!readable(after)) {
+    log('Lost the usage card, continuing without the usage guard')
+    usage = null
+    return
+  }
+  record(kind, units, usage, after)
+  usage = after
+}
 
 const sessions = scout.sessions.slice().sort((a, b) => a.project.localeCompare(b.project) || a.path.localeCompare(b.path))
 const batches = []
@@ -282,15 +388,35 @@ ${GROUND}`,
 }
 
 phase('Gather')
-const gathered = await parallel(tasks.map(t => () =>
-  agent(t.prompt, { label: t.label, phase: 'Gather', schema: FINDINGS })
-    .then(r => (r ? { source: t.source, label: t.label, ...r } : null)),
-))
-const failed = tasks.filter((t, i) => !gathered[i]).map(t => t.label)
+const gatherQueue = SOURCE_ORDER.flatMap(s => tasks.filter(t => t.source === s))
+const gathered = []
+let skippedTasks = []
+while (gatherQueue.length) {
+  let n = Math.min(GATHER_CHUNK, gatherQueue.length)
+  if (usage) n = Math.min(n, fitCount('gather', n, { merge: 1, verify: MIN_VERIFY, report: 1 }))
+  if (!n) {
+    skippedTasks = gatherQueue.splice(0)
+    break
+  }
+  const chunk = gatherQueue.splice(0, n)
+  const out = await parallel(chunk.map(t => () =>
+    agent(t.prompt, { label: t.label, phase: 'Gather', schema: FINDINGS })
+      .then(r => (r ? { source: t.source, label: t.label, ...r } : null)),
+  ))
+  chunk.forEach((t, i) => gathered.push({ task: t, result: out[i] }))
+  await measure('gather', chunk.length, 'Gather', `usage after ${gathered.length} sources`)
+}
+if (skippedTasks.length) log(`Skipped to stay under the usage limits: ${skippedTasks.map(t => t.label).join(', ')}`)
+if (!gathered.length) {
+  return { error: `Not enough usage left to start with ${MARGIN} points kept free: ${usage ? showUsage(usage) : 'unknown'}.` }
+}
+const failed = gathered.filter(g => !g.result).map(g => g.task.label)
 if (failed.length) log(`No result from: ${failed.join(', ')}`)
-const results = gathered.filter(Boolean)
+const results = gathered.map(g => g.result).filter(Boolean)
 const allFindings = results.flatMap(r => r.findings.map(f => ({ ...f, source: r.source })))
-const coverage = results.map(r => `${r.label}: ${r.coverage}`).concat(failed.map(l => `${l}: the agent returned nothing`))
+const coverage = results.map(r => `${r.label}: ${r.coverage}`)
+  .concat(failed.map(l => `${l}: the agent returned nothing`))
+  .concat(skippedTasks.map(t => `${t.label}: skipped to stay under the usage limits`))
 log(`${allFindings.length} findings from ${results.length} of ${tasks.length} sources`)
 
 phase('Merge')
@@ -305,11 +431,12 @@ if (allFindings.length) {
 Findings, as JSON:
 ${JSON.stringify(allFindings)}
 ${GROUND}`, { label: 'merge', phase: 'Merge', schema: MERGED })) || merged
+  await measure('merge', 1, 'Merge', 'usage after merge')
 }
 log(`${merged.proposals.length} proposals to verify, ${merged.dropped.length} dropped while merging`)
 
 phase('Verify')
-const verified = await pipeline(merged.proposals, p => parallel([
+const verifyOne = p => parallel([
   () => agent(`Check the evidence for this proposal from a weekly review of the user's Claude Code setup. Open every reference it cites and decide whether the sources say what the proposal claims. Set holds to false when you cannot find the evidence or it says something else, and when unsure. Set recurring to true only when the problem shows up more than once or its single occurrence was costly.
 
 Proposal, as JSON:
@@ -325,7 +452,23 @@ Read ~/.claude/CLAUDE.md, ~/.claude/settings.json and, when the target is elsewh
 Proposal, as JSON:
 ${JSON.stringify(p)}
 ${GROUND}`, { label: `fit ${p.id}`, phase: 'Verify', schema: FIT_CHECK }),
-]).then(([evidence, fit]) => ({ ...p, evidenceCheck: evidence, fit })))
+]).then(([evidence, fit]) => ({ ...p, evidenceCheck: evidence, fit }))
+
+const verifyQueue = merged.proposals.slice()
+const verified = []
+let unchecked = []
+while (verifyQueue.length) {
+  let n = Math.min(VERIFY_CHUNK, verifyQueue.length)
+  if (usage) n = Math.min(n, fitCount('verify', n, { report: 1 }))
+  if (!n) {
+    unchecked = verifyQueue.splice(0)
+    break
+  }
+  const chunk = verifyQueue.splice(0, n)
+  verified.push(...(await pipeline(chunk, verifyOne)))
+  await measure('verify', chunk.length, 'Verify', `usage after ${verified.length} proposals`)
+}
+if (unchecked.length) log(`${unchecked.length} proposals left unchecked to stay under the usage limits`)
 
 const checked = verified.filter(Boolean)
 const kept = checked.filter(p => p.evidenceCheck && p.evidenceCheck.holds && p.fit && p.fit.verdict !== 'drop')
@@ -348,8 +491,9 @@ Sections, in this order:
 2. Changes to the setup: every other kept proposal, highest impact first. For each, the problem in a sentence or two, the change, the evidence as links or paths, and the script in a fenced bash block. Revised proposals use the revised text.
 3. Skills to try: kept proposals of kind "skill-adopt", with the repository link and the install command in a block.
 4. Changes from Anthropic: kept proposals from the anthropic and doctor sources that are not already above, with the changelog version or URL.
-5. Left out: every dropped and rejected proposal with its reason, inside a <details> block.
+5. Left out: every dropped and rejected proposal with its reason, and every proposal left unchecked to stay under the usage limits with its proposal text, inside a <details> block.
 6. Coverage: the time window, the Claude Code version, and what each source read and skipped, inside a <details> block.
+7. Usage: a short table of each plan limit at the start and before this report, then one line each on what a source and a checked proposal cost in percentage points, and what was skipped or left unchecked to stay ${MARGIN} points under the limits. Leave the section out when usage is null below.
 
 Window: ${scout.since} to ${scout.today}. Claude Code ${scout.installedVersion}.
 
@@ -362,11 +506,42 @@ ${JSON.stringify(merged.dropped)}
 Rejected in verification, as JSON:
 ${JSON.stringify(rejected)}
 
+Left unchecked to stay under the usage limits, as JSON:
+${JSON.stringify(unchecked.map(p => ({ id: p.id, kind: p.kind, title: p.title, proposal: p.proposal, target: p.target, impact: p.impact })))}
+
+Usage, as JSON (windows are plan limits in percent used, ledger is percentage points and units of work measured this run per kind):
+${JSON.stringify(startUsage ? { start: startUsage.windows, beforeReport: usage ? usage.windows : null, ledger, skippedSources: skippedTasks.map(t => t.label), estimatesFrom: pastRuns.length ? `${pastRuns.length} earlier runs` : 'defaults and this run' } : null)}
+
 Coverage notes:
 ${coverage.join('\n')}
 
 Return the path you wrote and a summary of at most five lines for the chat.
 ${GROUND}`, { label: 'report', phase: 'Report', schema: REPORT })
+await measure('report', 1, 'Report', 'usage after report')
+
+let recorded = false
+if (Object.keys(ledger).length) {
+  const entry = {
+    date: scout.today,
+    model: scout.model,
+    effort: scout.effort,
+    margin: MARGIN,
+    proposals: merged.proposals.length,
+    checked: verified.length,
+    unchecked: unchecked.length,
+    skippedSources: skippedTasks.length,
+    start: startUsage.windows.map(w => ({ label: w.label, percentUsed: w.percentUsed })),
+    end: usage ? usage.windows.map(w => ({ label: w.label, percentUsed: w.percentUsed })) : null,
+    ledger,
+  }
+  const saved = await agent(`Append one line to ${HISTORY_FILE}. Expand ~, create the directory if it is missing, and write the line with a quoted heredoc so the shell changes nothing in it:
+cat >> ${HISTORY_FILE} <<'EOF'
+${JSON.stringify(entry)}
+EOF
+Then check with tail -n 1 that the file ends with exactly that line, and return ok true when it does.`, { label: 'record usage', phase: 'Report', model: 'haiku', effort: 'low', schema: { type: 'object', required: ['ok'], properties: { ok: { type: 'boolean' } } } })
+  recorded = Boolean(saved && saved.ok)
+  if (!recorded) log(`Could not record this run's usage in ${HISTORY_FILE}`)
+}
 
 return {
   report: report ? report.path : null,
@@ -375,5 +550,8 @@ return {
   kept: kept.length,
   rejected: rejected.length + merged.dropped.length,
   failedSources: failed,
+  skippedSources: skippedTasks.map(t => t.label),
+  unchecked: unchecked.length,
+  usage: startUsage ? { start: showUsage(startUsage), end: usage ? showUsage(usage) : 'unknown', recorded } : 'not readable',
   ...(report ? {} : { proposals: kept }),
 }
