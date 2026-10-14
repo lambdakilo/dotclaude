@@ -231,10 +231,19 @@ apply to one repository belong in that repository's project memory.
   since a Playwright run at full speed is too fast to follow. Whenever screenshots or
   recordings exist for a PR and show what it changes, upload them to it in the same turn they
   are made, without asking first: a reply never ends with a set waiting for a go. Upload them
-  through GitHub's own editor in Claude in Chrome, where the user is signed in: drop the files
-  into the PR's comment box, copy the markdown GitHub puts there, and clear the box without
-  posting. The go per set was dropped on 2026-10-14 after a session captured a set and stopped
-  to ask. Each picture goes at the start of the step it shows, never on the line
+  through GitHub's own editor, where the user is signed in: drop the files into the PR's
+  comment box, copy the markdown GitHub puts there, and clear the box without posting. Use
+  Claude in Chrome when it is connected, and otherwise the app's built-in browser pane, which
+  has no file upload tool: push the files to the PR's repository on a throwaway branch built
+  with git plumbing (`hash-object`, `update-index` on a temporary index, `write-tree`,
+  `commit-tree`, `update-ref`, `push --no-verify`), then in the page fetch each from
+  `https://github.com/<owner>/<repo>/raw/<branch>/<file>` with `credentials: 'same-origin'`,
+  put the blobs in a `DataTransfer`, assign it to the comment box's `input[type=file]`,
+  dispatch a bubbling `change`, read the markdown from the textarea after a few seconds, and
+  delete the branch afterwards. A Chrome that does not connect is never a reason to stop. The
+  go per set was dropped on 2026-10-14 after a session captured a set and stopped to ask, and
+  the pane method was added the same day after the next turn stalled on a Chrome that was not
+  connected. Each picture goes at the start of the step it shows, never on the line
   with the number: that line holds the number and one short clause naming what the picture
   shows, the picture follows on its own line under it, indented to the step, and the step's
   text comes after the picture, so the reader sees what to look for before acting. A
