@@ -51,7 +51,7 @@
   },
   "model": "claude-fable-5-1[1m]",
   "enabledPlugins": {
-    "figma@claude-plugins-official": true
+    "figma@claude-plugins-official": false
   },
   "modelSettings": {
     "claude-opus-5": {},
