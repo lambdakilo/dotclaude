@@ -173,7 +173,7 @@ const scout = await agent(`Set the time window for a weekly review of this user'
 7. Return as model the model id you run on, from your own system prompt, and as effort the value of $CLAUDE_EFFORT, or "unknown" when it is unset.
 8. ${READ_USAGE} Put the result in usage, an object with available and windows.
 9. Return the lines of ${HISTORY_FILE} verbatim as historyLines, oldest first, or an empty list when the file does not exist.
-${GROUND}`, { label: 'scout', effort: 'low', schema: SCOUT })
+${GROUND}`, { label: 'scout', schema: SCOUT })
 
 if (!scout) return { error: 'The scout agent failed, nothing ran.' }
 log(`Window ${scout.since} to ${scout.today} (${scout.sinceReason || 'default'}), Claude Code ${scout.installedVersion}, ${scout.sessions.length} transcripts, ${scout.skillRepos.length} skill repositories`)
