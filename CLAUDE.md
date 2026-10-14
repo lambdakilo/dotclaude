@@ -228,10 +228,13 @@ apply to one repository belong in that repository's project memory.
   manual step of "How to verify", in the state that step describes, named after the step,
   and a WebM only where motion is the point. A recording is made with `slowMo` of about 400 ms
   on the browser launch and a pause of two or three seconds at every state a step describes,
-  since a Playwright run at full speed is too fast to follow. Upload the set through GitHub's
-  own editor in Claude in Chrome, where the user is signed in, with the user's go for the set:
-  drop the files into the PR's comment box, copy the markdown GitHub puts there, and clear the
-  box without posting. Each picture goes at the start of the step it shows, never on the line
+  since a Playwright run at full speed is too fast to follow. Whenever screenshots or
+  recordings exist for a PR and show what it changes, upload them to it in the same turn they
+  are made, without asking first: a reply never ends with a set waiting for a go. Upload them
+  through GitHub's own editor in Claude in Chrome, where the user is signed in: drop the files
+  into the PR's comment box, copy the markdown GitHub puts there, and clear the box without
+  posting. The go per set was dropped on 2026-10-14 after a session captured a set and stopped
+  to ask. Each picture goes at the start of the step it shows, never on the line
   with the number: that line holds the number and one short clause naming what the picture
   shows, the picture follows on its own line under it, indented to the step, and the step's
   text comes after the picture, so the reader sees what to look for before acting. A
