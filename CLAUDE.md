@@ -382,8 +382,8 @@ apply to one repository belong in that repository's project memory.
 
 - The parts of `~/.claude` that help other people learn this workflow are mirrored in a public
   git repository. Its checkout lives at `~/src/dotclaude`. Mirrored today: this file,
-  `settings.json` and `hooks/`. The checkout also holds its own `README.md`, licence texts and
-  `sync.sh`.
+  `settings.json`, `hooks/` and `workflows/`. The checkout also holds its own `README.md`,
+  licence texts and `sync.sh`.
 - The mirrored copy keeps the name `CLAUDE.md`. A session started inside the checkout would load
   it as project memory on top of the global file, so `settings.json` lists
   `**/dotclaude/CLAUDE.md` in `claudeMdExcludes`. Claude Code reads no other mirrored file from

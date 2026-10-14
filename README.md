@@ -1,8 +1,8 @@
 # dotclaude
 
 This is a public mirror of my `~/.claude`, the global configuration directory of Claude Code: the
-rules I have Claude Code follow in every project, my user settings and my hooks, with the script I
-use to keep this checkout and the live directory in sync.
+rules I have Claude Code follow in every project, my user settings, my hooks and a workflow, with
+the script I use to keep this checkout and the live directory in sync.
 
 The rules file names no person, organisation, customer or repository, so it can be copied as it
 stands. `./sync.sh --install` copies every mirrored file into your own `~/.claude`.
@@ -22,6 +22,14 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   nothing on them would be lost, that is when every commit is on the default branch or the
   branch is the head of a pull request GitHub still holds. Other gone branches are named for the
   user to decide. Deleted names and hashes are logged in the git directory for recovery.
+- [`workflows/weekly-review.js`](workflows/weekly-review.js): a saved Claude Code workflow, run as
+  `/weekly-review` when there are tokens left at the end of a week. It reads the week's session
+  transcripts in batches, the whole configuration, `claude doctor`, the Claude Code changelog and
+  Anthropic news since the last run, the user's own pull request reviews, and the skill repositories
+  listed in `~/.claude/weekly-review/skill-repos.txt`, which stays local. Two more agents check
+  each proposal, one that its evidence holds and one that no rule already covers it. The run
+  writes one report to `~/.claude/weekly-review/` with habits for next week and a shell script
+  for each change to the setup. It changes nothing itself.
 - [`sync.sh`](sync.sh): pulls this checkout, copies each mirrored file whichever way it changed,
   stops on a file changed on both sides, scans everything for private names, paths, addresses
   and credentials before anything gets committed, and after a clean scan copies every published
