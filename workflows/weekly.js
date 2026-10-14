@@ -1,5 +1,5 @@
 export const meta = {
-  name: 'weekly-review',
+  name: 'weekly',
   description: 'Review a week of Claude Code use and propose changes to the global setup',
   whenToUse: 'At the end of a week with tokens to spare. Optional args: {since: "YYYY-MM-DD", only: ["transcripts", "config", "doctor", "anthropic", "skills", "github"], out: "<report directory>", margin: <usage percentage points to leave free, default 5>}. Skill repositories to compare against are listed one per line in ~/.claude/weekly-review/skill-repos.txt as "owner/repo[/path] optional note". The run reads the plan usage card between chunks of work and stops adding work before a limit would fill, using what earlier runs cost, as kept in ~/.claude/weekly-review/usage-history.jsonl.',
   phases: [

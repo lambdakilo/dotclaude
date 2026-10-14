@@ -30,7 +30,7 @@ mirrored=(
   settings.json
   hooks/git-fetch-prune.sh
   hooks/git-prune-gone-branches.sh
-  workflows/weekly-review.js
+  workflows/weekly.js
 )
 
 install_file() {

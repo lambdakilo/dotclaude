@@ -22,8 +22,8 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   nothing on them would be lost, that is when every commit is on the default branch or the
   branch is the head of a pull request GitHub still holds. Other gone branches are named for the
   user to decide. Deleted names and hashes are logged in the git directory for recovery.
-- [`workflows/weekly-review.js`](workflows/weekly-review.js): a saved Claude Code workflow, run as
-  `/weekly-review` when there are tokens left at the end of a week. It reads the week's session
+- [`workflows/weekly.js`](workflows/weekly.js): a saved Claude Code workflow, run as
+  `/weekly` when there are tokens left at the end of a week. It reads the week's session
   transcripts in batches, the whole configuration, `claude doctor`, the Claude Code changelog and
   Anthropic news since the last run, the user's own pull request reviews, and the skill repositories
   listed in `~/.claude/weekly-review/skill-repos.txt`, which stays local. Two more agents check
