@@ -189,26 +189,26 @@ apply to one repository belong in that repository's project memory.
   same day the steps prefixed the test data with the PR's number, and pasted an address the
   reader had never been told to copy. The address rule came on 2026-10-13, after a step named a
   page with no URL.
-- A PR review runs the PR's own "How to verify" steps and hands back corrections to them, never a
-  test script of the reviewer's own, however complete. The reply gives the commands first, as the
-  two command steps above. Then only what the author's steps need: a label that is not on screen, a
-  click left out, a step the seed data cannot do, a change the steps do not cover, a check that
-  failed. When the steps are right as they stand, say so in a line. The reply is one numbered list
-  the reader follows from a cold start: the two command steps come first, each with its block under
-  it, then the manual steps in the standing form, taken from the screen and no wider than the PR's
-  own steps plus the changes those steps skip. A manual step that runs a command carries that
-  command in a block under it, never a description of it. Where the PR's step has a screenshot or
-  video, the matching step names it at its start, "the PR's screenshot under step 3 shows this
-  dialog", and the comparison comes before the click that closes what the picture shows; a PR that
-  puts the picture after the OK or the save gets a line for it under what the instructions missed.
-  The list ends with what the PR's instructions missed: state the reviewer builds by hand through a
-  workflow the specs already cover, which the PR should have seeded; a change without a step; a
-  claim the run disproved; a picture placed after the step it shows. That section ends with the two
-  command steps of the list as GitHub markdown inside a four-backtick fence, numbered as in the
-  reply, so the PR's "How to verify" can take them over unchanged. That block is the one thing in
-  the reply written to be pasted into the PR. Added 2026-10-12 after a review answered six author
-  steps with twenty-eight of its own, then handed back a paste-ready section, then steps without
-  their commands, the same day; the picture and markdown rules came that evening.
+- A PR review switches the checkout to the PR's branch and leaves it there, runs the two command
+  steps above itself, and opens the reply with the results of the verify command and the end to
+  end run. "Here" or "only" in a review prompt limits where the reply goes, never what runs. Then
+  comes one numbered list the reader follows from a cold start: the two command steps, each with
+  its block under it, then the PR's own manual steps in the standing form, taken from the screen
+  and no wider than the PR's steps plus the changes those steps skip, never a test script of the
+  reviewer's own. A manual step that runs a command carries that command in a block under it,
+  never a description of it. Where the PR's step has a screenshot or video, the matching step
+  names it at its start, "the PR's screenshot under step 3 shows this dialog", and the comparison
+  comes before the click that closes what the picture shows. The list ends with what the PR's
+  instructions missed, or a line saying nothing was: a label that is not on screen; a click left
+  out; a step the seed data cannot do, or state the reviewer builds by hand through a workflow
+  the specs already cover, which the PR should have seeded; a change without a step; a check
+  that failed or a claim the run disproved; a picture placed after the step it shows. That
+  section ends with the two command steps of the list as GitHub markdown inside a four-backtick
+  fence, numbered as in the reply, so the PR's "How to verify" can take them over unchanged.
+  That block is the one thing in the reply written to be pasted into the PR. Added 2026-10-12
+  after a review answered six author steps with twenty-eight of its own, and rewritten as one
+  rule on 2026-10-15: five edits on 2026-10-12 had left a corrections-only half beside the full
+  list the user kept, and a 2026-10-10 review had read "only" as no checks.
 - Never post a comment, a review thread reply, a review or an issue comment on GitHub: every
   word posted goes out under the user's name, and the user writes those. A review finding is
   answered by the commit that fixes it, and the reply to the user lists, per thread, what
