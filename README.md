@@ -22,6 +22,10 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   nothing on them would be lost, that is when every commit is on the default branch or the
   branch is the head of a pull request GitHub still holds. Other gone branches are named for the
   user to decide. Deleted names and hashes are logged in the git directory for recovery.
+- [`hooks/claude-md-changed.sh`](hooks/claude-md-changed.sh): keeps a copy of `CLAUDE.md` for
+  each session and, once the file has changed, adds the diff to the next prompt, or blocks the
+  next commit or `gh pr` create, edit or merge once with the diff, so a session sees rule edits
+  made from another session while it runs.
 - [`hooks/no-github-posts.sh`](hooks/no-github-posts.sh): runs before every shell command and
   refuses the GitHub CLI calls that would post as the user: `gh pr comment`, `gh issue comment`,
   `gh pr review`, a close or reopen with `--comment`, and `gh api` calls that write a comment or a

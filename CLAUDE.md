@@ -96,6 +96,10 @@ apply to one repository belong in that repository's project memory.
 - Re-read this file from disk before writing a commit message or a PR body. A session loads it
   once at start, so an edit made from another session while this one runs stays invisible until
   the file is read again.
+  `~/.claude/hooks/claude-md-changed.sh` backs this up: once the file differs from the copy a
+  session last saw, it adds the diff to the next prompt, or blocks the next commit or `gh pr`
+  create, edit or merge once with the diff. Added 2026-10-14 after a session made some 25
+  commits in a week without a re-read while the file changed 25 times.
 
 ## Pull requests
 
