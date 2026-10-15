@@ -1,7 +1,7 @@
 export const meta = {
   name: 'weekly',
   description: 'Review a week of Claude Code use and propose changes to the global setup',
-  whenToUse: 'At the end of a week with tokens to spare. Optional args: {since: "YYYY-MM-DD", only: ["transcripts", "config", "doctor", "anthropic", "skills", "github"], out: "<report directory>", margin: <usage percentage points to leave free, default 5>}. Skill repositories to compare against are listed one per line in ~/.claude/weekly-review/skill-repos.txt as "owner/repo[/path] optional note". The run reads the plan usage card between chunks of work and stops adding work before a limit would fill, using what earlier runs cost, as kept in ~/.claude/weekly-review/usage-history.jsonl. When the run finishes, read the report file and show all of it in the chat, unshortened, since the user reads the report only there. The scripts stay in the scripts file until the user asks a session to apply one by its id.',
+  whenToUse: 'At the end of a week with tokens to spare. Optional args: {since: "YYYY-MM-DD", only: ["transcripts", "config", "doctor", "anthropic", "skills", "github"], out: "<report directory>", margin: <usage percentage points to leave free, default 5>}. Skill repositories to compare against are listed one per line in ~/.claude/weekly-review/skill-repos.txt as "owner/repo[/path] optional note". The run reads the plan usage card between chunks of work and stops adding work before a limit would fill, using what earlier runs cost, as kept in ~/.claude/weekly-review/usage-history.jsonl. When the run finishes, read the report file and show all of it in the chat, unshortened, since the user reads the report only there. Each proposal\'s script is in a folder named after the date beside the report, numbered in the order to apply them, and the report gives the command that runs each one.',
   phases: [
     { title: 'Scout', detail: 'date, time window, transcripts to read, usage and its history' },
     { title: 'Gather', detail: 'one agent per source, transcripts in batches, in chunks while usage allows' },
@@ -140,8 +140,29 @@ const FIT_CHECK = {
 
 const REPORT = {
   type: 'object',
-  required: ['path', 'scriptsPath', 'summary'],
-  properties: { path: { type: 'string' }, scriptsPath: { type: 'string' }, summary: { type: 'string' } },
+  required: ['path', 'summary'],
+  properties: { path: { type: 'string' }, summary: { type: 'string' } },
+}
+
+const PLAN = {
+  type: 'object',
+  required: ['steps'],
+  properties: {
+    steps: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['id', 'from', 'status', 'command', 'note'],
+        properties: {
+          id: { type: 'string' },
+          from: { type: 'string', description: 'The proposal id this step was given before ordering' },
+          status: { type: 'string', enum: ['runs', 'needs-regenerating', 'no-script'] },
+          command: { type: 'string', description: 'For runs, the shell command that runs the file, in a subshell with cd when it works in a repository. For no-script, the prompt to give a session.' },
+          note: { type: 'string' },
+        },
+      },
+    },
+  },
 }
 
 const USAGE = {
@@ -482,15 +503,29 @@ const rejected = checked.filter(p => !kept.includes(p)).map(p => ({
 log(`${kept.length} proposals kept, ${rejected.length} rejected in verification`)
 
 phase('Report')
-const report = await agent(`Write the weekly review report for the user as Markdown to ${OUT}/${scout.today}.md, and the scripts of the kept proposals to ${OUT}/${scout.today}-scripts.md. Expand ~, create the directory, and use ${scout.today}-2.md with ${scout.today}-2-scripts.md and so on if the report exists. These are the two files this run writes.
+const SCRIPTS_DIR = `${OUT}/${scout.today}`
+const keptForReport = kept.map(p => ({ id: p.id, kind: p.kind, title: p.title, problem: p.problem, proposal: p.fit.verdict === 'revise' ? p.fit.finalProposal : p.proposal, target: p.target, evidence: p.evidence, impact: p.impact, sources: p.sources, recurring: p.evidenceCheck.recurring, script: p.fit.script, fitNote: p.fit.reason }))
+const plan = await agent(`Put the kept proposals of a weekly review in the order the user should apply them, write each one's script to a file, and test the scripts in that order in a sandbox. The script files and the sandbox are what this step writes.
+1. Order: a proposal that another one depends on comes first, such as one whose edit a later script's anchor needs, or memory edits before a pass that consolidates that memory. Then higher impact before lower. Number them p1, p2 and so on in that order. Habits, kind "habit", get no number and no script.
+2. Write each script exactly as given to ${SCRIPTS_DIR}/<new id>.sh (expand ~, create the folder), with #!/usr/bin/env bash and a comment naming the review date and the proposal's original id on top, and make it executable. A last command that is git diff --no-index gets || true, since it always exits 1.
+3. Build a sandbox in the scratchpad: a fresh directory used as HOME, holding copies of ~/.claude/CLAUDE.md, settings.json, hooks/, workflows/ and skills/, every ~/.claude/projects/*/memory folder under the same directory names, ~/src/dotclaude with its origin remote set to a path that does not exist and its commit-msg hook removed, each directory listed in ~/src/dotclaude/sync-mirrors.txt as a fresh git repository with the same files, and, for any other repository a script works in, a minimal git repository with only the files the script edits, on a branch other than the default.
+4. Run every script in order with env -i HOME=<sandbox> PATH="$PATH" TMPDIR=<sandbox>/tmp LANG=en_US.UTF-8 bash <file>, from its stand-in repository when it works in one, under a time limit of two minutes each. Never run a script outside the sandbox. Record whether it exited 0, whether it changed files, and for a failure the line that explains it: an anchor not found, a term the sync.sh scan refused, or anything else.
+5. A script that fails in the sandbox stays in its file with status "needs-regenerating" and the reason in note. A proposal without a script gets status "no-script", and its command is the prompt the user gives a session to carry it out.
+
+Kept proposals, as JSON:
+${JSON.stringify(keptForReport)}
+${GROUND}`, { label: 'scripts', phase: 'Report', schema: PLAN })
+if (!plan) log('The scripts step returned nothing, so the report has no commands')
+
+const report = await agent(`Write the weekly review report for the user as Markdown to ${OUT}/${scout.today}.md. Expand ~, create the directory, and use ${scout.today}-2.md and so on if the file exists. This is the one file this step writes. The proposals' scripts are already in ${SCRIPTS_DIR}/.
 
 The user reads the report only in the chat, where the session that started the run shows all of it, so it has to read well there: at most about 25,000 characters, no scripts, no <details> blocks, and nothing said twice. Follow the Prose rules of ~/.claude/CLAUDE.md. The file needs no "Prompt feedback" section.
 
-The scripts file has one section per kept proposal that has a script, headed with its id and title, with the script in a fenced bash block exactly as given. In the report, each such proposal ends with one line saying the user can have a session apply it by its id, such as "apply p3 from the weekly report".
+Number and order the changes exactly as the plan below does, and name a proposal only by its plan id. Each change ends with its command: for status "runs", the plan's command in a fenced bash block; for "needs-regenerating", the reason in a sentence and the prompt "regenerate <id> from the weekly report" in a fenced text block; for "no-script", the plan's prompt in a fenced text block.
 
 Sections, in this order:
 1. Next week: the changes in how the user works, from the kept proposals of kind "habit". At most seven, each in two or three lines with its strongest piece of evidence.
-2. Changes to the setup: every other kept proposal, highest impact first, each in at most six lines: the id, title and impact first, the problem in a sentence or two, the change in a sentence or two, and at most three pieces of evidence as short paths or links. Revised proposals use the revised text. Then the order to apply them in, where one depends on another.
+2. Changes to the setup: first one line per impact level naming its ids, such as "High: p1, p2, p4. Medium: p3, p5.", then one line saying the commands run in the order given and commit nothing, so a session commits and pushes the dotclaude checkout afterwards. Then every other kept proposal in plan order, each in at most six lines before its command: the id, title and impact first, the problem in a sentence or two, the change in a sentence or two, and at most three pieces of evidence as short paths or links. Revised proposals use the revised text.
 3. Skills to try: kept proposals of kind "skill-adopt", with the repository link and the install command in a fenced block.
 4. Changes from Anthropic: kept proposals from the anthropic and doctor sources that are not already above, with the changelog version or URL.
 5. Left out: every dropped, rejected or unchecked proposal in one line with its reason.
@@ -517,7 +552,10 @@ ${JSON.stringify(startUsage ? { start: startUsage.windows, beforeReport: usage ?
 Coverage notes:
 ${coverage.join('\n')}
 
-Return the paths of the report and of the scripts file, and a summary of at most five lines.
+The plan, as JSON:
+${JSON.stringify(plan ? plan.steps : [])}
+
+Return the path of the report and a summary of at most five lines.
 ${GROUND}`, { label: 'report', phase: 'Report', schema: REPORT })
 await measure('report', 1, 'Report', 'usage after report')
 
@@ -547,7 +585,8 @@ Then check with tail -n 1 that the file ends with exactly that line, and return 
 
 return {
   report: report ? report.path : null,
-  scripts: report ? report.scriptsPath : null,
+  scripts: SCRIPTS_DIR,
+  plan: plan ? plan.steps.map(s => `${s.id} (${s.from}) ${s.status}`) : null,
   summary: report ? report.summary : 'The report agent returned nothing. The kept proposals are below.',
   window: `${scout.since} to ${scout.today}`,
   kept: kept.length,
