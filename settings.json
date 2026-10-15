@@ -84,6 +84,18 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/no-github-posts.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
   "claudeMdExcludes": [

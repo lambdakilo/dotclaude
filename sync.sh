@@ -53,6 +53,7 @@ mirrored=(
   settings.json
   hooks/git-fetch-prune.sh
   hooks/git-prune-gone-branches.sh
+  hooks/no-github-posts.sh
   workflows/weekly.js
 )
 

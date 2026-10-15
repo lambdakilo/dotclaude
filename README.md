@@ -22,6 +22,11 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   nothing on them would be lost, that is when every commit is on the default branch or the
   branch is the head of a pull request GitHub still holds. Other gone branches are named for the
   user to decide. Deleted names and hashes are logged in the git directory for recovery.
+- [`hooks/no-github-posts.sh`](hooks/no-github-posts.sh): runs before every shell command and
+  refuses the GitHub CLI calls that would post as the user: `gh pr comment`, `gh issue comment`,
+  `gh pr review`, a close or reopen with `--comment`, and `gh api` calls that write a comment or a
+  review, reply to a review thread or resolve one. It runs in every permission mode, bypass
+  included. Editing a PR body, assigning, and closing or reopening without a comment still work.
 - [`workflows/weekly.js`](workflows/weekly.js): a saved Claude Code workflow, run as
   `/weekly` when there are tokens left at the end of a week. It reads the week's session
   transcripts in batches, the whole configuration, `claude doctor`, the Claude Code changelog and
