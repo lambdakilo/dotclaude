@@ -15,6 +15,11 @@
 # the run. Literals listed one per line in sync-allow.txt are exempt from the
 # scan.
 #
+# Literals listed one per line in sync-deny.txt, which git ignores, fail the
+# scan wherever they appear, in any case: the names and labels of a private
+# project. sync.sh --check-message <file> checks a commit message against the
+# same list, for a commit-msg hook.
+#
 # Mirrors: directories listed one per line in sync-mirrors.txt, which git
 # ignores, get a copy of every published file after a clean scan, for a second
 # copy kept in another repository. A leading ~/ stands for the home directory.
@@ -24,6 +29,24 @@ set -euo pipefail
 
 source_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
 checkout="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+deny_args=()
+if [ -f "$checkout/sync-deny.txt" ]; then
+  while IFS= read -r line || [ -n "$line" ]; do
+    case "$line" in
+      "" | "#"*) ;;
+      *) deny_args+=(-e "$line") ;;
+    esac
+  done < "$checkout/sync-deny.txt"
+fi
+
+if [ "${1:-}" = "--check-message" ]; then
+  if [ "${#deny_args[@]}" -gt 0 ] && grep -v '^#' "$2" | grep -n -i -F "${deny_args[@]}" >&2; then
+    echo "sync: the commit message names a term from sync-deny.txt" >&2
+    exit 1
+  fi
+  exit 0
+fi
 
 mirrored=(
   CLAUDE.md
@@ -144,6 +167,9 @@ for value in "${private_values[@]}"; do
 done
 
 scan "home path" -E -e '/(Users|home)/[A-Za-z0-9._-]+'
+if [ "${#deny_args[@]}" -gt 0 ]; then
+  scan "term from sync-deny.txt" -i -F "${deny_args[@]}"
+fi
 scan "email address" -E -e '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
 scan "credential-like string" -E \
   -e '(gh[pousr]|github_pat)_[A-Za-z0-9_]{20,}' \

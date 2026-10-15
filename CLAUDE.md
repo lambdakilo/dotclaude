@@ -157,24 +157,24 @@ apply to one repository belong in that repository's project memory.
   company is filled in that order and never in the order the step's purpose brings them to mind.
   Every control is named by the label the reader sees, in bold, in the locale the app renders
   (the catalog's `msgstr`, or the `msgid` when that is empty), never by what it does for the
-  flow: click **Add item**, search for C and click its card, not "pick an item"; the
-  row's **Delete**, not "remove it". A verb alone never stands for a control. When a label is on
-  more than one control, say which: the row's, the dialog's, the bottom bar's. One action per
+  flow: click **Add item**, search for C and click its card, not "pick an item"; the row's
+  **Delete**, not "remove it". A verb alone never stands for a control. When a label is on more
+  than one control, say which: the row's, the dialog's, the bottom bar's. One action per
   sentence, followed by what the reader should now see, and two actions that each trigger the
   same thing get a sentence each, never "both ask too". Test data the reader creates gets the
-  shortest name that works, a, b, c or 1, 2, 3, never a prefix like pr12. A step that searches
-  by name says what to type and uses the shortest string the seed data does not contain, checked
-  with a search in the grid first. Every action the reader takes is written down, also the ones
-  that feel obvious: copy the address before pasting it, open the new tab before pasting into
-  it, log in again after logging out. A step never relies on something the reader has not been
-  told to do. A step that opens a page gives its full local address, such as
-  `http://localhost:3000/items`, never the page's name alone, so the reader pastes instead
-  of hunting through the navigation. Added 2026-10-10 after the PR 12 steps put Company before
-  Name, wrote "pick" for a three-click flow and joined two checks into one sentence, so the
-  reader made no change, saw no dialog and looked for a Back that was not there. The same
-  day the steps named the test data pr12 a, b and c, and pasted an address the reader had
-  never been told to copy. The address rule came on 2026-10-13, after a step said "Open Items"
-  with no URL.
+  shortest name that works, a, b, c or 1, 2, 3, never a prefix such as the PR's number. A step
+  that searches by name says what to type and uses the shortest string the seed data does not
+  contain, checked with a search in the grid first. Every action the reader takes is written
+  down, also the ones that feel obvious: copy the address before pasting it, open the new tab
+  before pasting into it, log in again after logging out. A step never relies on something the
+  reader has not been told to do. A step that opens a page gives its full local address, such
+  as `http://localhost:3000/items`, never the page's name alone, so the reader pastes instead of
+  hunting through the navigation. Added 2026-10-10 after review steps put a dialog's fields out
+  of order, wrote "pick" for a three-click flow and joined two checks into one sentence, so the
+  reader made no change, saw no dialog and looked for a back button that was not there. The
+  same day the steps prefixed the test data with the PR's number, and pasted an address the
+  reader had never been told to copy. The address rule came on 2026-10-13, after a step named a
+  page with no URL.
 - A PR review runs the PR's own "How to verify" steps and hands back corrections to them, never a
   test script of the reviewer's own, however complete. The reply gives the commands first, each
   in its fenced block: the branch switch with the submodule update, whatever starts the stack,
@@ -406,6 +406,9 @@ apply to one repository belong in that repository's project memory.
   published for the local user name, home paths, the git identity, email addresses and
   credential-shaped strings, exits non-zero on a hit, and prints `git status`. Literals listed
   one per line in `sync-allow.txt`, when that file exists, are exempt.
+  Literals listed one per line in the git-ignored `sync-deny.txt` fail the scan in any case,
+  and `sync.sh --check-message`, run from the untracked commit-msg hook of the checkout and of
+  each mirror, holds commit messages to the same list.
 - Whenever a session changes a mirrored file, run `sync.sh`, read the diff, commit and push to
   the default branch in the same turn. No PR: the checkout has one owner. When a new file under
   `~/.claude` would help other people (a hook, a skill, a command, an agent), add it to the list
@@ -431,6 +434,11 @@ apply to one repository belong in that repository's project memory.
   checkout's git config and nowhere else. Redact quoted prompts with square brackets where
   needed, as for upstream PRs, and quote only the part of a prompt that is about the
   configuration, as the Commit messages section says; the mirrors follow the same rule.
+  An example in a published file is a generic English placeholder, never a label, address,
+  number or tool name from the session's project or employer, and a term that slips through
+  goes into `sync-deny.txt`. Added 2026-10-15 after the manual-steps examples, two allow rules
+  and four commit messages published a downstream project's labels, its local address and the
+  employer's command line tool.
 
 ## Memory hygiene
 

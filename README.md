@@ -39,6 +39,9 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   file into the directories listed in `sync-mirrors.txt`. With `--install` it copies the
   mirrored files into `~/.claude` on a new machine.
 - `sync-allow.txt`: optional and absent here, one literal per line that the scan ignores.
+- `sync-deny.txt`: optional and ignored by git, one literal per line that fails the scan in any
+  case, such as a private project's names and labels. `./sync.sh --check-message <file>` checks
+  a commit message against it, for a commit-msg hook.
 - `sync-mirrors.txt`: optional and ignored by git, one directory per line that gets a copy of
   every published file, for a second copy kept in another repository. A leading `~/` stands for
   the home directory.
