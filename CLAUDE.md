@@ -473,6 +473,14 @@ apply to one repository belong in that repository's project memory.
 - Memory is per start directory. When a rule should hold everywhere, put it in this file, not in
   memory. When starting in a parent folder like `~/src`, also read the memory of the project you
   end up working in under `~/.claude/projects/-Users-<user>-src-<project>/memory/MEMORY.md`.
+- A memory note that records a correction quotes the user's words and dates them. What Claude
+  reads into them is marked as its own inference or left out: a note never adds "always",
+  "never" or "convention" where the user said none of them, and never narrows a rule in this
+  file. A claim that rests on a note keeps the note's date and qualifiers, "as of 2026-10-02
+  one of the four fits" and not "all four fit", and the note is re-read before a plan depends
+  on it. Added 2026-10-14 after "you always start the stack" went into memory as a convention
+  of leaving it up, with the nothing-running rule read as shell tasks only, and a plan turned a
+  dated note on which endpoint fits into "all four".
 - A correction that would hold beyond the task, a why question included, gets a drafted rule in
   the same reply: the bullet's text, where it goes (project memory or this file), any rule it
   changes, and the reply redone under it. When the correction asks for what the current text
