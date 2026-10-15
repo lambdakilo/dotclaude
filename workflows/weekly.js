@@ -1,7 +1,7 @@
 export const meta = {
   name: 'weekly',
   description: 'Review a week of Claude Code use and propose changes to the global setup',
-  whenToUse: 'At the end of a week with tokens to spare. Optional args: {since: "YYYY-MM-DD", only: ["transcripts", "config", "doctor", "anthropic", "skills", "github"], out: "<report directory>", margin: <usage percentage points to leave free, default 5>}. Skill repositories to compare against are listed one per line in ~/.claude/weekly-review/skill-repos.txt as "owner/repo[/path] optional note". The run reads the plan usage card between chunks of work and stops adding work before a limit would fill, using what earlier runs cost, as kept in ~/.claude/weekly-review/usage-history.jsonl.',
+  whenToUse: 'At the end of a week with tokens to spare. Optional args: {since: "YYYY-MM-DD", only: ["transcripts", "config", "doctor", "anthropic", "skills", "github"], out: "<report directory>", margin: <usage percentage points to leave free, default 5>}. Skill repositories to compare against are listed one per line in ~/.claude/weekly-review/skill-repos.txt as "owner/repo[/path] optional note". The run reads the plan usage card between chunks of work and stops adding work before a limit would fill, using what earlier runs cost, as kept in ~/.claude/weekly-review/usage-history.jsonl. When the run finishes, read the report file and show all of it in the chat, unshortened, since the user reads the report only there. The scripts stay in the scripts file until the user asks a session to apply one by its id.',
   phases: [
     { title: 'Scout', detail: 'date, time window, transcripts to read, usage and its history' },
     { title: 'Gather', detail: 'one agent per source, transcripts in batches, in chunks while usage allows' },
@@ -140,8 +140,8 @@ const FIT_CHECK = {
 
 const REPORT = {
   type: 'object',
-  required: ['path', 'summary'],
-  properties: { path: { type: 'string' }, summary: { type: 'string' } },
+  required: ['path', 'scriptsPath', 'summary'],
+  properties: { path: { type: 'string' }, scriptsPath: { type: 'string' }, summary: { type: 'string' } },
 }
 
 const USAGE = {
@@ -482,17 +482,19 @@ const rejected = checked.filter(p => !kept.includes(p)).map(p => ({
 log(`${kept.length} proposals kept, ${rejected.length} rejected in verification`)
 
 phase('Report')
-const report = await agent(`Write the weekly review report for the user as Markdown to ${OUT}/${scout.today}.md (expand ~, create the directory, and use ${scout.today}-2.md and so on if the file exists). This is the one file this run writes.
+const report = await agent(`Write the weekly review report for the user as Markdown to ${OUT}/${scout.today}.md, and the scripts of the kept proposals to ${OUT}/${scout.today}-scripts.md. Expand ~, create the directory, and use ${scout.today}-2.md with ${scout.today}-2-scripts.md and so on if the report exists. These are the two files this run writes.
 
-Follow the Prose rules of ~/.claude/CLAUDE.md. Every command and script goes in a fenced bash block. The file needs no "Prompt feedback" section.
+The user reads the report only in the chat, where the session that started the run shows all of it, so it has to read well there: at most about 25,000 characters, no scripts, no <details> blocks, and nothing said twice. Follow the Prose rules of ~/.claude/CLAUDE.md. The file needs no "Prompt feedback" section.
+
+The scripts file has one section per kept proposal that has a script, headed with its id and title, with the script in a fenced bash block exactly as given. In the report, each such proposal ends with one line saying the user can have a session apply it by its id, such as "apply p3 from the weekly report".
 
 Sections, in this order:
-1. Next week: the changes in how the user works, from the kept proposals of kind "habit", each with the evidence that prompted it. At most seven.
-2. Changes to the setup: every other kept proposal, highest impact first. For each, the problem in a sentence or two, the change, the evidence as links or paths, and the script in a fenced bash block. Revised proposals use the revised text.
-3. Skills to try: kept proposals of kind "skill-adopt", with the repository link and the install command in a block.
+1. Next week: the changes in how the user works, from the kept proposals of kind "habit". At most seven, each in two or three lines with its strongest piece of evidence.
+2. Changes to the setup: every other kept proposal, highest impact first, each in at most six lines: the id, title and impact first, the problem in a sentence or two, the change in a sentence or two, and at most three pieces of evidence as short paths or links. Revised proposals use the revised text. Then the order to apply them in, where one depends on another.
+3. Skills to try: kept proposals of kind "skill-adopt", with the repository link and the install command in a fenced block.
 4. Changes from Anthropic: kept proposals from the anthropic and doctor sources that are not already above, with the changelog version or URL.
-5. Left out: every dropped and rejected proposal with its reason, and every proposal left unchecked to stay under the usage limits with its proposal text, inside a <details> block.
-6. Coverage: the time window, the Claude Code version, and what each source read and skipped, inside a <details> block.
+5. Left out: every dropped, rejected or unchecked proposal in one line with its reason.
+6. Coverage: the time window, the Claude Code version, and one line per source on what it read and skipped.
 7. Usage: a short table of each plan limit at the start and before this report, then one line each on what a source and a checked proposal cost in percentage points, and what was skipped or left unchecked to stay ${MARGIN} points under the limits. Leave the section out when usage is null below.
 
 Window: ${scout.since} to ${scout.today}. Claude Code ${scout.installedVersion}.
@@ -515,7 +517,7 @@ ${JSON.stringify(startUsage ? { start: startUsage.windows, beforeReport: usage ?
 Coverage notes:
 ${coverage.join('\n')}
 
-Return the path you wrote and a summary of at most five lines for the chat.
+Return the paths of the report and of the scripts file, and a summary of at most five lines.
 ${GROUND}`, { label: 'report', phase: 'Report', schema: REPORT })
 await measure('report', 1, 'Report', 'usage after report')
 
@@ -545,6 +547,7 @@ Then check with tail -n 1 that the file ends with exactly that line, and return 
 
 return {
   report: report ? report.path : null,
+  scripts: report ? report.scriptsPath : null,
   summary: report ? report.summary : 'The report agent returned nothing. The kept proposals are below.',
   window: `${scout.since} to ${scout.today}`,
   kept: kept.length,

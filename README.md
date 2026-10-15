@@ -28,11 +28,13 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   Anthropic news since the last run, the user's own pull request reviews, and the skill repositories
   listed in `~/.claude/weekly-review/skill-repos.txt`, which stays local. Two more agents check
   each proposal, one that its evidence holds and one that no rule already covers it. The run
-  writes one report to `~/.claude/weekly-review/` with habits for next week and a shell script
-  for each change to the setup. It changes nothing itself. Between chunks of work it reads the
-  plan usage card in the desktop app and stops adding sources and proposals before a limit would
-  come within five points of full, estimating each chunk from what earlier runs cost. It keeps
-  those costs in `~/.claude/weekly-review/usage-history.jsonl`, which stays local.
+  writes a report short enough to read in the chat, with habits for next week and the changes to
+  the setup, and keeps a shell script for each change in a separate file beside it in
+  `~/.claude/weekly-review/`, for a session to apply on request. It changes nothing itself.
+  Between chunks of work it reads the plan usage card in the desktop app and stops adding
+  sources and proposals before a limit would come within five points of full, estimating each
+  chunk from what earlier runs cost. It keeps those costs in
+  `~/.claude/weekly-review/usage-history.jsonl`, which stays local.
 - [`sync.sh`](sync.sh): pulls this checkout, copies each mirrored file whichever way it changed,
   stops on a file changed on both sides, scans everything for private names, paths, addresses
   and credentials before anything gets committed, and after a clean scan copies every published
