@@ -328,6 +328,19 @@ apply to one repository belong in that repository's project memory.
   order, a letter as one choice among several, so a reader who sees `1.` and `2.` starts on
   both. Numbers stay for commands run in order. Added 2026-10-09 after two ways to finish a
   task were offered as 1 and 2.
+- Steps written for a person outside a PR, in a README, a setup section or chat, are run here
+  before they are written down, and a menu, tab or button they name is taken from the installed
+  version, such as the app's localized strings or the tool's `--help`, never from memory. A step
+  that cannot be run here, such as a sign-in, a device build or a setting on a phone, is named
+  in the reply as not run, with the reason, and is never called checked. Added 2026-10-14 after
+  phone setup steps called checked against this Mac's toolchain failed on the device three
+  times: a menu name from an older release, a team id read before the first signed build made
+  one, a build for a generic platform that registers no device, and no step for USB mode or
+  debugging authorisation.
+- A project's CLAUDE.md holds what Claude runs, such as build, test, verify, install, launch and
+  logs, and the rules the code follows. Setup a person does once by hand goes in the README,
+  and CLAUDE.md points there. Added 2026-10-14 after device setup steps went into a project's
+  CLAUDE.md and the user had them moved to the README.
 
 ## Prompt feedback
 
