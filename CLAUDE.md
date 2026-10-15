@@ -370,6 +370,19 @@ apply to one repository belong in that repository's project memory.
 - Prefer official features over custom glue that wraps unstable internals. If only custom works,
   say so and name the drift risk before building it.
 - Probe before spending quota on rate-limited APIs. Read retry-after, no blind retry loops.
+- Software outside the project is installed only with the user's yes. Before an install, say
+  in a line what the tool is and why it is needed. Ask rules in `settings.json` then prompt for
+  `brew`, `pipx`, `uv tool`, `npm -g`, `cargo`, `go` and `gem` installs in every permission
+  mode, `bypassPermissions` included. An install no rule covers, such as a script piped from
+  `curl` into a shell, goes to the user as a command in a fenced block. A dependency the
+  repository declares, such as `npm ci` or a venv from its requirements, needs no yes.
+- Add no CI workflow or GitHub Action to a repository unless the user asks. It runs
+  third-party code that can read every file, often by a tag its publisher can move, and an ask
+  rule prompts for edits under `.github/workflows/`. When a change removes a check, such as a
+  strict build, say so in the reply and offer a replacement as a choice instead of adding one.
+  Added 2026-10-14 after a session in `bypassPermissions` installed two tools with Homebrew,
+  output sent to `/dev/null` and unmentioned in the reply, and added a link-check Action
+  pinned by tag to a private repository.
 
 ## Permissions
 
