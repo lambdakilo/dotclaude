@@ -100,12 +100,16 @@ apply to one repository belong in that repository's project memory.
 ## Pull requests
 
 - Open PRs as drafts.
-- Claude's part of the body is the two blocks below, then the repository's pull request
-  template filled in as described further down. Nothing else: no free-form summary or test
-  plan outside the template. Without a template the body ends after the blocks and the user
-  writes the description.
-- The two blocks come directly under the title and above everything else. They are a TL;DR
-  for the reviewer.
+- Claude's part of the body is, in this order: the one sentence on what has changed, the line
+  that closes issues (`Closes #n`, with any related documents), the two blocks below, then the
+  rest of the repository's pull request template filled in as described further down. Nothing
+  else: no free-form summary or test plan outside that. The sentence and the closing line stand
+  on their own, without a heading, even where the template gives them sections of their own.
+  Without a template the body ends after the blocks and the user writes the description.
+  Changed 2026-10-15 from the blocks first: the reader wants what changed and what it closes
+  before the prompts behind it.
+- The two blocks come straight after the closing line and above the rest of the template. They
+  are a TL;DR for the reviewer.
 - First block: a fenced code block holding the URL of the public configuration repository
   described under Public configuration repository below, so teammates can read and copy the
   rules at their source. Take the URL at runtime from the checkout's `origin` remote, with
@@ -133,12 +137,12 @@ apply to one repository belong in that repository's project memory.
 - Leave out meta prompts: anything about Claude Code itself, its memory, this rules file, or how
   to format the PR, even when the same prompt also asks for a small fix to the PR. Only prompts
   about the change under review belong in the PR.
-- Below the blocks, fill in the repository's pull request template when it has one. Look in
-  `.github/` for `pull_request_template.md` or `PULL_REQUEST_TEMPLATE.md`, a
+- Below the blocks, fill in the rest of the repository's pull request template when it has one.
+  Look in `.github/` for `pull_request_template.md` or `PULL_REQUEST_TEMPLATE.md`, a
   `PULL_REQUEST_TEMPLATE/` directory, and the same names at the repository root and under
-  `docs/`. Keep the template's headings, comments and order, and answer each section briefly:
-  one sentence on what has changed, the issue links (`Closes #n`) and any related documents,
-  and the manual steps a reviewer follows to verify the change in the running app. A section
+  `docs/`. Keep the template's headings, comments and order, apart from the summary and the
+  issue links, which go to the top as above, and answer each section briefly, such as the
+  manual steps a reviewer follows to verify the change in the running app. A section
   that asks a yes/no question with a checkbox for each answer, such as "Added tests?" or "Is
   documentation up-to-date?", keeps only the box that applies, ticked, and the other box's
   line is deleted rather than left empty: nothing more when the answer is yes, one sentence
@@ -152,6 +156,12 @@ apply to one repository belong in that repository's project memory.
   last, unless the user says otherwise: a failing spec shows before the slow part, and end to end
   never follows the manual steps. Added 2026-10-07 after review steps closed with a switch back to
   the previous branch and put the specs after the manual pass.
+- The automated part is two command steps, each one fenced block joined with `&&`, since each
+  is a sequence that should stop at its first failure. The first, run in a tab of its own,
+  fetches, switches to the branch, updates the submodules and starts the stack. The second, in
+  another tab, runs whatever the stack needs after a switch (a cache clear, a build), the
+  verify command and the end to end run. The manual steps follow them. Added 2026-10-15 after
+  a PR gave five command steps, one per command, where two did the same work.
 - Manual steps follow the screen. Before writing one, open the component or the running page and
   take the order of fields and clicks from it, so a dialog that shows type, then name, then
   company is filled in that order and never in the order the step's purpose brings them to mind.
@@ -176,29 +186,25 @@ apply to one repository belong in that repository's project memory.
   reader had never been told to copy. The address rule came on 2026-10-13, after a step named a
   page with no URL.
 - A PR review runs the PR's own "How to verify" steps and hands back corrections to them, never a
-  test script of the reviewer's own, however complete. The reply gives the commands first, each
-  in its fenced block: the branch switch with the submodule update, whatever starts the stack,
-  the verify command and the end to end run. Then only what the author's steps need: a label
-  that is not on screen, a click left out, a step the seed data cannot do, a change the steps do
-  not cover, a check that failed. When the steps are right as they stand, say so in a line.
-  The reply is one numbered list the reader follows from a cold start: the branch switch with
-  the submodule update, whatever starts the stack, the cache clear, the verify command and the
-  end to end run come first, each as its own step with its command in a fenced block under it,
-  then the manual steps in the standing form, taken from the screen and no wider than the PR's
+  test script of the reviewer's own, however complete. The reply gives the commands first, as the
+  two command steps above. Then only what the author's steps need: a label that is not on screen, a
+  click left out, a step the seed data cannot do, a change the steps do not cover, a check that
+  failed. When the steps are right as they stand, say so in a line. The reply is one numbered list
+  the reader follows from a cold start: the two command steps come first, each with its block under
+  it, then the manual steps in the standing form, taken from the screen and no wider than the PR's
   own steps plus the changes those steps skip. A manual step that runs a command carries that
-  command in a block under it, never a description of it. Where the PR's step has a screenshot
-  or video, the matching step names it at its start, "the PR's screenshot under step 3 shows
-  this dialog", and the comparison comes before the click that closes what the picture shows;
-  a PR that puts the picture after the OK or the save gets a line for it under what the
-  instructions missed. The list ends with what the PR's instructions missed: state the
-  reviewer builds by hand through a workflow the specs already cover, which the PR should have
-  seeded; a change without a step; a claim the run disproved; a picture placed after the step
-  it shows. That section ends with the command steps of the list, from the switch to the end
-  to end run, as GitHub markdown inside a four-backtick fence, numbered as in the reply, so
-  the PR's "How to verify" can take them over unchanged. That block is the one thing in the
-  reply written to be pasted into the PR. Added 2026-10-12 after a review answered six author
-  steps with twenty-eight of its own, then handed back a paste-ready section, then steps
-  without their commands, the same day; the picture and markdown rules came that evening.
+  command in a block under it, never a description of it. Where the PR's step has a screenshot or
+  video, the matching step names it at its start, "the PR's screenshot under step 3 shows this
+  dialog", and the comparison comes before the click that closes what the picture shows; a PR that
+  puts the picture after the OK or the save gets a line for it under what the instructions missed.
+  The list ends with what the PR's instructions missed: state the reviewer builds by hand through a
+  workflow the specs already cover, which the PR should have seeded; a change without a step; a
+  claim the run disproved; a picture placed after the step it shows. That section ends with the two
+  command steps of the list as GitHub markdown inside a four-backtick fence, numbered as in the
+  reply, so the PR's "How to verify" can take them over unchanged. That block is the one thing in
+  the reply written to be pasted into the PR. Added 2026-10-12 after a review answered six author
+  steps with twenty-eight of its own, then handed back a paste-ready section, then steps without
+  their commands, the same day; the picture and markdown rules came that evening.
 - Never post a comment, a review thread reply, a review or an issue comment on GitHub: every
   word posted goes out under the user's name, and the user writes those. A review finding is
   answered by the commit that fixes it, and the reply to the user lists, per thread, what
@@ -209,7 +215,7 @@ apply to one repository belong in that repository's project memory.
 - Add a prompt about the change under review to the PR's prompts block in the same turn it is
   answered, whether or not anything is committed, and refresh the prompts block again after
   every commit and push. Read the live body with `gh pr view <n> --json body --jq .body`, edit it as
-  a file, write it back with `gh pr edit <n> --body-file`, and re-read to confirm. Below the
+  a file, write it back with `gh pr edit <n> --body-file`, and re-read to confirm. Outside the
   blocks, change only a template answer that a later commit made wrong, and keep every edit
   the user has made there.
 - The prompt that says to merge is a prompt about the change too. Add it to the PR's prompts
@@ -221,8 +227,10 @@ apply to one repository belong in that repository's project memory.
   issue silently when the edit is refused for lack of permission. The board then shows who
   holds the work without a separate step. Added 2026-10-08.
 - Screenshots and recordings go into the PR body when the change is visual, anything that
-  alters what a page renders, and the repository's pull request template carries the
-  `[!IMPORTANT]` alert asking for a recording or screenshots. Capture them from the local
+  alters what a page renders, and the repository asks for a recording or screenshots, in its
+  pull request template or in the agent instructions it keeps in context (`AGENTS.md`,
+  `CLAUDE.md`). A repository may keep such asks out of the template so the body carries only
+  what a reviewer reads, and they bind as much there. Capture them from the local
   stack on fixture data with a scratch Playwright script in the scratchpad, on the
   repository's Playwright install, never a config change in the repository: one PNG per
   manual step of "How to verify", in the state that step describes, named after the step,
