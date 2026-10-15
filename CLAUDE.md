@@ -183,12 +183,18 @@ apply to one repository belong in that repository's project memory.
   before pasting into it, log in again after logging out. A step never relies on something the
   reader has not been told to do. A step that opens a page gives its full local address, such
   as `http://localhost:3000/items`, never the page's name alone, so the reader pastes instead of
-  hunting through the navigation. Added 2026-10-10 after review steps put a dialog's fields out
+  hunting through the navigation. Steps run in the order their data needs, deletions last. A
+  step that uses a seeded record says it comes from the seed and what to type to find it. Where
+  the screen shows a stand-in, such as placeholder data, a mock or an unwired part, or a part
+  that ignores the step's input, the step says so. A limitation found while building goes into
+  its step, not only into the reply. Added 2026-10-10 after review steps put a dialog's fields out
   of order, wrote "pick" for a three-click flow and joined two checks into one sentence, so the
   reader made no change, saw no dialog and looked for a back button that was not there. The
   same day the steps prefixed the test data with the PR's number, and pasted an address the
   reader had never been told to copy. The address rule came on 2026-10-13, after a step named a
-  page with no URL.
+  page with no URL. The order, seed and stand-in rules came on 2026-10-14, after steps used a
+  record no step had made and a seeded one they never introduced, and described a placeholder
+  preview as if it followed the step's input.
 - A PR review switches the checkout to the PR's branch and leaves it there, runs the two command
   steps above itself, and opens the reply with the results of the verify command and the end to
   end run. "Here" or "only" in a review prompt limits where the reply goes, never what runs. Then
@@ -240,7 +246,11 @@ apply to one repository belong in that repository's project memory.
   manual step of "How to verify", in the state that step describes, named after the step,
   and a WebM only where motion is the point. A recording is made with `slowMo` of about 400 ms
   on the browser launch and a pause of two or three seconds at every state a step describes,
-  since a Playwright run at full speed is too fast to follow. Whenever screenshots or
+  since a Playwright run at full speed is too fast to follow. Fixture data is what the project's
+  own start command leaves, so capture on a stack that no end to end run has touched since its
+  last clean start: specs add records the reader's stack lacks. Open every picture with Read
+  before it is uploaded, and check that it shows the state its step describes and nothing a
+  freshly started stack would not show. Whenever screenshots or
   recordings exist for a PR and show what it changes, upload them to it in the same turn they
   are made, without asking first: a reply never ends with a set waiting for a go. Upload them
   through GitHub's own editor, where the user is signed in: drop the files into the PR's
@@ -265,7 +275,9 @@ apply to one repository belong in that repository's project memory.
   the way the prompts block is refreshed, so no reviewer judges a stale picture. Added
   2026-10-09; the pictures moved from a details block under the alert to the start of their
   steps on 2026-10-13, since a reader wants to know what a step looks like before doing it,
-  and off the number's line the same day.
+  and off the number's line the same day. The fixture and Read checks came on 2026-10-14, after
+  a set taken after a full end to end run showed records the reader's stack did not have, and
+  was uploaded without being opened.
 - Public and upstream repositories: never name a downstream project, its client or its
   customer. Say "a downstream project". Redact them in quoted prompts with square brackets, and
   redact absolute paths and container names that carry them.
