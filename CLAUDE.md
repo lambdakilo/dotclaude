@@ -434,10 +434,13 @@ apply to one repository belong in that repository's project memory.
   Literals listed one per line in the git-ignored `sync-deny.txt` fail the scan in any case,
   and `sync.sh --check-message`, run from the untracked commit-msg hook of the checkout and of
   each mirror, holds commit messages to the same list.
-- Whenever a session changes a mirrored file, run `sync.sh`, read the diff, commit and push to
-  the default branch in the same turn. No PR: the checkout has one owner. When a new file under
-  `~/.claude` would help other people (a hook, a skill, a command, an agent), add it to the list
-  in `sync.sh` first.
+- A change to this file is made only on the user's go: a prompt that says go or push, or a
+  script from this session that the user says they ran. Then, as whenever a session changes
+  another mirrored file, run `sync.sh`, read the diff, commit and push to the default branch in
+  the same turn. No PR: the checkout has one owner. When a new file under `~/.claude` would help
+  other people (a hook, a skill, a command, an agent), add it to the list in `sync.sh` first.
+  The go came in on 2026-10-14, after five pushes on 2026-10-12 rewrote one review rule, some
+  undoing the one before, and the user asked four times that day to confirm first.
 - `sync.sh` also copies every published file into each directory listed in `sync-mirrors.txt`, an
   optional file beside it that git ignores, and prints each directory it copied into. When it
   reports one, commit and push in that repository too, in the same turn. Which directories those
@@ -470,3 +473,11 @@ apply to one repository belong in that repository's project memory.
 - Memory is per start directory. When a rule should hold everywhere, put it in this file, not in
   memory. When starting in a parent folder like `~/src`, also read the memory of the project you
   end up working in under `~/.claude/projects/-Users-<user>-src-<project>/memory/MEMORY.md`.
+- A correction that would hold beyond the task, a why question included, gets a drafted rule in
+  the same reply: the bullet's text, where it goes (project memory or this file), any rule it
+  changes, and the reply redone under it. When the correction asks for what the current text
+  already does another way, say in a line how it already does it and ask which to keep. Project
+  memory is written at once, this file on the go described under Public configuration
+  repository. Added 2026-10-14 after a python script correction went unrecorded on 2026-10-08
+  and had to be made again, and a subshell that already returned was rewritten on 2026-10-07 to
+  the paired cd and restored five days later.
