@@ -469,18 +469,21 @@ apply to one repository belong in that repository's project memory.
   default two-space indent, which round-trips the file byte for byte (checked 2026-10-12), so
   the diff is the rules alone. One script names every rule the turn needs:
   `Bash(<prefix>:*)` with the prefix the refused command started with, such as
-  `Bash(gh pr reopen:*)`, or `Edit(<path>)` for a refused file edit, such as
-  `Edit(~/.claude/CLAUDE.md)`. The reply says in a line what each rule unlocks. The user
+  `Bash(gh pr reopen:*)`, or `Edit(<path>)` for a refused edit of a file outside
+  `~/.claude`. The reply says in a line what each rule unlocks. The user
   runs the script; after that the mirrored `settings.json` has changed, so run `sync.sh`,
   commit and push as under Public configuration repository. Added 2026-10-08 after a
   session in which four refusals each cost a round trip.
 - A rule matches the literal start of the command, so once it exists the session runs the
   allowed command bare: not behind `cd ... &&`, not in a pipe, and with `~` unexpanded where
   the rule has it. Paths in rules use `~`, never the home directory spelled out, which the
-  mirror's scan rejects. No rule gets past the classifier's self-modification and instruction
-  poisoning refusals: on 2026-10-08 an `Edit` rule for this file did not take, so an edit of
-  this file and a commit in the mirror both went to the user as a script, the edit as a `sed`
-  insert at a named anchor.
+  mirror's scan rejects. No rule reaches `~/.claude`: writes there are checked before the
+  allow rules, and in auto mode the classifier decides each one. It lets most edits of this
+  file through, so make them, and the mirror's commit and push, in the turn they belong to.
+  Only an edit it refuses in that turn, usually text that widens permissions, goes to the
+  user as a `sed` insert at a named anchor, with the refusal's reason. Changed 2026-10-14:
+  the note before said these edits always went to the user, so sessions stopped trying,
+  though auto mode let them through on 2026-10-08, 10-10 and 10-13.
 - Every script handed to the user is shell, never Python or another interpreter: a `cat`
   heredoc for a file or a block of text, `sed` for an insert at an anchor, `jq` for JSON, and
   `git commit -F - <<'EOF'` for a commit message. Added 2026-10-12 after a rules edit went

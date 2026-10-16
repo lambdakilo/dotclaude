@@ -46,7 +46,6 @@
       "Bash(gh issue edit:*)",
       "Bash(gh pr edit:*)",
       "Bash(gh pr reopen:*)",
-      "Edit(~/.claude/CLAUDE.md)",
       "Bash(git push --force-with-lease:*)",
       "Bash(~/.claude/hooks/prompt-log.sh print:*)"
     ],
@@ -63,7 +62,8 @@
       "Bash(go install:*)",
       "Bash(gem install:*)",
       "Edit(**/.github/workflows/**)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "model": "claude-fable-5-1[1m]",
   "enabledPlugins": {
