@@ -62,7 +62,10 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   before a limit would come within five points of full, estimating each chunk from what earlier
   runs cost, as kept in `~/.claude/dream/usage-history.jsonl`. By default it guards only the
   weekly limits, letting the 5-hour limit fill and waiting for its reset, since it runs while the
-  user is away. With `day` it keeps the 5-hour limit under the margin too.
+  user is away. With `day` it keeps the 5-hour limit under the margin too. With `weekend`, when the
+  weekly limit resets within 48 hours, it spends what is left of the week: every source runs,
+  failing scripts are regenerated, and it reads older transcripts a week at a time until two weeks
+  in a row give nothing new, the weekly limits reach the margin or the week resets.
 - [`sync.sh`](sync.sh): pulls this checkout, copies each mirrored file whichever way it changed,
   a JSON file in the key order it has here, stops on a file changed on both sides, scans
   everything for private names, paths, addresses and credentials before anything gets committed,

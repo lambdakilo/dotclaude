@@ -1,12 +1,13 @@
 export const meta = {
   name: 'dream',
   description: 'Review Claude Code use since the last run in idle time, carry open proposals forward, and propose changes to the global setup',
-  whenToUse: 'In idle time with tokens to spare: at the end of a day, overnight or over a weekend. Optional args: {since: "<ISO time>", only: ["transcripts", "config", "harness", "doctor", "anthropic", "skills", "github"], all: true to run every source whether due or not, out: "<report directory>", margin: <usage percentage points to leave free, default 5>, day: true for a run while the user keeps working, which keeps the 5-hour limit under the margin too}. Transcripts and config run every time, GitHub reviews once a day, and the harness, doctor, Anthropic and skill repository sources once a week. Skill repositories are listed one per line in ~/.claude/dream/skill-repos.txt as "owner/repo[/path] optional note". By default a run guards only the weekly limits and lets the 5-hour limit fill, then waits for its reset, since it runs while the user is away. Open proposals carry over in ~/.claude/dream/backlog.json until they are applied or found obsolete. The run reads the plan usage card between chunks of work and stops adding work before a limit would fill, using what earlier runs cost, as kept in ~/.claude/dream/usage-history.jsonl. When the run finishes, read the report file and show all of it in the chat, unshortened, since the user reads the report only there. Each run has its own folder of scripts beside the report, numbered in the order to apply them, and the report gives the command that runs each one.',
+  whenToUse: 'In idle time with tokens to spare: at the end of a day, overnight or over a weekend. Optional args: {since: "<ISO time>", only: ["transcripts", "config", "harness", "doctor", "anthropic", "skills", "github"], all: true to run every source whether due or not, out: "<report directory>", margin: <usage percentage points to leave free, default 5>, day: true for a run while the user keeps working, which keeps the 5-hour limit under the margin too, weekend: true to spend what is left of the week when the weekly limit resets within 48 hours: every source runs, failing scripts are regenerated, and the run then reads older transcripts a week at a time, back to the oldest kept and on from where the last weekend run stopped, until two weeks in a row give nothing new, the weekly limits reach the margin or the weekly limit resets}. Transcripts and config run every time, GitHub reviews once a day, and the harness, doctor, Anthropic and skill repository sources once a week. Skill repositories are listed one per line in ~/.claude/dream/skill-repos.txt as "owner/repo[/path] optional note". By default a run guards only the weekly limits and lets the 5-hour limit fill, then waits for its reset, since it runs while the user is away. Open proposals carry over in ~/.claude/dream/backlog.json until they are applied or found obsolete. The run reads the plan usage card between chunks of work and stops adding work before a limit would fill, using what earlier runs cost, as kept in ~/.claude/dream/usage-history.jsonl. When the run finishes, read the report file and show all of it in the chat, unshortened, since the user reads the report only there. Each run has its own folder of scripts beside the report, numbered in the order to apply them, and the report gives the command that runs each one.',
   phases: [
     { title: 'Scout', detail: 'time window, due sources, transcripts, backlog, usage and its history' },
     { title: 'Gather', detail: 'one agent per due source, transcripts in batches, in chunks while usage allows' },
     { title: 'Merge', detail: 'check the backlog, then dedupe and rank the new findings against it' },
     { title: 'Verify', detail: 'check evidence and fit of each new proposal, in chunks while usage allows' },
+    { title: 'Deep', detail: 'weekend only: older transcripts a week at a time, while the week\'s usage lasts' },
     { title: 'Report', detail: 'order and test the scripts, write the report and the backlog, record what the run cost' },
   ],
 }
@@ -27,7 +28,11 @@ if (unknown.length) log(`Ignoring unknown sources: ${unknown.join(', ')}`)
 const MAX_BATCHES = 24
 const MAX_PROPOSALS = 30
 const HISTORY_RUNS = 6
-const DAY = opts.day === true || opts.overnight === false
+const WEEKEND = opts.weekend === true
+const WEEKEND_RESET_HOURS = 48
+const DEEP_SLICE_DAYS = 7
+const MAX_DEEP_SLICES = 8
+const DAY = !WEEKEND && (opts.day === true || opts.overnight === false)
 const MARGIN = typeof opts.margin === 'number' ? opts.margin : 5
 const GATHER_CHUNK = 10
 const VERIFY_CHUNK = 6
@@ -99,6 +104,7 @@ const SCOUT = {
       items: { type: 'object', required: ['repo', 'note'], properties: { repo: { type: 'string' }, note: { type: 'string' } } },
     },
     installedVersion: { type: 'string' },
+    oldestTranscript: { type: 'string' },
     previousReports: { type: 'array', items: { type: 'string' } },
     sessions: {
       type: 'array',
@@ -110,6 +116,8 @@ const SCOUT = {
     },
   },
 }
+
+const SESSIONS = { type: 'object', required: ['sessions'], properties: { sessions: SCOUT.properties.sessions } }
 
 const BACKLOG_CHECK = {
   type: 'object',
@@ -225,7 +233,7 @@ const scout = await agent(`Set up a dream run, a review of this user's Claude Co
 2. List the files in ${OUT} named YYYY-MM-DD.md or YYYY-MM-DD-N.md (expand ~, the directory may not exist yet). Return their paths, newest first, as previousReports. Return as runId today's date when no report of today exists, else today's date with the next free -N, such as ${'<today>'}-2.
 3. since is ${opts.since ? `"${opts.since}", given by the user` : `the time field of the last line of ${HISTORY_FILE} that has one, else that line's date at 00:00 UTC, else now minus 7 days`}, as an ISO time in UTC.${runNote ? ` The user started the run with this note, which may name a different window: "${runNote}".` : ''} Say in sinceReason how you chose it. lookbackFrom is since minus ${LOOKBACK_DAYS} days, as an ISO time.
 4. Run "$CLAUDE_CODE_EXECPATH" --version, the Claude Code build this session runs on, or claude --version when that variable is unset, and return the version number.
-5. ${requested.includes('transcripts') ? `List the main session transcripts modified after since: files matching ~/.claude/projects/*/*.jsonl at depth one only, not the subagent folders below them, with find -newermt. The project directory names start with a dash, so give find and ls ./name or absolute paths, never a bare name. Return each with its absolute path, its project directory name and its size in bytes.` : 'Transcripts are out of scope for this run. Return an empty sessions list.'}
+5. ${requested.includes('transcripts') ? `List the main session transcripts modified after since: files matching ~/.claude/projects/*/*.jsonl at depth one only, not the subagent folders below them, with find -newermt. The project directory names start with a dash, so give find and ls ./name or absolute paths, never a bare name. Return each with its absolute path, its project directory name and its size in bytes. Also return as oldestTranscript the modification time, as an ISO time in UTC, of the oldest file matching that pattern.` : 'Transcripts are out of scope for this run. Return an empty sessions list.'}
 6. ${requested.includes('skills') ? `Read ${REPOS_FILE} if it exists. Each non-empty line not starting with # names a GitHub repository as owner/repo, optionally followed by /path to a folder inside it, then optionally a note after whitespace. Return each as repo and note, the note empty when there is none. Return an empty list when the file is missing.` : 'Skill repositories are out of scope for this run. Return an empty skillRepos list.'}
 7. Return as model the model id you run on, from your own system prompt, and as effort the value of $CLAUDE_EFFORT, or "unknown" when it is unset.
 8. ${READ_USAGE} Put the result in usage, an object with available and windows.
@@ -245,7 +253,7 @@ for (const r of history) {
   for (const s of r.sources || []) if (!lastRan[s] || at > lastRan[s]) lastRan[s] = at
 }
 const explicit = Array.isArray(opts.only) && opts.only.length
-const due = s => opts.all || explicit || !lastRan[s] || nowMs - lastRan[s] >= CADENCE_HOURS[s] * 3600 * 1000
+const due = s => opts.all || WEEKEND || explicit || !lastRan[s] || nowMs - lastRan[s] >= CADENCE_HOURS[s] * 3600 * 1000
 const only = requested.filter(s => SOURCES.includes(s) && due(s))
 const notDue = requested.filter(s => SOURCES.includes(s) && !due(s))
 log(`Run ${scout.runId}: ${scout.since} to ${scout.now} (${scout.sinceReason || 'default'}), Claude Code ${scout.installedVersion}, ${scout.sessions.length} transcripts. Due: ${only.join(', ')}${notDue.length ? `. Not due yet: ${notDue.join(', ')}` : ''}`)
@@ -268,13 +276,16 @@ let usage = readable(scout.usage) ? scout.usage : null
 const startUsage = usage
 const ledger = {}
 const showUsage = u => u.windows.map(w => `${w.label} ${w.percentUsed}%`).join(', ')
-if (usage) log(`Usage at start: ${showUsage(usage)}. Estimating from ${pastRuns.length} earlier runs on ${scout.model}, leaving ${MARGIN} points free${DAY ? ', the 5-hour limit included, since this is a day run' : ' on the weekly limits, and letting the 5-hour limit fill and reset'}`)
+if (usage) log(`Usage at start: ${showUsage(usage)}. Estimating from ${pastRuns.length} earlier runs on ${scout.model}, leaving ${MARGIN} points free${DAY ? ', the 5-hour limit included, since this is a day run' : ' on the weekly limits, and letting the 5-hour limit fill and reset up to twice'}`)
 else log('The usage card is not readable here, so the run goes without the usage guard')
 
 const sameWindow = (a, b) => a.label === b.label && Math.abs(Date.parse(a.resetsAt) - Date.parse(b.resetsAt)) < 5 * 60 * 1000
+// A run waits for a usage-limit reset at most twice; a third hit fails the agent that hits it.
+let fiveHourResets = 0
+let weeklyResetSeen = false
 
 function binds(label) {
-  if (!DAY && /hour/i.test(label)) return false
+  if (/hour/i.test(label)) return DAY || fiveHourResets >= 2
   const perModel = label.match(/^weekly[^a-z]+(.+)$/i)
   if (!perModel || /all models/i.test(perModel[1])) return true
   return scout.model.toLowerCase().includes(perModel[1].trim().split(/\s+/)[0].toLowerCase())
@@ -325,28 +336,42 @@ async function measure(kind, units, phaseName, label) {
     usage = null
     return
   }
+  for (const w of after.windows) {
+    const prior = usage.windows.find(x => x.label === w.label)
+    if (!prior || sameWindow(prior, w)) continue
+    if (/hour/i.test(w.label)) {
+      fiveHourResets++
+      log(`The 5-hour limit reset (${fiveHourResets} so far)${fiveHourResets >= 2 ? ', so the run guards it from now on' : ''}`)
+    } else if (binds(w.label)) {
+      weeklyResetSeen = true
+    }
+  }
   record(kind, units, usage, after)
   usage = after
 }
 
-const sessions = scout.sessions.slice().sort((a, b) => a.project.localeCompare(b.project) || a.path.localeCompare(b.path))
-const batches = []
-let current = []
-let currentBytes = 0
-for (const s of sessions) {
-  if (current.length && (current.length >= 4 || currentBytes + s.bytes > 8e6)) {
-    batches.push(current)
-    current = []
-    currentBytes = 0
+function makeBatches(list) {
+  const sorted = list.slice().sort((a, b) => a.project.localeCompare(b.project) || a.path.localeCompare(b.path))
+  const out = []
+  let current = []
+  let currentBytes = 0
+  for (const s of sorted) {
+    if (current.length && (current.length >= 4 || currentBytes + s.bytes > 8e6)) {
+      out.push(current)
+      current = []
+      currentBytes = 0
+    }
+    current.push(s)
+    currentBytes += s.bytes
   }
-  current.push(s)
-  currentBytes += s.bytes
+  if (current.length) out.push(current)
+  if (out.length > MAX_BATCHES) {
+    const skipped = out.splice(MAX_BATCHES).flat()
+    log(`Reading ${MAX_BATCHES} transcript batches, skipping ${skipped.length} transcripts: ${skipped.map(s => s.project).join(', ')}`)
+  }
+  return out
 }
-if (current.length) batches.push(current)
-if (batches.length > MAX_BATCHES) {
-  const skipped = batches.splice(MAX_BATCHES).flat()
-  log(`Reading ${MAX_BATCHES} transcript batches, skipping ${skipped.length} transcripts: ${skipped.map(s => s.project).join(', ')}`)
-}
+const batches = makeBatches(scout.sessions)
 
 const WINDOW = `This run covers ${scout.since} to ${scout.now}. A finding needs evidence from inside that window. To show that a pattern recurs, you may also search the transcripts and files of the ${LOOKBACK_DAYS} days before it, from ${scout.lookbackFrom}. Open proposals from earlier runs carry over in a backlog, so a finding that only repeats one of these is no news: ${backlog.open.map(i => i.title).join('; ') || 'none'}.`
 
@@ -355,16 +380,19 @@ const OUTPUT = `Return findings in the schema. Each finding is one concrete, sep
 const tasks = []
 
 if (only.includes('transcripts')) {
-  batches.forEach((batch, i) => {
-    tasks.push({
-      source: 'transcripts',
-      label: `transcripts ${i + 1}/${batches.length}`,
-      prompt: `Read these Claude Code session transcripts of the user and find what should change in their global setup or in how they work.
+  batches.forEach((batch, i) => tasks.push(transcriptTask(batch, `transcripts ${i + 1}/${batches.length}`, 'transcripts', scout.since, WINDOW)))
+}
+
+function transcriptTask(batch, label, source, from, windowText) {
+  return {
+    source,
+    label,
+    prompt: `Read these Claude Code session transcripts of the user and find what should change in their global setup or in how they work.
 ${batch.map(s => `- ${s.path} (${Math.round(s.bytes / 1024)} KB)`).join('\n')}
 
 The files are JSONL and mostly tool output. Do not read them whole. Extract the conversation with jq, for example:
 jq -r 'select(.isSidechain != true and .isMeta != true) | select(.type == "user" or .type == "assistant") | [.timestamp, .type, (.message.content | if type == "string" then . else (map(select(.type == "text") | .text) | join("\\n")) end)] | select(.[2] != "") | "\\(.[0]) \\(.[1]): \\(.[2][0:3000])"' FILE
-Drop user lines that are only system reminders, command output or tool results, and the parts of a file from before ${scout.since}. Open more of a file around a moment that matters.
+Drop user lines that are only system reminders, command output or tool results, and the parts of a file from before ${from}. Open more of a file around a moment that matters.
 
 Look for:
 - the user correcting Claude, repeating an instruction, undoing Claude's work, or showing frustration;
@@ -373,11 +401,10 @@ Look for:
 - a sequence the user asked for by hand more than once that a skill, hook, workflow or setting could do;
 - themes that recur in the "Prompt feedback" sections Claude wrote at the end of its replies, which point to habits the user can change;
 - an approach the user confirmed worked well and that no rule records yet.
-${WINDOW}
+${windowText}
 ${OUTPUT}
 ${GROUND}`,
-    })
-  })
+  }
 }
 
 if (only.includes('config')) {
@@ -481,32 +508,38 @@ ${GROUND}`,
   })
 }
 
-phase('Gather')
-const gatherQueue = SOURCE_ORDER.flatMap(s => tasks.filter(t => t.source === s))
-const gathered = []
-let skippedTasks = []
-while (gatherQueue.length) {
-  let n = Math.min(GATHER_CHUNK, gatherQueue.length)
-  if (usage) n = Math.min(n, fitCount('gather', n, { merge: 1, verify: MIN_VERIFY, report: 1 }))
-  if (!n) {
-    skippedTasks = gatherQueue.splice(0)
-    break
+async function gatherAll(list, phaseName) {
+  const queue = SOURCE_ORDER.concat(['deep']).flatMap(s => list.filter(t => t.source === s))
+  const done = []
+  let skipped = []
+  while (queue.length) {
+    let n = Math.min(GATHER_CHUNK, queue.length)
+    if (usage) n = Math.min(n, fitCount('gather', n, { merge: 1, verify: MIN_VERIFY, report: 1 }))
+    if (!n) {
+      skipped = queue.splice(0)
+      break
+    }
+    const chunk = queue.splice(0, n)
+    const out = await parallel(chunk.map(t => () =>
+      agent(t.prompt, { label: t.label, phase: phaseName, schema: FINDINGS })
+        .then(r => (r ? { source: t.source, label: t.label, ...r } : null)),
+    ))
+    chunk.forEach((t, i) => done.push({ task: t, result: out[i] }))
+    await measure('gather', chunk.length, phaseName, `usage after ${done.length} sources`)
   }
-  const chunk = gatherQueue.splice(0, n)
-  const out = await parallel(chunk.map(t => () =>
-    agent(t.prompt, { label: t.label, phase: 'Gather', schema: FINDINGS })
-      .then(r => (r ? { source: t.source, label: t.label, ...r } : null)),
-  ))
-  chunk.forEach((t, i) => gathered.push({ task: t, result: out[i] }))
-  await measure('gather', chunk.length, 'Gather', `usage after ${gathered.length} sources`)
+  return { done, skipped }
 }
+
+phase('Gather')
+const main = await gatherAll(tasks, 'Gather')
+const skippedTasks = main.skipped
 if (skippedTasks.length) log(`Skipped to stay under the usage limits: ${skippedTasks.map(t => t.label).join(', ')}`)
-if (!gathered.length && tasks.length) {
+if (!main.done.length && tasks.length) {
   return { error: `Not enough usage left to start with ${MARGIN} points kept free: ${usage ? showUsage(usage) : 'unknown'}.` }
 }
-const failed = gathered.filter(g => !g.result).map(g => g.task.label)
+const failed = main.done.filter(g => !g.result).map(g => g.task.label)
 if (failed.length) log(`No result from: ${failed.join(', ')}`)
-const results = gathered.map(g => g.result).filter(Boolean)
+const results = main.done.map(g => g.result).filter(Boolean)
 const ranSources = [...new Set(results.map(r => r.source))]
 const allFindings = results.flatMap(r => r.findings.map(f => ({ ...f, source: r.source })))
 const coverage = results.map(r => `${r.label}: ${r.coverage}`)
@@ -529,14 +562,15 @@ const closedNow = backlog.open.filter(i => statusOf(i.key).status !== 'open').ma
 const stillOpen = backlog.open.filter(i => statusOf(i.key).status === 'open')
 if (backlog.open.length) log(`Backlog: ${stillOpen.length} still open, ${closedNow.length} closed as applied or obsolete`)
 
-let merged = { proposals: [], updates: [], dropped: [] }
-if (allFindings.length) {
-  merged = (await agent(`Merge the findings of a dream run over this user's Claude Code setup into one ranked list of new proposals.
+async function mergeFindings(findings, known, phaseName, label, prefix) {
+  if (!findings.length) return { proposals: [], updates: [], dropped: [] }
+  const result = (await agent(`Merge the findings of a dream run over this user's Claude Code setup into one ranked list of new proposals.
 - Merge findings that propose the same change, keeping all their evidence and listing every source.
 - A finding that matches an open backlog item becomes an update of that item: its key and the new evidence. It is not a new proposal.
 - A finding that matches a closed backlog item is dropped with the item's closing reason, unless its evidence shows the problem recurring after the item was closed as applied. Then it is a new proposal that says so.
+- A finding that matches a proposal this run already found is dropped as found already.
 - Rank the new proposals by impact, then by how much evidence there is. Keep at most ${MAX_PROPOSALS}, and put every one you leave out in dropped with the reason.
-- Give each new proposal a short id such as n1, n2.
+- Give each new proposal a short id that starts with ${prefix}, such as ${prefix}1 and ${prefix}2.
 
 Open backlog items, as JSON:
 ${JSON.stringify(stillOpen.map(i => ({ key: i.key, title: i.title, proposal: i.proposal })))}
@@ -544,20 +578,25 @@ ${JSON.stringify(stillOpen.map(i => ({ key: i.key, title: i.title, proposal: i.p
 Closed backlog items, as JSON:
 ${JSON.stringify(backlog.closed.concat(closedNow).map(i => ({ title: i.title, closedOn: i.closedOn, reason: i.reason })))}
 
+Proposals this run already found, as JSON:
+${JSON.stringify(known)}
+
 Findings, as JSON:
-${JSON.stringify(allFindings)}
-${GROUND}`, { label: 'merge', phase: 'Merge', schema: MERGED })) || merged
-  await measure('merge', 1, 'Merge', 'usage after merge')
+${JSON.stringify(findings)}
+${GROUND}`, { label, phase: phaseName, schema: MERGED })) || { proposals: [], updates: [], dropped: [] }
+  await measure('merge', 1, phaseName, `usage after ${label}`)
+  return result
 }
+
+const merged = await mergeFindings(allFindings, [], 'Merge', 'merge', 'n')
 log(`${merged.proposals.length} new proposals to verify, ${merged.updates.length} backlog items with new evidence, ${merged.dropped.length} dropped`)
 
-phase('Verify')
-const verifyOne = p => parallel([
+const verifyOne = (p, phaseName) => parallel([
   () => agent(`Check the evidence for this proposal from a dream run over the user's Claude Code setup. Open every reference it cites and decide whether the sources say what the proposal claims. Set holds to false when you cannot find the evidence or it says something else, and when unsure. Set recurring to true only when the problem shows up more than once or its single occurrence was costly.
 
 Proposal, as JSON:
 ${JSON.stringify(p)}
-${GROUND}`, { label: `evidence ${p.id}`, phase: 'Verify', schema: EVIDENCE_CHECK }),
+${GROUND}`, { label: `evidence ${p.id}`, phase: phaseName, schema: EVIDENCE_CHECK }),
   () => agent(`Decide whether this proposal from a dream run fits the user's Claude Code setup, and write the shell that applies it.
 Read ~/.claude/CLAUDE.md, ~/.claude/settings.json and, when the target is elsewhere, the target file.
 - Drop it when an existing rule or setting already covers it (name it in alreadyCoveredBy), when it contradicts a rule the user chose deliberately, or when it adds always-loaded text without enough benefit.
@@ -567,28 +606,87 @@ Read ~/.claude/CLAUDE.md, ~/.claude/settings.json and, when the target is elsewh
 
 Proposal, as JSON:
 ${JSON.stringify(p)}
-${GROUND}`, { label: `fit ${p.id}`, phase: 'Verify', schema: FIT_CHECK }),
+${GROUND}`, { label: `fit ${p.id}`, phase: phaseName, schema: FIT_CHECK }),
 ]).then(([evidence, fit]) => ({ ...p, evidenceCheck: evidence, fit }))
 
-const verifyQueue = merged.proposals.slice()
-const verified = []
-let unchecked = []
-while (verifyQueue.length) {
-  let n = Math.min(VERIFY_CHUNK, verifyQueue.length)
-  if (usage) n = Math.min(n, fitCount('verify', n, { report: 1 }))
-  if (!n) {
-    unchecked = verifyQueue.splice(0)
-    break
+async function verifyAll(proposals, phaseName) {
+  const queue = proposals.slice()
+  const done = []
+  let left = []
+  while (queue.length) {
+    let n = Math.min(VERIFY_CHUNK, queue.length)
+    if (usage) n = Math.min(n, fitCount('verify', n, { report: 1 }))
+    if (!n) {
+      left = queue.splice(0)
+      break
+    }
+    const chunk = queue.splice(0, n)
+    done.push(...(await pipeline(chunk, p => verifyOne(p, phaseName))))
+    await measure('verify', chunk.length, phaseName, `usage after ${done.length} proposals`)
   }
-  const chunk = verifyQueue.splice(0, n)
-  verified.push(...(await pipeline(chunk, verifyOne)))
-  await measure('verify', chunk.length, 'Verify', `usage after ${verified.length} proposals`)
+  return { done: done.filter(Boolean), left }
 }
+
+const holds = p => p.evidenceCheck && p.evidenceCheck.holds && p.fit && p.fit.verdict !== 'drop'
+
+phase('Verify')
+const first = await verifyAll(merged.proposals, 'Verify')
+const verified = first.done
+let unchecked = first.left
 if (unchecked.length) log(`${unchecked.length} proposals left unchecked to stay under the usage limits`)
 
-const checked = verified.filter(Boolean)
-const kept = checked.filter(p => p.evidenceCheck && p.evidenceCheck.holds && p.fit && p.fit.verdict !== 'drop')
-const rejected = checked.filter(p => !kept.includes(p)).map(p => ({
+let deepBack = null
+if (WEEKEND) {
+  const weekly = usage && usage.windows.find(w => /all models/i.test(w.label))
+  const hoursToReset = weekly ? (Date.parse(weekly.resetsAt) - nowMs) / 3600000 : null
+  const pastDeep = history.map(r => r.deepBack).filter(Boolean).map(t => Date.parse(t))
+  let sliceEnd = pastDeep.length ? Math.min(...pastDeep) : Date.parse(scout.lookbackFrom)
+  const oldest = scout.oldestTranscript ? Date.parse(scout.oldestTranscript) : sliceEnd
+  if (!weekly) log('Weekend: the usage card is not readable, so the deeper pass stays off')
+  else if (hoursToReset > WEEKEND_RESET_HOURS) log(`Weekend: the weekly limit resets in ${Math.round(hoursToReset)} hours, more than ${WEEKEND_RESET_HOURS}, so the deeper pass stays off to keep that budget for the days ahead`)
+  else if (sliceEnd <= oldest) log('Weekend: earlier runs already went back to the oldest transcript kept, so the deeper pass has nothing left to read')
+  else {
+    phase('Deep')
+    let dry = 0
+    for (let k = 1; k <= MAX_DEEP_SLICES && dry < 2 && sliceEnd > oldest; k++) {
+      if (weeklyResetSeen) {
+        log('Weekend: the weekly limit reset, so the deeper pass stops to keep the new week')
+        break
+      }
+      if (usage && fitCount('gather', 1, { merge: 1, verify: MIN_VERIFY, report: 1 }) === 0) {
+        log('Weekend: the weekly limits reached the margin, so the deeper pass stops')
+        break
+      }
+      const sliceStart = Math.max(oldest, sliceEnd - DEEP_SLICE_DAYS * 86400000)
+      const from = new Date(sliceStart).toISOString()
+      const to = new Date(sliceEnd).toISOString()
+      const listing = await agent(`List the main session transcripts last modified after ${from} and not after ${to}: files matching ~/.claude/projects/*/*.jsonl at depth one only, with find -newermt and ! -newermt. The project directory names start with a dash, so give find ./name or absolute paths, never a bare name. Return each with its absolute path, its project directory name and its size in bytes.
+${GROUND}`, { label: `deep ${k} list`, phase: 'Deep', effort: 'low', schema: SESSIONS })
+      const known = stillOpen.map(i => i.title).concat(merged.proposals.map(p => p.title))
+      const sliceWindow = `This is a deeper pass over older sessions, from ${from} to ${to}. A finding needs evidence from inside that slice and should show a pattern, since one old incident is no news. A finding that only repeats one of these is no news either: ${known.join('; ') || 'none'}.`
+      const deepTasks = makeBatches(listing ? listing.sessions : []).map((b, i, all) => transcriptTask(b, `deep ${k} transcripts ${i + 1}/${all.length}`, 'deep', from, sliceWindow))
+      const g = await gatherAll(deepTasks, 'Deep')
+      const deepResults = g.done.map(x => x.result).filter(Boolean)
+      coverage.push(...deepResults.map(r => `${r.label}: ${r.coverage}`), ...g.skipped.map(t => `${t.label}: skipped to stay under the usage limits`))
+      const m = await mergeFindings(deepResults.flatMap(r => r.findings.map(f => ({ ...f, source: 'deep' }))), merged.proposals.map(p => ({ id: p.id, title: p.title })), 'Deep', `deep ${k} merge`, `d${k}-`)
+      merged.proposals.push(...m.proposals)
+      merged.updates.push(...m.updates)
+      merged.dropped.push(...m.dropped)
+      const v = await verifyAll(m.proposals, 'Deep')
+      verified.push(...v.done)
+      unchecked = unchecked.concat(v.left)
+      const keptHere = v.done.filter(holds).length
+      dry = keptHere ? 0 : dry + 1
+      deepBack = from
+      sliceEnd = sliceStart
+      log(`Weekend: ${from.slice(0, 10)} to ${to.slice(0, 10)} gave ${keptHere} new proposals from ${deepTasks.length} transcript batches`)
+      if (g.skipped.length || v.left.length) break
+    }
+  }
+}
+
+const kept = verified.filter(holds)
+const rejected = verified.filter(p => !holds(p)).map(p => ({
   title: p.title,
   reason: !p.evidenceCheck ? 'the evidence check returned nothing'
     : !p.evidenceCheck.holds ? `evidence did not hold: ${p.evidenceCheck.notes}`
@@ -626,7 +724,7 @@ const plan = openItems.length ? await agent(`Put the open proposals of a dream r
 2. Write each script to ${SCRIPTS_DIR}/<new id>.sh (expand ~, create the folder), with #!/usr/bin/env bash and a comment naming the run and the proposal's key on top, and make it executable. A new proposal's script is given in its script field. A carried one's script is in the file named in its scriptFile field: copy it from there. A last command that is git diff --no-index gets || true, since it always exits 1. Every git diff, log or show runs as git --no-pager, since the user runs the scripts in an interactive terminal, where a pager waits for a key.
 3. Build a sandbox in the scratchpad: a fresh directory used as HOME, holding copies of ~/.claude/CLAUDE.md, rules/, settings.json, hooks/, workflows/ and skills/, every ~/.claude/projects/*/memory folder under the same directory names, ~/src/dotclaude with its origin remote set to a path that does not exist and its commit-msg hook removed, each directory listed in ~/src/dotclaude/sync-mirrors.txt as a fresh git repository with the same files, and, for any other repository a script works in, a minimal git repository with only the files the script edits, on a branch other than the default.
 4. Run every script in order with env -i HOME=<sandbox> PATH="$PATH" TMPDIR=<sandbox>/tmp LANG=en_US.UTF-8 bash <file>, from its stand-in repository when it works in one, under a time limit of two minutes each. Never run a script outside the sandbox. Record whether it exited 0, whether it changed files, and for a failure the line that explains it: an anchor not found, a term the sync.sh scan refused, or anything else.
-5. A script that fails in the sandbox stays in its file with status "needs-regenerating" and the reason in note. A proposal without a script gets status "no-script", and its command is the prompt the user gives a session to carry it out.
+5. A script that fails in the sandbox stays in its file with status "needs-regenerating" and the reason in note.${WEEKEND ? " This is a weekend run, so first regenerate a failing script: rewrite it against the files as they stand, keeping its proposal, and test it again in the sandbox with the scripts before it, and only when it still fails does it keep that status." : ""} A proposal without a script gets status "no-script", and its command is the prompt the user gives a session to carry it out.
 
 Open proposals, as JSON:
 ${JSON.stringify(openItems.map(i => ({ key: i.key, isNew: i.isNew, kind: i.kind, title: i.title, impact: i.impact, target: i.target, fitNote: i.fitNote, script: i.isNew ? i.script : undefined, scriptFile: i.isNew ? undefined : i.scriptFile })))}
@@ -645,7 +743,7 @@ Sections, in this order:
 3. Closed since the last run: each backlog item now applied or obsolete, in one line.
 4. Skills to try: proposals of kind "skill-adopt", with the repository link and the install command in a fenced block.
 5. Left out: every dropped, rejected or unchecked proposal in one line with its reason.
-6. Coverage: the window, the Claude Code version, one line per source on what it read and skipped, and the sources not due yet.
+6. Coverage: the window, the Claude Code version, one line per source on what it read and skipped, and the sources not due yet${WEEKEND ? `, and how far back the deeper pass went: ${deepBack || "nowhere"}` : ""}.
 7. Usage: a short table of each plan limit at the start and before this report, then one line each on what a source and a checked proposal cost in percentage points, and what was skipped or left unchecked to stay ${MARGIN} points under the limits. Leave the section out when usage is null below.
 
 Window: ${scout.since} to ${scout.now}. Claude Code ${scout.installedVersion}.
@@ -706,6 +804,8 @@ const entry = {
   effort: scout.effort,
   margin: MARGIN,
   day: DAY,
+  weekend: WEEKEND,
+  deepBack,
   proposals: merged.proposals.length,
   checked: verified.length,
   unchecked: unchecked.length,
