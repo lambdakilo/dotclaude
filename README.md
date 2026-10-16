@@ -22,6 +22,10 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   nothing on them would be lost, that is when every commit is on the default branch or the
   branch is the head of a pull request GitHub still holds. Other gone branches are named for the
   user to decide. Deleted names and hashes are logged in the git directory for recovery.
+- [`hooks/prompt-log.sh`](hooks/prompt-log.sh): runs on every prompt and appends it to
+  `~/.claude/prompt-log/<session id>.jsonl`, which stays local. With `print` it prints the
+  session's prompts numbered and quoted for a pull request body, or with `--commit` for a commit
+  message, with URLs and email addresses replaced by `[pasted: an address]`.
 - [`hooks/memory-plain-characters.sh`](hooks/memory-plain-characters.sh): runs after every
   Write, Edit and Bash call and hands back each em dash in a memory file changed in the last two
   minutes, since the built-in memory template puts one in every index line.

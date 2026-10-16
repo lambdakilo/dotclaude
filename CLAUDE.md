@@ -70,7 +70,7 @@ apply to one repository belong in that repository's project memory.
 - The prompt section opens with two lines. The first is
   `Prompts behind this commit, as given to Claude Code` and the second is
   `(model <id>, effort <level>):`, with the model id and effort level of the running session,
-  taken from the session or from `model` and `modelSettings` in `~/.claude/settings.json`,
+  taken as the bullet on printing the prompts below says,
   never from memory. Then come the prompts behind the change: those given since the session's
   previous commit, every prompt of the session for its first commit, and for a follow-up to a
   commit made under the same prompt that prompt again. They keep their session numbers, each on
@@ -83,6 +83,22 @@ apply to one repository belong in that repository's project memory.
   from someone else) is never quoted, in a commit message or in a PR body. Replace it where it
   stood with a bracketed description of what it was, such as `[pasted: an email address]` or
   `[pasted: 40 lines of test output]`.
+- Print the prompts, never retype them. The `UserPromptSubmit` hook `prompt-log.sh` in
+  `~/.claude/hooks` appends every prompt to `~/.claude/prompt-log/<session id>.jsonl`, and
+  `~/.claude/hooks/prompt-log.sh print` prints the session's prompts numbered and quoted for a
+  PR body, with `--commit` in the commit form above and with `--from <n>` from prompt n on.
+  Addresses come out as `[pasted: an address]`. Then do only what the printout cannot: leave
+  out and redact as the bullets around this one say, say what each pasted address or block
+  was, and add the answer marks, the AskUserQuestion selections and the abbreviations. The
+  model id comes from the session. The effort comes from `get_session` with `self` where the
+  app offers it, else from `CLAUDE_EFFORT` in the shell, else from
+  `modelSettings.<id>.effortLevel` in `~/.claude/settings.json` with the id's `[1m]` suffix
+  dropped. A value that is not one word is a failed lookup and is never printed. When `/model`
+  or `/effort` changed either during the session, name each value with the prompts it ran
+  under, such as `Model: claude-fable-5-1 for prompts 1 to 3, claude-opus-5-5 for 4 to 9,
+  effort: xhigh`. Added 2026-10-14 after a session retyped its prompts into a PR body over
+  thirteen edits and lost two, two PRs named one model for prompts that ran on two, and a
+  commit printed the whole `modelSettings` object as its effort.
 - The PR rules on exclusion and redaction apply to commit messages too: leave out meta prompts,
   and in public and upstream repositories redact downstream project, client and customer names
   with square brackets. The one exception is the public configuration repository, where prompts
@@ -126,8 +142,8 @@ apply to one repository belong in that repository's project memory.
   a verbatim copy of this file on 2026-09-30, which went stale with every edit.
 - Second block: `<details><summary>Prompts behind this PR</summary>`. Its first line names the
   model and effort level the session ran with, for example `Model: claude-fable-5-1, effort:
-  medium`. Take them from the running session, or from `model` and `modelSettings` in
-  `~/.claude/settings.json`, never from memory. Then number every prompt from the session in
+  medium`. Take them, and the prompts under it, as the bullet on printing the prompts under
+  Commit messages says, never from memory. Then number every prompt from the session in
   order and quote each verbatim, typos and lowercase included, as a `>` blockquote (`**1.**` on
   its own line, then the `>` quote). Include prompts that produced no commit. Mark answers to
   questions with a short parenthetical, and put AskUserQuestion selections as nested `>` lines
@@ -141,6 +157,10 @@ apply to one repository belong in that repository's project memory.
 - Leave out meta prompts: anything about Claude Code itself, its memory, this rules file, or how
   to format the PR, even when the same prompt also asks for a small fix to the PR. Only prompts
   about the change under review belong in the PR.
+  A prompt mainly about the change keeps that part, and its meta part becomes a bracketed note
+  such as `[a question about Claude Code settings left out]`. An abbreviation found only in a
+  left-out part is not listed. Added 2026-10-14 after a PR quoted a settings question inside a
+  prompt about the change and listed its abbreviation.
 - Below the blocks, fill in the rest of the repository's pull request template when it has one.
   Look in `.github/` for `pull_request_template.md` or `PULL_REQUEST_TEMPLATE.md`, a
   `PULL_REQUEST_TEMPLATE/` directory, and the same names at the repository root and under
