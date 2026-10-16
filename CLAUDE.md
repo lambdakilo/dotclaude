@@ -371,6 +371,13 @@ apply to one repository belong in that repository's project memory.
   order, a letter as one choice among several, so a reader who sees `1.` and `2.` starts on
   both. Numbers stay for commands run in order. Added 2026-10-09 after two ways to finish a
   task were offered as 1 and 2.
+- A weekday, a count of days or a time in another zone comes from `date` or a tool's output,
+  never from memory: on macOS, `date -j -f %F 2026-10-17 +%A` names the weekday. A table or
+  list given as a tool's results holds every result, or says which it left out and why, and a
+  person whose address no source gives is named as not checked, never looked up under a
+  guessed address. Added 2026-10-14 after a reply put a reset on Friday 17 October, a
+  Saturday, and a calendar table called 15 October a Wednesday, dropped three of the windows
+  its heading promised and counted a colleague under an address guessed from a pattern.
 - Steps written for a person outside a PR, in a README, a setup section or chat, are run here
   before they are written down, and a menu, tab or button they name is taken from the installed
   version, such as the app's localized strings or the tool's `--help`, never from memory. A step
@@ -447,6 +454,11 @@ apply to one repository belong in that repository's project memory.
 - Prefer official features over custom glue that wraps unstable internals. If only custom works,
   say so and name the drift risk before building it.
 - Probe before spending quota on rate-limited APIs. Read retry-after, no blind retry loops.
+- A `PreToolUse` hook, `~/.claude/hooks/calendar-free-busy-only.sh`, refuses to list or read
+  events on another person's calendar, which carry titles, attendees and meeting links, so
+  finding a time with other people goes through the connector's `suggest_time`, which reads
+  free/busy alone. Added 2026-10-14 after a session listed two colleagues' events once
+  `suggest_time` had already answered.
 - Software outside the project is installed only with the user's yes. Before an install, say
   in a line what the tool is and why it is needed. Ask rules in `settings.json` then prompt for
   `brew`, `pipx`, `uv tool`, `npm -g`, `cargo`, `go` and `gem` installs in every permission

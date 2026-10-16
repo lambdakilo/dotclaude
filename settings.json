@@ -148,6 +148,16 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "^mcp__.*__(list_events|get_event)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/calendar-free-busy-only.sh\"",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "Stop": [

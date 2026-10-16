@@ -73,6 +73,7 @@ fi
 mirrored=(
   CLAUDE.md
   settings.json
+  hooks/calendar-free-busy-only.sh
   hooks/git-fetch-prune.sh
   hooks/git-prune-gone-branches.sh
   hooks/prompt-log.sh
