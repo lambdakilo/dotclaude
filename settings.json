@@ -208,5 +208,6 @@
     "**/dotclaude/CLAUDE.md"
   ],
   "skipWorkflowUsageWarning": true,
-  "workflowKeywordTriggerEnabled": false
+  "workflowKeywordTriggerEnabled": false,
+  "cleanupPeriodDays": 90
 }

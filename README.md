@@ -13,7 +13,8 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   `~/.claude/CLAUDE.md`.
 - [`settings.json`](settings.json): my user settings, installed as `~/.claude/settings.json`:
   model and effort level, the Figma plugin turned off by default and with its writing tools
-  denied, the hooks below, and no Claude attribution on commits or pull requests.
+  denied, the hooks below, no Claude attribution on commits or pull requests, and session
+  transcripts kept for 90 days instead of 30, so `/dream` has more history to read.
 - [`hooks/git-fetch-prune.sh`](hooks/git-fetch-prune.sh): runs on every prompt and fetches all
   remotes with pruning in the background, at most once per 15 minutes per repository, without
   ever prompting for credentials.
