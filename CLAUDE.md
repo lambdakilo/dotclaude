@@ -591,6 +591,16 @@ apply to one repository belong in that repository's project memory.
   another route. Added 2026-10-14 after a turn tried Claude in Chrome eight times, then handed
   a screenshot upload to the user while a memory note held a route through the built-in
   browser pane that had worked twice.
+- A file a connector cannot open gets one retry of the same call. A file that a member of
+  another organisation posted in a shared channel, such as a Slack Connect channel, lives in
+  that organisation's workspace, which the connector's token cannot reach, so the retry fails
+  too and file search does not list it. Open such a file where the user is signed in: the
+  message's permalink in the built-in browser pane, the option to open it in the browser, then
+  the app's own viewer, read page by page from zoomed screenshots, since the viewer's frame
+  blocks scripts. A reply calls a file unreadable only after both routes fail, and says how
+  many tries each took. When the file will be read again, ask the user for a copy in the
+  project instead. Added 2026-10-16 after a session gave up on a shared-channel PDF after one
+  call, while an earlier session's transcript showed the browser route that had read it.
 - A desktop session started with No folder gets a new memory key each time, which no later
   session loads, so a deny rule in `settings.json` blocks memory writes there. Save a project
   fact to that project's memory instead, and a private fact that holds everywhere to a file in
