@@ -22,6 +22,11 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   nothing on them would be lost, that is when every commit is on the default branch or the
   branch is the head of a pull request GitHub still holds. Other gone branches are named for the
   user to decide. Deleted names and hashes are logged in the git directory for recovery.
+- [`hooks/check-not-piped.sh`](hooks/check-not-piped.sh): runs before every Bash command and
+  refuses a check, such as verify, tests, lint, a build or end to end, piped into another
+  command, since a pipeline exits with its last command's status and a failed check piped into
+  `tail` reads as a pass. It lets the command through when it sets `pipefail`, and otherwise
+  names the way round: the output to a file in the scratchpad, then the status echoed.
 - [`hooks/prompt-log.sh`](hooks/prompt-log.sh): runs on every prompt and appends it to
   `~/.claude/prompt-log/<session id>.jsonl`, which stays local. With `print` it prints the
   session's prompts numbered and quoted for a pull request body, or with `--commit` for a commit

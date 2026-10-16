@@ -580,6 +580,13 @@ apply to one repository belong in that repository's project memory.
 - Memory is per start directory. When a rule should hold everywhere, put it in this file, not in
   memory. When starting in a parent folder like `~/src`, also read the memory of the project you
   end up working in under `~/.claude/projects/-Users-<user>-src-<project>/memory/MEMORY.md`.
+- Only `MEMORY.md` loads when a session starts, the notes it links to do not. Before a reply
+  calls a task blocked or hands a step of it to the user, grep the project's memory directory
+  for the task's words, such as upload, login or screenshot, and try each recipe it finds. A
+  tool that has failed to connect twice is not tried a third time in that turn: look for
+  another route. Added 2026-10-14 after a turn tried Claude in Chrome eight times, then handed
+  a screenshot upload to the user while a memory note held a route through the built-in
+  browser pane that had worked twice.
 - A desktop session started with No folder gets a new memory key each time, which no later
   session loads, so a deny rule in `settings.json` blocks memory writes there. Save a project
   fact to that project's memory instead, and a private fact that holds everywhere to a file in
