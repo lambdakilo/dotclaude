@@ -149,6 +149,18 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/memory-plain-characters.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
   "claudeMdExcludes": [

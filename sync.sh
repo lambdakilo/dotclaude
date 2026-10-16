@@ -53,6 +53,7 @@ mirrored=(
   settings.json
   hooks/git-fetch-prune.sh
   hooks/git-prune-gone-branches.sh
+  hooks/memory-plain-characters.sh
   hooks/stop-running-stack.sh
   hooks/claude-md-changed.sh
   hooks/no-github-posts.sh

@@ -512,6 +512,18 @@ apply to one repository belong in that repository's project memory.
 - Memory is per start directory. When a rule should hold everywhere, put it in this file, not in
   memory. When starting in a parent folder like `~/src`, also read the memory of the project you
   end up working in under `~/.claude/projects/-Users-<user>-src-<project>/memory/MEMORY.md`.
+- A memory note states what holds now. When a fact changes, rewrite the sentence that states
+  it, never append a paragraph calling an earlier one stale, and re-read the note from disk
+  first, since a peer session may have written the same fact.
+- A session that adds or changes a rule in this file greps `~/.claude/projects/*/memory/` for
+  notes that state the old behaviour and rewrites or deletes them in the same turn. When the
+  user reverses what a note records, edit the note first and act after. Added 2026-10-14 after a
+  stale paragraph left above its correction gave a wrong answer, a memory kept the old draft PR
+  rule the minute this file changed it, and a start command was refused while a note still
+  forbade it.
+- An index line is `- [Title](file.md): hook`, with a colon where the built-in memory template
+  shows an em dash. The `PostToolUse` hook `~/.claude/hooks/memory-plain-characters.sh` hands
+  back every em dash in a memory file changed in the last two minutes.
 - A memory note that records a correction quotes the user's words and dates them. What Claude
   reads into them is marked as its own inference or left out: a note never adds "always",
   "never" or "convention" where the user said none of them, and never narrows a rule in this
