@@ -22,6 +22,10 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   nothing on them would be lost, that is when every commit is on the default branch or the
   branch is the head of a pull request GitHub still holds. Other gone branches are named for the
   user to decide. Deleted names and hashes are logged in the git directory for recovery.
+- [`hooks/git-submodule-update-after-switch.sh`](hooks/git-submodule-update-after-switch.sh):
+  runs after every Bash command that switches branches and, in a repository with submodules,
+  runs `git submodule update --init` and reports `git submodule status` to Claude Code, since a
+  switch moves the pin of each submodule in the index but leaves its work tree where it was.
 - [`hooks/check-not-piped.sh`](hooks/check-not-piped.sh): runs before every Bash command and
   refuses a check, such as verify, tests, lint, a build or end to end, piped into another
   command, since a pipeline exits with its last command's status and a failed check piped into

@@ -76,6 +76,7 @@ mirrored=(
   hooks/calendar-free-busy-only.sh
   hooks/git-fetch-prune.sh
   hooks/git-prune-gone-branches.sh
+  hooks/git-submodule-update-after-switch.sh
   hooks/check-not-piped.sh
   hooks/prompt-log.sh
   hooks/memory-plain-characters.sh

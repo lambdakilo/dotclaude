@@ -61,6 +61,10 @@ apply to one repository belong in that repository's project memory.
   given `--recurse-submodules`. This holds for switches run and for switch commands given to the
   user. Added 2026-10-07 after a review's test steps gave a branch switch without it, and made
   unconditional the same day.
+- A `PostToolUse` hook, `~/.claude/hooks/git-submodule-update-after-switch.sh`, runs the update
+  after every Bash command that switches and adds `git submodule status`, or the error that
+  stopped the update, to the context. A switch given to the user still carries the update. Added
+  2026-10-14 after a session ran its checks on a submodule left off its pin by a bare switch.
 
 ## Commit messages
 
