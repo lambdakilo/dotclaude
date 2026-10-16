@@ -83,7 +83,7 @@ mirrored=(
   hooks/stop-running-stack.sh
   hooks/claude-md-changed.sh
   hooks/no-github-posts.sh
-  workflows/weekly.js
+  workflows/dream.js
 )
 
 install_file() {

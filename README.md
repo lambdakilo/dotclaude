@@ -47,19 +47,21 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   `gh pr review`, a close or reopen with `--comment`, and `gh api` calls that write a comment or a
   review, reply to a review thread or resolve one. It runs in every permission mode, bypass
   included. Editing a PR body, assigning, and closing or reopening without a comment still work.
-- [`workflows/weekly.js`](workflows/weekly.js): a saved Claude Code workflow, run as
-  `/weekly` when there are tokens left at the end of a week. It reads the week's session
-  transcripts in batches, the whole configuration, `claude doctor`, the Claude Code changelog and
-  Anthropic news since the last run, the user's own pull request reviews, and the skill repositories
-  listed in `~/.claude/weekly-review/skill-repos.txt`, which stays local. Two more agents check
-  each proposal, one that its evidence holds and one that no rule already covers it. The run
-  writes a report short enough to read in the chat, with habits for next week and the changes to
-  the setup, and keeps a shell script for each change in a separate file beside it in
-  `~/.claude/weekly-review/`, for a session to apply on request. It changes nothing itself.
-  Between chunks of work it reads the plan usage card in the desktop app and stops adding
-  sources and proposals before a limit would come within five points of full, estimating each
-  chunk from what earlier runs cost. It keeps those costs in
-  `~/.claude/weekly-review/usage-history.jsonl`, which stays local.
+- [`workflows/dream.js`](workflows/dream.js): a saved Claude Code workflow, run as `/dream` in
+  idle time, at the end of a day, overnight or over a weekend. It reads the session transcripts
+  since the last run in batches, the whole configuration, `claude doctor`, the Claude Code
+  changelog and Anthropic news, the user's own pull request reviews, what Claude Code now does by
+  itself that the setup duplicates, and the skill repositories listed in
+  `~/.claude/dream/skill-repos.txt`, which stays local. Transcripts and configuration run every
+  time, reviews once a day and the rest once a week. Two more agents check each new proposal, one
+  that its evidence holds and one that no rule already covers it, and open proposals carry over
+  in `~/.claude/dream/backlog.json` until they are applied or found obsolete. Each run writes a
+  report short enough to read in the chat and a folder with a shell script per change, numbered
+  in the order to apply them and tested in that order in a sandbox. It changes nothing itself.
+  Between chunks of work it reads the plan usage card in the desktop app and stops adding work
+  before a limit would come within five points of full, estimating each chunk from what earlier
+  runs cost, as kept in `~/.claude/dream/usage-history.jsonl`. With `overnight` it lets the
+  5-hour limit fill and waits for its reset instead.
 - [`sync.sh`](sync.sh): pulls this checkout, copies each mirrored file whichever way it changed,
   a JSON file in the key order it has here, stops on a file changed on both sides, scans
   everything for private names, paths, addresses and credentials before anything gets committed,
