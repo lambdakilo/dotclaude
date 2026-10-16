@@ -369,12 +369,20 @@ apply to one repository belong in that repository's project memory.
   it could have been better: what was missing, what was ambiguous, what was unnecessary, and a
   rewritten prompt when the change is more than a word. Keep it to a few lines. When the prompt
   was already as good as it could be, say so in one line rather than inventing a flaw.
+  Leave the section out when the user typed no prompt for the turn: a peer session's message,
+  an idle or task notification, or a spawned task's opening prompt, which another session
+  wrote. Added 2026-10-14 after replies to peer messages ended in a nothing-to-improve line,
+  and a reply critiqued a chip prompt as if the user had typed it.
 - Write the rewritten prompt itself as the user would type it: all lowercase, names included,
   and without characters that need the shift key when a plain one does the job, so commas and
   full stops in place of colons, quotes, question marks and parentheses. Make it as short as it
   can be while still being a good prompt, and never longer than a few lines. The rest of the
   section keeps normal capitals and punctuation, so `Rewritten: "pull pr 94 and redo the
   review"` is right and `Rewritten: "Pull PR 94, redo the review!"` is not.
+  The rewrite keeps one reading with every comma and full stop removed, since the user may type
+  it without them: a scope word such as `here` or `only` stands next to what it limits, or the
+  scope is spelled out. Added 2026-10-14 after a rewrite that relied on its comma was retyped
+  without it and read as skipping verify and end to end.
 
 ## Comments
 
