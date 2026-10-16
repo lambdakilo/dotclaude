@@ -1,8 +1,8 @@
 # dotclaude
 
 This is a public mirror of my `~/.claude`, the global configuration directory of Claude Code: the
-rules I have Claude Code follow in every project, my user settings, my hooks and a workflow, with
-the script I use to keep this checkout and the live directory in sync.
+rules I have Claude Code follow in every project, my user settings, my hooks, a skill and a
+workflow, with the script I use to keep this checkout and the live directory in sync.
 
 The rules file names no person, organisation, customer or repository, so it can be copied as it
 stands. `./sync.sh --install` copies every mirrored file into your own `~/.claude`.
@@ -48,6 +48,11 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   `gh pr review`, a close or reopen with `--comment`, and `gh api` calls that write a comment or a
   review, reply to a review thread or resolve one. It runs in every permission mode, bypass
   included. Editing a PR body, assigning, and closing or reopening without a comment still work.
+- [`skills/pull-requests/SKILL.md`](skills/pull-requests/SKILL.md): a skill, installed as
+  `~/.claude/skills/pull-requests/SKILL.md`, with the procedures for a pull request: the body and
+  its prompts block, the steps to verify it, the reply to a review, and screenshots and
+  recordings. `CLAUDE.md` tells Claude Code to load it before any of those, so the procedures stay
+  out of the context of sessions that never touch a pull request.
 - [`workflows/dream.js`](workflows/dream.js): a saved Claude Code workflow, run as `/dream` in
   idle time, at the end of a day, overnight or over a weekend. It reads the session transcripts
   since the last run in batches, the whole configuration, `claude doctor`, the Claude Code
@@ -87,8 +92,9 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
 
 ## License
 
-Prose, meaning `CLAUDE.md` and this README, is licensed under Creative Commons
-Attribution-ShareAlike 4.0 International. See [`LICENSE-CC-BY-SA-4.0`](LICENSE-CC-BY-SA-4.0).
+Prose, meaning `CLAUDE.md`, `skills/pull-requests/SKILL.md` and this README, is licensed under
+Creative Commons Attribution-ShareAlike 4.0 International. See
+[`LICENSE-CC-BY-SA-4.0`](LICENSE-CC-BY-SA-4.0).
 
 Everything else is licensed under the GNU Affero General Public License, version 3 or (at your
 option) any later version. See [`LICENSE`](LICENSE).

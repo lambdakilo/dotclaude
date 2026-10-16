@@ -83,6 +83,7 @@ mirrored=(
   hooks/stop-running-stack.sh
   hooks/claude-md-changed.sh
   hooks/no-github-posts.sh
+  skills/pull-requests/SKILL.md
   workflows/dream.js
 )
 
