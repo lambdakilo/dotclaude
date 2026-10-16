@@ -850,12 +850,15 @@ if (only.includes('anthropic')) {
 Read:
 - the Claude Code changelog, https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md, for every version released after ${lastRan.anthropic ? `the last check on ${new Date(lastRan.anthropic).toISOString()}` : scout.lookbackFrom} and every version newer than the installed ${scout.installedVersion}; npm view @anthropic-ai/claude-code time --json gives release dates;
 - the weekly digests under https://code.claude.com/docs/en/whats-new/ for those weeks;
+- the Claude Platform release notes, https://platform.claude.com/docs/en/release-notes/overview, for the same time, and the pages of the docs index https://platform.claude.com/llms.txt that cover what they announce. Read the Managed Agents pages on dreams (https://platform.claude.com/docs/en/managed-agents/dreams), memory stores, scheduled deployments, multiagent orchestration and session budgets every time, since they do jobs this setup does by hand, and note anything on them that is new;
 - Anthropic's news at https://www.anthropic.com/news for posts in that time about Claude Code, models or the API.
-Then read ~/.claude/settings.json, ~/.claude/hooks/ and ~/.claude/CLAUDE.md and match each change against them:
-- a new official feature that replaces a hook, a script or a rule the user built by hand (the user prefers official features over custom glue);
+Then read ~/.claude/settings.json, ~/.claude/hooks/, ~/.claude/CLAUDE.md, ~/.claude/workflows/ and ~/.claude/skills/ and match each change against them:
+- a new official feature that replaces a hook, a script, a rule or a step of a workflow the user built by hand (the user prefers official features over custom glue);
+- a feature whose design a workflow could copy, above all ~/.claude/workflows/dream.js, which does for Claude Code transcripts and memory files what Managed Agents dreams do for sessions and memory stores: name the step and what it would do differently;
 - a deprecated or removed setting, flag, command or model the user still uses;
 - a new setting or command that fixes friction the rules describe;
 - a model or effort change worth making.
+A Claude API or Managed Agents feature needs an API key, bills at API token rates outside the Claude plan's limits, and works on its own sessions and memory stores, not on Claude Code transcripts or memory files. A finding about one says what it would cost, what the user would have to set up, which part of their own version it would replace, and, for a research preview, how access is requested.
 Skip changes that do not touch this setup. Cite the changelog version or URL for every finding.
 ${WINDOW}
 ${OUTPUT}

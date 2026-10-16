@@ -58,9 +58,11 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   each tier's findings are merged and checked before later tiers get the usage: first the session
   transcripts since the last run, newest first, the whole configuration and the user's own pull
   request reviews; then whether each section of `CLAUDE.md` is followed, broken or never
-  triggered, where sessions waste tokens, `claude doctor`, the Claude Code changelog and
-  Anthropic news, what Claude Code now does by itself that the setup duplicates, and the skill
-  repositories listed in `~/.claude/dream/skill-repos.txt`, which stays local; then an audit of
+  triggered, where sessions waste tokens, `claude doctor`, the Claude Code changelog, the Claude
+  Platform release notes and Managed Agents docs, such as dreams, for what the setup or this
+  workflow could use, Anthropic news, what Claude Code now does by itself that the setup
+  duplicates, and the skill repositories listed in `~/.claude/dream/skill-repos.txt`, which
+  stays local; then an audit of
   each repository worked in against its `CLAUDE.md` and project memory, a review of the user's
   open pull requests and a brief for Monday; and last subagent transcripts and older transcripts
   a week at a time. Transcripts and configuration run every time, reviews once a day and the rest
