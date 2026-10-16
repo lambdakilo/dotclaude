@@ -187,5 +187,6 @@
   "claudeMdExcludes": [
     "**/dotclaude/CLAUDE.md"
   ],
-  "skipWorkflowUsageWarning": true
+  "skipWorkflowUsageWarning": true,
+  "workflowKeywordTriggerEnabled": false
 }

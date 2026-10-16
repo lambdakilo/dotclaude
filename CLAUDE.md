@@ -459,6 +459,14 @@ apply to one repository belong in that repository's project memory.
   finding a time with other people goes through the connector's `suggest_time`, which reads
   free/busy alone. Added 2026-10-14 after a session listed two colleagues' events once
   `suggest_time` had already answered.
+- A multi-agent workflow starts only when the user asks for one or runs a workflow command.
+  Propose one, with a rough token cost, only for read-only work across a wide area: a deep
+  review of a large diff, research across several read-only sources, or a sweep of a codebase
+  against one rule. Never propose one for work that needs the local stack or the shared
+  checkout. `workflowKeywordTriggerEnabled` is `false` in `settings.json`, so the word
+  ultracode in a prompt opts in to nothing. Added 2026-10-14 after a question that named
+  ultracode started a 3-agent workflow of about 560k tokens for an answer that needed no
+  research.
 - Software outside the project is installed only with the user's yes. Before an install, say
   in a line what the tool is and why it is needed. Ask rules in `settings.json` then prompt for
   `brew`, `pipx`, `uv tool`, `npm -g`, `cargo`, `go` and `gem` installs in every permission
