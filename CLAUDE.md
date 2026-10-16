@@ -313,6 +313,10 @@ apply to one repository belong in that repository's project memory.
   checkout back to the branch it was on afterwards.
 - Direct checkouts: branch from `origin/<default branch>`, push to `origin`, and open the PR
   with `--head <branch>` against that default branch.
+  The exception is a repository under the user's own account whose only collaborator is the
+  user, as `gh api repos/<owner>/<repo>/collaborators` lists them: commit on its default branch
+  and push there, with no branch and no PR. Added 2026-10-14 after a draft PR in such a
+  repository was merged four minutes after it opened, on the user's word to push to main.
 - Upstream PRs only when asked. First check what is already open with
   `gh pr list --repo <upstream-owner>/<repo> --author @me` and prefer adding to an open PR.
 - One draft PR per session. Everything a session is asked to change goes to the branch of the
