@@ -1,7 +1,7 @@
 export const meta = {
   name: 'dream',
   description: 'Review Claude Code use since the last run in idle time, carry open proposals forward, and propose changes to the global setup',
-  whenToUse: 'In idle time with tokens to spare: at the end of a day, overnight or over a weekend. Optional args: {since: "<ISO time>", only: ["transcripts", "config", "harness", "doctor", "anthropic", "skills", "github"], all: true to run every source whether due or not, out: "<report directory>", margin: <usage percentage points to leave free, default 5>, overnight: true to let the 5-hour limit fill and wait for its reset}. Transcripts and config run every time, GitHub reviews once a day, and the harness, doctor, Anthropic and skill repository sources once a week. Skill repositories are listed one per line in ~/.claude/dream/skill-repos.txt as "owner/repo[/path] optional note". Open proposals carry over in ~/.claude/dream/backlog.json until they are applied or found obsolete. The run reads the plan usage card between chunks of work and stops adding work before a limit would fill, using what earlier runs cost, as kept in ~/.claude/dream/usage-history.jsonl. When the run finishes, read the report file and show all of it in the chat, unshortened, since the user reads the report only there. Each run has its own folder of scripts beside the report, numbered in the order to apply them, and the report gives the command that runs each one.',
+  whenToUse: 'In idle time with tokens to spare: at the end of a day, overnight or over a weekend. Optional args: {since: "<ISO time>", only: ["transcripts", "config", "harness", "doctor", "anthropic", "skills", "github"], all: true to run every source whether due or not, out: "<report directory>", margin: <usage percentage points to leave free, default 5>, day: true for a run while the user keeps working, which keeps the 5-hour limit under the margin too}. Transcripts and config run every time, GitHub reviews once a day, and the harness, doctor, Anthropic and skill repository sources once a week. Skill repositories are listed one per line in ~/.claude/dream/skill-repos.txt as "owner/repo[/path] optional note". By default a run guards only the weekly limits and lets the 5-hour limit fill, then waits for its reset, since it runs while the user is away. Open proposals carry over in ~/.claude/dream/backlog.json until they are applied or found obsolete. The run reads the plan usage card between chunks of work and stops adding work before a limit would fill, using what earlier runs cost, as kept in ~/.claude/dream/usage-history.jsonl. When the run finishes, read the report file and show all of it in the chat, unshortened, since the user reads the report only there. Each run has its own folder of scripts beside the report, numbered in the order to apply them, and the report gives the command that runs each one.',
   phases: [
     { title: 'Scout', detail: 'time window, due sources, transcripts, backlog, usage and its history' },
     { title: 'Gather', detail: 'one agent per due source, transcripts in batches, in chunks while usage allows' },
@@ -27,6 +27,7 @@ if (unknown.length) log(`Ignoring unknown sources: ${unknown.join(', ')}`)
 const MAX_BATCHES = 24
 const MAX_PROPOSALS = 30
 const HISTORY_RUNS = 6
+const DAY = opts.day === true || opts.overnight === false
 const MARGIN = typeof opts.margin === 'number' ? opts.margin : 5
 const GATHER_CHUNK = 10
 const VERIFY_CHUNK = 6
@@ -267,13 +268,13 @@ let usage = readable(scout.usage) ? scout.usage : null
 const startUsage = usage
 const ledger = {}
 const showUsage = u => u.windows.map(w => `${w.label} ${w.percentUsed}%`).join(', ')
-if (usage) log(`Usage at start: ${showUsage(usage)}. Estimating from ${pastRuns.length} earlier runs on ${scout.model}, leaving ${MARGIN} points free${opts.overnight ? ', and letting the 5-hour limit fill and reset' : ''}`)
+if (usage) log(`Usage at start: ${showUsage(usage)}. Estimating from ${pastRuns.length} earlier runs on ${scout.model}, leaving ${MARGIN} points free${DAY ? ', the 5-hour limit included, since this is a day run' : ' on the weekly limits, and letting the 5-hour limit fill and reset'}`)
 else log('The usage card is not readable here, so the run goes without the usage guard')
 
 const sameWindow = (a, b) => a.label === b.label && Math.abs(Date.parse(a.resetsAt) - Date.parse(b.resetsAt)) < 5 * 60 * 1000
 
 function binds(label) {
-  if (opts.overnight && /hour/i.test(label)) return false
+  if (!DAY && /hour/i.test(label)) return false
   const perModel = label.match(/^weekly[^a-z]+(.+)$/i)
   if (!perModel || /all models/i.test(perModel[1])) return true
   return scout.model.toLowerCase().includes(perModel[1].trim().split(/\s+/)[0].toLowerCase())
@@ -704,7 +705,7 @@ const entry = {
   model: scout.model,
   effort: scout.effort,
   margin: MARGIN,
-  overnight: Boolean(opts.overnight),
+  day: DAY,
   proposals: merged.proposals.length,
   checked: verified.length,
   unchecked: unchecked.length,
