@@ -38,7 +38,8 @@
       "mcp__figma__weave_cancel_tool_run",
       "mcp__figma__weave_list_tools",
       "mcp__figma__weave_get_tool_inputs",
-      "mcp__figma__weave_get_tool_run_output"
+      "mcp__figma__weave_get_tool_run_output",
+      "Edit(~/.claude/projects/*-Claude-scratch-workspaces-*/memory/**)"
     ],
     "allow": [
       "Bash(gh repo create:*)",

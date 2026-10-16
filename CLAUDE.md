@@ -321,8 +321,8 @@ apply to one repository belong in that repository's project memory.
   label quoted from the screen. Added 2026-10-10 after breadcrumbs were written with a chevron
   character between them, which the reader could neither read nor type.
 - Name an organisation by its full registered name every time. Never "we", "ours", "they" or
-  "theirs" standing in for a company. The names that apply to a repository live in its project
-  memory.
+  "theirs" standing in for a company. The names live in `~/.claude/rules/organisations.md`,
+  which loads in every session, and those of one repository also in its project memory.
 - A command the reader is meant to run goes in a fenced code block tagged with its shell, never
   inline in a sentence. A fenced block reads as a command and copies as one, an inline span
   hides in the prose and breaks at the first backtick. One command per block. Several commands
@@ -416,6 +416,10 @@ apply to one repository belong in that repository's project memory.
   in commands run and in commands given to the user, since the working directory persists from
   one command to the next. The subshell replaced the paired return on 2026-10-12, after a PR's
   own steps showed it; the paired return had stood since 2026-10-06.
+- A command given to the user names every file by its full `~` path, since the user's terminal
+  does not start in the session's directory. A file such a command reads or writes that belongs
+  to no checkout goes in `~/Downloads` unless the user names a folder. Added 2026-10-14 after a
+  loop read `archive-ids.txt` by bare name from a scratch workspace and failed in the terminal.
 - Never run environment or deployment tooling against a remote environment. Confirm before
   destructive commands.
 - Prefer official features over custom glue that wraps unstable internals. If only custom works,
@@ -520,6 +524,13 @@ apply to one repository belong in that repository's project memory.
 - Memory is per start directory. When a rule should hold everywhere, put it in this file, not in
   memory. When starting in a parent folder like `~/src`, also read the memory of the project you
   end up working in under `~/.claude/projects/-Users-<user>-src-<project>/memory/MEMORY.md`.
+- A desktop session started with No folder gets a new memory key each time, which no later
+  session loads, so a deny rule in `settings.json` blocks memory writes there. Save a project
+  fact to that project's memory instead, and a private fact that holds everywhere to a file in
+  `~/.claude/rules/` after asking: it loads in every session and `sync.sh` does not mirror it.
+  The reply says where it went. When the topic is a local project, read its checkout's
+  `CLAUDE.md` and its `MEMORY.md` first. Added 2026-10-14 after a scratch session saved a
+  memory no session loaded again, and another shortened organisation names.
 - A memory note states what holds now. When a fact changes, rewrite the sentence that states
   it, never append a paragraph calling an earlier one stale, and re-read the note from disk
   first, since a peer session may have written the same fact.
