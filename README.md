@@ -52,10 +52,13 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   chunk from what earlier runs cost. It keeps those costs in
   `~/.claude/weekly-review/usage-history.jsonl`, which stays local.
 - [`sync.sh`](sync.sh): pulls this checkout, copies each mirrored file whichever way it changed,
-  stops on a file changed on both sides, scans everything for private names, paths, addresses
-  and credentials before anything gets committed, and after a clean scan copies every published
-  file into the directories listed in `sync-mirrors.txt`. With `--install` it copies the
-  mirrored files into `~/.claude` on a new machine.
+  a JSON file in the key order it has here, stops on a file changed on both sides, scans
+  everything for private names, paths, addresses and credentials before anything gets committed,
+  and after a clean scan copies every published file into the directories listed in
+  `sync-mirrors.txt`, removing there what this checkout has deleted. With
+  `--commit <message-file>` it then commits and pushes this checkout and every mirror with that
+  message, adding to a mirror's message a line that names the commit here. With `--install` it
+  copies the mirrored files into `~/.claude` on a new machine.
 - `sync-allow.txt`: optional and absent here, one literal per line that the scan ignores.
 - `sync-deny.txt`: optional and ignored by git, one literal per line that fails the scan in any
   case, such as a private project's names and labels. `./sync.sh --check-message <file>` checks

@@ -9,11 +9,19 @@
 #   sync.sh --install  copy every mirrored file from the checkout into the
 #                      configuration directory (first run on a new machine);
 #                      an existing file that differs is kept as <file>.bak
+#   sync.sh --commit <message-file> [<path>...]
+#                      sync, then commit the paths, all by default, with the
+#                      message and push, then do the same in every mirror,
+#                      the message gaining a line that names the commit here
 #
 # Reconciling: a file the pull changed is installed locally, a file changed
 # locally is copied into the checkout, and a file changed on both sides stops
 # the run. Literals listed one per line in sync-allow.txt are exempt from the
 # scan.
+#
+# Key order: a mirrored JSON file changed locally is first put back into the
+# key order the checkout has, when jq is installed, so a tool that writes the
+# whole file back in its own order leaves a diff of the values alone.
 #
 # Literals listed one per line in sync-deny.txt, which git ignores, fail the
 # scan wherever they appear, in any case: the names and labels of a private
@@ -23,12 +31,26 @@
 # Mirrors: directories listed one per line in sync-mirrors.txt, which git
 # ignores, get a copy of every published file after a clean scan, for a second
 # copy kept in another repository. A leading ~/ stands for the home directory.
-# A file removed from this checkout is not removed from a mirror.
+# A file this checkout has deleted is removed from a mirror too.
 
 set -euo pipefail
 
 source_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
 checkout="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+message_file=""
+commit_paths=(.)
+if [ "${1:-}" = "--commit" ]; then
+  if [ ! -f "${2:-}" ]; then
+    echo "sync: --commit needs a message file" >&2
+    exit 2
+  fi
+  message_file="$(cd "$(dirname "$2")" && pwd)/$(basename "$2")"
+  shift 2
+  if [ "$#" -gt 0 ]; then
+    commit_paths=("$@")
+  fi
+fi
 
 deny_args=()
 if [ -f "$checkout/sync-deny.txt" ]; then
@@ -74,6 +96,22 @@ same_as_commit() {
   [ "$(git rev-parse --verify --quiet "$1:$2")" = "$(git hash-object "$3")" ]
 }
 
+keep_key_order() {
+  command -v jq >/dev/null 2>&1 || return 0
+  same_file "$1" "$2" && return 0
+  local ordered
+  ordered="$(jq --slurpfile old "$1" '
+    def order($o):
+      if type == "object" and ($o | type) == "object" then
+        . as $n
+        | [($o | keys_unsorted[] | select(. as $k | $n | has($k))),
+           ($n | keys_unsorted[] | select(. as $k | $o | has($k) | not))]
+        | reduce .[] as $k ({}; .[$k] = ($n[$k] | order($o[$k])))
+      else . end;
+    order($old[0])' "$2" 2>/dev/null)" || return 0
+  printf '%s\n' "$ordered" | cmp -s - "$2" || printf '%s\n' "$ordered" > "$2"
+}
+
 if [ "${1:-}" = "--install" ]; then
   for path in "${mirrored[@]}"; do
     target="$source_dir/$path"
@@ -100,6 +138,7 @@ for path in "${mirrored[@]}"; do
     continue
   fi
   if git diff --quiet "$before" HEAD -- "$path"; then
+    case "$path" in *.json) keep_key_order "$repo_file" "$local_file" ;; esac
     same_file "$local_file" "$repo_file" || install_file "$local_file" "$repo_file"
   elif same_as_commit "$before" "$path" "$local_file"; then
     install_file "$repo_file" "$local_file"
@@ -132,6 +171,7 @@ fi
 files=()
 scan_files=()
 while IFS= read -r -d '' path; do
+  [ -e "$path" ] || continue
   files+=("$path")
   case "$path" in LICENSE*|sync-allow.txt) continue ;; esac
   scan_files+=("$path")
@@ -197,9 +237,48 @@ if [ "$failed" -eq 0 ] && [ "${#mirror_dirs[@]}" -gt 0 ]; then
     for path in "${files[@]}"; do
       install_file "$checkout/$path" "$dir/$path"
     done
-    echo "sync: published files copied into $dir, commit there too"
+    published=$'\n'"$(printf '%s\n' "${files[@]}")"$'\n'
+    while IFS= read -r path; do
+      [ -n "$path" ] || continue
+      case "$published" in *$'\n'"$path"$'\n'*) continue ;; esac
+      rm -f "$dir/$path"
+    done < <({
+      git log --no-renames --diff-filter=D --name-only --format=
+      git diff --cached --no-renames --diff-filter=D --name-only
+      git ls-files --deleted
+    } | sort -u)
+    [ -n "$message_file" ] || echo "sync: published files copied into $dir, commit there too"
   done
 fi
 
 git status --short
+
+if [ -n "$message_file" ] && [ "$failed" -ne 0 ]; then
+  echo "sync: nothing committed, fix the above first" >&2
+elif [ -n "$message_file" ]; then
+  git add -A -- "${commit_paths[@]}"
+  if git diff --cached --quiet -- "${commit_paths[@]}"; then
+    echo "sync: nothing to commit here" >&2
+  else
+    git commit -q -F "$message_file" -- "${commit_paths[@]}"
+  fi
+  git push -q
+  hash="$(git rev-parse --short HEAD)"
+  echo "sync: $hash pushed"
+  mirror_message="$(mktemp)"
+  awk -v line="Mirrors $(basename "$checkout") $hash." '
+    done == 0 && /^Prompts behind this commit/ { print line; print ""; done = 1 }
+    { print }
+    END { if (done == 0) { print ""; print line } }
+  ' "$message_file" > "$mirror_message"
+  for dir in ${mirror_dirs[@]+"${mirror_dirs[@]}"}; do
+    git -C "$dir" pull --ff-only --quiet
+    git -C "$dir" add -A -- "${commit_paths[@]}"
+    git -C "$dir" diff --cached --quiet -- "${commit_paths[@]}" ||
+      git -C "$dir" commit -q -F "$mirror_message" -- "${commit_paths[@]}"
+    git -C "$dir" push -q
+    echo "sync: $(git -C "$dir" rev-parse --short HEAD) pushed in $dir"
+  done
+  rm -f "$mirror_message"
+fi
 exit "$failed"

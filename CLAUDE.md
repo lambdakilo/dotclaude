@@ -512,17 +512,24 @@ apply to one repository belong in that repository's project memory.
   each mirror, holds commit messages to the same list.
 - A change to this file is made only on the user's go: a prompt that says go or push, or a
   script from this session that the user says they ran. Then, as whenever a session changes
-  another mirrored file, run `sync.sh`, read the diff, commit and push to the default branch in
-  the same turn. No PR: the checkout has one owner. When a new file under `~/.claude` would help
-  other people (a hook, a skill, a command, an agent), add it to the list in `sync.sh` first.
-  The go came in on 2026-10-14, after five pushes on 2026-10-12 rewrote one review rule, some
-  undoing the one before, and the user asked four times that day to confirm first.
+  another mirrored file, run `sync.sh` and read the diff, write the commit message to a file in
+  the scratchpad, and run `sync.sh --commit <file>` in the same turn, with the paths to commit
+  after the file when the checkout holds other changes too. It commits and pushes the checkout
+  to the default branch, then every mirror below. No PR: the checkout has one owner. A mirrored
+  JSON file changed locally goes back into the checkout's key order first, so `claude plugin`
+  and the `/plugin` dialog may change `settings.json`. When a new file under `~/.claude` would
+  help other people (a hook, a skill, a command, an agent), add it to the list in `sync.sh`
+  first. The go came in on 2026-10-14, after five pushes on 2026-10-12 rewrote one review rule,
+  some undoing the one before, and the user asked four times that day to confirm first.
+  `--commit` came on 2026-10-16, after seven commit pairs on 2026-10-14 each carried the
+  checkout's hash into the mirror's message by `sed`.
 - `sync.sh` also copies every published file into each directory listed in `sync-mirrors.txt`, an
-  optional file beside it that git ignores, and prints each directory it copied into. When it
-  reports one, commit and push in that repository too, in the same turn. Which directories those
-  are and what each is for lives in the dotclaude checkout's project memory, never in this file
-  or in a tracked file, so the public repository shows the mechanism and nothing it points at.
-  Added 2026-10-10.
+  optional file beside it that git ignores, removes there what the checkout has deleted, and
+  prints each directory it copied into. With `--commit` it then commits and pushes in each of
+  them with the same message and a line naming the checkout commit, so one message is trimmed
+  and redacted for every copy. Which directories those are and what each is for lives in the
+  dotclaude checkout's project memory, never in this file or in a tracked file, so the public
+  repository shows the mechanism and nothing it points at. Added 2026-10-10.
 - New machine: clone the repository to `~/src/dotclaude`, run `./sync.sh --install` to copy the
   mirrored files into `~/.claude` (existing files that differ are kept as `.bak`), and set the
   repository-local git identity to match the existing history, from
