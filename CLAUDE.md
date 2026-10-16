@@ -298,6 +298,15 @@ apply to one repository belong in that repository's project memory.
   second PR is opened only when the user says so in that session. Until 2026-10-13 a different
   feature got its own branch and draft, and a one-paragraph docs change went out as a second
   draft beside the feature PR the session was on; the user closed it and had the change moved.
+- A change for a branch that another live session works on goes to that session, never to a
+  task chip and never through a switch of the checkout the two share: send it with SendMessage
+  to the name ListAgents prints. A send counts only when it returns without an error. When it
+  fails, the checkout stays where it is and the reply names that session and the change, so
+  the user can pass it on. A task chip is for work no live session holds. A session that
+  switches a shared checkout for anything but the PR in play switches it back before the turn
+  ends. Added 2026-10-14 after a chip spawned to fix another session's PR moved the shared
+  checkout to that PR and left it there, and a switch ran between two sends to an idle peer
+  that both failed.
 
 ## Prose
 
@@ -387,6 +396,11 @@ apply to one repository belong in that repository's project memory.
   stopped. A project memory that says to keep a stack up does not override this. Made explicit
   2026-10-13 after a turn ended with a stack up on a project memory from 2026-10-08 that said to
   keep it up.
+- A `Stop` hook runs `~/.claude/hooks/stop-running-stack.sh` when a turn ends. When that turn
+  ran a command that starts a compose stack, and a compose project of the repository or one of
+  its worktrees still has containers up, it sends the turn back once with the reason. It stops
+  nothing itself, and a turn that started nothing passes. It is a safety net for the rule
+  above, not a substitute for it. Added 2026-10-14.
 - A command that must run in another directory uses the tool's own directory flag, such as
   `git -C` or `npm --prefix`, and otherwise a subshell, `(cd playwright && npx playwright test)`,
   which returns on its own. Never `cd playwright && npx playwright test; cd ..`: when the `cd`
