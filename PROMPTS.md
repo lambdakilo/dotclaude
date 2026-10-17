@@ -1,0 +1,1382 @@
+# Prompts
+
+The prompts behind the commits of this repository, as given to Claude Code, newest first, each
+with its commit and pull request. Square brackets mark what was left out or redacted, and a
+commit without a prompts section is left out. This file is generated from the commit messages,
+so a change by hand is lost at the next commit.
+
+## Generate PROMPTS.md from the prompts in commit messages
+
+2026-10-17, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> what sort of file name would be good for for example dotclaude
+> prompts.md that would list all prompts in the repo, the relating
+> commit to that and the pr? would it be PROMPTS.md or prompts.md?
+
+**2.**
+> dotclaude always update a PROMPTS.md in a repo. push one to dotclaude
+> repo and ill check if its so good so i can push it to my other repos
+
+## Keep steps the session can take out of the user's hands
+
+2026-10-17, commit [3a679ab](https://github.com/lambdakilo/dotclaude/commit/3a679abd411ef118793c92336dfcefb957134e7b), model claude-opus-5-5, effort xhigh.
+
+**25.**
+> [a note about a project left out] dotclaude if not personal dont tell
+> me to do inputs on browsers etc. for example dont list the eu trader
+> status. if not sure, ask me. otherwise continue on your own after im
+> done inputingg my personal information. [a note about a project left
+> out]
+
+**26.**
+> take the rule, go
+
+## Cover review fixes in a PR's verify steps and summary
+
+2026-10-17, commit [64b0e44](https://github.com/lambdakilo/dotclaude/commit/64b0e44fc5a0a6972a67b9bb883bbe23081fb5f2), model claude-opus-5-5, effort xhigh.
+
+**11.**
+> [an ask about a downstream project left out]
+
+**12.**
+> does claude always edit the pr description accordingly after fixing
+> comments?
+
+**13.**
+> go rule
+
+## Leave the steps after a long run for the reply that follows it
+
+2026-10-17, commit [7171229](https://github.com/lambdakilo/dotclaude/commit/7171229501dc940c4c928028312b9244334d692d), model claude-opus-5-5, effort xhigh.
+
+**9.**
+> dotclaude dont give me those instructions 2 and 3 since theyll anyway
+> be lost in the dreaming output. if you want you can give them to me
+> after dreaming has been done.
+>
+> [an ask about a usage check after the dream run left out]
+
+**10.** (answering whether to add the drafted sentence to the rule)
+> go, add the drafted sentence to the to-do list rule in CLAUDE.md
+
+## End a dream run with a usage check and the steps to take
+
+2026-10-17, commit [cdcd62e](https://github.com/lambdakilo/dotclaude/commit/cdcd62e2ce4de06b5f7115431717089fce1d7618), model claude-opus-5-5, effort xhigh.
+
+**9.**
+> dotclaude dont give me those instructions 2 and 3 since theyll anyway
+> be lost in the dreaming output. if you want you can give them to me
+> after dreaming has been done.
+>
+> also dotclaude can you give me a verification after saturday dreaming
+> that 5h and weekly usage was spent to x percent after dreaming
+> completed
+
+## Say that commands for the user must work pasted into a new terminal
+
+2026-10-17, commit [4b564c1](https://github.com/lambdakilo/dotclaude/commit/4b564c1f32aef7358f92718bc84e44e573735d85), model claude-opus-5-5, effort xhigh.
+
+**21.**
+> dotclaude always give the commands like i could paste them from home
+> folder, i.e. [a path inside a project] doesnt work here. [questions
+> about a project left out]
+
+**22.**
+> take the new wording, [a note about a project left out], go
+
+## List every step still to do after changing given steps
+
+2026-10-17, commit [489399d](https://github.com/lambdakilo/dotclaude/commit/489399d42452cdd8a9c2e499ee9e0ca1d359669c), model claude-opus-5-5, effort xhigh.
+
+**6.**
+> [an ask about a weekly usage recap in the dream report left out] also
+> dotclaude you told me stuff like "dont run p5 p1 and p4 are still
+> yours to run. always give me a full list of what to do next since i
+> shouldnt remember things like that on my human memory if you make
+> changes to the todolist after dreaming changes on the sat morning
+
+**7.** (answering whether to add the rule as drafted)
+> go, add the full to-do list rule to CLAUDE.md as drafted
+
+**8.** (answering whether to commit p1 to p4 and the new rule as two commits) Quoted under [2250924](https://github.com/lambdakilo/dotclaude/commit/2250924accb02788f5fab1a707dea2e4b1fbfe60).
+
+## Apply dream proposals on prompt logs, shared stacks and the browser
+
+2026-10-17, commit [2250924](https://github.com/lambdakilo/dotclaude/commit/2250924accb02788f5fab1a707dea2e4b1fbfe60), model claude-opus-5-5, effort xhigh.
+
+**4.** Quoted under [5d38f18](https://github.com/lambdakilo/dotclaude/commit/5d38f18b7d5ddc97beb218d493c9b173f26231d2).
+
+**8.** (answering whether to commit p1 to p4 and the new rule as two commits)
+> yes, commit p1 to p4 first and then the new rule, as two commits, and
+> push
+
+## End the dream report with a weekly usage recap
+
+2026-10-17, commit [dfc134f](https://github.com/lambdakilo/dotclaude/commit/dfc134f18076a3177029e6253ac18ca3b77da7a4), model claude-opus-5-5, effort xhigh.
+
+**7.**
+> weekly usage history should be a nice recap in the chat in the end of
+> dreaming like percentages last week, last month average, last year
+> average. [an ask to always get the whole to-do list after a change to
+> it left out]
+
+## Check carried proposals first and pick transcripts by last use
+
+2026-10-17, commit [5d38f18](https://github.com/lambdakilo/dotclaude/commit/5d38f18b7d5ddc97beb218d493c9b173f26231d2), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> run the dream workflow now
+
+**6.** (answering whether to fix the four dream.js problems)
+> Yes, fix them. also my mac asked me apparently during dreaming can i
+> read files permission. i only clicked accept probably wayyy into the
+> dreaming. does this affect me? can i somehow give claude permissions
+> forever reading my files? also does anthropic store my weekly usage
+> at the end of weeks somewhere? if not can i start collecting them
+> with dreaming to some place here in local since dreaming is the last
+> thing before my weekly resets?
+
+## Read the Claude Platform release notes and Managed Agents docs
+
+2026-10-16, commit [bc05825](https://github.com/lambdakilo/dotclaude/commit/bc05825849de8742c5928c6a6f5205e807d87ee0), model claude-opus-5-5, effort xhigh.
+
+**3.**
+> also have you put the documentation etc of claude dream etc [pasted:
+> the address of the Managed Agents dreams page in the Claude Platform
+> docs] into the things it can check and analyze if anthropic has
+> invented something new that my dream workflow could use
+
+## Pick the dream mode from the weekly reset and rank its work in tiers
+
+2026-10-16, commit [a999519](https://github.com/lambdakilo/dotclaude/commit/a9995191f446a32e554cb56f1bf027b765e26f28), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> you said my weekly usage wont even fill up currently with my dreaming
+> workflow. what else could my dream workflow analyze etc to make it
+> fill up the rest of the usage? maybe also prioritize most important
+> things before dreaming the less important things? like more recent
+> sessions more important than the 90 day old session?
+>
+> also can i somehow speed up the dreaming progress? weekly resets
+> happen 17 on saturday and im still doing some work on saturday
+> morning maybe around 8 or 9 and i dont think i can dream fast enough
+> to fill weekly usage.
+>
+> also should i dream even on friday evening to fill the 5 hour windows
+> so that one more 5 hour usage can fill up the rest of the weekly
+> usage when begun around 11?
+
+**2.** (answering whether to build the ranked queue and new sources)
+> yes build it but also cant i just say dream and it checks if its on
+> friday it can run the 5 hour windows and weekly so that on saturday i
+> still have weekly usage for one 5h window and one actual 5 h fresh
+> window for work, and the saying dream on saturday checks its saturday
+> and spends the rest of the weekly and 5h usage there. hopefully using
+> the whole 100% on 5h and weekly or stopping just before those so that
+> the agents can return and finish the dreaming gracefully?
+
+## Move the pull request procedures into a skill
+
+2026-10-16, commit [c4657b7](https://github.com/lambdakilo/dotclaude/commit/c4657b7632a40e9ef3e73847144a29807fbba955), model claude-opus-5-5, effort xhigh.
+
+**27.**
+> regenerate p26 from the weekly report
+
+**28.**
+> ran p26, commit and push
+
+## Keep session transcripts for 90 days
+
+2026-10-16, commit [2360937](https://github.com/lambdakilo/dotclaude/commit/23609376c9cabe2346ecc23b7e8acd709b5f8735), model claude-opus-5-5, effort xhigh.
+
+**26.**
+> keep transcripts for 90 days
+
+## Spend what is left of the week with a weekend dream
+
+2026-10-16, commit [e4194a7](https://github.com/lambdakilo/dotclaude/commit/e4194a7ad38d5a608e1fad1a0fcc256a6d014832), model claude-opus-5-5, effort xhigh.
+
+**25.**
+> could we do it so that a dream with weekend as parameter so it burns
+> also through the weeks usage after 5 hour window resets
+
+## Let a dream run fill the 5-hour limit by default
+
+2026-10-16, commit [0b253b5](https://github.com/lambdakilo/dotclaude/commit/0b253b516b3d310ea2fe437acda82e3a3bbbb4d0), model claude-opus-5-5, effort xhigh.
+
+**24.**
+> arent all dream workflows overnight? why do i need to say that again
+> when doing just slash dream?
+
+## Rename the weekly workflow to dream for idle-time runs
+
+2026-10-16, commit [6f5bea1](https://github.com/lambdakilo/dotclaude/commit/6f5bea1d48e8f90e111375f33eb3ffe8e084dcdb), model claude-opus-5-5, effort xhigh.
+
+**17.**
+> i didnt understand the habit of p10 so i didnt run the bash command.
+> explain and list the the rest of the items again from 10 onward.
+>
+> also just like you saw the weekly didnt really eat that much tokens
+> after all. could i use this even more frequently when having idle
+> time like during a lunch break, end of day over night and over the
+> weekend? would i require changes to the workflow? it wouldnt be
+> called weekly but dream instead since it reminds of the anthropics
+> dreaming. good idea or not?
+
+**18.**
+> p10: but how can i do the manual terminal commands if they are
+> worktrees? or do the two commands i usually run in prs work then too
+> fine? will the p10 automatically use worktrees when i tell claude to
+> start working on a feat x?
+
+**19.**
+> wait so i can only test/build one pr/session/repo at a given time?
+
+**20.**
+> [a request to measure a local stack's memory and CPU use on this Mac
+> left out]
+
+**21.**
+> p16 why no bypass mode?
+
+**22.**
+> p25 i have quite many [a downstream project] sessions open cant i
+> just do that still because theres usually always open some sessions
+> on [it]?
+
+**23.**
+> commit the weekly changes and rename weekly to dream and anything
+> else i should do about the dream workflow? does it cover "redunant"
+> things that i have in my dotclaude that have already been
+> incorporated to the claude default harness by anthropic?
+
+## Retry a connector file once, then read it in the browser
+
+2026-10-16, commit [0cf6598](https://github.com/lambdakilo/dotclaude/commit/0cf659810b905a3f36d9ab01aff631b4245f05b6), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+
+**2.** (answer to which message was meant)
+> [an ask about a downstream project left out]
+
+**3.** (a message from another Claude session, not typed by the user)
+> [a note about a downstream project's memory left out]
+
+**4.**
+> dotclaude retry atleast once always if you cant open a file from
+> slack connector or how many tries did you do?
+
+**5.**
+> lets debug why slack connector cant open file
+
+**6.**
+> should we add a rule about ext and builtinbrowsers to dotclaude?
+
+**7.** (answer to whether to add the merged rule and push)
+> go
+
+## Audit in the agent and leave no probe sessions in the weekly run
+
+2026-10-16, commit [5239b0d](https://github.com/lambdakilo/dotclaude/commit/5239b0dd1c8e20901a39f9ef196830ba2b40811b), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Update submodules after every branch switch with a hook
+
+2026-10-16, commit [d6a6580](https://github.com/lambdakilo/dotclaude/commit/d6a65808309a6fb882b5b353f4a5805c0a4b60e5), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Check properly before reporting pass, fail or blocked
+
+2026-10-16, commit [6d420c0](https://github.com/lambdakilo/dotclaude/commit/6d420c091987e6c6c3ea04ddc57f49ff279901fd), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Commit on the default branch where the user is the only collaborator
+
+2026-10-16, commit [5542c3b](https://github.com/lambdakilo/dotclaude/commit/5542c3be5ac9783e34b599edc11c240312a4d4f0), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Turn off the ultracode keyword trigger
+
+2026-10-16, commit [9d48081](https://github.com/lambdakilo/dotclaude/commit/9d480816e94d1ded6109689f9eeb7a5aa61b636d), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Weekdays from date, complete result lists, free/busy for others
+
+2026-10-16, commit [dddd06c](https://github.com/lambdakilo/dotclaude/commit/dddd06c897e02a2979bdd965f241e73907e399a9), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Commit and push the checkout and every mirror with sync.sh --commit
+
+2026-10-16, commit [fac48a0](https://github.com/lambdakilo/dotclaude/commit/fac48a0070d5aa6555565eb10e24090e6e1aee08), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> regenerate p18 from the weekly report
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Prune patch-equivalent gone branches and tell the user once
+
+2026-10-16, commit [57ae11d](https://github.com/lambdakilo/dotclaude/commit/57ae11dfc696f2ae89f95d652a88b4eb69680504), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Make CLAUDE.md edits in auto mode, and start sessions in auto
+
+2026-10-16, commit [f49c2be](https://github.com/lambdakilo/dotclaude/commit/f49c2be0a3132bbcfec5bdc31464a783df7b75dc), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Print the prompts block from a prompt log
+
+2026-10-16, commit [022aead](https://github.com/lambdakilo/dotclaude/commit/022aead8a652c7c9b96072c2a962ad36cf79a8e9), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Cover No folder sessions and keep organisation names local
+
+2026-10-16, commit [8136ad9](https://github.com/lambdakilo/dotclaude/commit/8136ad9df272725cccd82cdf626219baeb964087), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Skip prompt feedback on turns the user did not prompt
+
+2026-10-16, commit [b744ac0](https://github.com/lambdakilo/dotclaude/commit/b744ac0f48c98de1bcf35e5b685f84cc3408da0d), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Memory notes state what holds now, with a hook for em dashes
+
+2026-10-16, commit [ee21883](https://github.com/lambdakilo/dotclaude/commit/ee21883b9c9c6a765fc91bef2441407250282a5a), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+
+## Hand a shared branch's change to its session, and add a Stop hook
+
+2026-10-16, commit [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7), model claude-opus-5-5, effort xhigh.
+
+**2.**
+> go, run p18 and commit and push dotclaude
+
+**3.** (answer to whether the scripts in the terminal were done)
+> done running scripts, run p18 then commit and push everything pending
+> in dotclaude, one commit per proposal
+
+## Steps and pictures show what the reader will really see
+
+2026-10-15, commit [8974a1e](https://github.com/lambdakilo/dotclaude/commit/8974a1e241e82f871d503447e5e7432434254afe), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> regenerate p9 from the weekly report
+
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+
+## Run steps for a person first, and keep setup in the README
+
+2026-10-15, commit [2363a7e](https://github.com/lambdakilo/dotclaude/commit/2363a7e5978e60fd0c2bbeb843295c7f40a00d37), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+
+## Rewrite the PR review rule as one bullet
+
+2026-10-15, commit [b2d761e](https://github.com/lambdakilo/dotclaude/commit/b2d761eaa157a147e849f425ec5b86ee04c54e16), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+
+## Quote corrections in memory and keep a note's qualifiers
+
+2026-10-15, commit [e03c79c](https://github.com/lambdakilo/dotclaude/commit/e03c79c78832d4c601bec435060a8f6a9f84d040), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+
+## Change the rules only on a go, and draft rules from corrections
+
+2026-10-15, commit [125e1b5](https://github.com/lambdakilo/dotclaude/commit/125e1b5790bb650bb525eac4faff256869a8cb27), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+
+## Tell a running session when CLAUDE.md changed under it
+
+2026-10-15, commit [dfc4754](https://github.com/lambdakilo/dotclaude/commit/dfc4754fea3a87030a855e1e0b9cdf2ca38f9ece), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+
+## Ask before installing software or adding CI
+
+2026-10-15, commit [9c39a2c](https://github.com/lambdakilo/dotclaude/commit/9c39a2c72d682e165a714a9c01459d7f13faf9c8), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+
+## Refuse GitHub posts as the user with a PreToolUse hook
+
+2026-10-15, commit [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7), model claude-opus-5-5, effort xhigh.
+
+**2.**
+> go, run p9 and commit and push dotclaude
+
+## Print weekly script diffs without a pager
+
+2026-10-15, commit [6f9607e](https://github.com/lambdakilo/dotclaude/commit/6f9607e806418bf77109b9a9447ba9f134e82b60), model claude-opus-5-5, effort xhigh.
+
+**16.** Quoted under [696018f](https://github.com/lambdakilo/dotclaude/commit/696018f01f529914df58ac1e0e70fe83305e5480).
+
+## Number weekly changes in apply order, with commands
+
+2026-10-15, commit [696018f](https://github.com/lambdakilo/dotclaude/commit/696018f01f529914df58ac1e0e70fe83305e5480), model claude-opus-5-5, effort xhigh.
+
+**16.**
+> force push with lease to dotclaude. dotclaude add commands that i can
+> run or copy with the proposals in the response. also the order is
+> wrong, youre now explaining those so that for example p2 should be
+> run after p6, p7 etc. change numbering in the future maybe so that p1
+> is the first that should be done. its good that you mention
+> severities before going through the list of what i must do next
+
+## Open PR bodies with the summary, verify in two command steps
+
+2026-10-15, commit [e576a66](https://github.com/lambdakilo/dotclaude/commit/e576a66d8b11c959030351f47c58a6e6b1ef74fc), model claude-opus-5-5, effort xhigh.
+
+**5.**
+> why 5 commands and not 2 like other two prs had? dotclaude fix.
+> [an ask about a downstream project's pull request template left
+> out] dotclaude and also this pr move the what has changed sentence
+> to the top, then closing issues, then the prompts etc and then
+> verify. [an ask to move that template's checklist into the
+> project's agent docs left out]
+
+## Size the weekly report for the chat, scripts apart
+
+2026-10-15, commit [6650f14](https://github.com/lambdakilo/dotclaude/commit/6650f1462af28730ee4681706f40b98fe04e8762), model claude-opus-5-5, effort xhigh.
+
+**15.** Quoted under [24b09c5](https://github.com/lambdakilo/dotclaude/commit/24b09c5646bc77097b3bf4702c6fc45bd46fa095).
+
+## Keep private project terms out of the published files
+
+2026-10-15, commit [24b09c5](https://github.com/lambdakilo/dotclaude/commit/24b09c5646bc77097b3bf4702c6fc45bd46fa095), model claude-opus-5-5, effort xhigh.
+
+**15.**
+> fix the two things. anonymize and dotclaude so that it doesnt happen
+> again. list the whole weekly report here always im not going to open
+> that copy anywhere else
+
+## Record the session's effort in the weekly usage history
+
+2026-10-14, commit [ae4d0d9](https://github.com/lambdakilo/dotclaude/commit/ae4d0d9fc2899d3cc24738c8e5a135706e7227ee), model claude-opus-5-5, effort xhigh.
+
+**12.**
+> do you think this particular workflow should be js then instead of
+> shell script? why not ts? should my hooks be js as well?
+
+**13.**
+> so if i were to run the weekly now would it stop at 95% 5h? do i have
+> to separately tell it to not continue until weekly usage is 95%?
+
+**14.**
+> /weekly
+
+## Rename the weekly review workflow to weekly
+
+2026-10-14, commit [c397f0f](https://github.com/lambdakilo/dotclaude/commit/c397f0f06df2cf76ba98979aa96b0ce944de910a), model claude-opus-5-5, effort xhigh.
+
+**10.**
+> remove [a person] and [another person] from the workflow
+
+**11.**
+> if i fire the weekly now (also rename it as weekly), will it put my
+> 5h usage to 95% ish
+
+## Keep the weekly review under the plan usage limits
+
+2026-10-14, commit [cce004a](https://github.com/lambdakilo/dotclaude/commit/cce004af276ace537c579da9003f7d4823393896), model claude-opus-5-5, effort xhigh.
+
+**7.**
+> github plugin removed from claude.ai. how much will opus 5.5.
+> extrahigh premium team seat usage cost in the weekly review
+
+**8.**
+> what do you mean by proposals? also my limits are [pasted: the usage
+> limits panel from the app] for some reason on sat and not friday.
+
+**9.**
+> right and can i somehow modify the workflow so that it collects data
+> on how much usually x amount of proposals take usage and with time
+> the workflow will always look at my usage and use the estimated
+> amount of proposals so that usage fill doesnt block and stop the
+> workflow?
+
+## Run the weekly review's checks on the desktop build
+
+2026-10-14, commit [4f573a5](https://github.com/lambdakilo/dotclaude/commit/4f573a5a37fb80707ecf2108a98191e21b73a635), model claude-opus-5-5, effort xhigh.
+
+**6.** Quoted under [67172c0](https://github.com/lambdakilo/dotclaude/commit/67172c0c9d3b2ecda466bda68dc0dbc10dfb0af4).
+
+## Turn the Figma plugin off by default
+
+2026-10-14, commit [67172c0](https://github.com/lambdakilo/dotclaude/commit/67172c0c9d3b2ecda466bda68dc0dbc10dfb0af4), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> do i need the terminal claude to anything? are you srue github
+> plugins just fails to connect 36 of 41 sessions because i have vpn
+> on? how to fix the figm aplugin thingy?
+
+**5.**
+> can i just uninstall claude code terminal?
+
+**6.**
+> switch the doctor step to the desktop build. also i uninstalled
+> before doing the figma commands
+
+## Upload screenshots through the built-in browser when Chrome is out
+
+2026-10-14, commit [03071ff](https://github.com/lambdakilo/dotclaude/commit/03071ff9bb77435cde111d9cb86f64168cf02ffa), model claude-opus-5-5, effort xhigh.
+
+**6.**
+> [pasted: a review of why the screenshot upload stalled, asking for the
+> upload through the built-in browser, a memory index fix and a fix to
+> this rule]
+
+## Upload a PR's screenshots without asking first
+
+2026-10-14, commit [8f63649](https://github.com/lambdakilo/dotclaude/commit/8f6364920b100a9d53dedb44ef924140fa0c665c), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> [an ask about a downstream project left out]
+
+**5.**
+> dotclaude always upload the screenshots and recordings to the pr if
+> they exist and are relevant in the pr
+
+## Add a weekly review workflow
+
+2026-10-14, commit [c97a0a4](https://github.com/lambdakilo/dotclaude/commit/c97a0a4ef3cbabad47e53bc2d76bd285fd1a8fda), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> will / doctor analyze deprecations based on my claude history or
+> based on anthropic patch notes
+
+**2.**
+> do you think i could be able to build a thing (help me find a better
+> word for this? skill? hook? workflow?) that i can run inside claude
+> at the end of week maybe due to resets over weekend that spends a lot
+> of tokens in analyzing anything it has access to in my computer to
+> make my dotclaude better and tell me what to do differently nex week?
+> maybe fetch [a person's] skills repo and check if anything would be
+> useful to me? maybe fetch [another person's] sklils etc and do the
+> same? maybe use /doctor and the prompt audit as well? maybe fetch
+> anthorpic news / pathc notes / changelog to spot something i should
+> do differently?
+
+**3.**
+> can you create a workflow like this for me? how are workflows
+> different than skills? i dont wanna schedule it i just wanna run it
+> myself in case i have tokens left at the end of the week
+
+## Never post on GitHub as the user
+
+2026-10-13, commit [bf8105e](https://github.com/lambdakilo/dotclaude/commit/bf8105ede233e8a03059f2011a14ea165b838dbd), model claude-fable-5-1, effort xhigh.
+
+**15.**
+> dotclaude never reply to anyone on behalf of me on github
+
+## Stop the stack before every reply
+
+2026-10-13, commit [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> [an ask about a downstream project left out]
+
+**2.**
+> [an ask about a downstream project left out]
+
+**3.**
+> dotclaude never leave stack up
+
+## Delete the template box that does not apply
+
+2026-10-13, commit [e2a5a2a](https://github.com/lambdakilo/dotclaude/commit/e2a5a2ace218c0fb7ee1b289b08ace485e441f1d), model claude-fable-5-1, effort xhigh.
+
+**13.**
+> dotclaude so i want the other non checked box to be deleted isntead
+> of jsut left unchecked
+
+## Manual steps give a page's full local address
+
+2026-10-13, commit [33f590f](https://github.com/lambdakilo/dotclaude/commit/33f590f3bfd8f624ce9c13da3ed5a3c52b2c2e00), model claude-fable-5-1, effort xhigh.
+
+**12.**
+> dotclaude you didnt put url localhost etc in the pr description
+
+## Pictures on their own line under the step number
+
+2026-10-13, commit [95b332c](https://github.com/lambdakilo/dotclaude/commit/95b332c57e2bbd2243862a51abb6ab2d26fa04b0), model claude-fable-5-1, effort xhigh.
+
+**11.**
+> dotclaude put the images and videos under the step number not at the
+> same line
+
+## Pictures at the start of their steps, recordings slowed
+
+2026-10-13, commit [4b45b7b](https://github.com/lambdakilo/dotclaude/commit/4b45b7bee1e8e349beb1c70d957c13a9ca35956c), model claude-fable-5-1, effort xhigh.
+
+**10.**
+> dotclaude pull out the screenshots and videos from the detail element
+> in pr description and put them under the steps where they are used.
+> preferably at the start of the step since were not too sure when the
+> screenshot happens exactly and what to look for. can you slow down
+> the videos since they are playwright automation or not possible?
+
+## One draft PR per session
+
+2026-10-13, commit [644646a](https://github.com/lambdakilo/dotclaude/commit/644646a6e1fa047880bfc6c0ee684aad2fde968b), model claude-fable-5-1, effort xhigh.
+
+**8.**
+> [an ask about a downstream project left out] dotclaude dont open two
+> prs in one session unless i explicitly state so
+
+## Name the PR's picture before the click, paste the command steps
+
+2026-10-12, commit [36b2e16](https://github.com/lambdakilo/dotclaude/commit/36b2e16a6458d3228fefd914f2972dd1db8beab1), model claude-fable-5-1, effort xhigh.
+
+**11.**
+> dotclaude. a step’s screenshot is named at the start of the step and
+> comes before the ok that closes what it shows, pr 110 put both after
+> the ok and the save. confirm first before pushing.
+>
+> also dotclaude in the pr instruction missed section give me a github
+> md version of the commands that you gave me as instructions like in
+> this case from 1 to 5 steps. confirm first
+
+**12.**
+> ok now give the markdown of them steps
+
+**13.**
+> push
+
+## Review replies are one list with commands, subshells for cd
+
+2026-10-12, commit [d5727d3](https://github.com/lambdakilo/dotclaude/commit/d5727d375dcb9272c5922d1a4553439d2f531c31), model claude-fable-5-1, effort xhigh.
+
+**7.**
+> dotclaude give me the steps you would have given me to test things.
+> in the end of my "review pr #" prompt tell me what the pr
+> instructions missed etc like the seeding of already tested workflows
+> instead if me clicking through things. when a step has a video or
+> image attached to it in pr tell me to look at this point at the pr.
+> also the () approach of not doing cd .. seems good. shoudl we also do
+> the way its done in the pr? also is it good practice to chain other
+> commands in the instructions you just gave me? thoughts before
+> commit?
+
+**8.**
+> not good enough. you missed shell commands in the pr 110 steps.
+> dotclaude fix. confirm first
+
+**9.**
+> retry pr 110 review  steps
+
+**10.**
+> excellent. push the dotclaude edits that made your response so good
+
+## Quote only the configuration part of a prompt, redacted
+
+2026-10-12, commit [719067c](https://github.com/lambdakilo/dotclaude/commit/719067cac511c51c5d4caa5d4490bc8ffa8bfa9b), model claude-fable-5-1, effort xhigh.
+
+**6.**
+> [a mirror] now has commit message such as "[a content type] with a
+> few children" which gives information regarding a private customer
+> project and gives unnecessary information regarding the actual
+> commit to [a mirror]/dotclaude. dotclaude: anonymize in future
+> somehow or remove unnecessary bits
+
+## Review corrections are short prose, nothing to paste
+
+2026-10-12, commit [986a428](https://github.com/lambdakilo/dotclaude/commit/986a4286d280d22e3e01d368b38ee043ab6e78cc), model claude-fable-5-1, effort xhigh.
+
+**5.**
+> no. dotclaude dont put copypastable things to pr reviews. just tell
+> me shortly what should be corrected
+
+## Shell scripts for the user, corrected steps in a review
+
+2026-10-12, commit [a9604bf](https://github.com/lambdakilo/dotclaude/commit/a9604bfd3d563c42d77eb918e87e695d429d4de0), model claude-fable-5-1, effort xhigh.
+
+**4.**
+> [pasted: the previous script's terminal output]
+>
+> didnt seem to push anything to [a mirror]. also dotclaude never give
+> me python scripts when doing thing on shell. give me shell script.
+>
+> also give me the corrected pr description instructions on how to test
+> the feat. and then give me instructions where the pr should have
+> mentioned somethign else. put this also in dotclaude
+
+## Review a PR by correcting its own test steps
+
+2026-10-12, commit [b45b966](https://github.com/lambdakilo/dotclaude/commit/b45b966a13bd3f898d2dea7518831412e507561a), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> review pr 110 here only give manual testing instructions
+
+**2.**
+> you literally said in pr 12 review "review pr 12 here only, give
+> manual testing instructions, and leave the checkout on its branch”"
+> is the optimal way to say this.
+>
+> how should i have said it so that you would have understood to run
+> also verify, e2e and literally everything you can before i manually
+> test this
+
+**3.**
+> has the author not made a manual testing seed that contains the
+> "[a content type] with a few children" because putting that would
+> not reflect the staging backend of [the backend vendor] and would
+> thus create tests that would break in gcp when tested against
+> staging backend e2e? why not create a different seed for e2e tests
+> and a different one for manual local testing?
+>
+> also dotclaude: dont put your arbitrary instructions on how to test
+> here but rather just corrections to the pr instructions if any. your
+> commands are nice tho keep them
+
+## Let the user's own name stand in the public repository's history
+
+2026-10-10, commit [92bccf0](https://github.com/lambdakilo/dotclaude/commit/92bccf01e2c7e4a85049f5d5f2f6e9c4b65629fd), model claude-fable-5-1, effort xhigh.
+
+**2.**
+> well then change the rules of the checkout local identity. my name is
+> fine in history. others ofc not
+
+## Copy the published files into the directories sync-mirrors.txt lists
+
+2026-10-10, commit [9d7fdc6](https://github.com/lambdakilo/dotclaude/commit/9d7fdc65ae8a0facfc9ad519d83c025b3359dddc), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> add local project memory to sync also to [a directory in a second
+> repository]? i was thinking on local project memory so that public
+> dotclaude users wont see the [second repository] path? confirm before
+> doing anything
+> > Script mirror + memory (AskUserQuestion selection)
+> > Yes, commit and push to main (AskUserQuestion selection)
+
+## Plain characters, shortest test names, no implied actions
+
+2026-10-10, commit [aa3cc21](https://github.com/lambdakilo/dotclaude/commit/aa3cc21b7aae36e5daa780b0dbd018bbd1ca38b9), model claude-fable-5-1, effort xhigh.
+
+**4.**
+> › what in gods name is this character. dotclaude dont output chars
+> like that.
+> also why name them pr12 when they could have been more shorter like
+> 123 or abc? dotclaude fix
+> also "Paste pr12 c’s address into a new tab". you never told me to
+> copy the address. fix in dotclaude
+>
+> confirm all with me before doing anything
+
+**5.**
+> yeah sure commit and push
+
+## Manual steps follow the screen and name controls by label
+
+2026-10-10, commit [8a2f66e](https://github.com/lambdakilo/dotclaude/commit/8a2f66eacdf49e712d484639c42d8a5e001d22e2), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> review pr 12 and give manual testing instructions here
+
+**2.**
+> 6. naming it a comes before setting the company as company1-sub. this
+> "wrong order" happens other times in the instructions you gave me.
+> fix in dotclaude so that this never happens again.
+>
+> 8. On A, pick any other content, then click C’s name. what? what do
+> you mean pick any other content? also cancel is back in the ui
+> after clicking C. also when clicking the contents breadcrump i.e.
+> /contents theres no back button. "both ask too"? what? > Remove
+> the picked content again . what? ohh by pick you mean Add item.
+>
+>
+> ok picking a content is just wrong if you mean Add item, which
+> is adding content, although in some sense yes youre picking content
+> logically but in ui its called adding. obviously this finnish thing
+> is not working so research and figure out if we should make a change
+> in dotclaude like click "Add item" button name instead of
+> calling things with their logical names. dont commit anything
+> without confirming with me first
+
+**3.**
+> yeah commit and push dotclaude
+
+## Letter alternatives, number only ordered steps
+
+2026-10-09, commit [59970a4](https://github.com/lambdakilo/dotclaude/commit/59970a4cc683b8601d1a2f087e609c31c7422335), model claude-fable-5-1, effort xhigh.
+
+**7.**
+> global ruling: if theres two ways to do something dont say 1, 2 etc.
+> say a or b right? thoughts?
+>
+> also retry. cant you open the browser yourself inside claude chrome?
+
+## Put screenshots of a visual change in the PR body
+
+2026-10-09, commit [a6451f2](https://github.com/lambdakilo/dotclaude/commit/a6451f2fd82238dfd7c52d157eb17b186b0dcf3c), model claude-fable-5-1, effort xhigh.
+
+**6.**
+> are you able to take screenshots or screen recordings of when for
+> example the playwright runs to the pull request description?
+
+**7.**
+> can you put a rule in my dotclaude to put any screenshots and
+> recordings to the pull request in details element if the pr has
+> playwright and pr has the purple thingy screenshots section?
+> thoughts before committing?
+
+**8.**
+> yeah change visual. ive logged in the calude chrome on github so use
+> that. thoughts?
+
+## Hand over the allow rule script on a classifier refusal
+
+2026-10-08, commit [5f8d268](https://github.com/lambdakilo/dotclaude/commit/5f8d2681ae9f6df128cb2f7fce027dd9d821e3bd), model claude-fable-5-1, effort xhigh.
+
+**4.**
+> global ruling: if classifier refuses something i can fix with giving
+> more permissions tell me the shell script that i can fix it with
+
+**5.** (confirming that both handed-over scripts were run)
+> ran
+
+## Allow gh issue and pull request edits from a session
+
+2026-10-08, commit [f3b322b](https://github.com/lambdakilo/dotclaude/commit/f3b322b4da4d01e795e5447ede80065430f21094), model claude-fable-5-1, effort xhigh.
+
+**2.**
+> ok lets continue working on the [a feature of a downstream project].
+> also do you need more settings perms to do gh issue edits?
+
+**3.**
+> i redid that in zsh so you should have more perms. go ahead
+
+## Count the merge prompt among a PR's prompts
+
+2026-10-08, commit [f1fa780](https://github.com/lambdakilo/dotclaude/commit/f1fa7807b86c6ae2a44f7510838ee616aba466bb), model claude-fable-5-1, effort xhigh.
+
+**14.**
+> global ruling: put the merge prompt also to the pr when i say merge
+
+## Assign the user to the issues a PR closes
+
+2026-10-08, commit [280fcd7](https://github.com/lambdakilo/dotclaude/commit/280fcd7b982c597180d7661d6caceaae41eb1472), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> [a question about a downstream project's backlog and next task]
+>
+> global ruling: assign me to the issues a draft pr or pr closes if i
+> have perms to assign myself to that issue
+
+## Allow sessions to start and stop the local stack
+
+2026-10-08, commit [1dc8ca2](https://github.com/lambdakilo/dotclaude/commit/1dc8ca287f247b6063eee9e89051bbd339b1b960), model claude-fable-5-1.
+
+**7.**
+> also you always start the stack not me. also so hotspot is now ok
+> from backend code? what about other logs endpoints?
+
+**8.**
+> yeah add the permission rule but you should probably not run it in
+> background since you always complain about permissions not being
+> able to stop it. or is that permission thing something i can fix as
+> well?
+
+**9.**
+> convention is stack stays up? huh? but when i review prs or do my
+> own pr i think its good practice to stop the stack for example if i
+> have to install something and cant be hot reloaded? thoughts? also
+> give me sed command etc to edit the settings.json
+
+**10.**
+> done, go with your recommendations on all three
+
+## Add a length rule to the Prose section
+
+2026-10-07, commit [8d49c37](https://github.com/lambdakilo/dotclaude/commit/8d49c37df94399d6ecd77f8c3d64d9e7af9ae2a9), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> whats that one chatgpt session where this mathematician speaks very
+> technical with chatgpt on maths and it sets the skill level the same
+> way? can i somehow elevate my claude sessions like that since im a cs
+> masters graduate?
+
+**2.**
+> any proof there was a register.md or similar with tao? also look at my
+> claude code history and analyze if i would actually benefit from a
+> register.md like that?
+
+**3.**
+> yeah sure sync it
+
+## Put end to end before the manual pass in test steps
+
+2026-10-07, commit [867d6f2](https://github.com/lambdakilo/dotclaude/commit/867d6f2d3cc362b51f1385e87d0991aa19a45a82), model claude-fable-5-1, effort xhigh.
+
+**6.**
+> global memory: dont put e2e tests then never after manual testing in
+> prs unless said otherwise
+
+## End review test steps with the last check
+
+2026-10-07, commit [f4cb122](https://github.com/lambdakilo/dotclaude/commit/f4cb122373bbddad02f9a0d432375d698d2d5655), model claude-fable-5-1, effort xhigh.
+
+**5.**
+> global memory: dont tell me step 9 again pr review scenarios or
+> whenever a pr checkout was used as the step 2 anyway rewrites that
+> each time i review pr
+>
+> also why is the e2e spec after testing manually?
+
+## Run the submodule update unconditionally after a switch
+
+2026-10-07, commit [1e889d4](https://github.com/lambdakilo/dotclaude/commit/1e889d448510d355a56ea61448944daa9ebc839f), model claude-fable-5-1, effort xhigh.
+
+**4.**
+> global ruling: no if conditions on like that on submodule. just
+> update submodule
+> also project memory: clear the symfony cache always no need to do
+> conditional guesswork
+>
+> also none of those commands starts the whole thing like [cli] start
+> or [cli] develop. not too professional
+
+## Update submodules after every branch switch
+
+2026-10-07, commit [62b6d96](https://github.com/lambdakilo/dotclaude/commit/62b6d96caeb1438795b6a0d99ab6a4c161a70065), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> review pr 104 and tell me how to test locally
+
+**2.**
+> dont i have to update backend module if the last pr i reviewed or
+> created had a different version in it?
+
+**3.**
+> global ruling: when switching branches always check and update the
+> backend to the version its in the checked out branch
+
+## Pair a cd with an explicit cd back, not a subshell
+
+2026-10-07, commit [a861b43](https://github.com/lambdakilo/dotclaude/commit/a861b43cb424c84afe5aaf69e61ffd495fa42167), model claude-fable-5-1, effort xhigh.
+
+**4.**
+> the cd playwright thingy is again without the cd back. also no need
+> for numbering nor explanatiosn nor check by hand section
+
+## Return to the starting directory after a cd
+
+2026-10-07, commit [5af1440](https://github.com/lambdakilo/dotclaude/commit/5af14406eee61fba2ea6993ee4bbd3a13638d336), model claude-fable-5-1, effort xhigh.
+
+**2.**
+> global ruling: when doing cd operations remember to cd back to the
+> place where it cd from
+>
+> also why would i have to seed rows back afterwards? im gonna reseed
+> after each new pr anyway.
+>
+> also project memory maybe: you should probably not start [the
+> project's cli] things in background since you dont have permissions
+> to stop them yourself afterwards. thoughts?
+
+## Delete gone local branches safely at session start
+
+2026-10-06, commit [2fbeea0](https://github.com/lambdakilo/dotclaude/commit/2fbeea048415d4d0f6a6419208725ae684e69249), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> i would like claude to remove stale branches i.e. that dont have pr
+> or draft open in them when sending a new prompt or session? thoughts
+
+**2.**
+> does my current workflow already remove remotely deleted branches
+> from local?
+
+**3.**
+> ok lets do the remove safely branches that are deleted from remote
+> already in the beginning of the session
+
+## Allow gh repo create without a prompt
+
+2026-10-06, commit [0dbe828](https://github.com/lambdakilo/dotclaude/commit/0dbe8285052c3fd32dd88686ce441987744e8033), model claude-fable-5-1, effort xhigh.
+
+**2.**
+> add gh repo create for bash in my claude code settings
+
+## Scope the draft PR rule to one per feature
+
+2026-10-03, commit [d246b5c](https://github.com/lambdakilo/dotclaude/commit/d246b5ca70b42f686d41cb273d064bd88ccf0790), model claude-fable-5-1, effort xhigh.
+
+**2.**
+> put the places where to check to project memory so that i i can just
+> say lets start doing feat x without having to list all the resources
+> youre going to look at always before doing that. youll probably also
+> fetch figma only when it has some edits in there and not all the
+> time. also what is one draft pr at a time? i probably meant like only
+> one draft per conversation/feat but this is a different feat than
+> those two
+
+## Allow semicolons in prose again
+
+2026-10-03, commit [0e6c226](https://github.com/lambdakilo/dotclaude/commit/0e6c2262d405b0e12a073c9b2d2ee7f94379fed9), model claude-fable-5-1, effort xhigh.
+
+**7.**
+> global claude rule you can use semicolons
+
+## Scope the lowercase rule to the rewritten prompt only
+
+2026-10-03, commit [b05ac24](https://github.com/lambdakilo/dotclaude/commit/b05ac24812476c1ea650bc461aa72b6d09eb2a3a), model claude-fable-5-1, effort xhigh.
+
+**3.**
+> global ruling: you can still use " quotes in the prompt feedback and
+> shift characters. just dont use them at the rewritten part. you can
+> still do like ReWritten: "blahblah" but not Rewritten: "Blj#445K". get
+> it?
+>
+> also i dont see the new 10 findings i only see the 8 in the old
+> response
+
+## Give prompt feedback rewrites in lowercase without shift
+
+2026-10-03, commit [4ae697a](https://github.com/lambdakilo/dotclaude/commit/4ae697a7082102be11f82c501fb5ac69d4e5c530), model claude-fable-5-1, effort xhigh.
+
+**2.**
+> pull the branch and run the same review here locally results. was
+> probably force pushed. also ""Review PR 94 against the local stack:
+> run verify and the content e2e specs, click through its How to verify
+> steps, and report findings here rather than on GitHub."" how to say
+> this in lowercase?
+>
+> global ruling: always give prompt feedback rewritten as lowecase and
+> without using shift operand if possible and as little typing as is to
+> make the prompt actually good but not overly long
+
+## Link the public rules from a PR instead of copying them
+
+2026-09-30, commit [d7dd1ad](https://github.com/lambdakilo/dotclaude/commit/d7dd1aded41fb43a9fe99317e0181b2ab2a3f29f), model claude-fable-5-1[1m], effort xhigh.
+
+**4.**
+> global ruling: instead of a details element link my dotclaude there
+> in copyable code block. i think blue clickable links are antipattern
+> and might lead to somewhere other than the visual url. can someone
+> put malicious invisible characters to a copyable code block on
+> github markdown?
+
+## Give list steps their commands in fenced blocks too
+
+2026-09-29, commit [9e0b37c](https://github.com/lambdakilo/dotclaude/commit/9e0b37c95ebde517fa8cbbd251589607294f97f3), model claude-fable-5-1[1m], effort xhigh.
+
+**2.**
+> global ruling: why did you not put the tool start --clean in
+> copyable triple backticks? also recreate mock database did not
+> contain a command. why? fix in global ruling so that this problem
+> never repeats again
+
+## Add a Reviewed-by trailer for reviewers when squashing
+
+2026-09-29, commit [a2762f8](https://github.com/lambdakilo/dotclaude/commit/a2762f8decdc922eb9862bab5c66b55abf2f65e4), model claude-fable-5-1, effort xhigh.
+
+**5.**
+> global ruling: put co-authored of any reviewers/commenters of the pr
+> when merging the pr too. you can for example find the git email and
+> name from git log grep? if you cant find the exact match dont put it
+> into the coauthored by. thoughts before committing to global ruling?
+
+**6.**
+> yeah the reviewed by approach sounds good. apply to the global
+> ruling.
+>
+> next thing to global ruling: can i somehow apply the projects own
+> internal md like for example where the discovery lives (not in git)
+> to the pr description before or after the claude.md line, whichever
+> is the order that claude code reads them. thoughts before committing
+> to global ruling?
+
+## Cut the README to one sentence per file
+
+2026-09-28, commit [15c58c6](https://github.com/lambdakilo/dotclaude/commit/15c58c6efc16caa1ebc4f1ae5d56a12a52135cfa), model claude-fable-5-1, effort xhigh.
+
+**2.**
+> nooo wayyy too verbose. like one sentence per each item to be
+> explained
+
+## Explain what every file in the repository does
+
+2026-09-28, commit [3eedb3f](https://github.com/lambdakilo/dotclaude/commit/3eedb3f70380bcc6ab4abda9047b380502b8f544), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> explain in readme what everything/every file does. for example it was
+> unclear what the sync.sh does just based on the name. or the git fetch
+> prune hook
+
+## Say when commands share a block and when they get one each
+
+2026-09-27, commit [7786fa1](https://github.com/lambdakilo/dotclaude/commit/7786fa1115300b3134bac5edfbf7d867fc4b4382), model claude-fable-5-1, effort xhigh.
+
+**4.**
+> named in passing? also now the commands are in one block in pr and
+> will probably fail because no ampersand or no new codeblock. always
+> figure out which one to use.
+
+## Put commands the reader should run in fenced code blocks
+
+2026-09-27, commit [2d8439b](https://github.com/lambdakilo/dotclaude/commit/2d8439b9f7480b25395b8cad07c87e363b5f03e4), model claude-fable-5-1, effort xhigh.
+
+**3.**
+> global ruling: when writing terminal commands to the mds like the
+> docker compose one in the pr, put it int triple backticks etc. so
+> that copying and reading is easier
+
+## Prefer git switch over git checkout for branch changes
+
+2026-09-26, commit [1423306](https://github.com/lambdakilo/dotclaude/commit/1423306f7b8ae7a3daeabee6d4fcd84aee4762e3), model claude-fable-5-1, effort xhigh.
+
+**2.**
+> global ruling: use git switch whenever you can get away with it
+> rather than opting for checkout because checkout can do more than
+> just switch branches
+
+## Credit human co-authors when squashing a pull request
+
+2026-09-25, commit [7460cd2](https://github.com/lambdakilo/dotclaude/commit/7460cd2f278620f9eeb85288ba9a5d65034a2af3), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> global ruling: when squashing pull requests remember to add co
+> authored by the proper human accounts that were part of that pr
+> commits
+
+## Tie the prompts block update to the turn, not the commit
+
+2026-09-25, commit [c41d5c6](https://github.com/lambdakilo/dotclaude/commit/c41d5c62d7ba749de44332d425dc57e760585c0d), model claude-fable-5-1, effort xhigh.
+
+**8.**
+> you forgot to put prompt to the description even though we didnt
+> push commits
+
+**9.**
+> yes but why did you miss it? did i not state it in global ruling
+> good enough?
+
+**10.**
+> sync it
+
+## Leave the abbreviations section out when the prompts use none
+
+2026-09-24, commit [33c5067](https://github.com/lambdakilo/dotclaude/commit/33c50679a3bf79ef3a8598881bda719672d826a2), model claude-fable-5-1, effort xhigh.
+
+**2.**
+> remember: dont put abbreviations details element to commit messages
+> nor to pr descriptions if there are none
+
+## Write the README in first person, drop copyright and SPDX lines
+
+2026-09-24, commit [1cba951](https://github.com/lambdakilo/dotclaude/commit/1cba9513fec80c3e61338f505c75264ffa1b00b8), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> can you write in my dotclaude repo so it reads as mine e.g. a public
+> mirror my ~.claude etc. also do we really need that copyright
+> lambdakilo 2026 thingy? do we need those spdx identifier phrase
+> either? also can you with gh put the correct topics tagged in the
+> repo?
+
+## Ask for prompt feedback at the end of every reply
+
+2026-09-23, commit [49f1c57](https://github.com/lambdakilo/dotclaude/commit/49f1c5777ead77bb35f26f93202cf27cd3c8c928), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> can you put into my dotclaude that the model should at the end of
+> reply tell me how my prompt could have been better
+
+## Skip the workflow usage warning
+
+2026-09-23, commit [975b506](https://github.com/lambdakilo/dotclaude/commit/975b5065bd67fc10acafd962209eeab4717deef5), model claude-fable-5-1, effort xhigh.
+
+**4.**
+> ok then commit that and push settings.json change
+
+## Drop the abbreviation from the commit message prompt header
+
+2026-09-23, commit [d8ce80a](https://github.com/lambdakilo/dotclaude/commit/d8ce80a32d5db1c21afe5e7ca27d5f507fe1d80f), model claude-fable-5-1, effort xhigh.
+
+**3.**
+> the commit message always abbreviates llm. dont abbreviate that or
+> just remove the word llm. the pr prompt text doesnt even abbreviate
+> pr (and thats good)
+
+## Fill the pull request template instead of pasting it unfilled
+
+2026-09-23, commit [6df3bb5](https://github.com/lambdakilo/dotclaude/commit/6df3bb5f7c7e610168142185801c1bcaa88b506e), model claude-fable-5-1, effort xhigh.
+
+**2.**
+> remember begin: if the pr template has the added tests? just put the
+> check on the one thats us for example if youve written tests then
+> thats it if not write one sentence why not. in the what has changed
+> write one sentence on what has changed.  write the related ticekts
+> and documents. do the same thing always with the is documentation up
+> to date thingy. also write the how to verify (manually) .
+>
+> [a second paragraph asking for a pull request to a template
+> repository, not about this file]
+
+## Re-read the rules file before writing a commit message
+
+2026-09-22, commit [0d8a7d9](https://github.com/lambdakilo/dotclaude/commit/0d8a7d90b5067d1bf1c8b007684a1f3f36626df9), model claude-fable-5-1, effort xhigh.
+
+**4.**
+> did you not read the global ruling claude.md? the part of not putting
+> prompts first in commit messages? or what happened here? help me
+> debug, but dont force push anything rn
+
+**5.**
+> whats a commit rule
+
+**6.**
+> yeah put a line in the commit rules
+
+## Exclude the clone's CLAUDE.md, reformat commit messages
+
+2026-09-21, commit [ad33df5](https://github.com/lambdakilo/dotclaude/commit/ad33df505606463efe3433990905865edb2b1cd1), model claude-fable-5-1, effort xhigh.
+
+**3.**
+> should the CLAUDE.md file be called something else than that so that
+> my sessions started inside that local clone wont load both my
+> claude.md from .claude and the dotclaude as well? any other files
+> that need to be named otherwise? im not sure about the copyright
+> email thingy in readme. plus license is h1 although a haeder 1 should
+> be my .claude folder etc. ah you must have misunderstood my [address]
+> email thingy there. i meant it to be used in git config email and
+> nowhere else. does github still show my commits verified although i
+> cant add [pasted: an email address] as my github email but i can set
+> it as my git email? also you censor well copypastes in pull requests
+> but in commit messages they still are not removed. fix in global
+> ruling. take a look at [a downstream project] latest merge commit we
+> made. also censor that name here. also maybe limit commit message
+> widths to 80 or something more standard? they break pretty bad in
+> github interface. also in commit message maybe put my prompts only
+> after the commit message itself but in pr its ok to put them first.
+> make these global ruling
+
+## Compare files through git, skip the root login in the scan
+
+2026-09-19, commit [d717a6c](https://github.com/lambdakilo/dotclaude/commit/d717a6cbcf77c56388fac67c1df546d35385bb4d), model claude-fable-5-1, effort xhigh.
+
+**2.** Quoted under [df2d3d7](https://github.com/lambdakilo/dotclaude/commit/df2d3d792251c37a9eac4e51b724f567ef659feb).
+
+## Prompts in every commit, licence-only README, two-way sync
+
+2026-09-19, commit [df2d3d7](https://github.com/lambdakilo/dotclaude/commit/df2d3d792251c37a9eac4e51b724f567ef659feb), model claude-fable-5-1, effort xhigh.
+
+**2.**
+> actually yeah put the prompts in all of my commits in the future. git
+> commit messages also should probably say that this is the llm prompt
+> and which model and effort was used. remove the readme part except
+> the license part. just put my disposable email [pasted: an email
+> address] since github is a pain in the ahh with simplelogin. rename
+> the repo dotclaude that makes more sense. are you sure the shell
+> scripts wont drift with time? im planning to just tell claude on my
+> arch desktop (rather than this m5 air) to fetch my dotclaude once and
+> then itll sync itself with gh and git etc. tell me if my intuition is
+> wrong
+
+## Publish global Claude Code configuration
+
+2026-09-19, commit [a6bd820](https://github.com/lambdakilo/dotclaude/commit/a6bd82056425642a76c5ed69259a03c514b8c34b), model claude-fable-5-1, effort xhigh.
+
+**1.**
+> how to set global ruling (is that what its called in short? the
+> ~.claude/claude.md) that gitch fetch --prune should be run from time
+> to time when in git repos? at each prompt? also create a repo on my
+> lambdakilo account that contains stuff like my claude.md and anythign
+> else that might be useful for learning about my workflow for other
+> people. repo name can be for example .claude. dont create readme. i
+> wanna use either agplv3 or later (so actually create the appropriate
+> or later message in readme after all lol for agplv3 if we choose
+> agplv3) or ccbysa4.0. use both or either or neither whichever is
+> applicable for our work. put my prompts in git commit messages.
+> always update the .claude github repo whenever theres changes in
+> local .claude etc my claude settings useful for others. never put my
+> name or any company names or secrets or anything disclosing on what
+> im working with in the .claude repo. also now that were on the
+> subject of my claude.md: global ruling: never write pull request
+> descriptions, let me write them myself. also always put a details
+> element list of abbreviations in the prompt details element i might
+> have used in the prompts so that people can open and check those if i
+> use some abbreviations people dont know about
+
+## Abbreviations
+
+- 5h: 5-hour
+- 5h: five hours
+- agplv3: GNU Affero General Public License, version 3
+- arch: Arch Linux
+- ccbysa4.0: Creative Commons Attribution-ShareAlike 4.0 International
+- cd: change directory, the shell command
+- cs: computer science
+- e.g.: for example
+- e2e: end to end
+- etc: et cetera
+- eu: European Union
+- ext: external, a file posted by another organisation in a shared channel
+- feat: feature
+- gcp: Google Cloud Platform
+- gh: GitHub CLI
+- gh: GitHub command line interface
+- h1: HTML heading level 1
+- i.e.: id est, that is
+- i.e.: that is
+- js: JavaScript
+- LLM: large language model
+- lol: laughing out loud
+- m5 air: MacBook Air with the M5 chip
+- md: markdown
+- md: Markdown file
+- mds: Markdown files
+- ofc: of course
+- p18: proposal 18 of the weekly review of 2026-10-14
+- p9: proposal 9 of the weekly review of 2026-10-14
+- perms: permissions
+- PR: pull request
+- prs: pull requests
+- repo: repository
+- rn: right now
+- sat: Saturday
+- spdx: Software Package Data Exchange
+- ts: TypeScript
+- ui: user interface
+- url: uniform resource locator
+- vpn: virtual private network

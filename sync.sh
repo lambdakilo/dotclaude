@@ -32,6 +32,10 @@
 # ignores, get a copy of every published file after a clean scan, for a second
 # copy kept in another repository. A leading ~/ stands for the home directory.
 # A file this checkout has deleted is removed from a mirror too.
+#
+# PROMPTS.md, when the checkout has one, is rebuilt by hooks/prompts-md.sh
+# before the scan, with the commit message when there is one, and goes into
+# every commit.
 
 set -euo pipefail
 
@@ -84,6 +88,7 @@ mirrored=(
   hooks/stack-held-by-peer.sh
   hooks/claude-md-changed.sh
   hooks/no-github-posts.sh
+  hooks/prompts-md.sh
   skills/pull-requests/SKILL.md
   workflows/dream.js
 )
@@ -152,6 +157,15 @@ for path in "${mirrored[@]}"; do
     failed=1
   fi
 done
+
+if [ -f "$checkout/PROMPTS.md" ]; then
+  if [ -n "$message_file" ]; then
+    "$checkout/hooks/prompts-md.sh" --message "$message_file"
+    case " ${commit_paths[*]} " in *" . "* | *" PROMPTS.md "*) ;; *) commit_paths+=(PROMPTS.md) ;; esac
+  else
+    "$checkout/hooks/prompts-md.sh"
+  fi
+fi
 
 allow_args=()
 if [ -f "$checkout/sync-allow.txt" ]; then

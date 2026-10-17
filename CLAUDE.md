@@ -112,6 +112,12 @@ apply to one repository belong in that repository's project memory.
   `[an ask about a downstream project left out]`, and what stays is redacted as for upstream
   PRs, a content type's name in the project's language included, since it names the project
   as surely as the project's name does.
+- A repository with a `PROMPTS.md` at its root keeps it current in every commit: write the commit
+  message to a file, run `~/.claude/hooks/prompts-md.sh --message <file>` in the checkout, and
+  commit the rebuilt file with the change, with `git commit -F <file>`. The script writes the
+  file from the prompts sections of the commit messages, newest first, each with its commit and
+  PR, so it is never edited by hand. A repository without the file gets one only when the user
+  asks. In the public configuration repository `sync.sh` runs the script itself.
 - Re-read this file from disk before writing a commit message or a PR body, and before a PR body
   also `~/.claude/skills/pull-requests/SKILL.md`. A session reads each once, so an edit made
   from another session while this one runs stays invisible until the file is read again.

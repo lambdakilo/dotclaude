@@ -49,6 +49,11 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   `gh pr review`, a close or reopen with `--comment`, and `gh api` calls that write a comment or a
   review, reply to a review thread or resolve one. It runs in every permission mode, bypass
   included. Editing a PR body, assigning, and closing or reopening without a comment still work.
+- [`hooks/prompts-md.sh`](hooks/prompts-md.sh): not a hook but a script, run before a commit in
+  a repository with a `PROMPTS.md` at its root. It rebuilds that file from the prompts section of
+  every commit message, newest first, each with its commit and pull request, and with
+  `--message <file>` lists the commit about to be made first. A commit cannot name its own hash,
+  so that one links to the file's history until the next rebuild.
 - [`skills/pull-requests/SKILL.md`](skills/pull-requests/SKILL.md): a skill, installed as
   `~/.claude/skills/pull-requests/SKILL.md`, with the procedures for a pull request: the body and
   its prompts block, the steps to verify it, the reply to a review, and screenshots and
@@ -103,13 +108,15 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
 - `sync-mirrors.txt`: optional and ignored by git, one directory per line that gets a copy of
   every published file, for a second copy kept in another repository. A leading `~/` stands for
   the home directory.
+- [`PROMPTS.md`](PROMPTS.md): every prompt behind the commits of this repository with its commit,
+  written by `hooks/prompts-md.sh`, which `sync.sh` runs before the scan.
 - [`LICENSE`](LICENSE) and [`LICENSE-CC-BY-SA-4.0`](LICENSE-CC-BY-SA-4.0): the licence texts,
   see below.
 
 ## License
 
-Prose, meaning `CLAUDE.md`, `skills/pull-requests/SKILL.md` and this README, is licensed under
-Creative Commons Attribution-ShareAlike 4.0 International. See
+Prose, meaning `CLAUDE.md`, `PROMPTS.md`, `skills/pull-requests/SKILL.md` and this README, is
+licensed under Creative Commons Attribution-ShareAlike 4.0 International. See
 [`LICENSE-CC-BY-SA-4.0`](LICENSE-CC-BY-SA-4.0).
 
 Everything else is licensed under the GNU Affero General Public License, version 3 or (at your
