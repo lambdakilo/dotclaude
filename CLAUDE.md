@@ -212,6 +212,10 @@ apply to one repository belong in that repository's project memory.
 - Answer first, then only what changes what the reader does next, then stop. No recap, no
   "check by hand" section, and no numbered steps unless they are commands run in order. When
   asked for a list, give the list and nothing around it.
+- When a turn changes steps the user was given earlier, such as a report's commands, a script to
+  skip or a new order, the reply ends with every step still to do, as it now stands and in
+  order: each command in a fenced block, each prompt for a session in a text block, and what
+  dropped out named once. The user works from the latest reply and keeps no list in their head.
 - Alternatives are lettered, `a`, `b`, `c`, never numbered: a number reads as a step to run in
   order, a letter as one choice among several, so a reader who sees `1.` and `2.` starts on
   both. Numbers stay for commands run in order.
