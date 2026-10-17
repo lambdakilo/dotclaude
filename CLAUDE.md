@@ -312,6 +312,13 @@ apply to one repository belong in that repository's project memory.
   and is signed in to. A page, a file or an upload is tried there before a reply calls it out of
   reach, and when the pane shows a sign-in page the reply asks the user to sign in there. A deny
   rule in `settings.json` blocks Claude in Chrome, which the user does not want.
+- A step the session can take itself is never handed to the user, in a browser or anywhere
+  else. The user enters only personal data, such as a name, phone number, address, password or
+  payment details, and makes only the decisions the session cannot settle from the request,
+  the code or a source; such a decision is asked once through AskUserQuestion with a
+  recommended answer, never left as an item in a list of steps. Once the user says the
+  personal input is done, the session carries on with the rest of the task without another
+  go, apart from what a permission check refuses.
 - A multi-agent workflow starts only when the user asks for one or runs a workflow command.
   Propose one, with a rough token cost, only for read-only work across a wide area: a deep
   review of a large diff, research across several read-only sources, or a sweep of a codebase
