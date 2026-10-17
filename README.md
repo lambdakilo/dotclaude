@@ -73,6 +73,8 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   `~/.claude/dream/backlog.json` until they are applied or found obsolete. Each run writes a
   report short enough to read in the chat and a folder with a shell script per change, numbered
   in the order to apply them and tested in that order in a sandbox. It changes nothing itself.
+  Its result tells the calling session to show the whole report, check the usage limits against
+  the run's target, say why the run stopped there, and end with the steps to take.
   It keeps seven pieces of work going, reads the plan usage card in the desktop app as they
   finish, and starts new work only while it fits, estimating each piece from what earlier runs
   cost, as kept in `~/.claude/dream/usage-history.jsonl`, and holds back the checks of what it
