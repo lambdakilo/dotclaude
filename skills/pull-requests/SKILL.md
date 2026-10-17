@@ -54,8 +54,12 @@ redacted in public and upstream repositories.
   and `--body-file` replace it silently, so the body file has to contain the template text.
 - To change the body, read the live one with `gh pr view <n> --json body --jq .body`, edit it as
   a file, write it back with `gh pr edit <n> --body-file`, and re-read to confirm. Outside the
-  blocks, change only a template answer that a later commit made wrong, and keep every edit
-  the user has made there.
+  blocks, change only a template answer that a later commit made wrong or left incomplete, and
+  keep every edit the user has made there.
+- After a commit that answers review threads, read How to verify against each thread. A fix
+  that changes what a reviewer sees or does gets a manual step, or a sentence in the step that
+  already shows that screen, and the summary sentence is rewritten when it no longer covers
+  the PR. A fix nothing on screen shows needs no step.
 
 ## How to verify
 
