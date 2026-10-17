@@ -291,9 +291,11 @@ apply to one repository belong in that repository's project memory.
   fails, the return still runs and leaves the reader one level above the project. This holds
   in commands run and in commands given to the user, since the working directory persists from
   one command to the next.
-- A command given to the user names every file by its full `~` path, since the user's terminal
-  does not start in the session's directory. A file such a command reads or writes that belongs
-  to no checkout goes in `~/Downloads` unless the user names a folder.
+- A command given to the user works when pasted into a new terminal, which starts in `~`. Every
+  file it names has its full `~` path, and a command that runs inside a checkout uses the tool's
+  directory flag or a subshell, such as `(cd ~/src/<repo> && make test)`, also when it is
+  quoted from a README whose paths are relative to the checkout. A file such a command reads or
+  writes that belongs to no checkout goes in `~/Downloads` unless the user names a folder.
 - Never run environment or deployment tooling against a remote environment. Confirm before
   destructive commands.
 - Prefer official features over custom glue that wraps unstable internals. If only custom works,
