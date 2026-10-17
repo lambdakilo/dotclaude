@@ -55,32 +55,35 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   out of the context of sessions that never touch a pull request.
 - [`workflows/dream.js`](workflows/dream.js): a saved Claude Code workflow, run as `/dream` in
   idle time, at the end of a day, overnight or over a weekend. Its work comes in four tiers, and
-  each tier's findings are merged and checked before later tiers get the usage: first the session
-  transcripts since the last run, newest first, the whole configuration and the user's own pull
-  request reviews; then whether each section of `CLAUDE.md` is followed, broken or never
-  triggered, where sessions waste tokens, `claude doctor`, the Claude Code changelog, the Claude
-  Platform release notes and Managed Agents docs, such as dreams, for what the setup or this
-  workflow could use, Anthropic news, what Claude Code now does by itself that the setup
+  each tier's findings are merged and checked before later tiers get the usage: first the
+  proposals an earlier run had no usage to check, the session transcripts used since the last
+  run, by their last user or assistant record and newest first, the whole configuration and the
+  user's own pull request reviews; then whether each section of `CLAUDE.md` is followed, broken
+  or never triggered, where sessions waste tokens, `claude doctor`, the Claude Code changelog,
+  the Claude Platform release notes and Managed Agents docs, such as dreams, for what the setup
+  or this workflow could use, Anthropic news, what Claude Code now does by itself that the setup
   duplicates, and the skill repositories listed in `~/.claude/dream/skill-repos.txt`, which
-  stays local; then an audit of
-  each repository worked in against its `CLAUDE.md` and project memory, a review of the user's
-  open pull requests and a brief for Monday; and last subagent transcripts and older transcripts
-  a week at a time. Transcripts and configuration run every time, reviews once a day and the rest
-  once a week. Two more agents check each new proposal, one that its evidence holds and one that
-  no rule already covers it, and open proposals carry over in `~/.claude/dream/backlog.json` until
-  they are applied or found obsolete. Each run writes a report short enough to read in the chat
-  and a folder with a shell script per change, numbered in the order to apply them and tested in
-  that order in a sandbox. It changes nothing itself. It keeps seven pieces of work going, reads
-  the plan usage card in the desktop app as they finish, and starts new work only while it fits,
-  estimating each piece from what earlier runs cost, as kept in
-  `~/.claude/dream/usage-history.jsonl`. Transcripts it had no usage for carry over to the next
-  run. Run bare, it picks its mode from the weekly reset. On the day before, it spends the week
-  but keeps back what two 5-hour windows cost, one for work and one for a last run, and stops in
-  time to leave the 5-hour window open at 08:00 on the reset day untouched. On the reset day it
-  spends the week down to one point and stops starting work before the reset, so its agents
-  finish first. On other days it guards only the weekly limits, letting the 5-hour limit fill and
-  waiting for its reset. `mode`, `workAt`, `keep` and `margin` change those choices, and `day`
-  keeps the 5-hour limit under the margin while the user works.
+  stays local; then an audit of each repository worked in against its `CLAUDE.md` and project
+  memory, a review of the user's open pull requests in repositories checked out under `~/src`
+  or updated in the last two weeks, and a brief for Monday; and last subagent transcripts and
+  older transcripts a week at a time. Transcripts and configuration run every time, reviews once
+  a day and the rest once a week. Two more agents check each new proposal, one that its evidence
+  holds and one that no rule already covers it, and open proposals carry over in
+  `~/.claude/dream/backlog.json` until they are applied or found obsolete. Each run writes a
+  report short enough to read in the chat and a folder with a shell script per change, numbered
+  in the order to apply them and tested in that order in a sandbox. It changes nothing itself.
+  It keeps seven pieces of work going, reads the plan usage card in the desktop app as they
+  finish, and starts new work only while it fits, estimating each piece from what earlier runs
+  cost, as kept in `~/.claude/dream/usage-history.jsonl`, and holds back the checks of what it
+  reads. Transcripts and proposals it had no usage for carry over to the next run. Its last
+  usage reading goes into `~/.claude/dream/weekly-usage.jsonl`, so the last line for a week keeps
+  how much of it was used. Run bare, it picks its mode from the weekly reset. On the day before,
+  it spends the week but keeps back what two 5-hour windows cost, one for work and one for a last
+  run, and stops in time to leave the 5-hour window open at 08:00 on the reset day untouched. On
+  the reset day it spends the week down to one point and stops starting work before the reset,
+  so its agents finish first. On other days it guards only the weekly limits, letting the 5-hour
+  limit fill and waiting for its reset. `mode`, `workAt`, `keep` and `margin` change those
+  choices, and `day` keeps the 5-hour limit under the margin while the user works.
 - [`sync.sh`](sync.sh): pulls this checkout, copies each mirrored file whichever way it changed,
   a JSON file in the key order it has here, stops on a file changed on both sides, scans
   everything for private names, paths, addresses and credentials before anything gets committed,
