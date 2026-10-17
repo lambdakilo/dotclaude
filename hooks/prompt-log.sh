@@ -13,7 +13,12 @@
 # print numbers every prompt of the session in CLAUDE_CODE_SESSION_ID, or in
 # PROMPT_LOG_SESSION when set, as **n.** and > lines for a PR body, or with
 # --commit as n. and > lines wrapped at 72 columns. --from n starts at prompt
-# n. URLs and email addresses come out as [pasted: an address].
+# n. The log keeps each prompt as it arrived. print drops what the harness
+# wraps in tags: reminders, artifact context, peer session messages, subagent
+# hand-backs and notifications, and an entry with nothing else in it gets no
+# number. A pasted block comes out as [pasted: n lines], URLs and email
+# addresses as [pasted: an address], a home path with ~, a temporary path as
+# [a temporary path] and a password or token value as [redacted].
 
 set -u
 
@@ -52,13 +57,23 @@ if [ -z "$session" ] || [ ! -f "$log" ]; then
 fi
 
 n=0
-jq -j '.prompt + "\u0000"' "$log" | while IFS= read -r -d '' prompt; do
+jq -j '.prompt
+  | gsub("<(?<t>system-reminder|artifact-view-context|cross-session-message|agent-message|task-notification|teammate-message)[\\s>][\\s\\S]*?</\\k<t>\\s*>"; "")
+  | gsub("<pasted_content[^>]*>(?<b>[\\s\\S]*?)</pasted_content[^>]*>";
+      "[pasted: \(.b | sub("\\A\\s+"; "") | sub("\\s+\\z"; "") | split("\n") | length) lines]")
+  | sub("\\A\\s+"; "") | sub("\\s+\\z"; "")
+  | select(length > 0)
+  | . + "\u0000"' "$log" | while IFS= read -r -d '' prompt; do
   n=$((n + 1))
   [ "$n" -ge "$from" ] || continue
   prompt="$(printf '%s\n' "$prompt" | sed -E \
     -e 's#[A-Za-z][A-Za-z0-9+.-]*://[^[:space:]]*[^[:space:].,;:!?)]#[pasted: an address]#g' \
     -e 's#[A-Za-z0-9._-]+@[A-Za-z0-9.-]+:[^[:space:]]*[^[:space:].,;:!?)]#[pasted: an address]#g' \
-    -e 's#[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}#[pasted: an address]#g')"
+    -e 's#[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}#[pasted: an address]#g' \
+    -e 's#(/private)?/tmp/claude-[0-9]+/[^[:space:]"]*#[a temporary path]#g' \
+    -e 's#/Users/[^/[:space:]"]+#~#g' \
+    -e 's#((mysql|mariadb|mysqldump|mysqladmin)[^|;&]*[[:space:]]-p)[^[:space:]]+#\1[redacted]#g' \
+    -e 's#((PASSWORD|PASSWD|TOKEN|SECRET|PWD|[Pp]assword|[Pp]asswd|[Tt]oken|[Ss]ecret)=)[^[:space:]]+#\1[redacted]#g')"
   if [ "$form" = commit ]; then
     printf '%s.\n' "$n"
     printf '%s\n' "$prompt" | fold -s -w 70 | sed -e 's/ *$//' -e 's/^/> /' -e 's/^> $/>/'

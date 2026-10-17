@@ -5,6 +5,8 @@
 # its worktrees still has containers up, it sends the turn back once with the
 # reason, so the stack is stopped and the reply says so. It stops nothing
 # itself, and a turn that started nothing passes.
+# A turn passes too when stack-held-by-peer.sh records the stack as another
+# session's.
 # The current turn is read from the transcript, whose format Claude Code does
 # not document, so a change there makes this hook quietly pass every turn.
 
@@ -43,6 +45,8 @@ projects="$(docker ps --format '{{.Label "com.docker.compose.project"}}\t{{.Labe
   awk -F '\t' -v root="$root" '$2 == root || index($2, root "/") == 1 { print $1 }' |
   sort -u | paste -sd ' ' -)"
 [ -n "$projects" ] || exit 0
+holder="$(cut -f1 "$common_dir/claude-stack-holder" 2>/dev/null)"
+[ -z "$holder" ] || [ "$holder" = "$(printf '%s' "$input" | jq -r '.session_id // empty' 2>/dev/null)" ] || exit 0
 
 echo "This turn started a stack and compose project $projects is still up. Stop it with the project's own stop command and say in the reply that it is stopped." >&2
 exit 2

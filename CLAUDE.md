@@ -90,11 +90,14 @@ apply to one repository belong in that repository's project memory.
   `~/.claude/hooks` appends every prompt to `~/.claude/prompt-log/<session id>.jsonl`, and
   `~/.claude/hooks/prompt-log.sh print` prints the session's prompts numbered and quoted for a
   PR body, with `--commit` in the commit form above and with `--from <n>` from prompt n on.
-  Addresses come out as `[pasted: an address]`. Then do only what the printout cannot: leave
-  out and redact as the bullets around this one say, say what each pasted address or block
-  was, and add the answer marks, the AskUserQuestion selections and the abbreviations. The
-  model id comes from the session. The effort comes from `get_session` with `self` where the
-  app offers it, else from `CLAUDE_EFFORT` in the shell, else from
+  It leaves out reminders, peer session messages and subagent hand-backs, and prints an address
+  as `[pasted: an address]`, a pasted block as `[pasted: <n> lines]`, a home path with `~` and a
+  password or token value as `[redacted]`. Then do only what the printout cannot: leave out and
+  redact as the bullets around this one say, replace a spawned task's opening prompt, which
+  another session wrote, with `[a task another Claude session wrote, left out]`, say what each
+  pasted address or block was, and add the answer marks, the AskUserQuestion selections and the
+  abbreviations. The model id comes from the session. The effort comes from `get_session` with
+  `self` where the app offers it, else from `CLAUDE_EFFORT` in the shell, else from
   `modelSettings.<id>.effortLevel` in `~/.claude/settings.json` with the id's `[1m]` suffix
   dropped. A value that is not one word is a failed lookup and is never printed. When `/model`
   or `/effort` changed either during the session, name each value with the prompts it ran
@@ -268,6 +271,16 @@ apply to one repository belong in that repository's project memory.
   its worktrees still has containers up, it sends the turn back once with the reason. It stops
   nothing itself, and a turn that started nothing passes. It is a safety net for the rule
   above, not a substitute for it.
+- A compose stack with fixed container names is one per machine, shared by every session of
+  the repository and its worktrees. A stack another live session started stays that session's
+  until its containers are down: ask it with SendMessage to say when they are, and run what
+  needs no stack meanwhile. A notice sent before a start is not an ask, and a send result
+  saying the message is not yet read is no answer.
+- A `PreToolUse` hook, `~/.claude/hooks/stack-held-by-peer.sh`, notes in the git directory
+  which session started the stack. While those containers are up or starting and that session
+  has written to its transcript in the last 15 minutes, it refuses any other session's start,
+  restart, stop or removal of them, and the `Stop` hook leaves them alone. Its container
+  matching is a heuristic that backs the rule above.
 - A command that must run in another directory uses the tool's own directory flag, such as
   `git -C` or `npm --prefix`, and otherwise a subshell, `(cd playwright && npx playwright test)`,
   which returns on its own. Never `cd playwright && npx playwright test; cd ..`: when the `cd`
@@ -286,6 +299,10 @@ apply to one repository belong in that repository's project memory.
   events on another person's calendar, which carry titles, attendees and meeting links, so
   finding a time with other people goes through the connector's `suggest_time`, which reads
   free/busy alone.
+- Browser work runs in the built-in browser pane, which the user also calls the built-in chrome
+  and is signed in to. A page, a file or an upload is tried there before a reply calls it out of
+  reach, and when the pane shows a sign-in page the reply asks the user to sign in there. A deny
+  rule in `settings.json` blocks Claude in Chrome, which the user does not want.
 - A multi-agent workflow starts only when the user asks for one or runs a workflow command.
   Propose one, with a rough token cost, only for read-only work across a wide area: a deep
   review of a large diff, research across several read-only sources, or a sweep of a codebase
