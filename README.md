@@ -77,7 +77,8 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   cost, as kept in `~/.claude/dream/usage-history.jsonl`, and holds back the checks of what it
   reads. Transcripts and proposals it had no usage for carry over to the next run. Its last
   usage reading goes into `~/.claude/dream/weekly-usage.jsonl`, so the last line for a week keeps
-  how much of it was used. Run bare, it picks its mode from the weekly reset. On the day before,
+  how much of it was used, and the report ends with this week, last week and the 4-week and
+  52-week averages from it. Run bare, it picks its mode from the weekly reset. On the day before,
   it spends the week but keeps back what two 5-hour windows cost, one for work and one for a last
   run, and stops in time to leave the 5-hour window open at 08:00 on the reset day untouched. On
   the reset day it spends the week down to one point and stops starting work before the reset,

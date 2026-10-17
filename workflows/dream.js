@@ -1,7 +1,7 @@
 export const meta = {
   name: 'dream',
   description: 'Review Claude Code use since the last run in idle time, carry open proposals forward, and propose changes to the global setup',
-  whenToUse: 'In idle time with tokens to spare: at the end of a day, overnight or over a weekend. Run it without arguments and it picks its mode from the weekly reset on the usage card. On the day before the reset an eve run spends the week but keeps back what two 5-hour windows cost, one for work and one for a final run, and stops starting work in time to leave the 5-hour window that would still be open at 08:00 on the reset day untouched. On the reset day a final run spends what is left of the week down to 1 point and stops starting work an hour and a quarter before the reset, so its agents finish and report before it. On other days a night run guards the weekly limits and lets the 5-hour limit fill. Optional args: {mode: "eve", "final", "night" or "day" to choose the mode, where a day run keeps the 5-hour limit under the margin too while the user works, workAt: "HH:MM" local time the user starts on the reset day (default 08:00), keep: <5-hour windows an eve run keeps back, default 2>, since: "<ISO time>", only: ["transcripts", "config", "github", "rules", "waste", "harness", "doctor", "anthropic", "skills", "projects", "prs", "brief", "subagents"], all: true to run every source whether due or not, out: "<report directory>", margin: <usage percentage points to leave free, default 5, 1 in a final run>, pool: <pieces of work at a time, default 7>}; weekend: true still means mode final and day: true mode day. The work comes in four tiers, and a tier\'s findings are merged and checked before later tiers get the usage: 1. checks of the proposals earlier runs had no usage to check, the window\'s transcripts by their last user or assistant record, newest first, config and GitHub reviews; 2. rule effectiveness, token waste, the harness, doctor, Anthropic and skill repository sources; 3. project audits, reviews of the user\'s open pull requests in repositories checked out under ~/src or updated in the last 14 days and, in a final run, a brief for Monday; 4. in eve and final runs, subagent transcripts and then older transcripts a week at a time, newest first, on from where the last weekend run stopped. Transcripts and config run every time, GitHub reviews once a day, the other sources of tiers 2 and 3 once a week, or once a weekend in eve and final runs, and transcripts and proposals a run had no usage for carry over to the next run. Each run appends its last usage reading to ~/.claude/dream/weekly-usage.jsonl, so the last line for a week shows how much of that week was used. Skill repositories are listed one per line in ~/.claude/dream/skill-repos.txt as "owner/repo[/path] optional note". A run waits for a 5-hour reset at most twice and guards the 5-hour limit after that. Open proposals carry over in ~/.claude/dream/backlog.json until they are applied or found obsolete. The run reads the plan usage card as work finishes and starts new work only while it fits, using what earlier runs cost, as kept in ~/.claude/dream/usage-history.jsonl. When the run finishes, read the report file and show all of it in the chat, unshortened, since the user reads the report only there. Each run has its own folder of scripts beside the report, numbered in the order to apply them, and the report gives the command that runs each one.',
+  whenToUse: 'In idle time with tokens to spare: at the end of a day, overnight or over a weekend. Run it without arguments and it picks its mode from the weekly reset on the usage card. On the day before the reset an eve run spends the week but keeps back what two 5-hour windows cost, one for work and one for a final run, and stops starting work in time to leave the 5-hour window that would still be open at 08:00 on the reset day untouched. On the reset day a final run spends what is left of the week down to 1 point and stops starting work an hour and a quarter before the reset, so its agents finish and report before it. On other days a night run guards the weekly limits and lets the 5-hour limit fill. Optional args: {mode: "eve", "final", "night" or "day" to choose the mode, where a day run keeps the 5-hour limit under the margin too while the user works, workAt: "HH:MM" local time the user starts on the reset day (default 08:00), keep: <5-hour windows an eve run keeps back, default 2>, since: "<ISO time>", only: ["transcripts", "config", "github", "rules", "waste", "harness", "doctor", "anthropic", "skills", "projects", "prs", "brief", "subagents"], all: true to run every source whether due or not, out: "<report directory>", margin: <usage percentage points to leave free, default 5, 1 in a final run>, pool: <pieces of work at a time, default 7>}; weekend: true still means mode final and day: true mode day. The work comes in four tiers, and a tier\'s findings are merged and checked before later tiers get the usage: 1. checks of the proposals earlier runs had no usage to check, the window\'s transcripts by their last user or assistant record, newest first, config and GitHub reviews; 2. rule effectiveness, token waste, the harness, doctor, Anthropic and skill repository sources; 3. project audits, reviews of the user\'s open pull requests in repositories checked out under ~/src or updated in the last 14 days and, in a final run, a brief for Monday; 4. in eve and final runs, subagent transcripts and then older transcripts a week at a time, newest first, on from where the last weekend run stopped. Transcripts and config run every time, GitHub reviews once a day, the other sources of tiers 2 and 3 once a week, or once a weekend in eve and final runs, and transcripts and proposals a run had no usage for carry over to the next run. Each run appends its last usage reading to ~/.claude/dream/weekly-usage.jsonl, so the last line for a week shows how much of that week was used, and the report ends with this week, last week and the 4-week and 52-week averages from it. Skill repositories are listed one per line in ~/.claude/dream/skill-repos.txt as "owner/repo[/path] optional note". A run waits for a 5-hour reset at most twice and guards the 5-hour limit after that. Open proposals carry over in ~/.claude/dream/backlog.json until they are applied or found obsolete. The run reads the plan usage card as work finishes and starts new work only while it fits, using what earlier runs cost, as kept in ~/.claude/dream/usage-history.jsonl. When the run finishes, read the report file and show all of it in the chat, unshortened, since the user reads the report only there. Each run has its own folder of scripts beside the report, numbered in the order to apply them, and the report gives the command that runs each one.',
   phases: [
     { title: 'Scout', detail: 'time window, mode, due sources, transcripts, pull requests, backlog, usage and its history' },
     { title: 'Recent', detail: 'tier 1: the window\'s transcripts newest first, config and GitHub reviews, merged and checked first' },
@@ -116,7 +116,7 @@ const SESSION = {
 
 const SCOUT = {
   type: 'object',
-  required: ['now', 'today', 'utcOffset', 'runId', 'since', 'lookbackFrom', 'installedVersion', 'previousReports', 'sessions', 'skillRepos', 'model', 'effort', 'usage', 'historyLines', 'backlogText', 'ruleSections', 'repos', 'prs'],
+  required: ['now', 'today', 'utcOffset', 'runId', 'since', 'lookbackFrom', 'installedVersion', 'previousReports', 'sessions', 'skillRepos', 'model', 'effort', 'usage', 'historyLines', 'weekLines', 'backlogText', 'ruleSections', 'repos', 'prs'],
   properties: {
     now: { type: 'string' },
     today: { type: 'string' },
@@ -129,6 +129,7 @@ const SCOUT = {
     effort: { type: 'string' },
     usage: { type: 'object' },
     historyLines: { type: 'array', items: { type: 'string' } },
+    weekLines: { type: 'array', items: { type: 'string' } },
     backlogText: { type: 'string' },
     skillRepos: {
       type: 'array',
@@ -330,7 +331,7 @@ const scout = await agent(`Set up a dream run, a review of this user's Claude Co
 6. ${requested.includes('skills') ? `Read ${REPOS_FILE} if it exists. Each non-empty line not starting with # names a GitHub repository as owner/repo, optionally followed by /path to a folder inside it, then optionally a note after whitespace. Return each as repo and note, the note empty when there is none. Return an empty list when the file is missing.` : 'Skill repositories are out of scope for this run. Return an empty skillRepos list.'}
 7. Return as model the model id you run on, from your own system prompt, and as effort the value of $CLAUDE_EFFORT, or "unknown" when it is unset.
 8. ${READ_USAGE} Put the result in usage, an object with available and windows.
-9. Return the lines of ${HISTORY_FILE} verbatim as historyLines, oldest first, or an empty list when the file does not exist.
+9. Return the lines of ${HISTORY_FILE} verbatim as historyLines, oldest first, or an empty list when the file does not exist. Return the lines of ${WEEKS_FILE} the same way as weekLines.
 10. Return the content of ${BACKLOG_FILE} verbatim as backlogText, or an empty string when the file does not exist.
 11. ${requested.includes('rules') ? 'Return as ruleSections the headings of ~/.claude/CLAUDE.md that start with "## ", without the "## ", in file order.' : 'Return an empty ruleSections list.'}
 12. ${requested.includes('projects') ? `Find the repositories the user worked in: for each directory under ~/.claude/projects with a main transcript whose last user or assistant record is after lookbackFrom, read the cwd fields of those transcripts with jq -r 'select(.cwd) | .cwd' FILE | sort -u. Keep a cwd that is inside a git work tree, and map it to its main checkout, the parent of git -C <cwd> rev-parse --path-format=absolute --git-common-dir. Leave out ~/.claude and everything below it, and any path containing scratch-workspaces. Return each main checkout once, as a ~ path in path, with the project directory names that led to it in projectDirs.` : 'Return an empty repos list.'}
@@ -1236,6 +1237,52 @@ if (briefResult !== null || only.includes('brief')) coverage.push(`monday brief:
 coverage.push(...notDue.map(s => `${s}: ${s === 'brief' ? 'runs in final runs only' : s === 'subagents' ? 'runs in eve and final runs only' : `not due yet, last run ${new Date(lastRan[s]).toISOString()}`}`))
 if (nextPending.length) coverage.push(`carried over to the next run: ${nextPending.length} transcripts`)
 
+// Each week counts with its last reading; this week joins the averages only in a final run, when little of it is left.
+function weeklyRecap() {
+  const readings = scout.weekLines
+    .map(line => { try { return JSON.parse(line) } catch (e) { return null } })
+    .filter(r => r && r.weekEnds && Array.isArray(r.windows))
+  const nowWeekly = usage && usage.windows.find(w => /all models/i.test(w.label))
+  if (nowWeekly) readings.push({ weekEnds: nowWeekly.resetsAt, readAt: new Date(lastNowMs).toISOString(), windows: usage.windows, dreamSpent: weeklyCard && sameWindow(weeklyCard, nowWeekly) ? nowWeekly.percentUsed - weeklyCard.percentUsed : 0 })
+  const weeks = {}
+  for (const r of readings) {
+    const ends = Date.parse(r.weekEnds)
+    if (!Number.isFinite(ends)) continue
+    const key = new Date(Math.round(ends / 3600000) * 3600000).toISOString()
+    const w = weeks[key] = weeks[key] || { endsAt: key, readAt: '', windows: [], dreamSpent: 0 }
+    if (typeof r.dreamSpent === 'number') w.dreamSpent += r.dreamSpent
+    if (r.readAt >= w.readAt) {
+      w.readAt = r.readAt
+      w.windows = r.windows.filter(x => !/hour/i.test(x.label)).map(x => ({ label: x.label, percentUsed: x.percentUsed }))
+    }
+  }
+  const list = Object.values(weeks).sort((a, b) => b.endsAt.localeCompare(a.endsAt))
+  if (!list.length) return null
+  const current = list.find(w => Date.parse(w.endsAt) > lastNowMs) || null
+  const past = list.filter(w => Date.parse(w.endsAt) <= lastNowMs)
+  const anchor = current ? Date.parse(current.endsAt) : lastNowMs
+  const labels = [...new Set(list.flatMap(w => w.windows.map(x => x.label)))]
+  const span = count => {
+    const from = anchor - count * 7 * 86400000
+    const inSpan = past.filter(w => Date.parse(w.endsAt) > from).concat(current && MODE === 'final' ? [current] : [])
+    const averages = {}
+    for (const label of labels) {
+      const values = inSpan.map(w => (w.windows.find(x => x.label === label) || {}).percentUsed).filter(v => typeof v === 'number')
+      averages[label] = values.length ? Math.round((10 * values.reduce((a, b) => a + b, 0)) / values.length) / 10 : null
+    }
+    return { weeks: inSpan.length, of: count, averages }
+  }
+  return {
+    thisWeek: current,
+    lastWeek: past[0] || null,
+    month: span(4),
+    year: span(52),
+    thisWeekInAverages: Boolean(current && MODE === 'final'),
+    loggedSince: list[list.length - 1].endsAt,
+  }
+}
+const recap = weeklyRecap()
+
 phase('Report')
 const SCRIPTS_DIR = `${OUT}/${scout.runId}`
 const habits = kept.filter(p => p.kind === 'habit')
@@ -1287,6 +1334,7 @@ Sections, in this order:
 6. Left out: every dropped, rejected or unchecked proposal in one line with its reason, saying once that unchecked proposals carry over and are checked first in the next run, then the skipped work grouped by reason in one line per reason.
 7. Coverage: the window, the mode and why the run chose it, the Claude Code version, one line per source on what it read and skipped, the transcripts carried over to the next run, the sources not due yet${DEEP ? ` and how far back the deeper pass went: ${deepBack || 'nowhere'}` : ''}.
 8. Usage: a short table of each plan limit at the start and before this report, then one line each on what a source, a checked proposal and a pull request review cost in percentage points${MODE === 'eve' ? ', the weekly points kept back for tomorrow' : ''}, and what was skipped to stay ${MARGIN} points under the limits or for the time limits of the mode. Leave the section out when usage is null below.
+9. Weekly usage, the last section: a table with a row per weekly limit and the columns this week, with the local time of its reading and how long before the reset that was, last week, the 4-week average and the 52-week average, each average with the number of weeks it rests on, such as "58% (3 of 4 weeks)". Then one line on how many points of this week and of last week dream runs used. Say in one line which columns are empty because the log only goes back to the week ending ${recap ? recap.loggedSince.slice(0, 10) : 'this week'}, and${recap && recap.thisWeekInAverages ? '' : ' that'} the averages ${recap && recap.thisWeekInAverages ? 'count this week, since this is a final run' : 'leave this week out until a final run'}. Leave the section out when the weekly recap below is null.
 
 Window: ${scout.since} to ${scout.now}. Claude Code ${scout.installedVersion}. Mode: this is ${modeNote}.
 
@@ -1322,6 +1370,9 @@ ${JSON.stringify(skippedWork.map(s => ({ label: s.label, tier: s.tier, reason: s
 
 Usage, as JSON (windows are plan limits in percent used, ledger is percentage points and units of work measured this run per kind):
 ${JSON.stringify(startUsage ? { start: startUsage.windows, beforeReport: usage ? usage.windows : null, ledger, reserveForTomorrow: MODE === 'eve' ? RESERVE : null, estimatesFrom: pastRuns.length ? `${pastRuns.length} earlier runs` : 'defaults and this run' } : null)}
+
+Weekly recap, as JSON (percentUsed per weekly limit, endsAt and readAt in UTC, local time is UTC${scout.utcOffset}):
+${JSON.stringify(recap)}
 
 Coverage notes:
 ${coverage.join('\n')}
@@ -1413,5 +1464,6 @@ return {
   pending: nextPending.length,
   unchecked: unchecked.length,
   usage: startUsage ? { start: showUsage(startUsage), end: usage ? showUsage(usage) : 'unknown', recorded } : 'not readable',
+  weekly: recap,
   ...(report ? {} : { proposals: openItems }),
 }
