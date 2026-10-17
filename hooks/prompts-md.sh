@@ -152,7 +152,7 @@ function flush(    i, h, n, line, state, model, k, head, quote, abbr, key, numbe
   for (; i <= count; i++) {
     line = lines[i]
     if (state == "abbr") {
-      if (line == "") { state = "done"; continue }
+      if (line == "" || line ~ /^[A-Za-z-]+-by: / || line ~ /: .*<[^ >]+@[^ >]+>$/ || line ~ /^Mirrors /) { state = "done"; continue }
       if (line ~ /^(- )?[^ :>][^:]*: /) { sub(/^- /, "", line); abbreviations["- " line] = 1; abbr = "- " line }
       else if (abbr != "") {
         delete abbreviations[abbr]
