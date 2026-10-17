@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Stop PROMPTS.md reading a sign-off as an abbreviation
+## Read the prompts heading that names the model in PROMPTS.md
 
 2026-10-17, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.** Quoted under [ff9d05b](https://github.com/lambdakilo/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027).
+
+**4.** Quoted under [ff9d05b](https://github.com/lambdakilo/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027).
+
+## Stop PROMPTS.md reading a sign-off as an abbreviation
+
+2026-10-17, commit [992ac4c](https://github.com/lambdakilo/dotclaude/commit/992ac4c55455cd76a7244a5f0b60c92009c6bf1d), model claude-opus-5-5, effort xhigh.
 
 **3.** Quoted under [ff9d05b](https://github.com/lambdakilo/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027).
 

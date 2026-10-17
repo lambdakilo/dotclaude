@@ -130,12 +130,16 @@ function flush(    i, h, n, line, state, model, k, head, quote, abbr, key, numbe
   if (count == 0) return
   h = 0
   for (i = 1; i <= count; i++)
-    if (lines[i] ~ /^(LLM p|P)rompts behind this commit, as given to Claude Code$/) h = i
+    if (lines[i] ~ /^(LLM p|P)rompts behind this commit(, as given to Claude Code| \(Claude Code, model .*\):)$/) h = i
   if (h == 0) { count = 0; return }
 
   i = h + 1
   model = ""
-  if (lines[i] ~ /^\(?[Mm]odel[ :]/) {
+  if (lines[h] ~ /\(Claude Code, model .*\):$/) {
+    model = lines[h]
+    sub(/^.*\(Claude Code, /, "", model)
+    sub(/\):$/, "", model)
+  } else if (lines[i] ~ /^\(?[Mm]odel[ :]/) {
     model = lines[i]
     while (model !~ /:$/ && i < count && i < h + 3 && lines[i + 1] != "" && lines[i + 1] !~ /^([0-9]+\.|>)/)
       model = model " " lines[++i]
