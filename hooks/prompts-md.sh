@@ -98,6 +98,34 @@ function escape(s) {
   return s
 }
 
+# Some older messages carry the whole modelSettings object from settings.json
+# as the effort, so the level is read from the entry of the model, and left
+# out when that entry has none.
+function effort_from_settings(model,    id, rest, p, level) {
+  id = model
+  sub(/^model /, "", id)
+  sub(/,.*/, "", id)
+  rest = model
+  sub(/^model [^ ,]+, effort /, "", rest)
+  sub(/\[1m\]$/, "", id)
+  p = index(rest, id "\047")
+  if (p == 0) p = index(rest, id "\"")
+  if (p == 0) p = index(rest, id "[1m]")
+  level = ""
+  if (p > 0) {
+    rest = substr(rest, p + length(id))
+    sub(/}.*/, "", rest)
+    p = index(rest, "effortLevel")
+    if (p > 0) {
+      level = substr(rest, p + length("effortLevel"))
+      sub(/^[^A-Za-z0-9]+/, "", level)
+      sub(/[^A-Za-z0-9_-].*/, "", level)
+    }
+  }
+  sub(/, effort .*/, "", model)
+  return level == "" ? model : model ", effort " level
+}
+
 function flush(    i, h, n, line, state, model, k, head, quote, abbr, key, number, rest, text, pr) {
   if (count == 0) return
   h = 0
@@ -116,7 +144,7 @@ function flush(    i, h, n, line, state, model, k, head, quote, abbr, key, numbe
     i++
   }
   if (model ~ /^model [^ ,]+, effort [A-Za-z0-9_-]+$/) model = ", " model
-  else if (model ~ /^model [^ ,]+, effort /) { sub(/, effort .*/, "", model); model = ", " model }
+  else if (model ~ /^model [^ ,]+, effort /) model = ", " effort_from_settings(model)
   else if (model != "") model = ", " model
 
   n = 0

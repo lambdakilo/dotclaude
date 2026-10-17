@@ -5,9 +5,21 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Generate PROMPTS.md from the prompts in commit messages
+## Recover the effort PROMPTS.md dropped from a settings object
 
 2026-10-17, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.**
+> not bad. [a question about which repositories could use a PROMPTS.md
+> left out]
+
+**4.**
+> [an ask to add a PROMPTS.md to two projects left out] also sometimes
+> you drop the effort level from prompts.md. dotcalude debug and fix
+
+## Generate PROMPTS.md from the prompts in commit messages
+
+2026-10-17, commit [4f5472e](https://github.com/lambdakilo/dotclaude/commit/4f5472e517e030bb77578bf6c25b5bf3769aa354), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > what sort of file name would be good for for example dotclaude
@@ -906,7 +918,7 @@ so a change by hand is lost at the next commit.
 
 ## Allow sessions to start and stop the local stack
 
-2026-10-08, commit [1dc8ca2](https://github.com/lambdakilo/dotclaude/commit/1dc8ca287f247b6063eee9e89051bbd339b1b960), model claude-fable-5-1.
+2026-10-08, commit [1dc8ca2](https://github.com/lambdakilo/dotclaude/commit/1dc8ca287f247b6063eee9e89051bbd339b1b960), model claude-fable-5-1, effort xhigh.
 
 **7.**
 > also you always start the stack not me. also so hotspot is now ok
