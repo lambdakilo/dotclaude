@@ -216,6 +216,9 @@ apply to one repository belong in that repository's project memory.
   skip or a new order, the reply ends with every step still to do, as it now stands and in
   order: each command in a fenced block, each prompt for a session in a text block, and what
   dropped out named once. The user works from the latest reply and keeps no list in their head.
+  Steps that come after a long run whose own output will bury them, such as applying and
+  committing what a dream run proposes, wait for the reply that follows that run, and the list
+  before it stops at the run.
 - Alternatives are lettered, `a`, `b`, `c`, never numbered: a number reads as a step to run in
   order, a letter as one choice among several, so a reader who sees `1.` and `2.` starts on
   both. Numbers stay for commands run in order.
