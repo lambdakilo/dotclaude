@@ -87,8 +87,12 @@ mirrored=(
   hooks/stop-running-stack.sh
   hooks/stack-held-by-peer.sh
   hooks/claude-md-changed.sh
+  hooks/stale-cache-guard.sh
   hooks/no-github-posts.sh
+  hooks/prompt-feedback-box.sh
+  hooks/no-meta-prompts.sh
   hooks/prompts-md.sh
+  hooks/cd-fall-through.sh
   skills/pull-requests/SKILL.md
   workflows/dream.js
 )

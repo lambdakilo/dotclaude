@@ -116,8 +116,12 @@ apply to one repository belong in that repository's project memory.
   message to a file, run `~/.claude/hooks/prompts-md.sh --message <file>` in the checkout, and
   commit the rebuilt file with the change, with `git commit -F <file>`. The script writes the
   file from the prompts sections of the commit messages, newest first, each with its commit and
-  PR, so it is never edited by hand. A repository without the file gets one only when the user
-  asks. In the public configuration repository `sync.sh` runs the script itself.
+  PR, so it is never edited by hand. Each rebuild rewrites the whole file and fills in a hash or
+  PR that an earlier commit could not name yet, so no commit is amended, force-pushed or added
+  only to update the file, and a conflict in it is settled by taking either side. A repository
+  without the file gets one only when the user asks, and before adding it to one that merges
+  through PRs, tell the user that every open PR rebuilding it will conflict with the others once
+  one of them merges. In the public configuration repository `sync.sh` runs the script itself.
 - Re-read this file from disk before writing a commit message or a PR body, and before a PR body
   also `~/.claude/skills/pull-requests/SKILL.md`. A session reads each once, so an edit made
   from another session while this one runs stays invisible until the file is read again.
@@ -248,9 +252,13 @@ apply to one repository belong in that repository's project memory.
   it could have been better: what was missing, what was ambiguous, what was unnecessary, and a
   rewritten prompt when the change is more than a word. Keep it to a few lines. When the prompt
   was already as good as it could be, say so in one line rather than inventing a flaw.
-  Leave the section out when the user typed no prompt for the turn: a peer session's message,
-  an idle or task notification, or a spawned task's opening prompt, which another session
-  wrote.
+  Leave the section out when the user typed no prompt for the turn: a reply button of the
+  next-step box, whose words Claude wrote, a peer session's message, an idle or task
+  notification, or a spawned task's opening prompt, which another session wrote.
+  A question in the next-step box ends the turn and takes no text after it, so the closing
+  reply, any draft the question asks about and this section come before the box. The hook
+  `~/.claude/hooks/prompt-feedback-box.sh` refuses such a box once in a turn a typed prompt
+  opened until the section is written, and marks a prompt that repeats a button's words.
 - Write the rewritten prompt itself as the user would type it: all lowercase, names included,
   and without characters that need the shift key when a plain one does the job, so commas and
   full stops in place of colons, quotes, question marks and parentheses. Make it as short as it
@@ -296,10 +304,13 @@ apply to one repository belong in that repository's project memory.
   matching is a heuristic that backs the rule above.
 - A command that must run in another directory uses the tool's own directory flag, such as
   `git -C` or `npm --prefix`, and otherwise a subshell, `(cd playwright && npx playwright test)`,
-  which returns on its own. Never `cd playwright && npx playwright test; cd ..`: when the `cd`
-  fails, the return still runs and leaves the reader one level above the project. This holds
-  in commands run and in commands given to the user, since the working directory persists from
-  one command to the next.
+  which returns on its own. Every part after the `cd` depends on it: joined with `&&`, or in a
+  subshell that opens with `cd <dir> || exit 1`. A part after a `;` or a line break still runs
+  when the `cd` failed, inside a subshell too, and runs in the start directory, which in a
+  shared checkout holds another session's branch. This holds in commands run and in commands
+  given to the user, since the working directory persists from one command to the next.
+- A `PreToolUse` hook, `~/.claude/hooks/cd-fall-through.sh`, refuses a Bash command with such a
+  part unless the `cd` goes into a directory that exists already. It backs the rule above.
 - A command given to the user works when pasted into a new terminal, which starts in `~`. Every
   file it names has its full `~` path, and a command that runs inside a checkout uses the tool's
   directory flag or a subshell, such as `(cd ~/Projects/<repo> && make test)`, also when it is

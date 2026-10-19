@@ -106,6 +106,24 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/prompt-feedback-box.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/stale-cache-guard.sh\"",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "SessionStart": [
@@ -176,6 +194,36 @@
           {
             "type": "command",
             "command": "\"$HOME/.claude/hooks/stack-held-by-peer.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/cd-fall-through.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/no-meta-prompts.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__ccd_turn__wrap_up",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/prompt-feedback-box.sh\"",
             "timeout": 10
           }
         ]

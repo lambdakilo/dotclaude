@@ -12,15 +12,17 @@ set -u
 rules="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/CLAUDE.md"
 [ -f "$rules" ] && command -v jq >/dev/null 2>&1 || exit 0
 
-event="" key="" guarded=""
+event="" key="" guarded="" transcript=""
 {
   IFS= read -r event
   IFS= read -r key
   IFS= read -r guarded
+  IFS= read -r transcript
 } < <(jq -r '
   .hook_event_name // "",
   (.session_id // "") + (if (.agent_id // "") == "" then "" else "-" + .agent_id end),
   ((.tool_input.command // "") | test("(^|[^A-Za-z0-9_./-])(git( -[Cc] [^ ]+)* commit|gh pr (create|edit|merge))"))
+  , .transcript_path // ""
 ' 2>/dev/null)
 case "$key" in "" | *[^A-Za-z0-9_-]*) exit 0 ;; esac
 
@@ -51,7 +53,11 @@ if [ "$total" -gt "$limit" ]; then
   changes="$(printf '%s\n' "$changes" | head -n "$limit")
 [$((total - limit)) more diff lines cut, read the whole file with the Read tool]"
 fi
-cp "$rules" "$snapshot" 2>/dev/null || exit 0
+# The stale cache guard may block this prompt and its context with it, so while
+# the session is stale the copy stays and the diff comes again with the next one.
+if [ "$event" != UserPromptSubmit ] || ! "${0%/*}/stale-cache-guard.sh" --stale "$transcript"; then
+  cp "$rules" "$snapshot" 2>/dev/null || exit 0
+fi
 
 if [ "$event" = UserPromptSubmit ]; then
   jq -n --arg context "~/.claude/CLAUDE.md changed since this session loaded it. The diff below is in force now:

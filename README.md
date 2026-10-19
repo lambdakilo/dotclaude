@@ -33,6 +33,10 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   command, since a pipeline exits with its last command's status and a failed check piped into
   `tail` reads as a pass. It lets the command through when it sets `pipefail`, and otherwise
   names the way round: the output to a file in the scratchpad, then the status echoed.
+- [`hooks/cd-fall-through.sh`](hooks/cd-fall-through.sh): runs before every Bash command and
+  refuses one in which a part after a `;` or a line break would still run when a `cd` before it
+  failed, and so would run in the start directory. A `cd` guarded with `|| exit`, or into a
+  directory that exists already, goes through.
 - [`hooks/prompt-log.sh`](hooks/prompt-log.sh): runs on every prompt and appends it to
   `~/.claude/prompt-log/<session id>.jsonl`, which stays local. With `print` it prints the
   session's prompts numbered and quoted for a pull request body, or with `--commit` for a commit
@@ -44,11 +48,26 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   each session and, once the file has changed, adds the diff to the next prompt, or blocks the
   next commit or `gh pr` create, edit or merge once with the diff, so a session sees rule edits
   made from another session while it runs.
+- [`hooks/stale-cache-guard.sh`](hooks/stale-cache-guard.sh): runs on every prompt and blocks
+  the first prompt after more than an hour into a session of 200k tokens or more once, since the
+  prompt cache has expired by then and the prompt would write the whole conversation to it
+  again. Sending the prompt again goes through, and `/compact` or a new session is the cheaper
+  way on. Slash commands and what the harness sends in tags, such as subagent reports, pass.
 - [`hooks/no-github-posts.sh`](hooks/no-github-posts.sh): runs before every shell command and
   refuses the GitHub CLI calls that would post as the user: `gh pr comment`, `gh issue comment`,
   `gh pr review`, a close or reopen with `--comment`, and `gh api` calls that write a comment or a
   review, reply to a review thread or resolve one. It runs in every permission mode, bypass
   included. Editing a PR body, assigning, and closing or reopening without a comment still work.
+- [`hooks/prompt-feedback-box.sh`](hooks/prompt-feedback-box.sh): runs before the desktop app's
+  next-step box and on every prompt. A box with a question ends the turn and takes no text after
+  it, so in a turn a typed prompt opened, it refuses such a box once until a `Prompt feedback`
+  section is written. On a prompt that repeats a reply button of the last box, it tells Claude
+  Code that it wrote those words itself, so the section is left out.
+- [`hooks/no-meta-prompts.sh`](hooks/no-meta-prompts.sh): runs before every shell command and
+  blocks a commit or a `gh pr` create, edit or merge once when a prompt it quotes has a sentence
+  that opens with `dotclaude`, `global ruling`, `global memory` or `memory:`, the words that mark
+  an ask about the Claude Code setup, so such asks stay out of the history of a project. This
+  checkout and its mirrors are let through, and so is the same command run again.
 - [`hooks/prompts-md.sh`](hooks/prompts-md.sh): not a hook but a script, run before a commit in
   a repository with a `PROMPTS.md` at its root. It rebuilds that file from the prompts section of
   every commit message, newest first, each with its commit and pull request, and with

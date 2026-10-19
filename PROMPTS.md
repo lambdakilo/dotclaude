@@ -5,9 +5,27 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Move the checkouts from ~/src to ~/Projects
+## Apply the dream's high-impact proposals and ask about each step
 
 2026-10-19, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**12.**
+> its now monday and im looking at the session limit message. any stats
+> what happened? i should be seeing the report now. at least my weekly
+> usage is 0% now so thats good
+> [pasted: a screenshot of the app's session limit message]
+> > Which of the 51 tested dream scripts should I apply and commit now?
+> > do the high impacts first. but dotclaude ask me each proposition one
+> > by one in the future because i cant scroll up to p2 etc from p60 and
+> > still remember the order and numbers and your comments from down
+> > below. thoughts?
+> > p7 and p9 both add a hook against a cd that later commands don't
+> > depend on. Keep both?
+> > Only p7 (Recommended)
+
+## Move the checkouts from ~/src to ~/Projects
+
+2026-10-19, commit [6c05d5d](https://github.com/lambdakilo/dotclaude/commit/6c05d5d898c661f0068ca0e29425f7909dfedb50), model claude-opus-5-5, effort xhigh.
 
 **14.**
 > [an ask about a downstream project left out]

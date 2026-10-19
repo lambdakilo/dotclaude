@@ -19,6 +19,8 @@
 # number. A pasted block comes out as [pasted: n lines], URLs and email
 # addresses as [pasted: an address], a home path with ~, a temporary path as
 # [a temporary path] and a password or token value as [redacted].
+# A prompt identical to the one before it, such as one sent again after a hook
+# blocked it, is printed once.
 
 set -u
 
@@ -64,6 +66,8 @@ jq -j '.prompt
   | sub("\\A\\s+"; "") | sub("\\s+\\z"; "")
   | select(length > 0)
   | . + "\u0000"' "$log" | while IFS= read -r -d '' prompt; do
+  [ "$prompt" = "${previous-}" ] && continue
+  previous="$prompt"
   n=$((n + 1))
   [ "$n" -ge "$from" ] || continue
   prompt="$(printf '%s\n' "$prompt" | sed -E \
