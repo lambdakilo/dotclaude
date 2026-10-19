@@ -1,7 +1,7 @@
 export const meta = {
   name: 'dream',
   description: 'Review Claude Code use since the last run in idle time, carry open proposals forward, and propose changes to the global setup',
-  whenToUse: 'In idle time with tokens to spare: at the end of a day, overnight or over a weekend. Run it without arguments and it picks its mode from the weekly reset on the usage card. On the day before the reset an eve run spends the week but keeps back what two 5-hour windows cost, one for work and one for a final run, and stops starting work in time to leave the 5-hour window that would still be open at 08:00 on the reset day untouched. On the reset day a final run spends what is left of the week down to 1 point and stops starting work an hour and a quarter before the reset, so its agents finish and report before it. On other days a night run guards the weekly limits and lets the 5-hour limit fill. Optional args: {mode: "eve", "final", "night" or "day" to choose the mode, where a day run keeps the 5-hour limit under the margin too while the user works, workAt: "HH:MM" local time the user starts on the reset day (default 08:00), keep: <5-hour windows an eve run keeps back, default 2>, since: "<ISO time>", only: ["transcripts", "config", "github", "rules", "waste", "harness", "doctor", "anthropic", "skills", "projects", "prs", "brief", "subagents"], all: true to run every source whether due or not, out: "<report directory>", margin: <usage percentage points to leave free, default 5, 1 in a final run>, pool: <pieces of work at a time, default 7>}; weekend: true still means mode final and day: true mode day. The work comes in four tiers, and a tier\'s findings are merged and checked before later tiers get the usage: 1. checks of the proposals earlier runs had no usage to check, the window\'s transcripts by their last user or assistant record, newest first, config and GitHub reviews; 2. rule effectiveness, token waste, the harness, doctor, Anthropic and skill repository sources; 3. project audits, reviews of the user\'s open pull requests in repositories checked out under ~/src or updated in the last 14 days and, in a final run, a brief for Monday; 4. in eve and final runs, subagent transcripts and then older transcripts a week at a time, newest first, on from where the last weekend run stopped. Transcripts and config run every time, GitHub reviews once a day, the other sources of tiers 2 and 3 once a week, or once a weekend in eve and final runs, and transcripts and proposals a run had no usage for carry over to the next run. Each run appends its last usage reading to ~/.claude/dream/weekly-usage.jsonl, so the last line for a week shows how much of that week was used, and the report ends with this week, last week and the 4-week and 52-week averages from it. Skill repositories are listed one per line in ~/.claude/dream/skill-repos.txt as "owner/repo[/path] optional note". A run waits for a 5-hour reset at most twice and guards the 5-hour limit after that. Open proposals carry over in ~/.claude/dream/backlog.json until they are applied or found obsolete. The run reads the plan usage card as work finishes and starts new work only while it fits, using what earlier runs cost, as kept in ~/.claude/dream/usage-history.jsonl. When the run finishes, do what forTheSession in its result says: show the whole report, check where the usage limits stand now against the run\'s target, and end with the steps to take now. Each run has its own folder of scripts beside the report, numbered in the order to apply them, and the report gives the command that runs each one.',
+  whenToUse: 'In idle time with tokens to spare: at the end of a day, overnight or over a weekend. Run it without arguments and it picks its mode from the weekly reset on the usage card. On the day before the reset an eve run spends the week but keeps back what two 5-hour windows cost, one for work and one for a final run, and stops starting work in time to leave the 5-hour window that would still be open at 08:00 on the reset day untouched. On the reset day a final run spends what is left of the week down to 1 point and stops starting work an hour and a quarter before the reset, so its agents finish and report before it. On other days a night run guards the weekly limits. Every run stops just short of the 5-hour limit, since an agent that reaches it fails instead of waiting for the reset. Optional args: {mode: "eve", "final", "night" or "day" to choose the mode, where a day run keeps the margin free on the 5-hour limit too while the user works, workAt: "HH:MM" local time the user starts on the reset day (default 08:00), keep: <5-hour windows an eve run keeps back, default 2>, since: "<ISO time>", only: ["transcripts", "config", "github", "rules", "waste", "harness", "doctor", "anthropic", "skills", "projects", "prs", "brief", "subagents"], all: true to run every source whether due or not, out: "<report directory>", margin: <usage percentage points to leave free, default 5, 1 in a final run>, pool: <pieces of work at a time, default 7>}; weekend: true still means mode final and day: true mode day. The work comes in four tiers, and a tier\'s findings are merged and checked before later tiers get the usage: 1. checks of the proposals earlier runs had no usage to check, the window\'s transcripts by their last user or assistant record, newest first, config and GitHub reviews; 2. rule effectiveness, token waste, the harness, doctor, Anthropic and skill repository sources; 3. project audits, reviews of the user\'s open pull requests in repositories checked out under ~/src or updated in the last 14 days and, in a final run, a brief for Monday; 4. in eve and final runs, subagent transcripts and then older transcripts a week at a time, newest first, on from where the last weekend run stopped. Transcripts and config run every time, GitHub reviews once a day, the other sources of tiers 2 and 3 once a week, or once a weekend in eve and final runs, and transcripts and proposals a run had no usage for carry over to the next run. Each run appends its last usage reading to ~/.claude/dream/weekly-usage.jsonl, so the last line for a week shows how much of that week was used, and the report ends with this week, last week and the 4-week and 52-week averages from it. Skill repositories are listed one per line in ~/.claude/dream/skill-repos.txt as "owner/repo[/path] optional note". Open proposals carry over in ~/.claude/dream/backlog.json until they are applied or found obsolete. The run reads the plan usage card as work finishes and starts new work only while it fits, using what earlier runs cost, as kept in ~/.claude/dream/usage-history.jsonl. When the run finishes, do what forTheSession in its result says: show the whole report, check where the usage limits stand now against the run\'s target, and end with the steps to take now. Each run has its own folder of scripts beside the report, numbered in the order to apply them, and the report gives the command that runs each one.',
   phases: [
     { title: 'Scout', detail: 'time window, mode, due sources, transcripts, pull requests, backlog, usage and its history' },
     { title: 'Recent', detail: 'tier 1: the window\'s transcripts newest first, config and GitHub reviews, merged and checked first' },
@@ -49,7 +49,7 @@ const STALE_MINUTES = 10
 const KEEP_WINDOWS = typeof opts.keep === 'number' && opts.keep >= 0 ? opts.keep : 2
 const WORK_AT = /^([01]?\d|2[0-3]):[0-5]\d$/.test(opts.workAt || '') ? opts.workAt : '08:00'
 // Percentage points per unit of work before anything is measured; deliberately high, replaced by measurements.
-const DEFAULT_COST = { gather: 1, merge: 1, verify: 1, review: 2, report: 1 }
+const DEFAULT_COST = { gather: 1, merge: 1, verify: 1, review: 2, scripts: 1, report: 1 }
 const DEFAULT_WEEKLY_PER_WINDOW = 20
 const MODES = ['eve', 'final', 'night', 'day']
 const askedMode = MODES.includes(opts.mode) ? opts.mode
@@ -116,7 +116,7 @@ const SESSION = {
 
 const SCOUT = {
   type: 'object',
-  required: ['now', 'today', 'utcOffset', 'runId', 'since', 'lookbackFrom', 'installedVersion', 'previousReports', 'sessions', 'skillRepos', 'model', 'effort', 'usage', 'historyLines', 'weekLines', 'backlogText', 'ruleSections', 'repos', 'prs'],
+  required: ['now', 'today', 'utcOffset', 'runId', 'since', 'lookbackFrom', 'installedVersion', 'previousReports', 'sessions', 'skillRepos', 'model', 'effort', 'usage', 'historyLines', 'weekLines', 'backlog', 'ruleSections', 'repos', 'prs'],
   properties: {
     now: { type: 'string' },
     today: { type: 'string' },
@@ -130,7 +130,16 @@ const SCOUT = {
     usage: { type: 'object' },
     historyLines: { type: 'array', items: { type: 'string' } },
     weekLines: { type: 'array', items: { type: 'string' } },
-    backlogText: { type: 'string' },
+    backlog: {
+      type: 'object',
+      required: ['valid', 'open', 'closed', 'unchecked'],
+      properties: {
+        valid: { type: 'boolean' },
+        open: { type: 'array', items: { type: 'object' } },
+        closed: { type: 'array', items: { type: 'object' } },
+        unchecked: { type: 'array', items: { type: 'object' } },
+      },
+    },
     skillRepos: {
       type: 'array',
       items: { type: 'object', required: ['repo', 'note'], properties: { repo: { type: 'string' }, note: { type: 'string' } } },
@@ -318,6 +327,9 @@ const OK = { type: 'object', required: ['ok'], properties: { ok: { type: 'boolea
 const READ_USAGE = `Run date -u +%Y-%m-%dT%H:%M:%SZ and return it as now. Then load the tool mcp__ccd_session_mgmt__get_usage with ToolSearch and call it with no arguments. Return available true and its plan windows exactly as reported: label, percentUsed and resetsAt. Return available false with no windows when the tool cannot be found or its plan status is not "ok".`
 
 const LIST_FILES = 'Return each with its absolute path, its project directory name, its size in bytes and its modification time as an ISO time in UTC.'
+// The backlog file outgrew what an agent can repeat verbatim, so a run passes an index around and agents read whole items from the file by key.
+const BACKLOG_INDEX = `jq -c '{valid: true, open: [.open[]? | {key, title, kind, impact, target, firstSeen, lastSeen, scriptFile: (.scriptFile // "")}], closed: ([.closed[]? | {title, closedOn, reason: ((.reason // "") | .[0:160])}] | .[-150:]), unchecked: [.unchecked[]? | {key, title, kind, impact, target, firstSeen}]}' ${BACKLOG_FILE}`
+const readItem = (list, key) => `jq '.${list}[] | select(.key == "${key}")' ${BACKLOG_FILE}`
 // The desktop app appends untimestamped records to old sessions, so a file's modification time says little about when it was last used.
 const LAST_ACTIVITY = `For a main session transcript also return as lastActivity the timestamp of its last user or assistant record: jq -r 'select(.type == "user" or .type == "assistant") | .timestamp // empty' FILE | tail -n 1. Use find -newermt only to narrow the files down, and decide by lastActivity.`
 
@@ -332,7 +344,7 @@ const scout = await agent(`Set up a dream run, a review of this user's Claude Co
 7. Return as model the model id you run on, from your own system prompt, and as effort the value of $CLAUDE_EFFORT, or "unknown" when it is unset.
 8. ${READ_USAGE} Put the result in usage, an object with available and windows.
 9. Return the lines of ${HISTORY_FILE} verbatim as historyLines, oldest first, or an empty list when the file does not exist. Return the lines of ${WEEKS_FILE} the same way as weekLines.
-10. Return the content of ${BACKLOG_FILE} verbatim as backlogText, or an empty string when the file does not exist.
+10. Run ${BACKLOG_INDEX} and return its output as backlog, parsed, every field as jq prints it, never shortened or summarised. When the file does not exist, return valid true and empty lists; when jq fails on it, return valid false and empty lists.
 11. ${requested.includes('rules') ? 'Return as ruleSections the headings of ~/.claude/CLAUDE.md that start with "## ", without the "## ", in file order.' : 'Return an empty ruleSections list.'}
 12. ${requested.includes('projects') ? `Find the repositories the user worked in: for each directory under ~/.claude/projects with a main transcript whose last user or assistant record is after lookbackFrom, read the cwd fields of those transcripts with jq -r 'select(.cwd) | .cwd' FILE | sort -u. Keep a cwd that is inside a git work tree, and map it to its main checkout, the parent of git -C <cwd> rev-parse --path-format=absolute --git-common-dir. Leave out ~/.claude and everything below it, and any path containing scratch-workspaces. Return each main checkout once, as a ~ path in path, with the project directory names that led to it in projectDirs.` : 'Return an empty repos list.'}
 13. ${requested.includes('prs') ? 'List the open pull requests the user authored: gh search prs --author @me --state open --limit 100 --json url,title,repository,number,isDraft,updatedAt. Keep one only when it was updated in the last 14 days or its repository is the origin or upstream remote of a checkout under ~/src (git -C <checkout> remote -v), since old contributions elsewhere are not the user\'s current work. Return each with repo as its repository nameWithOwner. Return an empty list when gh fails.' : 'Return an empty prs list.'}
@@ -408,20 +420,17 @@ const notDue = requested.filter(s => SOURCES.includes(s) && !due(s))
 const modeNote = {
   eve: `an eve run, since the weekly limit resets tomorrow at ${Number.isFinite(weeklyResetMs) ? localTime(weeklyResetMs) : 'an unknown time'}: it keeps ${RESERVE.toFixed(1)} weekly points back for ${KEEP_WINDOWS} 5-hour windows tomorrow and stops starting work in time to leave the 5-hour window open at ${WORK_AT} untouched`,
   final: `a final run, since the weekly limit resets ${Number.isFinite(weeklyResetMs) ? `today at ${localTime(weeklyResetMs)}` : 'soon'}: it spends the week down to ${MARGIN} points free and stops starting work ${TASK_MINUTES + TAIL_MINUTES} minutes before the reset`,
-  night: 'a night run: it guards the weekly limits and lets the 5-hour limit fill, then waits for its reset',
+  night: 'a night run: it guards the weekly limits and stops just short of the 5-hour limit, since an agent that reaches it fails',
   day: 'a day run: it keeps the 5-hour limit under the margin too',
 }[MODE]
 log(`Run ${scout.runId}: ${scout.since} to ${scout.now} (${scout.sinceReason || 'default'}), Claude Code ${scout.installedVersion}, ${scout.sessions.length} transcripts${pending.length ? ` and ${pending.length} carried over` : ''}. This is ${modeNote}. Due: ${only.join(', ')}${notDue.length ? `. Not due yet: ${notDue.join(', ')}` : ''}`)
 if (only.includes('skills') && !scout.skillRepos.length) log(`No skill repositories listed in ${REPOS_FILE}, skipping that source`)
 
-let backlog = { open: [], closed: [], unchecked: [] }
-try {
-  const parsed = scout.backlogText ? JSON.parse(scout.backlogText) : null
-  if (parsed && Array.isArray(parsed.open) && Array.isArray(parsed.closed)) backlog = { ...parsed, unchecked: Array.isArray(parsed.unchecked) ? parsed.unchecked : [] }
-} catch (e) {
-  log(`${BACKLOG_FILE} is not valid JSON, starting with an empty backlog`)
-}
-const carriedUnchecked = backlog.unchecked.map(p => ({ ...p, id: p.key }))
+const backlogValid = Boolean(scout.backlog && scout.backlog.valid)
+const listOf = name => (backlogValid && Array.isArray(scout.backlog[name]) ? scout.backlog[name] : []).filter(i => i && i.title)
+const backlog = { open: listOf('open'), closed: listOf('closed'), unchecked: listOf('unchecked') }
+if (!backlogValid) log(`${BACKLOG_FILE} could not be read, so the run starts with an empty backlog and writes its own to ${BACKLOG_FILE}.new`)
+const carriedUnchecked = backlog.unchecked.filter(i => i.key).map(p => ({ ...p, id: p.key, fromBacklog: true }))
 
 const ledger = {}
 const showUsage = u => u.windows.map(w => `${w.label} ${w.percentUsed}%`).join(', ')
@@ -429,16 +438,15 @@ if (usage) log(`Usage at start: ${showUsage(usage)}. Estimating from ${pastRuns.
 else log('The usage card is not readable here, so the run goes without the usage guard')
 
 const sameWindow = (a, b) => a.label === b.label && Math.abs(Date.parse(a.resetsAt) - Date.parse(b.resetsAt)) < 5 * 60 * 1000
-// A run waits for a usage-limit reset at most twice; a third hit fails the agent that hits it.
+// An agent that reaches the 5-hour limit fails instead of waiting for its reset, so every mode guards it; only a day run keeps more of it free, for the user's own work.
+const FIVE_HOUR_MARGIN = DAY ? MARGIN : 1
 let fiveHourResets = 0
 let weeklyResetSeen = false
+let blockedBy = null
+let fiveBlockedReset = NaN
 
 function binds(w) {
-  if (/hour/i.test(w.label)) {
-    if (DAY || fiveHourResets >= 2) return true
-    // Waiting for a 5-hour reset that comes after the weekly reset gains a final run nothing.
-    return MODE === 'final' && Number.isFinite(weeklyResetMs) && Date.parse(w.resetsAt) > weeklyResetMs - 3600 * 1000
-  }
+  if (/hour/i.test(w.label)) return true
   const perModel = w.label.match(/^weekly[^a-z]+(.+)$/i)
   if (!perModel || /all models/i.test(perModel[1])) return true
   return scout.model.toLowerCase().includes(perModel[1].trim().split(/\s+/)[0].toLowerCase())
@@ -456,7 +464,9 @@ function estimate(kind, label) {
       delta += entry.delta
     }
   }
-  return units ? Math.max(delta, 1) / units : DEFAULT_COST[kind]
+  if (units) return Math.max(delta, 1) / units
+  // Writing and testing a proposal's script is about the work of checking it, which earlier runs did measure.
+  return kind === 'scripts' ? estimate('verify', label) : DEFAULT_COST[kind]
 }
 
 // Work of several kinds finishes between two readings, so each kind gets a share of the change in proportion to its estimated cost.
@@ -526,16 +536,21 @@ function fits(t) {
   reserve.verify = (reserve.verify || 0) + unmergedVerifyNeed(t.rank)
   // A gather keeps back the checks of what its own tier is expected to find, so reading never uses up the usage checking needs.
   if (t.kind === 'gather' && tierState[t.tier]) reserve.verify += Math.min(MAX_PROPOSALS, Math.max(MIN_VERIFY, PROPOSALS_PER_GATHER * (tierState[t.tier].started + 1)))
+  // Every proposal checked, and every one still open, needs its script written and tested at the end.
+  if (t.kind !== 'scripts') reserve.scripts = (reserve.scripts || 0) + reserve.verify + (t.kind === 'verify' ? 1 : 0) + stillOpen.length
   for (const w of usage.windows) {
     if (!binds(w)) continue
-    let room = 100 - MARGIN - w.percentUsed - (/hour/i.test(w.label) ? 0 : RESERVE)
+    let room = 100 - w.percentUsed - (/hour/i.test(w.label) ? FIVE_HOUR_MARGIN : MARGIN + RESERVE)
     for (const r in reserve) room -= reserve[r] * estimate(r, w.label)
     // Work that finished after the last reading has not reached the card yet, nor has work the reading in progress measures.
     let need = inFlight.concat([t]).reduce((sum, x) => sum + x.units * estimate(x.kind, w.label), 0)
     for (const k in doneUnits) need += doneUnits[k] * estimate(k, w.label)
     for (const k in readingUnits) need += readingUnits[k] * estimate(k, w.label)
     need += outsideRunning * estimate('merge', w.label)
-    if (SAFETY * need > room) return false
+    if (SAFETY * need > room) {
+      blockedBy = w
+      return false
+    }
   }
   return true
 }
@@ -574,7 +589,9 @@ function pump() {
         return
       }
       queue.shift()
-      drop(t, MODE === 'eve' ? 'no usage left above the margin and the reserve for tomorrow' : `no usage left above the ${MARGIN}-point margin`)
+      const byFive = Boolean(blockedBy && /hour/i.test(blockedBy.label))
+      if (byFive) fiveBlockedReset = Date.parse(blockedBy.resetsAt)
+      drop(t, byFive ? 'no room left under the 5-hour limit' : MODE === 'eve' ? 'no usage left above the margin and the reserve for tomorrow' : `no usage left above the ${MARGIN}-point weekly margin`)
       continue
     }
     queue.shift()
@@ -648,7 +665,7 @@ async function takeReading() {
     if (!prior || sameWindow(prior, w)) continue
     if (/hour/i.test(w.label)) {
       fiveHourResets++
-      log(`The 5-hour limit reset (${fiveHourResets} so far)${fiveHourResets >= 2 ? ', so the run guards it from now on' : ''}`)
+      log(`The 5-hour limit reset (${fiveHourResets} so far)`)
     } else if (binds(w)) {
       weeklyResetSeen = true
       log('The weekly limit reset, so the run starts no more work and reports')
@@ -950,10 +967,10 @@ let checks = { items: [] }
 let stillOpen = backlog.open
 let closedNow = []
 const backlogReady = (backlog.open.length
-  ? outside('merge', () => agent(`Check each open proposal of the user's dream backlog against their setup as it stands now. For each, read its target and decide: "applied" when the change is in place, whether by its script or otherwise, "obsolete" when the problem it addresses no longer exists or a later change made it moot, else "open". Say in note what you saw.
+  ? outside('merge', () => agent(`Check each open proposal of the user's dream backlog against their setup as it stands now. Read its whole entry from the backlog first, such as ${readItem('open', '<key>')}, then read its target and decide: "applied" when the change is in place, whether by its script or otherwise, "obsolete" when the problem it addresses no longer exists or a later change made it moot, else "open". Say in note what you saw.
 
 Open proposals, as JSON:
-${JSON.stringify(backlog.open.map(i => ({ key: i.key, title: i.title, proposal: i.proposal, target: i.target })))}
+${JSON.stringify(backlog.open.map(i => ({ key: i.key, title: i.title, target: i.target })))}
 ${GROUND}`, { label: 'backlog check', phase: 'Recent', schema: BACKLOG_CHECK }))
   : Promise.resolve(null)
 ).then(r => {
@@ -975,7 +992,7 @@ async function mergeFindings(findings, known, phaseName, label, prefix) {
 - Give each new proposal a short id that starts with ${prefix}, such as ${prefix}1 and ${prefix}2.
 
 Open backlog items, as JSON:
-${JSON.stringify(stillOpen.map(i => ({ key: i.key, title: i.title, proposal: i.proposal })))}
+${JSON.stringify(stillOpen.map(i => ({ key: i.key, title: i.title })))}
 
 Closed backlog items, as JSON:
 ${JSON.stringify(backlog.closed.concat(closedNow).map(i => ({ title: i.title, closedOn: i.closedOn, reason: i.reason })))}
@@ -989,11 +1006,14 @@ ${GROUND}`, { label, phase: phaseName, schema: MERGED }))
   return result || { proposals: [], updates: [], dropped: [] }
 }
 
+const proposalText = p => p.fromBacklog
+  ? `Proposal: the backlog entry ${p.key}, "${p.title}". Read its whole text first with ${readItem('unchecked', p.key)}`
+  : `Proposal, as JSON:\n${JSON.stringify(p)}`
+
 const verifyOne = (p, phaseName) => parallel([
   () => agent(`Check the evidence for this proposal from a dream run over the user's Claude Code setup. Open every reference it cites and decide whether the sources say what the proposal claims. Set holds to false when you cannot find the evidence or it says something else, and when unsure. Set recurring to true only when the problem shows up more than once or its single occurrence was costly.
 
-Proposal, as JSON:
-${JSON.stringify(p)}
+${proposalText(p)}
 ${GROUND}`, { label: `evidence ${p.id}`, phase: phaseName, schema: EVIDENCE_CHECK }),
   () => agent(`Decide whether this proposal from a dream run fits the user's Claude Code setup, and write the shell that applies it.
 Read ~/.claude/CLAUDE.md, ~/.claude/settings.json and, when the target is elsewhere, the target file.
@@ -1002,8 +1022,7 @@ Read ~/.claude/CLAUDE.md, ~/.claude/settings.json and, when the target is elsewh
 - For a kept or revised change to a file, write the script following the Permissions section of ~/.claude/CLAUDE.md: shell only, sed to insert at a named anchor (check with grep -c that the anchor occurs exactly once), jq for JSON, a cat heredoc for a new file. Do not run it. For a change to a mirrored file, end the script with the sync.sh run and the diff that the Public configuration repository section describes. The script never commits or pushes: the session that applies it writes the commit, with that session's own prompts. Leave script empty for a habit or for a skill the user should try first.
 - Write finalProposal in the style of the user's rules file when the target is that file.
 
-Proposal, as JSON:
-${JSON.stringify(p)}
+${proposalText(p)}
 ${GROUND}`, { label: `fit ${p.id}`, phase: phaseName, schema: FIT_CHECK }),
 ]).then(([evidence, fit]) => ({ ...p, evidenceCheck: evidence, fit }))
 
@@ -1212,13 +1231,11 @@ if (DEEP && deepSlices.length) log(deepBack ? `Weekend: the deeper pass read bac
 
 const holds = p => p.evidenceCheck && p.evidenceCheck.holds && p.fit && p.fit.verdict !== 'drop'
 const kept = verified.filter(holds)
-const rejected = verified.filter(p => !holds(p)).map(p => ({
-  title: p.title,
-  reason: !p.evidenceCheck ? 'the evidence check returned nothing'
-    : !p.evidenceCheck.holds ? `evidence did not hold: ${p.evidenceCheck.notes}`
-    : !p.fit ? 'the fit check returned nothing'
-    : `${p.fit.reason}${p.fit.alreadyCoveredBy ? ` (covered by ${p.fit.alreadyCoveredBy})` : ''}`,
-}))
+const rejectReason = p => !p.evidenceCheck ? 'the evidence check returned nothing'
+  : !p.evidenceCheck.holds ? `evidence did not hold: ${p.evidenceCheck.notes}`
+  : !p.fit ? 'the fit check returned nothing'
+  : `${p.fit.reason}${p.fit.alreadyCoveredBy ? ` (covered by ${p.fit.alreadyCoveredBy})` : ''}`
+const rejected = verified.filter(p => !holds(p)).map(p => ({ title: p.title, reason: rejectReason(p), fromBacklog: Boolean(p.fromBacklog) }))
 log(`${kept.length} new proposals kept, ${rejected.length} rejected in verification`)
 
 const prReport = reviewed.map(r => ({
@@ -1288,14 +1305,16 @@ const SCRIPTS_DIR = `${OUT}/${scout.runId}`
 const habits = kept.filter(p => p.kind === 'habit')
 const newItems = kept.filter(p => p.kind !== 'habit').map(p => ({
   key: p.key || `${scout.runId}-${p.id}`,
-  isNew: true,
+  isNew: !p.fromBacklog,
+  fromBacklog: Boolean(p.fromBacklog),
+  revised: p.fit.verdict === 'revise',
   kind: p.kind,
   title: p.title,
   impact: p.impact,
   problem: p.problem,
   proposal: p.fit.verdict === 'revise' ? p.fit.finalProposal : p.proposal,
   target: p.target,
-  evidence: p.evidence.slice(0, 5),
+  evidence: (p.evidence || []).slice(0, 5),
   fitNote: p.fit.reason,
   script: p.fit.script,
   firstSeen: p.firstSeen || scout.today,
@@ -1307,17 +1326,97 @@ const carried = stillOpen.map(i => {
 })
 const openItems = carried.concat(newItems)
 
-const plan = openItems.length ? await agent(`Put the open proposals of a dream run in the order the user should apply them, write each one's script to a file, and test the scripts in that order in a sandbox. The script files and the sandbox are what this step writes.
-1. Order: a proposal that another one depends on comes first, such as one whose edit a later script's anchor needs, or memory edits before a pass that consolidates that memory. Then higher impact before lower. Number them p1, p2 and so on in that order.
-2. Write each script to ${SCRIPTS_DIR}/<new id>.sh (expand ~, create the folder), with #!/usr/bin/env bash and a comment naming the run and the proposal's key on top, and make it executable. A new proposal's script is given in its script field. A carried one's script is in the file named in its scriptFile field: copy it from there. A last command that is git diff --no-index gets || true, since it always exits 1. Every git diff, log or show runs as git --no-pager, since the user runs the scripts in an interactive terminal, where a pager waits for a key.
-3. Build a sandbox in the scratchpad: a fresh directory used as HOME, holding copies of ~/.claude/CLAUDE.md, rules/, settings.json, hooks/, workflows/ and skills/, every ~/.claude/projects/*/memory folder under the same directory names, ~/src/dotclaude with its origin remote set to a path that does not exist and its commit-msg hook removed, each directory listed in ~/src/dotclaude/sync-mirrors.txt as a fresh git repository with the same files, and, for any other repository a script works in, a minimal git repository with only the files the script edits, on a branch other than the default.
-4. Run every script in order with env -i HOME=<sandbox> PATH="$PATH" TMPDIR=<sandbox>/tmp LANG=en_US.UTF-8 bash <file>, from its stand-in repository when it works in one, under a time limit of two minutes each. Never run a script outside the sandbox. Record whether it exited 0, whether it changed files, and for a failure the line that explains it: an anchor not found, a term the sync.sh scan refused, or anything else.
-5. A script that fails in the sandbox stays in its file with status "needs-regenerating" and the reason in note.${WEEKEND ? ' This is an eve or final run, so first regenerate a failing script: rewrite it against the files as they stand, keeping its proposal, and test it again in the sandbox with the scripts before it, and only when it still fails does it keep that status.' : ''} A proposal without a script gets status "no-script", and its command is the prompt the user gives a session to carry it out.
+const MERGE_JQ = `($p[0]) as $p
+| (.open // []) as $open | (.unchecked // []) as $unc | (.closed // []) as $closed
+| ($p.promote | map(.key)) as $pk | ($p.closeUnchecked | map(.key)) as $cuk | ($p.closeOpen | map(.key)) as $cok
+| {updated: $p.updated,
+   open: ([$open[] | select(.key | IN($cok[]) | not) | . as $i | (first($p.updates[] | select(.key == $i.key)) // null) as $u
+           | if $u then .evidence = (($u.evidence + (.evidence // []))[0:5]) | .lastSeen = $u.lastSeen else . end]
+          + [$unc[] | . as $i | (first($p.promote[] | select(.key == $i.key)) // null) as $m | select($m != null) | . + $m | del(.id)]
+          + $p.addOpen),
+   closed: ($closed + $p.closeOpen + $p.closeUnchecked + $p.addClosed),
+   unchecked: ([$unc[] | select(.key | IN(($pk + $cuk)[]) | not)] + $p.addUnchecked)}`
 
-Open proposals, as JSON:
-${JSON.stringify(openItems.map(i => ({ key: i.key, isNew: i.isNew, kind: i.kind, title: i.title, impact: i.impact, target: i.target, fitNote: i.fitNote, script: i.isNew ? i.script : undefined, scriptFile: i.isNew ? undefined : i.scriptFile })))}
-${GROUND}`, { label: 'scripts', phase: 'Report', schema: PLAN }) : { steps: [] }
-if (!plan) log('The scripts step returned nothing, so the report has no commands')
+// The backlog is merged on disk, so the run never has to hold or repeat the whole file, and an agent copies at most a dozen items.
+const backlogTarget = backlogValid ? BACKLOG_FILE : `${BACKLOG_FILE}.new`
+const PATCH_DIR = `${OUT}/${scout.runId}-patch`
+const PATCH_CHUNK = 12
+const fullItem = p => ({ key: p.key || `${scout.runId}-${p.id}`, kind: p.kind, title: p.title, impact: p.impact, problem: p.problem, proposal: p.proposal, target: p.target, evidence: (p.evidence || []).slice(0, 5), sources: p.sources || [], firstSeen: p.firstSeen || scout.today })
+const patch = {
+  updated: scout.now,
+  promote: newItems.filter(i => i.fromBacklog).map(i => ({ key: i.key, fitNote: i.fitNote, lastSeen: scout.today, ...(i.revised ? { proposal: i.proposal } : {}) })),
+  closeOpen: closedNow,
+  closeUnchecked: verified.filter(p => p.fromBacklog && (!holds(p) || p.kind === 'habit')).map(p => ({ key: p.key, title: p.title, closedOn: scout.today, reason: holds(p) ? 'shown as a habit in the report' : `rejected: ${rejectReason(p)}` })),
+  addClosed: rejected.filter(r => !r.fromBacklog).map(r => ({ key: `${scout.runId}-rejected`, title: r.title, closedOn: scout.today, reason: `rejected: ${r.reason}` })),
+  updates: merged.updates.map(u => ({ key: u.key, evidence: u.evidence || [], lastSeen: scout.today })),
+}
+const addOpen = newItems.filter(i => !i.fromBacklog).map(({ isNew, script, fromBacklog, revised, ...i }) => ({ ...i, scriptFile: '' }))
+const addUnchecked = unchecked.filter(p => !p.fromBacklog).slice(0, MAX_UNCHECKED).map(fullItem)
+if (unchecked.length > MAX_UNCHECKED) log(`Carrying ${MAX_UNCHECKED} of ${unchecked.length} unchecked proposals over, the rest are dropped`)
+const patchParts = []
+for (const [name, list] of [['add-open', addOpen], ['add-unchecked', addUnchecked]]) {
+  for (let i = 0; i < list.length; i += PATCH_CHUNK) patchParts.push({ file: `${PATCH_DIR}/${name}-${patchParts.length + 1}.jsonl`, items: list.slice(i, i + PATCH_CHUNK) })
+}
+const HEREDOC = 'with a quoted heredoc, so the shell changes nothing in it'
+const startedPatch = await agent(`Expand ~, then empty and create the folder ${PATCH_DIR}, create the empty files add-open-0.jsonl and add-unchecked-0.jsonl in it, and write two more files into it ${HEREDOC}:
+cat > ${PATCH_DIR}/patch.json <<'EOF'
+${JSON.stringify(patch)}
+EOF
+cat > ${PATCH_DIR}/merge.jq <<'EOF'
+${MERGE_JQ}
+EOF
+Check patch.json with jq empty and return ok true when it parses.`, { label: 'backlog patch', phase: 'Report', model: 'haiku', effort: 'low', schema: OK })
+const partsWritten = await parallel(patchParts.map(part => () => agent(`Write ${part.file} (expand ~) ${HEREDOC}, one JSON object per line, exactly as given:
+cat > ${part.file} <<'EOF'
+${part.items.map(i => JSON.stringify(i)).join('\n')}
+EOF
+Check that jq -c . ${part.file} prints ${part.items.length} lines, and return ok true when it does.`, { label: `backlog items ${part.file.split('/').pop()}`, phase: 'Report', model: 'haiku', effort: 'low', schema: OK })))
+const patchReady = Boolean(startedPatch && startedPatch.ok) && partsWritten.every(r => r && r.ok)
+const savedBacklog = patchReady ? await agent(`Merge a dream run's changes into its backlog with jq. Expand ~ in every path.
+1. Build the full patch: jq --slurpfile o <(cat ${PATCH_DIR}/add-open-*.jsonl 2>/dev/null | jq -s .) --slurpfile u <(cat ${PATCH_DIR}/add-unchecked-*.jsonl 2>/dev/null | jq -s .) '. + {addOpen: $o[0], addUnchecked: $u[0]}' ${PATCH_DIR}/patch.json > ${PATCH_DIR}/full.json
+2. ${backlogValid ? `Merge it: jq --slurpfile p ${PATCH_DIR}/full.json -f ${PATCH_DIR}/merge.jq ${BACKLOG_FILE} > ${backlogTarget}.tmp when ${BACKLOG_FILE} exists, else echo '{}' | jq --slurpfile p ${PATCH_DIR}/full.json -f ${PATCH_DIR}/merge.jq > ${backlogTarget}.tmp.` : `${BACKLOG_FILE} could not be read, so leave it alone: echo '{}' | jq --slurpfile p ${PATCH_DIR}/full.json -f ${PATCH_DIR}/merge.jq > ${backlogTarget}.tmp.`}
+3. Check ${backlogTarget}.tmp with jq empty, move it to ${backlogTarget}, and print the counts with jq '{open: (.open | length), closed: (.closed | length), unchecked: (.unchecked | length)}' ${backlogTarget}. Return ok true when the moved file parses.`, { label: 'write backlog', phase: 'Report', model: 'haiku', effort: 'low', schema: OK }) : null
+if (!(savedBacklog && savedBacklog.ok)) log(`Could not write ${backlogTarget}, the patch stays in ${PATCH_DIR}`)
+
+const IMPACT_ORDER = { high: 0, medium: 1, low: 2 }
+const ordered = openItems
+  .map((item, index) => ({ item, index }))
+  .sort((a, b) => (IMPACT_ORDER[a.item.impact] ?? 3) - (IMPACT_ORDER[b.item.impact] ?? 3) || a.index - b.index)
+  .map(({ item }, n) => ({ ...item, pid: `p${n + 1}` }))
+const PLAN_CHUNK = 8
+const steps = []
+for (let c = 0; c < ordered.length; c += PLAN_CHUNK) {
+  const chunk = ordered.slice(c, c + PLAN_CHUNK)
+  const earlier = steps.filter(s => s.status === 'runs' && s.file).map(s => s.file)
+  const label = `scripts ${c / PLAN_CHUNK + 1}/${Math.ceil(ordered.length / PLAN_CHUNK)}`
+  const result = await submit({
+    rank: 0,
+    tier: 0,
+    kind: 'scripts',
+    units: chunk.length,
+    label,
+    source: 'scripts',
+    reserve: { report: 1 },
+    run: () => agent(`Write and test the scripts of these proposals of a dream run, with the ids given, in that order. The script files and the sandbox are what this step writes.
+1. Write each script to ${SCRIPTS_DIR}/<id>.sh (expand ~, create the folder), with #!/usr/bin/env bash and a comment naming the run and the proposal's key on top, and make it executable. A proposal's script is given in its script field, or for one carried from an earlier run it is in the file named in its scriptFile field: copy it from there. A last command that is git diff --no-index gets || true, since it always exits 1. Every git diff, log or show runs as git --no-pager, since the user runs the scripts in an interactive terminal, where a pager waits for a key.
+2. Build a sandbox in the scratchpad: a fresh directory used as HOME, holding copies of ~/.claude/CLAUDE.md, rules/, settings.json, hooks/, workflows/ and skills/, every ~/.claude/projects/*/memory folder under the same directory names, ~/src/dotclaude with its origin remote set to a path that does not exist and its commit-msg hook removed, each directory listed in ~/src/dotclaude/sync-mirrors.txt as a fresh git repository with the same files, and, for any other repository a script works in, a minimal git repository with only the files the script edits, on a branch other than the default.
+3. ${earlier.length ? `Run the scripts of the earlier steps first, in this order, so the sandbox holds what they change: ${earlier.join(', ')}. Then run` : 'Run'} every script of these proposals in order with env -i HOME=<sandbox> PATH="$PATH" TMPDIR=<sandbox>/tmp LANG=en_US.UTF-8 bash <file>, from its stand-in repository when it works in one, under a time limit of two minutes each. Never run a script outside the sandbox. Record whether it exited 0, whether it changed files, and for a failure the line that explains it: an anchor not found, a term the sync.sh scan refused, or anything else.
+4. A script that fails in the sandbox stays in its file with status "needs-regenerating" and the reason in note.${WEEKEND ? ' This is an eve or final run, so first regenerate a failing script: rewrite it against the files as they stand, keeping its proposal, and test it again in the sandbox with the scripts before it, and only when it still fails does it keep that status.' : ''} A proposal without a script gets status "no-script", and its command is the prompt the user gives a session to carry it out.
+Return one step per proposal below, with its id, and no others.
+
+Proposals, as JSON:
+${JSON.stringify(chunk.map(i => ({ id: i.pid, key: i.key, kind: i.kind, title: i.title, impact: i.impact, target: i.target, fitNote: i.fitNote, script: i.script || undefined, scriptFile: i.script ? undefined : i.scriptFile })))}
+${GROUND}`, { label, phase: 'Report', schema: PLAN }),
+  })
+  const byId = {}
+  for (const s of result && !result.skipped && Array.isArray(result.steps) ? result.steps : []) byId[s.id] = s
+  for (const i of chunk) {
+    steps.push(byId[i.pid]
+      ? { ...byId[i.pid], key: i.key }
+      : { id: i.pid, key: i.key, status: 'needs-regenerating', command: '', file: '', note: result && result.skipped ? `no usage left to write and test its script (${result.reason})` : 'the scripts step returned nothing for it' })
+  }
+}
+if (!steps.length && openItems.length) log('No scripts were written, so the report has no commands')
 
 const report = await agent(`Write the report of a dream run for the user as Markdown to ${OUT}/${scout.runId}.md (expand ~, create the directory). This is the one file this step writes. The proposals' scripts are already in ${SCRIPTS_DIR}/.
 
@@ -1347,11 +1446,11 @@ ${briefDone ? briefResult.brief : 'none'}
 Pull request reviews, as JSON:
 ${JSON.stringify(prReport)}
 
-Open proposals, as JSON:
-${JSON.stringify(openItems.map(i => ({ key: i.key, isNew: i.isNew, kind: i.kind, title: i.title, impact: i.impact, problem: i.problem, proposal: i.proposal, target: i.target, evidence: i.evidence, firstSeen: i.firstSeen })))}
+Open proposals, as JSON. For one marked readFromBacklog, read its problem, proposal and evidence first with jq '.open[] | select(.key == "<key>")' ${backlogTarget}, or under .unchecked when it is not under .open:
+${JSON.stringify(ordered.map(i => i.isNew ? { id: i.pid, key: i.key, isNew: true, kind: i.kind, title: i.title, impact: i.impact, problem: i.problem, proposal: i.proposal, target: i.target, evidence: i.evidence, firstSeen: i.firstSeen } : { id: i.pid, key: i.key, isNew: false, kind: i.kind, title: i.title, impact: i.impact, target: i.target, firstSeen: i.firstSeen, readFromBacklog: true }))}
 
 The plan, as JSON:
-${JSON.stringify(plan ? plan.steps : [])}
+${JSON.stringify(steps)}
 
 Closed since the last run, as JSON:
 ${JSON.stringify(closedNow)}
@@ -1382,26 +1481,6 @@ ${GROUND}`, { label: 'report', phase: 'Report', schema: REPORT })
 doneUnits.report = (doneUnits.report || 0) + 1
 if (usage) await takeReading()
 
-const fileOf = key => {
-  const step = plan && plan.steps.find(s => s.key === key)
-  return step && step.file ? step.file : ''
-}
-const nextBacklog = {
-  updated: scout.now,
-  open: openItems.map(({ isNew, script, ...i }) => ({ ...i, scriptFile: fileOf(i.key) || i.scriptFile || '' })),
-  closed: backlog.closed.concat(closedNow).concat(rejected.map(r => ({ key: `${scout.runId}-rejected`, title: r.title, closedOn: scout.today, reason: `rejected: ${r.reason}` }))),
-  unchecked: unchecked.slice(0, MAX_UNCHECKED).map(p => {
-    const key = p.key || `${scout.runId}-${p.id}`
-    return { key, id: key, kind: p.kind, title: p.title, problem: p.problem, proposal: p.proposal, target: p.target, evidence: (p.evidence || []).slice(0, 5), impact: p.impact, sources: p.sources || [], firstSeen: p.firstSeen || scout.today }
-  }),
-}
-if (unchecked.length > MAX_UNCHECKED) log(`Carrying ${MAX_UNCHECKED} of ${unchecked.length} unchecked proposals over, the rest are dropped`)
-const savedBacklog = await agent(`Write ${BACKLOG_FILE} (expand ~, create the directory if it is missing), replacing what is there, with a quoted heredoc so the shell changes nothing in it:
-cat > ${BACKLOG_FILE} <<'EOF'
-${JSON.stringify(nextBacklog, null, 2)}
-EOF
-Then check with jq empty that the file parses, and return ok true when it does.`, { label: 'write backlog', phase: 'Report', model: 'haiku', effort: 'low', schema: OK })
-if (!(savedBacklog && savedBacklog.ok)) log(`Could not write ${BACKLOG_FILE}`)
 
 const ranSources = Object.keys(sourceDone).filter(s => sourceDone[s])
 const entry = {
@@ -1437,6 +1516,8 @@ const weekLine = endWeekly ? {
   windows: usage.windows.map(w => ({ label: w.label, percentUsed: w.percentUsed })),
   dreamSpent: weeklyCard && sameWindow(weeklyCard, endWeekly) ? endWeekly.percentUsed - weeklyCard.percentUsed : null,
 } : null
+const scriptFiles = {}
+for (const s of steps) if (s.key && s.file) scriptFiles[s.key] = s.file
 const saved = await agent(`Append one line to ${HISTORY_FILE}${weekLine ? ` and one line to ${WEEKS_FILE}` : ''}. Expand ~, create the directory if it is missing, and write each line with a quoted heredoc so the shell changes nothing in it:
 cat >> ${HISTORY_FILE} <<'EOF'
 ${JSON.stringify(entry)}
@@ -1444,17 +1525,20 @@ EOF
 ${weekLine ? `cat >> ${WEEKS_FILE} <<'EOF'
 ${JSON.stringify(weekLine)}
 EOF
-` : ''}Then check with tail -n 1 that each file ends with exactly its line, and return ok true when it does.`, { label: 'record run', phase: 'Report', model: 'haiku', effort: 'low', schema: OK })
+` : ''}Then check with tail -n 1 that each file ends with exactly its line.${Object.keys(scriptFiles).length && savedBacklog && savedBacklog.ok ? ` Then record where each open proposal's script is: jq --argjson s '${JSON.stringify(scriptFiles)}' '.open |= map(if $s[.key] then .scriptFile = $s[.key] else . end)' ${backlogTarget} > ${backlogTarget}.tmp, check that with jq empty and move it over ${backlogTarget}.` : ''} Return ok true when all of it worked.`, { label: 'record run', phase: 'Report', model: 'haiku', effort: 'low', schema: OK })
 const recorded = Boolean(saved && saved.ok)
 if (!recorded) log(`Could not record this run in ${HISTORY_FILE}`)
 
 const weeklyTarget = Math.round(100 - MARGIN - RESERVE)
 const skipReasons = {}
 for (const s of skippedWork) skipReasons[s.reason] = (skipReasons[s.reason] || 0) + 1
+const weeklyLeft = endWeekly ? weeklyTarget - endWeekly.percentUsed : 0
+const againAfter = Number.isFinite(fiveBlockedReset) && weeklyLeft > 3 && (!Number.isFinite(weeklyResetMs) || fiveBlockedReset < weeklyResetMs - (TASK_MINUTES + TAIL_MINUTES) * 60000)
+  ? ` The 5-hour limit stopped the run with ${weeklyLeft} weekly points left, so another /dream after ${localTime(fiveBlockedReset)} local time can spend them.`
+  : ''
 const stoppedBy = skippedWork.length
-  ? Object.entries(skipReasons).map(([r, n]) => `${n} pieces of work skipped as ${r}`).join('; ')
+  ? Object.entries(skipReasons).map(([r, n]) => `${n} pieces of work skipped as ${r}`).join('; ') + againAfter
   : 'it ran out of work, with everything due done'
-const steps = plan ? plan.steps : []
 const nextSteps = steps.length
   ? `${steps.some(s => s.status === 'runs') ? 'the commands of the steps with status runs, in plan order, in one fenced bash block joined with && so a failure stops the rest, then ' : ''}${steps.some(s => s.status !== 'runs') ? `the prompt of each other step in a text block, "regenerate <id> from the dream report ${scout.runId}" for one that needs regenerating, then ` : ''}last, in a text block, the prompt "commit and push what the scripts of dream report ${scout.runId} changed"`
   : 'none, so say there is nothing to apply'
@@ -1466,7 +1550,7 @@ return {
   verification: { weeklyTarget, stoppedBy, start: startUsage ? startUsage.windows : null, end: usage ? usage.windows : null },
   todo: steps.map(s => ({ id: s.id, status: s.status, command: s.command })),
   mode: `${MODE}: ${modeNote}`,
-  plan: plan ? plan.steps.map(s => `${s.id} (${s.key}) ${s.status}`) : null,
+  plan: steps.map(s => `${s.id} (${s.key}) ${s.status}`),
   summary: report ? report.summary : 'The report agent returned nothing. The open proposals are below.',
   window: `${scout.since} to ${scout.now}`,
   sources: { ran: ranSources, notDue },

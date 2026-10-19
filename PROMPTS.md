@@ -5,9 +5,24 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
+## Keep a dream run's results when its last steps run out of usage
+
+2026-10-19, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**11.**
+> dream
+
+**12.**
+> its now monday and im looking at the session limit message. any stats
+> what happened? i should be seeing the report now. at least my weekly
+> usage is 0% now so thats good
+> [pasted: a screenshot of the app's session limit message]
+> > How should I recover Saturday's dream results?
+> > Fix, then resume (Recommended)
+
 ## Read the prompts heading that names the model in PROMPTS.md
 
-2026-10-17, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [4feb84f](https://github.com/lambdakilo/dotclaude/commit/4feb84fb181efea2f8dfa44320b4031c334e54a7), model claude-opus-5-5, effort xhigh.
 
 **3.** Quoted under [ff9d05b](https://github.com/lambdakilo/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027).
 

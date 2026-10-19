@@ -90,9 +90,11 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   it spends the week but keeps back what two 5-hour windows cost, one for work and one for a last
   run, and stops in time to leave the 5-hour window open at 08:00 on the reset day untouched. On
   the reset day it spends the week down to one point and stops starting work before the reset,
-  so its agents finish first. On other days it guards only the weekly limits, letting the 5-hour
-  limit fill and waiting for its reset. `mode`, `workAt`, `keep` and `margin` change those
-  choices, and `day` keeps the 5-hour limit under the margin while the user works.
+  so its agents finish first. Every run stops just short of the 5-hour limit, since an agent that
+  reaches it fails instead of waiting for the reset, and says when another run could spend what
+  the week has left. The backlog is merged on disk with jq, and the scripts are written and tested
+  a few proposals at a time, within the same usage guard. `mode`, `workAt`, `keep` and `margin`
+  change those choices, and `day` keeps the margin free on the 5-hour limit while the user works.
 - [`sync.sh`](sync.sh): pulls this checkout, copies each mirrored file whichever way it changed,
   a JSON file in the key order it has here, stops on a file changed on both sides, scans
   everything for private names, paths, addresses and credentials before anything gets committed,
