@@ -353,6 +353,16 @@ apply to one repository belong in that repository's project memory.
   rule prompts for edits under `.github/workflows/`. When a change removes a check, such as a
   strict build, say so in the reply and offer a replacement as a choice instead of adding one.
 
+## Documents read aloud
+
+- Text pulled from a PDF or another document for text-to-speech keeps every heading marked as
+  a heading through the cleanup, section and subsection headings included, never as a plain
+  paragraph. The speech step reads each heading on its own, with about two seconds of silence
+  before it where a paragraph break gets under one, and about one second after it; a chapter
+  title gets a longer pause still. Before generating audio, list the headings the cleanup found
+  beside the table of contents and the heading-styled lines of the source, such as all-caps or
+  bold lines, and account for each one.
+
 ## Permissions
 
 - Auto mode blocks a session from editing its own permissions, so when the auto mode

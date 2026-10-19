@@ -5,9 +5,27 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Apply the dream's high-impact proposals and ask about each step
+## Give document headings a clear pause in text-to-speech
 
 2026-10-19, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask to turn a book into audio left out]
+
+**2.**
+> [an ask to narrow it to two chapters left out]
+
+**3.**
+> dotclaude next time when you textify the pdf take more care to make
+> sound breaks on sub chapters like "[a section heading]" was in the
+> [a book]
+
+**4.**
+> go, add the rule and push it to dotclaude
+
+## Apply the dream's high-impact proposals and ask about each step
+
+2026-10-19, commit [656a92e](https://github.com/lambdakilo/dotclaude/commit/656a92ee75437d2c8161af0b3f81a640aaf7d838), model claude-opus-5-5, effort xhigh.
 
 **12.**
 > its now monday and im looking at the session limit message. any stats
@@ -1443,6 +1461,7 @@ so a change by hand is lost at the next commit.
 - ofc: of course
 - p18: proposal 18 of the weekly review of 2026-10-14
 - p9: proposal 9 of the weekly review of 2026-10-14
+- pdf: Portable Document Format
 - perms: permissions
 - PR: pull request
 - prs: pull requests
