@@ -70,7 +70,7 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   or this workflow could use, Anthropic news, what Claude Code now does by itself that the setup
   duplicates, and the skill repositories listed in `~/.claude/dream/skill-repos.txt`, which
   stays local; then an audit of each repository worked in against its `CLAUDE.md` and project
-  memory, a review of the user's open pull requests in repositories checked out under `~/src`
+  memory, a review of the user's open pull requests in repositories checked out under `~/Projects`
   or updated in the last two weeks, and a brief for Monday; and last subagent transcripts and
   older transcripts a week at a time. Transcripts and configuration run every time, reviews once
   a day and the rest once a week. Two more agents check each new proposal, one that its evidence

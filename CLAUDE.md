@@ -302,7 +302,7 @@ apply to one repository belong in that repository's project memory.
   one command to the next.
 - A command given to the user works when pasted into a new terminal, which starts in `~`. Every
   file it names has its full `~` path, and a command that runs inside a checkout uses the tool's
-  directory flag or a subshell, such as `(cd ~/src/<repo> && make test)`, also when it is
+  directory flag or a subshell, such as `(cd ~/Projects/<repo> && make test)`, also when it is
   quoted from a README whose paths are relative to the checkout. A file such a command reads or
   writes that belongs to no checkout goes in `~/Downloads` unless the user names a folder.
 - Never run environment or deployment tooling against a remote environment. Confirm before
@@ -371,7 +371,7 @@ apply to one repository belong in that repository's project memory.
 ## Public configuration repository
 
 - The parts of `~/.claude` that help other people learn this workflow are mirrored in a public
-  git repository. Its checkout lives at `~/src/dotclaude`. Mirrored today: this file,
+  git repository. Its checkout lives at `~/Projects/dotclaude`. Mirrored today: this file,
   `settings.json`, `hooks/`, `workflows/` and the `pull-requests` skill. The checkout also holds
   its own `README.md`, licence texts and `sync.sh`.
 - The mirrored copy keeps the name `CLAUDE.md`. A session started inside the checkout would load
@@ -407,7 +407,7 @@ apply to one repository belong in that repository's project memory.
   and redacted for every copy. Which directories those are and what each is for lives in the
   dotclaude checkout's project memory, never in this file or in a tracked file, so the public
   repository shows the mechanism and nothing it points at.
-- New machine: clone the repository to `~/src/dotclaude`, run `./sync.sh --install` to copy the
+- New machine: clone the repository to `~/Projects/dotclaude`, run `./sync.sh --install` to copy the
   mirrored files into `~/.claude` (existing files that differ are kept as `.bak`), and set the
   repository-local git identity to match the existing history, from
   `git log -1 --format='%an <%ae>'`, before the first commit. Restart Claude Code so the hook
@@ -429,8 +429,9 @@ apply to one repository belong in that repository's project memory.
 ## Memory hygiene
 
 - Memory is per start directory. When a rule should hold everywhere, put it in this file, not in
-  memory. When starting in a parent folder like `~/src`, also read the memory of the project you
-  end up working in under `~/.claude/projects/-Users-<user>-src-<project>/memory/MEMORY.md`.
+  memory. When starting in a parent folder like `~/Projects`, also read the memory of the project
+  you end up working in, under
+  `~/.claude/projects/-Users-<user>-Projects-<project>/memory/MEMORY.md`.
 - Only `MEMORY.md` loads when a session starts, the notes it links to do not. Before a reply
   calls a task blocked or hands a step of it to the user, grep the project's memory directory
   for the task's words, such as upload, login or screenshot, and try each recipe it finds. A

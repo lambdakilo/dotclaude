@@ -5,9 +5,21 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep a dream run's results when its last steps run out of usage
+## Move the checkouts from ~/src to ~/Projects
 
 2026-10-19, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**14.**
+> [an ask about a downstream project left out]
+
+**15.**
+> isnt this already in dotclaude? always give terminal commands so that
+> i can run them from home dir instead. rename my src to Projects as
+> per the new XDG upcoming standard
+
+## Keep a dream run's results when its last steps run out of usage
+
+2026-10-19, commit [5df2771](https://github.com/lambdakilo/dotclaude/commit/5df27717a4add62c1287b9aff059dae0c4f4d0cf), model claude-opus-5-5, effort xhigh.
 
 **11.**
 > dream
@@ -1390,6 +1402,7 @@ so a change by hand is lost at the next commit.
 - ccbysa4.0: Creative Commons Attribution-ShareAlike 4.0 International
 - cd: change directory, the shell command
 - cs: computer science
+- dir: directory
 - e.g.: for example
 - e2e: end to end
 - etc: et cetera
@@ -1423,3 +1436,4 @@ so a change by hand is lost at the next commit.
 - ui: user interface
 - url: uniform resource locator
 - vpn: virtual private network
+- XDG: X Desktop Group, now freedesktop.org

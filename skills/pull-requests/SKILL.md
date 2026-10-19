@@ -22,7 +22,7 @@ redacted in public and upstream repositories.
 - First block: a fenced code block holding the URL of the public configuration repository
   described under Public configuration repository in `~/.claude/CLAUDE.md`, so teammates can
   read and copy the rules at their source. Take the URL at runtime from the checkout's `origin`
-  remote, with `git -C ~/src/dotclaude remote get-url origin`, rewritten from the SSH form to
+  remote, with `git -C ~/Projects/dotclaude remote get-url origin`, rewritten from the SSH form to
   https and without the `.git` suffix, never from memory. A code block and not a Markdown link:
   a link's visible text can differ from where it goes, while a URL the reader pastes is one
   they see in the address bar before they go.
