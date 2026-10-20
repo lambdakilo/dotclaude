@@ -5,9 +5,19 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Show the draft in the question that asks to confirm it
+## Run the dream workflow's agents as dream-worker, with only their tools
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> give an example of p12 then ask again from me
+>
+> > p12 (high): run the dream workflow's agents as a custom agent type
+> > that carries only the tools they use. Add it? Add it (Recommended)
+
+## Show the draft in the question that asks to confirm it
+
+2026-10-20, commit [992d9b7](https://github.com/lambdakilo/dotclaude/commit/992d9b7d0667c88e6f1f8399b12be89d1327f3a4), model claude-opus-5-5, effort xhigh.
 
 **12.**
 > you didnt tell me the issue names. fix in the future and now

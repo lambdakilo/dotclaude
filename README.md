@@ -154,6 +154,9 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   ```sh
   (cd ~/Projects/dotclaude && node test/dream-sim/checks.mjs)
   ```
+- [`agents/dream-worker.md`](agents/dream-worker.md): the agent type every agent of `/dream`
+  runs as. Its tools line names only the tools those agents use, so they start without the
+  browser, simulator and artifact tools of the desktop app, about half of each first request.
 - [`sync.sh`](sync.sh): pulls this checkout, copies each mirrored file whichever way it changed,
   a JSON file in the key order it has here, stops on a file changed on both sides, scans
   everything for private names, paths, addresses and credentials before anything gets committed,

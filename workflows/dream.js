@@ -328,6 +328,9 @@ const USAGE = {
 
 const OK = { type: 'object', required: ['ok'], properties: { ok: { type: 'boolean' } } }
 
+// Agents read each other's prompt cache only when type and tools match, so all run as dream-worker.
+const dreamAgent = (prompt, opts = {}) => agent(prompt, { agentType: 'dream-worker', ...opts })
+
 const READ_USAGE = `Run date -u +%Y-%m-%dT%H:%M:%SZ and return it as now. Then load the tool mcp__ccd_session_mgmt__get_usage with ToolSearch and call it with no arguments. Return available true and its plan windows exactly as reported: label, percentUsed and resetsAt. Return available false with no windows when the tool cannot be found or its plan status is not "ok".`
 
 const LIST_FILES = 'Return each with its absolute path, its project directory name, its size in bytes and its modification time as an ISO time in UTC.'
@@ -354,7 +357,7 @@ const REVIEW_SETUP = {
 // A review skips the run and asks about the open backlog, for when a dialogue stopped early or a report came without one.
 if (opts.review === true || /^\s*review\s*$/i.test(runNote)) {
   phase('Scout')
-  const r = await agent(`Get ready to go through the open proposals of the user's dream backlog.
+  const r = await dreamAgent(`Get ready to go through the open proposals of the user's dream backlog.
 1. Run date +%F and return it as today.
 2. Run ${BACKLOG_INDEX} and return its output as backlog, parsed, every field as jq prints it, never shortened or summarised. When the file does not exist, return valid true and empty lists; when jq fails on it, return valid false and empty lists.
 3. Return as report the path of the newest file in ${OUT} named YYYY-MM-DD.md or YYYY-MM-DD-N.md, or an empty string when there is none.
@@ -377,7 +380,7 @@ ${GROUND}`, { label: 'review setup', phase: 'Scout', model: 'haiku', effort: 'lo
 }
 
 phase('Scout')
-const scout = await agent(`Set up a dream run, a review of this user's Claude Code use since the last run.
+const scout = await dreamAgent(`Set up a dream run, a review of this user's Claude Code use since the last run.
 1. Run date -u +%Y-%m-%dT%H:%M:%SZ for now, date +%F for today and date +%z for utcOffset.
 2. List the files in ${OUT} named YYYY-MM-DD.md or YYYY-MM-DD-N.md (expand ~, the directory may not exist yet). Return their paths, newest first, as previousReports. Return as runId today's date when no report of today exists, else today's date with the next free -N, such as ${'<today>'}-2.
 3. since is ${opts.since ? `"${opts.since}", given by the user` : `the time field of the last line of ${HISTORY_FILE} that has one, else that line's date at 00:00 UTC, else now minus 7 days`}, as an ISO time in UTC.${runNote ? ` The user started the run with this note, which may name a different window: "${runNote}".` : ''} Say in sinceReason how you chose it. lookbackFrom is since minus ${LOOKBACK_DAYS} days, as an ISO time.
@@ -694,7 +697,7 @@ async function takeReading() {
   for (const k in doneUnits) delete doneUnits[k]
   readingUnits = units
   completionsSinceRead = 0
-  const after = await agent(READ_USAGE, { label: `usage ${++reads}`, phase: 'Usage', model: 'haiku', effort: 'low', schema: USAGE })
+  const after = await dreamAgent(READ_USAGE, { label: `usage ${++reads}`, phase: 'Usage', model: 'haiku', effort: 'low', schema: USAGE })
   readingUnits = {}
   if (!readable(after)) {
     if (usage) log('Lost the usage card, continuing without the usage guard')
@@ -1010,7 +1013,7 @@ let checks = { items: [] }
 let stillOpen = backlog.open
 let closedNow = []
 const backlogReady = (backlog.open.length
-  ? outside('merge', () => agent(`Check each open proposal of the user's dream backlog against their setup as it stands now. Read its whole entry from the backlog first, such as ${readItem('open', '<key>')}, then read its target and decide: "applied" when the change is in place, whether by its script or otherwise, "obsolete" when the problem it addresses no longer exists or a later change made it moot, else "open". Say in note what you saw.
+  ? outside('merge', () => dreamAgent(`Check each open proposal of the user's dream backlog against their setup as it stands now. Read its whole entry from the backlog first, such as ${readItem('open', '<key>')}, then read its target and decide: "applied" when the change is in place, whether by its script or otherwise, "obsolete" when the problem it addresses no longer exists or a later change made it moot, else "open". Say in note what you saw.
 
 Open proposals, as JSON:
 ${JSON.stringify(backlog.open.map(i => ({ key: i.key, title: i.title, target: i.target })))}
@@ -1026,7 +1029,7 @@ ${GROUND}`, { label: 'backlog check', phase: 'Recent', schema: BACKLOG_CHECK }))
 
 async function mergeFindings(findings, known, phaseName, label, prefix) {
   if (!findings.length) return { proposals: [], updates: [], dropped: [] }
-  const result = await outside('merge', () => agent(`Merge the findings of a dream run over this user's Claude Code setup into one ranked list of new proposals.
+  const result = await outside('merge', () => dreamAgent(`Merge the findings of a dream run over this user's Claude Code setup into one ranked list of new proposals.
 - Merge findings that propose the same change, keeping all their evidence and listing every source.
 - A finding that matches an open backlog item becomes an update of that item: its key and the new evidence. It is not a new proposal.
 - A finding that matches a closed backlog item is dropped with the item's closing reason, unless its evidence shows the problem recurring after the item was closed as applied. Then it is a new proposal that says so.
@@ -1054,11 +1057,11 @@ const proposalText = p => p.fromBacklog
   : `Proposal, as JSON:\n${JSON.stringify(p)}`
 
 const verifyOne = (p, phaseName) => parallel([
-  () => agent(`Check the evidence for this proposal from a dream run over the user's Claude Code setup. Open every reference it cites and decide whether the sources say what the proposal claims. Set holds to false when you cannot find the evidence or it says something else, and when unsure. Set recurring to true only when the problem shows up more than once or its single occurrence was costly.
+  () => dreamAgent(`Check the evidence for this proposal from a dream run over the user's Claude Code setup. Open every reference it cites and decide whether the sources say what the proposal claims. Set holds to false when you cannot find the evidence or it says something else, and when unsure. Set recurring to true only when the problem shows up more than once or its single occurrence was costly.
 
 ${proposalText(p)}
 ${GROUND}`, { label: `evidence ${p.id}`, phase: phaseName, schema: EVIDENCE_CHECK }),
-  () => agent(`Decide whether this proposal from a dream run fits the user's Claude Code setup, and write the shell that applies it.
+  () => dreamAgent(`Decide whether this proposal from a dream run fits the user's Claude Code setup, and write the shell that applies it.
 Read ~/.claude/CLAUDE.md, ~/.claude/settings.json and, when the target is elsewhere, the target file.
 - Drop it when an existing rule or setting already covers it (name it in alreadyCoveredBy), when it contradicts a rule the user chose deliberately, or when it adds always-loaded text without enough benefit.
 - Revise it when a hook, permission rule or setting would enforce it better than prose, or when it can be shorter.
@@ -1090,7 +1093,7 @@ function gatherTier(n, list) {
     label: t.label,
     source: t.source,
     reserve: { merge: 1, report: 1 },
-    run: () => agent(t.prompt, { label: t.label, phase: TIER_PHASE[n], schema: FINDINGS }),
+    run: () => dreamAgent(t.prompt, { label: t.label, phase: TIER_PHASE[n], schema: FINDINGS }),
   }).then(result => ({ task: t, result }))))
 }
 
@@ -1137,7 +1140,7 @@ function verifyTier(n, proposals) {
 }
 
 const olderListed = (DEEP || only.includes('subagents'))
-  ? outside('merge', () => agent(`List two sets of Claude Code transcripts.
+  ? outside('merge', () => dreamAgent(`List two sets of Claude Code transcripts.
 1. older: ${DEEP ? `the main session transcripts whose lastActivity is after ${new Date(deepFrom).toISOString()} and not after ${new Date(deepEnd).toISOString()}: files matching ~/.claude/projects/*/*.jsonl at depth one only, modified after the first of those times. ${LAST_ACTIVITY}` : 'return an empty list.'}
 2. subagents: ${only.includes('subagents') ? `the subagent transcripts ${subagentsFrom ? `modified after ${subagentsFrom}` : 'of every age'}: files named agent-*.jsonl at any depth below the subagents folders, ~/.claude/projects/*/*/subagents/, newest first, at most ${MAX_SUBAGENT_FILES}.` : 'return an empty list.'}
 The project directory names start with a dash, so give find and ls ./name or absolute paths, never a bare name. ${LIST_FILES}
@@ -1213,7 +1216,7 @@ if (only.includes('brief')) {
     label: 'monday brief',
     source: 'brief',
     reserve: { report: 1 },
-    run: () => agent(BRIEF_PROMPT, { label: 'monday brief', phase: 'Work', schema: BRIEF }),
+    run: () => dreamAgent(BRIEF_PROMPT, { label: 'monday brief', phase: 'Work', schema: BRIEF }),
   }).then(r => { briefResult = r }))
 }
 for (const pr of prList.slice(0, MAX_PRS)) {
@@ -1225,7 +1228,7 @@ for (const pr of prList.slice(0, MAX_PRS)) {
     label: `review ${label}`,
     source: 'prs',
     reserve: { verify: 1, report: 1 },
-    run: () => agent(reviewPrompt(pr), { label: `review ${label}`, phase: 'Work', schema: PR_REVIEW }),
+    run: () => dreamAgent(reviewPrompt(pr), { label: `review ${label}`, phase: 'Work', schema: PR_REVIEW }),
   }).then(review => {
     if (!review || review.skipped || !review.findings.length) return { pr, review, check: null }
     return submit({
@@ -1235,7 +1238,7 @@ for (const pr of prList.slice(0, MAX_PRS)) {
       label: `check ${label}`,
       source: 'prs',
       reserve: { report: 1 },
-      run: () => agent(prCheckPrompt(pr, review), { label: `check ${label}`, phase: 'Work', schema: PR_CHECK }),
+      run: () => dreamAgent(prCheckPrompt(pr, review), { label: `check ${label}`, phase: 'Work', schema: PR_CHECK }),
     }).then(check => ({ pr, review, check }))
   }).then(r => { reviews.push(r) }))
 }
@@ -1408,7 +1411,7 @@ for (const [name, list] of [['add-open', addOpen], ['add-unchecked', addUnchecke
   for (let i = 0; i < list.length; i += PATCH_CHUNK) patchParts.push({ file: `${PATCH_DIR}/${name}-${patchParts.length + 1}.jsonl`, items: list.slice(i, i + PATCH_CHUNK) })
 }
 const HEREDOC = 'with a quoted heredoc, so the shell changes nothing in it'
-const startedPatch = await agent(`Expand ~, then empty and create the folder ${PATCH_DIR}, create the empty files add-open-0.jsonl and add-unchecked-0.jsonl in it, and write two more files into it ${HEREDOC}:
+const startedPatch = await dreamAgent(`Expand ~, then empty and create the folder ${PATCH_DIR}, create the empty files add-open-0.jsonl and add-unchecked-0.jsonl in it, and write two more files into it ${HEREDOC}:
 cat > ${PATCH_DIR}/patch.json <<'EOF'
 ${JSON.stringify(patch)}
 EOF
@@ -1416,13 +1419,13 @@ cat > ${PATCH_DIR}/merge.jq <<'EOF'
 ${MERGE_JQ}
 EOF
 Check patch.json with jq empty and return ok true when it parses.`, { label: 'backlog patch', phase: 'Report', model: 'haiku', effort: 'low', schema: OK })
-const partsWritten = await parallel(patchParts.map(part => () => agent(`Write ${part.file} (expand ~) ${HEREDOC}, one JSON object per line, exactly as given:
+const partsWritten = await parallel(patchParts.map(part => () => dreamAgent(`Write ${part.file} (expand ~) ${HEREDOC}, one JSON object per line, exactly as given:
 cat > ${part.file} <<'EOF'
 ${part.items.map(i => JSON.stringify(i)).join('\n')}
 EOF
 Check that jq -c . ${part.file} prints ${part.items.length} lines, and return ok true when it does.`, { label: `backlog items ${part.file.split('/').pop()}`, phase: 'Report', model: 'haiku', effort: 'low', schema: OK })))
 const patchReady = Boolean(startedPatch && startedPatch.ok) && partsWritten.every(r => r && r.ok)
-const savedBacklog = patchReady ? await agent(`Merge a dream run's changes into its backlog with jq. Expand ~ in every path.
+const savedBacklog = patchReady ? await dreamAgent(`Merge a dream run's changes into its backlog with jq. Expand ~ in every path.
 1. Build the full patch: jq --slurpfile o <(cat ${PATCH_DIR}/add-open-*.jsonl 2>/dev/null | jq -s .) --slurpfile u <(cat ${PATCH_DIR}/add-unchecked-*.jsonl 2>/dev/null | jq -s .) '. + {addOpen: $o[0], addUnchecked: $u[0]}' ${PATCH_DIR}/patch.json > ${PATCH_DIR}/full.json
 2. ${backlogValid ? `Merge it: jq --slurpfile p ${PATCH_DIR}/full.json -f ${PATCH_DIR}/merge.jq ${BACKLOG_FILE} > ${backlogTarget}.tmp when ${BACKLOG_FILE} exists, else echo '{}' | jq --slurpfile p ${PATCH_DIR}/full.json -f ${PATCH_DIR}/merge.jq > ${backlogTarget}.tmp.` : `${BACKLOG_FILE} could not be read, so leave it alone: echo '{}' | jq --slurpfile p ${PATCH_DIR}/full.json -f ${PATCH_DIR}/merge.jq > ${backlogTarget}.tmp.`}
 3. Check ${backlogTarget}.tmp with jq empty, move it to ${backlogTarget}, and print the counts with jq '{open: (.open | length), closed: (.closed | length), unchecked: (.unchecked | length)}' ${backlogTarget}. Return ok true when the moved file parses.`, { label: 'write backlog', phase: 'Report', model: 'haiku', effort: 'low', schema: OK }) : null
@@ -1447,7 +1450,7 @@ for (let c = 0; c < ordered.length; c += PLAN_CHUNK) {
     label,
     source: 'scripts',
     reserve: { report: 1 },
-    run: () => agent(`Write and test the scripts of these proposals of a dream run, with the ids given, in that order. The script files and the sandbox are what this step writes.
+    run: () => dreamAgent(`Write and test the scripts of these proposals of a dream run, with the ids given, in that order. The script files and the sandbox are what this step writes.
 1. Write each script to ${SCRIPTS_DIR}/<id>.sh (expand ~, create the folder), with #!/usr/bin/env bash and a comment naming the run and the proposal's key on top, and make it executable. A proposal's script is given in its script field, or for one carried from an earlier run it is in the file named in its scriptFile field: copy it from there. A last command that is git diff --no-index gets || true, since it always exits 1. Every git diff, log or show runs as git --no-pager, since the user runs the scripts in an interactive terminal, where a pager waits for a key.
 2. Build a sandbox in the scratchpad: a fresh directory used as HOME, holding copies of ~/.claude/CLAUDE.md, rules/, settings.json, hooks/, workflows/ and skills/, every ~/.claude/projects/*/memory folder under the same directory names, ~/Projects/dotclaude with its origin remote set to a path that does not exist and its commit-msg hook removed, each directory listed in ~/Projects/dotclaude/sync-mirrors.txt as a fresh git repository with the same files, and, for any other repository a script works in, a minimal git repository with only the files the script edits, on a branch other than the default.
 3. ${earlier.length ? `Run the scripts of the earlier steps first, in this order, so the sandbox holds what they change: ${earlier.join(', ')}. Then run` : 'Run'} every script of these proposals in order with env -i HOME=<sandbox> PATH="$PATH" TMPDIR=<sandbox>/tmp LANG=en_US.UTF-8 bash <file>, from its stand-in repository when it works in one, under a time limit of two minutes each. Never run a script outside the sandbox. Record whether it exited 0, whether it changed files, and for a failure the line that explains it: an anchor not found, a term the sync.sh scan refused, or anything else.
@@ -1468,7 +1471,7 @@ ${GROUND}`, { label, phase: 'Report', schema: PLAN }),
 }
 if (!steps.length && openItems.length) log('No scripts were written, so the report has no commands')
 
-const report = await agent(`Write the report of a dream run for the user as Markdown to ${OUT}/${scout.runId}.md (expand ~, create the directory). This is the one file this step writes. The proposals' scripts are already in ${SCRIPTS_DIR}/.
+const report = await dreamAgent(`Write the report of a dream run for the user as Markdown to ${OUT}/${scout.runId}.md (expand ~, create the directory). This is the one file this step writes. The proposals' scripts are already in ${SCRIPTS_DIR}/.
 
 The user reads the report only in the chat, where the session that started the run shows all of it, so it has to read well there: at most about 30,000 characters, no scripts, no <details> blocks, and nothing said twice. Follow the Prose rules of ~/.claude/CLAUDE.md. The file needs no "Prompt feedback" section.
 
@@ -1568,7 +1571,7 @@ const weekLine = endWeekly ? {
 } : null
 const scriptFiles = {}
 for (const s of steps) if (s.key && s.file) scriptFiles[s.key] = s.file
-const saved = await agent(`Append one line to ${HISTORY_FILE}${weekLine ? ` and one line to ${WEEKS_FILE}` : ''}. Expand ~, create the directory if it is missing, and write each line with a quoted heredoc so the shell changes nothing in it:
+const saved = await dreamAgent(`Append one line to ${HISTORY_FILE}${weekLine ? ` and one line to ${WEEKS_FILE}` : ''}. Expand ~, create the directory if it is missing, and write each line with a quoted heredoc so the shell changes nothing in it:
 cat >> ${HISTORY_FILE} <<'EOF'
 ${JSON.stringify(entry)}
 EOF

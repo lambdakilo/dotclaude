@@ -100,6 +100,7 @@ mirrored=(
   mods/session-usage/usage.sh
   skills/pull-requests/SKILL.md
   workflows/dream.js
+  agents/dream-worker.md
 )
 
 install_file() {
