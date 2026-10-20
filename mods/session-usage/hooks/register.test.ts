@@ -3,6 +3,8 @@ import { expect, mock, test } from 'claude-code/testing'
 const TURN = { answer: '', durationMs: 1, isAborted: false, turnId: 't1', reason: 'answer' } as const
 const START = { cwd: '/', surface: 'terminal', isInteractive: true } as const
 const FIGURES = '16% ctx, 6.1M, $2.96'
+const FIRE = '\u{1F525}'
+const ICE = '\u{1F9CA}'
 // 12:20 on 20 Oct at UTC+3, and the next midnight there
 const NOW = 1792488000_000
 const MIDNIGHT = 1792530000_000
@@ -33,7 +35,7 @@ test('pins the cache countdown and the figures after a main turn', async ($, on)
   expect(argvs).toHaveLength(1)
   expect(argvs[0]?.[0]).toMatch(/\/usage\.sh$/)
   expect(argvs[0]?.slice(1)).toEqual(['--status', 'abc'])
-  expect(shown).toEqual([`warm 15 min, ${FIGURES}`])
+  expect(shown).toEqual([`${FIRE} 15 min, ${FIGURES}`])
 })
 
 test('counts down between turns, then names the day once it is past', async ($, on) => {
@@ -60,11 +62,11 @@ test('counts down between turns, then names the day once it is past', async ($, 
 
   expect(runs).toBe(1)
   expect(shown).toEqual([
-    `warm 2 min, ${FIGURES}`,
-    `warm 1 min, ${FIGURES}`,
-    `warm <1 min, ${FIGURES}`,
-    `cold since 12:22, ${FIGURES}`,
-    `cold since 20 Oct, ${FIGURES}`,
+    `${FIRE} 2 min, ${FIGURES}`,
+    `${FIRE} 1 min, ${FIGURES}`,
+    `${FIRE} <1 min, ${FIGURES}`,
+    `${ICE} since 12:22, ${FIGURES}`,
+    `${ICE} since 20 Oct, ${FIGURES}`,
   ])
 })
 

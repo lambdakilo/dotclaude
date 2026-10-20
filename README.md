@@ -71,14 +71,14 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
 - [`mods/session-usage`](mods/session-usage): a Claude Code mod named `usage`, the label the app
   puts before its line, installed as `~/.claude/mods/session-usage` and loaded in every session
   through `CLAUDE_CODE_PLUGIN_DIRS` in `settings.json`. It pins a short status line under the
-  prompt, such as
-  `warm 47 min, 16% ctx, 6.1M, $2.96`: how many minutes the prompt cache stays warm, how full the
-  context window is, and the tokens the session has processed and what they would cost at the
-  API list prices. Once the cache is cold the line opens with `cold since 12:22`, or with
-  `cold since 19 Oct` from the next day on. The desktop app shows about 40 characters before it
-  cuts the line, so the cache comes first. The figures refresh after every turn and every 15
-  seconds while one runs; between turns the minutes count down without the transcript being
-  read again. The app draws the line, and it never enters the model's context. `usage.sh` reads
+  prompt, such as `🔥 47 min, 16% ctx, 6.1M, $2.96`: how many minutes the prompt cache stays
+  warm, how full the context window is, and the tokens the session has processed and what they
+  would cost at the API list prices. Once the cache is cold the line opens with
+  `🧊 since 12:22`, or with `🧊 since 19 Oct` from the next day on. The mod API draws a status
+  line as plain text, so the emoji stand in for colours. The desktop app shows about 40
+  characters before it cuts the line, so the cache comes first. The figures refresh after every
+  turn and every 15 seconds while one runs; between turns the minutes count down without the
+  transcript being read again. The app draws the line, and it never enters the model's context. `usage.sh` reads
   the transcript, which repeats a response's usage on every streamed block, so it counts each
   response once. The status line leaves out workflow agents, whose transcripts can run to
   hundreds of megabytes; `usage.sh --run <folder>` totals every transcript under a folder, such

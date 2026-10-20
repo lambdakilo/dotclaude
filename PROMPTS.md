@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Name the session-usage mod usage for a shorter status label
+## Mark a warm and a cold cache with fire and ice in the usage line
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> restart the session so i see it
+
+**5.**
+> can the session usage use emojis or colors lol like cold for ice and
+> fire for warm?
+
+## Name the session-usage mod usage for a shorter status label
+
+2026-10-20, commit [34e7c44](https://github.com/lambdakilo/dotclaude/commit/34e7c4469e6517285cb9f70beb36fe21ac80bd5e), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > is the text session-usage necessary in statusline?

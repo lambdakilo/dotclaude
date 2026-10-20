@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-# Prints the status line of the usage mod: the minutes the prompt cache
-# stays warm, or since when it is cold, then how full the context window is,
-# the tokens the session has processed and what they would cost at the
-# first-party API list prices. The transcript repeats a response's usage on
-# every streamed block, so each response id counts once. A model missing from
-# the price table adds tokens but no cost, and a plus after the cost says so.
+# Prints the status line of the usage mod: a fire and the minutes the prompt
+# cache stays warm, or an ice cube and since when it is cold, then how full the
+# context window is, the tokens the session has processed and what they would
+# cost at the first-party API list prices. The transcript repeats a response's
+# usage on every streamed block, so each response id counts once. A model
+# missing from the price table adds tokens but no cost, and a plus after the
+# cost says so.
 #
 #   usage.sh <session id>   the session's transcript under projects/
 #   usage.sh <transcript>   a transcript file
@@ -191,13 +192,15 @@ if [ "$status" = true ]; then
   exit 0
 fi
 
+fire=$(printf '\360\237\224\245')
+ice=$(printf '\360\237\247\212')
 left=$((warm - $(date +%s)))
 if [ "$left" -ge 60 ]; then
-  echo "warm $((left / 60)) min, $figures"
+  echo "$fire $((left / 60)) min, $figures"
 elif [ "$left" -gt 0 ]; then
-  echo "warm <1 min, $figures"
+  echo "$fire <1 min, $figures"
 elif [ "$(at "$warm" +%F)" = "$(date +%F)" ]; then
-  echo "cold since $(at "$warm" +%H:%M), $figures"
+  echo "$ice since $(at "$warm" +%H:%M), $figures"
 else
-  echo "cold since $(at "$warm" '+%-d %b'), $figures"
+  echo "$ice since $(at "$warm" '+%-d %b'), $figures"
 fi

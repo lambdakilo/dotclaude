@@ -4,6 +4,8 @@ type Usage = { figures: string; coldAt: number; offset: number }
 
 const DAY = 86_400_000
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const FIRE = '\u{1F525}'
+const ICE = '\u{1F9CA}'
 
 let usage: Usage | undefined
 let shown: string | undefined
@@ -15,15 +17,15 @@ const pad = (n: number) => String(n).padStart(2, '0')
 // getters give local time whatever zone this environment runs in.
 const cache = (now: number, { coldAt, offset }: Usage) => {
   const left = coldAt - now
-  if (left >= 60_000) return `warm ${Math.floor(left / 60_000)} min`
-  if (left > 0) return 'warm <1 min'
+  if (left >= 60_000) return `${FIRE} ${Math.floor(left / 60_000)} min`
+  if (left > 0) return `${FIRE} <1 min`
 
   const cold = new Date(coldAt + offset)
   const isToday = Math.floor((coldAt + offset) / DAY) === Math.floor((now + offset) / DAY)
 
   return isToday
-    ? `cold since ${pad(cold.getUTCHours())}:${pad(cold.getUTCMinutes())}`
-    : `cold since ${cold.getUTCDate()} ${MONTHS[cold.getUTCMonth()]}`
+    ? `${ICE} since ${pad(cold.getUTCHours())}:${pad(cold.getUTCMinutes())}`
+    : `${ICE} since ${cold.getUTCDate()} ${MONTHS[cold.getUTCMonth()]}`
 }
 
 const line = async ($: EngineInterface) => usage && `${cache(await $.clock.now(), usage)}, ${usage.figures}`
