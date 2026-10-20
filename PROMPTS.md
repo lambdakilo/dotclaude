@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Allow gh pr ready and gh pr merge
+## Delete the head branch of every merged PR
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.**
+> always delete merged branches
+
+## Allow gh pr ready and gh pr merge
+
+2026-10-20, commit [428a710](https://github.com/lambdakilo/dotclaude/commit/428a710eab1273207444596f67694d050dd1e32e), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask to merge a pull request in a downstream project left out]

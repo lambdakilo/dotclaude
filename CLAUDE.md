@@ -153,6 +153,10 @@ apply to one repository belong in that repository's project memory.
 - The prompt that says to merge is a prompt about the change too. Add it to the PR's prompts
   block before merging, and to the prompts section of the squash commit, which is the commit
   that prompt creates.
+- Delete the head branch of every PR a session merges, on GitHub and in the local checkout:
+  `gh pr merge` gets `--delete-branch`. A local branch the merge leaves behind, such as when it
+  ran with `--repo` outside the checkout, goes with `git branch -D` once the PR shows as merged,
+  and the reply names its last hash, so `git branch <name> <hash>` brings it back.
 - Never post a comment, a review thread reply, a review or an issue comment on GitHub: every
   word posted goes out under the user's name, and the user writes those. A review finding is
   answered by the commit that fixes it, and the reply to the user lists, per thread, what
