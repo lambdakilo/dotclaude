@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Mark a warm and a cold cache with fire and ice in the usage line
+## Pin the PR body's dotclaude link to the commit of its last edit
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dotclaude maybe add in my prs instead of link to my dotclaude add
+> link to the repo in a commit time when the pr was last edited
+
+## Mark a warm and a cold cache with fire and ice in the usage line
+
+2026-10-20, commit [6fe58fc](https://github.com/lambdakilo/dotclaude/commit/6fe58fc92ee0470ef33142da6cf38d66572df2eb), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > restart the session so i see it

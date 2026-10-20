@@ -20,12 +20,16 @@ redacted in public and upstream repositories.
 - The two blocks come straight after the closing line and above the rest of the template. They
   are a TL;DR for the reviewer.
 - First block: a fenced code block holding the URL of the public configuration repository
-  described under Public configuration repository in `~/.claude/CLAUDE.md`, so teammates can
-  read and copy the rules at their source. Take the URL at runtime from the checkout's `origin`
-  remote, with `git -C ~/Projects/dotclaude remote get-url origin`, rewritten from the SSH form to
-  https and without the `.git` suffix, never from memory. A code block and not a Markdown link:
-  a link's visible text can differ from where it goes, while a URL the reader pastes is one
-  they see in the address bar before they go.
+  described under Public configuration repository in `~/.claude/CLAUDE.md`, pinned to a commit
+  as `<repository URL>/tree/<full hash>`, so teammates can read and copy the rules the PR was
+  made under, not ones changed since. Take the repository URL at runtime from the checkout's
+  `origin` remote, with `git -C ~/Projects/dotclaude remote get-url origin`, rewritten from the
+  SSH form to https and without the `.git` suffix, and the hash from
+  `git -C ~/Projects/dotclaude ls-remote origin HEAD`, the commit GitHub serves as the default
+  branch, never from memory or from a local commit not pushed yet. Every edit of the body takes
+  the hash again, so the block names the commit current at the body's last edit. A code block
+  and not a Markdown link: a link's visible text can differ from where it goes, while a URL the
+  reader pastes is one they see in the address bar before they go.
 - Second block: `<details><summary>Prompts behind this PR</summary>`. Its first line names the
   model and effort level the session ran with, for example `Model: claude-fable-5-1, effort:
   medium`. Take them, and the prompts under it, as the bullet on printing the prompts under
