@@ -104,9 +104,10 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   the run's target and say why the run stopped there, then ask about each change on its own:
   the exact text it adds, a real moment from the transcripts that went wrong, and the same
   moment with the change in place. A change the user adds is applied before the next question,
-  one put off comes back a week later, and the session commits what changed. It keeps seven
-  pieces of work going, reads the plan usage card in the desktop app as they finish, and starts
-  new work only while it fits, estimating each piece from what earlier runs cost, as kept in
+  one put off comes back a week later, and the session commits what changed. `/dream review`
+  skips the run and asks the same way about what the backlog still holds open, for a dialogue
+  that stopped early. A run keeps seven pieces of work going, reads the plan usage card in the
+  desktop app as they finish, and starts new work only while it fits, estimating each piece from what earlier runs cost, as kept in
   `~/.claude/dream/usage-history.jsonl`, and holds back the checks of what it reads. Transcripts
   and proposals it had no usage for carry over to the next run. Its last usage reading goes into
   `~/.claude/dream/weekly-usage.jsonl`, so the last line for a week keeps

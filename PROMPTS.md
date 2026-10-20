@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Show each dream proposal's exact change with a before and after
+## Let /dream review ask about the open backlog without a run
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**14.**
+> ok but how do i continue working with the previous dream results now?
+
+## Show each dream proposal's exact change with a before and after
+
+2026-10-20, commit [bef9337](https://github.com/lambdakilo/dotclaude/commit/bef9337832d86bc7b11923b599e14a6e3a6ec8bc), model claude-opus-5-5, effort xhigh.
 
 **13.**
 > theres a lot of proposals after every dream. let alone after fri and

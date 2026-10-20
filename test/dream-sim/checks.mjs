@@ -62,6 +62,23 @@ const scenarios = [
     ['the patch carries the examples', st => /"exampleWrong":"it broke"/.test(st.prompts['backlog patch'] || '') || Object.keys(st.prompts).some(k => k.startsWith('backlog items') && /"exampleWrong":"it broke"/.test(st.prompts[k]))],
     ['the session is told to ask one step at a time with the examples', (st, r) => /one AskUserQuestion call per step/.test(r.forTheSession) && /exampleWrong/.test(r.forTheSession)],
   ]],
+  ['review of the open backlog', { ...wed, week: 30, sessions: 4, args: 'review', backlog: {
+    valid: true,
+    open: [
+      { key: 'low-one', title: 'low', kind: 'hook', impact: 'low', target: '~/a', scriptFile: '~/.claude/dream/x/p9.sh' },
+      { key: 'parked', title: 'parked', kind: 'hook', impact: 'high', target: '~/b', scriptFile: '', askAgainAfter: '2026-10-20' },
+      { key: 'high-one', title: 'high', kind: 'hook', impact: 'high', target: '~/c', scriptFile: '~/.claude/dream/x/p2.sh' },
+    ],
+    closed: [],
+    unchecked: [{ key: 'u1', title: 'u', kind: 'hook', impact: 'low', target: '~/d' }],
+  } }, [
+    ['runs one agent and nothing else', st => Object.keys(st.labels).join() === 'review'],
+    ['asks about the due steps, high before low', (st, r) => r.due === 2 && r.forTheSession.indexOf('"high-one"') < r.forTheSession.indexOf('"low-one"')],
+    ['leaves the parked step out', (st, r) => r.waiting === 1 && !r.forTheSession.includes('"parked"')],
+    ['uses the same one-at-a-time dialogue', (st, r) => /^1 open proposals wait/.test(r.forTheSession) && /one AskUserQuestion call per step/.test(r.forTheSession)],
+    ['tests a script in a sandbox before running it', (st, r) => /test it in a sandbox before running it for real/.test(r.forTheSession)],
+    ['names the unchecked ones', (st, r) => /1 unchecked proposals wait/.test(r.forTheSession)],
+  ]],
 ]
 
 let failed = 0
