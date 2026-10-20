@@ -2,16 +2,18 @@ import { expect, mock, test } from 'claude-code/testing'
 
 const TURN = { answer: '', durationMs: 1, isAborted: false, turnId: 't1', reason: 'answer' } as const
 const START = { cwd: '/', surface: 'terminal', isInteractive: true } as const
-const FIGURES = '15% context, 4.3M tokens, $2.27, ~0.070 kWh, ~32 g CO2e'
+const FIGURES = '16% ctx, 6.1M, $2.96'
+// 12:20 on 20 Oct at UTC+3, and the next midnight there
 const NOW = 1792488000_000
+const MIDNIGHT = 1792530000_000
 
 const ran = (stdout: string) => ({
   value: { exitCode: 0, stdout, stderr: '', isStdoutTruncated: false, isStderrTruncated: false },
 })
 
-const warmFor = (minutes: number) => ran(`${FIGURES}\n${NOW / 1000 + minutes * 60}\n20 Oct 14:35\n`)
+const warmFor = (minutes: number) => ran(`${FIGURES}\n${NOW / 1000 + minutes * 60}\n10800\n`)
 
-test('pins the figures and the cache countdown after a main turn', async ($, on) => {
+test('pins the cache countdown and the figures after a main turn', async ($, on) => {
   const shown: (string | undefined)[] = []
   const argvs: string[][] = []
   mock.clock(on, { now: NOW })
@@ -31,10 +33,10 @@ test('pins the figures and the cache countdown after a main turn', async ($, on)
   expect(argvs).toHaveLength(1)
   expect(argvs[0]?.[0]).toMatch(/\/usage\.sh$/)
   expect(argvs[0]?.slice(1)).toEqual(['--status', 'abc'])
-  expect(shown).toEqual([`${FIGURES}, cache warm 15 min, until 20 Oct 14:35`])
+  expect(shown).toEqual([`warm 15 min, ${FIGURES}`])
 })
 
-test('counts the minutes down between turns without reading the transcript again', async ($, on) => {
+test('counts down between turns, then names the day once it is past', async ($, on) => {
   const shown: (string | undefined)[] = []
   let runs = 0
   const clock = mock.clock(on, { now: NOW })
@@ -54,13 +56,15 @@ test('counts the minutes down between turns without reading the transcript again
   await clock.advance(45_000)
   await clock.advance(15_000)
   await clock.advance(60_000)
+  await clock.set(MIDNIGHT + 15_000)
 
   expect(runs).toBe(1)
   expect(shown).toEqual([
-    `${FIGURES}, cache warm 2 min, until 20 Oct 14:35`,
-    `${FIGURES}, cache warm 1 min, until 20 Oct 14:35`,
-    `${FIGURES}, cache warm <1 min, until 20 Oct 14:35`,
-    `${FIGURES}, cache cold since 20 Oct 14:35`,
+    `warm 2 min, ${FIGURES}`,
+    `warm 1 min, ${FIGURES}`,
+    `warm <1 min, ${FIGURES}`,
+    `cold since 12:22, ${FIGURES}`,
+    `cold since 20 Oct, ${FIGURES}`,
   ])
 })
 

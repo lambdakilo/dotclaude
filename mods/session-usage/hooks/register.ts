@@ -1,26 +1,41 @@
 import type { EngineInterface, Register } from 'claude-code'
 
-type Usage = { figures: string; coldAt: number; clock: string }
+type Usage = { figures: string; coldAt: number; offset: number }
+
+const DAY = 86_400_000
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 let usage: Usage | undefined
 let shown: string | undefined
 let isBusy = false
 
-const cache = (left: number, clock: string) => {
-  if (left <= 0) return `cache cold since ${clock}`
-  const minutes = Math.floor(left / 60_000)
+const pad = (n: number) => String(n).padStart(2, '0')
 
-  return `cache warm ${minutes < 1 ? '<1' : minutes} min, until ${clock}`
+// The offset is the one usage.sh read from the host's clock, so the UTC
+// getters give local time whatever zone this environment runs in.
+const cache = (now: number, { coldAt, offset }: Usage) => {
+  const left = coldAt - now
+  if (left >= 60_000) return `warm ${Math.floor(left / 60_000)} min`
+  if (left > 0) return 'warm <1 min'
+
+  const cold = new Date(coldAt + offset)
+  const isToday = Math.floor((coldAt + offset) / DAY) === Math.floor((now + offset) / DAY)
+
+  return isToday
+    ? `cold since ${pad(cold.getUTCHours())}:${pad(cold.getUTCMinutes())}`
+    : `cold since ${cold.getUTCDate()} ${MONTHS[cold.getUTCMonth()]}`
 }
 
-const line = async ($: EngineInterface) =>
-  usage && `${usage.figures}, ${cache(usage.coldAt - (await $.clock.now()), usage.clock)}`
+const line = async ($: EngineInterface) => usage && `${cache(await $.clock.now(), usage)}, ${usage.figures}`
 
 const show = async ($: EngineInterface) => {
   const id = await $.session.id()
   const { exitCode, stdout } = await $.process.run([`${$.plugin.root}/usage.sh`, '--status', id])
-  const [figures, coldAt, clock] = stdout.trim().split('\n')
-  usage = exitCode === 0 && figures && coldAt && clock ? { figures, coldAt: Number(coldAt) * 1000, clock } : undefined
+  const [figures, coldAt, offset] = stdout.trim().split('\n')
+  usage =
+    exitCode === 0 && figures && coldAt && offset
+      ? { figures, coldAt: Number(coldAt) * 1000, offset: Number(offset) * 1000 }
+      : undefined
 
   shown = await line($)
   $.ui.status(shown)

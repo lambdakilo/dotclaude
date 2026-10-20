@@ -5,9 +5,19 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Count the prompt cache down in the session-usage status line
+## Put the cache first in a 40-character session-usage line
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**2.**
+> [pasted: a screenshot of the status line cut off after the cost]
+> nope thats too long it wraps already in status line
+> > The app shows about 40 characters. Which status line layout should
+> > the mod use? Cache first, short (Recommended)
+
+## Count the prompt cache down in the session-usage status line
+
+2026-10-20, commit [c27220d](https://github.com/lambdakilo/dotclaude/commit/c27220d053762f91e5955e7c0ce1b8832ed3b34b), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > add to the status line warm cache until num Month then the time

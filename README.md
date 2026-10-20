@@ -71,26 +71,27 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
 - [`mods/session-usage`](mods/session-usage): a Claude Code mod, installed as
   `~/.claude/mods/session-usage` and loaded in every session through `CLAUDE_CODE_PLUGIN_DIRS` in
   `settings.json`. It pins a short status line under the prompt, such as
-  `24% context, 92.4M tokens, $40.39, ~0.41 kWh, ~188 g CO2e, cache warm 47 min, until 20 Oct
-  08:32`: how full the context window is, the tokens the session has processed and what they
-  would cost at the API list prices, an estimate of the energy the responses took and the CO2e
-  it emitted, and how many minutes the prompt cache stays warm and until when, or
-  `cache cold since 20 Oct 08:32` once it is not. The figures refresh after every turn and
-  every 15 seconds while one runs; between turns the minutes count down without the transcript
-  being read again. The app draws the line, and it never enters the model's context. `usage.sh`
-  reads the transcript, which repeats a response's usage on every streamed block, so it counts
-  each response once. The energy is the seconds each response streamed
-  times one request's share of an 8-GPU H100 node, about 0.75 kW, as
-  [How Hungry is AI?](https://arxiv.org/abs/2505.09598) models a flagship model. The CO2e uses
-  the [Ember 2025 grid average](https://ourworldindata.org/grapher/carbon-intensity-electricity)
-  of the US when the response's `inference_geo` is `us`, and of the world otherwise. It is an
-  order of magnitude, not a measurement: it leaves out idle capacity, training and hardware
-  manufacture, and production serving likely batches more than the paper's 8 requests. The
-  status line leaves out workflow agents, whose transcripts can run to hundreds of megabytes;
-  `usage.sh --run <folder>` totals every transcript under a folder, such as a workflow run's, with
-  its energy, by kind of token and by model, and the share of prompt tokens the warm cache served,
-  and the dream workflow has the session show it after every run. `usage.sh --since <time>
-  [<until>]` totals the same from the usage log for any period, all sessions together. The mod
+  `warm 47 min, 16% ctx, 6.1M, $2.96`: how many minutes the prompt cache stays warm, how full the
+  context window is, and the tokens the session has processed and what they would cost at the
+  API list prices. Once the cache is cold the line opens with `cold since 12:22`, or with
+  `cold since 19 Oct` from the next day on. The desktop app shows about 40 characters before it
+  cuts the line, so the cache comes first. The figures refresh after every turn and every 15
+  seconds while one runs; between turns the minutes count down without the transcript being
+  read again. The app draws the line, and it never enters the model's context. `usage.sh` reads
+  the transcript, which repeats a response's usage on every streamed block, so it counts each
+  response once. The status line leaves out workflow agents, whose transcripts can run to
+  hundreds of megabytes; `usage.sh --run <folder>` totals every transcript under a folder, such
+  as a workflow run's, by kind of token and by model, with the share of prompt tokens the warm
+  cache served and an estimate of the energy the responses took and the CO2e it emitted, and
+  the dream workflow has the session show it after every run. `usage.sh --since <time>
+  [<until>]` totals the same from the usage log for any period, all sessions together. The
+  energy is the seconds each response streamed times one request's share of an 8-GPU H100 node,
+  about 0.75 kW, as [How Hungry is AI?](https://arxiv.org/abs/2505.09598) models a flagship
+  model. The CO2e uses the
+  [Ember 2025 grid average](https://ourworldindata.org/grapher/carbon-intensity-electricity) of
+  the US when the response's `inference_geo` is `us`, and of the world otherwise. It is an order
+  of magnitude, not a measurement: it leaves out idle capacity, training and hardware
+  manufacture, and production serving likely batches more than the paper's 8 requests. The mod
   API is early access and may change between Claude Code releases.
 - [`hooks/usage-log.sh`](hooks/usage-log.sh): a `Stop` hook that after every turn appends one
   line per new model response of the session and its agents to

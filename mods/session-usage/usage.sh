@@ -1,20 +1,18 @@
 #!/usr/bin/env bash
 
-# Prints the status line of the session-usage mod: how full the context window
-# is, the tokens the session has processed and what they would cost at the
-# first-party API list prices, an estimate of the energy the responses took and
-# the CO2e it emitted, and whether the prompt cache is warm: the minutes left
-# and until when, or since when it is cold. The transcript repeats a
-# response's usage on every streamed block, so each response id counts once. A
-# model missing from the price table adds tokens but no cost, and the line
-# says so.
+# Prints the status line of the session-usage mod: the minutes the prompt cache
+# stays warm, or since when it is cold, then how full the context window is,
+# the tokens the session has processed and what they would cost at the
+# first-party API list prices. The transcript repeats a response's usage on
+# every streamed block, so each response id counts once. A model missing from
+# the price table adds tokens but no cost, and a plus after the cost says so.
 #
 #   usage.sh <session id>   the session's transcript under projects/
 #   usage.sh <transcript>   a transcript file
 #   usage.sh --status <session id or transcript>
 #                           the figures, the second the cache goes cold and
-#                           that time as "20 Oct 14:35", a line each, for the
-#                           mod to count down from
+#                           the UTC offset then in seconds, a line each, for
+#                           the mod to count down from
 #   usage.sh --run <folder> the tokens, cost and energy of every transcript
 #                           under the folder, such as a workflow run's, by kind
 #                           and model
@@ -70,8 +68,6 @@ common='
   # 2025 grid average (Our World in Data), the US for inference_geo "us", else
   # the world, since "global" may run anywhere.
   def kw: (5.6 * 0.525 + 4.6 * 0.5) / 8 * 1.14;
-  def kwh: map(.busy * kw / 3600) | add // 0;
-  def grams: map(.busy * kw / 3600 * (if .u.inference_geo == "us" then 384.4 else 458.3 end)) | add // 0;
   def norm: .u as $u | {id, at, model, busy, geo: ($u.inference_geo // null), input: ($u.input_tokens | n),
     w5m: (if $u.cache_creation == null then ($u.cache_creation_input_tokens | n)
           else ($u.cache_creation.ephemeral_5m_input_tokens | n) end),
@@ -167,7 +163,7 @@ for f in "${transcript%.jsonl}"/subagents/*.jsonl; do
   [ -f "$f" ] && files+=("$f")
 done
 
-read -r ctx window tokens cost unpriced kwh grams warm < <(jq -nrR --arg main "$transcript" "$common"'
+read -r ctx window tokens cost unpriced warm < <(jq -nrR --arg main "$transcript" "$common"'
   responses($main)
   | select(length > 0)
   | (map(select(.main)) | max_by(.at)) as $last
@@ -177,27 +173,31 @@ read -r ctx window tokens cost unpriced kwh grams warm < <(jq -nrR --arg main "$
   | (if any(.[]; .main and (.u.cache_creation.ephemeral_1h_input_tokens | n) > 0)
      then 3600 else 300 end) as $ttl
   | ($last.model | if test("haiku-4|claude-3") then 200000 else 1000000 end) as $window
-  | "\($last.u | all_in) \($window) \($tokens) \($cost) \($unpriced) \(kwh) \(grams) \($last.at + $ttl | floor)"
+  | "\($last.u | all_in) \($window) \($tokens) \($cost) \($unpriced) \($last.at + $ttl | floor)"
 ' "${files[@]}" 2>/dev/null)
 [ -n "${warm:-}" ] || exit 0
 
-clock=$(LC_ALL=C date -r "$warm" '+%-d %b %H:%M' 2>/dev/null || LC_ALL=C date -d "@$warm" '+%-d %b %H:%M' 2>/dev/null)
+at() { LC_ALL=C date -r "$1" "$2" 2>/dev/null || LC_ALL=C date -d "@$1" "$2" 2>/dev/null; }
+
 percent=$(awk -v c="$ctx" -v w="$window" 'BEGIN { printf "%d", c * 100 / w }')
 dollars=$(awk -v d="$cost" 'BEGIN { printf "%.2f", d }')
-[ "$unpriced" -gt 0 ] && dollars="$dollars ($unpriced unpriced)"
+[ "$unpriced" -gt 0 ] && dollars="$dollars+"
 
-figures="$percent% context, $(human "$tokens") tokens, \$$dollars, $(energy "$kwh" "$grams")"
+figures="$percent% ctx, $(human "$tokens"), \$$dollars"
 
 if [ "$status" = true ]; then
-  printf '%s\n%s\n%s\n' "$figures" "$warm" "$clock"
+  z=$(at "$warm" +%z)
+  printf '%s\n%s\n%s\n' "$figures" "$warm" "$(( ${z:0:1}(10#${z:1:2} * 3600 + 10#${z:3:2} * 60) ))"
   exit 0
 fi
 
 left=$((warm - $(date +%s)))
-if [ "$left" -gt 0 ]; then
-  minutes=$((left / 60))
-  [ "$minutes" -lt 1 ] && minutes="<1"
-  echo "$figures, cache warm $minutes min, until $clock"
+if [ "$left" -ge 60 ]; then
+  echo "warm $((left / 60)) min, $figures"
+elif [ "$left" -gt 0 ]; then
+  echo "warm <1 min, $figures"
+elif [ "$(at "$warm" +%F)" = "$(date +%F)" ]; then
+  echo "cold since $(at "$warm" +%H:%M), $figures"
 else
-  echo "$figures, cache cold since $clock"
+  echo "cold since $(at "$warm" '+%-d %b'), $figures"
 fi
