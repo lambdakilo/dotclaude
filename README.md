@@ -68,9 +68,10 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   every commit message, newest first, each with its commit and pull request, and with
   `--message <file>` lists the commit about to be made first. A commit cannot name its own hash,
   so that one links to the file's history until the next rebuild.
-- [`mods/session-usage`](mods/session-usage): a Claude Code mod, installed as
-  `~/.claude/mods/session-usage` and loaded in every session through `CLAUDE_CODE_PLUGIN_DIRS` in
-  `settings.json`. It pins a short status line under the prompt, such as
+- [`mods/session-usage`](mods/session-usage): a Claude Code mod named `usage`, the label the app
+  puts before its line, installed as `~/.claude/mods/session-usage` and loaded in every session
+  through `CLAUDE_CODE_PLUGIN_DIRS` in `settings.json`. It pins a short status line under the
+  prompt, such as
   `warm 47 min, 16% ctx, 6.1M, $2.96`: how many minutes the prompt cache stays warm, how full the
   context window is, and the tokens the session has processed and what they would cost at the
   API list prices. Once the cache is cold the line opens with `cold since 12:22`, or with

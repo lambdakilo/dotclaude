@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Give a review's serious findings a short reproduction
+## Name the session-usage mod usage for a shorter status label
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.**
+> is the text session-usage necessary in statusline?
+> > Rename the mod so its label in the status line is shorter? usage
+> > (Recommended)
+
+## Give a review's serious findings a short reproduction
+
+2026-10-20, commit [e619ae3](https://github.com/lambdakilo/dotclaude/commit/e619ae3269a98e035b228708c3ca5b8c8185d53c), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > if somethings medium or high (anything not low) give me shortest

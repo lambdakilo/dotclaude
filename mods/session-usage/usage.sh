@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Prints the status line of the session-usage mod: the minutes the prompt cache
+# Prints the status line of the usage mod: the minutes the prompt cache
 # stays warm, or since when it is cold, then how full the context window is,
 # the tokens the session has processed and what they would cost at the
 # first-party API list prices. The transcript repeats a response's usage on

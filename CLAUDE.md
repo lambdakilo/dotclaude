@@ -304,7 +304,7 @@ apply to one repository belong in that repository's project memory.
   its worktrees still has containers up, it sends the turn back once with the reason. It stops
   nothing itself, and a turn that started nothing passes. It is a safety net for the rule
   above, not a substitute for it.
-- The `session-usage` mod in `~/.claude/mods/session-usage`, which `CLAUDE_CODE_PLUGIN_DIRS` in
+- The `usage` mod in `~/.claude/mods/session-usage`, which `CLAUDE_CODE_PLUGIN_DIRS` in
   `settings.json` loads in every session, pins a status line under the prompt: the minutes the
   prompt cache stays warm, or since when it is cold (the time that day, the date after it),
   then how full the context window is, the tokens the session has processed and their cost at

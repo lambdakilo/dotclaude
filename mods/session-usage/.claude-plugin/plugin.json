@@ -1,5 +1,5 @@
 {
-  "name": "session-usage",
+  "name": "usage",
   "version": "0.1.0",
-  "description": "Status line with context window use, session tokens, cost at API prices, estimated energy and CO2e, and prompt cache warm-until time"
+  "description": "Status line with prompt cache minutes left or cold since, context window use, session tokens and cost at API prices"
 }
