@@ -232,13 +232,16 @@ const EVIDENCE_CHECK = {
 
 const FIT_CHECK = {
   type: 'object',
-  required: ['verdict', 'reason', 'finalProposal', 'script'],
+  required: ['verdict', 'reason', 'finalProposal', 'script', 'exactChange', 'exampleWrong', 'exampleFixed'],
   properties: {
     verdict: { type: 'string', enum: ['keep', 'revise', 'drop'] },
     reason: { type: 'string' },
     alreadyCoveredBy: { type: 'string' },
     finalProposal: { type: 'string' },
     script: { type: 'string', description: 'Shell that applies the change, or empty for a habit or a skill to try' },
+    exactChange: { type: 'string', description: 'What the change adds or replaces, word for word as it will read in its file, with the file named; for a hook, what it refuses and the rule line beside it' },
+    exampleWrong: { type: 'string', description: 'One concrete moment from the evidence, as it went: who said or ran what, quoted where the source allows' },
+    exampleFixed: { type: 'string', description: 'The same moment as it would have gone with the change in place' },
   },
 }
 
@@ -329,7 +332,7 @@ const READ_USAGE = `Run date -u +%Y-%m-%dT%H:%M:%SZ and return it as now. Then l
 
 const LIST_FILES = 'Return each with its absolute path, its project directory name, its size in bytes and its modification time as an ISO time in UTC.'
 // The backlog file outgrew what an agent can repeat verbatim, so a run passes an index around and agents read whole items from the file by key.
-const BACKLOG_INDEX = `jq -c '{valid: true, open: [.open[]? | {key, title, kind, impact, target, firstSeen, lastSeen, scriptFile: (.scriptFile // "")}], closed: ([.closed[]? | {title, closedOn, reason: ((.reason // "") | .[0:160])}] | .[-150:]), unchecked: [.unchecked[]? | {key, title, kind, impact, target, firstSeen}]}' ${BACKLOG_FILE}`
+const BACKLOG_INDEX = `jq -c '{valid: true, open: [.open[]? | {key, title, kind, impact, target, firstSeen, lastSeen, scriptFile: (.scriptFile // ""), askAgainAfter: (.askAgainAfter // "")}], closed: ([.closed[]? | {title, closedOn, reason: ((.reason // "") | .[0:160])}] | .[-150:]), unchecked: [.unchecked[]? | {key, title, kind, impact, target, firstSeen}]}' ${BACKLOG_FILE}`
 const readItem = (list, key) => `jq '.${list}[] | select(.key == "${key}")' ${BACKLOG_FILE}`
 // The desktop app appends untimestamped records to old sessions, so a file's modification time says little about when it was last used.
 const LAST_ACTIVITY = `For a main session transcript also return as lastActivity the timestamp of its last user or assistant record: jq -r 'select(.type == "user" or .type == "assistant") | .timestamp // empty' FILE | tail -n 1. Use find -newermt only to narrow the files down, and decide by lastActivity.`
@@ -1022,6 +1025,7 @@ Read ~/.claude/CLAUDE.md, ~/.claude/settings.json and, when the target is elsewh
 - Revise it when a hook, permission rule or setting would enforce it better than prose, or when it can be shorter.
 - For a kept or revised change to a file, write the script following the Permissions section of ~/.claude/CLAUDE.md: shell only, sed to insert at a named anchor (check with grep -c that the anchor occurs exactly once), jq for JSON, a cat heredoc for a new file. Do not run it. For a change to a mirrored file, end the script with the sync.sh run and the diff that the Public configuration repository section describes. The script never commits or pushes: the session that applies it writes the commit, with that session's own prompts. Leave script empty for a habit or for a skill the user should try first.
 - Write finalProposal in the style of the user's rules file when the target is that file.
+- For a kept or revised proposal, write what the user sees before deciding: exactChange, the text your script adds or replaces, word for word with its file named, or for a hook what it refuses and the rule line beside it; exampleWrong, one moment from the evidence as it went, such as the command Claude ran and what broke, quoted where the source allows; and exampleFixed, the same moment as it would have gone with the change. Keep each under 1,200 characters, and leave all three empty for a dropped one.
 
 ${proposalText(p)}
 ${GROUND}`, { label: `fit ${p.id}`, phase: phaseName, schema: FIT_CHECK }),
@@ -1318,10 +1322,16 @@ const newItems = kept.filter(p => p.kind !== 'habit').map(p => ({
   evidence: (p.evidence || []).slice(0, 5),
   fitNote: p.fit.reason,
   script: p.fit.script,
+  exactChange: p.fit.exactChange || '',
+  exampleWrong: p.fit.exampleWrong || '',
+  exampleFixed: p.fit.exampleFixed || '',
   firstSeen: p.firstSeen || scout.today,
   lastSeen: scout.today,
 }))
-const carried = stillOpen.map(i => {
+// A step the user answered "Not now" for waits out its date, so the same questions do not come back every run.
+const parked = stillOpen.filter(i => i.askAgainAfter && i.askAgainAfter > scout.today)
+if (parked.length) log(`${parked.length} open proposals wait until their askAgainAfter date before they are asked about again`)
+const carried = stillOpen.filter(i => !parked.includes(i)).map(i => {
   const update = merged.updates.find(u => u.key === i.key)
   return { ...i, isNew: false, evidence: update ? update.evidence.concat(i.evidence).slice(0, 5) : i.evidence, lastSeen: update ? scout.today : i.lastSeen }
 })
@@ -1345,7 +1355,7 @@ const PATCH_CHUNK = 12
 const fullItem = p => ({ key: p.key || `${scout.runId}-${p.id}`, kind: p.kind, title: p.title, impact: p.impact, problem: p.problem, proposal: p.proposal, target: p.target, evidence: (p.evidence || []).slice(0, 5), sources: p.sources || [], firstSeen: p.firstSeen || scout.today })
 const patch = {
   updated: scout.now,
-  promote: newItems.filter(i => i.fromBacklog).map(i => ({ key: i.key, fitNote: i.fitNote, lastSeen: scout.today, ...(i.revised ? { proposal: i.proposal } : {}) })),
+  promote: newItems.filter(i => i.fromBacklog).map(i => ({ key: i.key, fitNote: i.fitNote, exactChange: i.exactChange, exampleWrong: i.exampleWrong, exampleFixed: i.exampleFixed, lastSeen: scout.today, ...(i.revised ? { proposal: i.proposal } : {}) })),
   closeOpen: closedNow,
   closeUnchecked: verified.filter(p => p.fromBacklog && (!holds(p) || p.kind === 'habit')).map(p => ({ key: p.key, title: p.title, closedOn: scout.today, reason: holds(p) ? 'shown as a habit in the report' : `rejected: ${rejectReason(p)}` })),
   addClosed: rejected.filter(r => !r.fromBacklog).map(r => ({ key: `${scout.runId}-rejected`, title: r.title, closedOn: scout.today, reason: `rejected: ${r.reason}` })),
@@ -1542,7 +1552,7 @@ const stoppedBy = skippedWork.length
   : 'it ran out of work, with everything due done'
 // Questions one step at a time, since nobody can hold sixty numbered steps from a long report in their head.
 const walkThrough = steps.length
-  ? `Then walk the user through the steps one at a time, in plan order, with one AskUserQuestion call per step and never several steps in one call. The question names the step's id, title and impact, and the option descriptions give its problem, the change and its strongest piece of evidence, read from the report and from ${backlogTarget} by its key. The options are "Apply (Recommended)" for a step that runs, "Regenerate and apply (Recommended)" for one that needs regenerating, or "Do it (Recommended)" for one without a script, then "Later", which leaves it open, "Drop", which closes it in the backlog as declined by the user, and "Stop here", which leaves this and every later step open. Carry out each accepted step before the next question: run its script, regenerate it against the files as they stand and test it in a sandbox first, or do what its prompt says, and say its result in one line; when it fails, say why and ask about it again with "Later" recommended. Afterwards commit and push what changed, as the Public configuration repository section of ~/.claude/CLAUDE.md says, mark each step in ${OUT}/${scout.runId}.md as applied, later or dropped, and say in one line how many went each way.`
+  ? `Then go through the steps in a dialogue, one at a time, in plan order, with one AskUserQuestion call per step and never several steps in one call. The question names the step's id, title and impact and asks whether to add it, naming where it goes, such as dotclaude or a project's memory. The first option is "Add it", marked (Recommended) when its script runs, and its preview holds three parts under their own headings: the exact change, word for word as it will read in its file, or for a hook what it refuses and the rule line beside it; what went wrong, one concrete moment from its evidence as it happened, quoted where the source allows; and the same moment as it goes once the change is in. Take the three from exactChange, exampleWrong and exampleFixed of the item in ${backlogTarget} by its key, and work out any that is missing from the step's script and evidence before asking. The other options are "Not now", which keeps it open and sets its askAgainAfter in the backlog to a week ahead, so runs before that date leave it out; "Don't add", which closes it in the backlog as declined by the user; and "Stop here", which leaves this and every later step open. Whatever the user types instead, such as a change to the proposal, is carried out and the step asked about again. Carry out each added step before the next question: run its script, regenerate it against the files as they stand and test it in a sandbox first, or do what its prompt says, and say its result in one line; when it fails, say why and ask about it again with "Not now" recommended. Afterwards commit and push what changed, as the Public configuration repository section of ~/.claude/CLAUDE.md says, mark each step in ${OUT}/${scout.runId}.md as added, not now or not added, and say in one line how many went each way.`
   : 'There are no steps to apply, so say so.'
 
 return {

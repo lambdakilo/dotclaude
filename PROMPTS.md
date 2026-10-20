@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Leave the desktop app's window layout to the user
+## Show each dream proposal's exact change with a before and after
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**13.**
+> theres a lot of proposals after every dream. let alone after fri and
+> sat on mon. lets do it so that after every dream the session asks in
+> dialogue if i wanna add it to dotclaude, not or something else. the
+> dialogue should give me the exact proposal on what is added and and a
+> concrete example on what is wrong and how the example looks if fixed
+
+## Leave the desktop app's window layout to the user
+
+2026-10-20, commit [1732363](https://github.com/lambdakilo/dotclaude/commit/17323634c20c635a17fe9665f4bb21fec2269443), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > lets test the usage line
@@ -1513,6 +1524,7 @@ so a change by hand is lost at the next commit.
 - eu: European Union
 - ext: external, a file posted by another organisation in a shared channel
 - feat: feature
+- fri: Friday
 - gcp: Google Cloud Platform
 - gh: GitHub CLI
 - gh: GitHub command line interface
@@ -1526,6 +1538,7 @@ so a change by hand is lost at the next commit.
 - md: markdown
 - md: Markdown file
 - mds: Markdown files
+- mon: Monday
 - ofc: of course
 - p18: proposal 18 of the weekly review of 2026-10-14
 - p9: proposal 9 of the weekly review of 2026-10-14
