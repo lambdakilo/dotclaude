@@ -342,6 +342,9 @@ apply to one repository belong in that repository's project memory.
   and is signed in to. A page, a file or an upload is tried there before a reply calls it out of
   reach, and when the pane shows a sign-in page the reply asks the user to sign in there. A deny
   rule in `settings.json` blocks Claude in Chrome, which the user does not want.
+- The window layout of the desktop app is the user's. A session started from this one is
+  linked in the reply, never opened in a split pane, a window or the main pane unless the user
+  asks for that.
 - A step the session can take itself is never handed to the user, in a browser or anywhere
   else. The user enters only personal data, such as a name, phone number, address, password or
   payment details, and makes only the decisions the session cannot settle from the request,

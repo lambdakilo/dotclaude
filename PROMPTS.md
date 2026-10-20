@@ -5,9 +5,19 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Show session usage as a status line, not a notice
+## Leave the desktop app's window layout to the user
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> lets test the usage line
+
+**6.**
+> what. why did it open in another window
+
+## Show session usage as a status line, not a notice
+
+2026-10-20, commit [0dbf3f0](https://github.com/lambdakilo/dotclaude/commit/0dbf3f04f897ffc163dd1202f2d95d82c3d6aa77), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [pasted: a screenshot of the usage line in a Claude Code notice]
