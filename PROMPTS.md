@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep dots out of file names but before the extension
+## Show each dream review step's example above its question
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> give an example of p12 then ask again from me
+
+## Keep dots out of file names but before the extension
+
+2026-10-20, commit [bf29ab3](https://github.com/lambdakilo/dotclaude/commit/bf29ab3ccf3d38b24a22453fd02b8e07c079e59a), model claude-opus-5-5, effort xhigh.
 
 **11.**
 > also dont say dot in the filename if not necessary for example 20-oct
