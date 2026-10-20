@@ -5,9 +5,19 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Show a dream review example as the exchange itself, before and after
+## Keep a dotclaude ask whole in Prompt feedback
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**6.**
+> your example was not clear and concrete enough
+>
+> > p14 (medium), trimmed: stop Prompt feedback calling a dotclaude ask
+> > unclear or a second job. Add it? Add it (Recommended)
+
+## Show a dream review example as the exchange itself, before and after
+
+2026-10-20, commit [3450279](https://github.com/lambdakilo/dotclaude/commit/34502791a229031fda2ef48906a8ab5713864e18), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > your example was not clear and concrete enough

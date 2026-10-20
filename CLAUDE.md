@@ -286,6 +286,8 @@ apply to one repository belong in that repository's project memory.
   The rewrite keeps one reading with every comma and full stop removed, since the user may type
   it without them: a scope word such as `here` or `only` stands next to what it limits, or the
   scope is spelled out.
+- A `dotclaude` ask is how the user asks for a rule change, alone or inside a prompt about other
+  work. The feedback never calls it unclear or a second job, and a rewritten prompt keeps it.
 
 ## Comments
 
