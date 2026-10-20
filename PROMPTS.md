@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Infer the scope of corrections, show usage after each turn
+## Put everything the reader copies in a code block
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**19.**
+> also when you say copy something put that in a triple backquote
+> whatever code block so i can one click copy it even if its an url
+> address
+>
+> [an ask about a downstream project left out]
+
+## Infer the scope of corrections, show usage after each turn
+
+2026-10-20, commit [74a5666](https://github.com/lambdakilo/dotclaude/commit/74a5666afbbee8a2cb63ca6128740e02f68e7980), model claude-opus-5-5, effort xhigh.
 
 **16.**
 > [an ask about a downstream project left out]

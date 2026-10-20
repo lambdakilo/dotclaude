@@ -90,8 +90,9 @@ redacted in public and upstream repositories.
   down, also the ones that feel obvious: copy the address before pasting it, open the new tab
   before pasting into it, log in again after logging out. A step never relies on something the
   reader has not been told to do. A step that opens a page gives its full local address, such
-  as `http://localhost:3000/items`, never the page's name alone, so the reader pastes instead of
-  hunting through the navigation. Steps run in the order their data needs, deletions last. A
+  as `http://localhost:3000/items`, in a `text` block of its own under the step, never the
+  page's name alone and never inline, so the reader copies it in one click instead of hunting
+  through the navigation. Steps run in the order their data needs, deletions last. A
   step that uses a seeded record says it comes from the seed and what to type to find it. Where
   the screen shows a stand-in, such as placeholder data, a mock or an unwired part, or a part
   that ignores the step's input, the step says so. A limitation found while building goes into
