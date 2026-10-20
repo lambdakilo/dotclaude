@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Make a review show where each bug it finds can be seen
+## Show the tokens and dollars a dream run spent
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**15.**
+> after dreaming is done does it say how many tokens and usd were
+> spent? if not, fix
+
+## Make a review show where each bug it finds can be seen
+
+2026-10-20, commit [9d08ba7](https://github.com/lambdakilo/dotclaude/commit/9d08ba71f1c7a33717509d06ac7aee3391886841), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a review of a pull request in a downstream project left out]
@@ -1577,6 +1585,7 @@ so a change by hand is lost at the next commit.
 - ts: TypeScript
 - ui: user interface
 - url: uniform resource locator
+- usd: US dollars
 - vpn: virtual private network
 - wth: what the hell
 - XDG: X Desktop Group, now freedesktop.org

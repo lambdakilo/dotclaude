@@ -61,6 +61,7 @@ const scenarios = [
     ['the fit check asks for the exact change and both examples', st => /exactChange/.test(st.prompts['fit old-n1'] || '') && /exampleFixed/.test(st.prompts['fit old-n1'] || '')],
     ['the patch carries the examples', st => /"exampleWrong":"it broke"/.test(st.prompts['backlog patch'] || '') || Object.keys(st.prompts).some(k => k.startsWith('backlog items') && /"exampleWrong":"it broke"/.test(st.prompts[k]))],
     ['the session is told to ask one step at a time with the examples', (st, r) => /one AskUserQuestion call per step/.test(r.forTheSession) && /exampleWrong/.test(r.forTheSession)],
+    ['the session is told to show the tokens and dollars the run spent', (st, r) => /usage\.sh --run/.test(r.forTheSession)],
   ]],
   ['review of the open backlog', { ...wed, week: 30, sessions: 4, args: 'review', backlog: {
     valid: true,

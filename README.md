@@ -74,8 +74,11 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   `24% context, 92.4M tokens, $40.39, cache until 08:32`: how full the context window is, the
   tokens the session has processed and what they would cost at the API list prices, and until
   when the prompt cache stays warm. `usage.sh` reads the transcript, which repeats a response's
-  usage on every streamed block, so it counts each response once. The mod API is early access
-  and may change between Claude Code releases.
+  usage on every streamed block, so it counts each response once. The status line leaves out
+  workflow agents, whose transcripts can run to hundreds of megabytes; `usage.sh --run <folder>`
+  totals every transcript under a folder, such as a workflow run's, by kind of token and by
+  model, and the dream workflow has the session show it after every run. The mod API is early
+  access and may change between Claude Code releases.
 - [`skills/pull-requests/SKILL.md`](skills/pull-requests/SKILL.md): a skill, installed as
   `~/.claude/skills/pull-requests/SKILL.md`, with the procedures for a pull request: the body and
   its prompts block, the steps to verify it, the reply to a review, and screenshots and

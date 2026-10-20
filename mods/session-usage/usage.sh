@@ -9,26 +9,15 @@
 #
 #   usage.sh <session id>   the session's transcript under projects/
 #   usage.sh <transcript>   a transcript file
+#   usage.sh --run <folder> the tokens and cost of every transcript under the
+#                           folder, such as a workflow run's, by kind and model
 
 set -u
 command -v jq >/dev/null 2>&1 || exit 0
 
-transcript=${1:-}
-if [ -n "$transcript" ] && [ ! -f "$transcript" ]; then
-  for f in "${CLAUDE_CONFIG_DIR:-$HOME/.claude}"/projects/*/"$1".jsonl; do
-    [ -f "$f" ] && transcript=$f
-  done
-fi
-[ -f "$transcript" ] || exit 0
-
-files=("$transcript")
-for f in "${transcript%.jsonl}"/subagents/*.jsonl; do
-  [ -f "$f" ] && files+=("$f")
-done
-
 # Dollars per million tokens: input, output, cache read, cache write for the
 # 5-minute and the 1-hour cache. Writes cost 1.25 and 2 times input.
-read -r ctx window tokens cost unpriced warm < <(jq -nrR --arg main "$transcript" '
+common='
   def prices: {
     "claude-fable-5-1":  [10, 50, 0.25, 12.5, 20],
     "claude-mythos-5-1": [10, 50, 0.25, 12.5, 20],
@@ -44,24 +33,77 @@ read -r ctx window tokens cost unpriced warm < <(jq -nrR --arg main "$transcript
   def n: . // 0;
   def all_in: (.input_tokens | n) + (.cache_creation_input_tokens | n)
     + (.cache_read_input_tokens | n) + (.output_tokens | n);
-  [inputs | fromjson? | select(.type == "assistant" and .message.usage != null
+  def cost($p): .u as $u
+    | if $p == null then 0 else
+        (($u.input_tokens | n) * $p[0] + ($u.output_tokens | n) * $p[1]
+         + ($u.cache_read_input_tokens | n) * $p[2]
+         + (if $u.cache_creation == null then ($u.cache_creation_input_tokens | n)
+            else ($u.cache_creation.ephemeral_5m_input_tokens | n) end) * $p[3]
+         + ($u.cache_creation.ephemeral_1h_input_tokens | n) * $p[4]) / 1000000
+      end;
+  def responses($main): [inputs | fromjson? | select(.type == "assistant" and .message.usage != null
       and .message.model != "<synthetic>" and .message.id != null)
     | {id: .message.id, model: .message.model, u: .message.usage,
        at: (.timestamp | sub("\\.[0-9]+"; "") | fromdateiso8601),
        main: (input_filename == $main)}]
-  | group_by(.id)
-  | map({model: .[0].model, u: .[-1].u, at: (map(.at) | min), main: .[0].main})
+    | group_by(.id)
+    | map({model: .[0].model, u: .[-1].u, at: (map(.at) | min), main: .[0].main});'
+
+human() {
+  awk -v n="$1" 'BEGIN {
+    if (n >= 1000000) { s = sprintf("%.1f", n / 1000000); sub(/\.0$/, "", s); printf "%sM", s }
+    else if (n >= 1000) printf "%dk", n / 1000
+    else printf "%d", n }'
+}
+
+if [ "${1:-}" = --run ]; then
+  [ -d "${2:-}" ] || { echo "usage.sh --run <folder>" >&2; exit 2; }
+  files=()
+  while IFS= read -r f; do files+=("$f"); done < <(find "$2" -name '*.jsonl' -type f 2>/dev/null)
+  [ "${#files[@]}" -gt 0 ] || { echo "no transcripts under $2" >&2; exit 1; }
+  jq -nrR "$common"'
+    responses("")
+    | (map(.u | all_in) | add // 0) as $tokens
+    | (map(cost(prices[.model])) | add // 0) as $cost
+    | (map(select(prices[.model] == null)) | length) as $unpriced
+    | (map(.u) | {input: (map(.input_tokens | n) | add // 0),
+        write: (map(.cache_creation_input_tokens | n) | add // 0),
+        read: (map(.cache_read_input_tokens | n) | add // 0),
+        output: (map(.output_tokens | n) | add // 0)}) as $k
+    | (group_by(.model) | map(.[0].model as $m | "\($m) \(map(.u | all_in) | add) \(map(cost(prices[$m])) | add)")) as $models
+    | "\($tokens) \($cost) \($unpriced) \($k.input) \($k.write) \($k.read) \($k.output)", $models[]
+  ' "${files[@]}" 2>/dev/null | {
+    read -r tokens cost unpriced input write read output || exit 1
+    note=""
+    [ "$unpriced" -gt 0 ] && note=" ($unpriced responses from models without a price)"
+    printf '%s tokens, $%.2f at API list prices%s\n' "$(human "$tokens")" "$cost" "$note"
+    printf '  input %s, cache write %s, cache read %s, output %s\n' "$(human "$input")" "$(human "$write")" "$(human "$read")" "$(human "$output")"
+    while read -r model mtokens mcost; do
+      printf '  %s: %s tokens, $%.2f\n' "$model" "$(human "$mtokens")" "$mcost"
+    done
+  }
+  exit 0
+fi
+
+transcript=${1:-}
+if [ -n "$transcript" ] && [ ! -f "$transcript" ]; then
+  for f in "${CLAUDE_CONFIG_DIR:-$HOME/.claude}"/projects/*/"$1".jsonl; do
+    [ -f "$f" ] && transcript=$f
+  done
+fi
+[ -f "$transcript" ] || exit 0
+
+files=("$transcript")
+for f in "${transcript%.jsonl}"/subagents/*.jsonl; do
+  [ -f "$f" ] && files+=("$f")
+done
+
+read -r ctx window tokens cost unpriced warm < <(jq -nrR --arg main "$transcript" "$common"'
+  responses($main)
   | select(length > 0)
   | (map(select(.main)) | max_by(.at)) as $last
   | (map(.u | all_in) | add) as $tokens
-  | (map(prices[.model] as $p | .u as $u
-      | if $p == null then 0 else
-          (($u.input_tokens | n) * $p[0] + ($u.output_tokens | n) * $p[1]
-           + ($u.cache_read_input_tokens | n) * $p[2]
-           + (if $u.cache_creation == null then ($u.cache_creation_input_tokens | n)
-              else ($u.cache_creation.ephemeral_5m_input_tokens | n) end) * $p[3]
-           + ($u.cache_creation.ephemeral_1h_input_tokens | n) * $p[4]) / 1000000
-        end) | add) as $cost
+  | (map(cost(prices[.model])) | add) as $cost
   | (map(select(prices[.model] == null)) | length) as $unpriced
   | (if any(.[]; .main and (.u.cache_creation.ephemeral_1h_input_tokens | n) > 0)
      then 3600 else 300 end) as $ttl
@@ -70,12 +112,6 @@ read -r ctx window tokens cost unpriced warm < <(jq -nrR --arg main "$transcript
 ' "${files[@]}" 2>/dev/null)
 [ -n "${warm:-}" ] || exit 0
 
-human() {
-  awk -v n="$1" 'BEGIN {
-    if (n >= 1000000) { s = sprintf("%.1f", n / 1000000); sub(/\.0$/, "", s); printf "%sM", s }
-    else if (n >= 1000) printf "%dk", n / 1000
-    else printf "%d", n }'
-}
 clock=$(date -r "$warm" +%H:%M 2>/dev/null || date -d "@$warm" +%H:%M 2>/dev/null)
 percent=$(awk -v c="$ctx" -v w="$window" 'BEGIN { printf "%d", c * 100 / w }')
 dollars=$(awk -v d="$cost" 'BEGIN { printf "%.2f", d }')
