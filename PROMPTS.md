@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Delete the head branch of every merged PR
+## Make review steps type what the PR's pictures show
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.**
+> [a note that a review step named other test data than the PR's
+> screenshot showed] fix this now and in future
+
+## Delete the head branch of every merged PR
+
+2026-10-20, commit [4368f4d](https://github.com/lambdakilo/dotclaude/commit/4368f4d6f0f6d3887899e100ff1d43ac0c5b5764), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > always delete merged branches

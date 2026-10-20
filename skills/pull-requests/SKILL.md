@@ -84,7 +84,9 @@ redacted in public and upstream repositories.
   than one control, say which: the row's, the dialog's, the bottom bar's. One action per
   sentence, followed by what the reader should now see, and two actions that each trigger the
   same thing get a sentence each, never "both ask too". Test data the reader creates gets the
-  shortest name that works, a, b, c or 1, 2, 3, never a prefix such as the PR's number. A step
+  shortest name that works, a, b, c or 1, 2, 3, never a prefix such as the PR's number, unless
+  a screenshot or recording of that step shows other data: then the step has the reader type
+  and pick exactly what the picture shows, so the screen matches the picture. A step
   that searches by name says what to type and uses the shortest string the seed data does not
   contain, checked with a search in the grid first. Every action the reader takes is written
   down, also the ones that feel obvious: copy the address before pasting it, open the new tab
@@ -109,7 +111,8 @@ redacted in public and upstream repositories.
   reviewer's own. A manual step that runs a command carries that command in a block under it,
   never a description of it. Where the PR's step has a screenshot or video, the matching step
   names it at its start, "the PR's screenshot under step 3 shows this dialog", and the comparison
-  comes before the click that closes what the picture shows.
+  comes before the click that closes what the picture shows. Open every such picture at full
+  size before writing its step, and take the step's typed and picked values from it.
 - Every bug the review finds has a step in that list where the reader sees it: the step that
   reaches the state, or one added for it right after the step that does, opens with "Bug
   (finding n):", gives the clicks that bring the bug out, then what the screen shows and what it
