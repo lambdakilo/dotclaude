@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Let /dream review ask about the open backlog without a run
+## Rewrap the dream entry of the README
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**14.** Quoted under [15d672a](https://github.com/lambdakilo/dotclaude/commit/15d672a63f759a420755dd034ab79c406754f0ca).
+
+## Let /dream review ask about the open backlog without a run
+
+2026-10-20, commit [15d672a](https://github.com/lambdakilo/dotclaude/commit/15d672a63f759a420755dd034ab79c406754f0ca), model claude-opus-5-5, effort xhigh.
 
 **14.**
 > ok but how do i continue working with the previous dream results now?
