@@ -242,6 +242,9 @@ apply to one repository belong in that repository's project memory.
   version, such as the app's localized strings or the tool's `--help`, never from memory. A step
   that cannot be run here, such as a sign-in, a device build or a setting on a phone, is named
   in the reply as not run, with the reason, and is never called checked.
+- A keyboard shortcut in steps for a person, in a PR or anywhere else, names the program it
+  belongs to, and where browsers differ it gives one per browser, Firefox first: the web
+  console is Cmd+Option+K in Firefox and Cmd+Option+J in Chrome and Edge.
 - A project's CLAUDE.md holds what Claude runs, such as build, test, verify, install, launch and
   logs, and the rules the code follows. Setup a person does once by hand goes in the README,
   and CLAUDE.md points there.
@@ -292,6 +295,9 @@ apply to one repository belong in that repository's project memory.
   its worktrees still has containers up, it sends the turn back once with the reason. It stops
   nothing itself, and a turn that started nothing passes. It is a safety net for the rule
   above, not a substitute for it.
+- A second `Stop` hook, `~/.claude/hooks/session-usage.sh`, shows one line at the end of every
+  turn: how full the context window is, the tokens the session has processed and their cost at
+  the API list prices, and until when the prompt cache stays warm.
 - A compose stack with fixed container names is one per machine, shared by every session of
   the repository and its worktrees. A stack another live session started stays that session's
   until its containers are down: ask it with SendMessage to say when they are, and run what
@@ -409,7 +415,8 @@ apply to one repository belong in that repository's project memory.
   and `sync.sh --check-message`, run from the untracked commit-msg hook of the checkout and of
   each mirror, holds commit messages to the same list.
 - A change to this file or to the `pull-requests` skill is made only on the user's go: a prompt
-  that says go or push, or a script from this session that the user says they ran. Then, as
+  that says go or push, a correction or wish meant to hold beyond the task as the last bullet
+  of Memory hygiene describes, or a script from this session that the user says they ran. Then, as
   whenever a session changes another mirrored file, run `sync.sh` and read the diff, write the
   commit message to a file in the scratchpad, and run `sync.sh --commit <file>` in the same
   turn, with the paths to commit after the file when the checkout holds other changes too. It
@@ -488,9 +495,11 @@ apply to one repository belong in that repository's project memory.
   file. A claim that rests on a note keeps the note's date and qualifiers, "as of 2026-10-02
   one of the four fits" and not "all four fit", and the note is re-read before a plan depends
   on it.
-- A correction that would hold beyond the task, a why question included, gets a drafted rule in
-  the same reply: the bullet's text, where it goes (project memory or this file), any rule it
-  changes, and the reply redone under it. When the correction asks for what the current text
-  already does another way, say in a line how it already does it and ask which to keep. Project
-  memory is written at once, this file on the go described under Public configuration
-  repository.
+- A correction or a wish that would hold beyond the task, a why question included, goes into
+  this file or the `pull-requests` skill in the same turn, committed and pushed as under Public
+  configuration repository, without the user naming that repository: it holds for later
+  prompts and sessions unless the user limits it. A limit the user states sets the scope: this
+  session only writes nothing, this project writes its project memory. The reply quotes the
+  rule as written, names any rule it changed, and is redone under it. When the correction asks
+  for what the current text already does another way, say in a line how it already does it
+  and rewrite the text so it says so plainly.

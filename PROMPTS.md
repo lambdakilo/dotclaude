@@ -5,9 +5,33 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
+## Infer the scope of corrections, show usage after each turn
+
+2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**16.**
+> [an ask about a downstream project left out]
+
+**17.**
+> [an ask about a downstream project left out]
+
+**18.**
+> dotclaude command option j doesnt open dev tool console btw on
+> firefox. [an ask about a downstream project left out] also edit
+> dotclaude so that i dont have to say dotclaude everytime i wanna make
+> a diff in global ruling. in the future infer that if i have a thing i
+> want fixed in future prompts and sessions as well youll add it to
+> dotclaude. ill say explicitly if i only want a change in this session
+> or project or etc
+>
+> also remove the dotcalude stale cache guard prompt. instead show me a
+> oneline of how much context percentage and tokens and maybe dollars
+> has been spent already on the session and when does the prompt cache
+> expire
+
 ## Give document headings a clear pause in text-to-speech
 
-2026-10-19, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+2026-10-19, commit [e1d30be](https://github.com/lambdakilo/dotclaude/commit/e1d30be3c0c868abcb574f7d879307518da23045), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask to turn a book into audio left out]

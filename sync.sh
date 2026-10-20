@@ -87,7 +87,7 @@ mirrored=(
   hooks/stop-running-stack.sh
   hooks/stack-held-by-peer.sh
   hooks/claude-md-changed.sh
-  hooks/stale-cache-guard.sh
+  hooks/session-usage.sh
   hooks/no-github-posts.sh
   hooks/prompt-feedback-box.sh
   hooks/no-meta-prompts.sh

@@ -48,11 +48,10 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   each session and, once the file has changed, adds the diff to the next prompt, or blocks the
   next commit or `gh pr` create, edit or merge once with the diff, so a session sees rule edits
   made from another session while it runs.
-- [`hooks/stale-cache-guard.sh`](hooks/stale-cache-guard.sh): runs on every prompt and blocks
-  the first prompt after more than an hour into a session of 200k tokens or more once, since the
-  prompt cache has expired by then and the prompt would write the whole conversation to it
-  again. Sending the prompt again goes through, and `/compact` or a new session is the cheaper
-  way on. Slash commands and what the harness sends in tags, such as subagent reports, pass.
+- [`hooks/session-usage.sh`](hooks/session-usage.sh): runs when a turn ends and shows one line:
+  how full the context window is, the tokens the session has processed and what they would cost
+  at the API list prices, and until when the prompt cache stays warm. The transcript repeats a
+  response's usage on every streamed block, so it counts each response once.
 - [`hooks/no-github-posts.sh`](hooks/no-github-posts.sh): runs before every shell command and
   refuses the GitHub CLI calls that would post as the user: `gh pr comment`, `gh issue comment`,
   `gh pr review`, a close or reopen with `--comment`, and `gh api` calls that write a comment or a
