@@ -186,6 +186,16 @@
         "hooks": [
           {
             "type": "command",
+            "command": "\"$HOME/.claude/hooks/no-home-search.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
             "command": "\"$HOME/.claude/hooks/stack-held-by-peer.sh\"",
             "timeout": 10
           }

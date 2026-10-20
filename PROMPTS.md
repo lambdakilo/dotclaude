@@ -5,9 +5,19 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep a dotclaude ask whole in Prompt feedback
+## Refuse whole-disk and home-wide searches with a PreToolUse hook
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**6.**
+> your example was not clear and concrete enough
+>
+> > p15 (medium): refuse whole-disk and home-wide searches with a
+> > PreToolUse hook in every session. Add it? Add it (Recommended)
+
+## Keep a dotclaude ask whole in Prompt feedback
+
+2026-10-20, commit [99a557c](https://github.com/lambdakilo/dotclaude/commit/99a557c7430a116984f37c74a9555211c1cd0a73), model claude-opus-5-5, effort xhigh.
 
 **6.**
 > your example was not clear and concrete enough

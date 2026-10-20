@@ -33,6 +33,11 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   command, since a pipeline exits with its last command's status and a failed check piped into
   `tail` reads as a pass. It lets the command through when it sets `pipefail`, and otherwise
   names the way round: the output to a file in the scratchpad, then the status echoed.
+- [`hooks/no-home-search.sh`](hooks/no-home-search.sh): runs before every Bash command and
+  refuses a search that walks the whole disk or the home folder: `find`, `fd`, `rg`, `du`,
+  `tree`, `grep -r` or `ls -R` rooted at `/`, `/Users`, `/Volumes`, `~` or `~/*`, and `mdfind`
+  without `-onlyin`. macOS asks the user about each protected folder such a search reaches, and
+  the command waits for the answer. The refusal names the folders to search instead.
 - [`hooks/cd-fall-through.sh`](hooks/cd-fall-through.sh): runs before every Bash command and
   refuses one in which a part after a `;` or a line break would still run when a `cd` before it
   failed, and so would run in the start directory. A `cd` guarded with `|| exit`, or into a

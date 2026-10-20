@@ -82,6 +82,7 @@ mirrored=(
   hooks/git-prune-gone-branches.sh
   hooks/git-submodule-update-after-switch.sh
   hooks/check-not-piped.sh
+  hooks/no-home-search.sh
   hooks/prompt-log.sh
   hooks/memory-plain-characters.sh
   hooks/stop-running-stack.sh
