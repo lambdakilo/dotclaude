@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Name dream review steps by p-number, and label a made-up example
+## Keep dots out of file names but before the extension
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**11.**
+> also dont say dot in the filename if not necessary for example 20-oct
+> would have been better
+
+## Name dream review steps by p-number, and label a made-up example
+
+2026-10-20, commit [d1a6ed5](https://github.com/lambdakilo/dotclaude/commit/d1a6ed5724089591f1799f98d7a04bc798294373), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > what does w mean here? also if you dont have any examples stored

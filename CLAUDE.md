@@ -204,9 +204,11 @@ apply to one repository belong in that repository's project memory.
   character outside ASCII belongs only inside a word that needs it, such as ä or ö, or inside a
   label quoted from the screen.
 - A file name a session picks, for a deliverable, a scratch file or a new file in a repository,
-  separates its words with dashes, never underscores: `weekly-plan.pdf`, not `weekly_plan.pdf`.
-  Only a name a language, tool or platform requires keeps its underscores, such as an
-  importable Python module or GitHub's `pull_request_template.md`.
+  separates its words with dashes, never underscores, and has no dot but the one before its
+  extension, so a date goes in as `20-oct`: `weekly-plan-20-oct.pdf`, not
+  `weekly_plan_20.10.pdf`. Only a name a language, tool or platform requires keeps its
+  underscores or dots, such as an importable Python module, a `.test.ts` file, a `.gitignore`
+  or GitHub's `pull_request_template.md`.
 - Name an organisation by its full registered name every time. Never "we", "ours", "they" or
   "theirs" standing in for a company. The names live in `~/.claude/rules/organisations.md`,
   which loads in every session, and those of one repository also in its project memory.
