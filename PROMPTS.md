@@ -5,9 +5,19 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Show the tokens and dollars a dream run spent
+## Estimate energy and CO2e in the session-usage status line
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dotclaude add estimates of kilowatthours and co2 grams to the
+> statusline with context window. those could come from estimates of
+> time and datacenter area. the statusline is separate operation of the
+> session context window right?
+
+## Show the tokens and dollars a dream run spent
+
+2026-10-20, commit [c224c07](https://github.com/lambdakilo/dotclaude/commit/c224c07ab907b4a044e4d86c36adbeea762f8f00), model claude-opus-5-5, effort xhigh.
 
 **15.**
 > after dreaming is done does it say how many tokens and usd were
@@ -1548,6 +1558,7 @@ so a change by hand is lost at the next commit.
 - arch: Arch Linux
 - ccbysa4.0: Creative Commons Attribution-ShareAlike 4.0 International
 - cd: change directory, the shell command
+- co2: carbon dioxide
 - cs: computer science
 - dir: directory
 - e.g.: for example

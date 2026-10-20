@@ -12,7 +12,7 @@ test('pins the script line after a main turn', async ($, on) => {
   on('session.id', () => ({ value: 'abc' }))
   on('process.run', ($, e) => {
     argvs.push([...e.argv])
-    return ran('15% context, 4.3M tokens, $2.27, cache until 08:50\n')
+    return ran('15% context, 4.3M tokens, $2.27, ~0.070 kWh, ~32 g CO2e, cache until 08:50\n')
   })
   on('ui.status', ($, e) => {
     shown.push(e.text)
@@ -25,7 +25,7 @@ test('pins the script line after a main turn', async ($, on) => {
   expect(argvs).toHaveLength(1)
   expect(argvs[0]?.[0]).toMatch(/\/usage\.sh$/)
   expect(argvs[0]?.[1]).toBe('abc')
-  expect(shown).toEqual(['15% context, 4.3M tokens, $2.27, cache until 08:50'])
+  expect(shown).toEqual(['15% context, 4.3M tokens, $2.27, ~0.070 kWh, ~32 g CO2e, cache until 08:50'])
 })
 
 test('leaves a subagent turn alone and clears on no line', async ($, on) => {

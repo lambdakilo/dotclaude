@@ -71,14 +71,22 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
 - [`mods/session-usage`](mods/session-usage): a Claude Code mod, installed as
   `~/.claude/mods/session-usage` and loaded in every session through `CLAUDE_CODE_PLUGIN_DIRS` in
   `settings.json`. After every turn it pins a short status line under the prompt, such as
-  `24% context, 92.4M tokens, $40.39, cache until 08:32`: how full the context window is, the
-  tokens the session has processed and what they would cost at the API list prices, and until
-  when the prompt cache stays warm. `usage.sh` reads the transcript, which repeats a response's
-  usage on every streamed block, so it counts each response once. The status line leaves out
-  workflow agents, whose transcripts can run to hundreds of megabytes; `usage.sh --run <folder>`
-  totals every transcript under a folder, such as a workflow run's, by kind of token and by
-  model, and the dream workflow has the session show it after every run. The mod API is early
-  access and may change between Claude Code releases.
+  `24% context, 92.4M tokens, $40.39, ~0.41 kWh, ~188 g CO2e, cache until 08:32`: how full the
+  context window is, the tokens the session has processed and what they would cost at the API
+  list prices, an estimate of the energy the responses took and the CO2e it emitted, and until
+  when the prompt cache stays warm. The app draws the line, and it never enters the model's
+  context. `usage.sh` reads the transcript, which repeats a response's usage on every streamed
+  block, so it counts each response once. The energy is the seconds each response streamed
+  times one request's share of an 8-GPU H100 node, about 0.75 kW, as
+  [How Hungry is AI?](https://arxiv.org/abs/2505.09598) models a flagship model. The CO2e uses
+  the [Ember 2025 grid average](https://ourworldindata.org/grapher/carbon-intensity-electricity)
+  of the US when the response's `inference_geo` is `us`, and of the world otherwise. It is an
+  order of magnitude, not a measurement: it leaves out idle capacity, training and hardware
+  manufacture, and production serving likely batches more than the paper's 8 requests. The
+  status line leaves out workflow agents, whose transcripts can run to hundreds of megabytes;
+  `usage.sh --run <folder>` totals every transcript under a folder, such as a workflow run's, with
+  its energy, by kind of token and by model, and the dream workflow has the session show it after
+  every run. The mod API is early access and may change between Claude Code releases.
 - [`skills/pull-requests/SKILL.md`](skills/pull-requests/SKILL.md): a skill, installed as
   `~/.claude/skills/pull-requests/SKILL.md`, with the procedures for a pull request: the body and
   its prompts block, the steps to verify it, the reply to a review, and screenshots and
