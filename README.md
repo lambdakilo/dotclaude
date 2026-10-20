@@ -85,8 +85,19 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   manufacture, and production serving likely batches more than the paper's 8 requests. The
   status line leaves out workflow agents, whose transcripts can run to hundreds of megabytes;
   `usage.sh --run <folder>` totals every transcript under a folder, such as a workflow run's, with
-  its energy, by kind of token and by model, and the dream workflow has the session show it after
-  every run. The mod API is early access and may change between Claude Code releases.
+  its energy, by kind of token and by model, and the share of prompt tokens the warm cache served,
+  and the dream workflow has the session show it after every run. `usage.sh --since <time>
+  [<until>]` totals the same from the usage log for any period, all sessions together. The mod
+  API is early access and may change between Claude Code releases.
+- [`hooks/usage-log.sh`](hooks/usage-log.sh): a `Stop` hook that after every turn appends one
+  line per new model response of the session and its agents to
+  `~/.claude/usage-log/<YYYY-MM>.jsonl`: its time, model, tokens by kind, the seconds it ran and
+  its `inference_geo`, so a week can be totalled after `cleanupPeriodDays` has deleted the
+  transcripts. It reads a transcript again only when it has grown. Run it once with `--all` to
+  fill the log from every transcript kept:
+  ```sh
+  ~/.claude/hooks/usage-log.sh --all
+  ```
 - [`skills/pull-requests/SKILL.md`](skills/pull-requests/SKILL.md): a skill, installed as
   `~/.claude/skills/pull-requests/SKILL.md`, with the procedures for a pull request: the body and
   its prompts block, the steps to verify it, the reply to a review, and screenshots and

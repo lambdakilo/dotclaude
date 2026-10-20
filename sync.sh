@@ -85,6 +85,7 @@ mirrored=(
   hooks/prompt-log.sh
   hooks/memory-plain-characters.sh
   hooks/stop-running-stack.sh
+  hooks/usage-log.sh
   hooks/stack-held-by-peer.sh
   hooks/claude-md-changed.sh
   hooks/no-github-posts.sh

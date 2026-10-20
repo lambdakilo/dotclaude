@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Make review steps type what the PR's pictures show
+## Log every response's usage and total a week of all sessions
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**16.**
+> dont add p9 and also add co2 and kwh at the end of dreaming. add also
+> to dream workflow a report that i can see on monday on how many
+> tokens were used, dollars would have cost, co2 and kwh of the whole
+> weeks estimated as an aggregate of all sessions. session should
+> somehow store these metrics in the computer in each prompt because
+> server location and time of day matter for kwh. also add a metric of
+> how many tokens (percentage too) hit the warm cache
+
+## Make review steps type what the PR's pictures show
+
+2026-10-20, commit [23969ef](https://github.com/lambdakilo/dotclaude/commit/23969ef2bdc4d713452da2bad71ade1a4eca6130), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > [a note that a review step named other test data than the PR's
@@ -1600,6 +1613,7 @@ so a change by hand is lost at the next commit.
 - i.e.: id est, that is
 - i.e.: that is
 - js: JavaScript
+- kwh: kilowatt-hours
 - LLM: large language model
 - lol: laughing out loud
 - m5 air: MacBook Air with the M5 chip
@@ -1609,6 +1623,7 @@ so a change by hand is lost at the next commit.
 - mon: Monday
 - ofc: of course
 - p18: proposal 18 of the weekly review of 2026-10-14
+- p9: proposal 9 of the dream report of 2026-10-17
 - p9: proposal 9 of the weekly review of 2026-10-14
 - pdf: Portable Document Format
 - perms: permissions

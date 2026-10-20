@@ -3,13 +3,18 @@
 # Prints the status line of the session-usage mod: how full the context window
 # is, the tokens the session has processed and what they would cost at the
 # first-party API list prices, an estimate of the energy the responses took and
-# the CO2e it emitted, and until when the prompt cache stays warm. The
-# transcript repeats a response's usage on every streamed block, so each
-# response id counts once. A model missing from the price table adds tokens but
-# no cost, and the line says so.
+# the CO2e it emitted, and whether the prompt cache is warm: the minutes left
+# and until when, or since when it is cold. The transcript repeats a
+# response's usage on every streamed block, so each response id counts once. A
+# model missing from the price table adds tokens but no cost, and the line
+# says so.
 #
 #   usage.sh <session id>   the session's transcript under projects/
 #   usage.sh <transcript>   a transcript file
+#   usage.sh --status <session id or transcript>
+#                           the figures, the second the cache goes cold and
+#                           that time as "20 Oct 14:35", a line each, for the
+#                           mod to count down from
 #   usage.sh --run <folder> the tokens, cost and energy of every transcript
 #                           under the folder, such as a workflow run's, by kind
 #                           and model
@@ -54,7 +59,7 @@ common='
     | .seen as $seen
     | .r | group_by(.id)
     | map(min_by(.at) as $first
-      | {model: .[0].model, u: .[-1].u, at: $first.at, main: .[0].main,
+      | {id: .[0].id, model: .[0].model, u: .[-1].u, at: $first.at, main: .[0].main,
          busy: ([(map(.at) | max) - ($seen[$first.parent // empty] // $first.at), 0] | max)});
 
   # Energy: the seconds from the entry a response answers to its last block,
@@ -66,7 +71,19 @@ common='
   # the world, since "global" may run anywhere.
   def kw: (5.6 * 0.525 + 4.6 * 0.5) / 8 * 1.14;
   def kwh: map(.busy * kw / 3600) | add // 0;
-  def grams: map(.busy * kw / 3600 * (if .u.inference_geo == "us" then 384.4 else 458.3 end)) | add // 0;'
+  def grams: map(.busy * kw / 3600 * (if .u.inference_geo == "us" then 384.4 else 458.3 end)) | add // 0;
+  def norm: .u as $u | {id, at, model, busy, geo: ($u.inference_geo // null), input: ($u.input_tokens | n),
+    w5m: (if $u.cache_creation == null then ($u.cache_creation_input_tokens | n)
+          else ($u.cache_creation.ephemeral_5m_input_tokens | n) end),
+    w1h: ($u.cache_creation.ephemeral_1h_input_tokens | n), read: ($u.cache_read_input_tokens | n),
+    output: ($u.output_tokens | n)};
+  def rtokens: .input + .w5m + .w1h + .read + .output;
+  def rcost: prices[.model] as $p | if $p == null then 0
+    else (.input * $p[0] + .output * $p[1] + .read * $p[2] + .w5m * $p[3] + .w1h * $p[4]) / 1000000 end;
+  def rkwh: .busy * kw / 3600;
+  def rgrams: rkwh * (if .geo == "us" then 384.4 else 458.3 end);
+  def summary: "\(map(rtokens) | add // 0) \(map(rcost) | add // 0) \(map(select(prices[.model] == null)) | length) \(map(rkwh) | add // 0) \(map(rgrams) | add // 0) \(map(.input) | add // 0) \(map(.w5m + .w1h) | add // 0) \(map(.read) | add // 0) \(map(.output) | add // 0) \(length) \(map(.at) | min // 0) \(map(.at) | max // 0)",
+    (group_by(.model)[] | "\(.[0].model) \(map(rtokens) | add) \(map(rcost) | add) \(map(rkwh) | add) \(map(rgrams) | add)");'
 
 human() {
   awk -v n="$1" 'BEGIN {
@@ -79,34 +96,63 @@ energy() {
   awk -v k="$1" -v g="$2" 'BEGIN { printf(k < 0.1 ? "~%.3f kWh, ~%d g CO2e" : "~%.2f kWh, ~%d g CO2e", k, g + 0.5) }'
 }
 
+# Reads summary lines on stdin and prints the total, its split, the share of
+# prompt tokens the warm cache served, and the same per model.
+summarise() {
+  read -r tokens cost unpriced kwh grams input write read output count first last || return 1
+  note=""
+  [ "$unpriced" -gt 0 ] && note=" ($unpriced responses from models without a price)"
+  printf '%s tokens in %s responses, $%.2f at API list prices%s, %s\n' "$(human "$tokens")" "$count" "$cost" "$note" "$(energy "$kwh" "$grams")"
+  printf '  input %s, cache write %s, cache read %s, output %s\n' "$(human "$input")" "$(human "$write")" "$(human "$read")" "$(human "$output")"
+  awk -v r="$read" -v p="$((input + write + read))" -v t="$tokens" 'BEGIN { if (p > 0) printf "  warm cache: %.1f%% of prompt tokens, %.1f%% of all tokens\n", r * 100 / p, r * 100 / t }'
+  while read -r model mtokens mcost mkwh mgrams; do
+    printf '  %s: %s tokens, $%.2f, %s\n' "$model" "$(human "$mtokens")" "$mcost" "$(energy "$mkwh" "$mgrams")"
+  done
+}
+
+transcripts() {
+  find "$@" -name '*.jsonl' -type f 2>/dev/null
+}
+
 if [ "${1:-}" = --run ]; then
   [ -d "${2:-}" ] || { echo "usage.sh --run <folder>" >&2; exit 2; }
   files=()
-  while IFS= read -r f; do files+=("$f"); done < <(find "$2" -name '*.jsonl' -type f 2>/dev/null)
+  while IFS= read -r f; do files+=("$f"); done < <(transcripts "$2")
   [ "${#files[@]}" -gt 0 ] || { echo "no transcripts under $2" >&2; exit 1; }
-  jq -nrR "$common"'
-    responses("")
-    | (map(.u | all_in) | add // 0) as $tokens
-    | (map(cost(prices[.model])) | add // 0) as $cost
-    | (map(select(prices[.model] == null)) | length) as $unpriced
-    | (map(.u) | {input: (map(.input_tokens | n) | add // 0),
-        write: (map(.cache_creation_input_tokens | n) | add // 0),
-        read: (map(.cache_read_input_tokens | n) | add // 0),
-        output: (map(.output_tokens | n) | add // 0)}) as $k
-    | (group_by(.model) | map(.[0].model as $m | "\($m) \(map(.u | all_in) | add) \(map(cost(prices[$m])) | add)")) as $models
-    | "\($tokens) \($cost) \($unpriced) \(kwh) \(grams) \($k.input) \($k.write) \($k.read) \($k.output)", $models[]
-  ' "${files[@]}" 2>/dev/null | {
-    read -r tokens cost unpriced kwh grams input write read output || exit 1
-    note=""
-    [ "$unpriced" -gt 0 ] && note=" ($unpriced responses from models without a price)"
-    printf '%s tokens, $%.2f at API list prices%s, %s\n' "$(human "$tokens")" "$cost" "$note" "$(energy "$kwh" "$grams")"
-    printf '  input %s, cache write %s, cache read %s, output %s\n' "$(human "$input")" "$(human "$write")" "$(human "$read")" "$(human "$output")"
-    while read -r model mtokens mcost; do
-      printf '  %s: %s tokens, $%.2f\n' "$model" "$(human "$mtokens")" "$mcost"
-    done
+  jq -nrR "$common"'responses("") | map(norm) | summary' "${files[@]}" 2>/dev/null | summarise
+  exit 0
+fi
+
+# One record per response, for the usage log: usage.sh --log <after> <file>...
+# prints the responses of the files that began after <after>, in seconds.
+if [ "${1:-}" = --log ]; then
+  after=${2:-0}
+  shift 2 || exit 2
+  [ "$#" -gt 0 ] || exit 0
+  jq -ncR --argjson after "$after" "$common"'responses("") | map(select(.at > $after) | norm)[]' "$@" 2>/dev/null
+  exit 0
+fi
+
+# Totals of the usage log for a period: usage.sh --since <ISO time> [<ISO time until>]
+if [ "${1:-}" = --since ]; then
+  [ -n "${2:-}" ] || { echo "usage.sh --since <ISO time> [<until>]" >&2; exit 2; }
+  log="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/usage-log"
+  ls "$log"/*.jsonl >/dev/null 2>&1 || { echo "no usage log in $log" >&2; exit 1; }
+  jq -nrR --arg since "$2" --arg until "${3:-9999}" "$common"'
+    def at_of($t): ($t | secs);
+    (at_of($since)) as $from | (if $until == "9999" then 1e12 else at_of($until) end) as $to
+    | reduce (inputs | fromjson? | select(.id != null)) as $r ({}; .[$r.id] = $r)
+    | [.[] | select(.at >= $from and .at < $to)] | summary' "$log"/*.jsonl 2>/dev/null | {
+    IFS= read -r head || exit 1
+    set -- $head
+    printf 'From %s to %s:\n' "$(date -r "${11%.*}" '+%a %d.%m. %H:%M' 2>/dev/null)" "$(date -r "${12%.*}" '+%a %d.%m. %H:%M' 2>/dev/null)"
+    { echo "$head"; cat; } | summarise
   }
   exit 0
 fi
+
+status=false
+[ "${1:-}" = --status ] && { status=true; shift; }
 
 transcript=${1:-}
 if [ -n "$transcript" ] && [ ! -f "$transcript" ]; then
@@ -135,9 +181,23 @@ read -r ctx window tokens cost unpriced kwh grams warm < <(jq -nrR --arg main "$
 ' "${files[@]}" 2>/dev/null)
 [ -n "${warm:-}" ] || exit 0
 
-clock=$(date -r "$warm" +%H:%M 2>/dev/null || date -d "@$warm" +%H:%M 2>/dev/null)
+clock=$(LC_ALL=C date -r "$warm" '+%-d %b %H:%M' 2>/dev/null || LC_ALL=C date -d "@$warm" '+%-d %b %H:%M' 2>/dev/null)
 percent=$(awk -v c="$ctx" -v w="$window" 'BEGIN { printf "%d", c * 100 / w }')
 dollars=$(awk -v d="$cost" 'BEGIN { printf "%.2f", d }')
 [ "$unpriced" -gt 0 ] && dollars="$dollars ($unpriced unpriced)"
 
-echo "$percent% context, $(human "$tokens") tokens, \$$dollars, $(energy "$kwh" "$grams"), cache until $clock"
+figures="$percent% context, $(human "$tokens") tokens, \$$dollars, $(energy "$kwh" "$grams")"
+
+if [ "$status" = true ]; then
+  printf '%s\n%s\n%s\n' "$figures" "$warm" "$clock"
+  exit 0
+fi
+
+left=$((warm - $(date +%s)))
+if [ "$left" -gt 0 ]; then
+  minutes=$((left / 60))
+  [ "$minutes" -lt 1 ] && minutes="<1"
+  echo "$figures, cache warm $minutes min, until $clock"
+else
+  echo "$figures, cache cold since $clock"
+fi
