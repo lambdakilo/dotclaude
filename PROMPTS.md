@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Pin the PR body's dotclaude link to the commit of its last edit
+## Name files with dashes, never underscores
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**9.**
+> also never use underscores in the filenames you can use dashes -
+
+## Pin the PR body's dotclaude link to the commit of its last edit
+
+2026-10-20, commit [c0a94a8](https://github.com/lambdakilo/dotclaude/commit/c0a94a8b001eb36e602c8153c3f9b244f8ba617f), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dotclaude maybe add in my prs instead of link to my dotclaude add
