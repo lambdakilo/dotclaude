@@ -87,12 +87,16 @@ mirrored=(
   hooks/stop-running-stack.sh
   hooks/stack-held-by-peer.sh
   hooks/claude-md-changed.sh
-  hooks/session-usage.sh
   hooks/no-github-posts.sh
   hooks/prompt-feedback-box.sh
   hooks/no-meta-prompts.sh
   hooks/prompts-md.sh
   hooks/cd-fall-through.sh
+  mods/session-usage/.claude-plugin/plugin.json
+  mods/session-usage/hooks/hooks.json
+  mods/session-usage/hooks/register.ts
+  mods/session-usage/hooks/register.test.ts
+  mods/session-usage/usage.sh
   skills/pull-requests/SKILL.md
   workflows/dream.js
 )

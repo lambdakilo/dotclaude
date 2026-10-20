@@ -5,9 +5,26 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep the copy block rule to what the reader copies
+## Show session usage as a status line, not a notice
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [pasted: a screenshot of the usage line in a Claude Code notice]
+> context window messages are now in claude code notice dont put them
+> in there. also its not a oneliner on my m5air. shorten it so that it
+> doesnt wrap
+>
+> > Where should the usage line go instead? App status line
+> > (Recommended)
+
+**3.**
+> wth i did not decline that i pressed many times allow but i just
+> reloaded
+
+## Keep the copy block rule to what the reader copies
+
+2026-10-20, commit [44b93de](https://github.com/lambdakilo/dotclaude/commit/44b93dee9a81e0269249c6ffae774aaa599f985f), model claude-opus-5-5, effort xhigh.
 
 **19.** Quoted under [49e41eb](https://github.com/lambdakilo/dotclaude/commit/49e41eb3e9df74aede4aba8afb2b97d35a3f99e6).
 
@@ -1514,4 +1531,5 @@ so a change by hand is lost at the next commit.
 - ui: user interface
 - url: uniform resource locator
 - vpn: virtual private network
+- wth: what the hell
 - XDG: X Desktop Group, now freedesktop.org

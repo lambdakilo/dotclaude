@@ -227,11 +227,6 @@
             "type": "command",
             "command": "\"$HOME/.claude/hooks/stop-running-stack.sh\"",
             "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "\"$HOME/.claude/hooks/session-usage.sh\"",
-            "timeout": 15
           }
         ]
       }
@@ -292,5 +287,8 @@
       "**Trusted repo**: The git repository the agent started in (this scratch workspace directory) — it currently has no configured remotes, so no additional trust extends beyond the local working tree",
       "**Org-specific CLIs**: None configured"
     ]
+  },
+  "env": {
+    "CLAUDE_CODE_PLUGIN_DIRS": "~/.claude/mods/session-usage"
   }
 }

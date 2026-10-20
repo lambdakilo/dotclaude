@@ -14,8 +14,8 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
 - [`settings.json`](settings.json): my user settings, installed as `~/.claude/settings.json`:
   model and effort level, the Figma plugin turned off by default and with its writing tools
   denied, Claude in Chrome denied, the hooks below, no Claude attribution on commits or pull
-  requests, and session transcripts kept for 90 days instead of 30, so `/dream` has more
-  history to read.
+  requests, session transcripts kept for 90 days instead of 30, so `/dream` has more
+  history to read, and the folder of the session-usage mod below.
 - [`hooks/git-fetch-prune.sh`](hooks/git-fetch-prune.sh): runs on every prompt and fetches all
   remotes with pruning in the background, at most once per 15 minutes per repository, without
   ever prompting for credentials.
@@ -48,10 +48,6 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   each session and, once the file has changed, adds the diff to the next prompt, or blocks the
   next commit or `gh pr` create, edit or merge once with the diff, so a session sees rule edits
   made from another session while it runs.
-- [`hooks/session-usage.sh`](hooks/session-usage.sh): runs when a turn ends and shows one line:
-  how full the context window is, the tokens the session has processed and what they would cost
-  at the API list prices, and until when the prompt cache stays warm. The transcript repeats a
-  response's usage on every streamed block, so it counts each response once.
 - [`hooks/no-github-posts.sh`](hooks/no-github-posts.sh): runs before every shell command and
   refuses the GitHub CLI calls that would post as the user: `gh pr comment`, `gh issue comment`,
   `gh pr review`, a close or reopen with `--comment`, and `gh api` calls that write a comment or a
@@ -72,6 +68,14 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   every commit message, newest first, each with its commit and pull request, and with
   `--message <file>` lists the commit about to be made first. A commit cannot name its own hash,
   so that one links to the file's history until the next rebuild.
+- [`mods/session-usage`](mods/session-usage): a Claude Code mod, installed as
+  `~/.claude/mods/session-usage` and loaded in every session through `CLAUDE_CODE_PLUGIN_DIRS` in
+  `settings.json`. After every turn it pins a short status line under the prompt, such as
+  `24% context, 92.4M tokens, $40.39, cache until 08:32`: how full the context window is, the
+  tokens the session has processed and what they would cost at the API list prices, and until
+  when the prompt cache stays warm. `usage.sh` reads the transcript, which repeats a response's
+  usage on every streamed block, so it counts each response once. The mod API is early access
+  and may change between Claude Code releases.
 - [`skills/pull-requests/SKILL.md`](skills/pull-requests/SKILL.md): a skill, installed as
   `~/.claude/skills/pull-requests/SKILL.md`, with the procedures for a pull request: the body and
   its prompts block, the steps to verify it, the reply to a review, and screenshots and
