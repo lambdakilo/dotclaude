@@ -365,6 +365,10 @@ apply to one repository belong in that repository's project memory.
   recommended answer, never left as an item in a list of steps. Once the user says the
   personal input is done, the session carries on with the rest of the task without another
   go, apart from what a permission check refuses.
+- A request to confirm something drafted, such as issue titles, a message or names to create,
+  carries the draft itself into the question: AskUserQuestion with every item written out in
+  the question or in an option's preview, never a next-step box question that points at a
+  table in the reply above, which the user may not see while the box is open.
 - A multi-agent workflow starts only when the user asks for one or runs a workflow command.
   Propose one, with a rough token cost, only for read-only work across a wide area: a deep
   review of a large diff, research across several read-only sources, or a sweep of a codebase

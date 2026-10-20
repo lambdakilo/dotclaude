@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Show each dream review step's example above its question
+## Show the draft in the question that asks to confirm it
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**12.**
+> you didnt tell me the issue names. fix in the future and now
+
+## Show each dream review step's example above its question
+
+2026-10-20, commit [7684d53](https://github.com/lambdakilo/dotclaude/commit/7684d5371b26f2a44d092475dd6e9cc9d16b9f83), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > give an example of p12 then ask again from me
