@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Run the dream workflow's agents as dream-worker, with only their tools
+## Show a dream review example as the exchange itself, before and after
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**5.**
+> your example was not clear and concrete enough
+
+## Run the dream workflow's agents as dream-worker, with only their tools
+
+2026-10-20, commit [3216b16](https://github.com/lambdakilo/dotclaude/commit/3216b16e7c0f92d2ea07760b726a4a2547702657), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > give an example of p12 then ask again from me
