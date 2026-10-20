@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Put everything the reader copies in a code block
+## Keep the copy block rule to what the reader copies
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**19.** Quoted under [49e41eb](https://github.com/lambdakilo/dotclaude/commit/49e41eb3e9df74aede4aba8afb2b97d35a3f99e6).
+
+## Put everything the reader copies in a code block
+
+2026-10-20, commit [49e41eb](https://github.com/lambdakilo/dotclaude/commit/49e41eb3e9df74aede4aba8afb2b97d35a3f99e6), model claude-opus-5-5, effort xhigh.
 
 **19.**
 > also when you say copy something put that in a triple backquote

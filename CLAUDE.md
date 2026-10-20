@@ -245,7 +245,7 @@ apply to one repository belong in that repository's project memory.
 - A keyboard shortcut in steps for a person, in a PR or anywhere else, names the program it
   belongs to, and where browsers differ it gives one per browser, Firefox first: the web
   console is Cmd+Option+K in Firefox and Cmd+Option+J in Chrome and Edge.
-- Anything the reader is told to copy, paste, type or open, an address included, goes in a
+- Anything the reader is told to copy, paste or open, an address included, goes in a
   fenced code block of its own, tagged `text` when it is no command, so the copy button takes
   it in one click: "Open this address:" and the block under it, never the address inline in
   the sentence. An address the reader only reads, such as the page that should now open, stays
