@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Name one session's moment, not a total, as a dream preview example
+## Name dream review steps by p-number, and label a made-up example
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.**
+> what does w mean here? also if you dont have any examples stored
+> anywhere invent some? should i just say p1 like proposals
+
+## Name one session's moment, not a total, as a dream preview example
+
+2026-10-20, commit [7c32637](https://github.com/lambdakilo/dotclaude/commit/7c326372af1a572a63446ffdce3c5328eb96e6cd), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream review
