@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Rewrap the dream entry of the README
+## Make a review show where each bug it finds can be seen
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [a review of a pull request in a downstream project left out]
+
+**2.**
+> always say in the review steps where a bug can be seen like the
+> greyed out bug now i dont know where to see it in the steps
+
+## Rewrap the dream entry of the README
+
+2026-10-20, commit [8aca51a](https://github.com/lambdakilo/dotclaude/commit/8aca51a75fe2e0402e802aa5aa1bb9ac730eb7f7), model claude-opus-5-5, effort xhigh.
 
 **14.** Quoted under [15d672a](https://github.com/lambdakilo/dotclaude/commit/15d672a63f759a420755dd034ab79c406754f0ca).
 

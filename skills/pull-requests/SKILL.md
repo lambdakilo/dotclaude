@@ -110,6 +110,12 @@ redacted in public and upstream repositories.
   never a description of it. Where the PR's step has a screenshot or video, the matching step
   names it at its start, "the PR's screenshot under step 3 shows this dialog", and the comparison
   comes before the click that closes what the picture shows.
+- Every bug the review finds has a step in that list where the reader sees it: the step that
+  reaches the state, or one added for it right after the step that does, opens with "Bug
+  (finding n):", gives the clicks that bring the bug out, then what the screen shows and what it
+  should show instead. The finding names that step in turn, so the reader can go from either to
+  the other. The bug's step undoes any change the later steps do not expect. A bug nothing on
+  screen can show, such as a race or a path no click reaches, says so in its finding.
 - The list ends with what the PR's instructions missed, or a line saying nothing was: a label
   that is not on screen; a click left out; a step the seed data cannot do, or state the reviewer
   builds by hand through a workflow the specs already cover, which the PR should have seeded; a
