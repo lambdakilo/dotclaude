@@ -305,10 +305,12 @@ apply to one repository belong in that repository's project memory.
   nothing itself, and a turn that started nothing passes. It is a safety net for the rule
   above, not a substitute for it.
 - The `session-usage` mod in `~/.claude/mods/session-usage`, which `CLAUDE_CODE_PLUGIN_DIRS` in
-  `settings.json` loads in every session, pins a status line under the prompt after every turn:
-  how full the context window is, the tokens the session has processed and their cost at the
-  API list prices, and until when the prompt cache stays warm. It stays short enough not to wrap
-  in the desktop app on a laptop, and no hook adds it to the transcript as a notice.
+  `settings.json` loads in every session, pins a status line under the prompt: how full the
+  context window is, the tokens the session has processed and their cost at the API list
+  prices, and the minutes the prompt cache stays warm with the day and time it goes cold, or
+  since when it is cold. The figures refresh after every turn and the minutes count down in
+  between. It stays short enough not to wrap in the desktop app on a laptop, and no hook adds
+  it to the transcript as a notice.
 - A compose stack with fixed container names is one per machine, shared by every session of
   the repository and its worktrees. A stack another live session started stays that session's
   until its containers are down: ask it with SendMessage to say when they are, and run what

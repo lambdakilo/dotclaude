@@ -5,9 +5,19 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Log every response's usage and total a week of all sessions
+## Count the prompt cache down in the session-usage status line
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> add to the status line warm cache until num Month then the time
+> because after a day i cant say anymore what day the cache was. is the
+> status line dynamic? can it show like how many minutes until cache
+> expire or if already expired?
+
+## Log every response's usage and total a week of all sessions
+
+2026-10-20, commit [53bed44](https://github.com/lambdakilo/dotclaude/commit/53bed4461543a227f344574cad9eb9c40e3aab33), model claude-opus-5-5, effort xhigh.
 
 **16.**
 > dont add p9 and also add co2 and kwh at the end of dreaming. add also
