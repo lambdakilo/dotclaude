@@ -104,15 +104,22 @@ redacted in public and upstream repositories.
 
 - A PR review switches the checkout to the PR's branch and leaves it there, runs the two command
   steps above itself, and opens the reply with the results of the verify command and the end to
-  end run. "Here" or "only" in a review prompt limits where the reply goes, never what runs. Then
-  comes one numbered list the reader follows from a cold start: the two command steps, each with
-  its block under it, then the PR's own manual steps in the standing form, taken from the screen
-  and no wider than the PR's steps plus the changes those steps skip, never a test script of the
-  reviewer's own. A manual step that runs a command carries that command in a block under it,
-  never a description of it. Where the PR's step has a screenshot or video, the matching step
-  names it at its start, "the PR's screenshot under step 3 shows this dialog", and the comparison
-  comes before the click that closes what the picture shows. Open every such picture at full
-  size before writing its step, and take the step's typed and picked values from it.
+  end run, followed by the findings. "Here" or "only" in a review prompt limits where the reply
+  goes, never what runs. Then comes one numbered list the reader follows from a cold start: the
+  two command steps, each with its block under it, then the PR's own manual steps in the
+  standing form, taken from the screen and no wider than the PR's steps plus the changes those
+  steps skip, never a test script of the reviewer's own. A manual step that runs a command
+  carries that command in a block under it, never a description of it. Where the PR's step has
+  a screenshot or video, the matching step names it at its start, "the PR's screenshot under
+  step 3 shows this dialog", and the comparison comes before the click that closes what the
+  picture shows. Open every such picture at full size before writing its step, and take the
+  step's typed and picked values from it.
+- Each finding carries its severity, high, medium or low. Every finding that is not low gets
+  the shortest reproduction that shows it, so the reviewer can send the author back to fix it
+  before reviewing anything by hand: from the stack running the PR's branch on its seed data,
+  the fewest numbered steps that bring the bug out, then what happens, what should happen
+  instead and, when the review found it, the code that causes it, as GitHub markdown in a
+  fenced block under the finding. The reproduction is run here as written before it goes in.
 - Every bug the review finds has a step in that list where the reader sees it: the step that
   reaches the state, or one added for it right after the step that does, opens with "Bug
   (finding n):", gives the clicks that bring the bug out, then what the screen shows and what it
@@ -125,8 +132,8 @@ redacted in public and upstream repositories.
   change without a step; a check that failed or a claim the run disproved; a picture placed
   after the step it shows. That section ends with the two command steps of the list as GitHub
   markdown inside a four-backtick fence, numbered as in the reply, so the PR's "How to verify"
-  can take them over unchanged. That block is the one thing in the reply written to be pasted
-  into the PR.
+  can take them over unchanged. That block is the one thing in the reply written for the PR's
+  body, as the reproductions are the ones written for its author.
 
 ## Screenshots and recordings
 

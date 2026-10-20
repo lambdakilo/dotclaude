@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Put the cache first in a 40-character session-usage line
+## Give a review's serious findings a short reproduction
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> if somethings medium or high (anything not low) give me shortest
+> possible reproduction steps to achieve the bug so that i can just
+> tell the author to fix it first before i review everything visually
+
+## Put the cache first in a 40-character session-usage line
+
+2026-10-20, commit [363d13f](https://github.com/lambdakilo/dotclaude/commit/363d13fa463330111c2dd592923a2a6113e13ac5), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > [pasted: a screenshot of the status line cut off after the cost]
