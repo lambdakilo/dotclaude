@@ -48,7 +48,9 @@
       "Bash(gh pr edit:*)",
       "Bash(gh pr reopen:*)",
       "Bash(git push --force-with-lease:*)",
-      "Bash(~/.claude/hooks/prompt-log.sh print:*)"
+      "Bash(~/.claude/hooks/prompt-log.sh print:*)",
+      "Bash(gh pr ready:*)",
+      "Bash(gh pr merge:*)"
     ],
     "ask": [
       "Bash(brew install:*)",

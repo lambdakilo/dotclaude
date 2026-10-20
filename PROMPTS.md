@@ -5,9 +5,19 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Estimate energy and CO2e in the session-usage status line
+## Allow gh pr ready and gh pr merge
 
 2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask to merge a pull request in a downstream project left out]
+
+**2.** (after running the script that adds the two rules)
+> ran it, go on
+
+## Estimate energy and CO2e in the session-usage status line
+
+2026-10-20, commit [648b928](https://github.com/lambdakilo/dotclaude/commit/648b928861137977c38315a06c7c1d9a7557a0e6), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dotclaude add estimates of kilowatthours and co2 grams to the
