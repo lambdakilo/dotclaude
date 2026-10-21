@@ -25,9 +25,10 @@ handle="$(setting handle)"
 [ -n "$dir" ] && [ -n "$owners" ] && [ -n "$handle" ] || exit 0
 git -C "$dir" rev-parse --show-toplevel > /dev/null 2>&1 || exit 0
 
-cwd="$(jq -r '.cwd // empty' 2> /dev/null)"
-[ -n "$cwd" ] || exit 0
-common="$(git -C "$cwd" rev-parse --path-format=absolute --git-common-dir 2> /dev/null)" || exit 0
+# The memory belongs to the folder the session started in, not to wherever a cd left it.
+project="${CLAUDE_PROJECT_DIR:-$(jq -r '.cwd // empty' 2> /dev/null)}"
+[ -n "$project" ] || exit 0
+common="$(git -C "$project" rev-parse --path-format=absolute --git-common-dir 2> /dev/null)" || exit 0
 root="$(dirname "$common")"
 origin="$(git -C "$root" remote get-url origin 2> /dev/null)" || exit 0
 slug="$(printf '%s' "$origin" | sed -E 's#^(git@[^:]+:|ssh://[^/]+/|https?://[^/]+/)##; s#\.git$##')"
@@ -51,9 +52,10 @@ touch "$state/$key.started"
 q="[\`'\"]"
 nq="[^\`'\"[:space:]]"
 secret="(password|passwd|salasana)[ :=]*(is )?$q$nq{8,}$q|figd_|ghp_|gho_|ghs_|github_pat_|xox[abpors]-|sk-[A-Za-z0-9]{20}|AKIA[0-9A-Z]{16}|BEGIN [A-Z ]*PRIVATE KEY"
+# Claude Code's memory tool moves the flag under metadata: and quotes it on save.
 share_value() {
   awk 'NR == 1 && $0 != "---" { exit } NR > 1 && $0 == "---" { exit }
-    /^ *share:/ { sub(/^ *share: */, ""); print; exit }' "$1"
+    /^ *share:/ { sub(/^ *share: */, ""); print; exit }' "$1" | tr -d "\"' "
 }
 
 new="$(mktemp -d)"

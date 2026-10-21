@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Share project memory with colleagues through a hook
+## Read share: no in any form and key memory to the session's folder
 
 2026-10-21, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**15.** Quoted under [9294539](https://github.com/lambdakilo/dotclaude/commit/9294539af47dbf80e3af9902a9897278ef108103).
+
+## Share project memory with colleagues through a hook
+
+2026-10-21, commit [9294539](https://github.com/lambdakilo/dotclaude/commit/9294539af47dbf80e3af9902a9897278ef108103), model claude-opus-5-5, effort xhigh.
 
 **13.**
 > can i just poke a hole in the automode so it can exfil info to
