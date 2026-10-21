@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Review the shared memory repository in dream runs
+## Add the library source to dream.js itself
 
 2026-10-21, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**20.** Quoted under [1538093](https://github.com/lambdakilo/dotclaude/commit/15380931d79035caefc4095a2014ef66a6d44baa).
+
+**23.** Quoted under [1538093](https://github.com/lambdakilo/dotclaude/commit/15380931d79035caefc4095a2014ef66a6d44baa).
+
+## Review the shared memory repository in dream runs
+
+2026-10-21, commit [1538093](https://github.com/lambdakilo/dotclaude/commit/15380931d79035caefc4095a2014ef66a6d44baa), model claude-opus-5-5, effort xhigh.
 
 **20.**
 > also can you make dreaming also analyze the [shared repository] in
