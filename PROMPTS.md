@@ -5,9 +5,34 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Read every source before drafting a message for the user
+## Add a slack-draft skill that copies drafts as rich text
 
 2026-10-21, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**6.**
+> [an ask about a downstream project left out]
+
+**7.**
+> [a question about a downstream project left out]
+
+**8.**
+> format it so that it uses slack formatting to its advantage. for
+> example commit message could be a link to the repo at the commit time
+> etc
+
+**9.**
+> [a shell command the user ran to copy the draft to the clipboard]
+
+**10.**
+> it doesnt give me anything in clipboard. [an ask about the draft's
+> wording left out]
+
+**11.**
+> now it got to my clipboard. save this feature to dotclaude
+
+## Read every source before drafting a message for the user
+
+2026-10-21, commit [c558028](https://github.com/lambdakilo/dotclaude/commit/c5580280d88009eaee4bebd8703b6ba173c54888), model claude-opus-5-5, effort xhigh.
 
 **2.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 

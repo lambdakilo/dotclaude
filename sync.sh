@@ -100,6 +100,8 @@ mirrored=(
   mods/session-usage/hooks/register.test.ts
   mods/session-usage/usage.sh
   skills/pull-requests/SKILL.md
+  skills/slack-draft/SKILL.md
+  skills/slack-draft/copy-rich.sh
   workflows/dream.js
   agents/dream-worker.md
 )

@@ -355,7 +355,8 @@ apply to one repository belong in that repository's project memory.
   free/busy alone.
 - Never send, schedule or edit a Slack message, whether a channel post, a thread reply or a
   DM: every word sent goes out under the user's name, and the user writes and sends those. A
-  reply the user could send is drafted in the chat reply, in a fenced `text` block they paste.
+  reply the user could send is drafted with the `slack-draft` skill, which shows it in a fenced
+  `text` block and, when it has links or formatting, puts it on the clipboard as rich text.
 - Before drafting a message for the user to send, such as a Slack reply or an email, read every
   source the project's memory lists for its subject and every connected source that could bear
   on it, the deployed and legacy environments included, and say in the reply which were read and

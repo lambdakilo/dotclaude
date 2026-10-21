@@ -113,6 +113,12 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
   its prompts block, the steps to verify it, the reply to a review, and screenshots and
   recordings. `CLAUDE.md` tells Claude Code to load it before any of those, so the procedures stay
   out of the context of sessions that never touch a pull request.
+- [`skills/slack-draft/SKILL.md`](skills/slack-draft/SKILL.md) and
+  [`copy-rich.sh`](skills/slack-draft/copy-rich.sh): a skill for drafting a Slack message the user
+  pastes and sends. Slack's message box makes no link from `[text](url)`, so the skill writes the
+  draft as HTML with pinned links to commits, file lines, Figma frames and messages, and the
+  script puts it on the macOS clipboard as HTML, RTF and plain text and reads each back, so one
+  paste keeps link text, bold and lists.
 - [`workflows/dream.js`](workflows/dream.js): a saved Claude Code workflow, run as `/dream` in idle
   time, at the end of a day, overnight or over a weekend. Its work comes in four tiers, and each
   tier's findings are merged and checked before later tiers get the usage: first the proposals an
@@ -184,7 +190,8 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
 
 ## License
 
-Prose, meaning `CLAUDE.md`, `PROMPTS.md`, `skills/pull-requests/SKILL.md` and this README, is
+Prose, meaning `CLAUDE.md`, `PROMPTS.md`, `skills/pull-requests/SKILL.md`,
+`skills/slack-draft/SKILL.md` and this README, is
 licensed under Creative Commons Attribution-ShareAlike 4.0 International. See
 [`LICENSE-CC-BY-SA-4.0`](LICENSE-CC-BY-SA-4.0).
 
