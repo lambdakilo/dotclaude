@@ -5,9 +5,24 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Read share: no in any form and key memory to the session's folder
+## Let a session place handed-over facts and rules itself
 
 2026-10-21, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**7.**
+> put these to the appropriate context (when i say in future context
+> you know where to put them memory, project memroy global ruling,
+> project docs etc, remember in dotclaude)
+>
+> [three rules for a downstream project left out]
+>
+> ask questions if unclear you can push these additions to the
+> prompts.md pull request
+> > [four answers about those rules left out]
+
+## Read share: no in any form and key memory to the session's folder
+
+2026-10-21, commit [05ac304](https://github.com/lambdakilo/dotclaude/commit/05ac30415d015f365b2d6a53e2b10cdc14b8246f), model claude-opus-5-5, effort xhigh.
 
 **15.** Quoted under [9294539](https://github.com/lambdakilo/dotclaude/commit/9294539af47dbf80e3af9902a9897278ef108103).
 

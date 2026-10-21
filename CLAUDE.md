@@ -544,6 +544,18 @@ apply to one repository belong in that repository's project memory.
   file. A claim that rests on a note keeps the note's date and qualifiers, "as of 2026-10-02
   one of the four fits" and not "all four fit", and the note is re-read before a plan depends
   on it.
+- When the user hands over facts or rules to keep, such as "put these to the appropriate
+  context", the session picks the place for each item without being told. A rule for every
+  project goes into this file, one about pull requests into the `pull-requests` skill. A rule
+  that a repository's code or design must follow, which its team should share, such as who may
+  see or change what or how a form marks a required field, goes into that repository's docs,
+  indexed from its `AGENTS.md` or `CLAUDE.md`, on the branch of the PR in play or the one the
+  user names. A fact about one project that only the session's work needs, such as a person, a
+  deadline, a channel or a local recipe, goes into that project's memory, and a private fact
+  that holds everywhere into a file in `~/.claude/rules/`. Before writing, the session checks
+  each item against the code, asks what is still unclear about its meaning or scope in one
+  AskUserQuestion call with a recommended answer per question, and the reply names where each
+  item went.
 - A correction or a wish that would hold beyond the task, a why question included, goes into
   this file or the `pull-requests` skill in the same turn, committed and pushed as under Public
   configuration repository, without the user naming that repository: it holds for later
