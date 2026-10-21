@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
+## Never send a Slack message on the user's behalf
+
+2026-10-21, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask about a downstream project's chat thread left out] never
+> send messages on behalf of me on slack
+
 ## Refuse whole-disk and home-wide searches with a PreToolUse hook
 
-2026-10-20, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [daa423d](https://github.com/lambdakilo/dotclaude/commit/daa423d3bc90296211719dc02544c286c6ca0fce), model claude-opus-5-5, effort xhigh.
 
 **6.**
 > your example was not clear and concrete enough

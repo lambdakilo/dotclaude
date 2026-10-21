@@ -353,6 +353,9 @@ apply to one repository belong in that repository's project memory.
   events on another person's calendar, which carry titles, attendees and meeting links, so
   finding a time with other people goes through the connector's `suggest_time`, which reads
   free/busy alone.
+- Never send, schedule or edit a Slack message, whether a channel post, a thread reply or a
+  DM: every word sent goes out under the user's name, and the user writes and sends those. A
+  reply the user could send is drafted in the chat reply, in a fenced `text` block they paste.
 - Browser work runs in the built-in browser pane, which the user also calls the built-in chrome
   and is signed in to. A page, a file or an upload is tried there before a reply calls it out of
   reach, and when the pane shows a sign-in page the reply asks the user to sign in there. A deny
