@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Let a session place handed-over facts and rules itself
+## Review the shared memory repository in dream runs
 
 2026-10-21, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**20.**
+> also can you make dreaming also analyze the [shared repository] in
+> its entirety? trimming unnecessary memories sounds like a good way to
+> spend tokens
+
+**23.**
+> lets no start dreaming now ill do it on friday and saturday but just
+> include it in dreaming then
+
+## Let a session place handed-over facts and rules itself
+
+2026-10-21, commit [0a5b6b1](https://github.com/lambdakilo/dotclaude/commit/0a5b6b152c4e3d6649bb69b66d35d40a842fb5fe), model claude-opus-5-5, effort xhigh.
 
 **7.**
 > put these to the appropriate context (when i say in future context
