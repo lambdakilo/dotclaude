@@ -85,6 +85,7 @@ mirrored=(
   hooks/no-home-search.sh
   hooks/prompt-log.sh
   hooks/memory-plain-characters.sh
+  hooks/share-memories.sh
   hooks/stop-running-stack.sh
   hooks/usage-log.sh
   hooks/stack-held-by-peer.sh

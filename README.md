@@ -49,6 +49,13 @@ stands. `./sync.sh --install` copies every mirrored file into your own `~/.claud
 - [`hooks/memory-plain-characters.sh`](hooks/memory-plain-characters.sh): runs after every
   Write, Edit and Bash call and hands back each em dash in a memory file changed in the last two
   minutes, since the built-in memory template puts one in every index line.
+- [`hooks/share-memories.sh`](hooks/share-memories.sh): runs after every Write, Edit and Bash
+  call and shares project memory with colleagues. An untracked `shared-memories.conf` beside the
+  hooks folder names a clone of a shared repository, the GitHub owners whose repositories are
+  shared and your handle. In such a repository, once a memory note has changed, it copies every
+  note without `share: no` into `<repository>/<handle>/` of that clone, then commits and pushes in
+  the background. It leaves out a note that looks like it holds a password or token and names it.
+  Without the conf file it does nothing.
 - [`hooks/claude-md-changed.sh`](hooks/claude-md-changed.sh): keeps a copy of `CLAUDE.md` for
   each session and, once the file has changed, adds the diff to the next prompt, or blocks the
   next commit or `gh pr` create, edit or merge once with the diff, so a session sees rule edits

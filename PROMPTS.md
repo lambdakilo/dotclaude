@@ -5,9 +5,42 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Add a slack-draft skill that copies drafts as rich text
+## Share project memory with colleagues through a hook
 
 2026-10-21, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**13.**
+> can i just poke a hole in the automode so it can exfil info to
+> memories dir in [a shared repository]
+
+**14.**
+> cant i have a memory sharing script / hook for sharing memories to
+> appropriate places in the [shared repository]/memories?
+
+**15.**
+> it shouldnt be opt-in it should be automatic. yes dotclaude set up
+> the hook
+
+**16.** (a reply button's words)
+> switch this session to ask before each write and build the hook, i
+> approve each step
+
+**17.**
+> its now on manual. the hook should work on automode right after we
+> build it?
+
+**18.**
+> also dotclaude since you clearly couldnt set the mode yourself never
+> give me a suggestion to say to you switch modes just say to me i have
+> to do it myself
+
+**19.**
+> should memories dir hold just everyones memories in there or separate
+> by user like lambdakilo there
+
+## Add a slack-draft skill that copies drafts as rich text
+
+2026-10-21, commit [b64c518](https://github.com/lambdakilo/dotclaude/commit/b64c518cc4b49d4b4a4d1b20421f0bf705799cc8), model claude-opus-5-5, effort xhigh.
 
 **6.**
 > [an ask about a downstream project left out]
@@ -1793,6 +1826,7 @@ so a change by hand is lost at the next commit.
 - e2e: end to end
 - etc: et cetera
 - eu: European Union
+- exfil: exfiltrate
 - ext: external, a file posted by another organisation in a shared channel
 - feat: feature
 - fri: Friday

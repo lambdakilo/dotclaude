@@ -432,6 +432,9 @@ apply to one repository belong in that repository's project memory.
 - Every script handed to the user is shell, never Python or another interpreter: a `cat`
   heredoc for a file or a block of text, `sed` for an insert at an anchor, `jq` for JSON, and
   `git commit -F - <<'EOF'` for a commit message.
+- A session cannot switch its own permission mode out of auto mode. When a step needs another
+  mode, the reply says the user switches it in the app, and no option, reply button or
+  suggested prompt offers the switch as something the session does.
 
 ## Public configuration repository
 
@@ -527,6 +530,14 @@ apply to one repository belong in that repository's project memory.
 - An index line is `- [Title](file.md): hook`, with a colon where the built-in memory template
   shows an em dash. The `PostToolUse` hook `~/.claude/hooks/memory-plain-characters.sh` hands
   back every em dash in a memory file changed in the last two minutes.
+- The `PostToolUse` hook `~/.claude/hooks/share-memories.sh` shares project memory with
+  colleagues on its own. In a repository whose `origin` is under an owner the untracked
+  `~/.claude/shared-memories.conf` lists, it copies every note of that project's memory into
+  `<repository>/<handle>/` of the shared clone the file names, with `~` for the home directory,
+  and commits and pushes. A note that holds a secret, a personal detail or a fact about only
+  the user's own machine or habits gets `share: no` in its frontmatter when it is written. The
+  hook leaves out a note that looks like it holds a password or token and names it, and the
+  answer is to move the secret out or add `share: no`, never to reword it past the check.
 - A memory note that records a correction quotes the user's words and dates them. What Claude
   reads into them is marked as its own inference or left out: a note never adds "always",
   "never" or "convention" where the user said none of them, and never narrows a rule in this

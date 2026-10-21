@@ -269,6 +269,16 @@
             "timeout": 120
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/share-memories.sh\"",
+            "timeout": 30
+          }
+        ]
       }
     ]
   },
