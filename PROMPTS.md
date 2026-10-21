@@ -5,9 +5,24 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Never send a Slack message on the user's behalf
+## Read every source before drafting a message for the user
 
 2026-10-21, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+
+**3.**
+> [a question about a downstream project left out]
+
+**4.** Quoted under [8f63649](https://github.com/lambdakilo/dotclaude/commit/8f6364920b100a9d53dedb44ef924140fa0c665c).
+
+**5.**
+> did you check the [a deployed test environment], [a legacy app] and
+> every other connector and context before you drafted that
+
+## Never send a Slack message on the user's behalf
+
+2026-10-21, commit [319428f](https://github.com/lambdakilo/dotclaude/commit/319428f1d0c5e3bc7bb5c4ff4ff319ea23d6f35b), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about a downstream project's chat thread left out] never
