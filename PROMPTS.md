@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Rename the session after each prompt in the desktop app
+## Say in the README why this setup is public
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> make the description oneliner. also topics only oneliner. use builtin
+> brwoser to check newline length. also add somehwere that my i think
+> this is the next step in free software / open source because say they
+> use ai but give only source code back, never how they use ai. i say
+> put your money where your mouth is.
+
+## Rename the session after each prompt in the desktop app
+
+2026-10-22, commit [db33bc4](https://github.com/lambdakilo/dotclaude/commit/db33bc436ccb01850f94bae26c06626c3ab6d8fc), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > can claude code still not rename sessions here?
@@ -2022,6 +2033,7 @@ so a change by hand is lost at the next commit.
 - 5h: 5-hour
 - 5h: five hours
 - agplv3: GNU Affero General Public License, version 3
+- ai: artificial intelligence
 - arch: Arch Linux
 - ccbysa4.0: Creative Commons Attribution-ShareAlike 4.0 International
 - cd: change directory, the shell command

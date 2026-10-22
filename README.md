@@ -7,6 +7,14 @@ copy of my setup, so you can borrow from it.
 Claude Code is good at writing code, but left alone it makes some of the same mistakes again and
 again. Most of this setup stops those mistakes before they happen.
 
+## Why this is public
+
+I think this is the next step for free software and open source. Many projects now write their
+code with AI, but they give back only the source code, never how they used the AI. If a project
+calls itself open, it should put its money where its mouth is and publish that too. This
+repository is my part: the rules and hooks I work with are here, and every commit quotes the
+prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
+
 ## Words you will see
 
 - **Repository** (repo): a project folder that git keeps the history of, usually also on GitHub.
