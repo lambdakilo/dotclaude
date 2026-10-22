@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Rebase each mirror onto its remote instead of a fast-forward pull
+## Keep commit dates when the memory hook rebases
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.** (answer: the user ran Claude's sed edit of the hook, which auto    mode had refused to make)
+> ran
+
+## Rebase each mirror onto its remote instead of a fast-forward pull
+
+2026-10-22, commit [0b9780d](https://github.com/lambdakilo/dotclaude/commit/0b9780df3061cae8484ac7b1abab6589d8439cff), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about a fast-forward error in another repository left out]

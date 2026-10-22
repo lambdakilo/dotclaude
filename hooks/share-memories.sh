@@ -90,7 +90,7 @@ mv "$state/$key.started" "$stamp"
   if ! git diff --cached --quiet -- "$repo/$handle"; then
     git commit -q -m "Update shared memory notes" -- "$repo/$handle"
   fi
-  git pull -q --rebase --autostash && git push -q
+  git fetch -q && git rebase -q --autostash --committer-date-is-author-date && git push -q
   rmdir "$state/$key.lock"
 ) > /dev/null 2>&1 &
 
