@@ -81,6 +81,16 @@ const scenarios = [
     ['tests a script in a sandbox before running it', (st, r) => /test it in a sandbox before running it for real/.test(r.forTheSession)],
     ['names the unchecked ones', (st, r) => /1 unchecked proposals wait/.test(r.forTheSession)],
   ]],
+  ['upstreams', { ...wed, week: 30, sessions: 4, args: { only: ['upstreams'] }, upstreams: [
+    { upstream: '~/Projects/template', derived: ['~/Projects/app', '~/Projects/app2'], note: '' },
+    { upstream: 'o/tool', derived: ['~/Projects/app'], note: 'the CLI the apps run' },
+    { upstream: '~/Projects/orphan', derived: [], note: '' },
+  ] }, [
+    ['one agent per upstream that has derived projects', st => st.labels.upstream === 2 && !st.prompts['upstream ~/Projects/orphan']],
+    ['the prompt names every derived project and the note', st => /~\/Projects\/app, ~\/Projects\/app2/.test(st.prompts['upstream ~/Projects/template'] || '') && /the CLI the apps run/.test(st.prompts['upstream o/tool'] || '')],
+    ['reads the default branch, never the work tree', st => /never from its work tree/.test(st.prompts['upstream o/tool'] || '')],
+    ['the run records the source', st => /"upstreams"/.test(st.historyLine || '')],
+  ]],
 ]
 
 let failed = 0

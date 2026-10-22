@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Allow short company names in internal Slack, drop the Finnish joo
+## Let dream propose what derived projects take over from upstreams
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dreaming should also include [a shared AI library], [a CLI] and
+> [a project template] if theres anything we should add to the
+> projects that derive from those like [a downstream project].
+
+## Allow short company names in internal Slack, drop the Finnish joo
+
+2026-10-22, commit [95ed02e](https://github.com/lambdakilo/dotclaude/commit/95ed02e97d9d28866372e2fdec469aeb0a8447bb), model claude-opus-5-5, effort xhigh.
 
 **7.**
 > kirjakieli also only in [a downstream channel]

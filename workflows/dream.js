@@ -1,12 +1,12 @@
 export const meta = {
   name: 'dream',
   description: 'Review Claude Code use since the last run in idle time, carry open proposals forward, and propose changes to the global setup',
-  whenToUse: 'In idle time with tokens to spare: at the end of a day, overnight or over a weekend. Run it without arguments and it picks its mode from the weekly reset on the usage card. On the day before the reset an eve run spends the week but keeps back what two 5-hour windows cost, one for work and one for a final run, and stops starting work in time to leave the 5-hour window that would still be open at 08:00 on the reset day untouched. On the reset day a final run spends what is left of the week down to 1 point and stops starting work an hour and a quarter before the reset, so its agents finish and report before it. On other days a night run guards the weekly limits. Every run stops just short of the 5-hour limit, since an agent that reaches it fails instead of waiting for the reset. Optional args: {mode: "eve", "final", "night" or "day" to choose the mode, where a day run keeps the margin free on the 5-hour limit too while the user works, workAt: "HH:MM" local time the user starts on the reset day (default 08:00), keep: <5-hour windows an eve run keeps back, default 2>, since: "<ISO time>", only: ["transcripts", "config", "github", "rules", "waste", "harness", "doctor", "anthropic", "skills", "projects", "library", "prs", "brief", "subagents"], all: true to run every source whether due or not, out: "<report directory>", margin: <usage percentage points to leave free, default 5, 1 in a final run>, pool: <pieces of work at a time, default 7>}; weekend: true still means mode final and day: true mode day. The work comes in four tiers, and a tier\'s findings are merged and checked before later tiers get the usage: 1. checks of the proposals earlier runs had no usage to check, the window\'s transcripts by their last user or assistant record, newest first, config and GitHub reviews; 2. rule effectiveness, token waste, the harness, doctor, Anthropic and skill repository sources; 3. project audits, a review of the shared library that ~/.claude/shared-memories.conf names, reviews of the user\'s open pull requests in repositories checked out under ~/Projects or updated in the last 14 days and, in a final run, a brief for Monday; 4. in eve and final runs, subagent transcripts and then older transcripts a week at a time, newest first, on from where the last weekend run stopped. Transcripts and config run every time, GitHub reviews once a day, the other sources of tiers 2 and 3 once a week, or once a weekend in eve and final runs, and transcripts and proposals a run had no usage for carry over to the next run. Each run appends its last usage reading to ~/.claude/dream/weekly-usage.jsonl, so the last line for a week shows how much of that week was used, and the report ends with this week, last week and the 4-week and 52-week averages from it. Skill repositories are listed one per line in ~/.claude/dream/skill-repos.txt as "owner/repo[/path] optional note". Open proposals carry over in ~/.claude/dream/backlog.json until they are applied or found obsolete. The run reads the plan usage card as work finishes and starts new work only while it fits, using what earlier runs cost, as kept in ~/.claude/dream/usage-history.jsonl. Run it with review, or {review: true}, to skip the run and go through the open backlog in that dialogue. When the run finishes, do what forTheSession in its result says: show the whole report, check where the usage limits stand now against the run\'s target, and end with the steps to take now. Each run has its own folder of scripts beside the report, numbered in the order to apply them, and the report gives the command that runs each one.',
+  whenToUse: 'In idle time with tokens to spare: at the end of a day, overnight or over a weekend. Run it without arguments and it picks its mode from the weekly reset on the usage card. On the day before the reset an eve run spends the week but keeps back what two 5-hour windows cost, one for work and one for a final run, and stops starting work in time to leave the 5-hour window that would still be open at 08:00 on the reset day untouched. On the reset day a final run spends what is left of the week down to 1 point and stops starting work an hour and a quarter before the reset, so its agents finish and report before it. On other days a night run guards the weekly limits. Every run stops just short of the 5-hour limit, since an agent that reaches it fails instead of waiting for the reset. Optional args: {mode: "eve", "final", "night" or "day" to choose the mode, where a day run keeps the margin free on the 5-hour limit too while the user works, workAt: "HH:MM" local time the user starts on the reset day (default 08:00), keep: <5-hour windows an eve run keeps back, default 2>, since: "<ISO time>", only: ["transcripts", "config", "github", "rules", "waste", "harness", "doctor", "anthropic", "skills", "projects", "library", "upstreams", "prs", "brief", "subagents"], all: true to run every source whether due or not, out: "<report directory>", margin: <usage percentage points to leave free, default 5, 1 in a final run>, pool: <pieces of work at a time, default 7>}; weekend: true still means mode final and day: true mode day. The work comes in four tiers, and a tier\'s findings are merged and checked before later tiers get the usage: 1. checks of the proposals earlier runs had no usage to check, the window\'s transcripts by their last user or assistant record, newest first, config and GitHub reviews; 2. rule effectiveness, token waste, the harness, doctor, Anthropic and skill repository sources; 3. project audits, a review of the shared library that ~/.claude/shared-memories.conf names, what the projects derived from a template, tool or shared library should take over from it, reviews of the user\'s open pull requests in repositories checked out under ~/Projects or updated in the last 14 days and, in a final run, a brief for Monday; 4. in eve and final runs, subagent transcripts and then older transcripts a week at a time, newest first, on from where the last weekend run stopped. Transcripts and config run every time, GitHub reviews once a day, the other sources of tiers 2 and 3 once a week, or once a weekend in eve and final runs, and transcripts and proposals a run had no usage for carry over to the next run. Each run appends its last usage reading to ~/.claude/dream/weekly-usage.jsonl, so the last line for a week shows how much of that week was used, and the report ends with this week, last week and the 4-week and 52-week averages from it. Skill repositories are listed one per line in ~/.claude/dream/skill-repos.txt as "owner/repo[/path] optional note". Upstreams are listed one per line in ~/.claude/dream/upstreams.txt as "upstream derived[,derived...] optional note", the upstream a ~ path to its checkout or owner/repo[/path] on GitHub, and each derived project a ~ path to its checkout. Open proposals carry over in ~/.claude/dream/backlog.json until they are applied or found obsolete. The run reads the plan usage card as work finishes and starts new work only while it fits, using what earlier runs cost, as kept in ~/.claude/dream/usage-history.jsonl. Run it with review, or {review: true}, to skip the run and go through the open backlog in that dialogue. When the run finishes, do what forTheSession in its result says: show the whole report, check where the usage limits stand now against the run\'s target, and end with the steps to take now. Each run has its own folder of scripts beside the report, numbered in the order to apply them, and the report gives the command that runs each one.',
   phases: [
     { title: 'Scout', detail: 'time window, mode, due sources, transcripts, pull requests, backlog, usage and its history' },
     { title: 'Recent', detail: 'tier 1: the window\'s transcripts newest first, config and GitHub reviews, merged and checked first' },
     { title: 'Weekly', detail: 'tier 2: rule effectiveness, token waste, harness, doctor, Anthropic and skill repositories' },
-    { title: 'Work', detail: 'tier 3: project audits, reviews of open pull requests and, in a final run, a Monday brief' },
+    { title: 'Work', detail: 'tier 3: project audits, what derived projects should take over from their upstreams, reviews of open pull requests and, in a final run, a Monday brief' },
     { title: 'Older', detail: 'tier 4, eve and final runs: subagent transcripts, then older transcripts a week at a time, newest first' },
     { title: 'Usage', detail: 'readings of the plan usage card as work finishes' },
     { title: 'Report', detail: 'order and test the scripts, write the report and the backlog, record what the run cost' },
@@ -17,13 +17,14 @@ const opts = typeof args === 'object' && args !== null ? args : {}
 const runNote = typeof args === 'string' ? args : ''
 const OUT = opts.out || '~/.claude/dream'
 const REPOS_FILE = '~/.claude/dream/skill-repos.txt'
+const UPSTREAMS_FILE = '~/.claude/dream/upstreams.txt'
 const HISTORY_FILE = '~/.claude/dream/usage-history.jsonl'
 const WEEKS_FILE = '~/.claude/dream/weekly-usage.jsonl'
 const BACKLOG_FILE = `${OUT}/backlog.json`
-const SOURCES = ['transcripts', 'config', 'github', 'rules', 'waste', 'harness', 'doctor', 'anthropic', 'skills', 'projects', 'library', 'prs', 'brief', 'subagents']
+const SOURCES = ['transcripts', 'config', 'github', 'rules', 'waste', 'harness', 'doctor', 'anthropic', 'skills', 'projects', 'library', 'upstreams', 'prs', 'brief', 'subagents']
 const TIER_PHASE = { 1: 'Recent', 2: 'Weekly', 3: 'Work', 4: 'Older' }
 const TIER_PREFIX = { 1: 'n', 2: 'w', 3: 'k', 4: 'd' }
-const CADENCE_HOURS = { transcripts: 0, config: 0, github: 20, rules: 160, waste: 160, harness: 160, doctor: 160, anthropic: 160, skills: 160, projects: 160, library: 160, prs: 160, brief: 0, subagents: 0 }
+const CADENCE_HOURS = { transcripts: 0, config: 0, github: 20, rules: 160, waste: 160, harness: 160, doctor: 160, anthropic: 160, skills: 160, projects: 160, library: 160, upstreams: 160, prs: 160, brief: 0, subagents: 0 }
 // In eve and final runs a weekly source is due once per weekend, so a final run picks up what the eve run had no usage for.
 const WEEKEND_CADENCE_HOURS = 36
 const LOOKBACK_DAYS = 7
@@ -117,7 +118,7 @@ const SESSION = {
 
 const SCOUT = {
   type: 'object',
-  required: ['now', 'today', 'utcOffset', 'runId', 'since', 'lookbackFrom', 'installedVersion', 'previousReports', 'sessions', 'skillRepos', 'model', 'effort', 'usage', 'historyLines', 'weekLines', 'backlog', 'ruleSections', 'repos', 'prs'],
+  required: ['now', 'today', 'utcOffset', 'runId', 'since', 'lookbackFrom', 'installedVersion', 'previousReports', 'sessions', 'skillRepos', 'model', 'effort', 'usage', 'historyLines', 'weekLines', 'backlog', 'ruleSections', 'repos', 'upstreams', 'prs'],
   properties: {
     now: { type: 'string' },
     today: { type: 'string' },
@@ -156,6 +157,14 @@ const SCOUT = {
         type: 'object',
         required: ['path', 'projectDirs'],
         properties: { path: { type: 'string' }, projectDirs: { type: 'array', items: { type: 'string' } } },
+      },
+    },
+    upstreams: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['upstream', 'derived', 'note'],
+        properties: { upstream: { type: 'string' }, derived: { type: 'array', items: { type: 'string' } }, note: { type: 'string' } },
       },
     },
     prs: {
@@ -394,6 +403,7 @@ const scout = await dreamAgent(`Set up a dream run, a review of this user's Clau
 11. ${requested.includes('rules') ? 'Return as ruleSections the headings of ~/.claude/CLAUDE.md that start with "## ", without the "## ", in file order.' : 'Return an empty ruleSections list.'}
 12. ${requested.includes('projects') ? `Find the repositories the user worked in: for each directory under ~/.claude/projects with a main transcript whose last user or assistant record is after lookbackFrom, read the cwd fields of those transcripts with jq -r 'select(.cwd) | .cwd' FILE | sort -u. Keep a cwd that is inside a git work tree, and map it to its main checkout, the parent of git -C <cwd> rev-parse --path-format=absolute --git-common-dir. Leave out ~/.claude and everything below it, and any path containing scratch-workspaces. Return each main checkout once, as a ~ path in path, with the project directory names that led to it in projectDirs.` : 'Return an empty repos list.'}
 13. ${requested.includes('prs') ? 'List the open pull requests the user authored: gh search prs --author @me --state open --limit 100 --json url,title,repository,number,isDraft,updatedAt. Keep one only when it was updated in the last 14 days or its repository is the origin or upstream remote of a checkout under ~/Projects (git -C <checkout> remote -v), since old contributions elsewhere are not the user\'s current work. Return each with repo as its repository nameWithOwner. Return an empty list when gh fails.' : 'Return an empty prs list.'}
+14. ${requested.includes('upstreams') ? `Read ${UPSTREAMS_FILE} if it exists. Each non-empty line not starting with # names an upstream, a ~ path to its checkout or owner/repo on GitHub, optionally followed by /path to a folder inside it, then after whitespace the projects derived from it as ~ paths to their checkouts, separated by commas, then optionally a note after whitespace. Return each as upstream, derived and note, the note empty when there is none, and leave out a derived path that is not a git checkout. Return an empty list when the file is missing.` : 'Return an empty upstreams list.'}
 ${GROUND}`, { label: 'scout', schema: SCOUT })
 
 if (!scout) return { error: 'The scout agent failed, nothing ran.' }
@@ -471,6 +481,7 @@ const modeNote = {
 }[MODE]
 log(`Run ${scout.runId}: ${scout.since} to ${scout.now} (${scout.sinceReason || 'default'}), Claude Code ${scout.installedVersion}, ${scout.sessions.length} transcripts${pending.length ? ` and ${pending.length} carried over` : ''}. This is ${modeNote}. Due: ${only.join(', ')}${notDue.length ? `. Not due yet: ${notDue.join(', ')}` : ''}`)
 if (only.includes('skills') && !scout.skillRepos.length) log(`No skill repositories listed in ${REPOS_FILE}, skipping that source`)
+if (only.includes('upstreams') && !scout.upstreams.some(u => u.derived.length)) log(`No upstreams with derived projects listed in ${UPSTREAMS_FILE}, skipping that source`)
 
 const backlogValid = Boolean(scout.backlog && scout.backlog.valid)
 const listOf = name => (backlogValid && Array.isArray(scout.backlog[name]) ? scout.backlog[name] : []).filter(i => i && i.title)
@@ -992,6 +1003,23 @@ Look for:
 - onboarding kits and READMEs there that no longer match what the user's setup does.
 Never edit, commit or push anything in that repository, and never edit a colleague's files.
 ${WINDOW}
+${OUTPUT}
+${GROUND}`,
+  })
+}
+
+for (const u of only.includes('upstreams') ? scout.upstreams.filter(u => u.derived.length) : []) {
+  tasks.push({
+    source: 'upstreams',
+    tier: 3,
+    label: `upstream ${u.upstream}`,
+    prompt: `Find what the projects derived from ${u.upstream} should take over from it, read only. The derived projects: ${u.derived.join(', ')}.${u.note ? ` The user's note on it: ${u.note}` : ''}
+1. Read every repository as its default branch stands on its canonical remote, never from its work tree, which may hold another session's branch. For a checkout, run git -C <checkout> fetch --all --prune, the one write this prompt allows, take the upstream remote when there is one and origin otherwise, find its default branch with git remote show <remote>, and read with git log, git show and git ls-tree on <remote>/<branch>. Never switch, check out, pull, merge, reset or stash. Read an owner/repo upstream with gh api.
+2. Find the point each derived project started from: a template name, version or upstream commit it records, or else the date of its first commit. List what the upstream changed after that point, from its git log and changelog.
+3. For each derived project, find what it lacks or holds an outdated copy of: the Claude Code and agent setup (CLAUDE.md, AGENTS.md, .claude/, .agents/, skills and rules), scripts, lint, test and CI configuration, and security fixes. For a tool the project runs, also a new command or flag that would replace something its scripts or docs do by hand, and one they use that the tool removed or deprecated. For a library of shared setups and notes, a skill, rule or note there that applies to the derived project.
+4. Leave out what a derived project dropped on purpose: its CLAUDE.md, AGENTS.md, README and docs name deliberate deviations, and its git log shows what it removed. Leave out upstream changes that serve only the upstream itself, such as its own docs site, releases, examples, or demo code the derived project replaced.
+A finding names the upstream file or commit it comes from, cited as a GitHub URL pinned to the commit, what the derived project has now, and the change. It targets the derived project's file as a ~ path, with kind "upgrade" for code, configuration and tooling, "rule-add" or "rule-change" for its CLAUDE.md, AGENTS.md, skills and rules, and "memory" for its project memory under ~/.claude/projects/. Say in coverage which derived projects you compared, from which point, and how many upstream commits you read.
+${BACKLOG_NOTE}
 ${OUTPUT}
 ${GROUND}`,
   })

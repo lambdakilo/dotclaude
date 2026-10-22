@@ -59,6 +59,7 @@ export async function simulate(wf, sc) {
       backlog: sc.backlog || { valid: true, open: [], closed: [], unchecked: [] },
       ruleSections: ['Git', 'Remote', 'Commands', 'Commits', 'PRs', 'Prose', 'Feedback', 'Comments', 'Running', 'Permissions', 'Public', 'Memory'],
       repos: [1, 2, 3, 4, 5].map(i => ({ path: `~/Projects/r${i}`, projectDirs: [`-r${i}`] })),
+      upstreams: sc.upstreams || [],
       prs: [1, 2, 3, 4].map(i => ({ url: `https://github.com/o/r/pull/${i}`, repo: 'o/r', number: i, title: `pr ${i}`, isDraft: true, updatedAt: `2026-10-1${i}T00:00:00Z` })),
     }
     if (label.startsWith('usage')) return usageCard()
