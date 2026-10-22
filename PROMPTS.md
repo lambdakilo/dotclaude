@@ -5,9 +5,27 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Answer in the format the asking message set
+## Keep Slack drafts off the clipboard unless memory names the channel
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.**
+> [an ask about a downstream project left out]
+
+**4.** Quoted under [8f63649](https://github.com/lambdakilo/dotclaude/commit/8f6364920b100a9d53dedb44ef924140fa0c665c).
+
+**5.**
+> [an ask about a downstream project left out]
+
+**6.**
+> [pasted: a colleague's two questions about progress figures]
+> [an ask about a downstream project left out] also dotclaude only use
+> the copypaste thingy for [a downstream channel]. also dont open the
+> builtin web brwoser whe doing that
+
+## Answer in the format the asking message set
+
+2026-10-22, commit [ffd6ec3](https://github.com/lambdakilo/dotclaude/commit/ffd6ec328ad6bfc9ab712551cb344966fa831e8a), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
