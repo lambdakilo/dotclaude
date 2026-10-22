@@ -84,7 +84,7 @@ done < <(printf '%s\n' "$cmd" | tr ';&|()`' '\n\n\n\n\n\n')
 cat >&2 <<EOF
 Refused by ~/.claude/hooks/no-home-search.sh: $hit reaches the whole disk or
 the home folder. macOS asks the user about each protected folder such a search
-touches, and the command waits for the answer. Search the project, ~/src,
+touches, and the command waits for the answer. Search the project, ~/Projects,
 ~/.claude, ~/Downloads or the folder the user named, and give mdfind -onlyin.
 For a file the user mentioned, stat the path it is likely at, then ask.
 ls -a ~ lists the home folder itself.

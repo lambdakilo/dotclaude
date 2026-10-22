@@ -5,9 +5,21 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Allow the push and the sync that a session was refused
+## Point two hooks at ~/Projects instead of the ~/src symlink
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> can you remove src even though its just symlink and removing it
+> doesnt break anything
+> > Fix hooks, remove later (Recommended)
+
+**2.** (answer to Claude's question, a reply button)
+> fix the two hooks here, then sync and commit
+
+## Allow the push and the sync that a session was refused
+
+2026-10-22, commit [cfdf0b3](https://github.com/lambdakilo/dotclaude/commit/cfdf0b363038c44590f9a9b216a68bfb546d853f), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > [an ask to push a downstream project's work straight to its default

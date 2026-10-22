@@ -36,7 +36,7 @@ dir="$cwd"
 c_arg="$(printf '%s\n' "$cmd" | sed -nE 's/.*git -C ([^[:space:];&|]+) .*/\1/p' | head -n 1)"
 [ -z "$c_arg" ] || dir="$(expand "$c_arg" "$cwd")"
 
-config_repo="$HOME/src/dotclaude"
+config_repo="$HOME/Projects/dotclaude"
 top="$(git -C "$dir" rev-parse --show-toplevel 2>/dev/null)"
 if [ -n "$top" ]; then
   [ "$top" = "$config_repo" ] && exit 0
