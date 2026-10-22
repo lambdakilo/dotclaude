@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep Slack draft HTML in ~/.claude/drafts, not Downloads
+## Repeat every pending step in every reply, complete on its own
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**29.**
+> again with the things being in other replies. dotclaude fix. next
+> time when you give instructions (give again) add the qr for example
+> so that each reply is complete without the other replies being read
+
+## Keep Slack draft HTML in ~/.claude/drafts, not Downloads
+
+2026-10-22, commit [9e28119](https://github.com/lambdakilo/dotclaude/commit/9e281190bd04863f9e03568ac9380cd52e3759a0), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
@@ -2087,6 +2096,7 @@ so a change by hand is lost at the next commit.
 - perms: permissions
 - PR: pull request
 - prs: pull requests
+- qr: quick response code
 - repo: repository
 - rest: REST, an HTTP API style
 - rn: right now

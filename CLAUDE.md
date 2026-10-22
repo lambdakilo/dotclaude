@@ -240,13 +240,15 @@ apply to one repository belong in that repository's project memory.
 - Answer first, then only what changes what the reader does next, then stop. No recap, no
   "check by hand" section, and no numbered steps unless they are commands run in order. When
   asked for a list, give the list and nothing around it.
-- When a turn changes steps the user was given earlier, such as a report's commands, a script to
-  skip or a new order, the reply ends with every step still to do, as it now stands and in
-  order: each command in a fenced block, each prompt for a session in a text block, and what
-  dropped out named once. The user works from the latest reply and keeps no list in their head.
-  Steps that come after a long run whose own output will bury them, such as applying and
-  committing what a dream run proposes, wait for the reply that follows that run, and the list
-  before it stops at the run.
+- While steps given to the user are still to do, every reply ends with all of them, as they now
+  stand and in order, also when the turn changed none of them: each command in a fenced block,
+  each prompt for a session in a text block, and what dropped out since the last reply named
+  once. Each reply is complete without the earlier ones: a QR code, a file, an address or a
+  value a step needs is shown again in that reply, never pointed to in another, and no reply
+  says that steps given before still stand. The user works from the latest reply and keeps no
+  list in their head. Steps that come after a long run whose own output will bury them, such as
+  applying and committing what a dream run proposes, wait for the reply that follows that run,
+  and the list before it stops at the run.
 - Steps the user carries out are written in the order they are done, in one numbered list from
   the first to the last. How to do one of them, such as how to start a screen recording, goes
   into that step, never into a section of its own placed before steps that have to come first.
