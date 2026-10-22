@@ -250,6 +250,10 @@ apply to one repository belong in that repository's project memory.
   list given as a tool's results holds every result, or says which it left out and why, and a
   person whose address no source gives is named as not checked, never looked up under a
   guessed address.
+- A figure given as a status or an estimate, such as a percentage done, says next to it what it
+  was counted from, such as 3 of 4 issues closed or 1 of 5 data reads moved. A figure that is a
+  judgement is called one and names the facts it weighs. When a count and a judgement disagree,
+  both are given.
 - Steps written for a person outside a PR, in a README, a setup section or chat, are run here
   before they are written down, and a menu, tab or button they name is taken from the installed
   version, such as the app's localized strings or the tool's `--help`, never from memory. A step

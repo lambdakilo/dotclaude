@@ -5,9 +5,30 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Write the user's steps in the order they are done
+## docs: say what a status figure was counted from
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [a question about a downstream project left out]
+
+**2.**
+> [a question about a downstream project left out]
+
+**3.** Quoted under [c558028](https://github.com/lambdakilo/dotclaude/commit/c5580280d88009eaee4bebd8703b6ba173c54888).
+
+**4.**
+> [a question about a downstream project left out]
+
+**5.**
+> [a question about a downstream project left out]
+
+**6.**
+> how did you come up with 5% rest hookup percent
+
+## Write the user's steps in the order they are done
+
+2026-10-22, commit [df95b19](https://github.com/lambdakilo/dotclaude/commit/df95b19a6d0f61124ba7cd48de1ea2d90595c88d), model claude-opus-5-5, effort xhigh.
 
 **28.**
 > dotclaude you instructions were in wrong order. you first told me to
@@ -1905,6 +1926,7 @@ so a change by hand is lost at the next commit.
 - PR: pull request
 - prs: pull requests
 - repo: repository
+- rest: REST, an HTTP API style
 - rn: right now
 - sat: Saturday
 - spdx: Software Package Data Exchange
