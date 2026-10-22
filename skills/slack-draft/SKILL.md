@@ -21,7 +21,8 @@ it with one paste.
    by dashes, starting with `<meta charset="utf-8">`. The HTML only feeds the clipboard, so it
    stays out of `~/Downloads`, which is for files the user opens or sends. Use only what Slack
    keeps from a paste: `<p>`, `<b>`, `<i>`, `<code>`, `<a href>`, `<ul>` or `<ol>` with `<li>`,
-   `<blockquote>` and `<pre>`. A bold label opens each list item.
+   `<blockquote>` and `<pre>`. A bold label opens each list item, unless the message being
+   answered set a format: then the draft copies it, as `~/.claude/CLAUDE.md` says under Prose.
 2. Link the evidence a claim rests on, pinned so the link still shows what the text says later:
    - a commit: `https://github.com/<owner>/<repo>/commit/<full sha>`, the short hash as code text
    - lines of a file: `https://github.com/<owner>/<repo>/blob/<full sha>/<path>#L<a>-L<b>`, with

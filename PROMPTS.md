@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Repeat every pending step in every reply, complete on its own
+## Answer in the format the asking message set
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+
+**2.**
+> what. in future i wanna see the same format as asked in your replies:
+>
+> [pasted: a colleague's nested list of progress figures, 12 lines]
+>
+>  like this
+
+## Repeat every pending step in every reply, complete on its own
+
+2026-10-22, commit [83f4ebf](https://github.com/lambdakilo/dotclaude/commit/83f4ebf4511ef77760f01ed40826355a4215876e), model claude-opus-5-5, effort xhigh.
 
 **29.**
 > again with the things being in other replies. dotclaude fix. next

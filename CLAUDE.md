@@ -240,6 +240,11 @@ apply to one repository belong in that repository's project memory.
 - Answer first, then only what changes what the reader does next, then stop. No recap, no
   "check by hand" section, and no numbered steps unless they are commands run in order. When
   asked for a list, give the list and nothing around it.
+- A reply to a message that set a format, such as a list of figures to confirm or update, a
+  template or a set of questions, answers in that format: the same items in the same order, with
+  the same nesting, labels, case and units, the new values in place of the old, and nothing
+  added inside it. This holds for a draft the user sends and for the answer in chat, which shows
+  that draft first, in that format. Reasons, counts and sources come after it, outside the draft.
 - While steps given to the user are still to do, every reply ends with all of them, as they now
   stand and in order, also when the turn changed none of them: each command in a fenced block,
   each prompt for a session in a text block, and what dropped out since the last reply named
