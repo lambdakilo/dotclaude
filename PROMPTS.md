@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Check the open PRs after every push to the checkout
+## List the open PRs pinned to an older commit after a push
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**2.** (answering whether sync.sh should list the PRs pinned to an older commit)
+> yes, make sync.sh --commit list my open prs that carry the dotclaude
+> block but pin an older commit, right after it pushes
+
+## Check the open PRs after every push to the checkout
+
+2026-10-22, commit [4f8fc53](https://github.com/lambdakilo/dotclaude/commit/4f8fc53dd365a951b298fffbebd8215a6f220e1f), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dotclaude when i make edits to dotclaude remember to check all my

@@ -12,7 +12,9 @@
 #   sync.sh --commit <message-file> [<path>...]
 #                      sync, then commit the paths, all by default, with the
 #                      message and push, then do the same in every mirror,
-#                      the message gaining a line that names the commit here
+#                      the message gaining a line that names the commit here,
+#                      then list the open PRs of the gh user whose body links
+#                      this repository but not the commit just pushed
 #
 # Reconciling: a file the pull changed is installed locally, a file changed
 # locally is copied into the checkout, and a file changed on both sides stops
@@ -314,5 +316,17 @@ elif [ -n "$message_file" ]; then
     echo "sync: $(git -C "$dir" rev-parse --short HEAD) pushed in $dir"
   done
   rm -f "$mirror_message"
+  if command -v gh >/dev/null 2>&1; then
+    repo_url="$(git remote get-url origin | sed -E 's#^git@([^:]+):#https://\1/#; s#\.git$##')"
+    pin="$repo_url/tree/$(git rev-parse HEAD)"
+    stale="$(gh search prs --author @me --state open --limit 100 --json url --jq '.[].url' |
+      while IFS= read -r pr; do
+        body="$(gh pr view "$pr" --json body --jq .body)" || continue
+        if [[ "$body" == *"$repo_url"* && "$body" != *"$pin"* ]]; then
+          echo "  $pr"
+        fi
+      done)" || echo "sync: could not list the open PRs" >&2
+    [ -z "$stale" ] || printf 'sync: open PRs whose link pins an older commit\n%s\n' "$stale"
+  fi
 fi
 exit "$failed"

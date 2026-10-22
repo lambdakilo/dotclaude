@@ -490,6 +490,9 @@ apply to one repository belong in that repository's project memory.
   block was written by hand and stays as it is. Nothing is rebuilt from another session's
   context: what the new rules need beyond the body, such as prompts, a verify run or new
   screenshots, is named in the reply under its PR, next to what the edit changed.
+  `sync.sh --commit` ends by listing the open PRs whose body links the repository but not the
+  commit it just pushed. It is a safety net for the pass, not a substitute for it: a PR with
+  only the prompts block is not on that list.
 - A rule in a mirrored file states what holds now. The incident behind it, its date and the
   wording it replaced go into the commit message, never into the file, and a changed rule is
   rewritten in place rather than followed by a note on what it used to say.
