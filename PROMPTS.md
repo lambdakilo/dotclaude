@@ -5,9 +5,21 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## List the open PRs pinned to an older commit after a push
+## Rewrite the README for readers who do not read code
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> could we get human readable readme in dotclaude? its very long, too
+> verbose. try to write it to a vibe coder who actually doesnt
+> understand how code works
+
+**2.** (answering whether to commit and push the new README)
+> commit and push the new readme
+
+## List the open PRs pinned to an older commit after a push
+
+2026-10-22, commit [bfc2d36](https://github.com/lambdakilo/dotclaude/commit/bfc2d36bd8763d439cb4c5ecadbc065f023523d6), model claude-opus-5-5, effort xhigh.
 
 **2.** (answering whether sync.sh should list the PRs pinned to an older commit)
 > yes, make sync.sh --commit list my open prs that carry the dotclaude
