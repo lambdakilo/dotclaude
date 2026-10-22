@@ -50,7 +50,9 @@
       "Bash(git push --force-with-lease:*)",
       "Bash(~/.claude/hooks/prompt-log.sh print:*)",
       "Bash(gh pr ready:*)",
-      "Bash(gh pr merge:*)"
+      "Bash(gh pr merge:*)",
+      "Bash(git push origin docs/prompts-md:dev:*)",
+      "Bash(~/Projects/dotclaude/sync.sh:*)"
     ],
     "ask": [
       "Bash(brew install:*)",
@@ -318,5 +320,6 @@
   },
   "env": {
     "CLAUDE_CODE_PLUGIN_DIRS": "~/.claude/mods/session-usage"
-  }
+  },
+  "switchModelsOnFlag": false
 }

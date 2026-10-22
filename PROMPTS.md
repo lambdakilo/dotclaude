@@ -5,9 +5,26 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Rewrite the README for readers who do not read code
+## Allow the push and the sync that a session was refused
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**2.**
+> [an ask to push a downstream project's work straight to its default
+> branch left out]
+
+**3.**
+> you didnt give me no allow script above
+
+**4.**
+> ran
+
+**5.**
+> ran
+
+## Rewrite the README for readers who do not read code
+
+2026-10-22, commit [8c0bcdc](https://github.com/lambdakilo/dotclaude/commit/8c0bcdcc69461f268bc0e8e4e0ba5f52601047b6), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > could we get human readable readme in dotclaude? its very long, too
