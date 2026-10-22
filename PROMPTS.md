@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep commit dates on every rebase
+## Rebase each mirror onto its remote instead of a fast-forward pull
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask about a fast-forward error in another repository left out]
+
+**2.** (answer to Claude's question, a reply button)
+> yes, [two changes to another repository left out], and fix the same
+> ff-only pull in sync.sh's mirror step
+
+## Keep commit dates on every rebase
+
+2026-10-22, commit [49b8a20](https://github.com/lambdakilo/dotclaude/commit/49b8a20d84480fcbd8f8f7e1aed02d8fb072f864), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > when i rebase something i force push as in rewrite history does git
@@ -1926,6 +1937,7 @@ so a change by hand is lost at the next commit.
 - exfil: exfiltrate
 - ext: external, a file posted by another organisation in a shared channel
 - feat: feature
+- ff-only: fast-forward only
 - fri: Friday
 - gcp: Google Cloud Platform
 - gh: GitHub CLI

@@ -305,7 +305,8 @@ elif [ -n "$message_file" ]; then
     END { if (done == 0) { print ""; print line } }
   ' "$message_file" > "$mirror_message"
   for dir in ${mirror_dirs[@]+"${mirror_dirs[@]}"}; do
-    git -C "$dir" pull --ff-only --quiet
+    git -C "$dir" fetch -q
+    git -C "$dir" rebase -q --autostash --committer-date-is-author-date
     git -C "$dir" add -A -- "${commit_paths[@]}"
     git -C "$dir" diff --cached --quiet -- "${commit_paths[@]}" ||
       git -C "$dir" commit -q -F "$mirror_message" -- "${commit_paths[@]}"
