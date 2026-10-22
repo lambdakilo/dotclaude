@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep commit dates when the memory hook rebases
+## Check the open PRs after every push to the checkout
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dotclaude when i make edits to dotclaude remember to check all my
+> open pull requests to match for example do have link to the commit at
+> the time of dotclaude etc. understand?
+
+## Keep commit dates when the memory hook rebases
+
+2026-10-22, commit [92d1e9c](https://github.com/lambdakilo/dotclaude/commit/92d1e9cca82f90820c86f05fdebc4991fdc43403), model claude-opus-5-5, effort xhigh.
 
 **3.** (answer: the user ran Claude's sed edit of the hook, which auto    mode had refused to make)
 > ran

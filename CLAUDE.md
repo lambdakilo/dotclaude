@@ -482,6 +482,14 @@ apply to one repository belong in that repository's project memory.
   key order first, so `claude plugin` and the `/plugin` dialog may change `settings.json`. When
   a new file under `~/.claude` would help other people (a hook, a skill, a command, an agent),
   add it to the list in `sync.sh` first.
+- Every push to the checkout is followed in the same turn by a pass over the user's open PRs,
+  listed with `gh search prs --author @me --state open`. Each PR whose body carries a block the
+  `pull-requests` skill puts there, the configuration link or the prompts block, gets the link
+  pinned to the commit just pushed and the rest of the body brought into line with the rules as
+  they now stand, as far as the skill lets an edit of the body change it. A PR with neither
+  block was written by hand and stays as it is. Nothing is rebuilt from another session's
+  context: what the new rules need beyond the body, such as prompts, a verify run or new
+  screenshots, is named in the reply under its PR, next to what the edit changed.
 - A rule in a mirrored file states what holds now. The incident behind it, its date and the
   wording it replaced go into the commit message, never into the file, and a changed rule is
   rewritten in place rather than followed by a note on what it used to say.
