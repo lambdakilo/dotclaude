@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Point two hooks at ~/Projects instead of the ~/src symlink
+## Drop the one-off push rule
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**6.**
+> what is that dead weight rule? also explain that new session
+> suggestion you gave me
+
+**7.**
+> y
+
+## Point two hooks at ~/Projects instead of the ~/src symlink
+
+2026-10-22, commit [d7e83e0](https://github.com/lambdakilo/dotclaude/commit/d7e83e0a4c3361e7cb5820e643a07f6b744288e1), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > can you remove src even though its just symlink and removing it

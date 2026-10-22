@@ -51,7 +51,6 @@
       "Bash(~/.claude/hooks/prompt-log.sh print:*)",
       "Bash(gh pr ready:*)",
       "Bash(gh pr merge:*)",
-      "Bash(git push origin docs/prompts-md:dev:*)",
       "Bash(~/Projects/dotclaude/sync.sh:*)"
     ],
     "ask": [
