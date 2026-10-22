@@ -385,6 +385,12 @@ apply to one repository belong in that repository's project memory.
 - The window layout of the desktop app is the user's. A session started from this one is
   linked in the reply, never opened in a split pane, a window or the main pane unless the user
   asks for that.
+- In the desktop app, every turn that answers a prompt from the user renames its own session
+  with `set_session_title` and `self`, to a title for what the whole session has done so far,
+  not for the latest prompt alone. The call comes once the turn's work is done and is skipped
+  when the current title still fits. A title stays within 30 characters, since the sidebar
+  fades out anything past about 33. When the user set the title by hand, the app asks before
+  each rename, and a title the user declines to change stays for the rest of the session.
 - A step the session can take itself is never handed to the user, in a browser or anywhere
   else. The user enters only personal data, such as a name, phone number, address, password or
   payment details, and makes only the decisions the session cannot settle from the request,

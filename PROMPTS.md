@@ -5,9 +5,31 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Drop the one-off push rule
+## Rename the session after each prompt in the desktop app
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> can claude code still not rename sessions here?
+
+**2.**
+> can we try to rename this session to foobar
+
+**3.**
+> can you rename it to something random now
+
+**4.**
+> change this session to numbers going without spaces to 30
+
+**5.**
+> dotclaude after each prompt rename my sessions accordingly based on
+> the session so far. you can see from the screenshot when the titel on
+> my m5 air fades and cuts out
+> [pasted: a screenshot of the session sidebar]
+
+## Drop the one-off push rule
+
+2026-10-22, commit [8b750ae](https://github.com/lambdakilo/dotclaude/commit/8b750ae1f27b17c8c4f8e4e60c92801dc10e8bfe), model claude-opus-5-5, effort xhigh.
 
 **6.**
 > what is that dead weight rule? also explain that new session
