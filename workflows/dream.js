@@ -1,7 +1,7 @@
 export const meta = {
   name: 'dream',
   description: 'Review Claude Code use since the last run in idle time, carry open proposals forward, and propose changes to the global setup',
-  whenToUse: 'In idle time with tokens to spare: at the end of a day, overnight or over a weekend. Run it without arguments and it picks its mode from the weekly reset on the usage card. On the day before the reset an eve run spends the week but keeps back what two 5-hour windows cost, one for work and one for a final run, and stops starting work in time to leave the 5-hour window that would still be open at 08:00 on the reset day untouched. On the reset day a final run spends what is left of the week down to 1 point and stops starting work an hour and a quarter before the reset, so its agents finish and report before it. On other days a night run guards the weekly limits. Every run stops just short of the 5-hour limit, since an agent that reaches it fails instead of waiting for the reset. Optional args: {mode: "eve", "final", "night" or "day" to choose the mode, where a day run keeps the margin free on the 5-hour limit too while the user works, workAt: "HH:MM" local time the user starts on the reset day (default 08:00), keep: <5-hour windows an eve run keeps back, default 2>, since: "<ISO time>", only: ["transcripts", "config", "github", "rules", "waste", "harness", "doctor", "anthropic", "skills", "projects", "library", "upstreams", "prs", "brief", "subagents"], all: true to run every source whether due or not, out: "<report directory>", margin: <usage percentage points to leave free, default 5, 1 in a final run>, pool: <pieces of work at a time, default 7>}; weekend: true still means mode final and day: true mode day. The work comes in four tiers, and a tier\'s findings are merged and checked before later tiers get the usage: 1. checks of the proposals earlier runs had no usage to check, the window\'s transcripts by their last user or assistant record, newest first, config and GitHub reviews; 2. rule effectiveness, token waste, the harness, doctor, Anthropic and skill repository sources; 3. project audits, a review of the shared library that ~/.claude/shared-memories.conf names, what the projects derived from a template, tool or shared library should take over from it, reviews of the user\'s open pull requests in repositories checked out under ~/Projects or updated in the last 14 days and, in a final run, a brief for Monday; 4. in eve and final runs, subagent transcripts and then older transcripts a week at a time, newest first, on from where the last weekend run stopped. Transcripts and config run every time, GitHub reviews once a day, the other sources of tiers 2 and 3 once a week, or once a weekend in eve and final runs, and transcripts and proposals a run had no usage for carry over to the next run. Each run appends its last usage reading to ~/.claude/dream/weekly-usage.jsonl, so the last line for a week shows how much of that week was used, and the report ends with this week, last week and the 4-week and 52-week averages from it. Skill repositories are listed one per line in ~/.claude/dream/skill-repos.txt as "owner/repo[/path] optional note". Upstreams are listed one per line in ~/.claude/dream/upstreams.txt as "upstream derived[,derived...] optional note", the upstream a ~ path to its checkout or owner/repo[/path] on GitHub, and each derived project a ~ path to its checkout. Open proposals carry over in ~/.claude/dream/backlog.json until they are applied or found obsolete. The run reads the plan usage card as work finishes and starts new work only while it fits, using what earlier runs cost, as kept in ~/.claude/dream/usage-history.jsonl. Run it with review, or {review: true}, to skip the run and go through the open backlog in that dialogue. When the run finishes, do what forTheSession in its result says: show the whole report, check where the usage limits stand now against the run\'s target, and end with the steps to take now. Each run has its own folder of scripts beside the report, numbered in the order to apply them, and the report gives the command that runs each one.',
+  whenToUse: 'In idle time with tokens to spare: at the end of a day, overnight or over a weekend. Run it without arguments and it picks its mode from the weekly reset on the usage card. On the day before the reset an eve run spends the week but keeps back what two 5-hour windows cost, one for work and one for a final run, and stops starting work in time to leave the 5-hour window that would still be open at 08:00 on the reset day untouched. On the reset day a final run spends what is left of the week down to 1 point and stops starting work an hour and a quarter before the reset, so its agents finish and report before it. On other days a night run guards the weekly limits. Every run stops just short of the 5-hour limit, since an agent that reaches it fails instead of waiting for the reset. Optional args: {mode: "eve", "final", "night" or "day" to choose the mode, where a day run keeps the margin free on the 5-hour limit too while the user works, workAt: "HH:MM" local time the user starts on the reset day (default 08:00), keep: <5-hour windows an eve run keeps back, default 2>, since: "<ISO time>", only: ["transcripts", "config", "github", "rules", "waste", "harness", "doctor", "anthropic", "skills", "projects", "library", "upstreams", "prs", "brief", "subagents"], all: true to run every source whether due or not, out: "<report directory>", margin: <usage percentage points to leave free, default 5, 1 in a final run>, pool: <pieces of work at a time, default 7>}; weekend: true still means mode final and day: true mode day. The work comes in four tiers, and a tier\'s findings are merged and checked before later tiers get the usage: 1. checks of the proposals earlier runs had no usage to check, the window\'s transcripts by their last user or assistant record, newest first, config and GitHub reviews; 2. rule effectiveness, token waste, the harness, doctor, Anthropic and skill repository sources; 3. project audits, a review of the shared library that ~/.claude/shared-memories.conf names, what the projects derived from a template, tool or shared library should take over from it, reviews of the user\'s open pull requests in repositories checked out under ~/Projects or updated in the last 14 days and, in a final run, a brief for Monday; 4. in eve and final runs, subagent transcripts and then older transcripts a week at a time, newest first, on from where the last weekend run stopped. Transcripts and config run every time, GitHub reviews once a day, the other sources of tiers 2 and 3 once a week, or once a weekend in eve and final runs, and transcripts and proposals a run had no usage for carry over to the next run. Each run appends its last usage reading to ~/.claude/dream/weekly-usage.jsonl, so the last line for a week shows how much of that week was used, and the report ends with this week, last week and the 4-week and 52-week averages from it. Skill repositories are listed one per line in ~/.claude/dream/skill-repos.txt as "owner/repo[/path] optional note". Upstreams are listed one per line in ~/.claude/dream/upstreams.txt as "upstream derived[,derived...] optional note", the upstream a ~ path to its checkout or owner/repo[/path] on GitHub, and each derived project a ~ path to its checkout. Open proposals carry over in ~/.claude/dream/backlog.json until they are applied or found obsolete. The run reads the plan usage card as work finishes and starts new work only while it fits, using what earlier runs cost, as kept in ~/.claude/dream/usage-history.jsonl. Run it with review, or {review: true}, to skip the run and go through the open backlog in that dialogue. When the run finishes, do what forTheSession in its result says: show the whole report, check where the usage limits stand now against the run\'s target, and end with the steps to take now. Each run has its own folder of scripts beside the report, numbered in the order to apply them, and the report gives the command that runs each one. When ~/.claude/dream/evals-checkout.txt names a checkout of the public repository of this setup, the session then reruns its evals with test/evals.mjs --readme, and commits and pushes the README section they fill when their numbers changed.',
   phases: [
     { title: 'Scout', detail: 'time window, mode, due sources, transcripts, pull requests, backlog, usage and its history' },
     { title: 'Recent', detail: 'tier 1: the window\'s transcripts newest first, config and GitHub reviews, merged and checked first' },
@@ -20,6 +20,7 @@ const REPOS_FILE = '~/.claude/dream/skill-repos.txt'
 const UPSTREAMS_FILE = '~/.claude/dream/upstreams.txt'
 const HISTORY_FILE = '~/.claude/dream/usage-history.jsonl'
 const WEEKS_FILE = '~/.claude/dream/weekly-usage.jsonl'
+const EVALS_FILE = '~/.claude/dream/evals-checkout.txt'
 const BACKLOG_FILE = `${OUT}/backlog.json`
 const SOURCES = ['transcripts', 'config', 'github', 'rules', 'waste', 'harness', 'doctor', 'anthropic', 'skills', 'projects', 'library', 'upstreams', 'prs', 'brief', 'subagents']
 const TIER_PHASE = { 1: 'Recent', 2: 'Weekly', 3: 'Work', 4: 'Older' }
@@ -343,6 +344,9 @@ const dreamAgent = (prompt, opts = {}) => agent(prompt, { agentType: 'dream-work
 const READ_USAGE = `Run date -u +%Y-%m-%dT%H:%M:%SZ and return it as now. Then load the tool mcp__ccd_session_mgmt__get_usage with ToolSearch and call it with no arguments. Return available true and its plan windows exactly as reported: label, percentUsed and resetsAt. Return available false with no windows when the tool cannot be found or its plan status is not "ok".`
 
 const LIST_FILES = 'Return each with its absolute path, its project directory name, its size in bytes and its modification time as an ISO time in UTC.'
+// Some project folders are symlinks to others, so a glob, ls or find -L lists their transcripts twice, and each read is paid for.
+const FIND_MAIN = `find ~/.claude/projects/ -mindepth 2 -maxdepth 2 -type f -name '*.jsonl'`
+const FIND_ONCE = 'Run find as given, without -L, and never list these files with a glob such as ~/.claude/projects/*/*.jsonl or with ls: some project folders there are symlinks to others, so a glob lists their files a second time.'
 // The backlog file outgrew what an agent can repeat verbatim, so a run passes an index around and agents read whole items from the file by key.
 const BACKLOG_INDEX = `jq -c '{valid: true, open: [.open[]? | {key, title, kind, impact, target, firstSeen, lastSeen, scriptFile: (.scriptFile // ""), askAgainAfter: (.askAgainAfter // "")}], closed: ([.closed[]? | {title, closedOn, reason: ((.reason // "") | .[0:160])}] | .[-150:]), unchecked: [.unchecked[]? | {key, title, kind, impact, target, firstSeen}]}' ${BACKLOG_FILE}`
 const readItem = (list, key) => `jq '.${list}[] | select(.key == "${key}")' ${BACKLOG_FILE}`
@@ -394,19 +398,28 @@ const scout = await dreamAgent(`Set up a dream run, a review of this user's Clau
 2. List the files in ${OUT} named YYYY-MM-DD.md or YYYY-MM-DD-N.md (expand ~, the directory may not exist yet). Return their paths, newest first, as previousReports. Return as runId today's date when no report of today exists, else today's date with the next free -N, such as ${'<today>'}-2.
 3. since is ${opts.since ? `"${opts.since}", given by the user` : `the time field of the last line of ${HISTORY_FILE} that has one, else that line's date at 00:00 UTC, else now minus 7 days`}, as an ISO time in UTC.${runNote ? ` The user started the run with this note, which may name a different window: "${runNote}".` : ''} Say in sinceReason how you chose it. lookbackFrom is since minus ${LOOKBACK_DAYS} days, as an ISO time.
 4. Run "$CLAUDE_CODE_EXECPATH" --version, the Claude Code build this session runs on, or claude --version when that variable is unset, and return the version number.
-5. ${requested.includes('transcripts') ? `List the main session transcripts used after since: files matching ~/.claude/projects/*/*.jsonl at depth one only, not the subagent folders below them, modified after since, whose lastActivity is after since. The project directory names start with a dash, so give find and ls ./name or absolute paths, never a bare name. ${LIST_FILES} ${LAST_ACTIVITY} Also return as oldestTranscript the modification time, as an ISO time in UTC, of the oldest file matching that pattern.` : 'Transcripts are out of scope for this run. Return an empty sessions list.'}
+5. ${requested.includes('transcripts') ? `List the main session transcripts used after since: of the files ${FIND_MAIN} -newermt <since> prints, those whose lastActivity is after since. ${FIND_ONCE} ${LIST_FILES} ${LAST_ACTIVITY} Also return as oldestTranscript the modification time, as an ISO time in UTC, of the oldest file ${FIND_MAIN} prints.` : 'Transcripts are out of scope for this run. Return an empty sessions list.'}
 6. ${requested.includes('skills') ? `Read ${REPOS_FILE} if it exists. Each non-empty line not starting with # names a GitHub repository as owner/repo, optionally followed by /path to a folder inside it, then optionally a note after whitespace. Return each as repo and note, the note empty when there is none. Return an empty list when the file is missing.` : 'Skill repositories are out of scope for this run. Return an empty skillRepos list.'}
 7. Return as model the model id you run on, from your own system prompt, and as effort the value of $CLAUDE_EFFORT, or "unknown" when it is unset.
 8. ${READ_USAGE} Put the result in usage, an object with available and windows.
 9. Return the lines of ${HISTORY_FILE} verbatim as historyLines, oldest first, or an empty list when the file does not exist. Return the lines of ${WEEKS_FILE} the same way as weekLines.
 10. Run ${BACKLOG_INDEX} and return its output as backlog, parsed, every field as jq prints it, never shortened or summarised. When the file does not exist, return valid true and empty lists; when jq fails on it, return valid false and empty lists.
 11. ${requested.includes('rules') ? 'Return as ruleSections the headings of ~/.claude/CLAUDE.md that start with "## ", without the "## ", in file order.' : 'Return an empty ruleSections list.'}
-12. ${requested.includes('projects') ? `Find the repositories the user worked in: for each directory under ~/.claude/projects with a main transcript whose last user or assistant record is after lookbackFrom, read the cwd fields of those transcripts with jq -r 'select(.cwd) | .cwd' FILE | sort -u. Keep a cwd that is inside a git work tree, and map it to its main checkout, the parent of git -C <cwd> rev-parse --path-format=absolute --git-common-dir. Leave out ~/.claude and everything below it, and any path containing scratch-workspaces. Return each main checkout once, as a ~ path in path, with the project directory names that led to it in projectDirs.` : 'Return an empty repos list.'}
+12. ${requested.includes('projects') ? `Find the repositories the user worked in: for each project folder holding one of the files ${FIND_MAIN} prints whose last user or assistant record is after lookbackFrom, read the cwd fields of those transcripts with jq -r 'select(.cwd) | .cwd' FILE | sort -u. Keep a cwd that is inside a git work tree, and map it to its main checkout, the parent of git -C <cwd> rev-parse --path-format=absolute --git-common-dir. Leave out ~/.claude and everything below it, and any path containing scratch-workspaces. Return each main checkout once, as a ~ path in path, with the project directory names that led to it in projectDirs.` : 'Return an empty repos list.'}
 13. ${requested.includes('prs') ? 'List the open pull requests the user authored: gh search prs --author @me --state open --limit 100 --json url,title,repository,number,isDraft,updatedAt. Keep one only when it was updated in the last 14 days or its repository is the origin or upstream remote of a checkout under ~/Projects (git -C <checkout> remote -v), since old contributions elsewhere are not the user\'s current work. Return each with repo as its repository nameWithOwner. Return an empty list when gh fails.' : 'Return an empty prs list.'}
 14. ${requested.includes('upstreams') ? `Read ${UPSTREAMS_FILE} if it exists. Each non-empty line not starting with # names an upstream, a ~ path to its checkout or owner/repo on GitHub, optionally followed by /path to a folder inside it, then after whitespace the projects derived from it as ~ paths to their checkouts, separated by commas, then optionally a note after whitespace. Return each as upstream, derived and note, the note empty when there is none, and leave out a derived path that is not a git checkout. Return an empty list when the file is missing.` : 'Return an empty upstreams list.'}
 ${GROUND}`, { label: 'scout', schema: SCOUT })
 
 if (!scout) return { error: 'The scout agent failed, nothing ran.' }
+const usedAt = s => Date.parse(s.lastActivity || s.mtime) || 0
+// A symlinked project folder or a forked session's copy shows one transcript under several paths, and its file name is its session or agent id.
+const fileName = s => s.path.split('/').pop()
+const onePerName = list => Object.values(list.reduce((by, s) => {
+  const k = fileName(s)
+  if (!by[k] || usedAt(s) > usedAt(by[k])) by[k] = s
+  return by
+}, {}))
+scout.sessions = onePerName(scout.sessions)
 
 const history = scout.historyLines
   .map(line => { try { return JSON.parse(line) } catch (e) { return null } })
@@ -732,7 +745,6 @@ async function takeReading() {
   usage = after
 }
 
-const usedAt = s => Date.parse(s.lastActivity || s.mtime) || 0
 const byNewest = (a, b) => usedAt(b) - usedAt(a)
 function makeBatches(list, size) {
   const out = []
@@ -753,7 +765,7 @@ function makeBatches(list, size) {
 
 const windowSessions = scout.sessions.map(s => ({ ...s, from: scout.since }))
 for (const p of pending) {
-  const same = windowSessions.find(s => s.path === p.path)
+  const same = windowSessions.find(s => fileName(s) === fileName(p))
   if (same) same.from = p.from
   else windowSessions.push(p)
 }
@@ -765,7 +777,7 @@ if (!WEEKEND && batches.length > MAX_BATCHES) {
 }
 
 const BACKLOG_NOTE = `Open proposals from earlier runs carry over in a backlog, so a finding that only repeats one of these is no news: ${backlog.open.map(i => i.title).join('; ') || 'none'}.`
-const WINDOW = `This run covers ${scout.since} to ${scout.now}. A finding needs evidence from inside that window. To show that a pattern recurs, you may also search the transcripts and files of the ${LOOKBACK_DAYS} days before it, from ${scout.lookbackFrom}. ${BACKLOG_NOTE}`
+const WINDOW = `This run covers ${scout.since} to ${scout.now}. A finding needs evidence from inside that window. To show that a pattern recurs, you may also search the transcripts and files of the ${LOOKBACK_DAYS} days before it, from ${scout.lookbackFrom}; the main transcripts are the files ${FIND_MAIN} -newermt ${scout.lookbackFrom} prints. ${FIND_ONCE} ${BACKLOG_NOTE}`
 
 const OUTPUT = `Return findings in the schema. Each finding is one concrete, separate change with evidence a reader can open. Prefer fewer, well-evidenced findings over many thin ones. A one-off is not a finding unless its cost was high. Use kind "habit" with target "habit" for something the user should do differently, and the other kinds for a change to a file. Put what you read and what you skipped in coverage.`
 
@@ -834,7 +846,7 @@ if (only.includes('config')) {
     tier: 1,
     label: 'config',
     prompt: `Review the user's Claude Code configuration as a whole for problems and improvements.
-Read ~/.claude/CLAUDE.md, ~/.claude/rules/, ~/.claude/settings.json, ~/.claude/hooks/, ~/.claude/skills/, ~/.claude/workflows/, the installed plugins under ~/.claude/plugins/, every ~/.claude/projects/*/memory/ folder (the directory names start with a dash, so use ./name or absolute paths), and the CLAUDE.md and AGENTS.md files of the repositories under ~/Projects.
+Read ~/.claude/CLAUDE.md, ~/.claude/rules/, ~/.claude/settings.json, ~/.claude/hooks/, ~/.claude/skills/, ~/.claude/workflows/, the installed plugins under ~/.claude/plugins/, every memory folder that find ~/.claude/projects/ -mindepth 2 -maxdepth 2 -type d -name memory prints (without -L, since some project folders are symlinks to others, and a glob or ls lists their memory twice), and the CLAUDE.md and AGENTS.md files of the repositories under ~/Projects.
 Look for:
 - rules that contradict each other, or a project memory that contradicts the global file;
 - duplication between the global file and project memories, and project memories that should be global rules or the other way round;
@@ -873,7 +885,7 @@ for (const heading of only.includes('rules') ? scout.ruleSections : []) {
     label: `rules: ${heading}`,
     prompt: `Check whether the rules under the heading "## ${heading}" in ~/.claude/CLAUDE.md work in practice.
 1. Read that section. For each bullet, find when its current wording landed: git -C ~/Projects/dotclaude log -S with a distinctive phrase of the bullet, or log -L over its lines, on CLAUDE.md.
-2. Search the main session transcripts, ~/.claude/projects/*/*.jsonl at depth one (the directory names start with a dash, so use absolute paths), modified after that date, for the moments the bullet applied: grep for what triggers it, such as the command, tool, file or kind of text it is about, then read the conversation around each hit with jq.
+2. Search the main session transcripts modified after that date, the files ${FIND_MAIN} -newermt <that date> prints, for the moments the bullet applied: grep them for what triggers it, such as the command, tool, file or kind of text it is about, with -exec grep -l on that find, then read the conversation around each hit with jq. ${FIND_ONCE}
 3. Sort each bullet into followed, broken or never triggered, with counts.
 A bullet broken twice or more, or once at a high cost, is a finding: kind "hook" when a hook or permission rule could enforce it, else "rule-change" with wording that would have held. A bullet never triggered since it landed, at least two weeks ago, with no hook behind it, is a finding of kind "rule-remove" with impact low that says since when it exists and how many lines of always-loaded context it costs. Two bullets the transcripts show Claude mixing up are a finding of kind "rule-change". A followed bullet is no finding: give the counts in coverage.
 Evidence may come from any transcript kept, since a rule's record is the point. ${BACKLOG_NOTE}
@@ -888,7 +900,7 @@ if (only.includes('waste')) {
     tier: 2,
     label: 'token waste',
     prompt: `Find where this user's Claude Code sessions spend context and usage without need, so next week's limits go further.
-1. For each main transcript, ~/.claude/projects/*/*.jsonl at depth one (the directory names start with a dash, so use absolute paths), modified after ${scout.lookbackFrom}, sum the usage of its assistant messages timestamped after that time with jq: input_tokens, cache_creation_input_tokens, cache_read_input_tokens and output_tokens under .message.usage. Take the ten largest sessions.
+1. For each main transcript modified after ${scout.lookbackFrom}, each file ${FIND_MAIN} -newermt ${scout.lookbackFrom} prints, sum the usage of its assistant messages timestamped after that time with jq: input_tokens, cache_creation_input_tokens, cache_read_input_tokens and output_tokens under .message.usage. Take the ten largest sessions. ${FIND_ONCE}
 2. In those, find the causes: the largest tool results by content length, the same file read several times, a command whose output was mostly noise, auto-compactions, long loops of retries, subagents started for a one-file lookup, MCP tools loaded and never used.
 3. A finding names the cause, what it cost in tokens, how often it recurs across sessions, and the change: a setting, a hook that trims output, a permission rule that saves a round trip, a rule, or a habit.
 ${BACKLOG_NOTE}
@@ -920,7 +932,7 @@ if (only.includes('doctor')) {
     prompt: `Run the Claude Code health checks and turn what they report into findings.
 Use the Claude Code build this session runs on: the path in $CLAUDE_CODE_EXECPATH, quoted since the desktop app's path has spaces, or claude on PATH when that variable is unset. CC below means that command.
 1. Run CC doctor with stdin from /dev/null under a time limit, such as perl -e 'alarm 120; exec @ARGV' "$CLAUDE_CODE_EXECPATH" doctor < /dev/null. It is read-only.
-2. Compare the version CC reports, ${scout.installedVersion}, with the versions the user's sessions ran, from the version field of the transcripts modified since ${scout.lookbackFrom}, and with the latest from npm view @anthropic-ai/claude-code version. When CC is the desktop app's build, the app updates it, sets DISABLE_AUTOUPDATER for it and signs its sessions in. Doctor's lines on auto-updates, the last update attempt, a missing claude command on PATH, the claude.ai sign-in and Remote Control then describe a terminal install the user may not have, and are no finding. Say what the user misses only when the sessions themselves ran an old version.
+2. Compare the version CC reports, ${scout.installedVersion}, with the versions the user's sessions ran, from the version field of the transcripts ${FIND_MAIN} -newermt ${scout.lookbackFrom} prints, and with the latest from npm view @anthropic-ai/claude-code version. When CC is the desktop app's build, the app updates it, sets DISABLE_AUTOUPDATER for it and signs its sessions in. Doctor's lines on auto-updates, the last update attempt, a missing claude command on PATH, the claude.ai sign-in and Remote Control then describe a terminal install the user may not have, and are no finding. Say what the user misses only when the sessions themselves ran an old version.
 3. Audit the instruction files in this session: invoke the claude-api skill with the Skill tool and the args prompt-audit ~/.claude/CLAUDE.md ~/.claude/skills/ ~/.claude/workflows/ for the model set in ~/.claude/settings.json, and follow its procedure. Turn its report into findings and leave its proposed diff unapplied. Leave stale paths and contradictions to the config source.
 4. Run CC -p --no-session-persistence "/skill-doctor" with stdin from /dev/null under a time limit of about 5 minutes. It runs locally and needs no sign-in. Report skills that cost context without being used.
 Report a check that failed or hung as a finding only when the failure itself matters.
@@ -1190,22 +1202,22 @@ function verifyTier(n, proposals) {
 
 const olderListed = (DEEP || only.includes('subagents'))
   ? outside('merge', () => dreamAgent(`List two sets of Claude Code transcripts.
-1. older: ${DEEP ? `the main session transcripts whose lastActivity is after ${new Date(deepFrom).toISOString()} and not after ${new Date(deepEnd).toISOString()}: files matching ~/.claude/projects/*/*.jsonl at depth one only, modified after the first of those times. ${LAST_ACTIVITY}` : 'return an empty list.'}
-2. subagents: ${only.includes('subagents') ? `the subagent transcripts ${subagentsFrom ? `modified after ${subagentsFrom}` : 'of every age'}: files named agent-*.jsonl at any depth below the subagents folders, ~/.claude/projects/*/*/subagents/, newest first, at most ${MAX_SUBAGENT_FILES}.` : 'return an empty list.'}
-The project directory names start with a dash, so give find and ls ./name or absolute paths, never a bare name. ${LIST_FILES}
+1. older: ${DEEP ? `the main session transcripts whose lastActivity is after ${new Date(deepFrom).toISOString()} and not after ${new Date(deepEnd).toISOString()}: of the files ${FIND_MAIN} -newermt <the first of those times> prints. ${LAST_ACTIVITY}` : 'return an empty list.'}
+2. subagents: ${only.includes('subagents') ? `the subagent transcripts ${subagentsFrom ? `modified after ${subagentsFrom}` : 'of every age'}: the files find ~/.claude/projects/ -path '*/subagents/*' -type f -name 'agent-*.jsonl' prints, newest first, at most ${MAX_SUBAGENT_FILES}.` : 'return an empty list.'}
+${FIND_ONCE} ${LIST_FILES}
 ${GROUND}`, { label: 'list older', phase: 'Older', effort: 'low', schema: OLDER }))
   : Promise.resolve(null)
 
 const tier4 = olderListed.then(list => {
   const out = []
   if (list && only.includes('subagents')) {
-    const subBatches = makeBatches(list.subagents.slice(0, MAX_SUBAGENT_FILES), 6)
+    const subBatches = makeBatches(onePerName(list.subagents).slice(0, MAX_SUBAGENT_FILES), 6)
     subBatches.forEach((b, i) => out.push(subagentTask(b, `subagents ${i + 1}/${subBatches.length}`)))
   }
   if (list && DEEP) {
     const week = DEEP_SLICE_DAYS * 86400000
     const groups = {}
-    for (const s of list.older) {
+    for (const s of onePerName(list.older)) {
       const at = usedAt(s)
       const k = at ? Math.min(DEEP_WEEKS - 1, Math.max(0, Math.floor((deepEnd - at) / week))) : 0
       if (!groups[k]) groups[k] = []
@@ -1643,12 +1655,13 @@ const againAfter = Number.isFinite(fiveBlockedReset) && weeklyLeft > 3 && (!Numb
 const stoppedBy = skippedWork.length
   ? Object.entries(skipReasons).map(([r, n]) => `${n} pieces of work skipped as ${r}`).join('; ') + againAfter
   : 'it ran out of work, with everything due done'
+const EVALS = `Then, when ${EVALS_FILE} exists, refresh the evals of the checkout it names: run node <checkout>/test/evals.mjs --readme and show its lines in a text block, whatever its exit status. When git -C <checkout> status --porcelain README.md then lists the file, commit and push README.md alone with <checkout>/sync.sh --commit <message file> README.md, as the Public configuration repository section of ~/.claude/CLAUDE.md says.`
 const walkThrough = steps.length
   ? `Then ${walkText(backlogTarget, `${OUT}/${scout.runId}.md`)}`
   : 'There are no steps to apply, so say so.'
 
 return {
-  forTheSession: `${report ? `Read ${report.path} and show all of it in the chat, unshortened, since the user reads the report only there.` : 'The report agent returned nothing: say so and list the open proposals below.'} Then read the usage card with mcp__ccd_session_mgmt__get_usage and show a table of the 5-hour and weekly limits at the start of the run, at its end and now, with this ${MODE} run's weekly target of ${weeklyTarget}%, and say in one line why the run stopped where it did: ${stoppedBy}. ${SPENT} ${WEEKS} ${walkThrough}`,
+  forTheSession: `${report ? `Read ${report.path} and show all of it in the chat, unshortened, since the user reads the report only there.` : 'The report agent returned nothing: say so and list the open proposals below.'} Then read the usage card with mcp__ccd_session_mgmt__get_usage and show a table of the 5-hour and weekly limits at the start of the run, at its end and now, with this ${MODE} run's weekly target of ${weeklyTarget}%, and say in one line why the run stopped where it did: ${stoppedBy}. ${SPENT} ${WEEKS} ${EVALS} ${walkThrough}`,
   report: report ? report.path : null,
   scripts: SCRIPTS_DIR,
   verification: { weeklyTarget, stoppedBy, start: startUsage ? startUsage.windows : null, end: usage ? usage.windows : null },

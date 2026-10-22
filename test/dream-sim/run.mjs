@@ -47,6 +47,9 @@ export async function simulate(wf, sc) {
     }
   }
 
+  // With dupes, a symlinked project folder shows the first three files of each list a second time, and the last run carried one over under that path.
+  const linked = list => list.concat(sc.dupes ? list.slice(0, 3).map(s => ({ ...s, path: s.path.replace(/^\/(\w+)\//, '/$1/link/'), project: 'link' })) : [])
+  const history = sc.dupes ? JSON.stringify({ ...JSON.parse(HISTORY), pending: [{ path: '/t/link/s5.jsonl', project: 'link', bytes: 1e6, mtime: sc.since, from: '2026-10-12T00:00:00Z' }] }) : HISTORY
   const fit = { verdict: 'keep', reason: 'ok', finalProposal: '', script: 'echo', exactChange: 'a line', exampleWrong: 'it broke', exampleFixed: 'it works' }
   function respond(label, prompt) {
     st.prompts[label] = prompt
@@ -54,8 +57,8 @@ export async function simulate(wf, sc) {
     if (label === 'scout') return {
       now: sc.now, today: sc.now.slice(0, 10), utcOffset: '+0300', runId: sc.now.slice(0, 10), since: sc.since, lookbackFrom: new Date(Date.parse(sc.since) - 7 * 24 * H).toISOString(),
       oldestTranscript: '2026-09-21T08:00:00Z', installedVersion: '2.1.299', previousReports: [],
-      sessions: Array.from({ length: sc.sessions }, (_, i) => ({ path: `/t/s${i}.jsonl`, project: `p${i % 5}`, bytes: 1e6 + i, mtime: new Date(Date.parse(sc.now) - i * H).toISOString(), lastActivity: new Date(Date.parse(sc.now) - i * H).toISOString() })),
-      skillRepos: [], model: 'claude-opus-5-5', effort: 'xhigh', usage: usageCard(), historyLines: [HISTORY].concat(sc.extraHistory || []), weekLines: sc.weekLines || [],
+      sessions: linked(Array.from({ length: sc.sessions }, (_, i) => ({ path: `/t/s${i}.jsonl`, project: `p${i % 5}`, bytes: 1e6 + i, mtime: new Date(Date.parse(sc.now) - i * H).toISOString(), lastActivity: new Date(Date.parse(sc.now) - i * H).toISOString() }))),
+      skillRepos: [], model: 'claude-opus-5-5', effort: 'xhigh', usage: usageCard(), historyLines: [history].concat(sc.extraHistory || []), weekLines: sc.weekLines || [],
       backlog: sc.backlog || { valid: true, open: [], closed: [], unchecked: [] },
       ruleSections: ['Git', 'Remote', 'Commands', 'Commits', 'PRs', 'Prose', 'Feedback', 'Comments', 'Running', 'Permissions', 'Public', 'Memory'],
       repos: [1, 2, 3, 4, 5].map(i => ({ path: `~/Projects/r${i}`, projectDirs: [`-r${i}`] })),
@@ -65,8 +68,8 @@ export async function simulate(wf, sc) {
     if (label.startsWith('usage')) return usageCard()
     if (label === 'backlog check') return { items: [] }
     if (label === 'list older') return {
-      older: Array.from({ length: 12 }, (_, i) => ({ path: `/old/o${i}.jsonl`, project: 'p', bytes: 2e6, mtime: new Date(Date.parse('2026-10-06T00:00:00Z') - i * 30 * H).toISOString() })),
-      subagents: Array.from({ length: 40 }, (_, i) => ({ path: `/sub/a${i}.jsonl`, project: 'p', bytes: 3e5, mtime: new Date(Date.parse(sc.now) - i * 5 * H).toISOString() })),
+      older: linked(Array.from({ length: 12 }, (_, i) => ({ path: `/old/o${i}.jsonl`, project: 'p', bytes: 2e6, mtime: new Date(Date.parse('2026-10-06T00:00:00Z') - i * 30 * H).toISOString() }))),
+      subagents: linked(Array.from({ length: 40 }, (_, i) => ({ path: `/sub/a${i}.jsonl`, project: 'p', bytes: 3e5, mtime: new Date(Date.parse(sc.now) - i * 5 * H).toISOString() }))),
     }
     if (label.startsWith('merge')) {
       const findings = JSON.parse(prompt.split('Findings, as JSON:\n')[1].split('\n')[0])

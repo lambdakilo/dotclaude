@@ -63,6 +63,7 @@ const scenarios = [
     ['the session is told to ask one step at a time with the examples', (st, r) => /one AskUserQuestion call per step/.test(r.forTheSession) && /exampleWrong/.test(r.forTheSession)],
     ['the session is told to show the tokens and dollars the run spent', (st, r) => /usage\.sh --run/.test(r.forTheSession)],
     ['and last week and this week of all sessions, from reset to reset', (st, r) => /usage\.sh --since 2026-10-03T13:59:59\.000Z 2026-10-10T13:59:59\.000Z/.test(r.forTheSession)],
+    ['and to refresh the evals of the checkout evals-checkout.txt names, before the walk', (st, r) => /evals-checkout\.txt exists/.test(r.forTheSession) && r.forTheSession.indexOf('evals.mjs --readme') < r.forTheSession.indexOf('one AskUserQuestion call per step')],
   ]],
   ['review of the open backlog', { ...wed, week: 30, sessions: 4, args: 'review', backlog: {
     valid: true,
@@ -90,6 +91,16 @@ const scenarios = [
     ['the prompt names every derived project and the note', st => /~\/Projects\/app, ~\/Projects\/app2/.test(st.prompts['upstream ~/Projects/template'] || '') && /the CLI the apps run/.test(st.prompts['upstream o/tool'] || '')],
     ['reads the default branch, never the work tree', st => /never from its work tree/.test(st.prompts['upstream o/tool'] || '')],
     ['the run records the source', st => /"upstreams"/.test(st.historyLine || '')],
+  ]],
+  ['symlinked project folders', { ...fri, week: 30, sessions: 12, dupes: true }, [
+    ['reads each transcript, carried or listed twice, once', st => {
+      const read = Object.entries(st.prompts).filter(([k]) => /^(transcripts|deep|subagents) /.test(k)).flatMap(([, p]) => [...p.matchAll(/^- \S+\/(\S+\.jsonl) \(/gm)].map(m => m[1]))
+      return read.filter(n => n.startsWith('s')).length === 12 && read.some(n => n.startsWith('o')) && read.some(n => n.startsWith('a')) && new Set(read).size === read.length
+    }],
+    ['lists with find without -L in every prompt that lists transcripts', st => {
+      const listing = Object.entries(st.prompts).filter(([k]) => /^(scout|list older|token waste|config|rules: |transcripts )/.test(k))
+      return listing.length > 5 && listing.every(([, p]) => /find ~\/\.claude\/projects\/ -mindepth 2 -maxdepth 2 -type [fd]/.test(p) && /without -L/.test(p))
+    }],
   ]],
 ]
 

@@ -8,7 +8,10 @@
 # feedback heading. On a prompt that repeats a reply button of the last box,
 # it tells Claude that it wrote those words itself, so the section is left out.
 # The turn is read from the transcript, whose format Claude Code does not
-# document, so a change there makes this hook quietly pass.
+# document, so a change there makes this hook quietly pass. Claude Code runs
+# the hook before the message that holds the call reaches the transcript,
+# which it writes from a queue flushed every 100 ms, so the hook waits up to
+# 3 seconds for the record of its own call and passes when it never shows.
 
 set -u
 
@@ -35,6 +38,15 @@ fi
 reason="A question in the next-step box ends the turn and takes no text after it. \
 Write the closing reply first: the answer, any draft the question asks about, and \
 the Prompt feedback section. Then call wrap_up again."
+
+id="$(printf '%s' "$input" | jq -r '.tool_use_id // empty' 2>/dev/null)"
+[ -n "$id" ] || exit 0
+waited=0
+until grep -qF "\"$id\"" "$transcript" 2>/dev/null; do
+  [ "$waited" -lt 30 ] || exit 0
+  sleep 0.1
+  waited=$((waited + 1))
+done
 
 jq -Rn -e --arg box "$box" --arg marker "${reason%%.*}" '
   def text: if type == "string" then . else [.[]? | select(.type == "text") | .text] | join("\n") end;

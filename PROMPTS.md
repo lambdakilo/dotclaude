@@ -5,9 +5,31 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Let dream propose what derived projects take over from upstreams
+## Test every hook, count rule slips, publish evals in README
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> is it even possible to do any evals on dotclaude?
+
+**2.**
+> even parts of it?
+
+**3.**
+> white hook tests also could we publish some evals when done during
+> dreaming to the readme.md? update them as well?
+
+**4.**
+> ask the questions again
+> > Rule evals: Yes, counts only (Recommended)
+> > Update: Refresh results each run (Recommended)
+
+**6.** (answer to Claude's question, a reply button)
+> both scripts ran, finish it
+
+## Let dream propose what derived projects take over from upstreams
+
+2026-10-22, commit [6a5818e](https://github.com/lambdakilo/dotclaude/commit/6a5818ed25b795bbfafb16ab7098100631cd1689), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dreaming should also include [a shared AI library], [a CLI] and
@@ -2121,6 +2143,7 @@ so a change by hand is lost at the next commit.
 - e2e: end to end
 - etc: et cetera
 - eu: European Union
+- evals: evaluations
 - exfil: exfiltrate
 - ext: external, a file posted by another organisation in a shared channel
 - feat: feature

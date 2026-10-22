@@ -24,6 +24,8 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
 - **Hook**: a small script Claude Code runs by itself at a set moment, such as before every
   command. A hook can stop a command before it runs. You never start one yourself.
 - **Skill**: written instructions Claude Code reads only when a task needs them.
+- **Eval**: a check that runs the same way every time and gives a score, so a change that makes
+  things worse shows up.
 - **Terminal**: the app where you type commands. On a Mac it is called Terminal.
 
 ## What you get
@@ -91,7 +93,9 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   on your clipboard with links and bold kept. You paste it and press send. Mac only.
 - [`workflows/dream.js`](workflows/dream.js): type `/dream` when you stop for the day. Many
   agents read your recent sessions and your setup, and come back with suggested changes, each
-  with a ready script. It changes nothing by itself and stops before your usage limits.
+  with a ready script. It changes nothing by itself and stops before your usage limits. When
+  `~/.claude/dream/evals-checkout.txt` names a copy of this repository, it then reruns the evals
+  below and publishes their numbers.
 - [`agents/dream-worker.md`](agents/dream-worker.md): a lighter agent for `/dream`, so it uses
   fewer tokens.
 
@@ -100,9 +104,42 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
 - [`sync.sh`](sync.sh): keeps this copy and my own `~/.claude` the same, and checks that nothing
   private gets published. `--install` copies everything onto a new computer.
 - [`test/dream-sim`](test/dream-sim/): checks how `/dream` spends your usage. Not installed.
+- [`test/hooks`](test/hooks/checks.mjs): feeds every hook the input Claude Code sends it, in a
+  throwaway home folder, and checks what it lets through. Not installed.
+- [`test/rules`](test/rules/adherence.mjs): counts how often Claude kept the rules in your own
+  sessions of the last week. It prints counts only, never what was said.
+- [`test/evals.mjs`](test/evals.mjs): runs all of these and fills in the Evals section below.
 
 For the full details, open the file: every hook explains itself at the top, and so do `sync.sh`
 and `dream.js`.
+
+## Evals
+
+These are the numbers from the last `/dream` run, or from the last time I ran the evals by hand.
+The rule counts come from my own sessions, and only the counts leave my computer. To run the
+evals on your copy:
+
+```bash
+node ~/Projects/dotclaude/test/evals.mjs
+```
+
+<!-- evals:start -->
+| Suite | What it checks | Result |
+| --- | --- | --- |
+| [Hook tests](test/hooks/checks.mjs) | every hook, fed the input Claude Code sends it | 113 of 113 pass |
+| [Dream simulation](test/dream-sim/checks.mjs) | how `/dream` spends usage and when it stops | 49 of 49 pass |
+| [Usage mod tests](mods/session-usage/hooks/register.test.ts) | the line under the prompt box | 4 of 4 pass |
+
+How often Claude kept rules from [`CLAUDE.md`](CLAUDE.md) from 2026-10-15 to 2026-10-22, in 61 of my own sessions and the commits of the 7 repositories they worked in, counted by [`test/rules/adherence.mjs`](test/rules/adherence.mjs):
+
+| Rule | Kept |
+| --- | --- |
+| No long dashes in replies | 100% (245 of 245 replies) |
+| Plain quotes, arrows and dots in replies | 100% (245 of 245 replies) |
+| A Prompt feedback section after each typed prompt | 89% (200 of 224 replies) |
+| Commit message lines within 72 columns | 99% (244 of 245 commits) |
+| No Claude attribution in commits | 100% (245 of 245 commits) |
+<!-- evals:end -->
 
 ## Before you install
 
