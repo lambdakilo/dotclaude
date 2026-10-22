@@ -361,9 +361,10 @@ apply to one repository belong in that repository's project memory.
   finding a time with other people goes through the connector's `suggest_time`, which reads
   free/busy alone.
 - Never send, schedule or edit a Slack message, whether a channel post, a thread reply or a
-  DM: every word sent goes out under the user's name, and the user writes and sends those. A
-  reply the user could send is drafted with the `slack-draft` skill, which shows it in a fenced
-  `text` block and, when it has links or formatting, puts it on the clipboard as rich text.
+  DM: every word sent goes out under the user's name, and the user writes and sends those. Every
+  Slack message the user could send, plain or formatted, is drafted with the `slack-draft` skill:
+  it puts the draft on the clipboard as rich text, shows it in a fenced `text` block, and gives
+  the command that copies it to the clipboard again.
 - Before drafting a message for the user to send, such as a Slack reply or an email, read every
   source the project's memory lists for its subject and every connected source that could bear
   on it, the deployed and legacy environments included, and say in the reply which were read and

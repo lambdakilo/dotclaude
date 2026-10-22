@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## docs: say what a status figure was counted from
+## Put every Slack draft on the clipboard with a re-copy command
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask about a work task left out]
+
+**2.** (answer to an offer to draft a Slack post)
+> always draft a slack message the way you did it last time in some
+> session? maybe a command to copypaste it to clipboard?
+
+## docs: say what a status figure was counted from
+
+2026-10-22, commit [7102d15](https://github.com/lambdakilo/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about a downstream project left out]

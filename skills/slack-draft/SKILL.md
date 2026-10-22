@@ -12,8 +12,8 @@ and sends. The CLAUDE.md rule on reading every source before drafting still hold
 
 Slack's message box turns neither `[text](url)` nor `<url|text>` into a link. That syntax works only
 through the API. By hand, link text gets in only by pasting a URL over selected text or by pasting
-rich text, so a draft with links goes on the clipboard as rich text. A draft without links or
-formatting can stay a fenced `text` block in the reply.
+rich text, so every draft goes on the clipboard as rich text, plain ones too, and the user sends
+it with one paste.
 
 ## Steps
 
@@ -38,11 +38,11 @@ formatting can stay a fenced `text` block in the reply.
    ```
 4. In the reply, show the draft as a fenced `text` block so it can be read in the chat, say it is
    on the clipboard, and name each link the recipients may not be able to open, such as a private
-   repository or a permalink from another workspace. Then the steps: paste into the thread with
-   Cmd+V in Slack and check it before sending; if the clipboard was overwritten, open the file, then
-   press Cmd+A and Cmd+C in the browser and paste again.
+   repository or a permalink from another workspace. Then the steps: paste with Cmd+V in Slack and
+   check it before sending, and the command that puts it back on the clipboard once something else
+   overwrote it, with the draft's own file name in place of `<topic>`:
    ```bash
-   open ~/Downloads/<topic>.html
+   ~/.claude/skills/slack-draft/copy-rich.sh ~/Downloads/<topic>.html
    ```
 
 ## What does not work
