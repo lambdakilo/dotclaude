@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
+## Write the user's steps in the order they are done
+
+2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**28.**
+> dotclaude you instructions were in wrong order. you first told me to
+> record then the instrructions to install app to phone. [a note about
+> a project left out]
+
 ## Add the library source to dream.js itself
 
-2026-10-21, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+2026-10-21, commit [a174303](https://github.com/lambdakilo/dotclaude/commit/a17430310606a36b7a63f2c5dd18a6d2f21ca2ac), model claude-opus-5-5, effort xhigh.
 
 **20.** Quoted under [1538093](https://github.com/lambdakilo/dotclaude/commit/15380931d79035caefc4095a2014ef66a6d44baa).
 

@@ -239,6 +239,9 @@ apply to one repository belong in that repository's project memory.
   Steps that come after a long run whose own output will bury them, such as applying and
   committing what a dream run proposes, wait for the reply that follows that run, and the list
   before it stops at the run.
+- Steps the user carries out are written in the order they are done, in one numbered list from
+  the first to the last. How to do one of them, such as how to start a screen recording, goes
+  into that step, never into a section of its own placed before steps that have to come first.
 - Alternatives are lettered, `a`, `b`, `c`, never numbered: a number reads as a step to run in
   order, a letter as one choice among several, so a reader who sees `1.` and `2.` starts on
   both. Numbers stay for commands run in order.
