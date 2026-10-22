@@ -62,6 +62,14 @@ apply to one repository belong in that repository's project memory.
 - A `PostToolUse` hook, `~/.claude/hooks/git-submodule-update-after-switch.sh`, runs the update
   after every Bash command that switches and adds `git submodule status`, or the error that
   stopped the update, to the context. A switch given to the user still carries the update.
+- Every rebase keeps each commit's original dates: run it with `--committer-date-is-author-date`,
+  in commands run and in commands given to the user. A plain rebase keeps the author date but
+  sets the committer date to the time of the rebase, and GitHub shows the committer date on a
+  commit's page, in the commit list and in a pull request's Commits tab, so every rebased commit
+  there looks written on the day of the rebase. Git has no config setting for the flag. An `-x`
+  step that amends each commit sets the committer date again, so it runs the amend with
+  `GIT_COMMITTER_DATE` set to the commit's author date, and a `--reset-author` in it comes with
+  `--date` set to that date too, since on its own it resets the author date as well.
 
 ## Commit messages
 

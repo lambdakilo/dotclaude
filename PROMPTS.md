@@ -5,9 +5,23 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Put every Slack draft on the clipboard with a re-copy command
+## Keep commit dates on every rebase
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> when i rebase something i force push as in rewrite history does git
+> keep the original date they was committed at?
+
+**2.**
+> does github show author date or committer date
+
+**3.**
+> yeah put so that rebase date keeps the original date in my dotclaude
+
+## Put every Slack draft on the clipboard with a re-copy command
+
+2026-10-22, commit [16d04eb](https://github.com/lambdakilo/dotclaude/commit/16d04eb97b95fe9cac79be33499eac9425774b33), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about a work task left out]
