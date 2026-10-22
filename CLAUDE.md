@@ -217,9 +217,11 @@ apply to one repository belong in that repository's project memory.
   `weekly_plan_20.10.pdf`. Only a name a language, tool or platform requires keeps its
   underscores or dots, such as an importable Python module, a `.test.ts` file, a `.gitignore`
   or GitHub's `pull_request_template.md`.
-- Name an organisation by its full registered name every time. Never "we", "ours", "they" or
-  "theirs" standing in for a company. The names live in `~/.claude/rules/organisations.md`,
-  which loads in every session, and those of one repository also in its project memory.
+- Name an organisation by its full registered name every time, apart from a Slack draft for a
+  channel that the project's memory names as internal, which uses the short names the user
+  writes there. Never "we", "ours", "they" or "theirs" standing in for a company. The names live
+  in `~/.claude/rules/organisations.md`, which loads in every session, and those of one
+  repository also in its project memory.
 - A command the reader is meant to run goes in a fenced code block tagged with its shell, never
   inline in a sentence. A fenced block reads as a command and copies as one, an inline span
   hides in the prose and breaks at the first backtick. One command per block. Several commands
@@ -245,6 +247,8 @@ apply to one repository belong in that repository's project memory.
   the same nesting, labels, case and units, the new values in place of the old, and nothing
   added inside it. This holds for a draft the user sends and for the answer in chat, which shows
   that draft first, in that format. Reasons, counts and sources come after it, outside the draft.
+- A Finnish reply to a yes-or-no question opens with the answer itself, as in "luku laski, koska
+  ...", never with "joo" or "kyllä" in front of it.
 - While steps given to the user are still to do, every reply ends with all of them, as they now
   stand and in order, also when the turn changed none of them: each command in a fenced block,
   each prompt for a session in a text block, and what dropped out since the last reply named

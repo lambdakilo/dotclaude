@@ -5,9 +5,23 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep Slack drafts off the clipboard unless memory names the channel
+## Allow short company names in internal Slack, drop the Finnish joo
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**7.**
+> kirjakieli also only in [a downstream channel]
+
+**8.**
+> [the user's edit of a draft about a downstream project left out]
+>
+> when just sending messages to non ext [a downstream project] slack
+> you dont have to do the full company names. also the joo at the
+> beginning was not very finnish of you
+
+## Keep Slack drafts off the clipboard unless memory names the channel
+
+2026-10-22, commit [55fb3db](https://github.com/lambdakilo/dotclaude/commit/55fb3db3aa4bd4b4fcdc78fce09856ca5904538e), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > [an ask about a downstream project left out]
