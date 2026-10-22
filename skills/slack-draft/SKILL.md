@@ -17,10 +17,11 @@ it with one paste.
 
 ## Steps
 
-1. Write the draft as an HTML fragment in `~/Downloads/<topic>.html`, with words separated by
-   dashes, starting with `<meta charset="utf-8">`. Use only what Slack keeps from a paste: `<p>`,
-   `<b>`, `<i>`, `<code>`, `<a href>`, `<ul>` or `<ol>` with `<li>`, `<blockquote>` and `<pre>`. A
-   bold label opens each list item.
+1. Write the draft as an HTML fragment in `~/.claude/drafts/<topic>.html`, with words separated
+   by dashes, starting with `<meta charset="utf-8">`. The HTML only feeds the clipboard, so it
+   stays out of `~/Downloads`, which is for files the user opens or sends. Use only what Slack
+   keeps from a paste: `<p>`, `<b>`, `<i>`, `<code>`, `<a href>`, `<ul>` or `<ol>` with `<li>`,
+   `<blockquote>` and `<pre>`. A bold label opens each list item.
 2. Link the evidence a claim rests on, pinned so the link still shows what the text says later:
    - a commit: `https://github.com/<owner>/<repo>/commit/<full sha>`, the short hash as code text
    - lines of a file: `https://github.com/<owner>/<repo>/blob/<full sha>/<path>#L<a>-L<b>`, with
@@ -34,7 +35,7 @@ it with one paste.
    it to `PATH`.
 3. Run the copy script. It prints what it read back and exits non-zero when a type is missing.
    ```bash
-   ~/.claude/skills/slack-draft/copy-rich.sh ~/Downloads/<topic>.html
+   ~/.claude/skills/slack-draft/copy-rich.sh ~/.claude/drafts/<topic>.html
    ```
 4. In the reply, show the draft as a fenced `text` block so it can be read in the chat, say it is
    on the clipboard, and name each link the recipients may not be able to open, such as a private
@@ -42,7 +43,7 @@ it with one paste.
    check it before sending, and the command that puts it back on the clipboard once something else
    overwrote it, with the draft's own file name in place of `<topic>`:
    ```bash
-   ~/.claude/skills/slack-draft/copy-rich.sh ~/Downloads/<topic>.html
+   ~/.claude/skills/slack-draft/copy-rich.sh ~/.claude/drafts/<topic>.html
    ```
 
 ## What does not work

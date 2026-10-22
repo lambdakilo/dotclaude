@@ -5,9 +5,23 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Say in the README why this setup is public
+## Keep Slack draft HTML in ~/.claude/drafts, not Downloads
 
 2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+
+**2.**
+> [a question about a draft for a downstream project left out]
+
+**3.**
+> dont save html temp files like that in my Downloads store them in
+> .claude etc somewhre where it doesnt delete like tmp but not
+> something that syncs
+
+## Say in the README why this setup is public
+
+2026-10-22, commit [3ebb7db](https://github.com/lambdakilo/dotclaude/commit/3ebb7dbeb9b5a3e71e5e798e51aaca143030c6a2), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > make the description oneliner. also topics only oneliner. use builtin
@@ -2053,6 +2067,7 @@ so a change by hand is lost at the next commit.
 - gh: GitHub CLI
 - gh: GitHub command line interface
 - h1: HTML heading level 1
+- html: HyperText Markup Language
 - i.e.: id est, that is
 - i.e.: that is
 - js: JavaScript
@@ -2077,6 +2092,7 @@ so a change by hand is lost at the next commit.
 - rn: right now
 - sat: Saturday
 - spdx: Software Package Data Exchange
+- tmp: the temporary directory, /tmp
 - ts: TypeScript
 - ui: user interface
 - url: uniform resource locator

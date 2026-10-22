@@ -359,6 +359,10 @@ apply to one repository belong in that repository's project memory.
   directory flag or a subshell, such as `(cd ~/Projects/<repo> && make test)`, also when it is
   quoted from a README whose paths are relative to the checkout. A file such a command reads or
   writes that belongs to no checkout goes in `~/Downloads` unless the user names a folder.
+- `~/Downloads` holds only files the user opens, sends or uploads, such as a PDF or a
+  spreadsheet. A working file that only feeds a tool, such as the HTML of a Slack draft that a
+  script puts on the clipboard, goes in `~/.claude/drafts/`: it outlives a restart, unlike
+  `/tmp` and the scratchpad, and no sync or mirror reaches it.
 - Never run environment or deployment tooling against a remote environment. Confirm before
   destructive commands.
 - Prefer official features over custom glue that wraps unstable internals. If only custom works,
