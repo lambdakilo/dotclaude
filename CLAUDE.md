@@ -35,6 +35,9 @@ apply to one repository belong in that repository's project memory.
   in the background on every prompt. Inside a repository with remotes it fetches all of them with
   pruning at most once every 15 minutes per repository, with every credential prompt disabled so
   it can never hang a prompt. It is a safety net, not a substitute for fetching before a decision.
+  A `PreToolUse` hook, `~/.claude/hooks/git-fetch-before-remote-base.sh`, is that fetch for a
+  command that branches, rebases, merges, hard-resets or adds a worktree from an `origin/` or
+  `upstream/` ref: it runs the same script and waits, unless a fetch ran in the last 2 minutes.
 - A `SessionStart` hook runs `~/.claude/hooks/git-prune-gone-branches.sh` when a session starts,
   resumes, is cleared or is forked. Inside a repository with remotes it runs the fetch above, then
   deletes every local branch whose upstream branch is gone, as long as nothing on it would be
@@ -47,11 +50,11 @@ apply to one repository belong in that repository's project memory.
 
 ## Git commands
 
-- Use `git switch` to change branches and `git switch -c` to create one, in commands run and in
-  commands given to the user, whenever it can do the job. `git checkout` also restores files
-  from the index or another commit, so a typo or a stray path in a checkout can overwrite work
-  where a switch would refuse. Reach for `checkout` only for what `switch` and `restore`
-  cannot do, such as checking out a pathspec from a commit into the work tree.
+- Use `git switch` to change branches, `git switch -c` to create one and `git restore` to put back
+  files, from a commit with `--source <commit> --staged --worktree`, in commands run and in
+  commands given to the user. `git checkout` does both jobs and picks one by what its argument
+  names, so a typo or a stray path can overwrite work where a switch would refuse. Nothing needs
+  it, and a `PreToolUse` hook, `~/.claude/hooks/no-git-checkout.sh`, refuses it.
 - After every branch switch in a repository with submodules, run `git submodule update --init`.
   The switch moves each submodule's pin in the index but leaves its work tree where it was, so a
   stack that bind-mounts the submodule keeps running the old code, and a cache built by the
@@ -94,23 +97,28 @@ apply to one repository belong in that repository's project memory.
   from someone else) is never quoted, in a commit message or in a PR body. Replace it where it
   stood with a bracketed description of what it was, such as `[pasted: an email address]` or
   `[pasted: 40 lines of test output]`.
-- Print the prompts, never retype them. The `UserPromptSubmit` hook `prompt-log.sh` in
-  `~/.claude/hooks` appends every prompt to `~/.claude/prompt-log/<session id>.jsonl`, and
-  `~/.claude/hooks/prompt-log.sh print` prints the session's prompts numbered and quoted for a
-  PR body, with `--commit` in the commit form above and with `--from <n>` from prompt n on.
+- In a public repository, a quoted prompt that gives the user's view of a named person, case or
+  organisation, or a plan they may not want public, is named in the reply before the push or the
+  `gh pr` call that publishes it, with a bracketed note offered in its place, such as
+  `[an aside about the case left out]`. Publishing waits for the user's answer.
+- Print the prompts and their heading, never retype them. The `UserPromptSubmit` hook
+  `prompt-log.sh` in `~/.claude/hooks` appends every prompt to
+  `~/.claude/prompt-log/<session id>.jsonl`, and `~/.claude/hooks/prompt-log.sh print` prints
+  the session's prompts numbered and quoted for a PR body under its `Model:` line, with
+  `--commit` in the commit form above under both heading lines, and with `--from <n>` from
+  prompt n on. It takes the model and effort of each prompt from the session's transcript,
+  names each value with the prompts it ran under when `/model` or `/effort` changed one, and
+  counts the prompts the transcript holds from before the log began, so a forked session
+  keeps its numbers.
   It leaves out reminders, peer session messages and subagent hand-backs, and prints an address
   as `[pasted: an address]`, a pasted block as `[pasted: <n> lines]`, a home path with `~` and a
   password or token value as `[redacted]`. Then do only what the printout cannot: leave out and
   redact as the bullets around this one say, replace a spawned task's opening prompt, which
   another session wrote, with `[a task another Claude session wrote, left out]`, say what each
   pasted address or block was, and add the answer marks, the AskUserQuestion selections and the
-  abbreviations. The model id comes from the session. The effort comes from `get_session` with
-  `self` where the app offers it, else from `CLAUDE_EFFORT` in the shell, else from
-  `modelSettings.<id>.effortLevel` in `~/.claude/settings.json` with the id's `[1m]` suffix
-  dropped. A value that is not one word is a failed lookup and is never printed. When `/model`
-  or `/effort` changed either during the session, name each value with the prompts it ran
-  under, such as `Model: claude-fable-5-1 for prompts 1 to 3, claude-opus-5-5 for 4 to 9,
-  effort: xhigh`.
+  abbreviations. When print leaves the heading out, it exits 1 and says why: run it again with
+  `--model <id>` and the model id of the session, or with `--effort <level>` and the level
+  `get_session` with `self` gives, as the message asks.
 - The PR rules on exclusion and redaction apply to commit messages too: leave out meta prompts,
   and in public and upstream repositories redact downstream project, client and customer names
   with square brackets. The one exception is the public configuration repository, where prompts
@@ -149,8 +157,10 @@ apply to one repository belong in that repository's project memory.
   PR in play, follow-ups to the work under review and unrelated small changes alike, and a
   second PR is opened only when the user says so in that session.
 - Leave out meta prompts: anything about Claude Code itself, its memory, this rules file, or how
-  to format the PR, even when the same prompt also asks for a small fix to the PR. Only prompts
-  about the change under review belong in the PR.
+  PR bodies are laid out in general, even when the same prompt also asks for a small fix to the
+  PR. Only prompts about the change under review belong in the PR, and a prompt that adds to or
+  corrects what this PR's body says or shows, such as a step, a picture or an upload, is one of
+  them: the body edit that answers it adds it to the prompts block.
   A prompt mainly about the change keeps that part, and its meta part becomes a bracketed note
   such as `[a question about Claude Code settings left out]`. An abbreviation found only in a
   left-out part is not listed.
@@ -359,7 +369,7 @@ apply to one repository belong in that repository's project memory.
   saying the message is not yet read is no answer.
 - A `PreToolUse` hook, `~/.claude/hooks/stack-held-by-peer.sh`, notes in the git directory
   which session started the stack. While those containers are up or starting and that session
-  has written to its transcript in the last 15 minutes, it refuses any other session's start,
+  has a user or assistant record from the last 15 minutes, it refuses any other session's start,
   restart, stop or removal of them, and the `Stop` hook leaves them alone. Its container
   matching is a heuristic that backs the rule above.
 - A command that must run in another directory uses the tool's own directory flag, such as
@@ -425,9 +435,15 @@ apply to one repository belong in that repository's project memory.
   else. The user enters only personal data, such as a name, phone number, address, password or
   payment details, and makes only the decisions the session cannot settle from the request,
   the code or a source; such a decision is asked once through AskUserQuestion with a
-  recommended answer, never left as an item in a list of steps. Once the user says the
+  recommended answer, never left as an item in a list of steps or a bullet in a longer reply,
+  and a go given for another point does not settle it. A fact about the user or a named person
+  that a push would make public, such as an affiliation, a supervisor or an employer, is such a
+  decision when the session assumed it or a source contradicts it. Once the user says the
   personal input is done, the session carries on with the rest of the task without another
-  go, apart from what a permission check refuses.
+  go, apart from what a permission check refuses. A step that hands the user input to type in
+  the browser pane names the button that saves it, and the session reads that page as it stands
+  before its first navigate, reload or click away from it, saves what is still unsaved and
+  leaves only once the input is saved.
 - A request to confirm something drafted, such as issue titles, a message or names to create,
   carries the draft itself into the question: AskUserQuestion with every item written out in
   the question or in an option's preview, never a next-step box question that points at a
@@ -582,14 +598,23 @@ apply to one repository belong in that repository's project memory.
   session loads, so a deny rule in `settings.json` blocks memory writes there. Save a project
   fact to that project's memory instead, and a private fact that holds everywhere to a file in
   `~/.claude/rules/` after asking: it loads in every session and `sync.sh` does not mirror it.
+  Only what changes how a session acts goes there. Background facts, such as devices or family,
+  go in a file outside it that a line there names, read when a request needs them.
   The reply says where it went. When the topic is a local project, read its checkout's
   `CLAUDE.md` and its `MEMORY.md` first.
+- A No folder session asked to start a repository or another project meant to last creates
+  `~/Projects/<name>` itself, named exactly as the user wrote it, with `mkdir` and no `-p` so a
+  folder that already exists stops it, then moves there with `change_directory` before writing
+  the first file: the tool cannot resolve a folder that does not exist yet, and the app's copy
+  at a later move leaves `.git` behind.
 - A memory note states what holds now. When a fact changes, rewrite the sentence that states
   it, never append a paragraph calling an earlier one stale, and re-read the note from disk
   first, since a peer session may have written the same fact.
-- A session that adds or changes a rule in this file greps `~/.claude/projects/*/memory/` for
-  notes that state the old behaviour and rewrites or deletes them in the same turn. When the
-  user reverses what a note records, edit the note first and act after.
+- A session that adds or changes a rule in this file finds the memory notes that state the old
+  behaviour, by what the rule governs rather than the words of the incident behind it, and
+  rewrites or deletes them in the same turn. After each edit of this file the `PostToolUse`
+  hook `~/.claude/hooks/claude-md-memory-index.sh` lists every project's memory index lines.
+  When the user reverses what a note records, edit the note first and act after.
 - An index line is `- [Title](file.md): hook`, with a colon where the built-in memory template
   shows an em dash. The `PostToolUse` hook `~/.claude/hooks/memory-plain-characters.sh` hands
   back every em dash in a memory file changed in the last two minutes.

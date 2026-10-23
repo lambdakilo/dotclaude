@@ -87,8 +87,8 @@
           {
             "type": "command",
             "command": "\"$HOME/.claude/hooks/git-fetch-prune.sh\"",
-            "async": true,
-            "timeout": 120
+            "timeout": 120,
+            "async": true
           }
         ]
       },
@@ -187,6 +187,16 @@
         "hooks": [
           {
             "type": "command",
+            "command": "\"$HOME/.claude/hooks/no-git-checkout.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
             "command": "\"$HOME/.claude/hooks/no-home-search.sh\"",
             "timeout": 10
           }
@@ -229,6 +239,16 @@
             "type": "command",
             "command": "\"$HOME/.claude/hooks/prompt-feedback-box.sh\"",
             "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/git-fetch-before-remote-base.sh\"",
+            "timeout": 30
           }
         ]
       }
@@ -280,6 +300,16 @@
             "timeout": 30
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/claude-md-memory-index.sh\"",
+            "timeout": 10
+          }
+        ]
       }
     ]
   },
@@ -320,5 +350,7 @@
   "env": {
     "CLAUDE_CODE_PLUGIN_DIRS": "~/.claude/mods/session-usage"
   },
-  "switchModelsOnFlag": false
+  "switchModelsOnFlag": false,
+  "agentPushNotifEnabled": true,
+  "inputNeededNotifEnabled": true
 }

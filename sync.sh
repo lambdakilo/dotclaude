@@ -81,12 +81,15 @@ mirrored=(
   settings.json
   hooks/calendar-free-busy-only.sh
   hooks/git-fetch-prune.sh
+  hooks/git-fetch-before-remote-base.sh
   hooks/git-prune-gone-branches.sh
   hooks/git-submodule-update-after-switch.sh
   hooks/check-not-piped.sh
+  hooks/no-git-checkout.sh
   hooks/no-home-search.sh
   hooks/prompt-log.sh
   hooks/memory-plain-characters.sh
+  hooks/claude-md-memory-index.sh
   hooks/share-memories.sh
   hooks/stop-running-stack.sh
   hooks/usage-log.sh
@@ -103,6 +106,7 @@ mirrored=(
   mods/session-usage/hooks/register.test.ts
   mods/session-usage/usage.sh
   skills/pull-requests/SKILL.md
+  skills/pull-requests/pane-upload.sh
   skills/slack-draft/SKILL.md
   skills/slack-draft/copy-rich.sh
   workflows/dream.js

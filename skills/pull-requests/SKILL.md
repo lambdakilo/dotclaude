@@ -162,14 +162,12 @@ redacted in public and upstream repositories.
   in the same turn they are made, without asking first: a reply never ends with a set waiting
   for a go. Upload them through GitHub's own editor, where the user is signed in: drop the files
   into the PR's comment box, copy the markdown GitHub puts there, and clear the box without
-  posting. Use the app's built-in browser pane, which has no file upload tool: push the files to
-  the PR's repository on a throwaway branch built with git plumbing (`hash-object`,
-  `update-index` on a temporary index, `write-tree`, `commit-tree`, `update-ref`,
-  `push --no-verify`), then in the page fetch each from
-  `https://github.com/<owner>/<repo>/raw/<branch>/<file>` with `credentials: 'same-origin'`,
-  put the blobs in a `DataTransfer`, assign it to the comment box's `input[type=file]`, dispatch
-  a bubbling `change`, read the markdown from the textarea after a few seconds, and delete the
-  branch afterwards.
+  posting. The app's built-in browser pane has no file upload tool, so run
+  `~/.claude/skills/pull-requests/pane-upload.sh -C <checkout> push <file>...`. It pushes the
+  files on a throwaway branch and prints the JavaScript to run with `javascript_tool` on the
+  PR's page, which returns the markdown and clears the box, then `pane-upload.sh clean <branch>`
+  deletes the branch. An error from the JavaScript is never worked around: a pane signed out of
+  GitHub waits for the user to sign in, and text already in the box is the user's and stays.
 - Each picture goes at the start of the step it shows, never on the line with the number: that
   line holds the number and one short clause naming what the picture shows, the picture follows
   on its own line under it, indented to the step, and the step's text comes after the picture,

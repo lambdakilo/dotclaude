@@ -41,6 +41,8 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   the Mac ask you for permission folder after folder.
 - [`cd-fall-through.sh`](hooks/cd-fall-through.sh): stops a command from carrying on in the wrong
   folder when moving to the right one failed.
+- [`no-git-checkout.sh`](hooks/no-git-checkout.sh): stops Claude from using `git checkout`, which
+  can overwrite files by mistake, and names the `git switch` or `git restore` command instead.
 - [`calendar-free-busy-only.sh`](hooks/calendar-free-busy-only.sh): stops Claude from reading
   other people's calendar events. It can still see when they are free.
 - [`stop-running-stack.sh`](hooks/stop-running-stack.sh): makes Claude stop the Docker containers
@@ -52,6 +54,9 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
 
 - [`git-fetch-prune.sh`](hooks/git-fetch-prune.sh): keeps Claude's picture of GitHub up to date,
   in the background, so it does not act on old information.
+- [`git-fetch-before-remote-base.sh`](hooks/git-fetch-before-remote-base.sh): fetches first and
+  waits when Claude is about to branch, rebase or reset from the copy on GitHub, so it never
+  starts from an old one.
 - [`git-prune-gone-branches.sh`](hooks/git-prune-gone-branches.sh): deletes old branches when no
   work would be lost, and lists the ones it kept.
 - [`git-submodule-update-after-switch.sh`](hooks/git-submodule-update-after-switch.sh): keeps
@@ -78,6 +83,9 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   end with a short note on how your prompt could have been better.
 - [`memory-plain-characters.sh`](hooks/memory-plain-characters.sh): points out long dashes in
   Claude's memory notes, so Claude swaps them for plain punctuation.
+- [`claude-md-memory-index.sh`](hooks/claude-md-memory-index.sh): when Claude changes a rule in
+  `CLAUDE.md`, shows it every memory note index, so it fixes the notes that still say the old
+  thing.
 - [`share-memories.sh`](hooks/share-memories.sh): shares Claude's notes about a project with your
   team. It does nothing until you set it up.
 
@@ -90,6 +98,8 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   memory of the chat is, and what the session has cost so far.
 - [`skills/pull-requests`](skills/pull-requests/SKILL.md): how Claude writes a pull request: the
   description, the steps to test it, screenshots.
+- [`skills/pull-requests/pane-upload.sh`](skills/pull-requests/pane-upload.sh): puts screenshots
+  into a pull request from the app's built-in browser, which cannot upload files itself.
 - [`skills/slack-draft`](skills/slack-draft/SKILL.md): Claude drafts a Slack message and puts it
   on your clipboard with links and bold kept. You paste it and press send. Mac only.
 - [`workflows/dream.js`](workflows/dream.js): type `/dream` when you stop for the day. Many
@@ -258,19 +268,19 @@ node ~/Projects/dotclaude/test/evals.mjs
 <!-- evals:start -->
 | Suite | What it checks | Result |
 | --- | --- | --- |
-| [Hook tests](test/hooks/checks.mjs) | every hook, fed the input Claude Code sends it | 113 of 113 pass |
+| [Hook tests](test/hooks/checks.mjs) | every hook, fed the input Claude Code sends it | 128 of 128 pass |
 | [Dream simulation](test/dream-sim/checks.mjs) | how `/dream` spends usage and when it stops | 49 of 49 pass |
 | [Usage mod tests](mods/session-usage/hooks/register.test.ts) | the line under the prompt box | 4 of 4 pass |
 
-How often Claude kept rules from [`CLAUDE.md`](CLAUDE.md) from 2026-10-15 to 2026-10-22, in 61 of my own sessions and the commits of the 7 repositories they worked in, counted by [`test/rules/adherence.mjs`](test/rules/adherence.mjs):
+How often Claude kept rules from [`CLAUDE.md`](CLAUDE.md) from 2026-10-16 to 2026-10-23, in 69 of my own sessions and the commits of the 6 repositories they worked in, counted by [`test/rules/adherence.mjs`](test/rules/adherence.mjs):
 
 | Rule | Kept |
 | --- | --- |
-| No long dashes in replies | 100% (245 of 245 replies) |
-| Plain quotes, arrows and dots in replies | 100% (245 of 245 replies) |
-| A Prompt feedback section after each typed prompt | 89% (200 of 224 replies) |
-| Commit message lines within 72 columns | 99% (244 of 245 commits) |
-| No Claude attribution in commits | 100% (245 of 245 commits) |
+| No long dashes in replies | 99% (281 of 282 replies) |
+| Plain quotes, arrows and dots in replies | 100% (282 of 282 replies) |
+| A Prompt feedback section after each typed prompt | 90% (231 of 255 replies) |
+| Commit message lines within 72 columns | 99% (235 of 236 commits) |
+| No Claude attribution in commits | 100% (236 of 236 commits) |
 <!-- evals:end -->
 
 ## Before you install

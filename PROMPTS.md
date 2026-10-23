@@ -5,9 +5,48 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Repeat the text to paste in every reply, clipboard or not
+## Apply 27 steps of the 2026-10-17 dream report in a review
 
 2026-10-23, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dream review
+> > p16 (medium): prompt-log.sh prints the prompts heading with model
+> > and effort itself, and exits 1 instead of printing nothing. Add it
+> > to dotclaude (hook plus the printing bullet in CLAUDE.md)?
+> > Add it (Recommended)
+> > p17 (medium): ship the browser-pane picture upload as
+> > pane-upload.sh beside the pull-requests skill, and point the skill
+> > at it. Add it to dotclaude?
+> > Add it (Recommended)
+> > p18 (medium): keep only pronouns and [the answer preferences] in
+> > rules/about-me.md (loaded everywhere), move the rest unchanged to
+> > ~/.claude/about-me/profile.md (read on demand), and add two lines
+> > to CLAUDE.md's Memory hygiene. Add it (profile stays local,
+> > CLAUDE.md lines go to dotclaude)?
+> > Add it (Recommended)
+> > p19 (medium): a No folder session asked to start a lasting repo
+> > creates ~/Projects/\<name> itself and moves there before the first
+> > file. Add it to dotclaude's CLAUDE.md?
+> > Add it (Recommended)
+> > p20 (medium): widen the AskUserQuestion bullet so an assumed or
+> > contradicted public fact about a person (affiliation, supervisor,
+> > employer) is asked on its own, never left as a bullet in a longer
+> > reply. Add it to dotclaude's CLAUDE.md?
+> > Add it (Recommended)
+
+**2.**
+> is it still so that you cant auto incorporate these proposals during
+> dream review in auto mode?
+> > How should the remaining 42 dream steps (p21 to p62) go?
+> > Auto-apply, ask exceptions (Recommended)
+
+**3.**
+> heading to sleep. start dreaming after youve applied all auto things
+
+## Repeat the text to paste in every reply, clipboard or not
+
+2026-10-23, commit [8e1a04e](https://github.com/lambdakilo/dotclaude/commit/8e1a04ed1b112b3578c7fedb7f121da1252af518), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > what? you gave me nothing to copy

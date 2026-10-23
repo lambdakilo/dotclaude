@@ -13,6 +13,10 @@
 # The pull request comes from a squash subject ending in (#n), from GitHub's
 # merge commit subject, or, for commits not yet on the default branch, from gh
 # for the current branch. A prompt quoted under an older commit is only named.
+#
+# Quoted prompts pass through prompt-log.sh mask, so a message written before
+# the printout masked addresses, home paths and secrets is masked here too, and
+# an effort that is not a level, such as default, is left out.
 
 set -euo pipefail
 
@@ -30,6 +34,7 @@ if [ -n "$message" ] && [ ! -f "$message" ]; then
 fi
 
 top="$(git rev-parse --show-toplevel)"
+prompt_log="$(cd "$(dirname "$0")" && pwd)/prompt-log.sh"
 cd "$top"
 
 remote=origin
@@ -88,7 +93,7 @@ fi
     printf '\036pending\037pending\037%s\037%s\n' "$(date +%F)" "$(head -n 1 "$message")"
     cat "$message"
   fi
-} | awk -v base="$base" -v branch="$default" -v prs="$prs" -v last="$last" -v branch_pr="$branch_pr" '
+} | "$prompt_log" mask --quoted | awk -v base="$base" -v branch="$default" -v prs="$prs" -v last="$last" -v branch_pr="$branch_pr" '
 function link(text, path) {
   return base == "" ? text : "[" text "](" base "/" path ")"
 }
@@ -150,6 +155,8 @@ function flush(    i, h, n, line, state, model, k, head, quote, abbr, key, numbe
   if (model ~ /^model [^ ,]+, effort [A-Za-z0-9_-]+$/) model = ", " model
   else if (model ~ /^model [^ ,]+, effort /) model = ", " effort_from_settings(model)
   else if (model != "") model = ", " model
+  if (model ~ /^, model [^ ,]+, effort [A-Za-z0-9_-]+$/ && model !~ /, effort (low|medium|high|xhigh|max)$/)
+    sub(/, effort [A-Za-z0-9_-]+$/, "", model)
 
   n = 0
   state = "between"

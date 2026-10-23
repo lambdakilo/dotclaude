@@ -103,6 +103,15 @@ const suites = [
     ['ignores a cd inside quotes', () => quiet(run(bash("echo 'cd /nonexistent-dir; ls'")))],
   ]],
 
+  ['no-git-checkout.sh', run => [
+    ['refuses a branch change with git checkout', () => refused(run(bash('git checkout main')))],
+    ['refuses a file restore with git checkout', () => refused(run(bash('git checkout HEAD~1 -- src/a.ts')))],
+    ['names git restore --source for a file from a commit', () => run(bash('git checkout HEAD~1 -- src/a.ts')).err.includes('git restore --source')],
+    ['lets gh pr checkout through', () => quiet(run(bash('gh pr checkout 12')))],
+    ['lets git switch through', () => quiet(run(bash('git switch main')))],
+    ['ignores the word in an echo', () => quiet(run(bash('echo git checkout is old')))],
+  ]],
+
   ['claude-md-changed.sh', run => {
     const rules = path.join(config, 'CLAUDE.md')
     const event = (hook_event_name, extra = {}) => ({ hook_event_name, session_id: 'md1', transcript_path: '', ...extra })
@@ -123,6 +132,26 @@ const suites = [
     ]
   }],
 
+  ['claude-md-memory-index.sh', run => {
+    const rules = path.join(config, 'CLAUDE.md'), index = path.join(config, 'projects/-mi/memory/MEMORY.md')
+    const edit = (file_path, session_id) => ({ hook_event_name: 'PostToolUse', tool_name: 'Edit', tool_input: { file_path }, session_id })
+    const listed = r => r.err.split('the build runs with make').length - 1
+    return [
+      ['lists every memory index after an edit of CLAUDE.md', () => {
+        write(rules, '- one\n')
+        write(index, '- [Build](build.md): the build runs with make\n')
+        const r = run(edit(rules, 'mi1'))
+        return r.code === 2 && listed(r) === 1
+      }],
+      ['says it once in five minutes per session', () => quiet(run(edit(rules, 'mi1')))],
+      ['leaves an edit of another file alone', () => quiet(run(edit(path.join(home, 'notes.md'), 'mi2')))],
+      ['lists a symlinked project folder once', () => {
+        fs.symlinkSync('-mi', path.join(config, 'projects/-mi-old'))
+        return listed(run(edit(rules, 'mi3'))) === 1
+      }],
+    ]
+  }],
+
   ['git-fetch-prune.sh', run => {
     const origin = path.join(home, 'fetch-origin.git'), other = path.join(home, 'fetch-other'), work = path.join(home, 'fetch-work')
     const env = { CLAUDE_PROJECT_DIR: work }
@@ -137,6 +166,22 @@ const suites = [
         return quiet(run({}, { env })) && !remoteBranches().includes('origin/later')
       }],
       ['does nothing outside a repository', () => quiet(run({}, { env: { CLAUDE_PROJECT_DIR: path.join(home, 'tmp') } }))],
+    ]
+  }],
+
+  ['git-fetch-before-remote-base.sh', run => {
+    const origin = path.join(home, 'base-origin.git'), other = path.join(home, 'base-other'), work = path.join(home, 'base-work')
+    const remoteBranches = () => sh(`git -C ${q(work)} branch -r`)
+    return [
+      ['fetches before a rebase onto an origin ref', () => {
+        sh(`git init -q --bare ${q(origin)} && git clone -q ${q(origin)} ${q(other)} 2>/dev/null && git -C ${q(other)} commit -q --allow-empty -m one && git -C ${q(other)} push -q origin main && git clone -q ${q(origin)} ${q(work)} && git -C ${q(other)} push -q origin main:feature`)
+        return quiet(run(bash('git rebase origin/main', work))) && remoteBranches().includes('origin/feature')
+      }],
+      ['skips the fetch when the repository fetched in the last 2 minutes', () => {
+        sh(`git -C ${q(other)} push -q origin main:later`)
+        return quiet(run(bash('git switch -c topic origin/main', work))) && !remoteBranches().includes('origin/later')
+      }],
+      ['leaves a command without a remote ref alone', () => quiet(run(bash('git status', work)))],
     ]
   }],
 
@@ -255,14 +300,20 @@ const suites = [
 
   ['prompts-md.sh', run => {
     const work = path.join(home, 'pm-work'), file = path.join(work, 'PROMPTS.md')
-    const body = (subject, prompt) => `${subject}\n\nIt does it.\n\nPrompts behind this commit, as given to Claude Code\n(model m, effort e):\n\n1.\n> ${prompt}\n`
+    const body = (subject, prompt, effort = 'high') => `${subject}\n\nIt does it.\n\nPrompts behind this commit, as given to Claude Code\n(model m, effort ${effort}):\n\n1.\n> ${prompt}\n`
     return [
       ['writes PROMPTS.md from the prompts of the commits', () => {
         write(path.join(home, 'pm-1.txt'), body('Add the parser', 'add a parser'))
         sh(`git init -q ${q(work)} && cd ${q(work)} && echo a > a && git add a && git commit -q -F ${q(path.join(home, 'pm-1.txt'))} && echo b > b && git add b && git commit -q -m 'No prompts here'`)
         const r = run('', { cwd: work })
         const text = fs.readFileSync(file, 'utf8')
-        return r.code === 0 && /## Add the parser\n\n\d{4}-\d\d-\d\d, commit [0-9a-f]{7}, model m, effort e\.\n\n\*\*1\.\*\*\n> add a parser/.test(text) && !text.includes('No prompts here')
+        return r.code === 0 && /## Add the parser\n\n\d{4}-\d\d-\d\d, commit [0-9a-f]{7}, model m, effort high\.\n\n\*\*1\.\*\*\n> add a parser/.test(text) && !text.includes('No prompts here')
+      }],
+      ['masks an old prompt and leaves out an effort that is not a level', () => {
+        write(path.join(home, 'pm-3.txt'), body('Add the reader', `read ${otherHome}/notes.txt`, 'default'))
+        sh(`cd ${q(work)} && echo c > c && git add c && git commit -q -F ${q(path.join(home, 'pm-3.txt'))}`)
+        const text = (run('', { cwd: work }), fs.readFileSync(file, 'utf8'))
+        return text.includes('> read ~/notes.txt') && !text.includes(otherHome) && !text.includes('effort default') && /commit [0-9a-f]{7}, model m\.\n/.test(text)
       }],
       ['lists the commit about to be made first', () => {
         run('', { cwd: work, args: ['--message', write(path.join(home, 'pm-2.txt'), body('Add the printer', 'add a printer'))] })
@@ -315,39 +366,49 @@ const suites = [
     const holder = path.join(home, 'holder.jsonl'), peer = path.join(home, 'peer.jsonl')
     const env = { CLAUDE_PROJECT_DIR: work }
     const as = (session_id, transcript_path, command) => ({ ...bash(command, work), session_id, transcript_path })
+    const active = (file, ago = 0) => jsonl(file, [{ ...says('working'), timestamp: new Date(Date.now() - ago).toISOString() }])
     return [
-      ['notes which session started the stack', () => {
+      ['notes which session started the stack, and the start for the Stop hook', () => {
         sh(`git init -q ${q(work)}`)
-        write(holder, '{}\n')
-        write(peer, '{}\n')
-        return quiet(run(as('s1', holder, 'docker compose up -d'), { env })) && fs.readFileSync(marker, 'utf8') === `s1\t${holder}\n`
+        active(holder)
+        active(peer)
+        return quiet(run(as('s1', holder, 'docker compose up -d'), { env })) && fs.readFileSync(marker, 'utf8') === `s1\t${holder}\n` &&
+          fs.existsSync(path.join(work, '.git/claude-stack-started-s1'))
       }],
       ['refuses another session stopping it while the holder is active', () => refused(run(as('s2', peer, 'docker compose down'), { env }))],
       ['refuses another session restarting it', () => refused(run(as('s2', peer, 'npm run start:local'), { env }))],
       ['leaves other docker commands alone', () => quiet(run(as('s2', peer, 'docker ps'), { env }))],
+      ['takes the holder as idle when its last reply is old, however fresh the file', () => {
+        active(holder, 60 * 60 * 1000)
+        fs.appendFileSync(holder, '{"type":"mode","timestamp":null}\n')
+        const r = run(as('s2', peer, 'docker compose restart'), { env })
+        active(holder)
+        sh(`printf 's1\\t%s\\n' ${q(holder)} > ${q(marker)}`)
+        return !refused(r)
+      }],
       ['lets the holder stop it and clears the note', () => quiet(run(as('s1', holder, 'docker compose down'), { env })) && !fs.existsSync(marker)],
     ]
   }],
 
   ['stop-running-stack.sh', run => {
     const work = path.join(home, 'stop-work'), t = path.join(home, 'stop.jsonl'), fake = path.join(home, 'fake-docker')
-    const turn = (...commands) => [human('start it'), ...commands.map(command => uses('Bash', { command }))]
     const env = up => ({ CLAUDE_PROJECT_DIR: work, PATH: `${fake}:${ENV.PATH}`, FAKE_PS: up ? `web\t${work}` : '' })
     const stop = { session_id: 's1', transcript_path: t, stop_hook_active: false }
+    const started = () => write(path.join(work, '.git/claude-stack-started-s1'), '')
     return [
       ['sends back a turn that started a stack and left it up', () => {
         sh(`git init -q ${q(work)}`)
         fs.chmodSync(write(path.join(fake, 'docker'), '#!/bin/sh\n[ -n "$FAKE_PS" ] && printf \'%s\\n\' "$FAKE_PS"\nexit 0\n'), 0o755)
-        jsonl(t, turn('docker compose up -d'))
+        started()
         const r = run(stop, { env: env(true) })
         return refused(r) && r.err.includes('compose project web')
       }],
-      ['lets it through once the stack is down', () => quiet(run(stop, { env: env(false) }))],
-      ['lets the second stop of a turn through', () => quiet(run({ ...stop, stop_hook_active: true }, { env: env(true) }))],
-      ['lets a turn through that started nothing', () => { jsonl(t, turn('ls')); return quiet(run(stop, { env: env(true) })) }],
-      ['looks only at the turn that is ending', () => { jsonl(t, [...turn('docker compose up -d'), ...turn('ls')]); return quiet(run(stop, { env: env(true) })) }],
+      ['sends it back only once', () => quiet(run(stop, { env: env(true) }))],
+      ['lets it through once the stack is down', () => { started(); return quiet(run(stop, { env: env(false) })) }],
+      ['lets the second stop of a turn through', () => { started(); return quiet(run({ ...stop, stop_hook_active: true }, { env: env(true) })) }],
+      ['lets a turn through that started nothing', () => quiet(run(stop, { env: env(true) }))],
       ['leaves a stack another session holds to that session', () => {
-        jsonl(t, turn('docker compose up -d'))
+        started()
         write(path.join(work, '.git/claude-stack-holder'), 's9\t/x\n')
         return quiet(run(stop, { env: env(true) }))
       }],

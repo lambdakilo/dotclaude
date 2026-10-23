@@ -3,14 +3,15 @@
 # Claude Code PreToolUse hook for the Google Calendar connector. It refuses to
 # list or read events on a calendar that belongs to another person, since those
 # carry titles, attendees and meeting links, and points the session at the
-# free/busy lookup instead. The user's own calendar is "primary", and shared
-# group, room and holiday calendars have ids under calendar.google.com.
+# free/busy lookup instead. The user's own calendar is "primary" or the address
+# in CLAUDE_CODE_USER_EMAIL, and shared group, room and holiday calendars have
+# ids under calendar.google.com.
 
 set -u
 
 calendar="$(jq -r '.tool_input.calendarId // empty' 2>/dev/null)" || exit 0
 case "$calendar" in
-  "" | primary | *calendar.google.com) exit 0 ;;
+  "" | primary | "${CLAUDE_CODE_USER_EMAIL:-}" | *calendar.google.com) exit 0 ;;
 esac
 
 reason="Events on another person's calendar are off limits. To find a time with \

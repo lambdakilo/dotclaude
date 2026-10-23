@@ -4,7 +4,7 @@
 # names is one per machine, shared by every session of a repository and its
 # worktrees. A start notes in the git directory which session holds the
 # stack. While the holder's containers are up, or its start is under 15
-# minutes old, and its transcript changed in the last 15 minutes, this hook
+# minutes old, and its last user or assistant record is too, this hook
 # refuses another session's start, restart, stop or removal. Containers count
 # as the repository's when their compose project is named like it or like the
 # command's COMPOSE_PROJECT_NAME, or their working directory is in it or in
@@ -52,8 +52,15 @@ holder=""
 holder_transcript=""
 [ -f "$marker" ] && IFS=$'\t' read -r holder holder_transcript < "$marker"
 
+# The desktop app appends untimestamped records to idle transcripts.
+recently_active() {
+  tail -n 500 "$1" 2>/dev/null | jq -Rne '
+    [inputs | fromjson? | select(.type == "user" or .type == "assistant") | .timestamp // empty]
+    | last // empty | sub("\\.[0-9]+"; "") | fromdateiso8601 > now - 900' >/dev/null 2>&1
+}
+
 if [ -n "$holder" ] && [ "$holder" != "$session" ] &&
-  [ -n "$(find "$holder_transcript" -mmin -15 2>/dev/null)" ]; then
+  recently_active "$holder_transcript"; then
   held="$(find "$marker" -mmin -15 2>/dev/null)"
   if [ -z "$held" ] && command -v docker >/dev/null 2>&1; then
     project="$(printf '%s\n' "$raw" | grep -oE 'COMPOSE_PROJECT_NAME=[^[:space:];&|]+' |
@@ -83,7 +90,7 @@ EOF
 fi
 
 case "$kind" in
-  start) { printf '%s\t%s\n' "$session" "$transcript" > "$marker"; } 2>/dev/null ;;
+  start) { printf '%s\t%s\n' "$session" "$transcript" > "$marker"; : > "$common_dir/claude-stack-started-$session"; } 2>/dev/null ;;
   stop) rm -f "$marker" ;;
 esac
 exit 0
