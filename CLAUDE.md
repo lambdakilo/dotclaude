@@ -303,6 +303,11 @@ apply to one repository belong in that repository's project memory.
   reply, any draft the question asks about and this section come before the box. The hook
   `~/.claude/hooks/prompt-feedback-box.sh` refuses such a box once in a turn a typed prompt
   opened until the section is written, and marks a prompt that repeats a button's words.
+- Before the section names something as missing from the prompt, check everything the prompt
+  gave, its screenshots to their edges included. A line of text cut off by a screenshot's edge,
+  or a scroll bar that ends short of its track, shows that the content goes on: the turn asks
+  for the rest before it rewrites what the screenshot shows, and the feedback never blames the
+  prompt for what the prompt showed.
 - Write the rewritten prompt itself as the user would type it: all lowercase, names included,
   and without characters that need the shift key when a plain one does the job, so commas and
   full stops in place of colons, quotes, question marks and parentheses. Make it as short as it

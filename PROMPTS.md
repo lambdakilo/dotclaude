@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Put every Slack draft on the clipboard, never in the reply
+## Read a screenshot to its edges before blaming the prompt
 
 2026-10-23, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask to rewrite a note left out]
+
+**2.**
+> [an ask about the same note left out]
+
+**3.**
+> the word stretch already is half cut horizontally
+
+## Put every Slack draft on the clipboard, never in the reply
+
+2026-10-23, commit [038b327](https://github.com/lambdakilo/dotclaude/commit/038b327a8105f77b990512a7b7d110f1597fc666), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about a Slack draft for work left out]
