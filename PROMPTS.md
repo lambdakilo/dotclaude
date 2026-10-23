@@ -5,9 +5,24 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Move How I work into the README
+## Ask before a command opens a window on the screen
 
 2026-10-23, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+
+**2.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+
+**3.**
+> [a question about opening a downstream project's file left out]
+
+**4.**
+> dotclaude if you ever do something that literally pops open a window
+> in my screen ask first
+
+## Move How I work into the README
+
+2026-10-23, commit [f38a703](https://github.com/lambdakilo/dotclaude/commit/f38a70342d5b5264d7c3f9537f331bc9774469e0), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > maybe it should be on readme instead

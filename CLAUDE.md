@@ -403,6 +403,12 @@ apply to one repository belong in that repository's project memory.
 - The window layout of the desktop app is the user's. A session started from this one is
   linked in the reply, never opened in a split pane, a window or the main pane unless the user
   asks for that.
+- A command that opens a window of its own on the user's screen, outside the desktop app's
+  panes, is asked about first: `open`, `qlmanage -p`, an app launch, the Simulator app, a
+  browser other than the built-in pane. AskUserQuestion names the window and the session waits
+  for a yes; a prompt that itself asks for that window is the yes. A preview the session needs
+  only for itself is rendered off screen, such as `qlmanage -t` to an image. Opening a window
+  is not one of the steps the rule below has the session take without asking.
 - In the desktop app, every turn that answers a prompt from the user renames its own session
   with `set_session_title` and `self`, to a title for what the whole session has done so far,
   not for the latest prompt alone. The call comes once the turn's work is done and is skipped
