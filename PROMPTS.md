@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
+## Add how-i-work.md on the daily and weekend routine
+
+2026-10-23, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dotclaude i should add a how i work .md file there as well that
+> explains how i work with dotlcaude i.e. nothing that gives away
+> customer things like ip but how i start my day with bin/sod, how i
+> prompt and use claude desktop, firefox and the settings my m5 air
+> uses to prevent 80% battery over. it should also say the how i do
+> first dreaming on friday when i get home and hook up charge. then
+> more work on saturday and then charge and dream rest.
+
 ## Test every hook, count rule slips, publish evals in README
 
-2026-10-22, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [539cb34](https://github.com/lambdakilo/dotclaude/commit/539cb3408ca4e175dfea07d389184b45aad0d922), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > is it even possible to do any evals on dotclaude?
@@ -2156,12 +2169,13 @@ so a change by hand is lost at the next commit.
 - html: HyperText Markup Language
 - i.e.: id est, that is
 - i.e.: that is
+- ip: intellectual property
 - js: JavaScript
 - kwh: kilowatt-hours
 - LLM: large language model
 - lol: laughing out loud
 - m5 air: MacBook Air with the M5 chip
-- md: markdown
+- md: Markdown
 - md: Markdown file
 - mds: Markdown files
 - mon: Monday
@@ -2178,6 +2192,7 @@ so a change by hand is lost at the next commit.
 - rest: REST, an HTTP API style
 - rn: right now
 - sat: Saturday
+- sod: start of day
 - spdx: Software Package Data Exchange
 - tmp: the temporary directory, /tmp
 - ts: TypeScript

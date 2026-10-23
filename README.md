@@ -5,7 +5,8 @@ reads its setup from a hidden folder on your computer, `~/.claude`. This reposit
 copy of my setup, so you can borrow from it.
 
 Claude Code is good at writing code, but left alone it makes some of the same mistakes again and
-again. Most of this setup stops those mistakes before they happen.
+again. Most of this setup stops those mistakes before they happen. [`how-i-work.md`](how-i-work.md)
+shows how I use it from day to day.
 
 ## Why this is public
 
@@ -182,7 +183,7 @@ git -C ~/Projects/dotclaude pull
 
 ## License
 
-Prose, meaning `CLAUDE.md`, `PROMPTS.md`, `skills/pull-requests/SKILL.md`,
+Prose, meaning `CLAUDE.md`, `PROMPTS.md`, `how-i-work.md`, `skills/pull-requests/SKILL.md`,
 `skills/slack-draft/SKILL.md` and this README, is licensed under Creative Commons
 Attribution-ShareAlike 4.0 International. See [`LICENSE-CC-BY-SA-4.0`](LICENSE-CC-BY-SA-4.0).
 
