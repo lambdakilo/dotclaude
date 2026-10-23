@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Link Slack draft evidence inline and format code as code
+## Give only the copy command for clipboard Slack drafts
 
 2026-10-23, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**10.**
+> [a shell command the user ran left out]
+
+**11.**
+> okei jatkossa älä edes anna jatkossa tuota kopioitavaa juttua suoraan
+> vaan toi copyrich komento
+
+## Link Slack draft evidence inline and format code as code
+
+2026-10-23, commit [b17576c](https://github.com/lambdakilo/dotclaude/commit/b17576c9fe8cefef50c2b00e3b8a7078c6493379), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > [a shell command the user ran left out]

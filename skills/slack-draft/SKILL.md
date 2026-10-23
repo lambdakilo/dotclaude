@@ -51,13 +51,13 @@ file, no clipboard and no copy command. The user copies it from the block.
    ```bash
    ~/.claude/skills/slack-draft/copy-rich.sh ~/.claude/drafts/<topic>.html
    ```
-4. In the reply, show the draft as a fenced `text` block so it can be read in the chat, with
-   each `<code>` span in backticks and each link's text in square brackets, so the block shows
-   what Slack will format and link. Say it is on the clipboard, and name each link the
-   recipients may not be able to open, such as a private repository or a permalink from another
-   workspace. Then the steps: paste with Cmd+V in Slack and check it before sending, and the
-   command that puts it back on the clipboard once something else overwrote it, with the draft's
-   own file name in place of `<topic>`:
+4. In the reply, give no copy of the draft, neither a text block nor a quote: the user reads it
+   in Slack after the paste. Say it is on the clipboard, say in a line what changed since the
+   last version when there was one, and name each link the recipients may not be able to open,
+   such as a private repository or a permalink from another workspace. Then the steps: paste
+   with Cmd+V in Slack and check it before sending, and the command that puts it back on the
+   clipboard once something else overwrote it, with the draft's own file name in place of
+   `<topic>`:
    ```bash
    ~/.claude/skills/slack-draft/copy-rich.sh ~/.claude/drafts/<topic>.html
    ```
