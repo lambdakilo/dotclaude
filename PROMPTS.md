@@ -5,9 +5,30 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Ask before a command opens a window on the screen
+## Link Slack draft evidence inline and format code as code
 
 2026-10-23, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**5.**
+> [a shell command the user ran left out]
+
+**6.** Quoted under [b64c518](https://github.com/lambdakilo/dotclaude/commit/b64c518cc4b49d4b4a4d1b20421f0bf705799cc8).
+
+**7.**
+> [a correction about a downstream project's channel left out]
+
+**8.**
+> [a correction about a downstream project's channel left out]
+
+**9.**
+> pistä vaan jatkossa esim. commit messaget linkattuna inline. voit myös
+> käyttää code format koodi juituille esim. [a table name]. esim.
+> [a page of a downstream project's old app] vois olla kans linkki
+> sinne
+
+## Ask before a command opens a window on the screen
+
+2026-10-23, commit [40bd746](https://github.com/lambdakilo/dotclaude/commit/40bd746b2185eb22f7e409513215b601c602f2c2), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
@@ -2195,6 +2216,7 @@ so a change by hand is lost at the next commit.
 - dir: directory
 - e.g.: for example
 - e2e: end to end
+- esim.: esimerkiksi, for example
 - etc: et cetera
 - eu: European Union
 - evals: evaluations

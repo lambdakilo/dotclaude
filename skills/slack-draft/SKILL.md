@@ -29,26 +29,35 @@ file, no clipboard and no copy command. The user copies it from the block.
    keeps from a paste: `<p>`, `<b>`, `<i>`, `<code>`, `<a href>`, `<ul>` or `<ol>` with `<li>`,
    `<blockquote>` and `<pre>`. A bold label opens each list item, unless the message being
    answered set a format: then the draft copies it, as `~/.claude/CLAUDE.md` says under Prose.
-2. Link the evidence a claim rests on, pinned so the link still shows what the text says later:
-   - a commit: `https://github.com/<owner>/<repo>/commit/<full sha>`, the short hash as code text
+2. Link the evidence a claim rests on inline, on the words that make the claim, never in a
+   parenthetical after them, and pinned so the link still shows what the text says later. An
+   identifier the text names, such as a table, a route, a class, a file or a tag, is `<code>`,
+   and a code thing it names, a page of an app included, links to the lines that define or
+   serve it:
+   - a commit cited for what it changed: `https://github.com/<owner>/<repo>/commit/<full sha>`
+     on its subject line, placed in the sentence ("commented out in commit <subject>"), never
+     "(commit `abc1234`)". A commit named as a version keeps its short hash as code text.
    - lines of a file: `https://github.com/<owner>/<repo>/blob/<full sha>/<path>#L<a>-L<b>`, with
      the sha of the commit that was read, never a branch name
+   - a release: `https://github.com/<owner>/<repo>/releases/tag/<tag>`, the tag as code text
    - a pull request or an issue: its full URL, never a bare `#123`
    - a Figma frame: `https://www.figma.com/design/<file key>/<slug>?node-id=<a>-<b>`
    - a Slack message: its permalink from the Slack connector
 
-   Check each GitHub link with `gh api`, the `contents` endpoint with `?ref=<sha>` for a file and
-   the `commits` endpoint for a commit. Never name a shell variable `path` in that loop: zsh ties
-   it to `PATH`.
+   Check each GitHub link with `gh api`, the `contents` endpoint with `?ref=<sha>` for a file,
+   the `commits` endpoint for a commit and `releases/tags/<tag>` for a release. Never name a
+   shell variable `path` in that loop: zsh ties it to `PATH`.
 3. Run the copy script. It prints what it read back and exits non-zero when a type is missing.
    ```bash
    ~/.claude/skills/slack-draft/copy-rich.sh ~/.claude/drafts/<topic>.html
    ```
-4. In the reply, show the draft as a fenced `text` block so it can be read in the chat, say it is
-   on the clipboard, and name each link the recipients may not be able to open, such as a private
-   repository or a permalink from another workspace. Then the steps: paste with Cmd+V in Slack and
-   check it before sending, and the command that puts it back on the clipboard once something else
-   overwrote it, with the draft's own file name in place of `<topic>`:
+4. In the reply, show the draft as a fenced `text` block so it can be read in the chat, with
+   each `<code>` span in backticks and each link's text in square brackets, so the block shows
+   what Slack will format and link. Say it is on the clipboard, and name each link the
+   recipients may not be able to open, such as a private repository or a permalink from another
+   workspace. Then the steps: paste with Cmd+V in Slack and check it before sending, and the
+   command that puts it back on the clipboard once something else overwrote it, with the draft's
+   own file name in place of `<topic>`:
    ```bash
    ~/.claude/skills/slack-draft/copy-rich.sh ~/.claude/drafts/<topic>.html
    ```
