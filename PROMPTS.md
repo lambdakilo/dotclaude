@@ -5,9 +5,27 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Add how-i-work.md on the daily and weekend routine
+## Read earlier draft prompts before drafting a message
 
 2026-10-23, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [a research ask about a university course left out]
+
+**2.**
+> [a personal fact to remember left out]
+
+**3.**
+> [an ask for a chat message draft left out]
+
+**4.**
+> did you check the last signal session about how many lines it can
+> actually have before wrapping? save for future as well the char
+> amount
+
+## Add how-i-work.md on the daily and weekend routine
+
+2026-10-23, commit [3a5aff5](https://github.com/lambdakilo/dotclaude/commit/3a5aff5b15da295da3a042b9e246674ebd8efc70), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dotclaude i should add a how i work .md file there as well that
@@ -2149,6 +2167,7 @@ so a change by hand is lost at the next commit.
 - arch: Arch Linux
 - ccbysa4.0: Creative Commons Attribution-ShareAlike 4.0 International
 - cd: change directory, the shell command
+- char: character
 - co2: carbon dioxide
 - cs: computer science
 - dir: directory

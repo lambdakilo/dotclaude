@@ -389,11 +389,13 @@ apply to one repository belong in that repository's project memory.
   it shows the draft in a fenced `text` block, and only for a channel the project's memory names
   as a clipboard channel it also puts the draft on the clipboard as rich text and gives the
   command that copies it there again. Drafting never opens the built-in browser pane.
-- Before drafting a message for the user to send, such as a Slack reply or an email, read every
-  source the project's memory lists for its subject and every connected source that could bear
-  on it, the deployed and legacy environments included, and say in the reply which were read and
-  which were skipped, with the reason. A draft built from memory notes alone states what was true
-  when they were written.
+- Before drafting a message for the user to send, such as a Slack reply, an email or a chat
+  message, read every source the project's memory lists for its subject, every connected source
+  that could bear on it, the deployed and legacy environments included, and the user's earlier
+  prompts about drafts for the same app or recipient, found by searching `~/.claude/prompt-log`,
+  so a format settled in another session, such as a line width, carries over. Say in the reply
+  which were read and which were skipped, with the reason. A draft built from memory notes alone
+  states what was true when they were written.
 - Browser work runs in the built-in browser pane, which the user also calls the built-in chrome
   and is signed in to. A page, a file or an upload is tried there before a reply calls it out of
   reach, and when the pane shows a sign-in page the reply asks the user to sign in there. A deny
