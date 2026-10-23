@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Read earlier draft prompts before drafting a message
+## Move How I work into the README
 
 2026-10-23, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**2.**
+> maybe it should be on readme instead
+
+## Read earlier draft prompts before drafting a message
+
+2026-10-23, commit [a2cad92](https://github.com/lambdakilo/dotclaude/commit/a2cad921a128a0fc8ace18cf59ad88b8ccbfad0c), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a research ask about a university course left out]
