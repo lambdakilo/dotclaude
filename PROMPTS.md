@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Apply 27 steps of the 2026-10-17 dream report in a review
+## Apply clean dream steps without asking, and ask about the rest
 
 2026-10-23, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**2.** Quoted under [5c100c9](https://github.com/lambdakilo/dotclaude/commit/5c100c9f6ee285bed1c25c439b448b801d739871).
+
+**3.** Quoted under [5c100c9](https://github.com/lambdakilo/dotclaude/commit/5c100c9f6ee285bed1c25c439b448b801d739871).
+
+## Apply 27 steps of the 2026-10-17 dream report in a review
+
+2026-10-23, commit [5c100c9](https://github.com/lambdakilo/dotclaude/commit/5c100c9f6ee285bed1c25c439b448b801d739871), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream review
