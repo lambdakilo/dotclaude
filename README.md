@@ -268,7 +268,7 @@ node ~/Projects/dotclaude/test/evals.mjs
 <!-- evals:start -->
 | Suite | What it checks | Result |
 | --- | --- | --- |
-| [Hook tests](test/hooks/checks.mjs) | every hook, fed the input Claude Code sends it | 128 of 128 pass |
+| [Hook tests](test/hooks/checks.mjs) | every hook, fed the input Claude Code sends it | 129 of 129 pass |
 | [Dream simulation](test/dream-sim/checks.mjs) | how `/dream` spends usage and when it stops | 49 of 49 pass |
 | [Usage mod tests](mods/session-usage/hooks/register.test.ts) | the line under the prompt box | 4 of 4 pass |
 
@@ -276,11 +276,11 @@ How often Claude kept rules from [`CLAUDE.md`](CLAUDE.md) from 2026-10-16 to 202
 
 | Rule | Kept |
 | --- | --- |
-| No long dashes in replies | 99% (281 of 282 replies) |
-| Plain quotes, arrows and dots in replies | 100% (282 of 282 replies) |
-| A Prompt feedback section after each typed prompt | 90% (231 of 255 replies) |
-| Commit message lines within 72 columns | 99% (235 of 236 commits) |
-| No Claude attribution in commits | 100% (236 of 236 commits) |
+| No long dashes in replies | 99% (282 of 283 replies) |
+| Plain quotes, arrows and dots in replies | 100% (283 of 283 replies) |
+| A Prompt feedback section after each typed prompt | 90% (232 of 256 replies) |
+| Commit message lines within 72 columns | 99% (239 of 240 commits) |
+| No Claude attribution in commits | 100% (240 of 240 commits) |
 <!-- evals:end -->
 
 ## Before you install

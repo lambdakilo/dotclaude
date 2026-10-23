@@ -315,6 +315,12 @@ const suites = [
         const text = (run('', { cwd: work }), fs.readFileSync(file, 'utf8'))
         return text.includes('> read ~/notes.txt') && !text.includes(otherHome) && !text.includes('effort default') && /commit [0-9a-f]{7}, model m\.\n/.test(text)
       }],
+      ['keeps each question and its answer under the prompt', () => {
+        write(path.join(home, 'pm-4.txt'), body('Add the asker', 'ask me first') + '\n(p1: keep the old\nparser?)\n> Keep it (Recommended)\n\n(p2: rename it?)\n> no\n')
+        sh(`cd ${q(work)} && echo d > d && git add d && git commit -q -F ${q(path.join(home, 'pm-4.txt'))}`)
+        const text = (run('', { cwd: work }), fs.readFileSync(file, 'utf8'))
+        return text.includes('> ask me first\n\n(p1: keep the old\nparser?)\n> Keep it (Recommended)\n\n(p2: rename it?)\n> no\n')
+      }],
       ['lists the commit about to be made first', () => {
         run('', { cwd: work, args: ['--message', write(path.join(home, 'pm-2.txt'), body('Add the printer', 'add a printer'))] })
         const text = fs.readFileSync(file, 'utf8')

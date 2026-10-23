@@ -38,8 +38,10 @@ redacted in public and upstream repositories.
   Commit messages in `~/.claude/CLAUDE.md` says, never from memory. Then number every prompt
   from the session in order and quote each verbatim, typos and lowercase included, as a `>`
   blockquote (`**1.**` on its own line, then the `>` quote). Include prompts that produced no
-  commit. Mark answers to questions with a short parenthetical, and put AskUserQuestion
-  selections as nested `>` lines under the prompt.
+  commit. Mark answers to questions with a short parenthetical, and give each AskUserQuestion
+  answer as the commit message rules say: after a blank line, the question shortened on a
+  parenthetical line, then the option picked or the text typed on `>` lines of its own, nothing
+  nested.
 - Directly under the model line, before the first prompt, a nested
   `<details><summary>Abbreviations</summary>` block lists every abbreviation used anywhere in the
   quoted prompts with its expansion, one per line, so a reader who does not know one can open

@@ -175,9 +175,11 @@ function flush(    i, h, n, line, state, model, k, head, quote, abbr, key, numbe
     }
     if (state == "done") break
     if (line == "Abbreviations:") { state = "abbr"; abbr = ""; continue }
+    if (state == "paren" && line != "" && line !~ /^>/) { quote[n] = quote[n] escape(line) "\n"; continue }
     if (line ~ /^[0-9]+\./ && state != "head") { n++; head[n] = line; quote[n] = ""; state = "head"; continue }
     if (line ~ /^>/) { quote[n] = quote[n] escape(line) "\n"; state = "quote"; continue }
     if (line == "") { state = "between"; continue }
+    if (state == "between" && n > 0 && line ~ /^\(/) { quote[n] = quote[n] "\n" escape(line) "\n"; state = "paren"; continue }
     if (state == "head") { head[n] = head[n] " " line; continue }
     if (line ~ /^[A-Z][A-Za-z-]*: / || line ~ /^Mirrors /) state = "done"
   }

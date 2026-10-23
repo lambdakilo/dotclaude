@@ -90,7 +90,10 @@ apply to one repository belong in that repository's project memory.
   commit made under the same prompt that prompt again. They keep their session numbers, each on
   its own line followed by the prompt as `>` quoted lines, verbatim, typos and lowercase
   included, wrapped onto further `>` lines at 72 columns. Mark answers to questions with a short
-  parenthetical, and put AskUserQuestion selections as nested `>` lines under the prompt. When
+  parenthetical. Each question an AskUserQuestion call put to that prompt follows it after a
+  blank line, as a pair: the question, shortened in Claude's words, on a parenthetical line, and
+  directly under it the option picked or the text typed on `>` lines of its own. Nothing is
+  nested inside a quote, and a blank line separates the pairs. When
   those prompts use abbreviations, an `Abbreviations:` section follows with one line per
   abbreviation and its expansion. When they use none, there is no such section.
 - Text the user pasted into a prompt (a pasted block: a log, code, a file, an address, a message
