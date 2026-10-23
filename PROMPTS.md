@@ -5,9 +5,29 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Give only the copy command for clipboard Slack drafts
+## Put every Slack draft on the clipboard, never in the reply
 
 2026-10-23, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask about a Slack draft for work left out]
+
+**2.**
+> [an ask about the same draft left out]
+
+**3.**
+> [an ask about the same draft left out]
+
+**4.**
+> [an ask about the same draft left out]
+
+**5.**
+> for slack messages never give me the copyable thingy just give me
+> only the command to copy like on the other session
+
+## Give only the copy command for clipboard Slack drafts
+
+2026-10-23, commit [ddc0bb5](https://github.com/lambdakilo/dotclaude/commit/ddc0bb58ea40c37b83f643e7a4b081243976e725), model claude-opus-5-5, effort xhigh.
 
 **10.**
 > [a shell command the user ran left out]

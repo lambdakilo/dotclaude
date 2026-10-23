@@ -12,14 +12,10 @@ and sends. The CLAUDE.md rule on reading every source before drafting still hold
 
 Slack's message box turns neither `[text](url)` nor `<url|text>` into a link. That syntax works only
 through the API. By hand, link text gets in only by pasting a URL over selected text or by pasting
-rich text. A draft for a channel that the project's memory names as a clipboard channel therefore
-goes on the clipboard as rich text, plain ones too, and the user sends it with one paste.
+rich text. Every draft therefore goes on the clipboard as rich text, plain ones too, whatever the
+channel or DM, and the user sends it with one paste.
 
-Every other draft, and every draft outside a project that names such a channel, is only a fenced
-`text` block in the reply, with each link as its bare URL after the words it belongs to: no HTML
-file, no clipboard and no copy command. The user copies it from the block.
-
-## Steps for a clipboard channel
+## Steps
 
 1. Write the draft as an HTML fragment in `~/.claude/drafts/<topic>.html`, with words separated
    by dashes, starting with `<meta charset="utf-8">`. Write it with a `cat` heredoc in Bash,
