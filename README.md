@@ -49,6 +49,9 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   takes under a second.
 - [`no-git-checkout.sh`](hooks/no-git-checkout.sh): stops Claude from using `git checkout`, which
   can overwrite files by mistake, and names the `git switch` or `git restore` command instead.
+- [`no-identity-override.sh`](hooks/no-identity-override.sh): stops Claude from making up a git
+  author, even in a throwaway test repository, and asks you before it changes the name or address
+  your commits carry.
 - [`calendar-free-busy-only.sh`](hooks/calendar-free-busy-only.sh): stops Claude from reading
   other people's calendar events. It can still see when they are free.
 - [`slack-user-search-own-workspace.sh`](hooks/slack-user-search-own-workspace.sh): tells Claude

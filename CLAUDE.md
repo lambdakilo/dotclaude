@@ -7,8 +7,11 @@ apply to one repository belong in that repository's project memory.
 
 ## Git identity and attribution
 
-- Never override the git author. Use the identity already configured in the repo or globally
-  (check with `git config user.email`). Never pass `-c user.email=...` or guess an address.
+- Never override the git author, in a scratch or test repository too. Use the identity already
+  configured in the repo or globally (check with `git config user.email`), and never guess an
+  address. A `PreToolUse` hook, `~/.claude/hooks/no-identity-override.sh`, refuses `-c user.name=`
+  and `-c user.email=`, the `GIT_AUTHOR_*` and `GIT_COMMITTER_*` name and email variables and
+  `git commit --author`, and asks the user before `git config` sets or unsets a name or address.
 - Never add `Co-Authored-By: Claude`, "Generated with Claude Code", or any Claude or Anthropic
   attribution to commits, PR bodies, or issues. The `attribution` setting also enforces this.
 - When squashing a pull request, by squash merge or by squashing its commits into one before

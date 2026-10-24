@@ -105,6 +105,7 @@ mirrored=(
   hooks/git-submodule-update-after-switch.sh
   hooks/check-not-piped.sh
   hooks/no-git-checkout.sh
+  hooks/no-identity-override.sh
   hooks/no-home-search.sh
   hooks/prompt-log.sh
   hooks/memory-plain-characters.sh

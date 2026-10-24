@@ -213,6 +213,16 @@
         "hooks": [
           {
             "type": "command",
+            "command": "\"$HOME/.claude/hooks/no-identity-override.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
             "command": "\"$HOME/.claude/hooks/no-home-search.sh\"",
             "timeout": 10
           }

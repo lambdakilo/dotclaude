@@ -129,6 +129,22 @@ const suites = [
     ['ignores the words inside quotes', () => quiet(run(bash(`echo 'grep -a .{0,9}x'`)))],
   ]],
 
+  ['no-identity-override.sh', run => [
+    ['refuses git -c user.email=', () => refused(run(bash(`git -c user.email=${address('bot')} commit -m fix`)))],
+    ['refuses git -c user.name= among other -c options', () => refused(run(bash('git -c core.editor=true -c user.name=Bot commit -m fix')))],
+    ['refuses GIT_AUTHOR_EMAIL= before git commit', () => refused(run(bash(`GIT_AUTHOR_EMAIL=${address('bot')} git commit -m fix`)))],
+    ['refuses an exported GIT_COMMITTER_NAME', () => refused(run(bash('export GIT_COMMITTER_NAME=Bot && git commit -m fix')))],
+    ['refuses git commit --author', () => refused(run(bash(`git -C repo commit -q --author="Bot <${address('bot')}>" -m fix`)))],
+    ['names the Signed-off-by trailer for a second person', () => run(bash('git commit --author=Bot -m fix')).err.includes('Signed-off-by:')],
+    ['asks before git config user.email <address>', () => decision(run(bash(`git config user.email ${address('me')}`))) === 'ask'],
+    ['asks before git config --global --unset user.name', () => decision(run(bash('git config --global --unset user.name'))) === 'ask'],
+    ['lets a read of git config user.email through', () => quiet(run(bash('git config user.email')))],
+    ['lets a plain git commit through', () => quiet(run(bash("git add a.txt && git commit -m 'fix the parser'")))],
+    ['lets git log --author through', () => quiet(run(bash('git log --author=someone --oneline')))],
+    ['ignores the words inside quotes', () => quiet(run(bash(`echo 'git -c user.email=x commit --author=y' && git commit -m "never set GIT_AUTHOR_EMAIL=x"`)))],
+    ['ignores the words inside a heredoc body', () => quiet(run(bash(`cat > notes.md <<'EOF'\ngit -c user.email=x commit --author="Bot <b>"\nGIT_AUTHOR_EMAIL=x git config user.name Bot\nEOF\ngit add notes.md`)))],
+  ]],
+
   ['no-git-checkout.sh', run => [
     ['refuses a branch change with git checkout', () => refused(run(bash('git checkout main')))],
     ['refuses a file restore with git checkout', () => refused(run(bash('git checkout HEAD~1 -- src/a.ts')))],
