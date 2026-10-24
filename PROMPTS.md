@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Fit glance pages on one screen, and watch the skill too
+## Ask before working around a failure the VPN could cause
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**5.**
+> dotclaude always tell me and do the ask dialogue if you have a hunch
+> my proton vpn is blocking your requests somehow
+
+## Fit glance pages on one screen, and watch the skill too
+
+2026-10-24, commit [1c85586](https://github.com/lambdakilo/dotclaude/commit/1c85586789d0cd3fbdab9716fa1a054f7a5e862c), model claude-opus-5-5, effort xhigh.
 
 **4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
