@@ -397,6 +397,13 @@ apply to one repository belong in that repository's project memory.
   destructive commands.
 - Prefer official features over custom glue that wraps unstable internals. If only custom works,
   say so and name the drift risk before building it.
+- A command, workflow, script, hook or skill built for a purpose the user stated does all of it
+  when run bare. Each choice it can make from what it reads, such as the date, the usage limits
+  or its last run, it makes itself. An argument is only for an exception the user named or for
+  what it cannot read, such as when the user starts work, and a reply on how to run it names no
+  other. A purpose that reads two ways, such as spending the whole budget or only what is worth
+  spending, is asked through AskUserQuestion before building, never settled alone and named in
+  Prompt feedback afterwards.
 - Probe before spending quota on rate-limited APIs. Read retry-after, no blind retry loops.
 - A `PreToolUse` hook, `~/.claude/hooks/calendar-free-busy-only.sh`, refuses to list or read
   events on another person's calendar, which carry titles, attendees and meeting links, so

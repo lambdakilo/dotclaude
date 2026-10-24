@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Refresh the README evals block after the 2026-10-23 dream run
+## Have a tool built for the user run bare and pick its own mode
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> dream review
+
+## Refresh the README evals block after the 2026-10-23 dream run
+
+2026-10-24, commit [9e3cc9e](https://github.com/lambdakilo/dotclaude/commit/9e3cc9eccbe42942172fb05b4969e890653ae595), model claude-opus-5-5, effort xhigh.
 
 **3.** Quoted under [5c100c9](https://github.com/lambdakilo/dotclaude/commit/5c100c9f6ee285bed1c25c439b448b801d739871).
 
