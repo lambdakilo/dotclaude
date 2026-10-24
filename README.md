@@ -44,6 +44,9 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
 - [`no-foreground-wait.sh`](hooks/no-foreground-wait.sh): stops Claude from checking over and over
   on a task it left running in the background, which keeps it from reading your messages for up to
   ten minutes.
+- [`no-slow-binary-grep.sh`](hooks/no-slow-binary-grep.sh): stops a search inside a large program
+  file, such as Claude Code itself, that would run for minutes, and shows Claude a way that
+  takes under a second.
 - [`no-git-checkout.sh`](hooks/no-git-checkout.sh): stops Claude from using `git checkout`, which
   can overwrite files by mistake, and names the `git switch` or `git restore` command instead.
 - [`calendar-free-busy-only.sh`](hooks/calendar-free-busy-only.sh): stops Claude from reading

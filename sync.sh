@@ -118,6 +118,7 @@ mirrored=(
   hooks/permission-mode-changed.sh
   hooks/no-foreground-wait.sh
   hooks/stop-unreachable-claim.sh
+  hooks/no-slow-binary-grep.sh
   presence/install.sh
   presence/lock-listener.swift
   mods/session-usage/.claude-plugin/plugin.json

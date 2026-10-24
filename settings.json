@@ -267,6 +267,16 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/no-slow-binary-grep.sh\"",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "Stop": [

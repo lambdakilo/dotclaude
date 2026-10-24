@@ -118,6 +118,17 @@ const suites = [
     ]
   }],
 
+  ['no-slow-binary-grep.sh', run => [
+    ['refuses grep -a with a window before the name', () => refused(run(bash(`B=./claude; grep -a -o '.\\{600\\}NAME.\\{600\\}' "$B" | head -3`)))],
+    ['refuses /usr/bin/grep -E with a {0,n} window', () => refused(run(bash(`LC_ALL=C /usr/bin/grep -a -o -E '.{0,120}Some label' ./claude | head -2`)))],
+    ['refuses a bracket window in double quotes', () => refused(run(bash('LC_ALL=C grep -ao "[^;]\\{0,400\\}NAME" "$CLAUDE_CODE_EXECPATH"')))],
+    ['names the byte offset recipe', () => run(bash(`grep -ao '.{0,9}x' f`)).err.includes('grep -a -b -o -F')],
+    ['lets the name first through', () => quiet(run(bash(`LC_ALL=C grep -a -o 'NAME[^;]\\{0,400\\}' ./claude`)))],
+    ['lets a fixed-string offset search through', () => quiet(run(bash('LC_ALL=C grep -a -b -o -F NAME ./claude | cut -d: -f1')))],
+    ['lets a window through without -a', () => quiet(run(bash(`grep -o '.{0,40}error' build.log`)))],
+    ['ignores the words inside quotes', () => quiet(run(bash(`echo 'grep -a .{0,9}x'`)))],
+  ]],
+
   ['no-git-checkout.sh', run => [
     ['refuses a branch change with git checkout', () => refused(run(bash('git checkout main')))],
     ['refuses a file restore with git checkout', () => refused(run(bash('git checkout HEAD~1 -- src/a.ts')))],
