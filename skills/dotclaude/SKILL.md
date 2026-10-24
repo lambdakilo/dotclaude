@@ -1,0 +1,67 @@
+---
+name: dotclaude
+description: How the public mirror of ~/.claude works. Load it before changing ~/.claude/CLAUDE.md, settings.json, a hook, a mirrored skill, a mod or a workflow, before adding a hook, skill, command or agent under ~/.claude, before changing anything in ~/Projects/dotclaude or a directory it mirrors into, and when setting up a new machine. It covers sync.sh with its scan and mirrors, the commit and its identity, and what the repository may contain.
+---
+
+# Public configuration repository
+
+These procedures sit beside the Public configuration repository rules in `~/.claude/CLAUDE.md`,
+which still hold: the user's go before a change to that file or a mirrored skill, the `sync.sh` run
+and its commit in the same turn, the pass over the open PRs after every push, and the rule that a
+mirrored file states what holds now.
+
+## The checkout
+
+- The checkout at `~/Projects/dotclaude` holds the mirrored files, each named in the `mirrored` list
+  of `sync.sh`, and its own `README.md`, licence texts and `sync.sh`.
+- The mirrored copy keeps the name `CLAUDE.md`. A session started inside the checkout would load it
+  as project memory on top of the global file, so `settings.json` lists `**/dotclaude/CLAUDE.md` in
+  `claudeMdExcludes`. Claude Code reads no other mirrored file from a repository root, so nothing
+  else needs a different name.
+- When a new file under `~/.claude` would help other people (a hook, a skill, a command, an agent),
+  add it to the list in `sync.sh` first.
+
+## sync.sh
+
+- `sync.sh` pulls the checkout fast-forward, then reconciles each mirrored file: one the pull
+  changed is installed into `~/.claude`, one changed locally is copied into the checkout, and one
+  changed on both sides stops the run for a manual merge. It then scans everything that would be
+  published for the local user name, home paths, the git identity, email addresses and
+  credential-shaped strings, exits non-zero on a hit, and prints `git status`. Literals listed one
+  per line in `sync-allow.txt`, when that file exists, are exempt. Literals listed one per line in
+  the git-ignored `sync-deny.txt` fail the scan in any case, and `sync.sh --check-message`, run from
+  the untracked commit-msg hook of the checkout and of each mirror, holds commit messages to the
+  same list.
+- `sync.sh --commit <file>` commits and pushes the checkout to the default branch, then every mirror
+  below, with the paths to commit after the file when the checkout holds other changes too. No PR:
+  the checkout has one owner. A mirrored JSON file changed locally goes back into the checkout's key
+  order first, so `claude plugin` and the `/plugin` dialog may change `settings.json`.
+- `sync.sh` also copies every published file into each directory listed in `sync-mirrors.txt`, an
+  optional file beside it that git ignores, removes there what the checkout has deleted, and prints
+  each directory it copied into. With `--commit` it then commits and pushes in each of them with the
+  same message and a line naming the checkout commit, so one message is trimmed and redacted for
+  every copy. Which directories those are and what each is for lives in the dotclaude checkout's
+  project memory, never in this skill, in `CLAUDE.md` or in another tracked file, so the public
+  repository shows the mechanism and nothing it points at.
+
+## Identity and contents
+
+- Commits there carry the identity configured in the checkout, and the rule in `~/.claude/CLAUDE.md`
+  about never overriding the git author applies to it as it stands: the user's own name with a
+  disposable address.
+- That repository never contains another person's name, an employer, client or customer name, a
+  project name, a secret, or anything else that discloses what the user works on. The user's own
+  name may stand in the history, as the author or in a quoted prompt, but in no published file,
+  which the scan enforces. No email address either: the disposable address lives in the checkout's
+  git config and nowhere else. Redact quoted prompts with square brackets where needed, as for
+  upstream PRs, and quote only the part of a prompt that is about the configuration, as the Commit
+  messages section of `~/.claude/CLAUDE.md` says; the mirrors follow the same rule. An example in a
+  published file is a generic English placeholder, never a label, address, number or tool name from
+  the session's project or employer, and a term that slips through goes into `sync-deny.txt`.
+
+## New machine
+
+- Clone the repository to `~/Projects/dotclaude`, run `./sync.sh --install` to copy the mirrored
+  files into `~/.claude` (existing files that differ are kept as `.bak`), and set the
+  repository-local git identity to match the existing history, from
+  `git log -1 --format='%an <%ae>'`, before the first commit. Restart Claude Code so the hooks load.

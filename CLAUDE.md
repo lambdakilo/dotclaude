@@ -585,34 +585,20 @@ apply to one repository belong in that repository's project memory.
 
 ## Public configuration repository
 
-- The parts of `~/.claude` that help other people learn this workflow are mirrored in a public
-  git repository. Its checkout lives at `~/Projects/dotclaude`. Mirrored today: this file,
-  `settings.json`, `hooks/`, `workflows/`, `agents/` and the `pull-requests` skill. The checkout
-  also holds its own `README.md`, licence texts and `sync.sh`.
-- The mirrored copy keeps the name `CLAUDE.md`. A session started inside the checkout would load
-  it as project memory on top of the global file, so `settings.json` lists
-  `**/dotclaude/CLAUDE.md` in `claudeMdExcludes`. Claude Code reads no other mirrored file from
-  a repository root, so nothing else needs a different name.
-- `sync.sh` pulls the checkout fast-forward, then reconciles each mirrored file: one the pull
-  changed is installed into `~/.claude`, one changed locally is copied into the checkout, and one
-  changed on both sides stops the run for a manual merge. It then scans everything that would be
-  published for the local user name, home paths, the git identity, email addresses and
-  credential-shaped strings, exits non-zero on a hit, and prints `git status`. Literals listed
-  one per line in `sync-allow.txt`, when that file exists, are exempt.
-  Literals listed one per line in the git-ignored `sync-deny.txt` fail the scan in any case,
-  and `sync.sh --check-message`, run from the untracked commit-msg hook of the checkout and of
-  each mirror, holds commit messages to the same list.
-- A change to this file or to the `pull-requests` skill is made only on the user's go: a prompt
-  that says go or push, a correction or wish meant to hold beyond the task as the last bullet
-  of Memory hygiene describes, or a script from this session that the user says they ran. Then, as
-  whenever a session changes another mirrored file, run `sync.sh` and read the diff, write the
-  commit message to a file in the scratchpad, and run `sync.sh --commit <file>` in the same
-  turn, with the paths to commit after the file when the checkout holds other changes too. It
-  commits and pushes the checkout to the default branch, then every mirror below. No PR: the
-  checkout has one owner. A mirrored JSON file changed locally goes back into the checkout's
-  key order first, so `claude plugin` and the `/plugin` dialog may change `settings.json`. When
-  a new file under `~/.claude` would help other people (a hook, a skill, a command, an agent),
-  add it to the list in `sync.sh` first.
+- The parts of `~/.claude` that help other people learn this workflow are mirrored in a public git
+  repository checked out at `~/Projects/dotclaude`: this file, `settings.json`, `hooks/`,
+  `workflows/`, `agents/`, the `session-usage` mod and the `pull-requests`, `slack-draft` and
+  `dotclaude` skills. Before changing one of them, adding a hook, skill, command or agent under
+  `~/.claude`, or changing anything in that checkout, load the `dotclaude` skill,
+  `~/.claude/skills/dotclaude/SKILL.md`, and follow it. It holds what `sync.sh` reconciles, scans
+  and mirrors, the commit and its identity, what the repository may contain, and the setup on a new
+  machine.
+- A change to this file or to a mirrored skill is made only on the user's go: a prompt that says go
+  or push, a correction or wish meant to hold beyond the task as the last bullet of Memory hygiene
+  describes, or a script from this session that the user says they ran. Then, as whenever a session
+  changes another mirrored file, run `sync.sh` and read the diff, write the commit message to a file
+  in the scratchpad, and run `sync.sh --commit <file>` in the same turn, with the paths to commit
+  after the file when the checkout holds other changes too.
 - Every push to the checkout is followed in the same turn by a pass over the user's open PRs,
   listed with `gh search prs --author @me --state open`. Each PR whose body carries a block the
   `pull-requests` skill puts there, the configuration link or the prompts block, gets the link
@@ -627,31 +613,6 @@ apply to one repository belong in that repository's project memory.
 - A rule in a mirrored file states what holds now. The incident behind it, its date and the
   wording it replaced go into the commit message, never into the file, and a changed rule is
   rewritten in place rather than followed by a note on what it used to say.
-- `sync.sh` also copies every published file into each directory listed in `sync-mirrors.txt`, an
-  optional file beside it that git ignores, removes there what the checkout has deleted, and
-  prints each directory it copied into. With `--commit` it then commits and pushes in each of
-  them with the same message and a line naming the checkout commit, so one message is trimmed
-  and redacted for every copy. Which directories those are and what each is for lives in the
-  dotclaude checkout's project memory, never in this file or in a tracked file, so the public
-  repository shows the mechanism and nothing it points at.
-- New machine: clone the repository to `~/Projects/dotclaude`, run `./sync.sh --install` to copy the
-  mirrored files into `~/.claude` (existing files that differ are kept as `.bak`), and set the
-  repository-local git identity to match the existing history, from
-  `git log -1 --format='%an <%ae>'`, before the first commit. Restart Claude Code so the hook
-  loads.
-- Commits there carry the identity configured in the checkout, and the rule above about never
-  overriding the author applies to it as it stands: the user's own name with a disposable
-  address.
-- That repository never contains another person's name, an employer, client or customer name,
-  a project name, a secret, or anything else that discloses what the user works on. The user's
-  own name may stand in the history, as the author or in a quoted prompt, but in no published
-  file, which the scan enforces. No email address either: the disposable address lives in the
-  checkout's git config and nowhere else. Redact quoted prompts with square brackets where
-  needed, as for upstream PRs, and quote only the part of a prompt that is about the
-  configuration, as the Commit messages section says; the mirrors follow the same rule.
-  An example in a published file is a generic English placeholder, never a label, address,
-  number or tool name from the session's project or employer, and a term that slips through
-  goes into `sync-deny.txt`.
 
 ## Memory hygiene
 

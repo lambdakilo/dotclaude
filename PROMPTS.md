@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Compact sessions at 400k tokens instead of about 967k
+## Move the dotclaude mirroring mechanics into a dotclaude skill
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> dream review
+
+(p30: move the mirroring mechanics from CLAUDE.md into a dotclaude
+skill, add it?)
+> Add it (Recommended)
+
+## Compact sessions at 400k tokens instead of about 967k
+
+2026-10-24, commit [1d9861a](https://github.com/lambdakilo/dotclaude/commit/1d9861ac524118136a5005307a0db1f67269fe70), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review

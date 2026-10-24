@@ -117,6 +117,7 @@ mirrored=(
   mods/session-usage/hooks/register.ts
   mods/session-usage/hooks/register.test.ts
   mods/session-usage/usage.sh
+  skills/dotclaude/SKILL.md
   skills/pull-requests/SKILL.md
   skills/pull-requests/pane-upload.sh
   skills/pull-requests/review-page/build.py

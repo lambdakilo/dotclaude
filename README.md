@@ -115,6 +115,9 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   you review it.
 - [`skills/slack-draft`](skills/slack-draft/SKILL.md): Claude drafts a Slack message and puts it
   on your clipboard with links and bold kept. You paste it and press send. Mac only.
+- [`skills/dotclaude`](skills/dotclaude/SKILL.md): how Claude keeps this copy and my own `~/.claude`
+  the same, and what it must never publish here. Claude reads it only before it changes the setup,
+  which keeps the rules every session reads shorter.
 - [`workflows/dream.js`](workflows/dream.js): type `/dream` when you stop for the day. Many
   agents read your recent sessions and your setup, and come back with suggested changes, each
   with a ready script. It changes nothing by itself and stops before your usage limits. When
@@ -339,9 +342,9 @@ git -C ~/Projects/dotclaude pull
 
 ## License
 
-Prose, meaning `CLAUDE.md`, `PROMPTS.md`, `skills/pull-requests/SKILL.md`,
-`skills/slack-draft/SKILL.md` and this README, is licensed under Creative Commons
-Attribution-ShareAlike 4.0 International. See [`LICENSE-CC-BY-SA-4.0`](LICENSE-CC-BY-SA-4.0).
+Prose, meaning `CLAUDE.md`, `PROMPTS.md`, every `SKILL.md` under `skills/` and this README, is
+licensed under Creative Commons Attribution-ShareAlike 4.0 International. See
+[`LICENSE-CC-BY-SA-4.0`](LICENSE-CC-BY-SA-4.0).
 
 Everything else is licensed under the GNU Affero General Public License, version 3 or (at your
 option) any later version. See [`LICENSE`](LICENSE).
