@@ -103,6 +103,21 @@ const suites = [
     ['ignores a cd inside quotes', () => quiet(run(bash("echo 'cd /nonexistent-dir; ls'")))],
   ]],
 
+  ['no-foreground-wait.sh', run => {
+    const task = '/tmp/claude/p/s1/tasks/b1a2c3.output'
+    const wait = (command, extra = {}) => ({ ...bash(command), tool_input: { command, timeout: 600000, ...extra } })
+    return [
+      ['refuses an until-loop on a task output file', () => refused(run(wait(`until grep -q '^NAME' ${task}; do sleep 3; done`)))],
+      ['refuses a while-loop on it at the default timeout', () => refused(run(bash(`while ! grep -q ok "${task}"; do sleep 5; done`)))],
+      ['refuses a loop that reads it through a variable', () => refused(run(wait(`F=${task}; for i in $(seq 1 54); do grep -q ok "$F" && break; sleep 10; done`)))],
+      ['lets the same loop through in the background', () => quiet(run(wait(`until grep -q ok ${task}; do sleep 3; done`, { run_in_background: true })))],
+      ['lets it through with a timeout of a minute or less', () => quiet(run(wait(`until grep -q ok ${task}; do sleep 1; done`, { timeout: 60000 })))],
+      ['lets a loop on a server through', () => quiet(run(wait('until curl -s localhost:11434/api/version; do sleep 0.5; done; ollama list')))],
+      ['lets a loop that never reads the file through', () => quiet(run(wait(`tail -2 ${task}; for tab in map me; do sleep 14; done`)))],
+      ['ignores a loop inside quotes', () => quiet(run(wait(`echo 'until grep -q ok ${task}; do sleep 3; done'`)))],
+    ]
+  }],
+
   ['no-git-checkout.sh', run => [
     ['refuses a branch change with git checkout', () => refused(run(bash('git checkout main')))],
     ['refuses a file restore with git checkout', () => refused(run(bash('git checkout HEAD~1 -- src/a.ts')))],

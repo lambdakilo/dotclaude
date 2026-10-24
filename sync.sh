@@ -100,6 +100,7 @@ mirrored=(
   hooks/no-meta-prompts.sh
   hooks/prompts-md.sh
   hooks/cd-fall-through.sh
+  hooks/no-foreground-wait.sh
   hooks/stop-unreachable-claim.sh
   mods/session-usage/.claude-plugin/plugin.json
   mods/session-usage/hooks/hooks.json

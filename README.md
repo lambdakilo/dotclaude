@@ -41,6 +41,9 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   the Mac ask you for permission folder after folder.
 - [`cd-fall-through.sh`](hooks/cd-fall-through.sh): stops a command from carrying on in the wrong
   folder when moving to the right one failed.
+- [`no-foreground-wait.sh`](hooks/no-foreground-wait.sh): stops Claude from checking over and over
+  on a task it left running in the background, which keeps it from reading your messages for up to
+  ten minutes.
 - [`no-git-checkout.sh`](hooks/no-git-checkout.sh): stops Claude from using `git checkout`, which
   can overwrite files by mistake, and names the `git switch` or `git restore` command instead.
 - [`calendar-free-busy-only.sh`](hooks/calendar-free-busy-only.sh): stops Claude from reading
