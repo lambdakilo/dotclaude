@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Move the dotclaude mirroring mechanics into a dotclaude skill
+## Keep a PR's review page as a local file with a link
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**13.**
+> nah bro no artifacts create a local html in appropriate place and
+> give me link i can click instaed of copy
+
+## Move the dotclaude mirroring mechanics into a dotclaude skill
+
+2026-10-24, commit [6d60275](https://github.com/lambdakilo/dotclaude/commit/6d6027541fb4ee250085683eb4729f0a2e111f2a), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review

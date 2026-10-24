@@ -3,7 +3,11 @@
 section exactly as GitHub holds them, its screenshots embedded, and the
 review's own results, findings and added steps from an optional overlay.
 
-usage: build.py <owner/repo#n> <out.html> [--review overlay.json]
+usage: build.py <owner/repo#n> [--out page.html] [--review overlay.json]
+
+Without --out the page goes to .reviews/<repo>-<n>.html in the checkout the
+command runs in, a folder this adds to the checkout's .git/info/exclude so
+git never sees it.
 
 The overlay is JSON:
   {"results": [{"name": "...", "outcome": "pass|fail|skip", "detail": "..."}],
@@ -349,18 +353,44 @@ def render_sections(sections):
     return "".join(out)
 
 
+def default_out(name, number):
+    top = subprocess.run(
+        ["git", "rev-parse", "--show-toplevel"], check=True, capture_output=True, text=True
+    ).stdout.strip()
+    common = subprocess.run(
+        ["git", "rev-parse", "--path-format=absolute", "--git-common-dir"],
+        check=True, capture_output=True, text=True,
+    ).stdout.strip()
+    exclude = os.path.join(common, "info", "exclude")
+    os.makedirs(os.path.dirname(exclude), exist_ok=True)
+    lines = open(exclude).read().split("\n") if os.path.exists(exclude) else []
+    if "/.reviews/" not in lines:
+        with open(exclude, "a") as f:
+            f.write(("" if not lines or lines[-1] == "" else "\n") + "/.reviews/\n")
+    os.makedirs(os.path.join(top, ".reviews"), exist_ok=True)
+    return os.path.join(top, ".reviews", "%s-%s.html" % (name, number))
+
+
+def take(args, flag):
+    if flag not in args:
+        return None
+    at = args.index(flag)
+    value = args[at + 1]
+    del args[at : at + 2]
+    return value
+
+
 def main():
     args = sys.argv[1:]
+    review_path = take(args, "--review")
+    out_path = take(args, "--out")
     review = {}
-    if "--review" in args:
-        at = args.index("--review")
-        with open(args[at + 1]) as f:
+    if review_path:
+        with open(review_path) as f:
             review = json.load(f)
-        del args[at : at + 2]
-    if len(args) != 2 or "#" not in args[0]:
+    if len(args) != 1 or "#" not in args[0]:
         sys.exit(__doc__)
     repo, number = args[0].split("#")
-    out_path = args[1]
 
     pr = gh_json(
         "pr", "view", number, "--repo", repo,
@@ -375,6 +405,7 @@ def main():
     with open(os.path.join(HERE, "template.html")) as f:
         page = f.read()
     name = repo.split("/")[-1]
+    out_path = out_path or default_out(name, number)
     fields = {
         "TITLE": html.escape("%s #%s review" % (name, number)),
         "PR_TITLE": inline(pr["title"]),

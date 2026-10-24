@@ -121,19 +121,19 @@ redacted in public and upstream repositories.
   steps above itself, and checks the PR's manual steps against the screen. "Here" or "only" in a
   review prompt limits where the reply goes, never what runs.
 - The steps the reader follows go on a review page, never into the reply, so they cannot drift from
-  what the PR holds. Build it with `review-page/build.py` beside this skill, run as `python3 -I
-  ~/.claude/skills/pull-requests/review-page/build.py <owner/repo#n> <out.html> --review
-  <overlay.json>` with the file in the scratchpad, and publish it as an Artifact with `capabilities:
-  {db: {}}` and the icon `checklist`. The script takes the steps of the PR body's How to verify? as
-  GitHub holds them, embeds the PR's screenshots, downloaded with the `gh` token, and adds from the
-  overlay the review's results, its findings and the steps it adds. On the page `x` ticks a step,
-  `j` and `k` move, `n` goes to the next open step, `c` copies the step's command and `o` opens its
-  screenshot. The ticks live in the artifact's `progress` collection, one document per step id,
-  which `ArtifactData` reads when the reader says how far they got. A later review of the same PR
-  rebuilds the page and publishes it to the same artifact, by its file path in the session or its
-  `url` from another, so the ticks stay.
-- The reply opens with the page's link, then the results of the verify command and the end to end
-  run, then the findings, and gives no step list of its own.
+  what the PR holds. Build it with `review-page/build.py` beside this skill, run in the checkout as
+  `python3 -I ~/.claude/skills/pull-requests/review-page/build.py <owner/repo#n> --review
+  <overlay.json>`. It writes the page to `.reviews/<repo>-<n>.html` in the checkout, a folder it
+  adds to the checkout's `.git/info/exclude` so git never sees it, and it is a local file, never an
+  Artifact. The script takes the steps of the PR body's How to verify? as GitHub holds them, embeds
+  the PR's screenshots, downloaded with the `gh` token, and adds from the overlay the review's
+  results, its findings and the steps it adds. On the page `x` ticks a step, `j` and `k` move, `n`
+  goes to the next open step, `c` copies the step's command and `o` opens its screenshot. The ticks
+  live in the browser's storage for that file, so a later review of the same PR rebuilds the page at
+  the same path and they stay; the session cannot read them, so the reader says how far they got.
+- The reply opens with the page's link, a Markdown link to the file's path relative to the checkout,
+  which the app opens on a click, then the results of the verify command and the end to end run,
+  then the findings, and gives no step list of its own.
 - Where the PR's steps fall short, the overlay's `added_steps` put the fix on the page, marked as
   added by the review: the two command steps when the PR lacks them (an empty `after` puts a step
   before the PR's first), a step for a change the PR's steps skip, and the bug steps below. They

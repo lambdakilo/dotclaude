@@ -323,11 +323,12 @@ apply to one repository belong in that repository's project memory.
 - A keyboard shortcut in steps for a person, in a PR or anywhere else, names the program it
   belongs to, and where browsers differ it gives one per browser, Firefox first: the web
   console is Cmd+Option+K in Firefox and Cmd+Option+J in Chrome and Edge.
-- Anything the reader is told to copy, paste or open, an address included, goes in a
-  fenced code block of its own, tagged `text` when it is no command, so the copy button takes
-  it in one click: "Open this address:" and the block under it, never the address inline in
-  the sentence. An address the reader only reads, such as the page that should now open, stays
-  inline.
+- Anything the reader is told to copy, paste or open, an address included, goes in a fenced code
+  block of its own, tagged `text` when it is no command, so the copy button takes it in one click:
+  "Open this address:" and the block under it, never the address inline in the sentence. An address
+  the reader only reads, such as the page that should now open, stays inline. A file in the
+  session's folders that the reader opens, such as a PR's review page, is the exception: it gets a
+  Markdown link to its path, which the app opens on a click.
 - A project's CLAUDE.md holds what Claude runs, such as build, test, verify, install, launch and
   logs, and the rules the code follows. Setup a person does once by hand goes in the README,
   and CLAUDE.md points there.

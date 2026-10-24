@@ -1,5 +1,9 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{TITLE}}</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -34,7 +38,10 @@
   --pass: #5cc38e; --fail: #f2836f; --warn: #e3a64a; color-scheme: dark;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
+img { max-width: 100%; }
 body {
+  margin: 0;
   background: var(--bg); color: var(--ink); font: 15px/1.55 var(--sans);
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
@@ -139,7 +146,8 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
   .result-detail { grid-column: 2; }
 }
 </style>
-
+</head>
+<body>
 <div class="wrap">
   <header class="top">
     <div class="ref"><a href="{{PR_URL}}" target="_blank" rel="noopener">{{PR_REF}}</a><span>{{BRANCH}}</span><span>head {{HEAD}}</span></div>
@@ -185,8 +193,6 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
   const keys = document.getElementById("keys");
   const toastEl = document.getElementById("toast");
   let focus = 0;
-  let progress = null;
-  const writes = new Map();
 
   function local(name, value) {
     try {
@@ -232,15 +238,7 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     const on = !done.has(id);
     if (on) done.add(id); else done.delete(id);
     paint();
-    if (!progress) {
-      local("done", [...done]);
-      return;
-    }
-    // One write at a time per step, in the order the clicks came.
-    const chain = (writes.get(id) || Promise.resolve())
-      .then(() => progress.doc(id).set({ done: on, at: new Date().toISOString() }))
-      .catch(() => { save.textContent = "Could not save the last change. Reload the page to see what was saved."; });
-    writes.set(id, chain);
+    local("done", [...done]);
   }
 
   function copyFrom(container) {
@@ -326,27 +324,13 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
   paint();
   setFocus(start >= 0 ? start : 0, false);
 
-  if (window.claude && window.claude.use) {
-    window.claude.use("db").then((db) => {
-      if (!db) {
-        save.textContent = "Progress is kept in this browser only.";
-        return;
-      }
-      progress = db.collection("progress");
-      progress.onSnapshot(
-        (snap) => {
-          done.clear();
-          for (const doc of snap.docs) if (doc.data().done) done.add(doc.id);
-          paint();
-        },
-        () => {
-          progress = null;
-          save.textContent = "Progress is kept in this browser only.";
-        }
-      );
-    });
-  } else {
-    save.textContent = "Progress is kept in this browser only.";
+  try {
+    localStorage.setItem(KEY + ":probe", "1");
+    localStorage.removeItem(KEY + ":probe");
+  } catch (e) {
+    save.textContent = "This view cannot keep progress; ticks last until the page closes.";
   }
 })();
 </script>
+</body>
+</html>
