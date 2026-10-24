@@ -47,6 +47,8 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   other people's calendar events. It can still see when they are free.
 - [`stop-running-stack.sh`](hooks/stop-running-stack.sh): makes Claude stop the Docker containers
   it started before it finishes, so nothing keeps running and eating battery.
+- [`stop-unreachable-claim.sh`](hooks/stop-unreachable-claim.sh): sends Claude back to try the
+  built-in browser, where you are signed in, before it says a page or file is out of reach.
 - [`stack-held-by-peer.sh`](hooks/stack-held-by-peer.sh): stops one Claude window from stopping
   Docker containers that another window is using.
 

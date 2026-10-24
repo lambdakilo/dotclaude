@@ -460,6 +460,10 @@ apply to one repository belong in that repository's project memory.
   and is signed in to. A page, a file or an upload is tried there before a reply calls it out of
   reach, and when the pane shows a sign-in page the reply asks the user to sign in there. A deny
   rule in `settings.json` blocks Claude in Chrome, which the user does not want.
+- A `Stop` hook, `~/.claude/hooks/stop-unreachable-claim.sh`, sends a turn back once when its
+  closing message says in the first person that something could not be opened, read, reached or
+  uploaded, and no browser pane tool ran since the prompt. Its phrase list is a heuristic that backs
+  the rule above.
 - The window layout of the desktop app is the user's. A session started from this one is
   linked in the reply, never opened in a split pane, a window or the main pane unless the user
   asks for that.

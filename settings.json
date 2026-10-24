@@ -263,6 +263,11 @@
           },
           {
             "type": "command",
+            "command": "\"$HOME/.claude/hooks/stop-unreachable-claim.sh\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
             "command": "\"$HOME/.claude/hooks/usage-log.sh\"",
             "timeout": 60,
             "async": true

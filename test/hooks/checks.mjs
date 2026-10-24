@@ -475,6 +475,43 @@ const suites = [
     ]
   }],
 
+  ['stop-unreachable-claim.sh', run => {
+    const t = path.join(home, 'unreachable.jsonl')
+    const pane = { type: 'attachment', attachment: { type: 'deferred_tools', names: ['mcp__Claude_Browser__navigate'] } }
+    const claim = "I couldn't open the attached PDF. The connector returns file not found."
+    const stop = (last, active = false) => ({ session_id: 's1', transcript_path: t, stop_hook_active: active, last_assistant_message: last })
+    return [
+      ['sends back a claim made without trying the pane', () => {
+        jsonl(t, [pane, human('read the pdf'), says(claim)])
+        const r = run(stop(claim))
+        return refused(r) && r.err.includes('browser pane')
+      }],
+      ['lets the second stop of a turn through', () => quiet(run(stop(claim, true)))],
+      ['reads the reply from the transcript when the input has none', () => refused(run({ session_id: 's1', transcript_path: t, stop_hook_active: false }))],
+      ['lets a claim through once the pane ran this turn', () => {
+        jsonl(t, [pane, human('read the pdf'), uses('mcp__Claude_Browser__navigate', { url: 'https://example.com' }), says(claim)])
+        return quiet(run(stop(claim)))
+      }],
+      ['does not count a pane call from an earlier turn', () => {
+        jsonl(t, [pane, human('open it'), uses('mcp__Claude_Browser__navigate', { url: 'https://example.com' }), says('Done.'), human('read the pdf'), says(claim)])
+        return refused(run(stop(claim)))
+      }],
+      ['lets a reply through that claims nothing', () => {
+        jsonl(t, [pane, human('read the pdf'), says('Here is what it says.')])
+        return quiet(run(stop('Here is what it says.')))
+      }],
+      ['lets a reply through about what someone else cannot open', () => {
+        const s = "Your colleague probably can't open the links, since the repository is private."
+        jsonl(t, [pane, human('draft it'), says(s)])
+        return quiet(run(stop(s)))
+      }],
+      ['lets a session without the pane through', () => {
+        jsonl(t, [human('read the pdf'), says(claim)])
+        return quiet(run(stop(claim)))
+      }],
+    ]
+  }],
+
   ['usage-log.sh', run => {
     const t = path.join(config, 'projects/-usage/s.jsonl'), out = path.join(config, 'usage-log/2026-10.jsonl')
     const user = { type: 'user', uuid: 'u1', timestamp: '2026-10-20T10:00:00.000Z', message: { content: 'hi' } }
