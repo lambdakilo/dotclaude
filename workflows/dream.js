@@ -782,7 +782,7 @@ const CARRIED = `A file listed with a from time before ${scout.since} was carrie
 
 const OUTPUT = `Return findings in the schema. Each finding is one concrete, separate change with evidence a reader can open. Prefer fewer, well-evidenced findings over many thin ones. A one-off is not a finding unless its cost was high. Use kind "habit" with target "habit" for something the user should do differently, and the other kinds for a change to a file. Put what you read and what you skipped in coverage.`
 
-const TRANSCRIPT_JQ = `jq -r 'select(.isSidechain != true and .isMeta != true) | select(.type == "user" or .type == "assistant") | [.timestamp, .type, (.message.content | if type == "string" then . else (map(select(.type == "text") | .text) | join("\\n")) end)] | select(.[2] != "") | "\\(.[0]) \\(.[1]): \\(.[2][0:3000])"' FILE`
+const TRANSCRIPT_JQ = `jq -r 'select(.sessionId == (input_filename | split("/") | last | rtrimstr(".jsonl")) and .isSidechain != true and .isMeta != true) | select(.type == "user" or .type == "assistant") | [.timestamp, .type, (.message.content | if type == "string" then . else (map(select(.type == "text") | .text) | join("\\n")) end)] | select(.[2] != "") | "\\(.[0]) \\(.[1]): \\(.[2][0:3000])"' FILE`
 
 function transcriptTask(batch, label, source, tier, windowText) {
   return {
@@ -795,7 +795,7 @@ ${batch.map(s => `- ${s.path} (${Math.round(s.bytes / 1024)} KB)${s.from ? `, fr
 
 The files are JSONL and mostly tool output. Do not read them whole. Extract the conversation with jq, for example:
 ${TRANSCRIPT_JQ}
-Drop user lines that are only system reminders, command output or tool results, and in a file listed with a from time the part before it. Open more of a file around a moment that matters.
+Drop user lines that are only system reminders, command output or tool results, and in a file listed with a from time the part before it. Open more of a file around a moment that matters. A record whose sessionId is not the file name was copied from the session this one was forked from, and that session's own file covers it, so the jq above leaves it out and so should any other read of the file.
 
 Look for:
 - the user correcting Claude, repeating an instruction, undoing Claude's work, or showing frustration;
