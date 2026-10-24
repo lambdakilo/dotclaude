@@ -551,6 +551,11 @@ apply to one repository belong in that repository's project memory.
 - A session cannot switch its own permission mode out of auto mode. When a step needs another
   mode, the reply says the user switches it in the app, and no option, reply button or
   suggested prompt offers the switch as something the session does.
+- The permission mode can change between prompts with nothing in the context saying so. The
+  `UserPromptSubmit` hook `~/.claude/hooks/permission-mode-changed.sh` keeps the mode of each
+  session's last prompt and, when a prompt arrives under another mode, adds both to the context. A
+  reply that names the session's mode, or a choice that rests on it, takes the mode from the latest
+  such notice or from `get_session` with `self` in the same turn, never from an earlier turn's call.
 
 ## Public configuration repository
 

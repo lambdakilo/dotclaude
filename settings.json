@@ -118,6 +118,15 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/permission-mode-changed.sh\"",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "SessionStart": [

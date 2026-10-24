@@ -353,6 +353,18 @@ const suites = [
     ]
   }],
 
+  ['permission-mode-changed.sh', run => {
+    const prompt = (session_id, permission_mode) => ({ hook_event_name: 'UserPromptSubmit', session_id, permission_mode, prompt: 'go on' })
+    return [
+      ['stays quiet on the first prompt of a session', () => quiet(run(prompt('pm1', 'bypassPermissions')))],
+      ['stays quiet while the mode stays the same', () => quiet(run(prompt('pm1', 'bypassPermissions')))],
+      ['names both modes when the mode changed', () => context(run(prompt('pm1', 'auto'))).includes('changed from bypassPermissions to auto')],
+      ['calls default Manual, as the app does', () => context(run(prompt('pm1', 'default'))).includes('from auto to default (Manual in the app)')],
+      ['keeps each session apart', () => quiet(run(prompt('pm2', 'auto')))],
+      ['lets input it cannot read through without a word', () => quiet(run('not json'))],
+    ]
+  }],
+
   ['prompt-log.sh', run => {
     const log = prompt => run({ session_id: 'p1', cwd: '/x', prompt })
     const print = (...args) => run('', { args: ['print', ...args], env: { PROMPT_LOG_SESSION: 'p1' } }).out
