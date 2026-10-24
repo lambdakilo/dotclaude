@@ -1,6 +1,6 @@
 ---
 name: dotclaude
-description: How the public mirror of ~/.claude works. Load it before changing ~/.claude/CLAUDE.md, settings.json, a hook, a mirrored skill, a mod or a workflow, before adding a hook, skill, command or agent under ~/.claude, before changing anything in ~/Projects/dotclaude or a directory it mirrors into, and when setting up a new machine. It covers sync.sh with its scan and mirrors, the commit and its identity, and what the repository may contain.
+description: How the public mirror of ~/.claude works. Load it before changing ~/.claude/CLAUDE.md, settings.json, a hook, a mirrored skill, a mod, a workflow or the presence listener, before adding a hook, skill, command or agent under ~/.claude, before changing anything in ~/Projects/dotclaude or a directory it mirrors into, and when setting up a new machine. It covers sync.sh with its scan and mirrors, the commit and its identity, and what the repository may contain.
 ---
 
 # Public configuration repository

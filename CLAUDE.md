@@ -599,9 +599,9 @@ apply to one repository belong in that repository's project memory.
 
 - The parts of `~/.claude` that help other people learn this workflow are mirrored in a public git
   repository checked out at `~/Projects/dotclaude`: this file, `settings.json`, `hooks/`,
-  `workflows/`, `agents/`, the `session-usage` mod and the `pull-requests`, `slack-draft` and
-  `dotclaude` skills. Before changing one of them, adding a hook, skill, command or agent under
-  `~/.claude`, or changing anything in that checkout, load the `dotclaude` skill,
+  `presence/`, `workflows/`, `agents/`, the `session-usage` mod and the `pull-requests`,
+  `slack-draft` and `dotclaude` skills. Before changing one of them, adding a hook, skill, command
+  or agent under `~/.claude`, or changing anything in that checkout, load the `dotclaude` skill,
   `~/.claude/skills/dotclaude/SKILL.md`, and follow it. It holds what `sync.sh` reconciles, scans
   and mirrors, the commit and its identity, what the repository may contain, and the setup on a new
   machine.
