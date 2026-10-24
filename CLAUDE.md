@@ -159,6 +159,11 @@ apply to one repository belong in that repository's project memory.
 - One draft PR per session. Everything a session is asked to change goes to the branch of the
   PR in play, follow-ups to the work under review and unrelated small changes alike, and a
   second PR is opened only when the user says so in that session.
+- A change on that branch to a file every branch of the repository reads, such as the pull request
+  template, `AGENTS.md` or `CLAUDE.md`, the test runner's config or the git hooks, holds nowhere
+  else until the PR merges. The reply that commits it says so and offers, in the next-step box, to
+  move it to a PR of its own off the default branch. Until the merge, a memory note or reply about
+  it names the PR it waits on, never a date it holds since.
 - Leave out meta prompts: anything about Claude Code itself, its memory, this rules file, or how
   PR bodies are laid out in general, even when the same prompt also asks for a small fix to the
   PR. Only prompts about the change under review belong in the PR, and a prompt that adds to or
