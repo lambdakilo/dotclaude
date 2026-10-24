@@ -5,9 +5,21 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Let the CLAUDE.md watcher replace the manual re-read
+## Open the dream reply with weekly points a run left unspent
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.** (asking why the weekly usage stood at 67% near the reset)
+> holdup what the weekly usage is reseting soon but i see only 67
+> percent used
+
+**4.**
+> you can also tell me honestly next time when youre done dreaming that
+> you had nothing else to do before usage could have gone to max
+
+## Let the CLAUDE.md watcher replace the manual re-read
+
+2026-10-24, commit [16dae55](https://github.com/lambdakilo/dotclaude/commit/16dae55afce06277bef33e20793001213c40d5fd), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 

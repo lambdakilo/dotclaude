@@ -1689,7 +1689,7 @@ const walkThrough = steps.length
   : 'There are no steps to apply, so say so.'
 
 return {
-  forTheSession: `${report ? `Read ${report.path} and show all of it in the chat, unshortened, since the user reads the report only there.` : 'The report agent returned nothing: say so and list the open proposals below.'} Then read the usage card with mcp__ccd_session_mgmt__get_usage and show a table of the 5-hour and weekly limits at the start of the run, at its end and now, with this ${MODE} run's weekly target of ${weeklyTarget}%, and say in one line why the run stopped where it did: ${stoppedBy}. ${SPENT} ${WEEKS} ${EVALS} ${walkThrough}`,
+  forTheSession: `${report ? `Read ${report.path} and show all of it in the chat, unshortened, since the user reads the report only there.` : 'The report agent returned nothing: say so and list the open proposals below.'} Then read the usage card with mcp__ccd_session_mgmt__get_usage and show a table of the 5-hour and weekly limits at the start of the run, at its end and now, with this ${MODE} run's weekly target of ${weeklyTarget}%, and say in one line why the run stopped where it did: ${stoppedBy}. When the weekly limit at the end sits below that target, open the reply with it, before the report, in plain words: how many weekly points lapse at the reset and at what local time, and why the run left them, such as that it had no work left or that the 5-hour limit stopped it, and whether a run started once the 5-hour window reopens can still spend them before the reset. ${SPENT} ${WEEKS} ${EVALS} ${walkThrough}`,
   report: report ? report.path : null,
   scripts: SCRIPTS_DIR,
   verification: { weeklyTarget, stoppedBy, start: startUsage ? startUsage.windows : null, end: usage ? usage.windows : null },
