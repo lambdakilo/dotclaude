@@ -143,6 +143,15 @@ downstream names redacted in public and upstream repositories.
   take the standing form above, from the screen, and a step that runs a command carries it in a
   block under it. Open every picture of the PR at full size before checking its step against the
   screen.
+- Before a PR is opened and in every review, check it against what people asked to change on the
+  repository's PRs of the last 30 days, leaving out bots and Copilot's reviews. `gh pr list
+  --state all --search 'updated:>=<date>' --json number,url,reviews` gives the review bodies, and
+  `gh api --paginate 'repos/<owner>/<repo>/pulls/comments?since=<date>'` and the same with
+  `issues/comments` give the inline and conversation comments. A correction counts wherever it
+  applies to what the PR changes, also one made about another page, such as where a back link
+  lands or how a field looks. Before opening, fix each miss on the branch. In a review each miss
+  is a finding that quotes the comment and links it, and the overlay's `results` carry the check,
+  with how many corrections applied and how many of those the PR follows.
 - Each finding carries its severity, high, medium or low. Every finding that is not low gets the
   shortest reproduction that shows it, so the reviewer can send the author back to fix it before
   reviewing anything by hand: from the stack running the PR's branch on its seed data, the fewest
