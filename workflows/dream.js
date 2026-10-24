@@ -68,6 +68,7 @@ Ground rules for this run:
 - Never post, comment, push, send or publish anything anywhere.
 - Never copy a secret, token or password into your output, even when a transcript contains one.
 - Never search the whole disk or home folder, such as find / or find ~, or mdfind without -onlyin: macOS asks the user about every protected folder such a search touches, and the command waits for the answer. Search ~/.claude, ~/Projects and the paths this prompt names.
+- The Claude Code build this session runs on is "$CLAUDE_CODE_EXECPATH", quoted since the path has spaces. A claude on PATH is a separate install that can be another version, so never report its version as the installed one. To check that a setting, hook field or tool exists in this build, run LC_ALL=C grep -ao <name> "$CLAUDE_CODE_EXECPATH".
 - Refer to files with ~ paths.`
 
 const EVIDENCE = {
