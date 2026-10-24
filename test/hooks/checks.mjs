@@ -133,6 +133,7 @@ const suites = [
     const commit = event('PreToolUse', { tool_input: { command: 'git commit -F msg.txt' } })
     const skill = path.join(config, 'skills/pull-requests/SKILL.md')
     const prEdit = event('PreToolUse', { session_id: 'md2', tool_input: { command: 'gh pr edit 7 --body-file body.md' } })
+    const installs = path.join(home, 'Projects/dotclaude/.git/sync-installed.log')
     return [
       ['takes a copy at session start and says nothing', () => { write(rules, '- one\n'); return quiet(run(event('SessionStart'))) }],
       ['adds nothing to a prompt while the file is unchanged', () => quiet(run(event('UserPromptSubmit')))],
@@ -179,11 +180,24 @@ const suites = [
         run(fix); write(rules, '- fixed\n'); run({ ...fix, hook_event_name: 'PostToolUse' })
         return quiet(run({ ...commit, session_id: 'md3' }))
       }],
-      ['still blocks when a sync.sh run changed the file', () => {
+      ['still blocks when a sync.sh run that keeps no log changed the file', () => {
         const sync = event('PreToolUse', { session_id: 'md3', tool_name: 'Bash', tool_use_id: 'toolu_4', tool_input: { command: '~/Projects/dotclaude/sync.sh' } })
         run(sync); write(rules, '- pulled\n'); run({ ...sync, hook_event_name: 'PostToolUse' })
         const r = run({ ...commit, session_id: 'md3' })
         return refused(r) && r.err.includes('+- pulled')
+      }],
+      ['takes an edit in a sync.sh call that installed nothing as the session\'s own', () => {
+        write(installs, '')
+        const sync = event('PreToolUse', { session_id: 'md3', tool_name: 'Bash', tool_use_id: 'toolu_8', tool_input: { command: 'bash fix.sh && ./sync.sh' } })
+        run(sync); write(rules, '- own, then synced\n'); run({ ...sync, hook_event_name: 'PostToolUse' })
+        return quiet(run({ ...commit, session_id: 'md3' }))
+      }],
+      ['still blocks when a sync.sh run installed the file from the checkout', () => {
+        const sync = event('PreToolUse', { session_id: 'md3', tool_name: 'Bash', tool_use_id: 'toolu_9', tool_input: { command: '~/Projects/dotclaude/sync.sh' } })
+        run(sync); write(rules, '- from the checkout\n'); fs.appendFileSync(installs, `${Math.floor(Date.now() / 1000)} ${rules}\n`)
+        run({ ...sync, hook_event_name: 'PostToolUse' })
+        const r = run({ ...commit, session_id: 'md3' })
+        return refused(r) && r.err.includes('+- from the checkout')
       }],
       ['still blocks when the Bash call that changed the file took over a minute', () => {
         const slow = event('PreToolUse', { session_id: 'md3', tool_name: 'Bash', tool_use_id: 'toolu_5', tool_input: { command: 'npm test' } })

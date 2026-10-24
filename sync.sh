@@ -22,6 +22,10 @@
 # changed both locally and by the pull stops the run. Literals listed one per
 # line in sync-allow.txt are exempt from the scan.
 #
+# Install log: each file installed into the configuration directory adds a
+# line "<epoch> <path>" to .git/sync-installed.log, so
+# hooks/claude-md-changed.sh can tell an install from a session's own edit.
+#
 # Checks: this script, reflow.sh and every mirrored shell script must parse,
 # every mirrored file needs an entry in README.md, its own or its folder's,
 # and no prose line of CLAUDE.md, README.md or the pull-requests skill may
@@ -51,6 +55,8 @@ set -euo pipefail
 
 source_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
 checkout="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+installed_log="$checkout/.git/sync-installed.log"
+{ : >> "$installed_log"; } 2>/dev/null || installed_log=/dev/null
 
 message_file=""
 commit_paths=(.)
@@ -133,6 +139,7 @@ mirrored=(
 install_file() {
   mkdir -p "$(dirname "$2")"
   cp "$1" "$2"
+  case "$2" in "$source_dir"/*) echo "$(date +%s) $2" >> "$installed_log" ;; esac
 }
 
 same_file() {

@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Add reflow.sh to rewrap the paragraphs an edit touched
+## Count an edit chained with sync.sh as the session's own
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+
+## Add reflow.sh to rewrap the paragraphs an edit touched
+
+2026-10-24, commit [2baa204](https://github.com/lambdakilo/dotclaude/commit/2baa204dd1a0b5459ccbc696b52cb0b4b229a4f1), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 

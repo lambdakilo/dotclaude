@@ -9,9 +9,10 @@
 # the diff on stderr: a commit or pull request command for CLAUDE.md, a pull
 # request command for the skill. A tool call that starts while a file matches
 # its copy and changes it within a minute is the session's own edit and updates
-# the copy, apart from a sync.sh run, which can install a change pulled from
-# elsewhere, and an Edit or Write of the other file. Anything missing lets the
-# prompt or the command through.
+# the copy, apart from an Edit or Write of the other file and a sync.sh run
+# whose log in the checkout's git directory is missing or names the file as
+# installed during the call. Anything else missing lets the prompt or the
+# command through.
 
 set -u
 
@@ -46,6 +47,13 @@ mkdir -p "$dir" 2>/dev/null || exit 0
 
 files=("$config/CLAUDE.md" "$config/skills/pull-requests/SKILL.md")
 suffixes=("" ".pull-requests")
+installs="$HOME/Projects/dotclaude/.git/sync-installed.log"
+
+# Succeeds when sync.sh keeps no log or installed file $1 at or after epoch $2.
+installed_since() {
+  [ -f "$installs" ] || return 0
+  awk -v t="$2" -v f="$1" '$1 >= t && substr($0, index($0, " ") + 1) == f { found = 1 } END { exit 1 - found }' "$installs"
+}
 
 # Prints the marker path of each watched file this tool call may count as its own edit.
 own_markers() {
@@ -53,7 +61,7 @@ own_markers() {
   [ -n "$call" ] || return 0
   for i in 0 1; do
     case "$tool" in
-      Bash) [ "$syncs" = true ] && continue ;;
+      Bash) ;;
       Edit | Write | MultiEdit) [ "$target" = "${files[$i]}" ] || continue ;;
       *) continue ;;
     esac
@@ -78,6 +86,7 @@ case "$event" in
       rm -f "$marker"
       case "$started" in "" | *[^0-9]*) continue ;; esac
       [ $(($(date +%s) - started)) -le 60 ] || continue
+      [ "$syncs" = true ] && installed_since "${files[$i]}" "$started" && continue
       snapshot="$dir/$key${suffixes[$i]}"
       cmp -s "${files[$i]}" "$snapshot" || cp "${files[$i]}" "$snapshot" 2>/dev/null
     done < <(own_markers)
@@ -120,5 +129,5 @@ if [ "$event" = UserPromptSubmit ]; then
   jq -n --arg context "$notes" '{hookSpecificOutput: {hookEventName: "UserPromptSubmit", additionalContext: $context}}'
   exit 0
 fi
-printf '%s\n%s\n' "Blocked once. Bring the message or body in line with the diff below, then run the command again." "$notes" >&2
+printf '%s\n%s\n' "Blocked once, so no part of the command ran. Bring the message or body in line with the diff below, then run the whole command again." "$notes" >&2
 exit 2
