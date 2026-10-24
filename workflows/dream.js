@@ -777,7 +777,8 @@ if (!WEEKEND && batches.length > MAX_BATCHES) {
 }
 
 const BACKLOG_NOTE = `Open proposals from earlier runs carry over in a backlog, so a finding that only repeats one of these is no news: ${backlog.open.map(i => i.title).join('; ') || 'none'}.`
-const WINDOW = `This run covers ${scout.since} to ${scout.now}. A finding needs evidence from inside that window. To show that a pattern recurs, you may also search the transcripts and files of the ${LOOKBACK_DAYS} days before it, from ${scout.lookbackFrom}; the main transcripts are the files ${FIND_MAIN} -newermt ${scout.lookbackFrom} prints. ${FIND_ONCE} ${BACKLOG_NOTE}`
+const PROMPT_LOG = `Every prompt the user typed since 2026-10-15 is one line of ~/.claude/prompt-log/<session id>.jsonl, with timestamp, session_id, cwd and prompt, so check whether a request recurs with grep over those files, and open a transcript only for what they cannot show, such as Claude's side of it. A line whose prompt is only a system reminder, a task notification or a peer session's message holds none of the user's words.`
+const WINDOW = `This run covers ${scout.since} to ${scout.now}. A finding needs evidence from inside that window. To show that a pattern recurs, you may also search the transcripts and files of the ${LOOKBACK_DAYS} days before it, from ${scout.lookbackFrom}; the main transcripts are the files ${FIND_MAIN} -newermt ${scout.lookbackFrom} prints. ${FIND_ONCE} ${PROMPT_LOG} ${BACKLOG_NOTE}`
 const CARRIED = `A file listed with a from time before ${scout.since} was carried over from an earlier run that did not get to it: its window starts at its own from time, so evidence from there on counts.`
 
 const OUTPUT = `Return findings in the schema. Each finding is one concrete, separate change with evidence a reader can open. Prefer fewer, well-evidenced findings over many thin ones. A one-off is not a finding unless its cost was high. Use kind "habit" with target "habit" for something the user should do differently, and the other kinds for a change to a file. Put what you read and what you skipped in coverage.`
@@ -795,14 +796,13 @@ ${batch.map(s => `- ${s.path} (${Math.round(s.bytes / 1024)} KB)${s.from ? `, fr
 
 The files are JSONL and mostly tool output. Do not read them whole. Extract the conversation with jq, for example:
 ${TRANSCRIPT_JQ}
-Drop user lines that are only system reminders, command output or tool results, and in a file listed with a from time the part before it. Open more of a file around a moment that matters. A record whose sessionId is not the file name was copied from the session this one was forked from, and that session's own file covers it, so the jq above leaves it out and so should any other read of the file.
+Drop user lines that are only system reminders, command output or tool results, and in a file listed with a from time the part before it. Open more of a file around a moment that matters. A record whose sessionId is not the file name was copied from the session this one was forked from, and that session's own file covers it, so the jq above leaves it out and so should any other read of the file.${source === 'transcripts' ? ' Leave out the "Prompt feedback" sections at the end of the replies: the prompt feedback agent of this run reads every one of them.' : ''}
 
 Look for:
 - the user correcting Claude, repeating an instruction, undoing Claude's work, or showing frustration;
 - a rule in ~/.claude/CLAUDE.md or a project memory that Claude broke, naming the rule;
 - friction: permission refusals, round trips, retries, loops, a question the user had to answer twice;
 - a sequence the user asked for by hand more than once that a skill, hook, workflow or setting could do;
-- themes that recur in the "Prompt feedback" sections Claude wrote at the end of its replies, which point to habits the user can change;
 - an approach the user confirmed worked well and that no rule records yet.
 ${windowText}
 ${OUTPUT}
@@ -845,6 +845,22 @@ const tasks = []
 
 if (only.includes('transcripts')) {
   batches.forEach((batch, i) => tasks.push(transcriptTask(batch, `transcripts ${i + 1}/${batches.length}`, 'transcripts', 1, batch.some(s => Date.parse(s.from) < Date.parse(scout.since)) ? `${WINDOW} ${CARRIED}` : WINDOW)))
+  // The Prompt feedback sections and the prompts span every transcript, so one agent reads them instead of each reader of a batch.
+  if (batches.length) tasks.push({
+    source: 'transcripts',
+    tier: 1,
+    label: 'prompt feedback',
+    sessions: [],
+    prompt: `Find what the user could change in how they prompt, from the "Prompt feedback" sections Claude wrote at the end of its replies and from the prompts themselves.
+1. Collect every Prompt feedback section since ${scout.lookbackFrom} in one pass, into one file in your scratch folder:
+${FIND_MAIN} -newermt ${scout.lookbackFrom} -exec jq -r 'select(.sessionId == (input_filename | split("/") | last | rtrimstr(".jsonl")) and .isSidechain != true and .type == "assistant" and (.timestamp // "") > "${scout.lookbackFrom}") | (.message.content | if type == "string" then . else (map(select(.type == "text") | .text) | join("\\n")) end) as $t | select($t | test("Prompt feedback")) | "\\(.timestamp) \\(input_filename)\\n\\($t | sub("(?s)^.*?Prompt feedback"; "Prompt feedback") | .[0:1500])\\n"' {} +
+${FIND_ONCE}
+2. ${PROMPT_LOG} Read the prompts of the same span from there.
+3. Group the sections into themes. A theme that recurs in two or more sessions, one of them inside the window from ${scout.since} to ${scout.now}, is a finding of kind "habit", with the prompts that show it and a rewrite as the sections write one. A theme the week before shows and the window no longer does is a habit the user has already changed, and no finding. A theme that comes from Claude misreading a rule rather than from the prompt is a finding on that rule instead.
+${BACKLOG_NOTE}
+${OUTPUT}
+${GROUND}`,
+  })
 }
 
 if (only.includes('config')) {

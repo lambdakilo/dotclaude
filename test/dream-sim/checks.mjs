@@ -92,7 +92,7 @@ const scenarios = [
     ['reads the default branch, never the work tree', st => /never from its work tree/.test(st.prompts['upstream o/tool'] || '')],
     ['the run records the source', st => /"upstreams"/.test(st.historyLine || '')],
   ]],
-  ['symlinked project folders', { ...fri, week: 30, sessions: 12, dupes: true }, [
+  ['symlinked project folders', { ...fri, five: 5, week: 30, sessions: 12, dupes: true }, [
     ['reads each transcript, carried or listed twice, once', st => {
       const read = Object.entries(st.prompts).filter(([k]) => /^(transcripts|deep|subagents) /.test(k)).flatMap(([, p]) => [...p.matchAll(/^- \S+\/(\S+\.jsonl) \(/gm)].map(m => m[1]))
       return read.filter(n => n.startsWith('s')).length === 12 && read.some(n => n.startsWith('o')) && read.some(n => n.startsWith('a')) && new Set(read).size === read.length

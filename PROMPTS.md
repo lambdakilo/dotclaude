@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Read a forked transcript only from its fork point
+## Have one dream agent read the window's Prompt feedback
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+
+## Read a forked transcript only from its fork point
+
+2026-10-24, commit [cf41759](https://github.com/lambdakilo/dotclaude/commit/cf41759313c5e7e544426f47c9005d2d429cc992), model claude-opus-5-5, effort xhigh.
 
 **4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
