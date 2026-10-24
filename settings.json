@@ -40,7 +40,14 @@
       "mcp__figma__weave_get_tool_inputs",
       "mcp__figma__weave_get_tool_run_output",
       "Edit(~/.claude/projects/*-Claude-scratch-workspaces-*/memory/**)",
-      "mcp__claude-in-chrome"
+      "mcp__claude-in-chrome",
+      "ScheduleWakeup",
+      "SearchPlugins",
+      "SuggestPluginInstall",
+      "SuggestSkills",
+      "ShareOnboardingGuide",
+      "mcp__visualize",
+      "mcp__ccd_session__read_widget_context"
     ],
     "allow": [
       "Bash(gh repo create:*)",

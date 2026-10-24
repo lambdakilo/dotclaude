@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep the history example in dream's review text generic
+## Deny seven tools no session has ever called
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> dream review
+
+(p7: deny seven never-called tools in settings.json, add it to
+dotclaude?)
+> Add it (Recommended)
+
+## Keep the history example in dream's review text generic
+
+2026-10-24, commit [4fccd4e](https://github.com/lambdakilo/dotclaude/commit/4fccd4ec21e2e9d39d066002f9ad6faaeef691c0), model claude-opus-5-5, effort xhigh.
 
 **4.** Quoted under [01f7bfc](https://github.com/lambdakilo/dotclaude/commit/01f7bfc02b23fae2ff12f3e609ad6749798f54c2).
 
