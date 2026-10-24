@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Deny seven tools no session has ever called
+## Have sync.sh parse scripts, require README entries and cap widths
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> dream review
+
+(p9: have sync.sh parse every mirrored script, require README entries
+and cap prose at 100 columns, add it?)
+> Add it (Recommended)
+
+## Deny seven tools no session has ever called
+
+2026-10-24, commit [d72016d](https://github.com/lambdakilo/dotclaude/commit/d72016dcd7626a059c3fc7b270d149a271043588), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review

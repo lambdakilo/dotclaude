@@ -464,8 +464,11 @@ apply to one repository belong in that repository's project memory.
   states what was true when they were written.
 - Browser work runs in the built-in browser pane, which the user also calls the built-in chrome
   and is signed in to. A page, a file or an upload is tried there before a reply calls it out of
-  reach, and when the pane shows a sign-in page the reply asks the user to sign in there. A deny
-  rule in `settings.json` blocks Claude in Chrome, which the user does not want.
+  reach. When a step needs the user in the pane, such as a sign-in, personal data to type or a
+  click the session may not make, the session opens the page that step happens on and brings the
+  pane into view with `show_pane` and `preview` in the same turn as the ask, so the user finds it
+  open beside the reply. A deny rule in `settings.json` blocks Claude in Chrome, which the user
+  does not want.
 - A `Stop` hook, `~/.claude/hooks/stop-unreachable-claim.sh`, sends a turn back once when its
   closing message says in the first person that something could not be opened, read, reached or
   uploaded, and no browser pane tool ran since the prompt. Its phrase list is a heuristic that backs

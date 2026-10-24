@@ -17,9 +17,17 @@
 #                      this repository but not the commit just pushed
 #
 # Reconciling: a file the pull changed is installed locally, a file changed
-# locally is copied into the checkout, and a file changed on both sides stops
-# the run. Literals listed one per line in sync-allow.txt are exempt from the
-# scan.
+# only in the checkout, its local copy still as committed, is installed
+# locally too, any other local change is copied into the checkout, and a file
+# changed both locally and by the pull stops the run. Literals listed one per
+# line in sync-allow.txt are exempt from the scan.
+#
+# Checks: this script and every mirrored shell script must parse, every
+# mirrored file needs an entry in README.md, its own or its folder's, and no
+# prose line of CLAUDE.md, README.md or the pull-requests skill may pass 100
+# columns, leaving out front matter, code blocks, tables and the README's
+# evals block. A failed check, like a scan hit, stops the mirror copy and the
+# commit.
 #
 # Key order: a mirrored JSON file changed locally is first put back into the
 # key order the checkout has, when jq is installed, so a tool that writes the
@@ -173,7 +181,14 @@ for path in "${mirrored[@]}"; do
   fi
   if git diff --quiet "$before" HEAD -- "$path"; then
     case "$path" in *.json) keep_key_order "$repo_file" "$local_file" ;; esac
-    same_file "$local_file" "$repo_file" || install_file "$local_file" "$repo_file"
+    if ! same_file "$local_file" "$repo_file"; then
+      if same_as_commit HEAD "$path" "$local_file"; then
+        install_file "$repo_file" "$local_file"
+        echo "sync: $path changed only in the checkout, installed locally"
+      else
+        install_file "$local_file" "$repo_file"
+      fi
+    fi
   elif same_as_commit "$before" "$path" "$local_file"; then
     install_file "$repo_file" "$local_file"
   elif ! same_file "$local_file" "$repo_file"; then
@@ -269,6 +284,37 @@ scan "credential-like string" -E \
   -e '-----BEGIN [A-Z ]*PRIVATE KEY-----'
 scan "credential-like assignment" -i -E \
   -e '(api[_-]?key|secret|token|passw(or)?d)[^A-Za-z0-9]{0,3}[:=][^A-Za-z0-9]{0,3}[A-Za-z0-9/+_.-]{16,}'
+
+for path in sync.sh "${mirrored[@]}"; do
+  case "$path" in *.sh) bash -n "$path" || failed=1 ;; esac
+done
+for path in "${mirrored[@]}"; do
+  entry="$path"
+  until grep -q -F -e "($entry)" -e "($entry/" README.md; do
+    case "$entry" in
+      */*/*) entry="${entry%/*}" ;;
+      *)
+        echo "sync: README.md has no entry for $path" >&2
+        failed=1
+        break
+        ;;
+    esac
+  done
+done
+long="$(LC_ALL=C awk '
+  FNR == 1 { front = ($0 == "---"); code = 0; evals = 0 }
+  front { if (FNR > 1 && $0 == "---") front = 0; next }
+  /^[ \t]*```/ { code = !code; next }
+  /^<!-- evals:start -->/ { evals = 1 }
+  /^<!-- evals:end -->/ { evals = 0; next }
+  code || evals || /^[ \t]*\|/ { next }
+  { s = $0; gsub(/[\200-\277]/, "", s) }
+  length(s) > 100 { print "  " FILENAME ":" FNR }
+' CLAUDE.md README.md skills/pull-requests/SKILL.md)"
+if [ -n "$long" ]; then
+  printf 'sync: line over 100 columns in\n%s\n' "$long" >&2
+  failed=1
+fi
 
 if [ "$failed" -eq 0 ] && [ "${#mirror_dirs[@]}" -gt 0 ]; then
   for dir in "${mirror_dirs[@]}"; do

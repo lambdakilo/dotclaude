@@ -123,7 +123,9 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
 ### Only for this repo
 
 - [`sync.sh`](sync.sh): keeps this copy and my own `~/.claude` the same, and checks that nothing
-  private gets published. `--install` copies everything onto a new computer.
+  private gets published. It also stops on a shell script with a syntax error, a file this list
+  leaves out, or a line in `CLAUDE.md`, the pull request skill or this README wider than 100
+  characters. `--install` copies everything onto a new computer.
 - [`test/dream-sim`](test/dream-sim/): checks how `/dream` spends your usage. Not installed.
 - [`test/hooks`](test/hooks/checks.mjs): feeds every hook the input Claude Code sends it, in a
   throwaway home folder, and checks what it lets through. Not installed.
