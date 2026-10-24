@@ -409,6 +409,10 @@ apply to one repository belong in that repository's project memory.
   given to the user, since the working directory persists from one command to the next.
 - A `PreToolUse` hook, `~/.claude/hooks/cd-fall-through.sh`, refuses a Bash command with such a
   part unless the `cd` goes into a directory that exists already. It backs the rule above.
+- A removal a session runs names each target as a literal path, never through a shell variable, and
+  stands in the Bash command itself, never in a `bash -c` or `zsh -c` string. Claude Code's built-in
+  removal check refuses a target it cannot resolve, such as `"$D"/*.tmp`, and a `-c` script it
+  cannot read, before any part of the command runs, and no allow rule or auto mode lets it through.
 - A command given to the user works when pasted into a new terminal, which starts in `~`. Every
   file it names has its full `~` path, and a command that runs inside a checkout uses the tool's
   directory flag or a subshell, such as `(cd ~/Projects/<repo> && make test)`, also when it is
