@@ -298,15 +298,15 @@ node ~/Projects/dotclaude/test/evals.mjs
 | [Dream simulation](test/dream-sim/checks.mjs) | how `/dream` spends usage and when it stops | 49 of 49 pass |
 | [Usage mod tests](mods/session-usage/hooks/register.test.ts) | the line under the prompt box | 4 of 4 pass |
 
-How often Claude kept rules from [`CLAUDE.md`](CLAUDE.md) from 2026-10-17 to 2026-10-24, in 71 of my own sessions and the commits of the 6 repositories they worked in, counted by [`test/rules/adherence.mjs`](test/rules/adherence.mjs):
+How often Claude kept rules from [`CLAUDE.md`](CLAUDE.md) from 2026-10-17 to 2026-10-24, in 68 of my own sessions and the commits of the 6 repositories they worked in, counted by [`test/rules/adherence.mjs`](test/rules/adherence.mjs):
 
 | Rule | Kept |
 | --- | --- |
-| No long dashes in replies | 99% (291 of 292 replies) |
-| Plain quotes, arrows and dots in replies | 99% (291 of 292 replies) |
-| A Prompt feedback section after each typed prompt | 90% (238 of 262 replies) |
-| Commit message lines within 72 columns | 99% (349 of 350 commits) |
-| No Claude attribution in commits | 100% (350 of 350 commits) |
+| No long dashes in replies | 99% (270 of 271 replies) |
+| Plain quotes, arrows and dots in replies | 99% (270 of 271 replies) |
+| A Prompt feedback section after each typed prompt | 91% (222 of 242 replies) |
+| Commit message lines within 72 columns | 99% (336 of 337 commits) |
+| No Claude attribution in commits | 100% (337 of 337 commits) |
 <!-- evals:end -->
 
 ## Before you install
