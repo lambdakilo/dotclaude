@@ -9,12 +9,15 @@
 #   sync.sh --install  copy every mirrored file from the checkout into the
 #                      configuration directory (first run on a new machine);
 #                      an existing file that differs is kept as <file>.bak
-#   sync.sh --commit <message-file> [<path>...]
-#                      sync, then commit the paths, all by default, with the
-#                      message and push, then do the same in every mirror,
-#                      the message gaining a line that names the commit here,
-#                      then list the open PRs of the gh user whose body links
-#                      this repository but not the commit just pushed
+#   sync.sh --commit <message-file> <path>...
+#                      sync, then commit the paths, . for everything, with the
+#                      message, list what stays uncommitted and push, then
+#                      commit and push the same paths in every mirror, the
+#                      message gaining a line that names the commit here, then
+#                      list the open PRs of the gh user whose body links this
+#                      repository but not the commit just pushed. Named paths
+#                      of which none but PROMPTS.md has a change stop the run
+#                      before the commit.
 #
 # Reconciling: a file the pull changed is installed locally, a file changed
 # only in the checkout, its local copy still as committed, is installed
@@ -59,7 +62,7 @@ installed_log="$checkout/.git/sync-installed.log"
 { : >> "$installed_log"; } 2>/dev/null || installed_log=/dev/null
 
 message_file=""
-commit_paths=(.)
+commit_paths=()
 if [ "${1:-}" = "--commit" ]; then
   if [ ! -f "${2:-}" ]; then
     echo "sync: --commit needs a message file" >&2
@@ -67,9 +70,11 @@ if [ "${1:-}" = "--commit" ]; then
   fi
   message_file="$(cd "$(dirname "$2")" && pwd)/$(basename "$2")"
   shift 2
-  if [ "$#" -gt 0 ]; then
-    commit_paths=("$@")
+  if [ "$#" -eq 0 ]; then
+    echo "sync: --commit needs the paths this session changed after the message file" >&2
+    exit 2
   fi
+  commit_paths=("$@")
 fi
 
 deny_args=()
@@ -211,6 +216,12 @@ for path in "${mirrored[@]}"; do
     failed=1
   fi
 done
+
+if [ -n "$message_file" ] && [ "${commit_paths[*]}" != . ] &&
+  [ -z "$(git status --porcelain -- "${commit_paths[@]}" ':(exclude)PROMPTS.md')" ]; then
+  echo "sync: none of the named paths changed, nothing committed" >&2
+  exit 1
+fi
 
 if [ -f "$checkout/PROMPTS.md" ]; then
   if [ -n "$message_file" ]; then
@@ -367,6 +378,8 @@ elif [ -n "$message_file" ]; then
   else
     git commit -q -F "$message_file" -- "${commit_paths[@]}"
   fi
+  left="$(git status --short)"
+  [ -z "$left" ] || printf 'sync: left uncommitted\n%s\n' "$left"
   git push -q
   hash="$(git rev-parse --short HEAD)"
   echo "sync: $hash pushed"

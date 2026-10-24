@@ -39,10 +39,16 @@ mirrored file states what holds now.
   `CLAUDE.md` counts the change as the session's own edit. It fills greedily each paragraph that
   differs from the checkout's last commit, in `~/.claude` and in the checkout, from the line before
   the first change, and leaves the other paragraphs as they are.
-- `sync.sh --commit <file>` commits and pushes the checkout to the default branch, then every mirror
-  below, with the paths to commit after the file when the checkout holds other changes too. No PR:
-  the checkout has one owner. A mirrored JSON file changed locally goes back into the checkout's key
-  order first, so `claude plugin` and the `/plugin` dialog may change `settings.json`.
+- `sync.sh --commit <file> <path>...` commits the named paths and pushes them to the default branch,
+  then every mirror below. It refuses a run that names no path, or no path with a change. No PR: the
+  repository has one owner, though several sessions work in the checkout at once, and every
+  `sync.sh` run copies their edits into it too. So name only the files this session's own edits
+  touched, never what a `git status` taken around them shows, and right before the commit read
+  `git -C ~/Projects/dotclaude diff -- <path>...`: a hunk this session did not write is another
+  session's, so leave its file out and tell that session with SendMessage, or wait for its commit
+  when the file holds a change of this session's too. A mirrored JSON file changed locally goes back
+  into the checkout's key order first, so `claude plugin` and the `/plugin` dialog may change
+  `settings.json`.
 - `sync.sh` also copies every published file into each directory listed in `sync-mirrors.txt`, an
   optional file beside it that git ignores, removes there what the checkout has deleted, and prints
   each directory it copied into. With `--commit` it then commits and pushes in each of them with the

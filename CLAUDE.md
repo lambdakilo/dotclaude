@@ -609,8 +609,8 @@ apply to one repository belong in that repository's project memory.
   or push, a correction or wish meant to hold beyond the task as the last bullet of Memory hygiene
   describes, or a script from this session that the user says they ran. Then, as whenever a session
   changes another mirrored file, run `sync.sh` and read the diff, write the commit message to a file
-  in the scratchpad, and run `sync.sh --commit <file>` in the same turn, with the paths to commit
-  after the file when the checkout holds other changes too.
+  in the scratchpad, and run `sync.sh --commit <file> <path>...` in the same turn, naming only the
+  files this session changed.
 - Every push to the checkout is followed in the same turn by a pass over the user's open PRs,
   listed with `gh search prs --author @me --state open`. Each PR whose body carries a block the
   `pull-requests` skill puts there, the configuration link or the prompts block, gets the link
