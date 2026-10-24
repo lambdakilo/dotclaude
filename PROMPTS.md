@@ -5,9 +5,24 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Name the Claude Code binary in dream's ground rules
+## Record the list of changes under the PR summary sentence
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**7.**
+> whats the current "prompt" that writes my pr descriptions currently.
+> compare those
+
+**8.**
+> lets borrow things from [a colleague's] skill to my dotclaude [and an
+> ask about a pull request left out]
+
+(where the list of changes goes)
+> As drafted (Recommended)
+
+## Name the Claude Code binary in dream's ground rules
+
+2026-10-24, commit [0b234e8](https://github.com/lambdakilo/dotclaude/commit/0b234e8a0dc1a5dac0189c32aa3f4f1912e350d3), model claude-opus-5-5, effort xhigh.
 
 **4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
