@@ -1,6 +1,6 @@
 ---
 name: pull-requests
-description: Procedures for a pull request. Load it before opening a PR or editing its body, before writing test steps for a change under review in a PR body or in chat, before reviewing a PR, and before capturing or uploading screenshots or recordings for one. It covers the body layout, the prompts block, the template answers, How to verify, manual steps, the review reply and the pictures.
+description: Procedures for a pull request. Load it before opening a PR or editing its body, before writing test steps for a change under review in a PR body or in chat, before reviewing a PR, and before capturing or uploading screenshots or recordings for one. It covers the body layout, the prompts block, the template answers, How to verify, manual steps, the review page and its reply, and the pictures.
 ---
 
 # Pull requests
@@ -11,20 +11,19 @@ redacted in public and upstream repositories.
 
 ## The body
 
-- Claude's part of the body is, in this order: the one sentence on what has changed, a list of
-  the changes, the line that closes issues (`Closes #n`, with any related documents), the two
-  blocks below, then the rest of the repository's pull request template filled in as described
-  further down. Nothing else: no free-form summary or test plan outside that. The sentence, the
-  list and the closing line stand on their own, without a heading, even where the template gives
-  them sections of their own. Without a template the body ends after the blocks and the user
-  writes the description.
+- Claude's part of the body is, in this order: the one sentence on what has changed, a list of the
+  changes, the line that closes issues (`Closes #n`, with any related documents), the two blocks
+  below, then the rest of the repository's pull request template filled in as described further
+  down. Nothing else: no free-form summary or test plan outside that. The sentence, the list and the
+  closing line stand on their own, without a heading, even where the template gives them sections of
+  their own. Without a template the body ends after the blocks and the user writes the description.
 - The list of changes under the sentence is built from the PR's final diff against its base, from
   the merge base to the head; the commits only help to understand intent. One short bullet per
   meaningful change, or per group of related ones, saying what it does and, when that helps the
-  reviewer, why. No file names, paths or line numbers, and no detail the diff already shows
-  unless it explains a behaviour or a decision. Tests, translations and documentation stay out
-  unless they are a purpose of the PR. Uncommitted changes are left out. The list is rebuilt with
-  the sentence whenever a push changes what the PR does.
+  reviewer, why. No file names, paths or line numbers, and no detail the diff already shows unless
+  it explains a behaviour or a decision. Tests, translations and documentation stay out unless they
+  are a purpose of the PR. Uncommitted changes are left out. The list is rebuilt with the sentence
+  whenever a push changes what the PR does.
 - The two blocks come straight after the closing line and above the rest of the template. They
   are a TL;DR for the reviewer.
 - First block: a fenced code block holding the URL of the public configuration repository
@@ -72,10 +71,10 @@ redacted in public and upstream repositories.
   a file, write it back with `gh pr edit <n> --body-file`, and re-read to confirm. Outside the
   blocks, change only a template answer that a later commit made wrong or left incomplete, and
   keep every edit the user has made there.
-- After a commit that answers review threads, read How to verify against each thread. A fix
-  that changes what a reviewer sees or does gets a manual step, or a sentence in the step that
-  already shows that screen, and the summary sentence and the list are rewritten when they no
-  longer cover the PR. A fix nothing on screen shows needs no step.
+- After a commit that answers review threads, read How to verify against each thread. A fix that
+  changes what a reviewer sees or does gets a manual step, or a sentence in the step that already
+  shows that screen, and the summary sentence and the list are rewritten when they no longer cover
+  the PR. A fix nothing on screen shows needs no step.
 
 ## How to verify
 
@@ -119,37 +118,48 @@ redacted in public and upstream repositories.
 ## Reviewing a PR
 
 - A PR review switches the checkout to the PR's branch and leaves it there, runs the two command
-  steps above itself, and opens the reply with the results of the verify command and the end to
-  end run, followed by the findings. "Here" or "only" in a review prompt limits where the reply
-  goes, never what runs. Then comes one numbered list the reader follows from a cold start: the
-  two command steps, each with its block under it, then the PR's own manual steps in the
-  standing form, taken from the screen and no wider than the PR's steps plus the changes those
-  steps skip, never a test script of the reviewer's own. A manual step that runs a command
-  carries that command in a block under it, never a description of it. Where the PR's step has
-  a screenshot or video, the matching step names it at its start, "the PR's screenshot under
-  step 3 shows this dialog", and the comparison comes before the click that closes what the
-  picture shows. Open every such picture at full size before writing its step, and take the
-  step's typed and picked values from it.
-- Each finding carries its severity, high, medium or low. Every finding that is not low gets
-  the shortest reproduction that shows it, so the reviewer can send the author back to fix it
-  before reviewing anything by hand: from the stack running the PR's branch on its seed data,
-  the fewest numbered steps that bring the bug out, then what happens, what should happen
-  instead and, when the review found it, the code that causes it, as GitHub markdown in a
-  fenced block under the finding. The reproduction is run here as written before it goes in.
-- Every bug the review finds has a step in that list where the reader sees it: the step that
-  reaches the state, or one added for it right after the step that does, opens with "Bug
-  (finding n):", gives the clicks that bring the bug out, then what the screen shows and what it
-  should show instead. The finding names that step in turn, so the reader can go from either to
-  the other. The bug's step undoes any change the later steps do not expect. A bug nothing on
-  screen can show, such as a race or a path no click reaches, says so in its finding.
-- The list ends with what the PR's instructions missed, or a line saying nothing was: a label
-  that is not on screen; a click left out; a step the seed data cannot do, or state the reviewer
-  builds by hand through a workflow the specs already cover, which the PR should have seeded; a
-  change without a step; a check that failed or a claim the run disproved; a picture placed
-  after the step it shows. That section ends with the two command steps of the list as GitHub
-  markdown inside a four-backtick fence, numbered as in the reply, so the PR's "How to verify"
-  can take them over unchanged. That block is the one thing in the reply written for the PR's
-  body, as the reproductions are the ones written for its author.
+  steps above itself, and checks the PR's manual steps against the screen. "Here" or "only" in a
+  review prompt limits where the reply goes, never what runs.
+- The steps the reader follows go on a review page, never into the reply, so they cannot drift from
+  what the PR holds. Build it with `review-page/build.py` beside this skill, run as `python3 -I
+  ~/.claude/skills/pull-requests/review-page/build.py <owner/repo#n> <out.html> --review
+  <overlay.json>` with the file in the scratchpad, and publish it as an Artifact with `capabilities:
+  {db: {}}` and the icon `checklist`. The script takes the steps of the PR body's How to verify? as
+  GitHub holds them, embeds the PR's screenshots, downloaded with the `gh` token, and adds from the
+  overlay the review's results, its findings and the steps it adds. On the page `x` ticks a step,
+  `j` and `k` move, `n` goes to the next open step, `c` copies the step's command and `o` opens its
+  screenshot. The ticks live in the artifact's `progress` collection, one document per step id,
+  which `ArtifactData` reads when the reader says how far they got. A later review of the same PR
+  rebuilds the page and publishes it to the same artifact, by its file path in the session or its
+  `url` from another, so the ticks stay.
+- The reply opens with the page's link, then the results of the verify command and the end to end
+  run, then the findings, and gives no step list of its own.
+- Where the PR's steps fall short, the overlay's `added_steps` put the fix on the page, marked as
+  added by the review: the two command steps when the PR lacks them (an empty `after` puts a step
+  before the PR's first), a step for a change the PR's steps skip, and the bug steps below. They
+  take the standing form above, from the screen, and a step that runs a command carries it in a
+  block under it. Open every picture of the PR at full size before checking its step against the
+  screen.
+- Each finding carries its severity, high, medium or low. Every finding that is not low gets the
+  shortest reproduction that shows it, so the reviewer can send the author back to fix it before
+  reviewing anything by hand: from the stack running the PR's branch on its seed data, the fewest
+  numbered steps that bring the bug out, then what happens, what should happen instead and, when the
+  review found it, the code that causes it, as GitHub markdown in a fenced block under the finding,
+  in the reply and in the overlay. The reproduction is run here as written before it goes in.
+- Every bug the review finds has a step on the page where the reader sees it: an added step right
+  after the step that reaches the state, opening with "Bug (finding n):", that gives the clicks that
+  bring the bug out, then what the screen shows and what it should show instead. The finding's
+  `step` names it, so the reader can go from either to the other. The bug's step undoes any change
+  the later steps do not expect. A bug nothing on screen can show, such as a race or a path no click
+  reaches, says so in its finding.
+- The overlay's `missed` says what the PR's instructions missed, or that nothing was: a label that
+  is not on screen; a click left out; a step the seed data cannot do, or state the reviewer builds
+  by hand through a workflow the specs already cover, which the PR should have seeded; a change
+  without a step; a check that failed or a claim the run disproved; a picture placed after the step
+  it shows. When the PR's command steps are missing or wrong, the reply ends with the two command
+  steps as GitHub markdown inside a four-backtick fence, so the PR's "How to verify" can take them
+  over unchanged. That block is the one thing in the reply written for the PR's body, as the
+  reproductions are the ones written for its author.
 
 ## Screenshots and recordings
 

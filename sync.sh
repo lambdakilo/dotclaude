@@ -119,6 +119,8 @@ mirrored=(
   mods/session-usage/usage.sh
   skills/pull-requests/SKILL.md
   skills/pull-requests/pane-upload.sh
+  skills/pull-requests/review-page/build.py
+  skills/pull-requests/review-page/template.html
   skills/slack-draft/SKILL.md
   skills/slack-draft/copy-rich.sh
   workflows/dream.js

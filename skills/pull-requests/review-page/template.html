@@ -1,0 +1,352 @@
+<title>{{TITLE}}</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* One column of step cards under a sticky progress header; the focused card carries the ring. */
+:root {
+  --bg: #f4f6f4;
+  --surface: #ffffff;
+  --ink: #1b2420;
+  --muted: #5b6862;
+  --line: #dce3df;
+  --accent: #2c6e5c;
+  --accent-ink: #ffffff;
+  --accent-soft: #e2efe9;
+  --code-bg: #eef2ef;
+  --pass: #1f7a4d;
+  --fail: #b42318;
+  --warn: #a15c07;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111614; --surface: #182019; --ink: #e3eae6; --muted: #98a59f; --line: #29332e;
+    --accent: #63c2a2; --accent-ink: #0b1411; --accent-soft: #1d2e27; --code-bg: #1f2823;
+    --pass: #5cc38e; --fail: #f2836f; --warn: #e3a64a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111614; --surface: #182019; --ink: #e3eae6; --muted: #98a59f; --line: #29332e;
+  --accent: #63c2a2; --accent-ink: #0b1411; --accent-soft: #1d2e27; --code-bg: #1f2823;
+  --pass: #5cc38e; --fail: #f2836f; --warn: #e3a64a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font: 15px/1.55 var(--sans);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 64px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+a { color: var(--accent); }
+code { font-family: var(--mono); font-size: 0.88em; background: var(--code-bg); padding: 0.08em 0.35em; border-radius: 4px; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  padding-block: 16px 12px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px;
+}
+.ref { font: 500 12px/1.4 var(--mono); color: var(--muted); display: flex; gap: 4px 12px; flex-wrap: wrap; }
+.ref a { color: inherit; }
+h1 { font-size: 1.3rem; line-height: 1.3; margin: 0; font-weight: 600; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.progress { display: flex; align-items: center; gap: 12px; }
+.track { flex: 1; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.fill { height: 100%; width: 0; background: var(--accent); transition: width 0.2s ease; }
+.count { font: 500 13px var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.keys-btn { border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 2px 8px; font: 500 12px var(--mono); cursor: pointer; }
+.save { font-size: 12px; color: var(--muted); min-height: 1em; }
+
+h2 { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+h3.sub { font-size: 0.95rem; margin: 14px 0 6px; }
+.note { color: var(--muted); margin-bottom: 12px; }
+.note p { margin: 0 0 8px; }
+
+.review { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+.results { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.result { display: grid; grid-template-columns: auto minmax(0, max-content) minmax(0, 1fr); gap: 10px; align-items: baseline; }
+.pill { font: 600 11px/1 var(--mono); padding: 4px 7px; border-radius: 999px; border: 1px solid currentColor; text-transform: uppercase; letter-spacing: 0.04em; }
+.result.pass .pill { color: var(--pass); }
+.result.fail .pill { color: var(--fail); }
+.result.skip .pill { color: var(--muted); }
+.result-name { font-weight: 500; }
+.result-detail { color: var(--muted); min-width: 0; }
+.findings { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.finding { border-left: 3px solid var(--muted); padding-left: 12px; }
+.finding.high { border-color: var(--fail); }
+.finding.medium { border-color: var(--warn); }
+.finding-head { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.sev { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.finding.high .sev { color: var(--fail); }
+.finding.medium .sev { color: var(--warn); }
+.finding-title { font-weight: 600; }
+.to-step { font-size: 13px; }
+.quiet { color: var(--muted); margin: 10px 0 0; }
+
+.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.step {
+  display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; align-items: start;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px;
+  scroll-margin-top: 170px; outline: none;
+}
+.step.added { border-style: dashed; border-color: var(--warn); }
+.step.focused { box-shadow: 0 0 0 2px var(--accent); border-color: transparent; }
+.check {
+  width: 28px; height: 28px; border-radius: 7px; border: 2px solid var(--line); background: var(--surface);
+  cursor: pointer; display: grid; place-items: center; margin-top: 2px; padding: 0;
+}
+.check::after { content: ""; width: 12px; height: 7px; border: solid var(--accent-ink); border-width: 0 0 2.5px 2.5px; transform: rotate(-45deg) translate(1px, -1px); opacity: 0; }
+.step.done .check { background: var(--accent); border-color: var(--accent); }
+.step.done .check::after { opacity: 1; }
+.step-label { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.step.added .step-label { color: var(--warn); }
+.step-title { font-weight: 600; margin: 2px 0 6px; }
+.step.done .step-title { color: var(--muted); }
+.step.done .step-body { opacity: 0.62; }
+.step-body { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.step-body p { margin: 0; max-width: 68ch; }
+.step-body ul { margin: 0; padding-left: 20px; }
+.block { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--code-bg); }
+.block-bar { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 4px 10px; font: 500 11px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.copy { border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 2px 9px; font: 500 12px var(--sans); cursor: pointer; text-transform: none; letter-spacing: 0; }
+.block pre { margin: 0; padding: 8px 12px 12px; overflow-x: auto; }
+.block code { background: none; padding: 0; font-size: 13px; white-space: pre; }
+.shot { margin: 0; }
+.zoom { display: block; border: 1px solid var(--line); border-radius: 8px; padding: 0; overflow: hidden; cursor: zoom-in; background: var(--bg); max-width: 100%; }
+.zoom img { display: block; width: 100%; height: auto; }
+
+#viewer { border: none; padding: 0; background: transparent; max-width: 96vw; max-height: 96vh; }
+#viewer::backdrop { background: rgb(0 0 0 / 0.78); }
+#viewer img { display: block; max-width: 96vw; max-height: 92vh; border-radius: 6px; cursor: zoom-out; }
+#keys { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); padding: 18px 22px; max-width: min(380px, 92vw); }
+#keys::backdrop { background: rgb(0 0 0 / 0.35); }
+#keys h2 { margin-bottom: 12px; }
+#keys dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 0; }
+#keys dt { font: 500 13px var(--mono); }
+#keys dd { margin: 0; }
+kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; background: var(--bg); }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 6px 14px; border-radius: 999px; font-size: 13px; opacity: 0; transition: opacity 0.15s; pointer-events: none; }
+.toast.show { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .fill, .toast { transition: none; } }
+@media (max-width: 520px) {
+  .step { grid-template-columns: 28px minmax(0, 1fr); padding: 12px; gap: 10px; }
+  .result { grid-template-columns: auto minmax(0, 1fr); }
+  .result-detail { grid-column: 2; }
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="ref"><a href="{{PR_URL}}" target="_blank" rel="noopener">{{PR_REF}}</a><span>{{BRANCH}}</span><span>head {{HEAD}}</span></div>
+    <h1>{{PR_TITLE}}</h1>
+    <div class="meta"><span>By {{AUTHOR}}</span><span>Steps taken from the PR's How to verify? on {{BUILT}}</span></div>
+    <div class="progress">
+      <div class="track" aria-hidden="true"><div class="fill" id="fill"></div></div>
+      <span class="count" id="count" role="status">0 of 0 done</span>
+      <button type="button" class="keys-btn" id="keys-btn" aria-haspopup="dialog">? Keys</button>
+    </div>
+    <div class="save" id="save"></div>
+  </header>
+
+  {{REVIEW}}
+
+  {{SECTIONS}}
+</div>
+
+<dialog id="viewer" aria-label="Screenshot"><img alt=""></dialog>
+<dialog id="keys" aria-labelledby="keys-h">
+  <h2 id="keys-h">Keyboard</h2>
+  <dl>
+    <dt><kbd>j</kbd> <kbd>k</kbd></dt><dd>Next or previous step</dd>
+    <dt><kbd>x</kbd></dt><dd>Mark the step done, or not done</dd>
+    <dt><kbd>n</kbd></dt><dd>Go to the next step not done</dd>
+    <dt><kbd>c</kbd></dt><dd>Copy the step's first command or address</dd>
+    <dt><kbd>o</kbd></dt><dd>Open the step's screenshot</dd>
+    <dt><kbd>?</kbd></dt><dd>Show or hide this list</dd>
+    <dt><kbd>Esc</kbd></dt><dd>Close the screenshot or this list</dd>
+  </dl>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  const KEY = "{{STORAGE_KEY}}";
+  const steps = [...document.querySelectorAll(".step")];
+  const done = new Set();
+  const fill = document.getElementById("fill");
+  const count = document.getElementById("count");
+  const save = document.getElementById("save");
+  const viewer = document.getElementById("viewer");
+  const keys = document.getElementById("keys");
+  const toastEl = document.getElementById("toast");
+  let focus = 0;
+  let progress = null;
+  const writes = new Map();
+
+  function local(name, value) {
+    try {
+      if (value === undefined) return JSON.parse(localStorage.getItem(KEY + ":" + name));
+      localStorage.setItem(KEY + ":" + name, JSON.stringify(value));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function toast(text) {
+    toastEl.textContent = text;
+    toastEl.classList.add("show");
+    clearTimeout(toast.timer);
+    toast.timer = setTimeout(() => toastEl.classList.remove("show"), 1400);
+  }
+
+  function paint() {
+    let n = 0;
+    for (const el of steps) {
+      const on = done.has(el.dataset.id);
+      if (on) n++;
+      el.classList.toggle("done", on);
+      el.querySelector(".check").setAttribute("aria-checked", on ? "true" : "false");
+    }
+    count.textContent = n + " of " + steps.length + " done";
+    fill.style.width = (steps.length ? (n / steps.length) * 100 : 0) + "%";
+  }
+
+  function setFocus(i, scroll) {
+    if (!steps.length) return;
+    focus = Math.max(0, Math.min(steps.length - 1, i));
+    steps.forEach((el, k) => el.classList.toggle("focused", k === focus));
+    if (scroll) {
+      const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+      steps[focus].scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "auto" });
+    }
+    local("focus", steps[focus].dataset.id);
+  }
+
+  function toggle(i) {
+    const id = steps[i].dataset.id;
+    const on = !done.has(id);
+    if (on) done.add(id); else done.delete(id);
+    paint();
+    if (!progress) {
+      local("done", [...done]);
+      return;
+    }
+    // One write at a time per step, in the order the clicks came.
+    const chain = (writes.get(id) || Promise.resolve())
+      .then(() => progress.doc(id).set({ done: on, at: new Date().toISOString() }))
+      .catch(() => { save.textContent = "Could not save the last change. Reload the page to see what was saved."; });
+    writes.set(id, chain);
+  }
+
+  function copyFrom(container) {
+    const code = container.querySelector(".block code");
+    if (!code) { toast("This step has no command"); return; }
+    const text = code.textContent;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => toast("Copied"), () => selectText(code));
+    } else {
+      selectText(code);
+    }
+  }
+
+  function selectText(node) {
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    const sel = getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    toast("Selected, press Cmd+C to copy");
+  }
+
+  function openImage(container) {
+    const img = container.querySelector(".zoom img");
+    if (!img) { toast("This step has no screenshot"); return; }
+    viewer.querySelector("img").src = img.src;
+    viewer.querySelector("img").alt = img.alt;
+    viewer.showModal();
+  }
+
+  function nextUndone() {
+    for (let k = 1; k <= steps.length; k++) {
+      const i = (focus + k) % steps.length;
+      if (!done.has(steps[i].dataset.id)) { setFocus(i, true); return; }
+    }
+    toast("Every step is done");
+  }
+
+  document.addEventListener("click", (e) => {
+    const check = e.target.closest(".check");
+    const copy = e.target.closest(".copy");
+    const zoom = e.target.closest(".zoom");
+    const jump = e.target.closest(".to-step");
+    const step = e.target.closest(".step");
+    if (step) setFocus(steps.indexOf(step), false);
+    if (check) toggle(steps.indexOf(step));
+    else if (copy) copyFrom(copy.closest(".block"));
+    else if (zoom) openImage(zoom.closest(".shot"));
+    else if (jump) {
+      e.preventDefault();
+      const i = steps.findIndex((el) => el.dataset.id === jump.dataset.step);
+      if (i >= 0) setFocus(i, true);
+    }
+  });
+  viewer.addEventListener("click", () => viewer.close());
+  keys.addEventListener("click", (e) => { if (e.target === keys) keys.close(); });
+  document.getElementById("keys-btn").addEventListener("click", () => keys.showModal());
+
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.target.closest("input, textarea, select, [contenteditable]")) return;
+    if (viewer.open || keys.open) {
+      if (e.key === "?" && keys.open) { keys.close(); e.preventDefault(); }
+      return;
+    }
+    const here = steps[focus];
+    switch (e.key) {
+      case "j": setFocus(focus + 1, true); break;
+      case "k": setFocus(focus - 1, true); break;
+      case "x": if (here) toggle(focus); break;
+      case "n": nextUndone(); break;
+      case "c": if (here) copyFrom(here); break;
+      case "o": if (here) openImage(here); break;
+      case "?": keys.showModal(); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
+  const saved = local("focus");
+  const start = steps.findIndex((el) => el.dataset.id === saved);
+  for (const id of local("done") || []) done.add(id);
+  paint();
+  setFocus(start >= 0 ? start : 0, false);
+
+  if (window.claude && window.claude.use) {
+    window.claude.use("db").then((db) => {
+      if (!db) {
+        save.textContent = "Progress is kept in this browser only.";
+        return;
+      }
+      progress = db.collection("progress");
+      progress.onSnapshot(
+        (snap) => {
+          done.clear();
+          for (const doc of snap.docs) if (doc.data().done) done.add(doc.id);
+          paint();
+        },
+        () => {
+          progress = null;
+          save.textContent = "Progress is kept in this browser only.";
+        }
+      );
+    });
+  } else {
+    save.textContent = "Progress is kept in this browser only.";
+  }
+})();
+</script>

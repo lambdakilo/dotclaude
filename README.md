@@ -107,9 +107,12 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   minutes the cache stays warm (a warm cache makes the next message cheaper), how full Claude's
   memory of the chat is, and what the session has cost so far.
 - [`skills/pull-requests`](skills/pull-requests/SKILL.md): how Claude writes a pull request: the
-  description, the steps to test it, screenshots.
+  description, the steps to test it, screenshots, and how it reviews one.
 - [`skills/pull-requests/pane-upload.sh`](skills/pull-requests/pane-upload.sh): puts screenshots
   into a pull request from the app's built-in browser, which cannot upload files itself.
+- [`skills/pull-requests/review-page`](skills/pull-requests/review-page/build.py): turns a pull
+  request's test steps and screenshots into a checklist page you tick off with the keyboard while
+  you review it.
 - [`skills/slack-draft`](skills/slack-draft/SKILL.md): Claude drafts a Slack message and puts it
   on your clipboard with links and bold kept. You paste it and press send. Mac only.
 - [`workflows/dream.js`](workflows/dream.js): type `/dream` when you stop for the day. Many

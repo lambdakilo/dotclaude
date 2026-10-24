@@ -150,11 +150,11 @@ apply to one repository belong in that repository's project memory.
 
 ## Pull requests
 
-- Before opening a PR or editing its body, writing test steps for a change under review, in a PR
-  or in chat, reviewing a PR, or capturing or uploading pictures for one, load the
-  `pull-requests` skill, `~/.claude/skills/pull-requests/SKILL.md`, and follow it. It holds the
-  body layout, the prompts block, the template answers, the verify steps, the review reply, and
-  the screenshots and recordings.
+- Before opening a PR or editing its body, writing test steps for a change under review, in a PR or
+  in chat, reviewing a PR, or capturing or uploading pictures for one, load the `pull-requests`
+  skill, `~/.claude/skills/pull-requests/SKILL.md`, and follow it. It holds the body layout, the
+  prompts block, the template answers, the verify steps, the review page and its reply, and the
+  screenshots and recordings.
 - Open PRs as drafts.
 - One draft PR per session. Everything a session is asked to change goes to the branch of the
   PR in play, follow-ups to the work under review and unrelated small changes alike, and a
@@ -276,15 +276,17 @@ apply to one repository belong in that repository's project memory.
 - A Finnish reply to a yes-or-no question opens with the answer itself, as in "luku laski, koska
   ...", never with "joo" or "kyllä" in front of it.
 - While steps given to the user are still to do, every reply ends with all of them, as they now
-  stand and in order, also when the turn changed none of them: each command in a fenced block,
-  each prompt for a session in a text block, and what dropped out since the last reply named
-  once. Each reply is complete without the earlier ones: a QR code, a file, an address, a
-  value or a text to paste that a step needs is shown again in that reply, never pointed to in
-  another reply or on the clipboard, apart from a Slack draft, which comes back as the command
-  that copies it. No reply says that steps given before still stand. The user works from the
-  latest reply and keeps no list in their head. Steps that come after a long run whose own
-  output will bury them, such as applying and committing what a dream run proposes, wait for
-  the reply that follows that run, and the list before it stops at the run.
+  stand and in order, also when the turn changed none of them: each command in a fenced block, each
+  prompt for a session in a text block, and what dropped out since the last reply named once. Each
+  reply is complete without the earlier ones: a QR code, a file, an address, a value or a text to
+  paste that a step needs is shown again in that reply, never pointed to in another reply or on the
+  clipboard, apart from a Slack draft, which comes back as the command that copies it. No reply says
+  that steps given before still stand. The user works from the latest reply and keeps no list in
+  their head. Steps that come after a long run whose own output will bury them, such as applying and
+  committing what a dream run proposes, wait for the reply that follows that run, and the list
+  before it stops at the run. A PR review's steps are the exception: they live on its review page,
+  where the user ticks them off, and each reply gives the page's link in their place, as the
+  `pull-requests` skill says.
 - Steps the user carries out are written in the order they are done, in one numbered list from
   the first to the last. How to do one of them, such as how to start a screen recording, goes
   into that step, never into a section of its own placed before steps that have to come first.

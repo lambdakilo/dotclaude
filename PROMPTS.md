@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Have sync.sh parse scripts, require README entries and cap widths
+## Put a PR review's steps on a review page
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**11.**
+> lets start doing a new way to review prs. theres a mismatch between
+> github prs and the notes here. instead always generate a html that i
+> can open as link here that has steps that track what steps ive
+> already done with sane keyboard shortcuts. it should also have the
+> screenshots from github if any
+
+## Have sync.sh parse scripts, require README entries and cap widths
+
+2026-10-24, commit [81f40fa](https://github.com/lambdakilo/dotclaude/commit/81f40fa82e1328cc309c036e7dc6a66903ce541c), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
