@@ -48,6 +48,9 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   can overwrite files by mistake, and names the `git switch` or `git restore` command instead.
 - [`calendar-free-busy-only.sh`](hooks/calendar-free-busy-only.sh): stops Claude from reading
   other people's calendar events. It can still see when they are free.
+- [`slack-user-search-own-workspace.sh`](hooks/slack-user-search-own-workspace.sh): tells Claude
+  that the Slack user search misses members of other companies who write in a shared channel, so it
+  reads that channel instead of saying it cannot see their message.
 - [`stop-running-stack.sh`](hooks/stop-running-stack.sh): makes Claude stop the Docker containers
   it started before it finishes, so nothing keeps running and eating battery.
 - [`stop-unreachable-claim.sh`](hooks/stop-unreachable-claim.sh): sends Claude back to try the

@@ -448,6 +448,17 @@ const suites = [
     ]
   }],
 
+  ['slack-user-search-own-workspace.sh', run => {
+    const search = { hook_event_name: 'PostToolUse', tool_name: 'mcp__slack__slack_search_users', tool_input: { query: 'Ville' }, tool_response: 'No results found' }
+    return [
+      ['adds the note on shared channels to the search result', () => {
+        const r = run(search)
+        return r.code === 0 && r.err === '' && context(r).includes('Slack Connect') && context(r).includes('slack_read_channel')
+      }],
+      ['answers as a PostToolUse hook', () => output(run(search)).hookSpecificOutput?.hookEventName === 'PostToolUse'],
+    ]
+  }],
+
   ['stack-held-by-peer.sh', run => {
     const work = path.join(home, 'stack-work'), marker = path.join(work, '.git/claude-stack-holder')
     const holder = path.join(home, 'holder.jsonl'), peer = path.join(home, 'peer.jsonl')

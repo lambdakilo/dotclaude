@@ -344,6 +344,16 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "^mcp__.*__slack_search_users$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/slack-user-search-own-workspace.sh\"",
+            "timeout": 10
+          }
+        ]
       }
     ]
   },

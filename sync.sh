@@ -100,6 +100,7 @@ mirrored=(
   hooks/no-meta-prompts.sh
   hooks/prompts-md.sh
   hooks/cd-fall-through.sh
+  hooks/slack-user-search-own-workspace.sh
   hooks/permission-mode-changed.sh
   hooks/no-foreground-wait.sh
   hooks/stop-unreachable-claim.sh
