@@ -337,10 +337,12 @@ apply to one repository belong in that repository's project memory.
   Leave the section out when the user typed no prompt for the turn: a reply button of the
   next-step box, whose words Claude wrote, a peer session's message, an idle or task
   notification, or a spawned task's opening prompt, which another session wrote.
-  A question in the next-step box ends the turn and takes no text after it, so the closing
-  reply, any draft the question asks about and this section come before the box. The hook
-  `~/.claude/hooks/prompt-feedback-box.sh` refuses such a box once in a turn a typed prompt
-  opened until the section is written, and marks a prompt that repeats a button's words.
+  The closing reply goes in the text right after the next-step box call, never before it, where
+  the app can cut it to a summary. It is written there in full: the answer, any draft the
+  question asks about, the steps still to do and this section, never a pointer to text above and
+  never the box's question again. The `Stop` hook `~/.claude/hooks/prompt-feedback-box.sh` sends
+  a turn back once when a typed prompt opened it and its last message has no Prompt feedback
+  section, and marks a prompt that repeats a button's words.
 - Before the section names something as missing from the prompt, check everything the prompt and the
   session's earlier prompts gave, their screenshots to their edges included. A line of text cut off
   by a screenshot's edge, or a scroll bar that ends short of its track, shows that the content goes

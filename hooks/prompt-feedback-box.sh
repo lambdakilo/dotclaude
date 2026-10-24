@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
 
-# Claude Code hook for the desktop app's next-step box, run before every
-# mcp__ccd_turn__wrap_up call and on every prompt. A box that asks a question
-# ends the turn and takes no text after it, so the closing reply and the
-# Prompt feedback section come before it. In a turn a typed prompt opened, it
-# refuses such a box once while nothing written in the turn carries a Prompt
-# feedback heading. On a prompt that repeats a reply button of the last box,
+# Claude Code hook for the Prompt feedback section, run when a turn ends and
+# on every prompt. In a turn a typed prompt opened, it sends the turn back
+# once while the turn's last message has no Prompt feedback heading, so the
+# section ends the closing reply, which in the desktop app comes right after
+# the next-step box. On a prompt that repeats a reply button of the last box,
 # it tells Claude that it wrote those words itself, so the section is left out.
 # The turn is read from the transcript, whose format Claude Code does not
-# document, so a change there makes this hook quietly pass. Claude Code runs
-# the hook before the message that holds the call reaches the transcript,
-# which it writes from a queue flushed every 100 ms, so the hook waits up to
-# 3 seconds for the record of its own call and passes when it never shows.
+# document, so a change there makes this hook quietly pass. The last message
+# comes from last_assistant_message, since Claude Code writes the transcript
+# from a queue and may not have written that message yet; only when the input
+# lacks the field is the turn's last text read from the transcript.
 
 set -u
 
@@ -20,8 +19,9 @@ input="$(cat 2>/dev/null)"
 transcript="$(printf '%s' "$input" | jq -r '.transcript_path // empty' 2>/dev/null)"
 [ -f "$transcript" ] || exit 0
 box=mcp__ccd_turn__wrap_up
+event="$(printf '%s' "$input" | jq -r '.hook_event_name // empty' 2>/dev/null)"
 
-if [ "$(printf '%s' "$input" | jq -r '.hook_event_name // empty' 2>/dev/null)" = UserPromptSubmit ]; then
+if [ "$event" = UserPromptSubmit ]; then
   prompt="$(printf '%s' "$input" | jq -r '.prompt // empty' 2>/dev/null)"
   grep -F "\"$box\"" "$transcript" 2>/dev/null | jq -Rn -e --arg box "$box" --arg prompt "$prompt" '
     def trimmed: gsub("^\\s+|\\s+$"; "");
@@ -34,21 +34,12 @@ if [ "$(printf '%s' "$input" | jq -r '.hook_event_name // empty' 2>/dev/null)" =
   exit 0
 fi
 
-[ "$(printf '%s' "$input" | jq -r '.tool_input.ask // "" | length > 0' 2>/dev/null)" = true ] || exit 0
-reason="A question in the next-step box ends the turn and takes no text after it. \
-Write the closing reply first: the answer, any draft the question asks about, and \
-the Prompt feedback section. Then call wrap_up again."
+[ "$event" = Stop ] || exit 0
+[ "$(printf '%s' "$input" | jq -r '.stop_hook_active // false' 2>/dev/null)" = false ] || exit 0
+last="$(printf '%s' "$input" | jq -c 'if has("last_assistant_message") then .last_assistant_message // "" else null end' 2>/dev/null)"
+[ -n "$last" ] || exit 0
 
-id="$(printf '%s' "$input" | jq -r '.tool_use_id // empty' 2>/dev/null)"
-[ -n "$id" ] || exit 0
-waited=0
-until grep -qF "\"$id\"" "$transcript" 2>/dev/null; do
-  [ "$waited" -lt 30 ] || exit 0
-  sleep 0.1
-  waited=$((waited + 1))
-done
-
-jq -Rn -e --arg box "$box" --arg marker "${reason%%.*}" '
+jq -Rn -e --arg box "$box" --argjson last "$last" '
   def text: if type == "string" then . else [.[]? | select(.type == "text") | .text] | join("\n") end;
   def trimmed: gsub("^\\s+|\\s+$"; "");
   [inputs | fromjson? // empty] as $lines
@@ -59,11 +50,13 @@ jq -Rn -e --arg box "$box" --arg marker "${reason%%.*}" '
     and ([$lines[:$turn][] | select(.type == "assistant") | .message.content[]?
           | select(.type == "tool_use" and .name == $box)] | last
          | all(.input.actions[]?; (.message // .label // "") | trimmed != $prompt))
-    and all($lines[$turn:][] | select(.type == "assistant") | .message.content[]?
-            | select(.type == "text") | .text; test("prompt feedback"; "i") | not)
-    and all($lines[$turn:][] | select(.type == "user") | .message.content | tostring;
-            contains($marker) | not)
+    and ($last // ([$lines[$turn:][] | select(.type == "assistant") | .message.content[]?
+                    | select(.type == "text") | .text] | last // "")
+         | test("prompt feedback"; "i") | not)
 ' "$transcript" >/dev/null 2>&1 || exit 0
 
-jq -n --arg reason "$reason" '{hookSpecificOutput: {hookEventName: "PreToolUse",
-  permissionDecision: "deny", permissionDecisionReason: $reason}}'
+echo "This turn answered a typed prompt and its last message has no Prompt feedback section. \
+Write the section now as the turn's last message, without calling wrap_up again. When the \
+closing reply after the next-step box only pointed back to text above it, or left out the \
+answer or the steps still to do, put those in that message first." >&2
+exit 2

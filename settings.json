@@ -242,16 +242,6 @@
         ]
       },
       {
-        "matcher": "mcp__ccd_turn__wrap_up",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$HOME/.claude/hooks/prompt-feedback-box.sh\"",
-            "timeout": 10
-          }
-        ]
-      },
-      {
         "matcher": "Bash",
         "hooks": [
           {
@@ -278,6 +268,11 @@
           {
             "type": "command",
             "command": "\"$HOME/.claude/hooks/stop-running-stack.sh\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/prompt-feedback-box.sh\"",
             "timeout": 10
           },
           {

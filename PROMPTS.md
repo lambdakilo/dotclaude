@@ -5,9 +5,23 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Record the list of changes under the PR summary sentence
+## Write the closing reply after the next-step box, check it on Stop
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> dream review
+
+(p5: put the closing reply after the box and check Prompt feedback on
+Stop, add it to dotclaude?)
+> add it but ok so in the future assume that i dont know anymore
+> during review what different hooks do so you must explain
+> everything a bit more from the beginning like what happens now and
+> what would happen after adding the proposal
+
+## Record the list of changes under the PR summary sentence
+
+2026-10-24, commit [f76c0d0](https://github.com/lambdakilo/dotclaude/commit/f76c0d01c8e131eec76efbc2256db67ccac3a31e), model claude-opus-5-5, effort xhigh.
 
 **7.**
 > whats the current "prompt" that writes my pr descriptions currently.

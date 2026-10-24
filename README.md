@@ -89,8 +89,8 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   or the pull request skill were changed in another window.
 - [`permission-mode-changed.sh`](hooks/permission-mode-changed.sh): tells a running session when you
   switched its permission mode, so it never names the old one.
-- [`prompt-feedback-box.sh`](hooks/prompt-feedback-box.sh): makes sure replies in the desktop app
-  end with a short note on how your prompt could have been better.
+- [`prompt-feedback-box.sh`](hooks/prompt-feedback-box.sh): makes sure every reply to a prompt
+  you typed ends with a short note on how your prompt could have been better.
 - [`memory-plain-characters.sh`](hooks/memory-plain-characters.sh): points out long dashes in
   Claude's memory notes, so Claude swaps them for plain punctuation.
 - [`claude-md-memory-index.sh`](hooks/claude-md-memory-index.sh): when Claude changes a rule in

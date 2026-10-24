@@ -1,6 +1,6 @@
 // Feeds each hook in hooks/ the JSON Claude Code would send it, inside a throwaway home folder, and checks what it does.
 // Usage: node test/hooks/checks.mjs [path to hooks/]
-import { spawn, spawnSync } from 'node:child_process'
+import { spawnSync } from 'node:child_process'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
@@ -332,23 +332,28 @@ const suites = [
   ['prompt-feedback-box.sh', run => {
     const t = path.join(home, 'feedback.jsonl')
     const box = actions => uses('mcp__ccd_turn__wrap_up', { recap: 'r', ask: 'Commit it?', actions })
-    const ask = { hook_event_name: 'PreToolUse', transcript_path: t, tool_use_id: 'toolu_box', tool_input: { recap: 'r', ask: 'Commit it?' } }
-    const call = { type: 'assistant', message: { content: [{ type: 'tool_use', id: ask.tool_use_id, name: 'mcp__ccd_turn__wrap_up', input: ask.tool_input }] } }
-    const refusal = 'A question in the next-step box ends the turn and takes no text after it. Write the closing reply first.'
-    const feedback = says('Fixed it.\n\n**Prompt feedback**\nIt was fine.')
-    // Claude Code writes the message holding the reply and the call only after the hook has started.
-    const later = records => spawn('bash', ['-c', `sleep 0.3; cat ${q(jsonl(`${t}.later`, records))} >> ${q(t)}`], { stdio: 'ignore' })
+    const stop = last => ({ hook_event_name: 'Stop', transcript_path: t, stop_hook_active: false, ...(last === undefined ? {} : { last_assistant_message: last }) })
+    const feedback = 'Fixed it.\n\n**Prompt feedback**\nIt was fine.'
+    const notification = { type: 'user', origin: { kind: 'task-notification' }, message: { role: 'user', content: 'done' } }
     return [
-      ['refuses a box with a question while the reply has no Prompt feedback', () => { jsonl(t, [human('fix the bug'), says('Fixed it.'), call]); return decision(run(ask)) === 'deny' }],
-      ['lets it through once the reply has the section', () => { jsonl(t, [human('fix the bug'), feedback, call]); return quiet(run(ask)) }],
-      ['waits for a reply with the section that reaches the transcript after the hook starts', () => { jsonl(t, [human('fix the bug')]); later([feedback, call]); return quiet(run(ask)) }],
-      ['still refuses a late reply without the section', () => { jsonl(t, [human('fix the bug')]); later([says('Fixed it.'), call]); return decision(run(ask)) === 'deny' }],
-      ['lets the box through when its own call never reaches the transcript', () => { jsonl(t, [human('fix the bug'), says('Fixed it.')]); return quiet(run(ask)) }],
-      ['refuses only once in a turn', () => { jsonl(t, [human('fix the bug'), says('Fixed it.'), toolResult(refusal), call]); return quiet(run(ask)) }],
-      ['lets a box without a question through', () => { jsonl(t, [human('fix the bug'), says('Fixed it.')]); return quiet(run({ ...ask, tool_input: { recap: 'r' } })) }],
+      ['sends back a turn whose last message has no Prompt feedback', () => { jsonl(t, [human('fix the bug'), says('Fixed it.')]); return refused(run(stop('Fixed it.'))) }],
+      ['lets the turn end once its last message has the section', () => { jsonl(t, [human('fix the bug'), says(feedback)]); return quiet(run(stop(feedback))) }],
+      ['sends it back when the section came before the box and a stub after it', () => {
+        jsonl(t, [human('fix the bug'), says(feedback), box([]), toolResult('Shown in the next-step box.'), says('The full answer is above.')])
+        return refused(run(stop('The full answer is above.')))
+      }],
+      ['sends back a turn that wrote nothing after the box', () => { jsonl(t, [human('fix the bug'), says(feedback), box([])]); return refused(run(stop(''))) }],
+      ['reads the transcript when the input has no last message', () => { jsonl(t, [human('fix the bug'), says(feedback)]); return quiet(run(stop())) }],
+      ['still sends back a transcript turn without the section', () => { jsonl(t, [human('fix the bug'), says('Fixed it.')]); return refused(run(stop())) }],
+      ['lets the second stop of a turn through', () => { jsonl(t, [human('fix the bug'), says('Fixed it.')]); return quiet(run({ ...stop('Fixed it.'), stop_hook_active: true })) }],
       ['lets a turn through that a reply button opened', () => {
-        jsonl(t, [human('fix the bug'), box([{ label: 'Commit', message: 'commit it' }]), human('commit it'), says('Committed.'), call])
-        return quiet(run(ask))
+        jsonl(t, [human('fix the bug'), says(feedback), box([{ label: 'Commit', message: 'commit it' }]), human('commit it'), says('Committed.')])
+        return quiet(run(stop('Committed.')))
+      }],
+      ['lets a turn through that a task notification opened', () => { jsonl(t, [human('fix the bug'), says(feedback), notification, says('The build passed.')]); return quiet(run(stop('The build passed.'))) }],
+      ['no longer refuses a box with a question', () => {
+        jsonl(t, [human('fix the bug'), says('Fixed it.')])
+        return quiet(run({ hook_event_name: 'PreToolUse', transcript_path: t, tool_use_id: 'toolu_box', tool_input: { recap: 'r', ask: 'Commit it?' } }))
       }],
       ['tells Claude when a prompt repeats a reply button', () => {
         jsonl(t, [human('fix the bug'), says('Fixed it.'), box([{ label: 'Commit', message: 'commit it' }])])
