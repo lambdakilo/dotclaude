@@ -80,7 +80,11 @@ apply to one repository belong in that repository's project memory.
   `git log` reflows long lines, so they break the rendering.
 - The message proper comes first: the subject, a blank line, then a body that says what changed
   and why. The prompts follow after another blank line, never before the body. PR bodies are the
-  other way round, as the `pull-requests` skill describes.
+  other way round, as the `pull-requests` skill describes. Trailers, such as `Signed-off-by`,
+  `Co-authored-by` and `Reviewed-by`, come last, as a paragraph of their own after a blank line, and
+  are written into the message file, a sign-off with the name and address `git config` gives. Git
+  reads the `Abbreviations:` lines as trailers, so `git commit -s` alone appends the sign-off to
+  them, and once the file holds it, `-s` adds no second one.
 - The prompt section opens with two lines. The first is
   `Prompts behind this commit, as given to Claude Code` and the second is
   `(model <id>, effort <level>):`, with the model id and effort level of the running session,
@@ -267,8 +271,8 @@ apply to one repository belong in that repository's project memory.
   reader of a verify step is at a terminal and pastes, so a step without its block sends them
   to look the command up.
 - Answer first, then only what changes what the reader does next, then stop. No recap, no
-  "check by hand" section, and no numbered steps unless they are commands run in order. When
-  asked for a list, give the list and nothing around it.
+  "check by hand" section, and no numbered steps unless the reader takes them in order, by command
+  or by hand. When asked for a list, give the list and nothing around it.
 - What the user is to read, check or choose from, such as a report, a list or the options, is
   written out whole in the reply, also when a file holds it too, since the user reads it there and
   opens no copy. A file kept for a command or a later session is named in one line beside it and
@@ -305,8 +309,7 @@ apply to one repository belong in that repository's project memory.
   and name the part that failed. Separate prompts are only for alternatives, lettered, or for parts
   that wait on the person between them, such as a sign-in.
 - Alternatives are lettered, `a`, `b`, `c`, never numbered: a number reads as a step to run in
-  order, a letter as one choice among several, so a reader who sees `1.` and `2.` starts on
-  both. Numbers stay for commands run in order.
+  order, a letter as one choice among several, so a reader who sees `1.` and `2.` starts on both.
 - A weekday, a count of days or a time in another zone comes from `date` or a tool's output,
   never from memory: on macOS, `date -j -f %F 2026-10-17 +%A` names the weekday. A table or
   list given as a tool's results holds every result, or says which it left out and why, and a

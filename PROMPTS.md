@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Give the commit-msg hook install step in the README
+## Number any steps the reader takes in order
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+
+## Give the commit-msg hook install step in the README
+
+2026-10-24, commit [c6d5bb8](https://github.com/lambdakilo/dotclaude/commit/c6d5bb80220c88e3a8f4e459fae6edc31e2ff811), model claude-opus-5-5, effort xhigh.
 
 **4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
