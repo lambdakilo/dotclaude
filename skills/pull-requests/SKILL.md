@@ -74,8 +74,8 @@ redacted in public and upstream repositories.
   keep every edit the user has made there.
 - After a commit that answers review threads, read How to verify against each thread. A fix
   that changes what a reviewer sees or does gets a manual step, or a sentence in the step that
-  already shows that screen, and the summary sentence is rewritten when it no longer covers
-  the PR. A fix nothing on screen shows needs no step.
+  already shows that screen, and the summary sentence and the list are rewritten when they no
+  longer cover the PR. A fix nothing on screen shows needs no step.
 
 ## How to verify
 
