@@ -11,12 +11,20 @@ redacted in public and upstream repositories.
 
 ## The body
 
-- Claude's part of the body is, in this order: the one sentence on what has changed, the line
-  that closes issues (`Closes #n`, with any related documents), the two blocks below, then the
-  rest of the repository's pull request template filled in as described further down. Nothing
-  else: no free-form summary or test plan outside that. The sentence and the closing line stand
-  on their own, without a heading, even where the template gives them sections of their own.
-  Without a template the body ends after the blocks and the user writes the description.
+- Claude's part of the body is, in this order: the one sentence on what has changed, a list of
+  the changes, the line that closes issues (`Closes #n`, with any related documents), the two
+  blocks below, then the rest of the repository's pull request template filled in as described
+  further down. Nothing else: no free-form summary or test plan outside that. The sentence, the
+  list and the closing line stand on their own, without a heading, even where the template gives
+  them sections of their own. Without a template the body ends after the blocks and the user
+  writes the description.
+- The list of changes under the sentence is built from the PR's final diff against its base, from
+  the merge base to the head; the commits only help to understand intent. One short bullet per
+  meaningful change, or per group of related ones, saying what it does and, when that helps the
+  reviewer, why. No file names, paths or line numbers, and no detail the diff already shows
+  unless it explains a behaviour or a decision. Tests, translations and documentation stay out
+  unless they are a purpose of the PR. Uncommitted changes are left out. The list is rebuilt with
+  the sentence whenever a push changes what the PR does.
 - The two blocks come straight after the closing line and above the rest of the template. They
   are a TL;DR for the reviewer.
 - First block: a fenced code block holding the URL of the public configuration repository
