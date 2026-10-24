@@ -260,6 +260,10 @@ apply to one repository belong in that repository's project memory.
 - Answer first, then only what changes what the reader does next, then stop. No recap, no
   "check by hand" section, and no numbered steps unless they are commands run in order. When
   asked for a list, give the list and nothing around it.
+- What the user is to read, check or choose from, such as a report, a list or the options, is
+  written out whole in the reply, also when a file holds it too, since the user reads it there and
+  opens no copy. A file kept for a command or a later session is named in one line beside it and
+  never stands in for it. A Slack draft stays the exception that Running things names.
 - A term that a session, a script or a workflow coined, such as a name for a unit of work, a role,
   an option or a step label, is explained in plain words where a reply first uses it, or plain words
   stand in its place. The reader saw neither the code nor the run that gave the term its meaning,
