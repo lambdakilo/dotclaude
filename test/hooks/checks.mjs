@@ -140,6 +140,49 @@ const suites = [
         const r = run(event('UserPromptSubmit', { session_id: 'md2' }))
         return r.code === 0 && context(r).includes('+- verify') && r.err === ''
       }],
+      ['takes the session\'s own Edit of CLAUDE.md as seen', () => {
+        const edit = event('PreToolUse', { session_id: 'md3', tool_name: 'Edit', tool_use_id: 'toolu_1', tool_input: { file_path: rules } })
+        write(rules, '- one\n'); run(event('SessionStart', { session_id: 'md3' }))
+        const pre = run(edit)
+        write(rules, '- one\n- own\n')
+        return quiet(pre) && quiet(run({ ...edit, hook_event_name: 'PostToolUse' })) && quiet(run({ ...commit, session_id: 'md3' }))
+      }],
+      ['still blocks for a peer\'s edit made before the session\'s own', () => {
+        const edit = event('PreToolUse', { session_id: 'md3', tool_name: 'Edit', tool_use_id: 'toolu_2', tool_input: { file_path: rules } })
+        write(rules, '- one\n- own\n- peer\n')
+        run(edit); write(rules, '- one\n- own\n- peer\n- own again\n'); run({ ...edit, hook_event_name: 'PostToolUse' })
+        const r = run({ ...commit, session_id: 'md3' })
+        return refused(r) && r.err.includes('+- peer')
+      }],
+      ['takes a quick Bash call that changed the file as the session\'s own', () => {
+        const fix = event('PreToolUse', { session_id: 'md3', tool_name: 'Bash', tool_use_id: 'toolu_3', tool_input: { command: 'bash fix.sh' } })
+        run(fix); write(rules, '- fixed\n'); run({ ...fix, hook_event_name: 'PostToolUse' })
+        return quiet(run({ ...commit, session_id: 'md3' }))
+      }],
+      ['still blocks when a sync.sh run changed the file', () => {
+        const sync = event('PreToolUse', { session_id: 'md3', tool_name: 'Bash', tool_use_id: 'toolu_4', tool_input: { command: '~/Projects/dotclaude/sync.sh' } })
+        run(sync); write(rules, '- pulled\n'); run({ ...sync, hook_event_name: 'PostToolUse' })
+        const r = run({ ...commit, session_id: 'md3' })
+        return refused(r) && r.err.includes('+- pulled')
+      }],
+      ['still blocks when the Bash call that changed the file took over a minute', () => {
+        const slow = event('PreToolUse', { session_id: 'md3', tool_name: 'Bash', tool_use_id: 'toolu_5', tool_input: { command: 'npm test' } })
+        run(slow); write(path.join(ENV.TMPDIR, 'claude-md-snapshots/md3.pre.toolu_5'), '0\n')
+        write(rules, '- slow\n'); run({ ...slow, hook_event_name: 'PostToolUse' })
+        const r = run({ ...commit, session_id: 'md3' })
+        return refused(r) && r.err.includes('+- slow')
+      }],
+      ['takes the session\'s own Edit of the skill as seen', () => {
+        const edit = event('PreToolUse', { session_id: 'md3', tool_name: 'Edit', tool_use_id: 'toolu_6', tool_input: { file_path: skill } })
+        run(edit); write(skill, '- body\n- own\n'); run({ ...edit, hook_event_name: 'PostToolUse' })
+        return quiet(run({ ...prEdit, session_id: 'md3' }))
+      }],
+      ['still blocks for a peer\'s CLAUDE.md edit made while the session edits the skill', () => {
+        const edit = event('PreToolUse', { session_id: 'md3', tool_name: 'Edit', tool_use_id: 'toolu_7', tool_input: { file_path: skill } })
+        run(edit); write(rules, '- peer again\n'); write(skill, '- body\n- own\n- more\n'); run({ ...edit, hook_event_name: 'PostToolUse' })
+        const r = run({ ...commit, session_id: 'md3' })
+        return refused(r) && r.err.includes('+- peer again') && !r.err.includes('SKILL.md')
+      }],
     ]
   }],
 

@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Ask before working around a failure the VPN could cause
+## Let a session's own CLAUDE.md edit through the watcher
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+
+## Ask before working around a failure the VPN could cause
+
+2026-10-24, commit [fb0545a](https://github.com/lambdakilo/dotclaude/commit/fb0545aee388530e010236923cd5045f12aa2e8b), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > dotclaude always tell me and do the ask dialogue if you have a hunch

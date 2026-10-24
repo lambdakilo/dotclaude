@@ -1,40 +1,88 @@
 #!/usr/bin/env bash
 
-# Claude Code hook for SessionStart, UserPromptSubmit and PreToolUse on Bash.
+# Claude Code hook for SessionStart, UserPromptSubmit, and PreToolUse and
+# PostToolUse on Bash, Edit, Write and MultiEdit.
 # A session reads CLAUDE.md and the pull-requests skill once, so an edit made
 # from another session while it runs stays invisible to it. This keeps a copy
 # of each file per session and, once one differs from its copy, adds the diff
 # to the next prompt, or blocks the next command that depends on it once with
 # the diff on stderr: a commit or pull request command for CLAUDE.md, a pull
-# request command for the skill. Anything missing lets the prompt or the
-# command through.
+# request command for the skill. A tool call that starts while a file matches
+# its copy and changes it within a minute is the session's own edit and updates
+# the copy, apart from a sync.sh run, which can install a change pulled from
+# elsewhere, and an Edit or Write of the other file. Anything missing lets the
+# prompt or the command through.
 
 set -u
 
 config="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
 command -v jq >/dev/null 2>&1 || exit 0
 
-event="" key="" pr="" guarded=""
+event="" key="" pr="" guarded="" tool="" call="" target="" syncs=""
 {
   IFS= read -r event
   IFS= read -r key
   IFS= read -r pr
   IFS= read -r guarded
+  IFS= read -r tool
+  IFS= read -r call
+  IFS= read -r target
+  IFS= read -r syncs
 } < <(jq -r '
   .hook_event_name // "",
   (.session_id // "") + (if (.agent_id // "") == "" then "" else "-" + .agent_id end),
   ((.tool_input.command // "") | test("(^|[^A-Za-z0-9_./-])gh pr (create|edit|merge)")),
-  ((.tool_input.command // "") | test("(^|[^A-Za-z0-9_./-])(git( -[Cc] [^ ]+)* commit|gh pr (create|edit|merge))"))
+  ((.tool_input.command // "") | test("(^|[^A-Za-z0-9_./-])(git( -[Cc] [^ ]+)* commit|gh pr (create|edit|merge))")),
+  .tool_name // "",
+  .tool_use_id // "",
+  .tool_input.file_path // "",
+  ((.tool_input.command // "") | test("sync\\.sh"))
 ' 2>/dev/null)
 case "$key" in "" | *[^A-Za-z0-9_-]*) exit 0 ;; esac
+case "$call" in *[^A-Za-z0-9_-]*) call="" ;; esac
 
 dir="${TMPDIR:-/tmp}/claude-md-snapshots"
 mkdir -p "$dir" 2>/dev/null || exit 0
 
+files=("$config/CLAUDE.md" "$config/skills/pull-requests/SKILL.md")
+suffixes=("" ".pull-requests")
+
+# Prints the marker path of each watched file this tool call may count as its own edit.
+own_markers() {
+  local i
+  [ -n "$call" ] || return 0
+  for i in 0 1; do
+    case "$tool" in
+      Bash) [ "$syncs" = true ] && continue ;;
+      Edit | Write | MultiEdit) [ "$target" = "${files[$i]}" ] || continue ;;
+      *) continue ;;
+    esac
+    printf '%s %s\n' "$i" "$dir/$key${suffixes[$i]}.pre.$call"
+  done
+}
+
 case "$event" in
   SessionStart) find "$dir" -type f -mtime +7 -delete 2>/dev/null ;;
   UserPromptSubmit) ;;
-  PreToolUse) [ "$guarded" = true ] || exit 0 ;;
+  PreToolUse)
+    while read -r i marker; do
+      snapshot="$dir/$key${suffixes[$i]}"
+      [ -f "$snapshot" ] && cmp -s "${files[$i]}" "$snapshot" && date +%s > "$marker"
+    done < <(own_markers)
+    [ "$guarded" = true ] || exit 0
+    ;;
+  PostToolUse)
+    while read -r i marker; do
+      [ -f "$marker" ] || continue
+      started="$(cat "$marker" 2>/dev/null)"
+      rm -f "$marker"
+      case "$started" in "" | *[^0-9]*) continue ;; esac
+      [ $(($(date +%s) - started)) -le 60 ] || continue
+      snapshot="$dir/$key${suffixes[$i]}"
+      cmp -s "${files[$i]}" "$snapshot" || cp "${files[$i]}" "$snapshot" 2>/dev/null
+    done < <(own_markers)
+    exit 0
+    ;;
   *) exit 0 ;;
 esac
 
@@ -64,8 +112,8 @@ check() {
 $changes"
 }
 
-check "~/.claude/CLAUDE.md" "$config/CLAUDE.md" "" "$guarded"
-check "~/.claude/skills/pull-requests/SKILL.md" "$config/skills/pull-requests/SKILL.md" ".pull-requests" "$pr"
+check "~/.claude/CLAUDE.md" "${files[0]}" "${suffixes[0]}" "$guarded"
+check "~/.claude/skills/pull-requests/SKILL.md" "${files[1]}" "${suffixes[1]}" "$pr"
 [ -n "$notes" ] || exit 0
 
 if [ "$event" = UserPromptSubmit ]; then
