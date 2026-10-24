@@ -398,5 +398,6 @@
   },
   "switchModelsOnFlag": false,
   "agentPushNotifEnabled": true,
-  "inputNeededNotifEnabled": true
+  "inputNeededNotifEnabled": true,
+  "autoCompactWindow": 400000
 }
