@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep a PR's review page as a local file with a link
+## Keep only what a session does about the stack hooks in CLAUDE.md
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> dream review
+
+(p32: shrink the two stack-hook bullets to one and require a README
+entry for each new hook, add it?)
+> Add it (Recommended)
+
+## Keep a PR's review page as a local file with a link
+
+2026-10-24, commit [3d4cb0f](https://github.com/lambdakilo/dotclaude/commit/3d4cb0fddbabe13c6ed4890950e3ba22c5d8727d), model claude-opus-5-5, effort xhigh.
 
 **13.**
 > nah bro no artifacts create a local html in appropriate place and

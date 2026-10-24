@@ -390,11 +390,6 @@ apply to one repository belong in that repository's project memory.
   stop the project's container stack with the project's own stop command before the reply,
   every turn, even when the next turn will start it again, and say in the reply that it is
   stopped. A project memory that says to keep a stack up does not override this.
-- A `Stop` hook runs `~/.claude/hooks/stop-running-stack.sh` when a turn ends. When that turn
-  ran a command that starts a compose stack, and a compose project of the repository or one of
-  its worktrees still has containers up, it sends the turn back once with the reason. It stops
-  nothing itself, and a turn that started nothing passes. It is a safety net for the rule
-  above, not a substitute for it.
 - The `usage` mod in `~/.claude/mods/session-usage`, which `CLAUDE_CODE_PLUGIN_DIRS` in
   `settings.json` loads in every session, pins a status line under the prompt: a fire emoji and
   the minutes the prompt cache stays warm, or an ice cube emoji and since when it is cold (the
@@ -408,11 +403,10 @@ apply to one repository belong in that repository's project memory.
   until its containers are down: ask it with SendMessage to say when they are, and run what
   needs no stack meanwhile. A notice sent before a start is not an ask, and a send result
   saying the message is not yet read is no answer.
-- A `PreToolUse` hook, `~/.claude/hooks/stack-held-by-peer.sh`, notes in the git directory
-  which session started the stack. While those containers are up or starting and that session
-  has a user or assistant record from the last 15 minutes, it refuses any other session's start,
-  restart, stop or removal of them, and the `Stop` hook leaves them alone. Its container
-  matching is a heuristic that backs the rule above.
+- Two hooks back the two stack rules above and replace neither. A `Stop` hook,
+  `~/.claude/hooks/stop-running-stack.sh`, sends a turn back once when it started a stack that is
+  still up. A `PreToolUse` hook, `~/.claude/hooks/stack-held-by-peer.sh`, refuses another session's
+  start, restart, stop or removal of a stack that an active session started.
 - A command that must run in another directory uses the tool's own directory flag, such as
   `git -C` or `npm --prefix`, and otherwise a subshell, `(cd playwright && npx playwright test)`,
   which returns on its own. Every part after the `cd` depends on it: joined with `&&`, or in a

@@ -19,7 +19,7 @@ mirrored file states what holds now.
   `claudeMdExcludes`. Claude Code reads no other mirrored file from a repository root, so nothing
   else needs a different name.
 - When a new file under `~/.claude` would help other people (a hook, a skill, a command, an agent),
-  add it to the list in `sync.sh` first.
+  add it to the list in `sync.sh` first and give it an entry in the checkout's `README.md`.
 
 ## sync.sh
 
