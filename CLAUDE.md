@@ -364,8 +364,10 @@ apply to one repository belong in that repository's project memory.
   session's earlier prompts gave, their screenshots to their edges included. A line of text cut off
   by a screenshot's edge, or a scroll bar that ends short of its track, shows that the content goes
   on: the turn asks for the rest before it rewrites what the screenshot shows. The feedback never
-  blames a prompt for what it or an earlier prompt gave, and when the prompt corrects a misreading
-  of Claude's, the section says the misreading was Claude's.
+  blames a prompt for what it or an earlier prompt gave. When the prompt corrects a misreading or a
+  mistake of Claude's, or the output of a tool Claude built or ran, the section says the fault was
+  Claude's. A prompt that ran a command, skill or workflow bare stays bare in the rewrite: a
+  correction of what it did goes into the tool, as the rule on tools run bare says.
 - Write the rewritten prompt itself as the user would type it: all lowercase, names included,
   and without characters that need the shift key when a plain one does the job, so commas and
   full stops in place of colons, quotes, question marks and parentheses. Make it as short as it
