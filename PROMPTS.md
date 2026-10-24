@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Split a long command with line continuations in the command rule
+## Match an unanchored correction to what just changed first
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+
+## Split a long command with line continuations in the command rule
+
+2026-10-24, commit [bc7e15a](https://github.com/lambdakilo/dotclaude/commit/bc7e15a43df585bd0525b738bbd8ca05b3880ae9), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 

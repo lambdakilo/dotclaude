@@ -697,11 +697,14 @@ apply to one repository belong in that repository's project memory.
   each item against the code, asks what is still unclear about its meaning or scope in one
   AskUserQuestion call with a recommended answer per question, and the reply names where each
   item went.
-- A correction or a wish that would hold beyond the task, a why question included, goes into
-  this file or the `pull-requests` skill in the same turn, committed and pushed as under Public
-  configuration repository, without the user naming that repository: it holds for later
-  prompts and sessions unless the user limits it. A limit the user states sets the scope: this
-  session only writes nothing, this project writes its project memory. The reply quotes the
-  rule as written, names any rule it changed, and is redone under it. When the correction asks
-  for what the current text already does another way, say in a line how it already does it
-  and rewrite the text so it says so plainly.
+- A correction or a wish that would hold beyond the task, a why question included, goes into this
+  file or the `pull-requests` skill in the same turn, committed and pushed as under Public
+  configuration repository, without the user naming that repository: it holds for later prompts and
+  sessions unless the user limits it. A limit the user states sets the scope: this session only
+  writes nothing, this project writes its project memory. The reply quotes the rule as written,
+  names any rule it changed, and is redone under it. When the correction asks for what the current
+  text already does another way, say in a line how it already does it and rewrite the text so it
+  says so plainly. A correction that does not say what it reacts to, such as "bro what", is first
+  matched against what changed since the last reply outside this session too, such as a new PR in
+  `gh pr list` or a peer session in ListAgents. When two readings remain, AskUserQuestion puts both
+  with a recommended one before any rule is written, never a guess named in the reply afterwards.
