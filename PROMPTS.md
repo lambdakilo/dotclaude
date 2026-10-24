@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Leave a person's own entry in a shared document to them
+## Keep one open draft PR per repository
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**18.**
+> theres still two pr drafts on my end open on [a project's] frontend
+> fix to the origianl pr
+
+## Leave a person's own entry in a shared document to them
+
+2026-10-24, commit [3cab280](https://github.com/lambdakilo/dotclaude/commit/3cab280dbd201a4e522f62b3a97b92755d4f7bb2), model claude-opus-5-5, effort xhigh.
 
 **10.**
 > Do this task here: "Carry two new wiki edits into the intra handbook"

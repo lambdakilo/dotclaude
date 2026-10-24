@@ -160,9 +160,11 @@ apply to one repository belong in that repository's project memory.
   prompts block, the template answers, the verify steps, the review page and its reply, and the
   screenshots and recordings.
 - Open PRs as drafts.
-- One draft PR per session. Everything a session is asked to change goes to the branch of the
-  PR in play, follow-ups to the work under review and unrelated small changes alike, and a
-  second PR is opened only when the user says so in that session.
+- One open draft PR per repository. Everything a session is asked to change in a repository goes to
+  the branch of the user's draft PR open there, follow-ups to the work under review and unrelated
+  small changes alike, also when another session opened it, and through that session while it is
+  live. A new PR is opened only when the repository has none open, or when the user says so in that
+  session.
 - A check or review the user asks for on a PR whose author is the user, such as of its links or its
   pages, ends with the fixes the session would recommend committed and pushed to that PR's branch in
   the same turn, and the reply lists each fix with its commit, so a no costs one revert. A prompt

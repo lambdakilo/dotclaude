@@ -6,8 +6,8 @@ description: Procedures for a pull request. Load it before opening a PR or editi
 # Pull requests
 
 These procedures sit beside the Pull requests rules in `~/.claude/CLAUDE.md`, which still hold:
-drafts only, one PR per session, never post on GitHub, meta prompts left out, and downstream names
-redacted in public and upstream repositories.
+drafts only, one open draft PR per repository, never post on GitHub, meta prompts left out, and
+downstream names redacted in public and upstream repositories.
 
 ## The body
 
