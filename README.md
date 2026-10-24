@@ -108,9 +108,9 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   memory of the chat is, and what the session has cost so far.
 - [`presence`](presence/install.sh): my phone gets Claude's pushes, such as a question waiting for
   an answer, only while the Mac is locked. [`lock-listener.swift`](presence/lock-listener.swift)
-  keeps the file that `CLAUDE_CLIENT_PRESENCE_FILE` in `settings.json` names in step with the
-  screen lock: it is there while the screen is unlocked, and Claude Code skips the push then. Mac
-  only. This builds it and starts it at every login:
+  keeps the file that `CLAUDE_CLIENT_PRESENCE_FILE` in `settings.json` names in step with the screen
+  lock: it is there while the screen is unlocked, and Claude Code skips the push then. Mac only.
+  This builds it and starts it at every login:
   ```zsh
   ~/.claude/presence/install.sh
   ```
@@ -355,6 +355,19 @@ of its public history:
 ```bash
 git -C ~/Projects/dotclaude config user.name '<name>' && \
   git -C ~/Projects/dotclaude config user.email '<address>'
+```
+
+A `sync-deny.txt` beside `sync.sh`, which git ignores, lists words that must never be published, one
+per line, such as the name of a project you work on: `sync.sh` refuses to publish a file that
+contains one. The command below installs a hook that refuses a commit message with one too, in your
+copy and in each folder that `sync-mirrors.txt` lists, replacing any commit-msg hook they have:
+
+```bash
+for dir in ~/Projects/dotclaude $(sed "s|^~|$HOME|" ~/Projects/dotclaude/sync-mirrors.txt 2>/dev/null); do
+  hook="$(git -C "$dir" rev-parse --path-format=absolute --git-path hooks/commit-msg)" &&
+    printf '#!/bin/sh\nexec "$HOME/Projects/dotclaude/sync.sh" --check-message "$1"\n' > "$hook" &&
+    chmod +x "$hook"
+done
 ```
 
 ## License
