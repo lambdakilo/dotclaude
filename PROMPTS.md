@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Say when remote deployment tooling may run
+## Name real examples from history when explaining a dream step
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.** Quoted under [01f7bfc](https://github.com/lambdakilo/dotclaude/commit/01f7bfc02b23fae2ff12f3e609ad6749798f54c2).
+
+## Say when remote deployment tooling may run
+
+2026-10-24, commit [01f7bfc](https://github.com/lambdakilo/dotclaude/commit/01f7bfc02b23fae2ff12f3e609ad6749798f54c2), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
