@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-/* One column of step cards under a sticky progress header; the focused card carries the ring. */
+/* Wide: a side rail with the PR, the progress and the review stays put while the step cards scroll. Narrow: one column under a thin progress bar. */
 :root {
   --bg: #f4f6f4;
   --surface: #ffffff;
@@ -48,19 +48,27 @@ body {
   padding-block: 0 64px;
 }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
-.wrap { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+.layout { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px 32px; padding-top: 20px; }
+.rail { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.main { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
+.bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  display: flex; align-items: center; gap: 10px; padding-block: 8px; margin-top: -8px;
+}
+@media (min-width: 1100px) {
+  .layout { grid-template-columns: 340px minmax(0, 1fr); }
+  .rail { position: sticky; top: calc(20px + env(safe-area-inset-top, 0px)); align-self: start; max-height: calc(100vh - 40px); overflow-y: auto; padding-right: 4px; }
+  .main > .bar { display: none; }
+}
 a { color: var(--accent); }
 code { font-family: var(--mono); font-size: 0.88em; background: var(--code-bg); padding: 0.08em 0.35em; border-radius: 4px; }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.top {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
-  padding-block: 16px 12px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px;
-}
+.top { display: flex; flex-direction: column; gap: 8px; }
 .ref { font: 500 12px/1.4 var(--mono); color: var(--muted); display: flex; gap: 4px 12px; flex-wrap: wrap; }
 .ref a { color: inherit; }
-h1 { font-size: 1.3rem; line-height: 1.3; margin: 0; font-weight: 600; text-wrap: balance; }
+h1 { font-size: 1.15rem; line-height: 1.3; margin: 0; font-weight: 600; text-wrap: balance; }
 .meta { color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 4px 14px; }
 .progress { display: flex; align-items: center; gap: 12px; }
 .track { flex: 1; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
@@ -74,22 +82,20 @@ h3.sub { font-size: 0.95rem; margin: 14px 0 6px; }
 .note { color: var(--muted); margin-bottom: 12px; }
 .note p { margin: 0 0 8px; }
 
-.review { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
-.review summary { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; padding: 12px 18px; cursor: pointer; list-style: none; }
-.review summary::-webkit-details-marker { display: none; }
-.review summary::after { content: "Show"; margin-left: auto; font: 500 12px var(--mono); color: var(--accent); }
-.review[open] summary::after { content: "Hide"; }
-.review-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-.review-sum { font-weight: 500; }
-.review-body { padding: 0 18px 16px; }
-.results { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-.result { display: grid; grid-template-columns: auto minmax(0, max-content) minmax(0, 1fr); gap: 10px; align-items: baseline; }
+.review { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; font-size: 13.5px; line-height: 1.5; }
+.review h2 { margin-bottom: 4px; }
+.review-sum { font-weight: 600; margin: 0 0 10px; font-size: 14px; }
+.review p { margin: 0; }
+.results { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.result { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 8px; align-items: baseline; }
+.result-detail { grid-column: 2; font-size: 12.5px; }
 .pill { font: 600 11px/1 var(--mono); padding: 4px 7px; border-radius: 999px; border: 1px solid currentColor; text-transform: uppercase; letter-spacing: 0.04em; }
 .result.pass .pill { color: var(--pass); }
 .result.fail .pill { color: var(--fail); }
 .result.skip .pill { color: var(--muted); }
 .result-name { font-weight: 500; }
 .result-detail { color: var(--muted); min-width: 0; }
+.review ul { margin: 0; padding-left: 18px; }
 .findings { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .finding { border-left: 3px solid var(--muted); padding-left: 12px; }
 .finding.high { border-color: var(--fail); }
@@ -99,14 +105,15 @@ h3.sub { font-size: 0.95rem; margin: 14px 0 6px; }
 .finding.high .sev { color: var(--fail); }
 .finding.medium .sev { color: var(--warn); }
 .finding-title { font-weight: 600; }
-.to-step { font-size: 13px; }
+.finding p, .finding .block { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+.to-step { font-size: 12.5px; }
 .quiet { color: var(--muted); margin: 10px 0 0; }
 
 .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .step {
   display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; align-items: start;
   background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px;
-  scroll-margin-top: 170px; outline: none;
+  scroll-margin-top: 56px; outline: none;
 }
 .step.added { border-style: dashed; border-color: var(--warn); }
 .step.focused { box-shadow: 0 0 0 2px var(--accent); border-color: transparent; }
@@ -147,30 +154,36 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
 .toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 6px 14px; border-radius: 999px; font-size: 13px; opacity: 0; transition: opacity 0.15s; pointer-events: none; }
 .toast.show { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .fill, .toast { transition: none; } }
+@media (min-width: 1100px) { .step { scroll-margin-top: 20px; } }
 @media (max-width: 520px) {
   .step { grid-template-columns: 28px minmax(0, 1fr); padding: 12px; gap: 10px; }
-  .result { grid-template-columns: auto minmax(0, 1fr); }
-  .result-detail { grid-column: 2; }
 }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <div class="ref"><a href="{{PR_URL}}" target="_blank" rel="noopener">{{PR_REF}}</a><span>{{BRANCH}}</span><span>head {{HEAD}}</span></div>
-    <h1>{{PR_TITLE}}</h1>
-    <div class="meta"><span>By {{AUTHOR}}</span><span>Steps taken from the PR's How to verify? on {{BUILT}}</span></div>
-    <div class="progress">
-      <div class="track" aria-hidden="true"><div class="fill" id="fill"></div></div>
-      <span class="count" id="count" role="status">0 of 0 done</span>
-      <button type="button" class="keys-btn" id="keys-btn" aria-haspopup="dialog">? Keys</button>
+<div class="layout">
+  <aside class="rail">
+    <header class="top">
+      <div class="ref"><a href="{{PR_URL}}" target="_blank" rel="noopener">{{PR_REF}}</a><span>{{BRANCH}}</span><span>head {{HEAD}}</span></div>
+      <h1>{{PR_TITLE}}</h1>
+      <div class="meta"><span>By {{AUTHOR}}</span><span>Steps taken from the PR's How to verify? on {{BUILT}}</span></div>
+      <div class="progress">
+        <div class="track" aria-hidden="true"><div class="fill"></div></div>
+        <span class="count" role="status">0 of 0 done</span>
+        <button type="button" class="keys-btn" aria-haspopup="dialog">? Keys</button>
+      </div>
+      <div class="save" id="save"></div>
+    </header>
+    {{REVIEW}}
+  </aside>
+  <main class="main">
+    <div class="bar progress" aria-hidden="true">
+      <div class="track"><div class="fill"></div></div>
+      <span class="count">0 of 0 done</span>
+      <button type="button" class="keys-btn" tabindex="-1">? Keys</button>
     </div>
-    <div class="save" id="save"></div>
-  </header>
-
-  {{REVIEW}}
-
-  {{SECTIONS}}
+    {{SECTIONS}}
+  </main>
 </div>
 
 <dialog id="viewer" aria-label="Screenshot"><img alt=""></dialog>
@@ -182,7 +195,6 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     <dt><kbd>n</kbd></dt><dd>Go to the next step not done</dd>
     <dt><kbd>c</kbd></dt><dd>Copy the step's first command or address</dd>
     <dt><kbd>o</kbd></dt><dd>Open the step's screenshot</dd>
-    <dt><kbd>r</kbd></dt><dd>Show or hide the review</dd>
     <dt><kbd>?</kbd></dt><dd>Show or hide this list</dd>
     <dt><kbd>Esc</kbd></dt><dd>Close the screenshot or this list</dd>
   </dl>
@@ -194,8 +206,8 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
   const KEY = "{{STORAGE_KEY}}";
   const steps = [...document.querySelectorAll(".step")];
   const done = new Set();
-  const fill = document.getElementById("fill");
-  const count = document.getElementById("count");
+  const fills = document.querySelectorAll(".fill");
+  const counts = document.querySelectorAll(".count");
   const save = document.getElementById("save");
   const viewer = document.getElementById("viewer");
   const keys = document.getElementById("keys");
@@ -227,8 +239,8 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
       el.classList.toggle("done", on);
       el.querySelector(".check").setAttribute("aria-checked", on ? "true" : "false");
     }
-    count.textContent = n + " of " + steps.length + " done";
-    fill.style.width = (steps.length ? (n / steps.length) * 100 : 0) + "%";
+    for (const el of counts) el.textContent = n + " of " + steps.length + " done";
+    for (const el of fills) el.style.width = (steps.length ? (n / steps.length) * 100 : 0) + "%";
   }
 
   function setFocus(i, scroll) {
@@ -303,7 +315,7 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
   });
   viewer.addEventListener("click", () => viewer.close());
   keys.addEventListener("click", (e) => { if (e.target === keys) keys.close(); });
-  document.getElementById("keys-btn").addEventListener("click", () => keys.showModal());
+  for (const el of document.querySelectorAll(".keys-btn")) el.addEventListener("click", () => keys.showModal());
 
   document.addEventListener("keydown", (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -321,11 +333,6 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
       case "n": nextUndone(); break;
       case "c": if (here) copyFrom(here); else pick(); break;
       case "o": if (here) openImage(here); else pick(); break;
-      case "r": {
-        const review = document.getElementById("review");
-        if (review) review.open = !review.open;
-        break;
-      }
       case "?": keys.showModal(); break;
       default: return;
     }

@@ -335,7 +335,6 @@ def render_review(review):
         )
     failed = sum(1 for r in results if r["outcome"] == "fail")
     passed = sum(1 for r in results if r["outcome"] == "pass")
-    serious = [f for f in findings if f["severity"] in ("high", "medium")]
     bits = []
     if results:
         bits.append("%d failed" % failed if failed else "%d of %d checks passed" % (passed, len(results)))
@@ -349,14 +348,9 @@ def render_review(review):
                 ", ".join("%d %s" % (by[k], k) for k in ("high", "medium", "low") if k in by),
             )
         )
-    elif results:
-        bits.append("no findings")
-    # Folded unless something needs the reader before the steps.
-    opened = " open" if failed or serious else ""
     return (
-        '<details class="review" id="review"%s><summary><span class="review-label">Review</span>'
-        '<span class="review-sum">%s</span></summary><div class="review-body">%s</div></details>'
-        % (opened, html.escape(" · ".join(bits)), "".join(parts))
+        '<section class="review" aria-labelledby="review-h"><h2 id="review-h">Review</h2>'
+        '<p class="review-sum">%s</p>%s</section>' % (html.escape(" · ".join(bits)), "".join(parts))
     )
 
 

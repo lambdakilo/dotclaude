@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Refresh the README evals block after the 2026-10-23 dream review
+## Keep the review page's PR, progress and review in a side column
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**16.**
+> bruh now its hidden in more. also the header takes a lot of screen
+> space by being frozen there. you can put frozen stuff to the sides
+> maybe?
+
+## Refresh the README evals block after the 2026-10-23 dream review
+
+2026-10-24, commit [4bef872](https://github.com/lambdakilo/dotclaude/commit/4bef8724aee77a16ba346427a667173ab558f782), model claude-opus-5-5, effort xhigh.
 
 **4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
