@@ -61,7 +61,6 @@ mirrored file states what holds now.
 
 ## New machine
 
-- Clone the repository to `~/Projects/dotclaude`, run `./sync.sh --install` to copy the mirrored
-  files into `~/.claude` (existing files that differ are kept as `.bak`), and set the
-  repository-local git identity to match the existing history, from
-  `git log -1 --format='%an <%ae>'`, before the first commit. Restart Claude Code so the hooks load.
+- Follow the Install section of the checkout's `README.md`, taking everything (option b), then its
+  identity step before the first commit, with the name and address `git log -1 --format='%an <%ae>'`
+  prints for the existing history.

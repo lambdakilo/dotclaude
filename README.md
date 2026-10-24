@@ -106,6 +106,14 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
 - [`mods/session-usage`](mods/session-usage): a line under the prompt box that shows how many
   minutes the cache stays warm (a warm cache makes the next message cheaper), how full Claude's
   memory of the chat is, and what the session has cost so far.
+- [`presence`](presence/install.sh): my phone gets Claude's pushes, such as a question waiting for
+  an answer, only while the Mac is locked. [`lock-listener.swift`](presence/lock-listener.swift)
+  keeps the file that `CLAUDE_CLIENT_PRESENCE_FILE` in `settings.json` names in step with the
+  screen lock: it is there while the screen is unlocked, and Claude Code skips the push then. Mac
+  only. This builds it and starts it at every login:
+  ```zsh
+  ~/.claude/presence/install.sh
+  ```
 - [`skills/pull-requests`](skills/pull-requests/SKILL.md): how Claude writes a pull request: the
   description, the steps to test it, screenshots, and how it reviews one.
 - [`skills/pull-requests/pane-upload.sh`](skills/pull-requests/pane-upload.sh): puts screenshots
@@ -338,6 +346,15 @@ To get my later changes, update your copy and then do step 2 again:
 
 ```bash
 git -C ~/Projects/dotclaude pull
+```
+
+If you publish your own copy with `sync.sh --commit`, you can give the checkout a git identity of
+its own, such as your GitHub noreply address, so the address your other repositories use stays out
+of its public history:
+
+```bash
+git -C ~/Projects/dotclaude config user.name '<name>' && \
+  git -C ~/Projects/dotclaude config user.email '<address>'
 ```
 
 ## License

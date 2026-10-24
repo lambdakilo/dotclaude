@@ -394,7 +394,8 @@
     ]
   },
   "env": {
-    "CLAUDE_CODE_PLUGIN_DIRS": "~/.claude/mods/session-usage"
+    "CLAUDE_CODE_PLUGIN_DIRS": "~/.claude/mods/session-usage",
+    "CLAUDE_CLIENT_PRESENCE_FILE": "/tmp/claude-client-present"
   },
   "switchModelsOnFlag": false,
   "agentPushNotifEnabled": true,

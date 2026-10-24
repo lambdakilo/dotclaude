@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Ask in a dream review only about security, privacy or a new habit
+## Point a new machine at the README's Install section
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+
+## Ask in a dream review only about security, privacy or a new habit
+
+2026-10-24, commit [60f3bf1](https://github.com/lambdakilo/dotclaude/commit/60f3bf1e3f2ebc11cf96571936dde3ed936dcc94), model claude-opus-5-5, effort xhigh.
 
 **9.**
 > ok these are pretty esoteric. in the future just ask me a input if
