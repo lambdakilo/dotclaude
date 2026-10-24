@@ -253,6 +253,16 @@
         "hooks": [
           {
             "type": "command",
+            "command": "\"$HOME/.claude/hooks/abbreviations-listed.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
             "command": "\"$HOME/.claude/hooks/prompts-md-current.sh\"",
             "timeout": 10
           }

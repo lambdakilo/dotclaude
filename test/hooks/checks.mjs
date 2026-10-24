@@ -354,6 +354,33 @@ const suites = [
     ]
   }],
 
+  ['abbreviations-listed.sh', run => {
+    const work = path.join(home, 'abbr-work'), checkout = path.join(home, 'Projects/dotclaude')
+    const message = (dir, name, prompt, abbreviations = '') => write(path.join(dir, name),
+      `Fix the parser\n\nIt parses.\n\nPrompts behind this commit, as given to Claude Code\n(model m, effort e):\n\n1.\n> ${prompt}\n${abbreviations && `\nAbbreviations:\n${abbreviations}\n`}`)
+    const earlier = (dir, name, abbreviations) => sh(`git init -q ${q(dir)} && git -C ${q(dir)} commit -q --allow-empty -F ${q(message(home, name, 'open it', abbreviations))}`)
+    return [
+      ['refuses a commit whose prompt uses an abbreviation an earlier commit expanded, naming the line to add', () => {
+        earlier(work, 'abbr-0.txt', 'pr: pull request\nmd: Markdown')
+        message(work, 'm1.txt', 'push the pr again')
+        const r = run(bash('git commit -F m1.txt', work))
+        return refused(r) && r.err.includes('\npr: pull request\n') && !r.err.includes('md: Markdown')
+      }],
+      ['lets the same command through the second time', () => quiet(run(bash('git commit -F m1.txt', work)))],
+      ['lets a message through that lists it', () => { message(work, 'm2.txt', 'merge the pr', 'pr: pull request'); return quiet(run(bash('git commit -F m2.txt', work))) }],
+      ['ignores the word inside a longer word or as a file extension', () => { message(work, 'm3.txt', 'fix the prompts in readme.md'); return quiet(run(bash('git commit -F m3.txt', work))) }],
+      ['ignores a commit with no prompts section', () => { write(path.join(work, 'm4.txt'), 'Fix the reader\n\nThe review said:\n> the pr breaks the reader\n'); return quiet(run(bash('git commit -F m4.txt', work))) }],
+      ['ignores a command that makes no commit', () => { message(work, 'b.md', 'close the pr'); return quiet(run(bash('gh pr create --draft --body-file b.md', work))) }],
+      ['counts an abbreviation the configuration checkout expanded', () => {
+        earlier(checkout, 'abbr-1.txt', 'wip: work in progress')
+        message(work, 'm5.txt', 'keep the wip label')
+        const r = run(bash('git commit -F m5.txt', work))
+        return refused(r) && r.err.includes('\nwip: work in progress\n')
+      }],
+      ['reads the message file of a sync.sh --commit', () => { message(checkout, 'c1.txt', 'squash the wip commits'); return refused(run(bash('./sync.sh --commit c1.txt', checkout))) }],
+    ]
+  }],
+
   ['prompt-feedback-box.sh', run => {
     const t = path.join(home, 'feedback.jsonl')
     const box = actions => uses('mcp__ccd_turn__wrap_up', { recap: 'r', ask: 'Commit it?', actions })

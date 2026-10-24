@@ -83,6 +83,9 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   not rebuild that file for it, in a repository that keeps one.
 - [`no-meta-prompts.sh`](hooks/no-meta-prompts.sh): keeps prompts about Claude's own setup out of
   a project's history.
+- [`abbreviations-listed.sh`](hooks/abbreviations-listed.sh): holds back a commit whose quoted
+  prompts use an abbreviation an earlier commit spelled out, such as pr for pull request, until
+  the message spells it out too.
 - [`usage-log.sh`](hooks/usage-log.sh): writes down the tokens each turn used, so you can add up
   a week later.
 

@@ -112,6 +112,7 @@ mirrored=(
   hooks/no-github-posts.sh
   hooks/prompt-feedback-box.sh
   hooks/no-meta-prompts.sh
+  hooks/abbreviations-listed.sh
   hooks/prompts-md.sh
   hooks/prompts-md-current.sh
   hooks/cd-fall-through.sh
