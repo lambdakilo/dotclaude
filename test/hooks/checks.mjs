@@ -116,6 +116,8 @@ const suites = [
     const rules = path.join(config, 'CLAUDE.md')
     const event = (hook_event_name, extra = {}) => ({ hook_event_name, session_id: 'md1', transcript_path: '', ...extra })
     const commit = event('PreToolUse', { tool_input: { command: 'git commit -F msg.txt' } })
+    const skill = path.join(config, 'skills/pull-requests/SKILL.md')
+    const prEdit = event('PreToolUse', { session_id: 'md2', tool_input: { command: 'gh pr edit 7 --body-file body.md' } })
     return [
       ['takes a copy at session start and says nothing', () => { write(rules, '- one\n'); return quiet(run(event('SessionStart'))) }],
       ['adds nothing to a prompt while the file is unchanged', () => quiet(run(event('UserPromptSubmit')))],
@@ -129,6 +131,15 @@ const suites = [
       ['blocks the next commit once with the diff', () => { const r = run(commit); return refused(r) && r.err.includes('+- three') }],
       ['then lets the commit through', () => quiet(run(commit))],
       ['takes a subagent\'s first look as its copy', () => quiet(run({ ...commit, agent_id: 'a1' }))],
+      ['takes a copy of the pull-requests skill at session start', () => { write(skill, '- body\n'); return quiet(run(event('SessionStart', { session_id: 'md2' }))) }],
+      ['lets a commit through after an edit of the skill alone', () => { write(skill, '- body\n- pictures\n'); return quiet(run({ ...commit, session_id: 'md2' })) }],
+      ['blocks the next gh pr edit once with the skill diff', () => { const r = run(prEdit); return refused(r) && r.err.includes('SKILL.md changed') && r.err.includes('+- pictures') }],
+      ['then lets gh pr edit through', () => quiet(run(prEdit))],
+      ['adds the next edit of the skill to the next prompt', () => {
+        write(skill, '- body\n- pictures\n- verify\n')
+        const r = run(event('UserPromptSubmit', { session_id: 'md2' }))
+        return r.code === 0 && context(r).includes('+- verify') && r.err === ''
+      }],
     ]
   }],
 

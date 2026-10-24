@@ -78,7 +78,7 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
 - [`CLAUDE.md`](CLAUDE.md): the rules Claude follows in every project. It names no person or
   company, so you can copy it as it is.
 - [`claude-md-changed.sh`](hooks/claude-md-changed.sh): tells a running session when the rules
-  were changed in another window.
+  or the pull request skill were changed in another window.
 - [`prompt-feedback-box.sh`](hooks/prompt-feedback-box.sh): makes sure replies in the desktop app
   end with a short note on how your prompt could have been better.
 - [`memory-plain-characters.sh`](hooks/memory-plain-characters.sh): points out long dashes in

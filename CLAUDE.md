@@ -144,9 +144,9 @@ apply to one repository belong in that repository's project memory.
 - Re-read this file from disk before writing a commit message or a PR body, and before a PR body
   also `~/.claude/skills/pull-requests/SKILL.md`. A session reads each once, so an edit made
   from another session while this one runs stays invisible until the file is read again.
-  `~/.claude/hooks/claude-md-changed.sh` backs this up for this file: once it differs from the
-  copy a session last saw, the hook adds the diff to the next prompt, or blocks the next commit
-  or `gh pr` create, edit or merge once with the diff.
+  `~/.claude/hooks/claude-md-changed.sh` backs this up for both files: once one differs from the
+  copy a session last saw, the hook adds the diff to the next prompt, or blocks the next `gh pr`
+  create, edit or merge once with the diff, and for this file also the next commit.
 
 ## Pull requests
 
@@ -303,6 +303,12 @@ apply to one repository belong in that repository's project memory.
 - A project's CLAUDE.md holds what Claude runs, such as build, test, verify, install, launch and
   logs, and the rules the code follows. Setup a person does once by hand goes in the README,
   and CLAUDE.md points there.
+- A page meant to be taken in at a glance, such as a schedule, a roadmap, a status page or a
+  README's navigation, fits one MacBook screen without scrolling: a table or columns in place of a
+  long list, and one line per row or bar. Check it with a viewport screenshot at 1440x730, about the
+  browser area of a 13-inch MacBook Air, never with a full-page one alone. A document modelled on
+  another keeps its page size and page count: a copy of a one-page A4 landscape PDF is one A4
+  landscape page, never a page stretched to fit the content.
 
 ## Prompt feedback
 
