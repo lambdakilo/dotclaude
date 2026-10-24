@@ -502,6 +502,10 @@ apply to one repository belong in that repository's project memory.
   closing message says in the first person that something could not be opened, read, reached or
   uploaded, and no browser pane tool ran since the prompt. Its phrase list is a heuristic that backs
   the rule above.
+- Before a reply says that a setup cannot do something, such as install a tool, reach a service or
+  suit a kind of user, the session reads that setup's own install scripts, README and settings, and
+  the guides they point to, such as an onboarding guide in another repository. A limit the reply
+  names cites the file that shows it, or is called not checked.
 - The window layout of the desktop app is the user's. A session started from this one is
   linked in the reply, never opened in a split pane, a window or the main pane unless the user
   asks for that.

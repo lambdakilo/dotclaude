@@ -5,9 +5,27 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Refuse git identity overrides with a hook
+## Read a setup's own docs before naming what it cannot do
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [a question about a hosted agent service left out]
+
+**2.**
+> [a question about the same service for colleagues left out]
+
+**3.**
+> my guy my setup can install git, jq and gh there and my dotclaude
+> connects to slack, drive, email etc
+
+**4.** (answer to whether to add the rule)
+> yes, add a rule to CLAUDE.md that a session reads a setup's own
+> install scripts and docs before saying it can't do something
+
+## Refuse git identity overrides with a hook
+
+2026-10-24, commit [7bed059](https://github.com/lambdakilo/dotclaude/commit/7bed05993d53078e591c23b004996f8383fec34e), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
