@@ -403,6 +403,7 @@ const suites = [
   ['prompt-log.sh', run => {
     const log = prompt => run({ session_id: 'p1', cwd: '/x', prompt })
     const print = (...args) => run('', { args: ['print', ...args], env: { PROMPT_LOG_SESSION: 'p1' } }).out
+    const compacted = 'The context window filled up while you were working, so the conversation was compacted. Please continue from where you left off.'
     return [
       ['logs a prompt and prints nothing', () => quiet(log(`fix the bug in https://example.com/a and tell ${address('bob')}`)) && fs.readFileSync(path.join(config, 'prompt-log/p1.jsonl'), 'utf8').trim().split('\n').length === 1],
       ['prints it for a commit with the addresses replaced', () => print('--commit') === '1.\n> fix the bug in [pasted: an address] and tell [pasted: an address]\n\n'],
@@ -410,6 +411,21 @@ const suites = [
       ['replaces a pasted block with its line count', () => { log('look at this <pasted_content id="1">a\nb\nc</pasted_content>'); return print('--from', '3') === '**3.**\n> look at this [pasted: 3 lines]\n\n' }],
       ['wraps long prompts at 72 columns for a commit', () => { log('word '.repeat(40).trim()); const out = print('--commit', '--from', '4'); return out.startsWith('4.\n') && out.split('\n').length > 3 && out.split('\n').every(l => l.length <= 72) }],
       ['redacts a token and writes a home path with ~', () => { log(`use TOKEN=abc123 in ${otherHome}/Projects/x`); return print('--from', '5').includes('TOKEN=[redacted] in ~/Projects/x') }],
+      ['gives no number to a cross-session notice or the compaction note', () => {
+        log('[Cross-session delivery notice] Your message to another session was held by that session.')
+        log('[Cross-session idle notice] "a", which you asked to be notified about, is idle now.')
+        log(compacted)
+        log('go on')
+        return print('--from', '6') === '**6.**\n> go on\n\n'
+      }],
+      ['counts no compaction note among the prompts from before the log began', () => {
+        jsonl(path.join(config, 'projects/x/p2.jsonl'), [
+          { type: 'user', timestamp: '2020-01-01T00:00:00Z', message: { content: 'first' } },
+          { type: 'user', timestamp: '2020-01-01T00:00:01Z', message: { content: compacted } },
+        ])
+        run({ session_id: 'p2', cwd: '/x', prompt: 'second' })
+        return run('', { args: ['print'], env: { PROMPT_LOG_SESSION: 'p2' } }).out === '**2.**\n> second\n\n'
+      }],
       ['fails without a log for the session', () => run('', { args: ['print'], env: { PROMPT_LOG_SESSION: 'none' } }).code === 1],
     ]
   }],

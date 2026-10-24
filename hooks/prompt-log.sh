@@ -20,9 +20,10 @@
 # The log keeps each prompt as it arrived. print drops what the harness wraps
 # in tags: reminders, artifact context, peer session messages, subagent
 # hand-backs and notifications, and an entry with nothing else in it gets no
-# number. A pasted block comes out as [pasted: n lines], URLs and email
-# addresses as [pasted: an address], a home path with ~, a temporary path as
-# [a temporary path] and a password or token value as [redacted].
+# number, nor does a cross-session notice or the app's note that it compacted
+# the conversation. A pasted block comes out as [pasted: n lines], URLs and
+# email addresses as [pasted: an address], a home path with ~, a temporary path
+# as [a temporary path] and a password or token value as [redacted].
 # A prompt identical to the one before it, such as one sent again after a hook
 # blocked it, is printed once.
 # mask applies those last masks alone, so prompts-md.sh can apply them to
@@ -107,7 +108,9 @@ for f in "$config_dir"/projects/*/"$session".jsonl; do
   [ -f "$f" ] && transcript="$f" && break
 done
 
-clean='def clean:
+clean='def typed:
+  . != "" and (test("\\A(<command-|<local-command-|\\[Request interrupted|\\[Cross-session [a-z]+ notice\\]|The context window filled up while you were working)") | not);
+def clean:
   gsub("<(?<t>system-reminder|artifact-view-context|cross-session-message|agent-message|task-notification|teammate-message)[\\s>][\\s\\S]*?</\\k<t>\\s*>"; "")
   | sub("\\A\\s+"; "") | sub("\\s+\\z"; "");'
 
@@ -143,7 +146,7 @@ clean='def clean:
         (.message.content
           | if type == "string" then . elif type == "array" then map(select(.type == "text") | .text) | join("") else "" end
           | clean) as $p
-        | select($p != "" and ($p | test("\\A(<command-|<local-command-|\\[Request interrupted)") | not))
+        | select($p | typed)
         | {t: .timestamp, prompt: true}
       else empty end' "$transcript" 2>/dev/null; fi) \
   --slurpfile settings <(jq -c '.modelSettings // {}' "$config_dir/settings.json" 2>/dev/null) \
@@ -162,7 +165,7 @@ clean='def clean:
   | ([.[] | {t: (.timestamp | epoch), p: (.prompt // "" | clean
       | gsub("<pasted_content[^>]*>(?<b>[\\s\\S]*?)</pasted_content[^>]*>";
           "[pasted: \(.b | sub("\\A\\s+"; "") | sub("\\s+\\z"; "") | split("\n") | length) lines]"))}
-      | select(.p != "")]
+      | select(.p | typed)]
       | reduce .[] as $x ([]; if length > 0 and .[-1].p == $x.p then . else . + [$x] end)) as $log
   | ($log[0].t // 0) as $start
   | ([$rec[] | select(.prompt and (.t | epoch) < $start - 5)] | length) as $offset
