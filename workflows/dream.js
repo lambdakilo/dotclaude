@@ -783,7 +783,7 @@ const PROMPT_LOG = `Every prompt the user typed since 2026-10-15 is one line of 
 const WINDOW = `This run covers ${scout.since} to ${scout.now}. A finding needs evidence from inside that window. To show that a pattern recurs, you may also search the transcripts and files of the ${LOOKBACK_DAYS} days before it, from ${scout.lookbackFrom}; the main transcripts are the files ${FIND_MAIN} -newermt ${scout.lookbackFrom} prints. ${FIND_ONCE} ${PROMPT_LOG} ${BACKLOG_NOTE}`
 const CARRIED = `A file listed with a from time before ${scout.since} was carried over from an earlier run that did not get to it: its window starts at its own from time, so evidence from there on counts.`
 
-const OUTPUT = `Return findings in the schema. Each finding is one concrete, separate change with evidence a reader can open. Prefer fewer, well-evidenced findings over many thin ones. A one-off is not a finding unless its cost was high. Use kind "habit" with target "habit" for something the user should do differently, and the other kinds for a change to a file. Put what you read and what you skipped in coverage.`
+const OUTPUT = `Read ~/.claude/CLAUDE.md and ~/.claude/rules/ first: a finding that a rule there already covers is no news, and one about a rule Claude broke names the rule. Return findings in the schema. Each finding is one concrete, separate change with evidence a reader can open. Prefer fewer, well-evidenced findings over many thin ones. A one-off is not a finding unless its cost was high. Use kind "habit" with target "habit" for something the user should do differently, and the other kinds for a change to a file. Put what you read and what you skipped in coverage.`
 
 const TRANSCRIPT_JQ = `jq -r 'select(.sessionId == (input_filename | split("/") | last | rtrimstr(".jsonl")) and .isSidechain != true and .isMeta != true) | select(.type == "user" or .type == "assistant") | [.timestamp, .type, (.message.content | if type == "string" then . else (map(select(.type == "text") | .text) | join("\\n")) end)] | select(.[2] != "") | "\\(.[0]) \\(.[1]): \\(.[2][0:3000])"' FILE`
 
@@ -1081,7 +1081,7 @@ const BRIEF_PROMPT = `Write the user's brief for Monday morning from GitHub, rea
 - Open pull requests the user authored: gh search prs --author @me --state open --limit 30 --json url,title,repository,isDraft,updatedAt. For each, gh pr view <url> --json reviewDecision,statusCheckRollup,mergeable,reviewRequests, and the unresolved review threads from gh api graphql (pullRequest, reviewThreads, isResolved).
 - Pull requests waiting for the user's review: gh search prs --review-requested @me --state open --limit 30 --json url,title,repository,updatedAt.
 - Issues assigned to the user: gh search issues --assignee @me --state open --limit 30 --json url,title,repository,updatedAt.
-Return Markdown of at most 4,000 characters: one line per item with its link and what holds it (a draft, failing checks, changes requested, unresolved threads, waiting for a review, a merge conflict), items that block other people first. Under an item that needs the user to act, put the first prompt they could give a session in a fenced text block.
+Read the Prose section of ~/.claude/CLAUDE.md and the files in ~/.claude/rules/ first, and follow them. Return Markdown of at most 4,000 characters: one line per item with its link and what holds it (a draft, failing checks, changes requested, unresolved threads, waiting for a review, a merge conflict), items that block other people first. Under an item that needs the user to act, put the first prompt they could give a session in a fenced text block.
 ${GROUND}`
 
 const oldestMs = scout.oldestTranscript ? Date.parse(scout.oldestTranscript) : NaN
@@ -1148,7 +1148,7 @@ const verifyOne = (p, phaseName) => parallel([
 ${proposalText(p)}
 ${GROUND}`, { label: `evidence ${p.id}`, phase: phaseName, schema: EVIDENCE_CHECK }),
   () => dreamAgent(`Decide whether this proposal from a dream run fits the user's Claude Code setup, and write the shell that applies it.
-Read ~/.claude/CLAUDE.md, ~/.claude/settings.json and, when the target is elsewhere, the target file.
+Read ~/.claude/CLAUDE.md, ~/.claude/rules/, ~/.claude/settings.json and, when the target is elsewhere, the target file.
 - Drop it when an existing rule or setting already covers it (name it in alreadyCoveredBy), when it contradicts a rule the user chose deliberately, or when it adds always-loaded text without enough benefit.
 - Revise it when a hook, permission rule or setting would enforce it better than prose, or when it can be shorter.
 - For a kept or revised change to a file, write the script following the Permissions section of ~/.claude/CLAUDE.md: shell only, sed to insert at a named anchor (check with grep -c that the anchor occurs exactly once), jq for JSON, a cat heredoc for a new file. Do not run it. For a change to a mirrored file, end the script with the sync.sh run and the diff that the Public configuration repository section describes. The script never commits or pushes: the session that applies it writes the commit, with that session's own prompts. Leave script empty for a habit or for a skill the user should try first.
@@ -1561,7 +1561,7 @@ if (!steps.length && openItems.length) log('No scripts were written, so the repo
 
 const report = await dreamAgent(`Write the report of a dream run for the user as Markdown to ${OUT}/${scout.runId}.md (expand ~, create the directory). This is the one file this step writes. The proposals' scripts are already in ${SCRIPTS_DIR}/.
 
-The user reads the report only in the chat, where the session that started the run shows all of it, so it has to read well there: at most about 30,000 characters, no scripts, no <details> blocks, and nothing said twice. Follow the Prose rules of ~/.claude/CLAUDE.md. The file needs no "Prompt feedback" section.
+The user reads the report only in the chat, where the session that started the run shows all of it, so it has to read well there: at most about 30,000 characters, no scripts, no <details> blocks, and nothing said twice. Read the Prose section of ~/.claude/CLAUDE.md and the files in ~/.claude/rules/ first, and follow them. The file needs no "Prompt feedback" section.
 
 Number and order the changes exactly as the plan below does, and name a proposal only by its plan id. A habit says what the user does, when, and what it changes, in plain words, and no change depends on a habit.
 
