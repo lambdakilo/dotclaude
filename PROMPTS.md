@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Hold the fenced-command rule to Markdown a person reads
+## Ask in a dream review only about security, privacy or a new habit
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**9.**
+> ok these are pretty esoteric. in the future just ask me a input if
+> its something shady/security/privacy or if i have to change my
+> behavior so i ack it
+
+## Hold the fenced-command rule to Markdown a person reads
+
+2026-10-24, commit [d1a5e8a](https://github.com/lambdakilo/dotclaude/commit/d1a5e8ab24dd717dd9a2fce83a0f0be0ade12fb9), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
