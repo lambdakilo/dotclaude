@@ -189,7 +189,7 @@ const SCOUT = {
 const OLDER = {
   type: 'object',
   required: ['older', 'subagents'],
-  properties: { older: { type: 'array', items: SESSION }, subagents: { type: 'array', items: SESSION } },
+  properties: { older: { type: 'array', items: SESSION }, subagents: { type: 'array', items: { ...SESSION, properties: { ...SESSION.properties, agents: { type: 'number', description: 'For a workflow run folder, how many of its agent transcripts the window holds' } } } } },
 }
 
 const BACKLOG_CHECK = {
@@ -810,6 +810,12 @@ ${GROUND}`,
   }
 }
 
+const RUN_FOLDER_STEPS = `For a workflow run folder, read the run before its agents:
+1. Its journal.jsonl has a started record with each agent's label and a result record with what it returned. Query it with jq, such as jq -c 'select(.type == "started") | [.agentId, .label]' and jq -c 'select(.type == "result") | [.agentId, (.result | tostring | length)]', and never print it whole, since it holds every result in full. The agent-*.meta.json files beside the transcripts name each agent's phase.
+2. Scan each transcript in the window with one jq pass instead of reading it, for its first and last timestamp, its failed tool calls, those a classifier or a permission check denied, and how many times it called StructuredOutput:
+jq -nc 'reduce inputs as $r ({first: null, last: null, failed: 0, denied: 0, structured: 0}; .first //= $r.timestamp | .last = ($r.timestamp // .last) | [$r | select(.type == "user") | .message.content | arrays | .[] | select(.type == "tool_result" and .is_error == true)] as $e | .failed += ($e | length) | .denied += ([$e[] | select(.content | tostring | test("classifier|denied"))] | length) | .structured += ([$r | select(.type == "assistant") | .message.content | arrays | .[] | select(.type == "tool_use" and .name == "StructuredOutput")] | length))' FILE
+3. Open in full only the agents that stand out, with a denial, StructuredOutput called more than once, five or more failed tool calls, no result in the journal, or a run far longer than others with the same label, then one agent of each label family, the label up to its first space, such as fit, evidence or usage. Open at most ten, those that stand out first.`
+
 function subagentTask(batch, label) {
   return {
     source: 'subagents',
@@ -817,7 +823,7 @@ function subagentTask(batch, label) {
     label,
     sessions: batch,
     prompt: `Read these Claude Code subagent transcripts, the logs of agents that sessions and workflows started, and find what should change in the prompts, workflows, skills or hooks that drove them.
-${batch.map(s => `- ${s.path} (${Math.round(s.bytes / 1024)} KB)`).join('\n')}
+${batch.map(s => s.agents ? `- the workflow run folder ${s.path}: ${s.agents} agent transcripts modified ${subagentsFrom ? `after ${subagentsFrom} and ` : ''}not after ${scout.now}, ${Math.round(s.bytes / 1048576)} MB in all. Read only those.` : `- ${s.path} (${Math.round(s.bytes / 1024)} KB)`).join('\n')}${batch.some(s => s.agents) ? `\n${RUN_FOLDER_STEPS}` : ''}
 
 A workflow agent's file sits in a folder named after its run, beside a journal.jsonl that records what each agent returned, and the session that started it is the transcript named after the folder above subagents/. Extract the conversation with jq, for example:
 jq -r 'select(.type == "user" or .type == "assistant") | [.timestamp, .type, (.message.content | if type == "string" then . else (map(select(.type == "text") | .text) | join("\\n")) end)] | select(.[2] != "") | "\\(.[0]) \\(.[1]): \\(.[2][0:2000])"' FILE
@@ -1205,7 +1211,7 @@ function verifyTier(n, proposals) {
 const olderListed = (DEEP || only.includes('subagents'))
   ? outside('merge', () => dreamAgent(`List two sets of Claude Code transcripts.
 1. older: ${DEEP ? `the main session transcripts whose lastActivity is after ${new Date(deepFrom).toISOString()} and not after ${new Date(deepEnd).toISOString()}: of the files ${FIND_MAIN} -newermt <the first of those times> prints. ${LAST_ACTIVITY}` : 'return an empty list.'}
-2. subagents: ${only.includes('subagents') ? `the subagent transcripts ${subagentsFrom ? `modified after ${subagentsFrom}` : 'of every age'}: the files find ~/.claude/projects/ -path '*/subagents/*' -type f -name 'agent-*.jsonl' prints, newest first, at most ${MAX_SUBAGENT_FILES}.` : 'return an empty list.'}
+2. subagents: ${only.includes('subagents') ? `the subagent transcripts modified ${subagentsFrom ? `after ${subagentsFrom} and ` : ''}not after ${scout.now}, so this run's own agents wait for the next run: the files find ~/.claude/projects/ -path '*/subagents/*' -type f -name 'agent-*.jsonl'${subagentsFrom ? ` -newermt ${subagentsFrom}` : ''} ! -newermt ${scout.now} prints. Return one row for each workflow run folder, a folder named wf_* under subagents/workflows/, with its absolute path without a trailing slash as path, how many of those files it holds as agents, their total size as bytes and the newest of their modification times as mtime, and one row for each other file, newest first, at most ${MAX_SUBAGENT_FILES} rows.` : 'return an empty list.'}
 ${FIND_ONCE} ${LIST_FILES}
 ${GROUND}`, { label: 'list older', phase: 'Older', effort: 'low', schema: OLDER }))
   : Promise.resolve(null)
@@ -1213,7 +1219,8 @@ ${GROUND}`, { label: 'list older', phase: 'Older', effort: 'low', schema: OLDER 
 const tier4 = olderListed.then(list => {
   const out = []
   if (list && only.includes('subagents')) {
-    const subBatches = makeBatches(onePerName(list.subagents).slice(0, MAX_SUBAGENT_FILES), 6)
+    const rows = onePerName(list.subagents).slice(0, MAX_SUBAGENT_FILES)
+    const subBatches = rows.filter(s => s.agents).sort(byNewest).map(s => [s]).concat(makeBatches(rows.filter(s => !s.agents), 6))
     subBatches.forEach((b, i) => out.push(subagentTask(b, `subagents ${i + 1}/${subBatches.length}`)))
   }
   if (list && DEEP) {
