@@ -32,6 +32,13 @@ mirrored file states what holds now.
   the git-ignored `sync-deny.txt` fail the scan in any case, and `sync.sh --check-message`, run from
   the untracked commit-msg hook of the checkout and of each mirror, holds commit messages to the
   same list.
+- `CLAUDE.md`, `README.md` and the pull-requests skill wrap prose at 100 columns, a list item's
+  later lines indented under its text, and a plain `sync.sh` run stops on a longer line. After an
+  edit of one of them, run `~/Projects/dotclaude/reflow.sh` bare in place of a reflow written for
+  the edit, as a command of its own rather than chained with `sync.sh`, so the hook that watches
+  `CLAUDE.md` counts the change as the session's own edit. It fills greedily each paragraph that
+  differs from the checkout's last commit, in `~/.claude` and in the checkout, from the line before
+  the first change, and leaves the other paragraphs as they are.
 - `sync.sh --commit <file>` commits and pushes the checkout to the default branch, then every mirror
   below, with the paths to commit after the file when the checkout holds other changes too. No PR:
   the checkout has one owner. A mirrored JSON file changed locally goes back into the checkout's key

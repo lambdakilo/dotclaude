@@ -22,12 +22,12 @@
 # changed both locally and by the pull stops the run. Literals listed one per
 # line in sync-allow.txt are exempt from the scan.
 #
-# Checks: this script and every mirrored shell script must parse, every
-# mirrored file needs an entry in README.md, its own or its folder's, and no
-# prose line of CLAUDE.md, README.md or the pull-requests skill may pass 100
-# columns, leaving out front matter, code blocks, tables and the README's
-# evals block. A failed check, like a scan hit, stops the mirror copy and the
-# commit.
+# Checks: this script, reflow.sh and every mirrored shell script must parse,
+# every mirrored file needs an entry in README.md, its own or its folder's,
+# and no prose line of CLAUDE.md, README.md or the pull-requests skill may
+# pass 100 columns, leaving out front matter, code blocks, tables and the
+# README's evals block; reflow.sh rewraps the paragraphs an edit touched. A
+# failed check, like a scan hit, stops the mirror copy and the commit.
 #
 # Key order: a mirrored JSON file changed locally is first put back into the
 # key order the checkout has, when jq is installed, so a tool that writes the
@@ -290,7 +290,7 @@ scan "credential-like string" -E \
 scan "credential-like assignment" -i -E \
   -e '(api[_-]?key|secret|token|passw(or)?d)[^A-Za-z0-9]{0,3}[:=][^A-Za-z0-9]{0,3}[A-Za-z0-9/+_.-]{16,}'
 
-for path in sync.sh "${mirrored[@]}"; do
+for path in sync.sh reflow.sh "${mirrored[@]}"; do
   case "$path" in *.sh) bash -n "$path" || failed=1 ;; esac
 done
 for path in "${mirrored[@]}"; do
@@ -318,6 +318,7 @@ long="$(LC_ALL=C awk '
 ' CLAUDE.md README.md skills/pull-requests/SKILL.md)"
 if [ -n "$long" ]; then
   printf 'sync: line over 100 columns in\n%s\n' "$long" >&2
+  printf 'sync: %s rewraps them, run it on its own\n' "$checkout/reflow.sh" >&2
   failed=1
 fi
 
