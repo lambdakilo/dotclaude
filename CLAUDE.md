@@ -148,8 +148,10 @@ apply to one repository belong in that repository's project memory.
 - An edit made to this file or to `~/.claude/skills/pull-requests/SKILL.md` from another session
   reaches a running one through `~/.claude/hooks/claude-md-changed.sh`, in place of a re-read before
   a commit message or a PR body: once one differs from the copy the session last saw, the hook adds
-  the diff to the next prompt, or blocks the next `gh pr` create, edit or merge once with the diff,
-  and for this file also the next commit or `sync.sh --commit`.
+  the diff to the next prompt, or to the next `gh pr` create, edit or merge, and for this file also
+  to the next commit or `sync.sh --commit`. It blocks that command once with the diff, unless every
+  change lies in a section of this file whose rules shape no commit message or PR body, such as
+  Running things.
 
 ## Pull requests
 

@@ -5,14 +5,15 @@
 # A session reads CLAUDE.md and the pull-requests skill once, so an edit made
 # from another session while it runs stays invisible to it. This keeps a copy
 # of each file per session and, once one differs from its copy, adds the diff
-# to the next prompt, or blocks the next command that depends on it once with
-# the diff on stderr: a commit or pull request command for CLAUDE.md, a pull
-# request command for the skill. A tool call that starts while a file matches
-# its copy and changes it within a minute is the session's own edit and updates
-# the copy, apart from an Edit or Write of the other file and a sync.sh run
-# whose log in the checkout's git directory is missing or names the file as
-# installed during the call. Anything else missing lets the prompt or the
-# command through.
+# to the next prompt or to the next command that depends on it: a commit or
+# pull request command for CLAUDE.md, a pull request command for the skill.
+# That command is blocked once with the diff on stderr, unless every change
+# lies in a CLAUDE.md section named in context_only. A tool call that starts
+# while a file matches its copy and changes it within a minute is the
+# session's own edit and updates the copy, apart from an Edit or Write of the
+# other file and a sync.sh run whose log in the checkout's git directory is
+# missing or names the file as installed during the call. Anything else
+# missing lets the prompt or the command through.
 
 set -u
 
@@ -95,9 +96,28 @@ case "$event" in
   *) exit 0 ;;
 esac
 
-limit=80 notes=""
+limit=80 notes="" block=""
+# CLAUDE.md sections whose rules shape no commit message or PR body.
+context_only="Remote state|Git commands|Running things|Documents read aloud|Permissions|Memory hygiene|Prompt feedback"
+
+# Succeeds when every changed line of the diff from the copy lies in a context_only section.
+context_only_diff() {
+  local touched
+  touched="$(diff -U0 "$1" "$2" | awk -v file="$2" '
+    BEGIN { while ((getline l < file) > 0) { n++; s[n] = (l ~ /^## /) ? substr(l, 4) : s[n - 1] } }
+    /^[-+]## / { print "(heading)" }
+    /^@@ / {
+      split(substr($3, 2), r, ",")
+      first = r[1] + 0
+      count = (r[2] == "") ? 1 : r[2] + 0
+      if (count == 0) print s[first]
+      for (i = first; i < first + count; i++) print s[i]
+    }')"
+  [ -n "$touched" ] && ! printf '%s\n' "$touched" | grep -qvxE "$context_only"
+}
+
 check() {
-  local name="$1" file="$2" snapshot="$dir/$key$3" needed="$4" changes total
+  local name="$1" file="$2" snapshot="$dir/$key$3" needed="$4" changes total stops=""
   [ -f "$file" ] || return 0
   if [ "$event" = SessionStart ]; then
     cp "$file" "$snapshot" 2>/dev/null
@@ -108,6 +128,7 @@ check() {
   # takes its first look as the copy it loaded.
   [ -f "$snapshot" ] || { cp "$file" "$snapshot" 2>/dev/null; return 0; }
   cmp -s "$file" "$snapshot" && return 0
+  [ "$file" = "${files[0]}" ] && context_only_diff "$snapshot" "$file" || stops=true
   changes="$(diff -U2 "$snapshot" "$file" | tail -n +3)"
   total="$(printf '%s\n' "$changes" | wc -l | tr -d ' ')"
   if [ "$total" -gt "$limit" ]; then
@@ -115,6 +136,7 @@ check() {
 [$((total - limit)) more diff lines cut, read the whole file with the Read tool]"
   fi
   cp "$file" "$snapshot" 2>/dev/null || return 0
+  [ -n "$stops" ] && block=true
   notes="${notes:+$notes
 
 }$name changed since this session last saw it. The diff below is in force now:
@@ -125,9 +147,8 @@ check "~/.claude/CLAUDE.md" "${files[0]}" "${suffixes[0]}" "$guarded"
 check "~/.claude/skills/pull-requests/SKILL.md" "${files[1]}" "${suffixes[1]}" "$pr"
 [ -n "$notes" ] || exit 0
 
-if [ "$event" = UserPromptSubmit ]; then
-  jq -n --arg context "$notes" '{hookSpecificOutput: {hookEventName: "UserPromptSubmit", additionalContext: $context}}'
-  exit 0
+if [ "$event" = PreToolUse ] && [ "$block" = true ]; then
+  printf '%s\n%s\n' "Blocked once, so no part of the command ran. Bring the message or body in line with the diff below, then run the whole command again." "$notes" >&2
+  exit 2
 fi
-printf '%s\n%s\n' "Blocked once, so no part of the command ran. Bring the message or body in line with the diff below, then run the whole command again." "$notes" >&2
-exit 2
+jq -n --arg event "$event" --arg context "$notes" '{hookSpecificOutput: {hookEventName: $event, additionalContext: $context}}'

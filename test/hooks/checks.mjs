@@ -232,6 +232,37 @@ const suites = [
         const r = run({ ...commit, session_id: 'md3' })
         return refused(r) && r.err.includes('+- peer again') && !r.err.includes('SKILL.md')
       }],
+      ['lets a commit through with the diff as context when only Running things changed', () => {
+        write(rules, '# Rules\n\n## Commit messages\n\n- wrap\n\n## Running things\n\n- stop the stack\n'); run(event('SessionStart', { session_id: 'md4' }))
+        write(rules, '# Rules\n\n## Commit messages\n\n- wrap\n\n## Running things\n\n- stop the stack\n- probe first\n')
+        const r = run({ ...commit, session_id: 'md4' })
+        return r.code === 0 && r.err === '' && context(r).includes('+- probe first')
+      }],
+      ['then lets the next commit through', () => quiet(run({ ...commit, session_id: 'md4' }))],
+      ['blocks a commit once when Commit messages changed', () => {
+        write(rules, '# Rules\n\n## Commit messages\n\n- wrap at 72\n\n## Running things\n\n- stop the stack\n- probe first\n')
+        const r = run({ ...commit, session_id: 'md4' })
+        return refused(r) && r.err.includes('+- wrap at 72')
+      }],
+      ['blocks a commit when one of several changes lies outside the context-only sections', () => {
+        write(rules, '# Rules\n\n## Commit messages\n\n- wrap at 80\n\n## Running things\n\n- stop the stack\n- probe once\n')
+        const r = run({ ...commit, session_id: 'md4' })
+        return refused(r) && r.err.includes('+- probe once') && r.err.includes('+- wrap at 80')
+      }],
+      ['blocks a commit when a heading changed', () => {
+        write(rules, '# Rules\n\n## Commit messages\n\n- wrap at 80\n\n## Running things\n\n- stop the stack\n- probe once\n\n## Releases\n\n- tag\n')
+        return refused(run({ ...commit, session_id: 'md4' }))
+      }],
+      ['blocks a commit when the text above the first heading changed', () => {
+        write(rules, '# Rules for all\n\n## Commit messages\n\n- wrap at 80\n\n## Running things\n\n- stop the stack\n- probe once\n\n## Releases\n\n- tag\n')
+        return refused(run({ ...commit, session_id: 'md4' }))
+      }],
+      ['still blocks gh pr edit for a skill change beside a Running things change', () => {
+        write(rules, '# Rules for all\n\n## Commit messages\n\n- wrap at 80\n\n## Running things\n\n- stop the stack\n- probe twice\n\n## Releases\n\n- tag\n')
+        write(skill, '- body\n- n6\n')
+        const r = run({ ...prEdit, session_id: 'md4' })
+        return refused(r) && r.err.includes('+- n6') && r.err.includes('+- probe twice')
+      }],
     ]
   }],
 
