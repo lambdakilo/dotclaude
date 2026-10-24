@@ -590,11 +590,12 @@ apply to one repository belong in that repository's project memory.
   memory. When starting in a parent folder like `~/Projects`, also read the memory of the project
   you end up working in, under
   `~/.claude/projects/-Users-<user>-Projects-<project>/memory/MEMORY.md`.
-- Only `MEMORY.md` loads when a session starts, the notes it links to do not. Before a reply
-  calls a task blocked or hands a step of it to the user, grep the project's memory directory
-  for the task's words, such as upload, login or screenshot, and try each recipe it finds. A
-  tool that has failed to connect twice is not tried a third time in that turn: look for
-  another route.
+- Only `MEMORY.md` loads when a session starts, the notes it links to do not. Before a step that an
+  index line names, such as adding a worktree, starting the stack, switching a shared checkout, an
+  upload or a login, open the note behind that line and follow it. Before a reply calls a task
+  blocked or hands a step of it to the user, grep the project's memory directory for the task's
+  words, such as upload, login or screenshot, and try each recipe it finds. A tool that has failed
+  to connect twice is not tried a third time in that turn: look for another route.
 - A file a connector cannot open gets one retry of the same call. A file that a member of
   another organisation posted in a shared channel, such as a Slack Connect channel, lives in
   that organisation's workspace, which the connector's token cannot reach, so the retry fails
