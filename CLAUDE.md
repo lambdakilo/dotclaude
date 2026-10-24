@@ -159,6 +159,14 @@ apply to one repository belong in that repository's project memory.
 - One draft PR per session. Everything a session is asked to change goes to the branch of the
   PR in play, follow-ups to the work under review and unrelated small changes alike, and a
   second PR is opened only when the user says so in that session.
+- A check or review the user asks for on a PR whose author is the user, such as of its links or its
+  pages, ends with the fixes the session would recommend committed and pushed to that PR's branch in
+  the same turn, and the reply lists each fix with its commit, so a no costs one revert. A prompt
+  that asks a question, for thoughts, a yes or no or a why, or says to change nothing yet, gets an
+  answer only. A fix the request, the code or a source cannot settle, such as a choice between two
+  layouts, is asked as under Running things, and a step beyond the branch, such as a merge or a
+  change outside the repository, stays a proposal. A review of a PR another author opened stays
+  findings for that author, as the `pull-requests` skill says.
 - A change on that branch to a file every branch of the repository reads, such as the pull request
   template, `AGENTS.md` or `CLAUDE.md`, the test runner's config or the git hooks, holds nowhere
   else until the PR merges. The reply that commits it says so and offers, in the next-step box, to

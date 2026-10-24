@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Show each dream review question's place among the questions
+## Commit the fixes a check on the user's own PR recommends
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> dream review
+
+(p14: commit the fixes a check on the user's own PR recommends, add
+it to dotclaude?)
+> Add it (Recommended)
+
+## Show each dream review question's place among the questions
+
+2026-10-24, commit [c163935](https://github.com/lambdakilo/dotclaude/commit/c163935d777b193c676cf149cb929894d41cff4f), model claude-opus-5-5, effort xhigh.
 
 **8.**
 > oof can you add a p12 out of something so ican see how manyproposals
