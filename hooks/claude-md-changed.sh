@@ -32,7 +32,7 @@ event="" key="" pr="" guarded="" tool="" call="" target="" syncs=""
   .hook_event_name // "",
   (.session_id // "") + (if (.agent_id // "") == "" then "" else "-" + .agent_id end),
   ((.tool_input.command // "") | test("(^|[^A-Za-z0-9_./-])gh pr (create|edit|merge)")),
-  ((.tool_input.command // "") | test("(^|[^A-Za-z0-9_./-])(git( -[Cc] [^ ]+)* commit|gh pr (create|edit|merge))")),
+  ((.tool_input.command // "") | test("(^|[^A-Za-z0-9_./-])(git( -[Cc] [^ ]+)* commit|gh pr (create|edit|merge))([^A-Za-z0-9_-]|$)")),
   .tool_name // "",
   .tool_use_id // "",
   .tool_input.file_path // "",

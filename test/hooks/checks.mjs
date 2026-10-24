@@ -145,6 +145,11 @@ const suites = [
       ['lets other commands through after an edit', () => { write(rules, '- one\n- two\n- three\n'); return quiet(run(event('PreToolUse', { tool_input: { command: 'ls' } }))) }],
       ['blocks the next commit once with the diff', () => { const r = run(commit); return refused(r) && r.err.includes('+- three') }],
       ['then lets the commit through', () => quiet(run(commit))],
+      ['lets git commit-tree and commit-graph through after an edit', () => {
+        write(rules, '- one\n- two\n- three\n- four\n')
+        return quiet(run(event('PreToolUse', { tool_input: { command: 'git commit-graph write && c=$(git commit-tree "$tree" -m pictures)' } })))
+      }],
+      ['still blocks git -C <dir> commit after that edit', () => refused(run(event('PreToolUse', { tool_input: { command: 'git -C repo commit -F msg.txt' } })))],
       ['takes a subagent\'s first look as its copy', () => quiet(run({ ...commit, agent_id: 'a1' }))],
       ['takes a copy of the pull-requests skill at session start', () => { write(skill, '- body\n'); return quiet(run(event('SessionStart', { session_id: 'md2' }))) }],
       ['lets a commit through after an edit of the skill alone', () => { write(skill, '- body\n- pictures\n'); return quiet(run({ ...commit, session_id: 'md2' })) }],
