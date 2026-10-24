@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Own a tool's mistake in Prompt feedback and keep a bare run bare
+## Check every page made for the user at 1440x730
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+
+## Own a tool's mistake in Prompt feedback and keep a bare run bare
+
+2026-10-24, commit [1cb91bc](https://github.com/lambdakilo/dotclaude/commit/1cb91bc1281371a8c1b893ecf1be80a3db4e9197), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
