@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep a change to a shared file in the PR in play, with no offer
+## Leave a person's own entry in a shared document to them
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**10.**
+> Do this task here: "Carry two new wiki edits into the intra handbook"
+
+(How should the two wiki edits, a colleague's contact row and the new
+expense app paragraph, land in the handbook repository?)
+> hold the phone what. [a colleague's] contact row? they should add it
+> themselves. fix in future so that you dont suggest even edit like
+> this
+
+## Keep a change to a shared file in the PR in play, with no offer
+
+2026-10-24, commit [3036182](https://github.com/lambdakilo/dotclaude/commit/3036182b0420854a7eb6c875138ae0814958174a), model claude-opus-5-5, effort xhigh.
 
 **17.**
 > bro what. just incorporate always the things to the same pr

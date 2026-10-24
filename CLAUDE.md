@@ -517,6 +517,10 @@ apply to one repository belong in that repository's project memory.
   the browser pane names the button that saves it, and the session reads that page as it stands
   before its first navigate, reload or click away from it, saves what is still unsaved and
   leaves only once the input is saved.
+- Another person's own entry in a shared document, such as their row in a contact list with their
+  phone number, title and photo, is theirs to add, change or remove. A session never writes one or
+  carries it over for them, also when it shows up in another copy such as an old wiki, and never
+  proposes to; it may say that the entry is missing from the copy in use.
 - A request to confirm something drafted, such as issue titles, a message or names to create,
   carries the draft itself into the question: AskUserQuestion with every item written out in
   the question or in an option's preview, never a next-step box question that points at a
