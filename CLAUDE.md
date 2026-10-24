@@ -504,8 +504,11 @@ apply to one repository belong in that repository's project memory.
   the rule above.
 - Before a reply says that a setup cannot do something, such as install a tool, reach a service or
   suit a kind of user, the session reads that setup's own install scripts, README and settings, and
-  the guides they point to, such as an onboarding guide in another repository. A limit the reply
-  names cites the file that shows it, or is called not checked.
+  the guides they point to, such as an onboarding guide in another repository. Before a reply
+  repeats what a service says it does, such as a data residency or privacy claim on its product
+  page, the session checks it against the service's own docs and privacy policy, and a claim they
+  contradict is given with both sources. A limit or claim the reply names cites the file or page
+  that shows it, or is called not checked.
 - The window layout of the desktop app is the user's. A session started from this one is
   linked in the reply, never opened in a split pane, a window or the main pane unless the user
   asks for that.

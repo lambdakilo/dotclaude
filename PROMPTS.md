@@ -5,9 +5,21 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Read a setup's own docs before naming what it cannot do
+## Check a service's claims against its docs before repeating them
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**5.**
+> [questions doubting the service's privacy and data residency claims
+> left out]
+
+**6.** (answer to whether to widen the rule)
+> yes, widen the new CLAUDE.md rule so a service's claims are checked
+> against its own docs and privacy policy before a reply repeats them
+
+## Read a setup's own docs before naming what it cannot do
+
+2026-10-24, commit [ed9a4e7](https://github.com/lambdakilo/dotclaude/commit/ed9a4e7d6275021d2446c082671c09348be507df), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about a hosted agent service left out]
