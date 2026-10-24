@@ -172,10 +172,10 @@ apply to one repository belong in that repository's project memory.
   change outside the repository, stays a proposal. A review of a PR another author opened stays
   findings for that author, as the `pull-requests` skill says.
 - A change on that branch to a file every branch of the repository reads, such as the pull request
-  template, `AGENTS.md` or `CLAUDE.md`, the test runner's config or the git hooks, holds nowhere
-  else until the PR merges. The reply that commits it says so and offers, in the next-step box, to
-  move it to a PR of its own off the default branch. Until the merge, a memory note or reply about
-  it names the PR it waits on, never a date it holds since.
+  template, `AGENTS.md` or `CLAUDE.md`, the test runner's config or the git hooks, stays in the PR
+  in play like any other, and no reply offers to move it to a PR of its own. It holds nowhere else
+  until the PR merges, so the reply that commits it says so, and until the merge a memory note or
+  reply about it names the PR it waits on, never a date it holds since.
 - Leave out meta prompts: anything about Claude Code itself, its memory, this rules file, or how
   PR bodies are laid out in general, even when the same prompt also asks for a small fix to the
   PR. Only prompts about the change under review belong in the PR, and a prompt that adds to or

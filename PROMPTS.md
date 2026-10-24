@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep the review page's PR, progress and review in a side column
+## Keep a change to a shared file in the PR in play, with no offer
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**17.**
+> bro what. just incorporate always the things to the same pr
+
+## Keep the review page's PR, progress and review in a side column
+
+2026-10-24, commit [c4bd0fe](https://github.com/lambdakilo/dotclaude/commit/c4bd0fe8a44cb4644ca4102356dd1661212e0cd4), model claude-opus-5-5, effort xhigh.
 
 **16.**
 > bruh now its hidden in more. also the header takes a lot of screen
