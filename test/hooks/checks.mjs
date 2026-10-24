@@ -462,6 +462,23 @@ const suites = [
     ]
   }],
 
+  ['prompts-md-current.sh', run => {
+    const repo = path.join(home, 'Projects/pmc'), plain = path.join(home, 'pmc-plain')
+    return [
+      ['refuses a commit once when the command leaves PROMPTS.md behind', () => {
+        sh(`git init -q ${q(repo)} && git init -q ${q(plain)} && cd ${q(repo)} && printf '# Prompts\\n\\nThe prompts behind the commits of this repository, as given to Claude Code.\\n' > PROMPTS.md && git add PROMPTS.md && git commit -q -m init`)
+        return refused(run(bash('git commit -F m.txt', repo)))
+      }],
+      ['lets the same command through the second time', () => quiet(run(bash('git commit -F m.txt', repo)))],
+      ['finds the checkout from a git -C variable the command assigns', () => refused(run(bash('R=~/Projects && W=$R/pmc\ngit -C $W add a && git -C $W commit -q -F m.txt')))],
+      ['finds the checkout from a cd', () => refused(run(bash('cd ~/Projects/pmc && git commit -m one')))],
+      ['lets a commit through that rebuilds the file', () => quiet(run(bash('~/.claude/hooks/prompts-md.sh --message m.txt && git add PROMPTS.md && git commit -F m.txt', repo)))],
+      ['lets an amend through', () => quiet(run(bash('git commit --amend -F m.txt', repo)))],
+      ['lets a commit through once the file has a change waiting', () => { fs.appendFileSync(path.join(repo, 'PROMPTS.md'), '\n'); return quiet(run(bash('git commit -a -F m.txt', repo))) }],
+      ['leaves a checkout without the file alone', () => quiet(run(bash('git commit -m two', plain)))],
+    ]
+  }],
+
   ['share-memories.sh', run => {
     const shared = path.join(home, 'shared'), proj = path.join(home, 'Projects/proj')
     const env = { CLAUDE_PROJECT_DIR: proj }

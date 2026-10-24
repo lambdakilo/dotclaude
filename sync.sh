@@ -113,6 +113,7 @@ mirrored=(
   hooks/prompt-feedback-box.sh
   hooks/no-meta-prompts.sh
   hooks/prompts-md.sh
+  hooks/prompts-md-current.sh
   hooks/cd-fall-through.sh
   hooks/slack-user-search-own-workspace.sh
   hooks/permission-mode-changed.sh

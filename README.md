@@ -79,6 +79,8 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
   commits and pull requests can quote the prompts behind them.
 - [`prompts-md.sh`](hooks/prompts-md.sh): builds a `PROMPTS.md` file that lists those prompts per
   commit, like the one in this repo.
+- [`prompts-md-current.sh`](hooks/prompts-md-current.sh): stops a commit once when Claude did
+  not rebuild that file for it, in a repository that keeps one.
 - [`no-meta-prompts.sh`](hooks/no-meta-prompts.sh): keeps prompts about Claude's own setup out of
   a project's history.
 - [`usage-log.sh`](hooks/usage-log.sh): writes down the tokens each turn used, so you can add up
