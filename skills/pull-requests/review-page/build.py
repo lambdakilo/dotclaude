@@ -149,6 +149,17 @@ def render_blocks(lines):
                 code.append(lines[i])
                 i += 1
             body = "\n".join(code)
+            if lang == "text" and re.fullmatch(r"https?://\S+", body.strip()):
+                # An address to open: a link the reader clicks, and still copies.
+                url = html.escape(body.strip())
+                out.append(
+                    '<div class="block" data-lang="address"><div class="block-bar"><span>address</span>'
+                    '<button type="button" class="copy">Copy</button></div>'
+                    '<pre><code><a href="%s" target="_blank" rel="noopener">%s</a></code></pre></div>'
+                    % (url, url)
+                )
+                i += 1
+                continue
             out.append(
                 '<div class="block" data-lang="%s"><div class="block-bar"><span>%s</span>'
                 '<button type="button" class="copy">Copy</button></div>'
@@ -322,7 +333,31 @@ def render_review(review):
             '<h3 class="sub">What the PR\'s steps missed</h3>%s'
             % render_blocks(review["missed"].split("\n"))
         )
-    return '<section class="review" aria-labelledby="review-h"><h2 id="review-h">Review</h2>%s</section>' % "".join(parts)
+    failed = sum(1 for r in results if r["outcome"] == "fail")
+    passed = sum(1 for r in results if r["outcome"] == "pass")
+    serious = [f for f in findings if f["severity"] in ("high", "medium")]
+    bits = []
+    if results:
+        bits.append("%d failed" % failed if failed else "%d of %d checks passed" % (passed, len(results)))
+    if findings:
+        by = {}
+        for f in findings:
+            by[f["severity"]] = by.get(f["severity"], 0) + 1
+        bits.append(
+            "%d finding%s: %s" % (
+                len(findings), "" if len(findings) == 1 else "s",
+                ", ".join("%d %s" % (by[k], k) for k in ("high", "medium", "low") if k in by),
+            )
+        )
+    elif results:
+        bits.append("no findings")
+    # Folded unless something needs the reader before the steps.
+    opened = " open" if failed or serious else ""
+    return (
+        '<details class="review" id="review"%s><summary><span class="review-label">Review</span>'
+        '<span class="review-sum">%s</span></summary><div class="review-body">%s</div></details>'
+        % (opened, html.escape(" · ".join(bits)), "".join(parts))
+    )
 
 
 def render_sections(sections):

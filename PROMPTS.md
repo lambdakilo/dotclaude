@@ -5,9 +5,19 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Number any steps the reader takes in order
+## Start the review page at no step, fold the review, link addresses
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**15.**
+> [a screenshot of the review page open in a browser]
+> pretty good but j doesnt go to first step. also the first chapter is
+> maybe a bit too long as you can see from the ss. also localhost
+> should be a clickable link on the html
+
+## Number any steps the reader takes in order
+
+2026-10-24, commit [40bb88c](https://github.com/lambdakilo/dotclaude/commit/40bb88cd941bed5861ce7275183e2c83f76ee25e), model claude-opus-5-5, effort xhigh.
 
 **4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
@@ -2727,6 +2737,7 @@ Stop, add it to dotclaude?)
 - sat: Saturday
 - sod: start of day
 - spdx: Software Package Data Exchange
+- ss: screenshot
 - tmp: the temporary directory, /tmp
 - ts: TypeScript
 - ui: user interface

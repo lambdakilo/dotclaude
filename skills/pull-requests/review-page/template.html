@@ -74,7 +74,14 @@ h3.sub { font-size: 0.95rem; margin: 14px 0 6px; }
 .note { color: var(--muted); margin-bottom: 12px; }
 .note p { margin: 0 0 8px; }
 
-.review { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+.review { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.review summary { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; padding: 12px 18px; cursor: pointer; list-style: none; }
+.review summary::-webkit-details-marker { display: none; }
+.review summary::after { content: "Show"; margin-left: auto; font: 500 12px var(--mono); color: var(--accent); }
+.review[open] summary::after { content: "Hide"; }
+.review-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.review-sum { font-weight: 500; }
+.review-body { padding: 0 18px 16px; }
 .results { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 .result { display: grid; grid-template-columns: auto minmax(0, max-content) minmax(0, 1fr); gap: 10px; align-items: baseline; }
 .pill { font: 600 11px/1 var(--mono); padding: 4px 7px; border-radius: 999px; border: 1px solid currentColor; text-transform: uppercase; letter-spacing: 0.04em; }
@@ -175,6 +182,7 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     <dt><kbd>n</kbd></dt><dd>Go to the next step not done</dd>
     <dt><kbd>c</kbd></dt><dd>Copy the step's first command or address</dd>
     <dt><kbd>o</kbd></dt><dd>Open the step's screenshot</dd>
+    <dt><kbd>r</kbd></dt><dd>Show or hide the review</dd>
     <dt><kbd>?</kbd></dt><dd>Show or hide this list</dd>
     <dt><kbd>Esc</kbd></dt><dd>Close the screenshot or this list</dd>
   </dl>
@@ -192,7 +200,8 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
   const viewer = document.getElementById("viewer");
   const keys = document.getElementById("keys");
   const toastEl = document.getElementById("toast");
-  let focus = 0;
+  // No step is picked until the reader moves, so the first j lands on step 1.
+  let focus = -1;
 
   function local(name, value) {
     try {
@@ -230,7 +239,6 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
       const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
       steps[focus].scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "auto" });
     }
-    local("focus", steps[focus].dataset.id);
   }
 
   function toggle(i) {
@@ -304,25 +312,28 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
       if (e.key === "?" && keys.open) { keys.close(); e.preventDefault(); }
       return;
     }
-    const here = steps[focus];
+    const here = focus >= 0 ? steps[focus] : null;
+    const pick = () => toast("Press j to pick a step first");
     switch (e.key) {
       case "j": setFocus(focus + 1, true); break;
-      case "k": setFocus(focus - 1, true); break;
-      case "x": if (here) toggle(focus); break;
+      case "k": setFocus(focus < 0 ? 0 : focus - 1, true); break;
+      case "x": if (here) toggle(focus); else pick(); break;
       case "n": nextUndone(); break;
-      case "c": if (here) copyFrom(here); break;
-      case "o": if (here) openImage(here); break;
+      case "c": if (here) copyFrom(here); else pick(); break;
+      case "o": if (here) openImage(here); else pick(); break;
+      case "r": {
+        const review = document.getElementById("review");
+        if (review) review.open = !review.open;
+        break;
+      }
       case "?": keys.showModal(); break;
       default: return;
     }
     e.preventDefault();
   });
 
-  const saved = local("focus");
-  const start = steps.findIndex((el) => el.dataset.id === saved);
   for (const id of local("done") || []) done.add(id);
   paint();
-  setFocus(start >= 0 ? start : 0, false);
 
   try {
     localStorage.setItem(KEY + ":probe", "1");

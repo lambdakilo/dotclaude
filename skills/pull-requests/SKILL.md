@@ -128,9 +128,11 @@ redacted in public and upstream repositories.
   Artifact. The script takes the steps of the PR body's How to verify? as GitHub holds them, embeds
   the PR's screenshots, downloaded with the `gh` token, and adds from the overlay the review's
   results, its findings and the steps it adds. On the page `x` ticks a step, `j` and `k` move, `n`
-  goes to the next open step, `c` copies the step's command and `o` opens its screenshot. The ticks
-  live in the browser's storage for that file, so a later review of the same PR rebuilds the page at
-  the same path and they stay; the session cannot read them, so the reader says how far they got.
+  goes to the next open step, `c` copies the step's command or address, `o` opens its screenshot and
+  `r` shows or hides the review, which stays folded to one line unless a check failed or a finding
+  is above low. An address in a `text` block is a link on the page. The ticks live in the browser's
+  storage for that file, so a later review of the same PR rebuilds the page at the same path and
+  they stay; the session cannot read them, so the reader says how far they got.
 - The reply opens with the page's link, a Markdown link to the file's path relative to the checkout,
   which the app opens on a click, then the results of the verify command and the end to end run,
   then the findings, and gives no step list of its own.
