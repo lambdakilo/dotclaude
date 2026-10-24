@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Put a PR review's steps on a review page
+## Say that the Bash tool runs zsh, and which pitfalls remain
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> dream review
+
+(p12: add shwordsplit to the Claude-only zshrc block and a CLAUDE.md
+bullet on zsh, add it?)
+> Add it (Recommended)
+
+## Put a PR review's steps on a review page
+
+2026-10-24, commit [a74e0d8](https://github.com/lambdakilo/dotclaude/commit/a74e0d872d4ecaecfa79ef61ad24d140e0c91c83), model claude-opus-5-5, effort xhigh.
 
 **11.**
 > lets start doing a new way to review prs. theres a mismatch between

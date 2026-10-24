@@ -413,6 +413,13 @@ apply to one repository belong in that repository's project memory.
   given to the user, since the working directory persists from one command to the next.
 - A `PreToolUse` hook, `~/.claude/hooks/cd-fall-through.sh`, refuses a Bash command with such a
   part unless the `cd` goes into a directory that exists already. It backs the rule above.
+- The Bash tool runs zsh, as the user's terminal does. A block in `~/.zshrc` sets `nonomatch`,
+  `noequals` and `shwordsplit` for the tool alone, so a glob, a leading `=` and an unquoted variable
+  act as in bash. The rest still differs: write `${var}` before a colon, as in `${ref}:src/app.php`,
+  since zsh reads `$ref:s` as a modifier; call `/usr/bin/log`, since `log` is a builtin; never name
+  a variable `path`, which zsh ties to `PATH`; and macOS has no `timeout` command, so a wait uses
+  the tool's own timeout or a loop with a count. A command given to the user runs without that
+  block, so it quotes a glob that is an argument and loops over an array, never over a string.
 - A removal a session runs names each target as a literal path, never through a shell variable, and
   stands in the Bash command itself, never in a `bash -c` or `zsh -c` string. Claude Code's built-in
   removal check refuses a target it cannot resolve, such as `"$D"/*.tmp`, and a `-c` script it
