@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Write out in the reply whatever the user is to read
+## Hand over prompts that run in order as one prompt
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+
+## Write out in the reply whatever the user is to read
+
+2026-10-24, commit [47bc411](https://github.com/lambdakilo/dotclaude/commit/47bc4113202c4f4e5a2c3780900e03c1ff6603e6), model claude-opus-5-5, effort xhigh.
 
 **4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
