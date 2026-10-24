@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Explain each dream step from the beginning before asking about it
+## Add the explain-first sentence that debda14 left out
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.** Quoted under [a18fc01](https://github.com/lambdakilo/dotclaude/commit/a18fc01ec8b103a749af569818613bff38936b30).
+
+## Explain each dream step from the beginning before asking about it
+
+2026-10-24, commit [debda14](https://github.com/lambdakilo/dotclaude/commit/debda14d57573acdcdfe49e782b1e9f3f2feed23), model claude-opus-5-5, effort xhigh.
 
 **4.** Quoted under [a18fc01](https://github.com/lambdakilo/dotclaude/commit/a18fc01ec8b103a749af569818613bff38936b30).
 
