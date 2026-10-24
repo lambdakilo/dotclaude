@@ -5,9 +5,21 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Add the explain-first sentence that debda14 left out
+## Say when remote deployment tooling may run
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> dream review
+
+(p6: replace the never-run-remote-tooling bullet with one that
+allows only an asked-for action and target, add it to dotclaude?)
+> add it but that was way too abstract. remote tooling could mean
+> anything. you must give always an example from history
+
+## Add the explain-first sentence that debda14 left out
+
+2026-10-24, commit [f709146](https://github.com/lambdakilo/dotclaude/commit/f709146dd30677c61a060c2ce9a9456b702bbfca), model claude-opus-5-5, effort xhigh.
 
 **4.** Quoted under [a18fc01](https://github.com/lambdakilo/dotclaude/commit/a18fc01ec8b103a749af569818613bff38936b30).
 

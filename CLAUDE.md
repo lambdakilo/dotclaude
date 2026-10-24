@@ -424,8 +424,12 @@ apply to one repository belong in that repository's project memory.
   spreadsheet. A working file that only feeds a tool, such as the HTML of a Slack draft that a
   script puts on the clipboard, goes in `~/.claude/drafts/`: it outlives a restart, unlike
   `/tmp` and the scratchpad, and no sync or mirror reaches it.
-- Never run environment or deployment tooling against a remote environment. Confirm before
-  destructive commands.
+- Environment or deployment tooling runs against a remote environment, such as a deploy, a
+  store upload or submission, or a command on a shared database, only when the user asked for
+  that action on that target in the session or said go to a reply that named both. The ask
+  covers the steps that finish it, such as a rebuild of the same release; another target,
+  production data or a new release needs its own ask, and carrying on without another go never
+  widens one. A project rule may ask for more. Confirm before destructive commands.
 - Prefer official features over custom glue that wraps unstable internals. If only custom works,
   say so and name the drift risk before building it.
 - A command, workflow, script, hook or skill built for a purpose the user stated does all of it
