@@ -162,6 +162,10 @@ const suites = [
         return quiet(run(event('PreToolUse', { tool_input: { command: 'git commit-graph write && c=$(git commit-tree "$tree" -m pictures)' } })))
       }],
       ['still blocks git -C <dir> commit after that edit', () => refused(run(event('PreToolUse', { tool_input: { command: 'git -C repo commit -F msg.txt' } })))],
+      ['blocks sync.sh --commit once after an edit', () => {
+        write(rules, '- one\n- two\n- three\n- four\n- five\n')
+        return refused(run(event('PreToolUse', { tool_input: { command: 'cd ~/Projects/dotclaude && ./sync.sh --commit msg.txt' } })))
+      }],
       ['takes a subagent\'s first look as its copy', () => quiet(run({ ...commit, agent_id: 'a1' }))],
       ['takes a copy of the pull-requests skill at session start', () => { write(skill, '- body\n'); return quiet(run(event('SessionStart', { session_id: 'md2' }))) }],
       ['lets a commit through after an edit of the skill alone', () => { write(skill, '- body\n- pictures\n'); return quiet(run({ ...commit, session_id: 'md2' })) }],

@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Hand the dream review to a new session when the user is away
+## Let the CLAUDE.md watcher replace the manual re-read
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+
+**2.** (asking why a dream step was put to the user) Quoted under [12dd424](https://github.com/lambdakilo/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d).
+
+## Hand the dream review to a new session when the user is away
+
+2026-10-24, commit [fbb41ac](https://github.com/lambdakilo/dotclaude/commit/fbb41acd298799383fa6778a6e989b636015d8ec), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream

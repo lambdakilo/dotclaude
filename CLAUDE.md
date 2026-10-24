@@ -145,12 +145,11 @@ apply to one repository belong in that repository's project memory.
   without the file gets one only when the user asks, and before adding it to one that merges
   through PRs, tell the user that every open PR rebuilding it will conflict with the others once
   one of them merges. In the public configuration repository `sync.sh` runs the script itself.
-- Re-read this file from disk before writing a commit message or a PR body, and before a PR body
-  also `~/.claude/skills/pull-requests/SKILL.md`. A session reads each once, so an edit made
-  from another session while this one runs stays invisible until the file is read again.
-  `~/.claude/hooks/claude-md-changed.sh` backs this up for both files: once one differs from the
-  copy a session last saw, the hook adds the diff to the next prompt, or blocks the next `gh pr`
-  create, edit or merge once with the diff, and for this file also the next commit.
+- An edit made to this file or to `~/.claude/skills/pull-requests/SKILL.md` from another session
+  reaches a running one through `~/.claude/hooks/claude-md-changed.sh`, in place of a re-read before
+  a commit message or a PR body: once one differs from the copy the session last saw, the hook adds
+  the diff to the next prompt, or blocks the next `gh pr` create, edit or merge once with the diff,
+  and for this file also the next commit or `sync.sh --commit`.
 
 ## Pull requests
 
