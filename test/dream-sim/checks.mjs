@@ -64,6 +64,7 @@ const scenarios = [
     ['the session is told to show the tokens and dollars the run spent', (st, r) => /usage\.sh --run/.test(r.forTheSession)],
     ['and last week and this week of all sessions, from reset to reset', (st, r) => /usage\.sh --since 2026-10-03T13:59:59\.000Z 2026-10-10T13:59:59\.000Z/.test(r.forTheSession)],
     ['and to refresh the evals of the checkout evals-checkout.txt names, before the walk', (st, r) => /evals-checkout\.txt exists/.test(r.forTheSession) && r.forTheSession.indexOf('evals.mjs --readme') < r.forTheSession.indexOf('one AskUserQuestion call per step')],
+    ['and to leave the walk to a new session in the checkout when the user is away', (st, r) => r.forTheSession.includes('start a new session in ~/Projects/dotclaude and type "dream review" there') && r.forTheSession.indexOf('type "dream review" there') < r.forTheSession.indexOf('one AskUserQuestion call per step')],
   ]],
   ['review of the open backlog', { ...wed, week: 30, sessions: 4, args: 'review', backlog: {
     valid: true,

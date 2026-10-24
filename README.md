@@ -279,17 +279,25 @@ twice around the reset:
    overnight, but keeps back two 5-hour windows, one for my work on Saturday and one for the
    final run, and leaves the 5-hour window that would be open at 08:00 on Saturday untouched.
 
-2. Saturday: open that session. It goes through what it proposes one question at a time, each
-   with the exact change, a moment where things went wrong and how that moment goes once the
-   change is in. I answer "Add it" or "Not now", and Claude applies what I added and pushes it
-   here. Then I carry on with my own work.
+2. Saturday: start a new Code session in `~/Projects/dotclaude` and send this there. That session
+   reads the steps from their files, while the one that ran overnight would send its whole context
+   again with every request.
+
+   ```text
+   dream review
+   ```
+
+   It applies most steps without asking and goes through the rest one question at a time, each with
+   the exact change, a moment where things went wrong and how that moment goes once the change is
+   in. I answer "Add it" or "Not now", and Claude applies what I added and pushes it here. Then I
+   carry on with my own work.
 
 3. Saturday, when I am done: connect the charger again and send `/dream` in a new Code session.
    On the reset day this is a final run. It spends the rest of the week, down to 1 percentage
    point, and stops starting work an hour and a quarter before the reset, so everything reports
    back in time.
 
-4. The next time I sit down: open that session and go through its proposals the same way.
+4. The next time I sit down: go through its proposals as in step 2.
 
 ## Evals
 

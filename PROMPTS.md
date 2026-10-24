@@ -5,9 +5,21 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Run dream agents without the always-loaded CLAUDE.md
+## Hand the dream review to a new session when the user is away
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dream
+
+(Add p9, hand the dream review to a new session?)
+> Add it (Recommended)
+
+**2.** (asking why a dream step was put to the user) Quoted under [12dd424](https://github.com/lambdakilo/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d).
+
+## Run dream agents without the always-loaded CLAUDE.md
+
+2026-10-24, commit [5ea9c06](https://github.com/lambdakilo/dotclaude/commit/5ea9c069ef12a2dd325223d294139fb94449f2bb), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 

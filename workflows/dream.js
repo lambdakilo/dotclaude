@@ -1568,7 +1568,7 @@ Number and order the changes exactly as the plan below does, and name a proposal
 Sections, in this order:
 1. Next time: the changes in how the user works, from the habits below. At most seven, each in two or three lines with its strongest piece of evidence.
 2. Before Monday: the Monday brief below as given, when there is one, then the pull request reviews below: per pull request its link and title, then each confirmed finding in at most three lines, its file and line, what breaks and the fix, then one line naming how many findings the check refuted and listing any left unchecked. Leave the section out when there is neither a brief nor a review.
-3. Changes to the setup: first one line per impact level naming its ids, such as "High: p1, p2, p4. Medium: p3, p5.", then one line saying the session that ran the dream asks about each step one at a time after this report, applies the ones the user accepts and commits what they change. Then every open proposal in plan order in one line: its id, title and impact, marked "new" or "open since <firstSeen>", and whether its script is ready, needs regenerating or is a prompt to carry out. No commands, problems or evidence here, since each question carries them.
+3. Changes to the setup: first one line per impact level naming its ids, such as "High: p1, p2, p4. Medium: p3, p5.", then one line saying who goes through the steps after this report: the session that ran the dream when the user is there to answer, otherwise a new session started in ~/Projects/dotclaude where the user types "dream review". Either one applies most steps without a question, asks about the rest one at a time and commits what they change. Then every open proposal in plan order in one line: its id, title and impact, marked "new" or "open since <firstSeen>", and whether its script is ready, needs regenerating or is a prompt to carry out. No commands, problems or evidence here, since each question carries them.
 4. Closed since the last run: each backlog item now applied or obsolete, in one line.
 5. Skills to try: proposals of kind "skill-adopt", with the repository link and the install command in a fenced block.
 6. Left out: every dropped, rejected or unchecked proposal in one line with its reason, saying once that unchecked proposals carry over and are checked first in the next run, then the skipped work grouped by reason in one line per reason.
@@ -1683,8 +1683,9 @@ const stoppedBy = skippedWork.length
   ? Object.entries(skipReasons).map(([r, n]) => `${n} pieces of work skipped as ${r}`).join('; ') + againAfter
   : 'it ran out of work, with everything due done'
 const EVALS = `Then, when ${EVALS_FILE} exists, refresh the evals of the checkout it names: run node <checkout>/test/evals.mjs --readme and show its lines in a text block, whatever its exit status. When git -C <checkout> status --porcelain README.md then lists the file, commit and push README.md alone with <checkout>/sync.sh --commit <message file> README.md, as the Public configuration repository section of ~/.claude/CLAUDE.md says.`
+const AWAY = `When the user is not there to answer, such as after a run they started before going to sleep or leaving for the day, leave every step for later and end the reply with the step to start a new session in ~/Projects/dotclaude and type "dream review" there, never in this session: the review reads the backlog and the report from their files, while this session would send its whole context again with each request, from a cold cache once the user is back.`
 const walkThrough = steps.length
-  ? `Then ${walkText(backlogTarget, `${OUT}/${scout.runId}.md`)}`
+  ? `${AWAY} Otherwise ${walkText(backlogTarget, `${OUT}/${scout.runId}.md`)}`
   : 'There are no steps to apply, so say so.'
 
 return {
