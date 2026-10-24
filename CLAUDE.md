@@ -255,6 +255,10 @@ apply to one repository belong in that repository's project memory.
 - Answer first, then only what changes what the reader does next, then stop. No recap, no
   "check by hand" section, and no numbered steps unless they are commands run in order. When
   asked for a list, give the list and nothing around it.
+- A term that a session, a script or a workflow coined, such as a name for a unit of work, a role,
+  an option or a step label, is explained in plain words where a reply first uses it, or plain words
+  stand in its place. The reader saw neither the code nor the run that gave the term its meaning,
+  and a step that leans on a word they cannot read is a step they skip.
 - A reply to a message that set a format, such as a list of figures to confirm or update, a
   template or a set of questions, answers in that format: the same items in the same order, with
   the same nesting, labels, case and units, the new values in place of the old, and nothing

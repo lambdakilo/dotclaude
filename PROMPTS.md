@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Let a session's own CLAUDE.md edit through the watcher
+## Explain a term a session coined, or use plain words
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+
+## Let a session's own CLAUDE.md edit through the watcher
+
+2026-10-24, commit [7ca211e](https://github.com/lambdakilo/dotclaude/commit/7ca211ed1c7f6be6b69fd3eb5e62fae58ee5a33d), model claude-opus-5-5, effort xhigh.
 
 **4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
