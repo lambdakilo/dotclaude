@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Say that the Bash tool runs zsh, and which pitfalls remain
+## Show each dream review question's place among the questions
 
 2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**8.**
+> oof can you add a p12 out of something so ican see how manyproposals
+> still left
+
+## Say that the Bash tool runs zsh, and which pitfalls remain
+
+2026-10-24, commit [a984b3e](https://github.com/lambdakilo/dotclaude/commit/a984b3e4cd94fa83c05c16194ecb2f53f397d6a7), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
