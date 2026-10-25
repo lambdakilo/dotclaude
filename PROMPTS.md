@@ -5,9 +5,32 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Ping the user when the browser pane cannot be shown
+## Leave settings the user turned on as they are
 
 2026-10-25, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**31.**
+> [a question about a store review left out]
+
+**32.**
+> [a store review check left out]
+
+**33.**
+> [a choice about a store review left out]
+
+**34.**
+> [a remark about a tester invitation left out]
+
+**35.**
+> [a tester sign-up check left out]
+
+**36.**
+> lol dont warn me about the dev mode. [an ask about an app's log
+> left out]
+
+## Ping the user when the browser pane cannot be shown
+
+2026-10-25, commit [e9533e7](https://github.com/lambdakilo/dotclaude/commit/e9533e7dfb37105c260b8c821617be2c5ab9e18a), model claude-opus-5-5, effort xhigh.
 
 **11.**
 > my guy. if you need something from me from the pane in the future
@@ -2974,6 +2997,7 @@ Stop, add it to dotclaude?)
 - char: character
 - co2: carbon dioxide
 - cs: computer science
+- dev: developer
 - dir: directory
 - e.g.: for example
 - e2e: end to end
