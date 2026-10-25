@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Show tokens and dollars only in the final dream report
+## Ping the user when the browser pane cannot be shown
 
 2026-10-25, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**11.**
+> my guy. if you need something from me from the pane in the future
+> also open the the pane for me. or is that possibel? [a note that a
+> sign-in was done left out]
+
+## Show tokens and dollars only in the final dream report
+
+2026-10-25, commit [5aa28d3](https://github.com/lambdakilo/dotclaude/commit/5aa28d3877a55ae1f6933256bec28443d5c5ddb4), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > remove dollars and token amounts from taskbar but keep them in the
