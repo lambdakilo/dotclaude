@@ -348,7 +348,8 @@ apply to one repository belong in that repository's project memory.
 - A project's CLAUDE.md holds what Claude runs, such as build, test, verify, install, launch and
   logs, and the rules the code follows. Setup a person does once by hand goes in a doc under `docs/`
   that CLAUDE.md or AGENTS.md indexes. The README says what the project is, shows its parts, and
-  tells a newcomer to ask Claude Code how to start and develop.
+  gives a newcomer a prompt to paste into Claude Code, in a `text` block, that clones the repository
+  and gets them started. A `claude://` link cannot stand in for it, since GitHub strips such links.
 - A page meant to be taken in at a glance, such as a schedule, a roadmap, a status page or a whole
   README, as its readme-ov-file link shows it, fits one MacBook screen without scrolling: a table or
   columns in place of a long list, and one line per row or bar. Check it, and every other page a

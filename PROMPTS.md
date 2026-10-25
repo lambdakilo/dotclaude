@@ -5,9 +5,25 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Mask a Linux home path in printed prompts too
+## Give a README's newcomer a prompt that clones the repository
 
 2026-10-25, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.**
+> [pasted: a README sentence on what Claude Code reads]
+> it reads much more and you know that. remove the line. does there
+> exist a url scheme that git clones and opens in claude code? whats
+> the optimal workflow for claude desktop code to get a new project
+> underway? do i even have to clone this thing myself?
+
+(What should the README's last line say?)
+> yeah can you actually give a copyable prompt to claude code? or does
+> claude code desktop support a uri scheme that the person just opens
+> to do that
+
+## Mask a Linux home path in printed prompts too
+
+2026-10-25, commit [139bc5e](https://github.com/lambdakilo/dotclaude/commit/139bc5ee412fbe26dafeaefc3a738ef6f7ab1bfb), model claude-opus-5-5, effort xhigh.
 
 **3.** (answer to whether to fix the masking too)
 > also fix prompt-log.sh so it masks /home paths, here
@@ -3110,6 +3126,7 @@ Stop, add it to dotclaude?)
 - tmp: the temporary directory, /tmp
 - ts: TypeScript
 - ui: user interface
+- uri: uniform resource identifier
 - url: uniform resource locator
 - usd: US dollars
 - vpn: virtual private network
