@@ -13,6 +13,7 @@ const config = path.join(home, '.claude')
 // Addresses and home paths are put together at run time, so the sync.sh scan does not take them for real ones.
 const address = (name, domain = 'example.com') => [name, domain].join('@')
 const otherHome = ['', 'Users', 'someone'].join('/')
+const linuxHome = ['', 'home', 'someone'].join('/')
 const ENV = { PATH: process.env.PATH, HOME: home, CLAUDE_CONFIG_DIR: config, TMPDIR: path.join(home, 'tmp'), LANG: 'en_US.UTF-8', GIT_CONFIG_NOSYSTEM: '1' }
 
 const write = (file, text) => { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, text); return file }
@@ -488,7 +489,7 @@ const suites = [
       ['leaves out reminders and a prompt sent twice', () => { log('<system-reminder>ignore</system-reminder>'); log('push it'); log('push it'); const out = print(); return out.endsWith('**2.**\n> push it\n\n') && !out.includes('**3.**') }],
       ['replaces a pasted block with its line count', () => { log('look at this <pasted_content id="1">a\nb\nc</pasted_content>'); return print('--from', '3') === '**3.**\n> look at this [pasted: 3 lines]\n\n' }],
       ['wraps long prompts at 72 columns for a commit', () => { log('word '.repeat(40).trim()); const out = print('--commit', '--from', '4'); return out.startsWith('4.\n') && out.split('\n').length > 3 && out.split('\n').every(l => l.length <= 72) }],
-      ['redacts a token and writes a home path with ~', () => { log(`use TOKEN=abc123 in ${otherHome}/Projects/x`); return print('--from', '5').includes('TOKEN=[redacted] in ~/Projects/x') }],
+      ['redacts a token and writes a macOS or Linux home path with ~', () => { log(`use TOKEN=abc123 in ${otherHome}/Projects/x and ${linuxHome}/y`); return print('--from', '5').includes('TOKEN=[redacted] in ~/Projects/x and ~/y') }],
       ['gives no number to a cross-session notice or the compaction note', () => {
         log('[Cross-session delivery notice] Your message to another session was held by that session.')
         log('[Cross-session idle notice] "a", which you asked to be notified about, is idle now.')

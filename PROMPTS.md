@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep the same abbreviation case in PROMPTS.md on Linux and macOS
+## Mask a Linux home path in printed prompts too
 
 2026-10-25, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.** (answer to whether to fix the masking too)
+> also fix prompt-log.sh so it masks /home paths, here
+
+## Keep the same abbreviation case in PROMPTS.md on Linux and macOS
+
+2026-10-25, commit [3f8f767](https://github.com/lambdakilo/dotclaude/commit/3f8f7678ea4dc817423aaa569bb38adc5680b4ec), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about model sizes left out] also fetch my whole ass

@@ -48,7 +48,7 @@ masks=(
   's#[A-Za-z0-9._-]+@[A-Za-z0-9.-]+:[^[:space:]]*[^[:space:].,;:!?)]#[pasted: an address]#g'
   's#[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}#[pasted: an address]#g'
   's#(/private)?/tmp/claude-[0-9]+/[^[:space:]"]*#[a temporary path]#g'
-  's#/Users/[^/[:space:]"]+#~#g'
+  's#/(Users|home)/[^/[:space:]"]+#~#g'
   's#((mysql|mariadb|mysqldump|mysqladmin)[^|;&]*[[:space:]]-p)[^[:space:]]+#\1[redacted]#g'
   's#((PASSWORD|PASSWD|TOKEN|SECRET|PWD|[Pp]assword|[Pp]asswd|[Tt]oken|[Ss]ecret)=)[^[:space:]]+#\1[redacted]#g'
 )
