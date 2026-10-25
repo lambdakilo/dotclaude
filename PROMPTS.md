@@ -5,9 +5,31 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
+## Ask before relaunching an app that crashed
+
+2026-10-25, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**24.**
+> [a feature request for an app left out]
+
+**25.**
+> 2 [app] ended suddenly apple messages came to my screen
+
+**26.**
+> third one
+
+**27.**
+> twice again pls stop its interrupting my other work
+
+**28.**
+> [a question about the crash left out]
+
+**29.**
+> [a question about a store listing left out]
+
 ## Check a service's claims against its docs before repeating them
 
-2026-10-24, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [938ef43](https://github.com/lambdakilo/dotclaude/commit/938ef43c98dcd7ae1d37b659a7b1b4228aac5e19), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > [questions doubting the service's privacy and data residency claims

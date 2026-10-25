@@ -516,8 +516,11 @@ apply to one repository belong in that repository's project memory.
   panes, is asked about first: `open`, `qlmanage -p`, an app launch, the Simulator app, a
   browser other than the built-in pane. AskUserQuestion names the window and the session waits
   for a yes; a prompt that itself asks for that window is the yes. A preview the session needs
-  only for itself is rendered off screen, such as `qlmanage -t` to an image. Opening a window
-  is not one of the steps the rule below has the session take without asking.
+  only for itself is rendered off screen, such as `qlmanage -t` to an image. Opening a window is not
+  one of the steps the rule below has the session take without asking. A crash of an app the session
+  launched, a simulator app included, opens a macOS crash report dialog over the user's work, so
+  once an app has crashed in a session, each further launch of it is asked about the same way until
+  a launch shows the crash fixed.
 - In the desktop app, every turn that answers a prompt from the user renames its own session
   with `set_session_title` and `self`, to a title for what the whole session has done so far,
   not for the latest prompt alone. The call comes once the turn's work is done and is skipped
