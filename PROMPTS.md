@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Leave the VPN switch to the user, then say it can go back on
+## Keep the same abbreviation case in PROMPTS.md on Linux and macOS
 
 2026-10-25, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [a question about model sizes left out] also fetch my whole ass
+> dotclaude fromgithub
+
+**2.** (answer to whether to fix the PROMPTS.md case flip on Linux here)
+> fix the prompts.md case flip on linux here
+
+## Leave the VPN switch to the user, then say it can go back on
+
+2026-10-25, commit [590df15](https://github.com/lambdakilo/dotclaude/commit/590df1559b9bc73cbde8878c4314e93fbd235d56), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > do you remember to still pause and tell me if my proton vpn is the

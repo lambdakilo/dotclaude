@@ -242,7 +242,9 @@ END {
     print ""
     print "## Abbreviations"
     print ""
-    sorter = "LC_ALL=C sort -f -u"
+    # for-in order differs between gawk and the BSD awk, so the case variant
+    # kept is the one first in byte order, not the one awk hands over first.
+    sorter = "LC_ALL=C sort -u | LC_ALL=C sort -f -s -u"
     for (a in abbreviations) print a | sorter
     close(sorter)
   }

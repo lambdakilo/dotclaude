@@ -531,6 +531,13 @@ const suites = [
         const text = (run('', { cwd: work }), fs.readFileSync(file, 'utf8'))
         return text.includes('> ask me first\n\n(p1: keep the old\nparser?)\n> Keep it (Recommended)\n\n(p2: rename it?)\n> no\n')
       }],
+      ['keeps the case variant of an abbreviation that comes first in byte order', () => {
+        write(path.join(home, 'pm-5.txt'), body('Add the model', 'add an llm') + '\nAbbreviations:\n- llm: large language model\n- md: markdown\n')
+        write(path.join(home, 'pm-6.txt'), body('Add the docs', 'add the md') + '\nAbbreviations:\n- LLM: large language model\n- md: Markdown\n')
+        sh(`cd ${q(work)} && echo e > e && git add e && git commit -q -F ${q(path.join(home, 'pm-5.txt'))} && echo f > f && git add f && git commit -q -F ${q(path.join(home, 'pm-6.txt'))}`)
+        const text = (run('', { cwd: work }), fs.readFileSync(file, 'utf8'))
+        return text.includes('\n- LLM: large language model\n') && text.includes('\n- md: Markdown\n') && !/^- (llm|md: markdown)/m.test(text)
+      }],
       ['lists the commit about to be made first', () => {
         run('', { cwd: work, args: ['--message', write(path.join(home, 'pm-2.txt'), body('Add the printer', 'add a printer'))] })
         const text = fs.readFileSync(file, 'utf8')
