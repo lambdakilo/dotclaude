@@ -344,17 +344,19 @@ apply to one repository belong in that repository's project memory.
   session's folders that the reader opens, such as a PR's review page, is the exception: it gets a
   Markdown link to its path, which the app opens on a click.
 - A project's CLAUDE.md holds what Claude runs, such as build, test, verify, install, launch and
-  logs, and the rules the code follows. Setup a person does once by hand goes in the README,
-  and CLAUDE.md points there.
-- A page meant to be taken in at a glance, such as a schedule, a roadmap, a status page or a
-  README's navigation, fits one MacBook screen without scrolling: a table or columns in place of a
-  long list, and one line per row or bar. Check it, and every other page a session makes for the
-  user to open in a browser, such as a PR's review page, with a viewport screenshot at 1440x730,
-  about the browser area of a 13-inch MacBook Air, never with a taller or full-page one alone. On a
-  page the user works through, the first screen reaches what they act on first, what stays in view
-  sits at the side or in a thin bar, and a part they call too long gets shorter, not folded behind a
-  toggle. A document modelled on another keeps its page size and page count: a copy of a one-page A4
-  landscape PDF is one A4 landscape page, never a page stretched to fit the content.
+  logs, and the rules the code follows. Setup a person does once by hand goes in a doc under `docs/`
+  that CLAUDE.md or AGENTS.md indexes. The README says what the project is, shows its parts, and
+  tells a newcomer to ask Claude Code how to start and develop.
+- A page meant to be taken in at a glance, such as a schedule, a roadmap, a status page or a whole
+  README, as its readme-ov-file link shows it, fits one MacBook screen without scrolling: a table or
+  columns in place of a long list, and one line per row or bar. Check it, and every other page a
+  session makes for the user to open in a browser, such as a PR's review page, with a viewport
+  screenshot at 1440x730, about the browser area of a 13-inch MacBook Air, never with a taller or
+  full-page one alone. On a page the user works through, the first screen reaches what they act on
+  first, what stays in view sits at the side or in a thin bar, and a part they call too long gets
+  shorter, not folded behind a toggle. A document modelled on another keeps its page size and page
+  count: a copy of a one-page A4 landscape PDF is one A4 landscape page, never a page stretched to
+  fit the content.
 
 ## Prompt feedback
 

@@ -5,9 +5,32 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Leave settings the user turned on as they are
+## Fit the whole README on one screen, setup in docs
 
 2026-10-25, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> readme is not short rn. make it so that the readmovfile link shows
+> literally all of readme. [an ask for a diagram of a downstream
+> project left out] newbies can just ask from claude how to start and
+> develop
+
+(Every project, or the one project only?)
+> Every project (Recommended)
+
+## Count simulator processes in the crash rule
+
+2026-10-25, commit [05a61d8](https://github.com/lambdakilo/dotclaude/commit/05a61d87c40c7ea6ceadde2906b5ae298e52e608), model claude-opus-5-5, effort xhigh.
+
+**36.**
+> [an ask about an app's log left out]
+
+(a message sent while that prompt ran)
+> [pasted: a screenshot of a simulator's crash report dialog]
+
+## Leave settings the user turned on as they are
+
+2026-10-25, commit [4ad0136](https://github.com/lambdakilo/dotclaude/commit/4ad0136cf90a5313919e9333c9fd2f0bd8ccdae1), model claude-opus-5-5, effort xhigh.
 
 **31.**
 > [a question about a store review left out]
