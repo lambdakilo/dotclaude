@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep asking an open question until it is answered
+## Leave the VPN switch to the user, then say it can go back on
 
 2026-10-25, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> do you remember to still pause and tell me if my proton vpn is the
+> reason you cant fetch some information? can you toggle it off and on
+> later when that happens?
+
+## Keep asking an open question until it is answered
+
+2026-10-25, commit [7425554](https://github.com/lambdakilo/dotclaude/commit/7425554fa5ce938ffeff2c0d0f9604f428a9502a), model claude-opus-5-5, effort xhigh.
 
 **38.**
 > [a question about an IDE sign-in left out]

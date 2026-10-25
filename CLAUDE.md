@@ -478,8 +478,10 @@ apply to one repository belong in that repository's project memory.
 - A request that fails in a way the user's VPN could cause, such as a timeout, a refused or reset
   connection, a DNS or TLS error, or a block page, captcha or 403 from a site that should answer,
   is named in the reply with its error and the hunch that the VPN may be the cause, hunch or not.
-  Before any retry, workaround or other route, AskUserQuestion asks whether to retry once the VPN
-  is off or lets the request through, with going on through the VPN as the other option.
+  Before any retry, workaround or other route, AskUserQuestion asks whether to retry once the VPN is
+  off or lets the request through, with going on through the VPN as the other option. The user
+  switches the VPN; a session never turns it off or on, since it is a security setting. Once the
+  retried request has its answer, the next reply opens by saying the VPN can go back on.
 - A `PreToolUse` hook, `~/.claude/hooks/calendar-free-busy-only.sh`, refuses to list or read
   events on another person's calendar, which carry titles, attendees and meeting links, so
   finding a time with other people goes through the connector's `suggest_time`, which reads
