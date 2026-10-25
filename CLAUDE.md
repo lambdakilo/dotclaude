@@ -498,6 +498,10 @@ apply to one repository belong in that repository's project memory.
   pane into view with `show_pane` and `preview` in the same turn as the ask, so the user finds it
   open beside the reply. A deny rule in `settings.json` blocks Claude in Chrome, which the user
   does not want.
+- Once the browser pane, the iOS simulator panel or a simulator has done its job in a turn, the
+  session closes it before the reply: each pane tab with `tabs_close`, which closes the pane with
+  the last one, the panel with the simulator tool's `detach`, and simulators and emulators with
+  their shutdown commands. A tab or panel where a step waits on the user stays open.
 - A `Stop` hook, `~/.claude/hooks/stop-unreachable-claim.sh`, sends a turn back once when its
   closing message says in the first person that something could not be opened, read, reached or
   uploaded, and no browser pane tool ran since the prompt. Its phrase list is a heuristic that backs

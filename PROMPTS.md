@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Ask before relaunching an app that crashed
+## Close the browser pane and simulators when done
 
 2026-10-25, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**30.**
+> can you close the browser and simulation windows when theyre done
+> or can claude even do that
+
+## Ask before relaunching an app that crashed
+
+2026-10-25, commit [ad4d6ba](https://github.com/lambdakilo/dotclaude/commit/ad4d6ba042abb7c2918b0d6bc994206377bbcde1), model claude-opus-5-5, effort xhigh.
 
 **24.**
 > [a feature request for an app left out]
