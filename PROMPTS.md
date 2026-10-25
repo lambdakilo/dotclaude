@@ -5,9 +5,23 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Fit the whole README on one screen, setup in docs
+## Keep asking an open question until it is answered
 
 2026-10-25, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**38.**
+> [a question about an IDE sign-in left out]
+
+**39.**
+> [a feature request for an app left out]
+
+**40.**
+> [an ask for research left out] also you didnt mention that anymore
+> once i just gave you input. fix in the future
+
+## Fit the whole README on one screen, setup in docs
+
+2026-10-25, commit [6a0a0da](https://github.com/lambdakilo/dotclaude/commit/6a0a0daad6e45634f36036453e25420846b5e7fa), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > readme is not short rn. make it so that the readmovfile link shows

@@ -303,13 +303,15 @@ apply to one repository belong in that repository's project memory.
   paste that a step needs is shown again in that reply, never pointed to in another reply or on the
   clipboard, apart from a Slack draft, which comes back as the command that copies it. No reply says
   that steps given before still stand. The user works from the latest reply and keeps no list in
-  their head. Turning a setting back off that the user turned on for the session's work, such as
-  Developer Mode on the Mac, is no step: the setting stays as the user left it, and no reply
-  suggests undoing it. Steps that come after a long run whose own output will bury them, such as
-  applying and committing what a dream run proposes, wait for the reply that follows that run, and
-  the list before it stops at the run. A PR review's steps are the exception: they live on its
-  review page, where the user ticks them off, and each reply gives the page's link in their place,
-  as the `pull-requests` skill says.
+  their head. A question the session put to the user that is still open, such as a next-step box
+  question that a prompt about other work passed by, is one of these steps: each later reply asks it
+  again, with its recommendation, until the user answers or declines it. Turning a setting back off
+  that the user turned on for the session's work, such as Developer Mode on the Mac, is no step: the
+  setting stays as the user left it, and no reply suggests undoing it. Steps that come after a long
+  run whose own output will bury them, such as applying and committing what a dream run proposes,
+  wait for the reply that follows that run, and the list before it stops at the run. A PR review's
+  steps are the exception: they live on its review page, where the user ticks them off, and each
+  reply gives the page's link in their place, as the `pull-requests` skill says.
 - Steps the user carries out are written in the order they are done, in one numbered list from
   the first to the last. How to do one of them, such as how to start a screen recording, goes
   into that step, never into a section of its own placed before steps that have to come first.
