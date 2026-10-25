@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Close the browser pane and simulators when done
+## Show tokens and dollars only in the final dream report
 
 2026-10-25, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> remove dollars and token amounts from taskbar but keep them in the
+> last dream report of the week
+
+(Should the eve, night and day reports drop them too?)
+> Final report only (Recommended)
+
+## Close the browser pane and simulators when done
+
+2026-10-25, commit [ae13644](https://github.com/lambdakilo/dotclaude/commit/ae13644dbd93edced0ad9da1a21a80e0a7c6349c), model claude-opus-5-5, effort xhigh.
 
 **30.**
 > can you close the browser and simulation windows when theyre done

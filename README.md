@@ -115,8 +115,9 @@ prompts behind it, collected in [`PROMPTS.md`](PROMPTS.md).
 - [`settings.json`](settings.json): turns the hooks on, picks my model, blocks a few tools,
   leaves "Co-Authored-By: Claude" off commits and keeps old sessions for 90 days instead of 30.
 - [`mods/session-usage`](mods/session-usage): a line under the prompt box that shows how many
-  minutes the cache stays warm (a warm cache makes the next message cheaper), how full Claude's
-  memory of the chat is, and what the session has cost so far.
+  minutes the cache stays warm (a warm cache makes the next message cheaper) and how full Claude's
+  memory of the chat is. The tokens and what they would cost show once a week instead, in the report
+  of the last `/dream` run before the weekly reset.
 - [`presence`](presence/install.sh): my phone gets Claude's pushes, such as a question waiting for
   an answer, only while the Mac is locked. [`lock-listener.swift`](presence/lock-listener.swift)
   keeps the file that `CLAUDE_CLIENT_PRESENCE_FILE` in `settings.json` names in step with the screen

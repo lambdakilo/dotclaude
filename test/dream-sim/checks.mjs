@@ -24,6 +24,8 @@ const scenarios = [
   ['final, little work', { ...sat, week: 64, sessions: 6 }, [
     ['mode is final', (st, r) => r.mode.startsWith('final')],
     ['nothing used after the weekly reset', st => st.afterWeekReset === 0],
+    ['the session is told to show the tokens and dollars the run spent', (st, r) => /usage\.sh --run/.test(r.forTheSession) && /the dollars at API list prices/.test(r.forTheSession)],
+    ['and last week and this week of all sessions, from reset to reset', (st, r) => /usage\.sh --since 2026-10-03T13:59:59\.000Z 2026-10-10T13:59:59\.000Z/.test(r.forTheSession)],
     noHits,
   ]],
   ...[80, 88, 93, 97].map(week => [`final, weekly at ${week}`, { ...sat, week, sessions: 200 }, [
@@ -61,8 +63,8 @@ const scenarios = [
     ['the fit check asks for the exact change and both examples', st => /exactChange/.test(st.prompts['fit old-n1'] || '') && /exampleFixed/.test(st.prompts['fit old-n1'] || '')],
     ['the patch carries the examples', st => /"exampleWrong":"it broke"/.test(st.prompts['backlog patch'] || '') || Object.keys(st.prompts).some(k => k.startsWith('backlog items') && /"exampleWrong":"it broke"/.test(st.prompts[k]))],
     ['the session is told to ask one step at a time with the examples', (st, r) => /one AskUserQuestion call per step/.test(r.forTheSession) && /exampleWrong/.test(r.forTheSession)],
-    ['the session is told to show the tokens and dollars the run spent', (st, r) => /usage\.sh --run/.test(r.forTheSession)],
-    ['and last week and this week of all sessions, from reset to reset', (st, r) => /usage\.sh --since 2026-10-03T13:59:59\.000Z 2026-10-10T13:59:59\.000Z/.test(r.forTheSession)],
+    ['the session is told to show only the energy the run used', (st, r) => /usage\.sh --run/.test(r.forTheSession) && /show only the kWh and CO2e/.test(r.forTheSession) && !/the dollars at API list prices/.test(r.forTheSession)],
+    ['and no week of all sessions, which only a final run shows', (st, r) => !/usage\.sh --since/.test(r.forTheSession)],
     ['and to refresh the evals of the checkout evals-checkout.txt names, before the walk', (st, r) => /evals-checkout\.txt exists/.test(r.forTheSession) && r.forTheSession.indexOf('evals.mjs --readme') < r.forTheSession.indexOf('one AskUserQuestion call per step')],
     ['and to leave the walk to a new session in the checkout when the user is away', (st, r) => r.forTheSession.includes('start a new session in ~/Projects/dotclaude and type "dream review" there') && r.forTheSession.indexOf('type "dream review" there') < r.forTheSession.indexOf('one AskUserQuestion call per step')],
   ]],
@@ -82,6 +84,7 @@ const scenarios = [
     ['uses the same one-at-a-time dialogue', (st, r) => /^1 open proposals wait/.test(r.forTheSession) && /one AskUserQuestion call per step/.test(r.forTheSession)],
     ['tests a script in a sandbox before running it', (st, r) => /test it in a sandbox before running it for real/.test(r.forTheSession)],
     ['names the unchecked ones', (st, r) => /1 unchecked proposals wait/.test(r.forTheSession)],
+    ['leaves the tokens and dollars of the week out', (st, r) => !/usage\.sh --since/.test(r.forTheSession)],
   ]],
   ['upstreams', { ...wed, week: 30, sessions: 4, args: { only: ['upstreams'] }, upstreams: [
     { upstream: '~/Projects/template', derived: ['~/Projects/app', '~/Projects/app2'], note: '' },

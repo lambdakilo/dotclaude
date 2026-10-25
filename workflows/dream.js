@@ -357,6 +357,8 @@ const LAST_ACTIVITY = `For a main session transcript also return as lastActivity
 // The workflow cannot see its own token counts, so the calling session sums its agents' transcripts after the run.
 const USAGE_SH = '~/.claude/mods/session-usage/usage.sh'
 const SPENT = `Then show what the run spent: run ${USAGE_SH} --run with the run's transcript folder, the Transcript dir the Workflow tool printed when it launched the run, and show its lines as they come in a text block: tokens by kind, the share the warm cache served, the dollars at API list prices, and kWh and CO2e. Say in one line that on a Claude plan the tokens count against the usage limits above and the dollars are what the same work would cost through the API, and that kWh and CO2e are estimates from how long each response ran and the grid average of its region setting, since the data centre that served it is not known. Add the same lines to the end of the report file under a heading Cost.`
+// Tokens and dollars stay off the status line and show once a week, in the final run's report.
+const ENERGY = `Then show the energy the run used: run ${USAGE_SH} --run with the run's transcript folder, the Transcript dir the Workflow tool printed when it launched the run, and show only the kWh and CO2e at the end of its first line in a text block, leaving out its tokens and dollars, which only the final run of the week shows. Say in one line that kWh and CO2e are estimates from how long each response ran and the grid average of its region setting, since the data centre that served it is not known. Add the same line to the end of the report file under a heading Energy.`
 // Weeks run from one weekly reset to the next, so last week is whole by the time the user reads the report.
 const weekly = (lastStart, thisStart) => `Then show the usage of all sessions from the usage log that ~/.claude/hooks/usage-log.sh keeps after every turn: run ${USAGE_SH} --since ${lastStart} ${thisStart} for last week and ${USAGE_SH} --since ${thisStart} for this week so far, each in a text block under its own heading, and add both to the end of the report file under a heading Week.`
 
@@ -385,7 +387,7 @@ ${GROUND}`, { label: 'review setup', phase: 'Scout', model: 'haiku', effort: 'lo
   const walk = walkText(BACKLOG_FILE, r.report || 'the latest dream report')
   return {
     forTheSession: due.length
-      ? `${waiting ? `${waiting} open proposals wait for their askAgainAfter date and are left out. ` : ''}${walk[0].toUpperCase()}${walk.slice(1)} A script was tested against the files as they stood when its run wrote it, so test it in a sandbox before running it for real, and regenerate it when it fails. Before the first question, take the weekly reset from mcp__ccd_session_mgmt__get_usage; this week began 7 days before it and last week 14 days before it. ${weekly('<last week\'s start>', '<this week\'s start>')}${uncheckedCount ? ` Say in one line that ${uncheckedCount} unchecked proposals wait for the next dream run, which checks them first.` : ''} The steps, in order, each with its script file where it has one: ${JSON.stringify(due.map(i => ({ key: i.key, title: i.title, impact: i.impact, target: i.target, scriptFile: i.scriptFile || '' })))}`
+      ? `${waiting ? `${waiting} open proposals wait for their askAgainAfter date and are left out. ` : ''}${walk[0].toUpperCase()}${walk.slice(1)} A script was tested against the files as they stood when its run wrote it, so test it in a sandbox before running it for real, and regenerate it when it fails.${uncheckedCount ? ` Say in one line that ${uncheckedCount} unchecked proposals wait for the next dream run, which checks them first.` : ''} The steps, in order, each with its script file where it has one: ${JSON.stringify(due.map(i => ({ key: i.key, title: i.title, impact: i.impact, target: i.target, scriptFile: i.scriptFile || '' })))}`
       : `No open proposal is due${waiting ? `, and ${waiting} wait for their askAgainAfter date` : ''}.${uncheckedCount ? ` ${uncheckedCount} unchecked proposals wait for the next dream run.` : ''}`,
     due: due.length,
     waiting,
@@ -1672,7 +1674,7 @@ if (!recorded) log(`Could not record this run in ${HISTORY_FILE}`)
 
 const weeklyTarget = Math.round(100 - MARGIN - RESERVE)
 const WEEK_MS = 7 * 86400000
-const WEEKS = Number.isFinite(weeklyResetMs) ? weekly(new Date(weeklyResetMs - 2 * WEEK_MS).toISOString(), new Date(weeklyResetMs - WEEK_MS).toISOString()) : ''
+const WEEKS = MODE === 'final' && Number.isFinite(weeklyResetMs) ? weekly(new Date(weeklyResetMs - 2 * WEEK_MS).toISOString(), new Date(weeklyResetMs - WEEK_MS).toISOString()) : ''
 const skipReasons = {}
 for (const s of skippedWork) skipReasons[s.reason] = (skipReasons[s.reason] || 0) + 1
 const weeklyLeft = endWeekly ? weeklyTarget - endWeekly.percentUsed : 0
@@ -1689,7 +1691,7 @@ const walkThrough = steps.length
   : 'There are no steps to apply, so say so.'
 
 return {
-  forTheSession: `${report ? `Read ${report.path} and show all of it in the chat, unshortened, since the user reads the report only there.` : 'The report agent returned nothing: say so and list the open proposals below.'} Then read the usage card with mcp__ccd_session_mgmt__get_usage and show a table of the 5-hour and weekly limits at the start of the run, at its end and now, with this ${MODE} run's weekly target of ${weeklyTarget}%, and say in one line why the run stopped where it did: ${stoppedBy}. When the weekly limit at the end sits below that target, open the reply with it, before the report, in plain words: how many weekly points lapse at the reset and at what local time, and why the run left them, such as that it had no work left or that the 5-hour limit stopped it, and whether a run started once the 5-hour window reopens can still spend them before the reset. ${SPENT} ${WEEKS} ${EVALS} ${walkThrough}`,
+  forTheSession: `${report ? `Read ${report.path} and show all of it in the chat, unshortened, since the user reads the report only there.` : 'The report agent returned nothing: say so and list the open proposals below.'} Then read the usage card with mcp__ccd_session_mgmt__get_usage and show a table of the 5-hour and weekly limits at the start of the run, at its end and now, with this ${MODE} run's weekly target of ${weeklyTarget}%, and say in one line why the run stopped where it did: ${stoppedBy}. When the weekly limit at the end sits below that target, open the reply with it, before the report, in plain words: how many weekly points lapse at the reset and at what local time, and why the run left them, such as that it had no work left or that the 5-hour limit stopped it, and whether a run started once the 5-hour window reopens can still spend them before the reset. ${MODE === 'final' ? SPENT : ENERGY} ${WEEKS} ${EVALS} ${walkThrough}`,
   report: report ? report.path : null,
   scripts: SCRIPTS_DIR,
   verification: { weeklyTarget, stoppedBy, start: startUsage ? startUsage.windows : null, end: usage ? usage.windows : null },

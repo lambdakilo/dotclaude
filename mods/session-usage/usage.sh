@@ -2,18 +2,18 @@
 
 # Prints the status line of the usage mod: a fire and the minutes the prompt
 # cache stays warm, or an ice cube and since when it is cold, then how full the
-# context window is, the tokens the session has processed and what they would
-# cost at the first-party API list prices. The transcript repeats a response's
-# usage on every streamed block, so each response id counts once. A model
-# missing from the price table adds tokens but no cost, and a plus after the
-# cost says so.
+# context window is. The other modes total tokens, what they would cost at the
+# first-party API list prices and their energy. The transcript repeats a
+# response's usage on every streamed block, so each response id counts once. A
+# model missing from the price table adds tokens but no cost, and the totals
+# say how many responses it gave.
 #
 #   usage.sh <session id>   the session's transcript under projects/
 #   usage.sh <transcript>   a transcript file
 #   usage.sh --status <session id or transcript>
-#                           the figures, the second the cache goes cold and
-#                           the UTC offset then in seconds, a line each, for
-#                           the mod to count down from
+#                           the context figure, the second the cache goes
+#                           cold and the UTC offset then in seconds, a line
+#                           each, for the mod to count down from
 #   usage.sh --run <folder> the tokens, cost and energy of every transcript
 #                           under the folder, such as a workflow run's, by kind
 #                           and model
@@ -40,14 +40,6 @@ common='
   def secs: (.[0:19] + "Z" | fromdateiso8601) + ((.[20:23] | tonumber?) // 0) / 1000;
   def all_in: (.input_tokens | n) + (.cache_creation_input_tokens | n)
     + (.cache_read_input_tokens | n) + (.output_tokens | n);
-  def cost($p): .u as $u
-    | if $p == null then 0 else
-        (($u.input_tokens | n) * $p[0] + ($u.output_tokens | n) * $p[1]
-         + ($u.cache_read_input_tokens | n) * $p[2]
-         + (if $u.cache_creation == null then ($u.cache_creation_input_tokens | n)
-            else ($u.cache_creation.ephemeral_5m_input_tokens | n) end) * $p[3]
-         + ($u.cache_creation.ephemeral_1h_input_tokens | n) * $p[4]) / 1000000
-      end;
   def responses($main): reduce (inputs | fromjson? | select(.timestamp != null)) as $e ({seen: {}, r: []};
       (if $e.uuid != null then .seen[$e.uuid] = ($e.timestamp | secs) else . end)
       | if $e.type == "assistant" and $e.message.usage != null
@@ -159,32 +151,20 @@ if [ -n "$transcript" ] && [ ! -f "$transcript" ]; then
 fi
 [ -f "$transcript" ] || exit 0
 
-files=("$transcript")
-for f in "${transcript%.jsonl}"/subagents/*.jsonl; do
-  [ -f "$f" ] && files+=("$f")
-done
-
-read -r ctx window tokens cost unpriced warm < <(jq -nrR --arg main "$transcript" "$common"'
+read -r ctx window warm < <(jq -nrR --arg main "$transcript" "$common"'
   responses($main)
   | select(length > 0)
-  | (map(select(.main)) | max_by(.at)) as $last
-  | (map(.u | all_in) | add) as $tokens
-  | (map(cost(prices[.model])) | add) as $cost
-  | (map(select(prices[.model] == null)) | length) as $unpriced
-  | (if any(.[]; .main and (.u.cache_creation.ephemeral_1h_input_tokens | n) > 0)
+  | max_by(.at) as $last
+  | (if any(.[]; (.u.cache_creation.ephemeral_1h_input_tokens | n) > 0)
      then 3600 else 300 end) as $ttl
   | ($last.model | if test("haiku-4|claude-3") then 200000 else 1000000 end) as $window
-  | "\($last.u | all_in) \($window) \($tokens) \($cost) \($unpriced) \($last.at + $ttl | floor)"
-' "${files[@]}" 2>/dev/null)
+  | "\($last.u | all_in) \($window) \($last.at + $ttl | floor)"
+' "$transcript" 2>/dev/null)
 [ -n "${warm:-}" ] || exit 0
 
 at() { LC_ALL=C date -r "$1" "$2" 2>/dev/null || LC_ALL=C date -d "@$1" "$2" 2>/dev/null; }
 
-percent=$(awk -v c="$ctx" -v w="$window" 'BEGIN { printf "%d", c * 100 / w }')
-dollars=$(awk -v d="$cost" 'BEGIN { printf "%.2f", d }')
-[ "$unpriced" -gt 0 ] && dollars="$dollars+"
-
-figures="$percent% ctx, $(human "$tokens"), \$$dollars"
+figures="$(awk -v c="$ctx" -v w="$window" 'BEGIN { printf "%d", c * 100 / w }')% ctx"
 
 if [ "$status" = true ]; then
   z=$(at "$warm" +%z)

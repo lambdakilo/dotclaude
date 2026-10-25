@@ -2,7 +2,7 @@ import { expect, mock, test } from 'claude-code/testing'
 
 const TURN = { answer: '', durationMs: 1, isAborted: false, turnId: 't1', reason: 'answer' } as const
 const START = { cwd: '/', surface: 'terminal', isInteractive: true } as const
-const FIGURES = '16% ctx, 6.1M, $2.96'
+const FIGURES = '16% ctx'
 const FIRE = '\u{1F525}'
 const ICE = '\u{1F9CA}'
 // 12:20 on 20 Oct at UTC+3, and the next midnight there
