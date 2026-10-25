@@ -503,9 +503,12 @@ apply to one repository belong in that repository's project memory.
   that ask, and every later turn calls `show_pane` again first while the step still waits. A deny
   rule in `settings.json` blocks Claude in Chrome, which the user does not want.
 - Once the browser pane, the iOS simulator panel or a simulator has done its job in a turn, the
-  session closes it before the reply: each pane tab with `tabs_close`, which closes the pane with
-  the last one, the panel with the simulator tool's `detach`, and simulators and emulators with
-  their shutdown commands. A tab or panel where a step waits on the user stays open.
+  session closes it before the reply: each pane tab with `tabs_close`, then the pane with
+  `close_pane` and `preview`, since closing the last tab leaves the empty pane on screen; the panel
+  with the simulator tool's `detach`; and simulators and emulators with their shutdown commands.
+  `close_pane` acts only while the session is in a window, so when it answers that the session is in
+  none, every later turn calls it again first until it closes the pane. A tab or panel where a step
+  waits on the user stays open.
 - A `Stop` hook, `~/.claude/hooks/stop-unreachable-claim.sh`, sends a turn back once when its
   closing message says in the first person that something could not be opened, read, reached or
   uploaded, and no browser pane tool ran since the prompt. Its phrase list is a heuristic that backs
@@ -526,9 +529,10 @@ apply to one repository belong in that repository's project memory.
   for a yes; a prompt that itself asks for that window is the yes. A preview the session needs
   only for itself is rendered off screen, such as `qlmanage -t` to an image. Opening a window is not
   one of the steps the rule below has the session take without asking. A crash of an app the session
-  launched, a simulator app included, opens a macOS crash report dialog over the user's work, so
-  once an app has crashed in a session, each further launch of it is asked about the same way until
-  a launch shows the crash fixed.
+  launched, a simulator app included, or of a process inside a simulator it booted, such as
+  PosterBoard during a test run's boot, opens a macOS crash report dialog over the user's work, so
+  once one has crashed in a session, each further launch of that app or boot of that simulator is
+  asked about the same way until a launch shows the crash fixed.
 - In the desktop app, every turn that answers a prompt from the user renames its own session
   with `set_session_title` and `self`, to a title for what the whole session has done so far,
   not for the latest prompt alone. The call comes once the turn's work is done and is skipped
