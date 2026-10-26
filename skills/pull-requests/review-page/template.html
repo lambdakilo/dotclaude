@@ -57,7 +57,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .main { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
 .bar {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
-  display: flex; align-items: center; gap: 10px; padding-block: 8px; margin-top: -8px;
+  display: flex; align-items: center; gap: 10px; height: 40px; box-sizing: border-box; padding-block: 8px; margin-top: -8px;
 }
 @media (min-width: 1100px) {
   .layout { grid-template-columns: minmax(200px, 1fr) minmax(0, 860px) minmax(200px, 1fr); grid-template-areas: "pr main ."; }
@@ -104,7 +104,7 @@ h3.sub { font-size: 0.95rem; margin: 14px 0 6px; }
 .step {
   display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; align-items: start;
   background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px;
-  scroll-margin-top: 56px; outline: none;
+  scroll-margin-top: calc(42px + env(safe-area-inset-top, 0px)); outline: none;
 }
 .step.added { border-style: dashed; border-color: var(--warn); }
 .step.finding { border-left: 4px solid var(--muted); }
@@ -149,7 +149,11 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
 .toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 6px 14px; border-radius: 999px; font-size: 13px; opacity: 0; transition: opacity 0.15s; pointer-events: none; }
 .toast.show { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .fill, .toast { transition: none; } }
-@media (min-width: 1100px) { .step { scroll-margin-top: 20px; } }
+/* A band as tall as the scroll margin, less the 2px focus ring, hides what scrolled up past the focused step; the progress bar does it on a narrow window. */
+@media (min-width: 1100px) {
+  body::before { height: calc(12px + env(safe-area-inset-top, 0px)); }
+  .step { scroll-margin-top: calc(14px + env(safe-area-inset-top, 0px)); }
+}
 @media (max-width: 520px) {
   .step { grid-template-columns: 28px minmax(0, 1fr); padding: 12px; gap: 10px; }
 }
