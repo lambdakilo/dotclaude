@@ -127,13 +127,18 @@ downstream names redacted in public and upstream repositories.
   adds to the checkout's `.git/info/exclude` so git never sees it, and it is a local file, never an
   Artifact. The script takes the steps of the PR body's How to verify? as GitHub holds them, embeds
   the PR's screenshots, downloaded with the `gh` token, and adds from the overlay the review's
-  results, its findings and the steps it adds. On the page `x` ticks a step, `j` and `k` move, `n`
-  goes to the next open step, `c` copies the step's command or address, `o` opens its screenshot. On
-  a wide window the PR, the progress and the review sit in a side column that stays in view while
-  the steps scroll; a narrow one keeps only a thin progress bar at the top. An address in a `text`
-  block is a link on the page. The ticks live in the browser's storage for that file, so a later
-  review of the same PR rebuilds the page at the same path and they stay; the session cannot read
-  them, so the reader says how far they got.
+  results, its findings and the steps it adds. The findings come first, as steps, so the reader can
+  request changes before the manual pass, and each miss shows inside the step it concerns. A
+  result's detail is a few words, what ran on which head with what count, such as 119 of 119 on
+  abc1234, and the script refuses a longer one. On the page `j` and `k` move to the next or the
+  previous step and center it, `x` ticks it, `n` goes to the next open step, `c` copies its first
+  command or address and `o` opens its screenshot. The current step lists these keys under its title
+  and its first block says that `c` copies it, so the page has no key list of its own. On a wide
+  window the PR, the progress and the review sit in a side column that stays in view while the steps
+  scroll; a narrow one keeps only a thin progress bar at the top. An address in a `text` block is a
+  link on the page. The ticks live in the browser's storage for that file, so a later review of the
+  same PR rebuilds the page at the same path and they stay; the session cannot read them, so the
+  reader says how far they got.
 - The reply opens with the page's link, a Markdown link to the file's path relative to the checkout,
   which the app opens on a click, then the results of the verify command and the end to end run,
   then the findings, and gives no step list of its own.
@@ -164,13 +169,14 @@ downstream names redacted in public and upstream repositories.
   `step` names it, so the reader can go from either to the other. The bug's step undoes any change
   the later steps do not expect. A bug nothing on screen can show, such as a race or a path no click
   reaches, says so in its finding.
-- The overlay's `missed` says what the PR's instructions missed, or that nothing was: a label that
-  is not on screen; a click left out; a step the seed data cannot do, or state the reviewer builds
-  by hand through a workflow the specs already cover, which the PR should have seeded; a change
-  without a step; a check that failed or a claim the run disproved; a picture placed after the step
-  it shows. When the PR's command steps are missing or wrong, the reply ends with the two command
-  steps as GitHub markdown inside a four-backtick fence, so the PR's "How to verify" can take them
-  over unchanged. That block is the one thing in the reply written for the PR's body, as the
+- Each entry of the overlay's `missed` names a step and says what the PR's instructions missed
+  there, and an empty list says nothing was: a label that is not on screen; a click left out; a step
+  the seed data cannot do, or state the reviewer builds by hand through a workflow the specs already
+  cover, which the PR should have seeded; a change without a step, named on the added step that
+  covers it; a check that failed or a claim the run disproved; a picture placed after the step it
+  shows. When the PR's command steps are missing or wrong, the reply ends with the two command steps
+  as GitHub markdown inside a four-backtick fence, so the PR's "How to verify" can take them over
+  unchanged. That block is the one thing in the reply written for the PR's body, as the
   reproductions are the ones written for its author.
 
 ## Screenshots and recordings

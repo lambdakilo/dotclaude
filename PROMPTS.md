@@ -5,9 +5,27 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Show the gm alias and the restart in the start of day section
+## Put review findings first and show keys on the current step
 
 2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**19.**
+> ok so. i want the current step centered. no need for the big ass
+> texts like these [pasted: a check's detail line from the review page]
+>
+> also its usually also the pr steps missed should be inline in the
+> steps. if theres a command i should be able to copy it with c and it
+> should tell me that i can use c to copy it. also the j and k to move
+> down or  up. findings should be first step so that i can still
+> request changes first before i start a huge operation of manual
+> checking.
+>
+> ? keys is also not too intuitive. just put the shortcuts there like
+> press or x for check in the steps. remove teh ? keys
+
+## Show the gm alias and the restart in the start of day section
+
+2026-10-26, commit [4bfacaa](https://github.com/lambdakilo/dotclaude/commit/4bfacaa8b7e615bbd36c4698b234ced04f0d99c4), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > can you alias s to gm instead the bin sod that is, you can actually

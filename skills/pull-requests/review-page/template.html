@@ -74,7 +74,6 @@ h1 { font-size: 1.15rem; line-height: 1.3; margin: 0; font-weight: 600; text-wra
 .track { flex: 1; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
 .fill { height: 100%; width: 0; background: var(--accent); transition: width 0.2s ease; }
 .count { font: 500 13px var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.keys-btn { border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 2px 8px; font: 500 12px var(--mono); cursor: pointer; }
 .save { font-size: 12px; color: var(--muted); min-height: 1em; }
 
 h2 { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
@@ -86,27 +85,15 @@ h3.sub { font-size: 0.95rem; margin: 14px 0 6px; }
 .review h2 { margin-bottom: 4px; }
 .review-sum { font-weight: 600; margin: 0 0 10px; font-size: 14px; }
 .review p { margin: 0; }
-.results { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.result { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 8px; align-items: baseline; }
-.result-detail { grid-column: 2; font-size: 12.5px; }
+.results { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.result { display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline; }
+.result-detail { font-size: 12.5px; }
 .pill { font: 600 11px/1 var(--mono); padding: 4px 7px; border-radius: 999px; border: 1px solid currentColor; text-transform: uppercase; letter-spacing: 0.04em; }
 .result.pass .pill { color: var(--pass); }
 .result.fail .pill { color: var(--fail); }
 .result.skip .pill { color: var(--muted); }
 .result-name { font-weight: 500; }
 .result-detail { color: var(--muted); min-width: 0; }
-.review ul { margin: 0; padding-left: 18px; }
-.findings { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.finding { border-left: 3px solid var(--muted); padding-left: 12px; }
-.finding.high { border-color: var(--fail); }
-.finding.medium { border-color: var(--warn); }
-.finding-head { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
-.sev { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
-.finding.high .sev { color: var(--fail); }
-.finding.medium .sev { color: var(--warn); }
-.finding-title { font-weight: 600; }
-.finding p, .finding .block { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
-.to-step { font-size: 12.5px; }
 .quiet { color: var(--muted); margin: 10px 0 0; }
 
 .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
@@ -116,7 +103,18 @@ h3.sub { font-size: 0.95rem; margin: 14px 0 6px; }
   scroll-margin-top: 56px; outline: none;
 }
 .step.added { border-style: dashed; border-color: var(--warn); }
+.step.finding { border-left: 4px solid var(--muted); }
+.step.finding.high { border-left-color: var(--fail); }
+.step.finding.medium { border-left-color: var(--warn); }
 .step.focused { box-shadow: 0 0 0 2px var(--accent); border-color: transparent; }
+.step.finding.high .step-label { color: var(--fail); }
+.step.finding.medium .step-label { color: var(--warn); }
+.missed { border-left: 3px solid var(--warn); padding: 2px 0 2px 10px; display: flex; flex-direction: column; gap: 4px; }
+.missed-label { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--warn); }
+.missed p { margin: 0; }
+.hint { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0 0 10px; font-size: 12.5px; color: var(--muted); }
+.c-hint { margin-left: auto; margin-right: 8px; text-transform: none; letter-spacing: 0; font: 400 12px var(--sans); }
+.start { margin: 0; color: var(--muted); font-size: 13.5px; }
 .check {
   width: 28px; height: 28px; border-radius: 7px; border: 2px solid var(--line); background: var(--surface);
   cursor: pointer; display: grid; place-items: center; margin-top: 2px; padding: 0;
@@ -144,12 +142,6 @@ h3.sub { font-size: 0.95rem; margin: 14px 0 6px; }
 #viewer { border: none; padding: 0; background: transparent; max-width: 96vw; max-height: 96vh; }
 #viewer::backdrop { background: rgb(0 0 0 / 0.78); }
 #viewer img { display: block; max-width: 96vw; max-height: 92vh; border-radius: 6px; cursor: zoom-out; }
-#keys { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); padding: 18px 22px; max-width: min(380px, 92vw); }
-#keys::backdrop { background: rgb(0 0 0 / 0.35); }
-#keys h2 { margin-bottom: 12px; }
-#keys dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 0; }
-#keys dt { font: 500 13px var(--mono); }
-#keys dd { margin: 0; }
 kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; background: var(--bg); }
 .toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 6px 14px; border-radius: 999px; font-size: 13px; opacity: 0; transition: opacity 0.15s; pointer-events: none; }
 .toast.show { opacity: 1; }
@@ -170,7 +162,6 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
       <div class="progress">
         <div class="track" aria-hidden="true"><div class="fill"></div></div>
         <span class="count" role="status">0 of 0 done</span>
-        <button type="button" class="keys-btn" aria-haspopup="dialog">? Keys</button>
       </div>
       <div class="save" id="save"></div>
     </header>
@@ -180,25 +171,13 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     <div class="bar progress" aria-hidden="true">
       <div class="track"><div class="fill"></div></div>
       <span class="count">0 of 0 done</span>
-      <button type="button" class="keys-btn" tabindex="-1">? Keys</button>
     </div>
+    <p class="start" id="start">Press <kbd>j</kbd> for the first step.</p>
     {{SECTIONS}}
   </main>
 </div>
 
 <dialog id="viewer" aria-label="Screenshot"><img alt=""></dialog>
-<dialog id="keys" aria-labelledby="keys-h">
-  <h2 id="keys-h">Keyboard</h2>
-  <dl>
-    <dt><kbd>j</kbd> <kbd>k</kbd></dt><dd>Next or previous step</dd>
-    <dt><kbd>x</kbd></dt><dd>Mark the step done, or not done</dd>
-    <dt><kbd>n</kbd></dt><dd>Go to the next step not done</dd>
-    <dt><kbd>c</kbd></dt><dd>Copy the step's first command or address</dd>
-    <dt><kbd>o</kbd></dt><dd>Open the step's screenshot</dd>
-    <dt><kbd>?</kbd></dt><dd>Show or hide this list</dd>
-    <dt><kbd>Esc</kbd></dt><dd>Close the screenshot or this list</dd>
-  </dl>
-</dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -210,8 +189,13 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
   const counts = document.querySelectorAll(".count");
   const save = document.getElementById("save");
   const viewer = document.getElementById("viewer");
-  const keys = document.getElementById("keys");
   const toastEl = document.getElementById("toast");
+  const start = document.getElementById("start");
+  const hint = document.createElement("div");
+  hint.className = "hint";
+  const copyHint = document.createElement("span");
+  copyHint.className = "c-hint";
+  copyHint.innerHTML = "<kbd>c</kbd> copies this";
   // No step is picked until the reader moves, so the first j lands on step 1.
   let focus = -1;
 
@@ -243,13 +227,27 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     for (const el of fills) el.style.width = (steps.length ? (n / steps.length) * 100 : 0) + "%";
   }
 
+  function showKeys(el) {
+    const keys = [["x", el.classList.contains("finding") ? "read" : "done"], ["j", "next"], ["k", "back"], ["n", "next open"]];
+    if (el.querySelector(".zoom img")) keys.push(["o", "screenshot"]);
+    hint.innerHTML = keys.map(([key, what]) => "<span><kbd>" + key + "</kbd> " + what + "</span>").join("");
+    el.querySelector(".step-title").after(hint);
+    const bar = el.querySelector(".block .block-bar");
+    if (bar) bar.insertBefore(copyHint, bar.querySelector(".copy"));
+    else copyHint.remove();
+  }
+
   function setFocus(i, scroll) {
     if (!steps.length) return;
     focus = Math.max(0, Math.min(steps.length - 1, i));
     steps.forEach((el, k) => el.classList.toggle("focused", k === focus));
+    start.hidden = true;
+    showKeys(steps[focus]);
     if (scroll) {
       const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
-      steps[focus].scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "auto" });
+      // A step taller than the window starts at its top, so its first line stays in view.
+      const fits = steps[focus].getBoundingClientRect().height < innerHeight - 40;
+      steps[focus].scrollIntoView({ block: fits ? "center" : "start", behavior: smooth ? "smooth" : "auto" });
     }
   }
 
@@ -314,16 +312,11 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     }
   });
   viewer.addEventListener("click", () => viewer.close());
-  keys.addEventListener("click", (e) => { if (e.target === keys) keys.close(); });
-  for (const el of document.querySelectorAll(".keys-btn")) el.addEventListener("click", () => keys.showModal());
 
   document.addEventListener("keydown", (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (e.target.closest("input, textarea, select, [contenteditable]")) return;
-    if (viewer.open || keys.open) {
-      if (e.key === "?" && keys.open) { keys.close(); e.preventDefault(); }
-      return;
-    }
+    if (viewer.open) return;
     const here = focus >= 0 ? steps[focus] : null;
     const pick = () => toast("Press j to pick a step first");
     switch (e.key) {
@@ -333,7 +326,6 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
       case "n": nextUndone(); break;
       case "c": if (here) copyFrom(here); else pick(); break;
       case "o": if (here) openImage(here); else pick(); break;
-      case "?": keys.showModal(); break;
       default: return;
     }
     e.preventDefault();

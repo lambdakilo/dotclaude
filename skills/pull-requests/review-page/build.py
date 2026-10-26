@@ -10,15 +10,17 @@ command runs in, a folder this adds to the checkout's .git/info/exclude so
 git never sees it.
 
 The overlay is JSON:
-  {"results": [{"name": "...", "outcome": "pass|fail|skip", "detail": "..."}],
+  {"results": [{"name": "...", "outcome": "pass|fail|skip",
+                "detail": "a few words, such as 119 of 119 on abc1234"}],
    "findings": [{"severity": "high|medium|low", "title": "...", "body": "...",
                  "step": "<step id>"}],
    "added_steps": [{"after": "<step id, or empty for before the first>",
                     "title": "...", "body": "..."}],
-   "missed": "..."}
-Bodies are Markdown in the form the pull-requests skill writes. Step ids are
-the section's slug and the step's number, such as setup-2; build.py prints
-them.
+   "missed": [{"step": "<step id>", "text": "..."}]}
+Findings come first on the page, as steps, and each miss shows inside the
+step it concerns. Bodies are Markdown in the form the pull-requests skill
+writes. Step ids are the section's slug and the step's number, such as
+setup-2; build.py prints them.
 
 Run it with python3 -I. It needs the gh CLI signed in to the PR's host.
 """
@@ -292,11 +294,57 @@ def add_review_steps(sections, review):
             sys.exit("added step %d: no step %s" % (k, extra["after"]))
 
 
+def add_findings(sections, review):
+    """The findings as the page's first steps, so changes can be requested
+    before the manual pass starts."""
+    findings = review.get("findings", [])
+    if not findings:
+        return
+    steps = []
+    for n, f in enumerate(findings, 1):
+        body = render_blocks(f.get("body", "").split("\n"))
+        if f.get("step"):
+            body += '<p><a class="to-step" href="#%s" data-step="%s">Go to the step that shows it</a></p>' % (
+                f["step"], f["step"])
+        steps.append(
+            {
+                "id": "finding-%d" % n,
+                "n": n,
+                "title": inline(f["title"]),
+                "body": body,
+                "finding": f["severity"],
+            }
+        )
+    sections.insert(0, {
+        "title": "Findings",
+        "note": "<p>Read these before the manual steps, so changes can be requested first.</p>",
+        "steps": steps,
+    })
+
+
+def add_missed(sections, review):
+    missed = review.get("missed", [])
+    if isinstance(missed, str):
+        sys.exit("missed: give a list of {step, text}, each shown inside its step")
+    by_id = {s["id"]: s for section in sections for s in section["steps"]}
+    for m in missed:
+        if m.get("step") not in by_id:
+            sys.exit("missed: no step %s" % m.get("step"))
+        by_id[m["step"]]["body"] = (
+            '<div class="missed"><span class="missed-label">Missed in the PR</span>%s</div>'
+            % render_blocks(m["text"].split("\n"))
+        ) + by_id[m["step"]]["body"]
+
+
 def render_review(review):
     if not review:
         return ""
     parts = []
     results = review.get("results", [])
+    for r in results:
+        if len(r.get("detail", "")) > 60:
+            sys.exit("result %r: keep the detail to a few words, such as the head it ran on and a count"
+                     % r["name"])
     if results:
         rows = "".join(
             '<li class="result %s"><span class="pill">%s</span><span class="result-name">%s</span>'
@@ -311,28 +359,8 @@ def render_review(review):
         )
         parts.append('<ul class="results">%s</ul>' % rows)
     findings = review.get("findings", [])
-    if findings:
-        items = "".join(
-            '<li class="finding %s"><div class="finding-head"><span class="sev">%s</span>'
-            '<span class="finding-title">%d. %s</span>%s</div>%s</li>'
-            % (
-                html.escape(f["severity"]),
-                html.escape(f["severity"].capitalize()),
-                n,
-                inline(f["title"]),
-                '<a class="to-step" href="#%s" data-step="%s">Step</a>' % (f["step"], f["step"]) if f.get("step") else "",
-                render_blocks(f.get("body", "").split("\n")),
-            )
-            for n, f in enumerate(findings, 1)
-        )
-        parts.append('<h3 class="sub">Findings</h3><ol class="findings">%s</ol>' % items)
-    elif results:
+    if not findings and results:
         parts.append('<p class="quiet">No findings.</p>')
-    if review.get("missed"):
-        parts.append(
-            '<h3 class="sub">What the PR\'s steps missed</h3>%s'
-            % render_blocks(review["missed"].split("\n"))
-        )
     failed = sum(1 for r in results if r["outcome"] == "fail")
     passed = sum(1 for r in results if r["outcome"] == "pass")
     bits = []
@@ -343,14 +371,14 @@ def render_review(review):
         for f in findings:
             by[f["severity"]] = by.get(f["severity"], 0) + 1
         bits.append(
-            "%d finding%s: %s" % (
+            "%d finding%s (%s), first in the steps" % (
                 len(findings), "" if len(findings) == 1 else "s",
                 ", ".join("%d %s" % (by[k], k) for k in ("high", "medium", "low") if k in by),
             )
         )
     return (
         '<section class="review" aria-labelledby="review-h"><h2 id="review-h">Review</h2>'
-        '<p class="review-sum">%s</p>%s</section>' % (html.escape(" · ".join(bits)), "".join(parts))
+        '<p class="review-sum">%s</p>%s</section>' % (html.escape(". ".join(bits)), "".join(parts))
     )
 
 
@@ -359,14 +387,20 @@ def render_sections(sections):
     for section in sections:
         steps = []
         for step in section["steps"]:
-            label = "Added by the review" if step.get("added") else "Step %d" % step["n"]
+            if step.get("finding"):
+                label = "Finding %d, %s" % (step["n"], step["finding"])
+                kind = " finding " + html.escape(step["finding"])
+            elif step.get("added"):
+                label, kind = "Added by the review", " added"
+            else:
+                label, kind = "Step %d" % step["n"], ""
             steps.append(
                 '<li class="step%s" id="%s" data-id="%s" tabindex="-1">'
                 '<button type="button" class="check" role="checkbox" aria-checked="false" aria-label="Done: %s"></button>'
                 '<div class="step-main"><div class="step-label">%s</div><div class="step-title">%s</div>'
                 '<div class="step-body">%s</div></div></li>'
                 % (
-                    " added" if step.get("added") else "",
+                    kind,
                     step["id"],
                     step["id"],
                     html.escape(re.sub("<[^>]+>", "", step["title"])),
@@ -430,6 +464,8 @@ def main():
         sys.exit("%s#%s has no How to verify? section" % (repo, number))
     if review:
         add_review_steps(sections, review)
+        add_missed(sections, review)
+        add_findings(sections, review)
 
     with open(os.path.join(HERE, "template.html")) as f:
         page = f.read()
