@@ -87,8 +87,10 @@ downstream names redacted in public and upstream repositories.
 - The automated part is two command steps, each one fenced block joined with `&&`, since each
   is a sequence that should stop at its first failure. The first, run in a tab of its own,
   fetches, switches to the branch, updates the submodules and starts the stack. The second, in
-  another tab, runs whatever the stack needs after a switch (a cache clear, a build), the
-  verify command and the end to end run. The manual steps follow them.
+  another tab, runs whatever the stack needs after a switch (a cache clear, a build), the verify
+  command and the end to end run. Both run in a subshell that opens with `cd` into the checkout, as
+  in `(cd ~/Projects/<repo> && git fetch --all --prune && ...)`, since the reader pastes them into a
+  new terminal, which starts in `~`. The manual steps follow them.
 - Manual steps follow the screen. Before writing one, open the component or the running page and
   take the order of fields and clicks from it, so a dialog that shows type, then name, then
   company is filled in that order and never in the order the step's purpose brings them to mind.
@@ -133,15 +135,17 @@ downstream names redacted in public and upstream repositories.
   the reader has nothing left to do about it; the reply names the fix. A result's name says in plain
   words what ran, such as manual steps replayed by a script, and its detail is a few words, what ran
   on which head with what count, such as 119 of 119 on abc1234, and the script refuses a longer one.
-  The browser tab reads Review PR and the number, with a tick for an icon. On the page `j` and `k`
-  move to the next or the previous step and center it, `x` ticks it, `n` goes to the next open step,
-  `c` copies its first command or address and `o` opens its screenshot. The current step lists these
-  keys under its title and its first block says that `c` copies it, so the page has no key list of
-  its own. On a wide window the steps sit centred, with the PR and the progress in a rail on the
-  left and the review in one on the right, both in view while the steps scroll; a narrow one keeps
-  only a thin progress bar at the top. An address in a `text` block is a link on the page. The ticks
-  live in the browser's storage for that file, so a later review of the same PR rebuilds the page at
-  the same path and they stay; the session cannot read them, so the reader says how far they got.
+  The browser tab reads Review PR and the number, with a tick for an icon. Checks that failed or did
+  not run and the count of open findings go in a box above the steps, and a review where all is well
+  shows none. The page opens on the first step not done, so its keys work at once. `j` and `k` move
+  to the next or the previous step and center it, `x` ticks it, `c` copies its first command or
+  address and `o` opens its screenshot. The current step lists these keys under its title and its
+  first block says that `c` copies it, so the page has no key list of its own. On a wide window the
+  steps sit centred, with the PR and the progress in a rail on the left that stays in view while the
+  steps scroll; a narrow one keeps only a thin progress bar at the top. An address in a `text` block
+  is a link on the page. The ticks live in the browser's storage for that file, so a later review of
+  the same PR rebuilds the page at the same path and they stay; the session cannot read them, so the
+  reader says how far they got.
 - The reply gives the results of the verify command and the end to end run, then the findings and
   the fixes made, and no step list of its own. It ends with the page's link, a Markdown link to the
   file's path relative to the checkout, which the app opens on a click, on its last line before
@@ -177,11 +181,11 @@ downstream names redacted in public and upstream repositories.
   there, and an empty list says nothing was: a label that is not on screen; a click left out; a step
   the seed data cannot do, or state the reviewer builds by hand through a workflow the specs already
   cover, which the PR should have seeded; a change without a step, named on the added step that
-  covers it; a check that failed or a claim the run disproved; a picture placed after the step it
-  shows. When the PR's command steps are missing or wrong, the reply ends with the two command steps
-  as GitHub markdown inside a four-backtick fence, so the PR's "How to verify" can take them over
-  unchanged. That block is the one thing in the reply written for the PR's body, as the
-  reproductions are the ones written for its author.
+  covers it; a command that fails pasted into a new terminal; a check that failed or a claim the run
+  disproved; a picture placed after the step it shows. When the PR's command steps are missing or
+  wrong, the reply ends with the two command steps as GitHub markdown inside a four-backtick fence,
+  so the PR's "How to verify" can take them over unchanged. That block is the one thing in the reply
+  written for the PR's body, as the reproductions are the ones written for its author.
 
 ## Screenshots and recordings
 

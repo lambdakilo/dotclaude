@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-/* Wide: the steps sit centred between a rail with the PR and its progress and a rail with the review, both staying put while the steps scroll. Narrow: one column under a thin progress bar. */
+/* Wide: the steps sit centred, with the PR and its progress in a rail on the left that stays put while the steps scroll. Narrow: one column under a thin progress bar. */
 :root {
   --bg: #f4f6f4;
   --surface: #ffffff;
@@ -49,10 +49,8 @@ body {
   padding-block: 0 64px;
 }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
-.layout { max-width: 1760px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "pr" "review" "main"; gap: 20px 32px; padding-top: 20px; }
+.layout { max-width: 1760px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "pr" "main"; gap: 20px 32px; padding-top: 20px; }
 .rail-pr { grid-area: pr; }
-.rail-review { grid-area: review; }
-.rail-review:empty { display: none; }
 @media (max-width: 1099px) { .rail-pr .progress { display: none; } }
 .main { grid-area: main; }
 .rail { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
@@ -62,7 +60,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   display: flex; align-items: center; gap: 10px; padding-block: 8px; margin-top: -8px;
 }
 @media (min-width: 1100px) {
-  .layout { grid-template-columns: minmax(200px, 1fr) minmax(0, 860px) minmax(200px, 1fr); grid-template-areas: "pr main review"; }
+  .layout { grid-template-columns: minmax(200px, 1fr) minmax(0, 860px) minmax(200px, 1fr); grid-template-areas: "pr main ."; }
   .rail { position: sticky; top: calc(20px + env(safe-area-inset-top, 0px)); align-self: start; max-height: calc(100vh - 40px); overflow-y: auto; padding-right: 4px; }
   .main > .bar { display: none; }
 }
@@ -120,7 +118,6 @@ h3.sub { font-size: 0.95rem; margin: 14px 0 6px; }
 .missed p { margin: 0; }
 .hint { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0 0 10px; font-size: 12.5px; color: var(--muted); }
 .c-hint { margin-left: auto; margin-right: 8px; text-transform: none; letter-spacing: 0; font: 400 12px var(--sans); }
-.start { margin: 0; color: var(--muted); font-size: 13.5px; }
 .check {
   width: 28px; height: 28px; border-radius: 7px; border: 2px solid var(--line); background: var(--surface);
   cursor: pointer; display: grid; place-items: center; margin-top: 2px; padding: 0;
@@ -164,7 +161,7 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     <header class="top">
       <div class="ref"><a href="{{PR_URL}}" target="_blank" rel="noopener">{{PR_REF}}</a><span>{{BRANCH}}</span><span>head {{HEAD}}</span></div>
       <h1>{{PR_TITLE}}</h1>
-      <div class="meta"><span>By {{AUTHOR}}</span><span>Steps taken from the PR's How to verify? on {{BUILT}}</span></div>
+      <div class="meta"><span>By {{AUTHOR}}</span><span>Review built {{BUILT}}</span></div>
       <div class="progress">
         <div class="track" aria-hidden="true"><div class="fill"></div></div>
         <span class="count" role="status">0 of 0 done</span>
@@ -172,13 +169,12 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
       <div class="save" id="save"></div>
     </header>
   </aside>
-  <aside class="rail rail-review">{{REVIEW}}</aside>
   <main class="main">
     <div class="bar progress" aria-hidden="true">
       <div class="track"><div class="fill"></div></div>
       <span class="count">0 of 0 done</span>
     </div>
-    <p class="start" id="start">Press <kbd>j</kbd> for the first step.</p>
+    {{REVIEW}}
     {{SECTIONS}}
   </main>
 </div>
@@ -196,13 +192,11 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
   const save = document.getElementById("save");
   const viewer = document.getElementById("viewer");
   const toastEl = document.getElementById("toast");
-  const start = document.getElementById("start");
   const hint = document.createElement("div");
   hint.className = "hint";
   const copyHint = document.createElement("span");
   copyHint.className = "c-hint";
   copyHint.innerHTML = "<kbd>c</kbd> copies this";
-  // No step is picked until the reader moves, so the first j lands on step 1.
   let focus = -1;
 
   function local(name, value) {
@@ -234,7 +228,7 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
   }
 
   function showKeys(el) {
-    const keys = [["x", el.classList.contains("finding") ? "read" : "done"], ["j", "next"], ["k", "back"], ["n", "next open"]];
+    const keys = [["x", el.classList.contains("finding") ? "read" : "done"], ["j", "next"], ["k", "back"]];
     if (el.querySelector(".zoom img")) keys.push(["o", "screenshot"]);
     hint.innerHTML = keys.map(([key, what]) => "<span><kbd>" + key + "</kbd> " + what + "</span>").join("");
     el.querySelector(".step-title").after(hint);
@@ -247,7 +241,6 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     if (!steps.length) return;
     focus = Math.max(0, Math.min(steps.length - 1, i));
     steps.forEach((el, k) => el.classList.toggle("focused", k === focus));
-    start.hidden = true;
     showKeys(steps[focus]);
     if (scroll) {
       const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -293,14 +286,6 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     viewer.showModal();
   }
 
-  function nextUndone() {
-    for (let k = 1; k <= steps.length; k++) {
-      const i = (focus + k) % steps.length;
-      if (!done.has(steps[i].dataset.id)) { setFocus(i, true); return; }
-    }
-    toast("Every step is done");
-  }
-
   document.addEventListener("click", (e) => {
     const check = e.target.closest(".check");
     const copy = e.target.closest(".copy");
@@ -329,7 +314,6 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
       case "j": setFocus(focus + 1, true); break;
       case "k": setFocus(focus < 0 ? 0 : focus - 1, true); break;
       case "x": if (here) toggle(focus); else pick(); break;
-      case "n": nextUndone(); break;
       case "c": if (here) copyFrom(here); else pick(); break;
       case "o": if (here) openImage(here); else pick(); break;
       default: return;
@@ -339,6 +323,9 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
 
   for (const id of local("done") || []) done.add(id);
   paint();
+  // Start on the first step not done, so c and x work without a j first.
+  const first = steps.findIndex((el) => !done.has(el.dataset.id));
+  setFocus(first < 0 ? 0 : first, first > 0);
 
   try {
     localStorage.setItem(KEY + ":probe", "1");

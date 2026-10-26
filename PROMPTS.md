@@ -5,9 +5,26 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Centre the review steps and leave fixed findings off the page
+## Drop the review rail and open the page on its first step
 
 2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**21.**
+> the n next open is gay. also
+>
+> [pasted: a log of a setup command failing outside the checkout]
+>
+> what happened with the subshell cd that weve been doing all the time?
+> also remove the review panel on left. honestly not needed to be
+> frozen. just tell me before steps if somethings not right or if
+> findings. also i had to press j to go to the first and only then c
+> worked. just goto first in the start. also steps taken from prs how
+> to verify is false since i always generate my own steps based on also
+> the prs steps. reword
+
+## Centre the review steps and leave fixed findings off the page
+
+2026-10-26, commit [f4b9b3c](https://github.com/lambdakilo/dotclaude/commit/f4b9b3cdd7073fd6a4d0158dd8670f3687649b4a), model claude-opus-5-5, effort xhigh.
 
 **20.** (with a screenshot of the review page)
 > its still not centered. you can move the left side bar a lot to left

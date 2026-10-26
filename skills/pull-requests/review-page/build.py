@@ -342,48 +342,44 @@ def add_missed(sections, review):
 
 
 def render_review(review):
-    if not review:
-        return ""
-    parts = []
+    """A notice above the steps, only when a check did not pass or a finding
+    is still open; a review where all is well shows none."""
     results = review.get("results", [])
     for r in results:
         if len(r.get("detail", "")) > 60:
             sys.exit("result %r: keep the detail to a few words, such as the head it ran on and a count"
                      % r["name"])
-    if results:
+    problems = [r for r in results if r["outcome"] != "pass"]
+    findings = still_open(review.get("findings", []))
+    if not problems and not findings:
+        return ""
+    parts = []
+    if problems:
         rows = "".join(
             '<li class="result %s"><span class="pill">%s</span><span class="result-name">%s</span>'
             '<span class="result-detail">%s</span></li>'
             % (
                 html.escape(r["outcome"]),
-                html.escape({"pass": "Passed", "fail": "Failed", "skip": "Not run"}.get(r["outcome"], r["outcome"])),
+                html.escape({"fail": "Failed", "skip": "Not run"}.get(r["outcome"], r["outcome"])),
                 inline(r["name"]),
                 inline(r.get("detail", "")),
             )
-            for r in results
+            for r in problems
         )
         parts.append('<ul class="results">%s</ul>' % rows)
-    findings = still_open(review.get("findings", []))
-    failed = sum(1 for r in results if r["outcome"] == "fail")
-    passed = sum(1 for r in results if r["outcome"] == "pass")
-    bits = []
-    if results:
-        bits.append("%d failed" % failed if failed else "%d of %d checks passed" % (passed, len(results)))
     if findings:
         by = {}
         for f in findings:
             by[f["severity"]] = by.get(f["severity"], 0) + 1
-        bits.append(
-            "%d finding%s (%s), first in the steps" % (
+        parts.append(
+            "<p>%d open finding%s (%s), the first steps below.</p>" % (
                 len(findings), "" if len(findings) == 1 else "s",
                 ", ".join("%d %s" % (by[k], k) for k in ("high", "medium", "low") if k in by),
             )
         )
-    else:
-        bits.append("No open findings")
     return (
-        '<section class="review" aria-labelledby="review-h"><h2 id="review-h">Review</h2>'
-        '<p class="review-sum">%s</p>%s</section>' % (html.escape(". ".join(bits)), "".join(parts))
+        '<section class="review" aria-labelledby="review-h"><h2 id="review-h">Before the steps</h2>%s</section>'
+        % "".join(parts)
     )
 
 
