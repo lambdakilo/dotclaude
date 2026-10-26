@@ -18,7 +18,8 @@ The overlay is JSON:
                     "title": "...", "body": "..."}],
    "missed": [{"step": "<step id>", "text": "..."}]}
 Findings come first on the page, as steps, and each miss shows inside the
-step it concerns. Bodies are Markdown in the form the pull-requests skill
+step it concerns. A finding or a miss with "fixed": "<commit>" stays off
+the page, since the reader has nothing left to do about it. Bodies are Markdown in the form the pull-requests skill
 writes. Step ids are the section's slug and the step's number, such as
 setup-2; build.py prints them.
 
@@ -294,10 +295,14 @@ def add_review_steps(sections, review):
             sys.exit("added step %d: no step %s" % (k, extra["after"]))
 
 
+def still_open(entries):
+    return [e for e in entries if not e.get("fixed")]
+
+
 def add_findings(sections, review):
     """The findings as the page's first steps, so changes can be requested
     before the manual pass starts."""
-    findings = review.get("findings", [])
+    findings = still_open(review.get("findings", []))
     if not findings:
         return
     steps = []
@@ -327,7 +332,7 @@ def add_missed(sections, review):
     if isinstance(missed, str):
         sys.exit("missed: give a list of {step, text}, each shown inside its step")
     by_id = {s["id"]: s for section in sections for s in section["steps"]}
-    for m in missed:
+    for m in still_open(missed):
         if m.get("step") not in by_id:
             sys.exit("missed: no step %s" % m.get("step"))
         by_id[m["step"]]["body"] = (
@@ -358,9 +363,7 @@ def render_review(review):
             for r in results
         )
         parts.append('<ul class="results">%s</ul>' % rows)
-    findings = review.get("findings", [])
-    if not findings and results:
-        parts.append('<p class="quiet">No findings.</p>')
+    findings = still_open(review.get("findings", []))
     failed = sum(1 for r in results if r["outcome"] == "fail")
     passed = sum(1 for r in results if r["outcome"] == "pass")
     bits = []
@@ -376,6 +379,8 @@ def render_review(review):
                 ", ".join("%d %s" % (by[k], k) for k in ("high", "medium", "low") if k in by),
             )
         )
+    else:
+        bits.append("No open findings")
     return (
         '<section class="review" aria-labelledby="review-h"><h2 id="review-h">Review</h2>'
         '<p class="review-sum">%s</p>%s</section>' % (html.escape(". ".join(bits)), "".join(parts))
@@ -472,7 +477,7 @@ def main():
     name = repo.split("/")[-1]
     out_path = out_path or default_out(name, number)
     fields = {
-        "TITLE": html.escape("%s #%s review" % (name, number)),
+        "TITLE": html.escape("Review PR %s" % number),
         "PR_TITLE": inline(pr["title"]),
         "PR_URL": html.escape(pr["url"]),
         "PR_REF": html.escape("%s#%s" % (repo, number)),

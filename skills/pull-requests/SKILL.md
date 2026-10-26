@@ -128,20 +128,24 @@ downstream names redacted in public and upstream repositories.
   Artifact. The script takes the steps of the PR body's How to verify? as GitHub holds them, embeds
   the PR's screenshots, downloaded with the `gh` token, and adds from the overlay the review's
   results, its findings and the steps it adds. The findings come first, as steps, so the reader can
-  request changes before the manual pass, and each miss shows inside the step it concerns. A
-  result's detail is a few words, what ran on which head with what count, such as 119 of 119 on
-  abc1234, and the script refuses a longer one. On the page `j` and `k` move to the next or the
-  previous step and center it, `x` ticks it, `n` goes to the next open step, `c` copies its first
-  command or address and `o` opens its screenshot. The current step lists these keys under its title
-  and its first block says that `c` copies it, so the page has no key list of its own. On a wide
-  window the PR, the progress and the review sit in a side column that stays in view while the steps
-  scroll; a narrow one keeps only a thin progress bar at the top. An address in a `text` block is a
-  link on the page. The ticks live in the browser's storage for that file, so a later review of the
-  same PR rebuilds the page at the same path and they stay; the session cannot read them, so the
-  reader says how far they got.
-- The reply opens with the page's link, a Markdown link to the file's path relative to the checkout,
-  which the app opens on a click, then the results of the verify command and the end to end run,
-  then the findings, and gives no step list of its own.
+  request changes before the manual pass, and each miss shows inside the step it concerns. A finding
+  or a miss fixed during the review carries `fixed` with its commit and stays off the page, since
+  the reader has nothing left to do about it; the reply names the fix. A result's name says in plain
+  words what ran, such as manual steps replayed by a script, and its detail is a few words, what ran
+  on which head with what count, such as 119 of 119 on abc1234, and the script refuses a longer one.
+  The browser tab reads Review PR and the number, with a tick for an icon. On the page `j` and `k`
+  move to the next or the previous step and center it, `x` ticks it, `n` goes to the next open step,
+  `c` copies its first command or address and `o` opens its screenshot. The current step lists these
+  keys under its title and its first block says that `c` copies it, so the page has no key list of
+  its own. On a wide window the steps sit centred, with the PR and the progress in a rail on the
+  left and the review in one on the right, both in view while the steps scroll; a narrow one keeps
+  only a thin progress bar at the top. An address in a `text` block is a link on the page. The ticks
+  live in the browser's storage for that file, so a later review of the same PR rebuilds the page at
+  the same path and they stay; the session cannot read them, so the reader says how far they got.
+- The reply gives the results of the verify command and the end to end run, then the findings and
+  the fixes made, and no step list of its own. It ends with the page's link, a Markdown link to the
+  file's path relative to the checkout, which the app opens on a click, on its last line before
+  Prompt feedback, where the reader's eye is when they go to click it.
 - Where the PR's steps fall short, the overlay's `added_steps` put the fix on the page, marked as
   added by the review: the two command steps when the PR lacks them (an empty `after` puts a step
   before the PR's first), a step for a change the PR's steps skip, and the bug steps below. They

@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Put review findings first and show keys on the current step
+## Centre the review steps and leave fixed findings off the page
 
 2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**20.** (with a screenshot of the review page)
+> its still not centered. you can move the left side bar a lot to left
+> and or you can also put half of it to right. also wth? step 1 already
+> fixed then why you show me it? also what is manual steps claims? also
+> change the browser title something that i can recognize immeditatley
+> what it is instead of just general [a project's name] and it fits
+> inside the tab size. also the link was way up in the convo this
+> session put lower so i can just click
+
+## Put review findings first and show keys on the current step
+
+2026-10-26, commit [cb18719](https://github.com/lambdakilo/dotclaude/commit/cb18719cae6c7370a4837c40d42dc3f39c4db731), model claude-opus-5-5, effort xhigh.
 
 **19.**
 > ok so. i want the current step centered. no need for the big ass
