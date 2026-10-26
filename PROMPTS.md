@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep the review page's focused step alone on the screen
+## Number review steps across the page and show section headings
 
 2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**26.**
+> moving from step 3 to step 4 which is btw not correct it says step 1
+> hides the report part text fix
+
+## Keep the review page's focused step alone on the screen
+
+2026-10-26, commit [d915bc3](https://github.com/lambdakilo/dotclaude/commit/d915bc331c47e200abaaa39d68247524eb1c45e9), model claude-opus-5-5, effort xhigh.
 
 **25.** (with a screenshot of the review page)
 > hmmm i can see the next step too a bit. is there some css trick that
@@ -3169,6 +3177,7 @@ Stop, add it to dotclaude?)
 - agplv3: GNU Affero General Public License, version 3
 - ai: artificial intelligence
 - arch: Arch Linux
+- btw: by the way
 - ccbysa4.0: Creative Commons Attribution-ShareAlike 4.0 International
 - cd: change directory, the shell command
 - char: character

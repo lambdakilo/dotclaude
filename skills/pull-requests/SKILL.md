@@ -137,16 +137,18 @@ downstream names redacted in public and upstream repositories.
   on which head with what count, such as 119 of 119 on abc1234, and the script refuses a longer one.
   The browser tab reads Review PR and the number, with a tick for an icon. Checks that failed or did
   not run and the count of open findings go in a box above the steps, and a review where all is well
-  shows none. The page opens on the first step not done, so its keys work at once. `j` and `k` move
-  to the next or the previous step and scroll it to the top of the window, alone on the screen with
-  nothing of the steps before or after it in view, `x` ticks it and moves on to the next one, or
-  clears a tick and stays, `c` copies its first command or address and `o` opens its screenshot. The
-  current step lists these keys under its title and its first block says that `c` copies it, so the
-  page has no key list of its own. On a wide window the steps sit centred, with the PR and the
-  progress in a rail on the left that stays in view while the steps scroll; a narrow one keeps only
-  a thin progress bar at the top. An address in a `text` block is a link on the page. The ticks live
-  in the browser's storage for that file, so a later review of the same PR rebuilds the page at the
-  same path and they stay; the session cannot read them, so the reader says how far they got.
+  shows none. The page numbers its steps from 1 across all sections and opens on the first step not
+  done, so its keys work at once. `j` and `k` move to the next or the previous step and scroll it to
+  the top of the window, alone on the screen with nothing of the steps before or after it in view,
+  and a section's first step brings the section's heading and note along. `x` ticks it and moves on
+  to the next one, or clears a tick and stays, `c` copies its first command or address and `o` opens
+  its screenshot. The current step lists these keys under its title and its first block says that
+  `c` copies it, so the page has no key list of its own. On a wide window the steps sit centred,
+  with the PR and the progress in a rail on the left that stays in view while the steps scroll; a
+  narrow one keeps only a thin progress bar at the top. An address in a `text` block is a link on
+  the page. The ticks live in the browser's storage for that file, so a later review of the same PR
+  rebuilds the page at the same path and they stay; the session cannot read them, so the reader says
+  how far they got.
 - The reply gives the results of the verify command and the end to end run, then the findings and
   the fixes made, and no step list of its own. It ends with the page's link, a Markdown link to the
   file's path relative to the checkout, which the app opens on a click, on its last line before

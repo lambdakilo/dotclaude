@@ -20,8 +20,8 @@ The overlay is JSON:
 Findings come first on the page, as steps, and each miss shows inside the
 step it concerns. A finding or a miss with "fixed": "<commit>" stays off
 the page, since the reader has nothing left to do about it. Bodies are Markdown in the form the pull-requests skill
-writes. Step ids are the section's slug and the step's number, such as
-setup-2; build.py prints them.
+writes. Step ids are the section's slug and the step's number in the PR's list, such as
+setup-2, while the page numbers the steps from 1 across all sections; build.py prints the ids.
 
 Run it with python3 -I. It needs the gh CLI signed in to the PR's host.
 """
@@ -385,6 +385,7 @@ def render_review(review):
 
 def render_sections(sections):
     out = []
+    count = 0
     for section in sections:
         steps = []
         for step in section["steps"]:
@@ -394,7 +395,8 @@ def render_sections(sections):
             elif step.get("added"):
                 label, kind = "Added by the review", " added"
             else:
-                label, kind = "Step %d" % step["n"], ""
+                count += 1
+                label, kind = "Step %d" % count, ""
             steps.append(
                 '<li class="step%s" id="%s" data-id="%s" tabindex="-1">'
                 '<button type="button" class="check" role="checkbox" aria-checked="false" aria-label="Done: %s"></button>'
