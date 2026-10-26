@@ -5,9 +5,29 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Never draft GitHub comments for the user to post
+## Name a draft's Slack thread in words, without a link
 
 2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask to draft a Slack reply for a downstream project left out]
+
+**2.**
+> [a change to that draft left out]
+
+**3.**
+> [a question about that project's work order left out]
+
+**4.**
+> [an ask to draft the next reply left out]
+
+**5.**
+> dont give me the slack link in the future. lipcaord thingy was good.
+> [a research question about that project's test setup left out]
+
+## Never draft GitHub comments for the user to post
+
+2026-10-26, commit [b2b6cae](https://github.com/lambdakilo/dotclaude/commit/b2b6cae1e53a701a5008783745ee68f4a64f03dc), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about a downstream project's issue comment left out]

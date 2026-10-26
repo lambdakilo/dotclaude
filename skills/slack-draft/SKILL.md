@@ -50,10 +50,12 @@ channel or DM, and the user sends it with one paste.
 4. In the reply, give no copy of the draft, neither a text block nor a quote: the user reads it
    in Slack after the paste. Say it is on the clipboard, say in a line what changed since the
    last version when there was one, and name each link the recipients may not be able to open,
-   such as a private repository or a permalink from another workspace. Then the steps: paste
-   with Cmd+V in Slack and check it before sending, and the command that puts it back on the
-   clipboard once something else overwrote it, with the draft's own file name in place of
-   `<topic>`:
+   such as a private repository or a permalink from another workspace. Then the steps. The first
+   is to paste with Cmd+V in Slack and check it before sending. It names the channel, and for a
+   thread reply whose message it answers, in words only, with no link to the channel, the thread
+   or a message: the user goes there in the Slack app. The second is the command that puts the
+   draft back on the clipboard once something else overwrote it, with the draft's own file name
+   in place of `<topic>`:
    ```bash
    ~/.claude/skills/slack-draft/copy-rich.sh ~/.claude/drafts/<topic>.html
    ```
