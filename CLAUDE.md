@@ -201,11 +201,13 @@ apply to one repository belong in that repository's project memory.
   `gh pr merge` gets `--delete-branch`. A local branch the merge leaves behind, such as when it
   ran with `--repo` outside the checkout, goes with `git branch -D` once the PR shows as merged,
   and the reply names its last hash, so `git branch <name> <hash>` brings it back.
-- Never post a comment, a review thread reply, a review or an issue comment on GitHub: every
-  word posted goes out under the user's name, and the user writes those. A review finding is
-  answered by the commit that fixes it, and the reply to the user lists, per thread, what
-  changed and in which commit, so the user can answer and resolve the threads themselves.
-  Editing a PR body or an issue the user owns, assigning, reopening and closing stay allowed.
+- Never post a comment, a review thread reply, a review or an issue comment on GitHub, and never
+  draft one for the user to post: every word posted goes out under the user's name, and the user
+  writes those. A question about an issue, a comment or a thread is answered in the reply as an
+  explanation, and no reply or next-step box offers a draft of an answer. A review finding is
+  answered by the commit that fixes it, and the reply to the user lists, per thread, what changed
+  and in which commit, so the user can answer and resolve the threads themselves. Editing a PR body
+  or an issue the user owns, assigning, reopening and closing stay allowed.
 - When a PR, draft or not, closes an issue, assign the user to that issue, with
   `gh issue edit <n> --add-assignee <handle>` and the handle from `gh api user --jq .login`.
   Do it when the PR is opened and again whenever its `Closes` list changes, and skip the

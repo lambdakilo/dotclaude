@@ -5,9 +5,19 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep client material out of shared memory notes
+## Never draft GitHub comments for the user to post
 
 2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask about a downstream project's issue comment left out]
+
+**2.**
+> never draft replies to github issues. just explain here
+
+## Keep client material out of shared memory notes
+
+2026-10-26, commit [8665fe4](https://github.com/lambdakilo/dotclaude/commit/8665fe42c92806036bd54aa3a87163e31d9435cf), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about a client contract left out]
