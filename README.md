@@ -171,13 +171,19 @@ I work on.
 
 ### Start of day
 
-Each morning, before I start anything, I run `sod`, short for start of day, in a terminal:
+Each morning, before I start anything, I run `gm` in a terminal:
 
 ```zsh
-sod
+gm
 ```
 
-It lives at `~/bin/sod`, and `~/bin` is on my `PATH`:
+It is an alias in `~/.zshrc`:
+
+```zsh
+alias gm="$HOME/bin/start-of-day-update-and-restart.sh"
+```
+
+And this is the script it runs:
 
 ```zsh
 #!/bin/zsh
@@ -192,12 +198,20 @@ fi
 brew update
 brew upgrade -y
 brew cleanup
+
+sleep 60
+osascript -e 'tell application "System Events" to restart'
 ```
 
 If Docker is running, it stops every container and deletes the containers and all their volumes,
 so each project starts the day from fresh test data and nothing from yesterday keeps running.
 Anything I changed by hand in a local database is gone. Then it updates Homebrew and everything
-Homebrew installed, without asking, and removes the old versions.
+Homebrew installed, without asking, and removes the old versions. Homebrew installs in the
+foreground, so nothing is left half installed once it returns, and the script then waits a minute
+more as a margin. Then it restarts the Mac the way Restart in the Apple menu does, without the
+dialog: every app is asked to quit and can stop the restart over unsaved work, and the windows open
+again after I log in. If an update fails, the script stops before the wait and the Mac keeps
+running. The first restart asks once whether the terminal may control System Events.
 
 ### Prompting
 

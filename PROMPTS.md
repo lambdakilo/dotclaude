@@ -5,9 +5,28 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
+## Show the gm alias and the restart in the start of day section
+
+2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> can you alias s to gm instead the bin sod that is, you can actually
+> alias the gm and rename the script start or day update and restart
+> etc sh. also can it sleep for an appropriate while and restart my mac
+> gracefully when updates are done
+
+**2.** (answer to whether to update the README, a reply button)
+> yes, update the start of day section in the dotclaude readme to match
+> and push
+
+**3.**
+> i dont care to read the brew output i just want the system to restart
+> gracefully cuz on debian if i instarestrat the packages are not yet
+> updated completely
+
 ## Give a README's newcomer a prompt that clones the repository
 
-2026-10-25, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [7073814](https://github.com/lambdakilo/dotclaude/commit/70738149a8fd6fec4165a04803b2df8e2b40a906), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > [pasted: a README sentence on what Claude Code reads]
@@ -3077,6 +3096,7 @@ Stop, add it to dotclaude?)
 - char: character
 - co2: carbon dioxide
 - cs: computer science
+- cuz: because
 - dev: developer
 - dir: directory
 - e.g.: for example
@@ -3120,6 +3140,7 @@ Stop, add it to dotclaude?)
 - rest: REST, an HTTP API style
 - rn: right now
 - sat: Saturday
+- sh: shell script
 - sod: start of day
 - spdx: Software Package Data Exchange
 - ss: screenshot
