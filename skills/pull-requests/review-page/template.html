@@ -244,9 +244,7 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     showKeys(steps[focus]);
     if (scroll) {
       const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
-      // A step taller than the window starts at its top, so its first line stays in view.
-      const fits = steps[focus].getBoundingClientRect().height < innerHeight - 40;
-      steps[focus].scrollIntoView({ block: fits ? "center" : "start", behavior: smooth ? "smooth" : "auto" });
+      steps[focus].scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "auto" });
     }
   }
 

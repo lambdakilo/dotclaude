@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Drop the review rail and open the page on its first step
+## Scroll the review page's next step to the top of the window
 
 2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**22.**
+> oof when going to next step put it to the top since im using a laptop
+
+## Drop the review rail and open the page on its first step
+
+2026-10-26, commit [3a61517](https://github.com/lambdakilo/dotclaude/commit/3a6151769ccfaefde800a99c576d0c912ff677d0), model claude-opus-5-5, effort xhigh.
 
 **21.**
 > the n next open is gay. also
