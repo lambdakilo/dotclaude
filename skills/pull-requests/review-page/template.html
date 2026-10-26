@@ -254,6 +254,7 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     if (on) done.add(id); else done.delete(id);
     paint();
     local("done", [...done]);
+    return on;
   }
 
   function copyFrom(container) {
@@ -311,7 +312,7 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     switch (e.key) {
       case "j": setFocus(focus + 1, true); break;
       case "k": setFocus(focus < 0 ? 0 : focus - 1, true); break;
-      case "x": if (here) toggle(focus); else pick(); break;
+      case "x": if (!here) pick(); else if (toggle(focus)) setFocus(focus + 1, true); break;
       case "c": if (here) copyFrom(here); else pick(); break;
       case "o": if (here) openImage(here); else pick(); break;
       default: return;

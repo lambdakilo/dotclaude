@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Scroll the review page's next step to the top of the window
+## Move the review page on to the next step when x ticks one
 
 2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**23.**
+> pressing x should move on to next step
+
+## Scroll the review page's next step to the top of the window
+
+2026-10-26, commit [fec4f8f](https://github.com/lambdakilo/dotclaude/commit/fec4f8f914518a8a40d61b7d8a9d6618d2100c23), model claude-opus-5-5, effort xhigh.
 
 **22.**
 > oof when going to next step put it to the top since im using a laptop
