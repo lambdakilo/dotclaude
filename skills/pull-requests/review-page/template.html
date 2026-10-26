@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-/* Wide: the steps sit centred, with the PR and its progress in a rail on the left that stays put while the steps scroll. Narrow: one column under a thin progress bar. */
+/* Wide: the steps sit centred, with the PR and its progress in a rail on the left that stays put while the steps scroll. Narrow: one column under a thin progress bar. The focused step pushes the rest a window down, so it is alone on screen; scroll anchoring stays off so that margin moving does not drag the scroll with it. */
 :root {
   --bg: #f4f6f4;
   --surface: #ffffff;
@@ -42,7 +42,7 @@
 [hidden] { display: none !important; }
 img { max-width: 100%; }
 body {
-  margin: 0;
+  margin: 0; overflow-anchor: none;
   background: var(--bg); color: var(--ink); font: 15px/1.55 var(--sans);
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
@@ -110,7 +110,7 @@ h3.sub { font-size: 0.95rem; margin: 14px 0 6px; }
 .step.finding { border-left: 4px solid var(--muted); }
 .step.finding.high { border-left-color: var(--fail); }
 .step.finding.medium { border-left-color: var(--warn); }
-.step.focused { box-shadow: 0 0 0 2px var(--accent); border-color: transparent; }
+.step.focused { box-shadow: 0 0 0 2px var(--accent); border-color: transparent; margin-bottom: 100vh; }
 .step.finding.high .step-label { color: var(--fail); }
 .step.finding.medium .step-label { color: var(--warn); }
 .missed { border-left: 3px solid var(--warn); padding: 2px 0 2px 10px; display: flex; flex-direction: column; gap: 4px; }
@@ -295,7 +295,7 @@ kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-w
     const zoom = e.target.closest(".zoom");
     const jump = e.target.closest(".to-step");
     const step = e.target.closest(".step");
-    if (step) setFocus(steps.indexOf(step), false);
+    if (step) { const i = steps.indexOf(step); setFocus(i, i !== focus); }
     if (check) toggle(steps.indexOf(step));
     else if (copy) copyFrom(copy.closest(".block"));
     else if (zoom) openImage(zoom.closest(".shot"));

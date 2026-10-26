@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Hide what sits above the review page's focused step
+## Keep the review page's focused step alone on the screen
 
 2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**25.** (with a screenshot of the review page)
+> hmmm i can see the next step too a bit. is there some css trick that
+> could make me see only the current step in my screen?
+
+## Hide what sits above the review page's focused step
+
+2026-10-26, commit [27c6125](https://github.com/lambdakilo/dotclaude/commit/27c6125669d8c04a17c1861cebce001035ac5875), model claude-opus-5-5, effort xhigh.
 
 **24.** (with a screenshot of the review page)
 > its not completely top theres still some leftover from last step in
