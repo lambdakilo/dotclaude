@@ -5,9 +5,26 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep rendering in the browser pane, not the Chrome app
+## Keep client material out of shared memory notes
 
 2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [a question about a client contract left out]
+
+**2.**
+> [quoted: a paragraph of Claude's earlier reply about the shared
+> notes]
+>
+> explain
+
+**3.** (answer to whether to stop sharing those notes)
+> stop sharing them and you can force push to rebase and remove the
+> things that would break contract
+
+## Keep rendering in the browser pane, not the Chrome app
+
+2026-10-26, commit [edc5916](https://github.com/lambdakilo/dotclaude/commit/edc591678b5a6503f4822066761190370746ef2c), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > who opened my google chrome and why?
