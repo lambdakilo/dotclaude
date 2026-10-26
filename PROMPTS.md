@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Number review steps across the page and show section headings
+## Keep rendering in the browser pane, not the Chrome app
 
 2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> who opened my google chrome and why?
+
+**2.**
+> cant you just always use builtin chrome
+
+(How far should the rule reach?)
+> Only the Chrome app (Recommended)
+
+## Number review steps across the page and show section headings
+
+2026-10-26, commit [1505c80](https://github.com/lambdakilo/dotclaude/commit/1505c80e722654394be0bba6687e7ead623b5dc5), model claude-opus-5-5, effort xhigh.
 
 **26.**
 > moving from step 3 to step 4 which is btw not correct it says step 1

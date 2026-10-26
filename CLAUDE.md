@@ -502,13 +502,21 @@ apply to one repository belong in that repository's project memory.
   states what was true when they were written.
 - Browser work runs in the built-in browser pane, which the user also calls the built-in chrome
   and is signed in to. A page, a file or an upload is tried there before a reply calls it out of
-  reach. When a step needs the user in the pane, such as a sign-in, personal data to type or a click
-  the session may not make, the session opens the page that step happens on and calls `show_pane`
-  with `preview` in the same turn as the ask, so the pane is open beside the reply. `show_pane` acts
-  only while the session is in a window and never takes one from another session. When it answers
-  that the session is in none, a `PushNotification` names the page that waits, the reply opens with
-  that ask, and every later turn calls `show_pane` again first while the step still waits. A deny
-  rule in `settings.json` blocks Claude in Chrome, which the user does not want.
+  reach. Rendering is browser work too: no session starts the Google Chrome app, headless or not,
+  also not to turn a page into an image or a PDF. Playwright's own Chromium, which a project's tests
+  and the `pull-requests` skill's screenshots run on, is not that app. A page that has to become a
+  file draws it on a canvas in the pane, an HTML layout through an SVG `foreignObject` with each
+  font named by its installed family or inlined as a data URL, never a keyword such as
+  `-apple-system` or a linked web font, and posts the blob to a small local server that the session
+  starts with `preview_start` and that writes it to disk. A job the pane cannot do this way is asked
+  about first through AskUserQuestion, which names the Chrome app. When a step needs the user in the
+  pane, such as a sign-in, personal data to type or a click the session may not make, the session
+  opens the page that step happens on and calls `show_pane` with `preview` in the same turn as the
+  ask, so the pane is open beside the reply. `show_pane` acts only while the session is in a window
+  and never takes one from another session. When it answers that the session is in none, a
+  `PushNotification` names the page that waits, the reply opens with that ask, and every later turn
+  calls `show_pane` again first while the step still waits. A deny rule in `settings.json` blocks
+  Claude in Chrome, which the user does not want.
 - Once the browser pane, the iOS simulator panel or a simulator has done its job in a turn, the
   session closes it before the reply: each pane tab with `tabs_close`, then the pane with
   `close_pane` and `preview`, since closing the last tab leaves the empty pane on screen; the panel
