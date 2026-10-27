@@ -283,10 +283,14 @@ apply to one repository belong in that repository's project memory.
 - Answer first, then only what changes what the reader does next, then stop. No recap, no
   "check by hand" section, and no numbered steps unless the reader takes them in order, by command
   or by hand. When asked for a list, give the list and nothing around it.
-- What the user is to read, check or choose from, such as a report, a list or the options, is
-  written out whole in the reply, also when a file holds it too, since the user reads it there and
-  opens no copy. A file kept for a command or a later session is named in one line beside it and
-  never stands in for it. A Slack draft stays the exception that Running things names.
+- The user reads only a turn's closing message, the text after its last tool call, and nothing above
+  it: no text written between tool calls and no file card sent during the turn. What the user is to
+  read, check or choose from, such as a report, a list or the options, is written out whole in that
+  message, also when a file holds it too. A picture or file sent for them to look at, such as before
+  and after screenshots, is linked in that message by its path, with what it shows said there in
+  words, never pointed to as sent above. A file kept for a command or a later session is named in
+  one line beside it and never stands in for it. A Slack draft stays the exception that Running
+  things names.
 - A term that a session, a script or a workflow coined, such as a name for a unit of work, a role,
   an option or a step label, is explained in plain words where a reply first uses it, or plain words
   stand in its place. The reader saw neither the code nor the run that gave the term its meaning,
@@ -373,10 +377,10 @@ apply to one repository belong in that repository's project memory.
   next-step box, whose words Claude wrote, a peer session's message, an idle or task
   notification, or a spawned task's opening prompt, which another session wrote.
   The closing reply goes in the text right after the next-step box call, never before it, where
-  the app can cut it to a summary. It is written there in full: the answer, any draft the
-  question asks about, the steps still to do and this section, never a pointer to text above and
-  never the box's question again. The `Stop` hook `~/.claude/hooks/prompt-feedback-box.sh` sends
-  a turn back once when a typed prompt opened it and its last message has no Prompt feedback
+  the app can cut it to a summary. It is written there in full: the answer, any draft the question
+  asks about, the steps still to do and this section, never a pointer to anything above it, text or
+  file, and never the box's question again. The `Stop` hook `~/.claude/hooks/prompt-feedback-box.sh`
+  sends a turn back once when a typed prompt opened it and its last message has no Prompt feedback
   section, and marks a prompt that repeats a button's words.
 - Before the section names something as missing from the prompt, check everything the prompt and the
   session's earlier prompts gave, their screenshots to their edges included. A line of text cut off

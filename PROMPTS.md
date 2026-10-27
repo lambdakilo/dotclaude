@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep each task's files in one Downloads folder
+## Say that only the closing message is read
 
 2026-10-27, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**9.** (with a screenshot of the end of a reply)
+> [an answer about a downstream project left out] btw im never reading
+> anything above where youve done something as i assume always that
+> the thing i read as your summary and not anything above it.
+
+## Keep each task's files in one Downloads folder
+
+2026-10-27, commit [1b5b94d](https://github.com/lambdakilo/dotclaude/commit/1b5b94d6d8c4c78799b9cec2c7b5c7bb670452fc), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about a study programme left out]
