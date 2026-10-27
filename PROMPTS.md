@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep the README's newcomer prompt clear of the copy button
+## Have the dream project audit send hand setup to docs
 
 2026-10-27, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**2.** (answer to whether to fix the dream prompt)
+> yes fix the dream prompt that still says setup goes in the readme
+
+## Keep the README's newcomer prompt clear of the copy button
+
+2026-10-27, commit [9884fae](https://github.com/lambdakilo/dotclaude/commit/9884fae323812d14d05b916d18b610b45ae6e295), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [d265fb0](https://github.com/lambdakilo/dotclaude/commit/d265fb0b4a78ca9943f3dbee8578e5eea06ffbb6).
 

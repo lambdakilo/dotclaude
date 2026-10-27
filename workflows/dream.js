@@ -1018,7 +1018,7 @@ for (const r of only.includes('projects') ? scout.repos : []) {
 - Check that every command they name exists: package.json scripts, Makefile targets, compose services, script files and CLI flags, with --help where needed. Never run a build, a test, an install or anything that starts a service.
 - Check each memory fact against the code: files, paths, flags, environment variables, ports and branch names that no longer exist, and facts the code now contradicts.
 - Read the main transcripts of those project directories modified after ${scout.lookbackFrom} for friction specific to this repository: a command Claude had to work out again in each session, a login or test recipe the user repeated by hand, a correction about the repository's conventions. Propose a memory note or a CLAUDE.md line for it.
-- What Claude runs belongs in CLAUDE.md and setup a person does once by hand in the README, so flag anything on the wrong side.
+- What Claude runs belongs in CLAUDE.md, setup a person does once by hand in a doc under docs/ that CLAUDE.md or AGENTS.md indexes, and the README only says on one screen what the project is, shows its parts and gives a newcomer a prompt to paste into Claude Code, so flag anything on the wrong side and a README that has outgrown that.
 A finding targets the memory file or the repository file as a ~ path. Leave what the global ~/.claude/CLAUDE.md covers to the other sources.
 ${WINDOW}
 ${OUTPUT}
