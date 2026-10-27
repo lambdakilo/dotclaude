@@ -5,9 +5,66 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
+## Keep each task's files in one Downloads folder
+
+2026-10-27, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [a question about a study programme left out]
+
+**2.**
+> [an ask for stickers left out]
+
+**3.**
+> [an ask for another sticker left out]
+
+**4.**
+> [an ask to rebrand the stickers left out]
+
+**5.**
+> [an ask to follow a colleague's review left out]
+
+**6.**
+> [a fix to the mascot artwork left out]
+
+**7.**
+> [a clarification of that fix left out]
+
+**8.**
+> [an ask to fix review comments left out]
+
+**9.**
+> [the same ask again left out]
+
+**10.**
+> [a question about a layout fix left out]
+
+**11.**
+> [an ask for a comic sticker and its sources left out]
+
+**12.**
+> [an ask for more comic stickers and a sticker pack left out]
+
+**13.**
+> [pasted: an address]
+> [a note on which source to use left out]
+
+**14.**
+> [changes to the stickers and a second pack left out]
+
+**15.**
+> [an ask for one more sticker left out]
+
+**16.**
+> [a change to the stickers' text left out]
+
+**17.**
+> bro just put them to one place pls dont make a mess of my downloads
+> in the future
+
 ## Name a draft's Slack thread in words, without a link
 
-2026-10-26, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [5c5695d](https://github.com/lambdakilo/dotclaude/commit/5c5695d8772c27a1b817c475257635e37a844faa), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask to draft a Slack reply for a downstream project left out]
@@ -3280,6 +3337,7 @@ Stop, add it to dotclaude?)
 - p9: proposal 9 of the weekly review of 2026-10-14
 - pdf: Portable Document Format
 - perms: permissions
+- pls: please
 - PR: pull request
 - prs: pull requests
 - qr: quick response code

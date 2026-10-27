@@ -458,10 +458,14 @@ apply to one repository belong in that repository's project memory.
   directory flag or a subshell, such as `(cd ~/Projects/<repo> && make test)`, also when it is
   quoted from a README whose paths are relative to the checkout. A file such a command reads or
   writes that belongs to no checkout goes in `~/Downloads` unless the user names a folder.
-- `~/Downloads` holds only files the user opens, sends or uploads, such as a PDF or a
-  spreadsheet. A working file that only feeds a tool, such as the HTML of a Slack draft that a
-  script puts on the clipboard, goes in `~/.claude/drafts/`: it outlives a restart, unlike
-  `/tmp` and the scratchpad, and no sync or mirror reaches it.
+- `~/Downloads` holds only files the user opens, sends or uploads, such as a PDF or a spreadsheet.
+  Each piece of work puts all of its files there in one folder of its own, named for the work, such
+  as `~/Downloads/<task>/`, never in several folders or as loose files beside each other. Subfolders
+  inside it keep its parts apart, such as one per app a set is made for, and what the work
+  downloaded or unpacked as its source material goes in it too. A later turn of the same work adds
+  to that folder instead of starting another. A working file that only feeds a tool, such as the
+  HTML of a Slack draft that a script puts on the clipboard, goes in `~/.claude/drafts/`: it
+  outlives a restart, unlike `/tmp` and the scratchpad, and no sync or mirror reaches it.
 - Environment or deployment tooling runs against a remote environment, such as a deploy, a
   store upload or submission, or a command on a shared database, only when the user asked for
   that action on that target in the session or said go to a reply that named both. The ask
