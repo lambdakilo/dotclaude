@@ -711,6 +711,11 @@ apply to one repository belong in that repository's project memory.
   folder that already exists stops it, then moves there with `change_directory` before writing
   the first file: the tool cannot resolve a folder that does not exist yet, and the app's copy
   at a later move leaves `.git` behind.
+- The sidebar's This computer group holds the No folder sessions, each in an empty folder the app
+  makes for it under `~/Library/Application Support/Claude/scratch-workspaces/`. The home folder is
+  a project folder like any other and gets a group of its own. `change_directory` refuses those
+  scratch folders, so a running session cannot move to This computer: asked to, the session says so,
+  and the user starts a No folder session for a question that belongs to no project.
 - A memory note states what holds now. When a fact changes, rewrite the sentence that states
   it, never append a paragraph calling an earlier one stale, and re-read the note from disk
   first, since a peer session may have written the same fact.

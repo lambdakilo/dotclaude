@@ -5,9 +5,29 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Have the dream project audit send hand setup to docs
+## Say what This computer in the sidebar is
 
 2026-10-27, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**14.**
+> can you move this from [a project] to this computer
+
+(which folder to move the session to)
+> Home folder (Recommended)
+
+**15.**
+> wot now its [the home folder's name] and This computer separately
+
+(whether to make a scratch folder by hand)
+> should these no folder sessions have a folder or how should this be
+> done?
+
+**16.** (reply button)
+> make the scratch folder and move this session there
+
+## Have the dream project audit send hand setup to docs
+
+2026-10-27, commit [35517c5](https://github.com/lambdakilo/dotclaude/commit/35517c5c93afcf120511f80b6e44fb40cd12fe06), model claude-opus-5-5, effort xhigh.
 
 **2.** (answer to whether to fix the dream prompt)
 > yes fix the dream prompt that still says setup goes in the readme
