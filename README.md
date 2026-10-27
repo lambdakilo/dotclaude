@@ -15,7 +15,7 @@ collected in [`PROMPTS.md`](PROMPTS.md).
 New here? Paste this into Claude Code:
 
 ```text
-clone github.com/lambdakilo/dotclaude into ~/Projects and help me pick what to install
+clone github.com/zululima/dotclaude into ~/Projects and help me pick what to install
 ```
 
 Prose, meaning `CLAUDE.md`, `PROMPTS.md`, `docs/`, every `SKILL.md` and this README, is [CC BY-SA

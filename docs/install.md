@@ -13,7 +13,7 @@
 1. Open Terminal and copy this repository to your computer:
 
    ```bash
-   git clone https://github.com/lambdakilo/dotclaude.git ~/Projects/dotclaude
+   git clone https://github.com/zululima/dotclaude.git ~/Projects/dotclaude
    ```
 
 2. Pick one:
