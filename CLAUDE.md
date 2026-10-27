@@ -716,6 +716,10 @@ apply to one repository belong in that repository's project memory.
   a project folder like any other and gets a group of its own. `change_directory` refuses those
   scratch folders, so a running session cannot move to This computer: asked to, the session says so,
   and the user starts a No folder session for a question that belongs to no project.
+- When a session's first prompt has nothing to do with the folder it started in, such as a general
+  question asked in a project's folder, the first reply opens with one line saying so and naming
+  where it belongs: a No folder session, or the folder of the project it is about. Then it answers.
+  Nothing it learns goes into the memory of the folder it started in.
 - A memory note states what holds now. When a fact changes, rewrite the sentence that states
   it, never append a paragraph calling an earlier one stale, and re-read the note from disk
   first, since a peer session may have written the same fact.

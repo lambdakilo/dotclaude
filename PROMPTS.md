@@ -5,9 +5,21 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Say what This computer in the sidebar is
+## Flag a first prompt that does not fit its folder
 
 2026-10-27, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**17.**
+> yeah leave it but in the future are you able to de-folder it in the
+> first prompt if i accidentally started this in [a project]
+
+**18.** (reply button)
+> add a rule that the first reply flags a session started in a folder
+> its prompt has nothing to do with
+
+## Say what This computer in the sidebar is
+
+2026-10-27, commit [c443c34](https://github.com/lambdakilo/dotclaude/commit/c443c3433197a921df1e72f1af4c2bc357b7967d), model claude-opus-5-5, effort xhigh.
 
 **14.**
 > can you move this from [a project] to this computer
