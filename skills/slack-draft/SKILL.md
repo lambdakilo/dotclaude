@@ -12,9 +12,11 @@ and sends. The CLAUDE.md rule on reading every source before drafting still hold
 
 Slack's message box turns neither `[text](url)` nor `<url|text>` into a link. That syntax works only
 through the API. By hand, link text gets in only by pasting a URL over selected text or by pasting
-rich text, and bold, lists and blank lines also survive only a rich paste. Every draft therefore
-goes on the clipboard as rich text, plain ones too, whatever the channel or DM, and the user sends
-it with one paste.
+rich text, and bold, lists and code also survive only a rich paste. A draft that uses any of them
+therefore goes on the clipboard as rich text, whatever the channel or DM, and the user sends it
+with one paste. A draft of words, line breaks, bare addresses and emoji codes alone survives a
+plain paste and skips the clipboard: the reply gives it in a `text` block, with a blank line
+between paragraphs, and steps 1, 3 and 4 below do not apply to it.
 
 ## Steps
 

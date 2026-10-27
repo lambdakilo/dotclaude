@@ -289,8 +289,8 @@ apply to one repository belong in that repository's project memory.
   message, also when a file holds it too. A picture or file sent for them to look at, such as before
   and after screenshots, is linked in that message by its path, with what it shows said there in
   words, never pointed to as sent above. A file kept for a command or a later session is named in
-  one line beside it and never stands in for it. A Slack draft stays the exception that Running
-  things names.
+  one line beside it and never stands in for it. A Slack draft on the clipboard stays the exception
+  that Running things names.
 - A term that a session, a script or a workflow coined, such as a name for a unit of work, a role,
   an option or a step label, is explained in plain words where a reply first uses it, or plain words
   stand in its place. The reader saw neither the code nor the run that gave the term its meaning,
@@ -307,17 +307,17 @@ apply to one repository belong in that repository's project memory.
   prompt for a session in a text block, and what dropped out since the last reply named once. Each
   reply is complete without the earlier ones: a QR code, a file, an address, a value or a text to
   paste that a step needs is shown again in that reply, never pointed to in another reply or on the
-  clipboard, apart from a Slack draft, which comes back as the command that copies it. No reply says
-  that steps given before still stand. The user works from the latest reply and keeps no list in
-  their head. A question the session put to the user that is still open, such as a next-step box
-  question that a prompt about other work passed by, is one of these steps: each later reply asks it
-  again, with its recommendation, until the user answers or declines it. Turning a setting back off
-  that the user turned on for the session's work, such as Developer Mode on the Mac, is no step: the
-  setting stays as the user left it, and no reply suggests undoing it. Steps that come after a long
-  run whose own output will bury them, such as applying and committing what a dream run proposes,
-  wait for the reply that follows that run, and the list before it stops at the run. A PR review's
-  steps are the exception: they live on its review page, where the user ticks them off, and each
-  reply gives the page's link in their place, as the `pull-requests` skill says.
+  clipboard, apart from a Slack draft on the clipboard, which comes back as the command that copies
+  it. No reply says that steps given before still stand. The user works from the latest reply and
+  keeps no list in their head. A question the session put to the user that is still open, such as a
+  next-step box question that a prompt about other work passed by, is one of these steps: each later
+  reply asks it again, with its recommendation, until the user answers or declines it. Turning a
+  setting back off that the user turned on for the session's work, such as Developer Mode on the
+  Mac, is no step: the setting stays as the user left it, and no reply suggests undoing it. Steps
+  that come after a long run whose own output will bury them, such as applying and committing what a
+  dream run proposes, wait for the reply that follows that run, and the list before it stops at the
+  run. A PR review's steps are the exception: they live on its review page, where the user ticks
+  them off, and each reply gives the page's link in their place, as the `pull-requests` skill says.
 - Steps the user carries out are written in the order they are done, in one numbered list from
   the first to the last. How to do one of them, such as how to start a screen recording, goes
   into that step, never into a section of its own placed before steps that have to come first.
@@ -499,10 +499,11 @@ apply to one repository belong in that repository's project memory.
   free/busy alone.
 - Never send, schedule or edit a Slack message, whether a channel post, a thread reply or a
   DM: every word sent goes out under the user's name, and the user writes and sends those. Every
-  Slack message the user could send, plain or formatted, is drafted with the `slack-draft` skill,
-  which puts it on the clipboard as rich text. The reply gives the command that copies it there
-  again and never the draft itself, in a text block or a quote: the user reads it in Slack after
-  the paste. Drafting never opens the built-in browser pane.
+  Slack message the user could send, plain or formatted, is drafted with the `slack-draft` skill. A
+  draft that survives a plain paste, with no link text, bold, list or other formatting, goes into
+  the reply in a `text` block. Any other goes on the clipboard as rich text, and the reply gives the
+  command that copies it there again and never the draft itself, in a text block or a quote: the
+  user reads it in Slack after the paste. Drafting never opens the built-in browser pane.
 - Before drafting a message for the user to send, such as a Slack reply, an email or a chat
   message, read every source the project's memory lists for its subject, every connected source
   that could bear on it, the deployed and legacy environments included, and the user's earlier

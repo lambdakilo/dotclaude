@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep link text and company forms to shared Slack channels
+## Give plain Slack drafts in the reply, not on the clipboard
 
 2026-10-27, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**10.**
+> if the slack text is something that will survive a copypaste without
+> your copyrich skill just paste it here in the future
+
+## Keep link text and company forms to shared Slack channels
+
+2026-10-27, commit [8bfaf66](https://github.com/zululima/dotclaude/commit/8bfaf66ad231b665018ee34d54b6ed38983aff20), model claude-opus-5-5, effort xhigh.
 
 **9.**
 > [an ask about the draft's content left out] dont use oy in non ext
