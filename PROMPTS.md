@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Fit the README on one screen, the rest in docs
+## Keep the README's newcomer prompt clear of the copy button
 
 2026-10-27, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [d265fb0](https://github.com/lambdakilo/dotclaude/commit/d265fb0b4a78ca9943f3dbee8578e5eea06ffbb6).
+
+## Fit the README on one screen, the rest in docs
+
+2026-10-27, commit [d265fb0](https://github.com/lambdakilo/dotclaude/commit/d265fb0b4a78ca9943f3dbee8578e5eea06ffbb6), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dotclaude compact the readme to a screenful like my other repos
