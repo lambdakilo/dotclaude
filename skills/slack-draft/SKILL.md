@@ -12,8 +12,9 @@ and sends. The CLAUDE.md rule on reading every source before drafting still hold
 
 Slack's message box turns neither `[text](url)` nor `<url|text>` into a link. That syntax works only
 through the API. By hand, link text gets in only by pasting a URL over selected text or by pasting
-rich text. Every draft therefore goes on the clipboard as rich text, plain ones too, whatever the
-channel or DM, and the user sends it with one paste.
+rich text, and bold, lists and blank lines also survive only a rich paste. Every draft therefore
+goes on the clipboard as rich text, plain ones too, whatever the channel or DM, and the user sends
+it with one paste.
 
 ## Steps
 
@@ -24,12 +25,16 @@ channel or DM, and the user sends it with one paste.
    stays out of `~/Downloads`, which is for files the user opens or sends. Use only what Slack
    keeps from a paste: `<p>`, `<b>`, `<i>`, `<code>`, `<a href>`, `<ul>` or `<ol>` with `<li>`,
    `<blockquote>` and `<pre>`. A bold label opens each list item, unless the message being
-   answered set a format: then the draft copies it, as `~/.claude/CLAUDE.md` says under Prose.
-2. Link the evidence a claim rests on inline, on the words that make the claim, never in a
-   parenthetical after them, and pinned so the link still shows what the text says later. An
-   identifier the text names, such as a table, a route, a class, a file or a tag, is `<code>`,
-   and a code thing it names, a page of an app included, links to the lines that define or
-   serve it:
+   answered set a format: then the draft copies it, as `~/.claude/CLAUDE.md` says under Prose. A
+   blank line, an empty `<p><br></p>`, goes between paragraphs and between a list and the text
+   around it.
+2. Link text belongs only in a channel shared with another organisation, such as a Slack Connect
+   channel. Everywhere else a draft has no link text: a link it needs is its bare address, and the
+   rest of this step does not apply. In a shared channel, link the evidence a claim rests on
+   inline, on the words that make the claim, never in a parenthetical after them, and pinned so
+   the link still shows what the text says later. An identifier the text names, such as a table,
+   a route, a class, a file or a tag, is `<code>`, and a code thing it names, a page of an app
+   included, links to the lines that define or serve it:
    - a commit cited for what it changed: `https://github.com/<owner>/<repo>/commit/<full sha>`
      on its subject line, placed in the sentence ("commented out in commit <subject>"), never
      "(commit `abc1234`)". A commit named as a version keeps its short hash as code text.

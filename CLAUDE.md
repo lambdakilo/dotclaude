@@ -255,10 +255,10 @@ apply to one repository belong in that repository's project memory.
   `weekly_plan_20.10.pdf`. Only a name a language, tool or platform requires keeps its
   underscores or dots, such as an importable Python module, a `.test.ts` file, a `.gitignore`
   or GitHub's `pull_request_template.md`.
-- Name an organisation by its full registered name every time, apart from a Slack draft for a
-  channel that the project's memory names as internal, which uses the short names the user
-  writes there. Never "we", "ours", "they" or "theirs" standing in for a company. The names live
-  in `~/.claude/rules/organisations.md`, which loads in every session, and those of one
+- Name an organisation by its full registered name every time, apart from a Slack draft for any
+  channel or DM that no other organisation shares, which uses the short names the user writes there,
+  without the company form. Never "we", "ours", "they" or "theirs" standing in for a company. The
+  names live in `~/.claude/rules/organisations.md`, which loads in every session, and those of one
   repository also in its project memory.
 - A command the reader is meant to run goes in a fenced code block tagged with its shell, never
   inline in a sentence. A fenced block reads as a command and copies as one, an inline span hides in

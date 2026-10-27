@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Point the clone addresses at zululima
+## Keep link text and company forms to shared Slack channels
 
 2026-10-27, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**9.**
+> [an ask about the draft's content left out] dont use oy in non ext
+> [a downstream project] slacks. [a wording fix in the draft left out]
+> use double enters when newline. dont use inline links outisde [a
+> downstream project] ext slack. [the rest, about the draft and
+> colleagues, left out]
+
+## Point the clone addresses at zululima
+
+2026-10-27, commit [f3c36cb](https://github.com/zululima/dotclaude/commit/f3c36cbe19538fddab4c418797fd32041dd76c08), model claude-opus-5-5, effort xhigh.
 
 **8.** (answer to whether the rename and the account are done)
 > i renamed to zululima, made the lambdakilo account, created
@@ -3380,6 +3391,7 @@ Stop, add it to dotclaude?)
 - eu: European Union
 - evals: evaluations
 - exfil: exfiltrate
+- ext: external
 - ext: external, a file posted by another organisation in a shared channel
 - feat: feature
 - ff-only: fast-forward only
@@ -3402,6 +3414,7 @@ Stop, add it to dotclaude?)
 - mds: Markdown files
 - mon: Monday
 - ofc: of course
+- oy: osakeyhtiö, the Finnish limited company form
 - p18: proposal 18 of the weekly review of 2026-10-14
 - p9: proposal 9 of the dream report of 2026-10-17
 - p9: proposal 9 of the weekly review of 2026-10-14
