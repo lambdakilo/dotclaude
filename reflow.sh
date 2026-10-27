@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
 # Rewraps prose that an edit left unwrapped in the files this checkout keeps at
-# 100 columns: CLAUDE.md, README.md and the pull-requests skill. A paragraph
-# that differs from the checkout's last commit, or has a line over 100
-# columns, is filled greedily from the line before its first changed line, a
-# list item's later lines indented under its text. Every other paragraph keeps
-# its breaks, and front matter, code blocks, tables, headings, quotes, HTML and
-# the README's evals block stay as they are. Run it on its own rather than
+# 100 columns: CLAUDE.md, README.md, docs/ and the pull-requests skill. A
+# paragraph that differs from the checkout's last commit, or has a line over
+# 100 columns, is filled greedily from the line before its first changed line,
+# a list item's later lines indented under its text. Every other paragraph
+# keeps its breaks, and front matter, code blocks, tables, headings, quotes,
+# HTML and the evals block stay as they are. Run it on its own rather than
 # chained with sync.sh, so the CLAUDE.md watcher hook counts the change as the
 # session's own edit.
 #
-#   reflow.sh           both copies of CLAUDE.md and of the skill, and README.md
+#   reflow.sh           both copies of CLAUDE.md and of the skill, README.md and
+#                       docs/
 #   reflow.sh <file>... those files, in this checkout or in the configuration
 #                       directory, each compared with its path's last commit
 
@@ -20,7 +21,7 @@ source_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
 checkout="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [ "$#" -eq 0 ]; then
-  set -- "$checkout/README.md"
+  set -- "$checkout/README.md" "$checkout"/docs/*.md
   for path in CLAUDE.md skills/pull-requests/SKILL.md; do
     set -- "$@" "$source_dir/$path" "$checkout/$path"
   done

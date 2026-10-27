@@ -30,11 +30,12 @@
 # hooks/claude-md-changed.sh can tell an install from a session's own edit.
 #
 # Checks: this script, reflow.sh and every mirrored shell script must parse,
-# every mirrored file needs an entry in README.md, its own or its folder's,
-# and no prose line of CLAUDE.md, README.md or the pull-requests skill may
-# pass 100 columns, leaving out front matter, code blocks, tables and the
-# README's evals block; reflow.sh rewraps the paragraphs an edit touched. A
-# failed check, like a scan hit, stops the mirror copy and the commit.
+# every mirrored file needs an entry in docs/what-you-get.md, its own or its
+# folder's, and no prose line of CLAUDE.md, README.md, docs/ or the
+# pull-requests skill may pass 100 columns, leaving out front matter, code
+# blocks, tables and the evals block; reflow.sh rewraps the paragraphs an edit
+# touched. A failed check, like a scan hit, stops the mirror copy and the
+# commit.
 #
 # Key order: a mirrored JSON file changed locally is first put back into the
 # key order the checkout has, when jq is installed, so a tool that writes the
@@ -317,11 +318,11 @@ for path in sync.sh reflow.sh "${mirrored[@]}"; do
 done
 for path in "${mirrored[@]}"; do
   entry="$path"
-  until grep -q -F -e "($entry)" -e "($entry/" README.md; do
+  until grep -q -F -e "(../$entry)" -e "(../$entry/" docs/what-you-get.md; do
     case "$entry" in
       */*/*) entry="${entry%/*}" ;;
       *)
-        echo "sync: README.md has no entry for $path" >&2
+        echo "sync: docs/what-you-get.md has no entry for $path" >&2
         failed=1
         break
         ;;
@@ -337,7 +338,7 @@ long="$(LC_ALL=C awk '
   code || evals || /^[ \t]*\|/ { next }
   { s = $0; gsub(/[\200-\277]/, "", s) }
   length(s) > 100 { print "  " FILENAME ":" FNR }
-' CLAUDE.md README.md skills/pull-requests/SKILL.md)"
+' CLAUDE.md README.md docs/*.md skills/pull-requests/SKILL.md)"
 if [ -n "$long" ]; then
   printf 'sync: line over 100 columns in\n%s\n' "$long" >&2
   printf 'sync: %s rewraps them, run it on its own\n' "$checkout/reflow.sh" >&2

@@ -1684,7 +1684,7 @@ const againAfter = Number.isFinite(fiveBlockedReset) && weeklyLeft > 3 && (!Numb
 const stoppedBy = skippedWork.length
   ? Object.entries(skipReasons).map(([r, n]) => `${n} pieces of work skipped as ${r}`).join('; ') + againAfter
   : 'it ran out of work, with everything due done'
-const EVALS = `Then, when ${EVALS_FILE} exists, refresh the evals of the checkout it names: run node <checkout>/test/evals.mjs --readme and show its lines in a text block, whatever its exit status. When git -C <checkout> status --porcelain README.md then lists the file, commit and push README.md alone with <checkout>/sync.sh --commit <message file> README.md, as the Public configuration repository section of ~/.claude/CLAUDE.md says.`
+const EVALS = `Then, when ${EVALS_FILE} exists, refresh the evals of the checkout it names: run node <checkout>/test/evals.mjs --write and show its lines in a text block, whatever its exit status. When git -C <checkout> status --porcelain docs/evals.md then lists the file, commit and push docs/evals.md alone with <checkout>/sync.sh --commit <message file> docs/evals.md, as the Public configuration repository section of ~/.claude/CLAUDE.md says.`
 const AWAY = `When the user is not there to answer, such as after a run they started before going to sleep or leaving for the day, leave every step for later and end the reply with the step to start a new session in ~/Projects/dotclaude and type "dream review" there, never in this session: the review reads the backlog and the report from their files, while this session would send its whole context again with each request, from a cold cache once the user is back.`
 const walkThrough = steps.length
   ? `${AWAY} Otherwise ${walkText(backlogTarget, `${OUT}/${scout.runId}.md`)}`

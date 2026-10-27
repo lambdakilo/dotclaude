@@ -13,13 +13,15 @@ mirrored file states what holds now.
 ## The checkout
 
 - The checkout at `~/Projects/dotclaude` holds the mirrored files, each named in the `mirrored` list
-  of `sync.sh`, and its own `README.md`, licence texts and `sync.sh`.
+  of `sync.sh`, and its own `README.md`, `docs/`, licence texts and `sync.sh`.
 - The mirrored copy keeps the name `CLAUDE.md`. A session started inside the checkout would load it
   as project memory on top of the global file, so `settings.json` lists `**/dotclaude/CLAUDE.md` in
   `claudeMdExcludes`. Claude Code reads no other mirrored file from a repository root, so nothing
   else needs a different name.
 - When a new file under `~/.claude` would help other people (a hook, a skill, a command, an agent),
-  add it to the list in `sync.sh` first and give it an entry in the checkout's `README.md`.
+  add it to the list in `sync.sh` first and give it an entry in the checkout's
+  `docs/what-you-get.md`. The `README.md` stays one screen long: it says what the repository is,
+  shows its parts and links the docs.
 
 ## sync.sh
 
@@ -32,13 +34,13 @@ mirrored file states what holds now.
   the git-ignored `sync-deny.txt` fail the scan in any case, and `sync.sh --check-message`, run from
   the untracked commit-msg hook of the checkout and of each mirror, holds commit messages to the
   same list.
-- `CLAUDE.md`, `README.md` and the pull-requests skill wrap prose at 100 columns, a list item's
-  later lines indented under its text, and a plain `sync.sh` run stops on a longer line. After an
-  edit of one of them, run `~/Projects/dotclaude/reflow.sh` bare in place of a reflow written for
-  the edit, as a command of its own rather than chained with `sync.sh`, so the hook that watches
-  `CLAUDE.md` counts the change as the session's own edit. It fills greedily each paragraph that
-  differs from the checkout's last commit, in `~/.claude` and in the checkout, from the line before
-  the first change, and leaves the other paragraphs as they are.
+- `CLAUDE.md`, `README.md`, the files under `docs/` and the pull-requests skill wrap prose at 100
+  columns, a list item's later lines indented under its text, and a plain `sync.sh` run stops on a
+  longer line. After an edit of one of them, run `~/Projects/dotclaude/reflow.sh` bare in place of a
+  reflow written for the edit, as a command of its own rather than chained with `sync.sh`, so the
+  hook that watches `CLAUDE.md` counts the change as the session's own edit. It fills greedily each
+  paragraph that differs from the checkout's last commit, in `~/.claude` and in the checkout, from
+  the line before the first change, and leaves the other paragraphs as they are.
 - `sync.sh --commit <file> <path>...` commits the named paths and pushes them to the default branch,
   then every mirror below. It refuses a run that names no path, or no path with a change. No PR: the
   repository has one owner, though several sessions work in the checkout at once, and every
@@ -74,6 +76,6 @@ mirrored file states what holds now.
 
 ## New machine
 
-- Follow the Install section of the checkout's `README.md`, taking everything (option b), then its
-  identity step before the first commit, with the name and address `git log -1 --format='%an <%ae>'`
-  prints for the existing history.
+- Follow the checkout's `docs/install.md`, taking everything (option b), then its identity step
+  before the first commit, with the name and address `git log -1 --format='%an <%ae>'` prints for
+  the existing history.

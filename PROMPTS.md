@@ -5,9 +5,16 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Say that only the closing message is read
+## Fit the README on one screen, the rest in docs
 
 2026-10-27, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dotclaude compact the readme to a screenful like my other repos
+
+## Say that only the closing message is read
+
+2026-10-27, commit [12080eb](https://github.com/lambdakilo/dotclaude/commit/12080ebdb95bfce5e94421ca22c52d78f4c49dfe), model claude-opus-5-5, effort xhigh.
 
 **9.** (with a screenshot of the end of a reply)
 > [an answer about a downstream project left out] btw im never reading

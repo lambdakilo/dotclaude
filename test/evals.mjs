@@ -1,12 +1,12 @@
-// Runs the evals of this repository and prints their results. With --readme it also writes them into README.md
+// Runs the evals of this repository and prints their results. With --write it also writes them into docs/evals.md
 // between the evals markers, unless only the dates would change. Exits 1 when a check failed or a suite did not run.
-// Usage: node test/evals.mjs [--readme]
+// Usage: node test/evals.mjs [--write]
 import { spawnSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 
 const ROOT = new URL('..', import.meta.url).pathname
-const README = path.join(ROOT, 'README.md')
+const EVALS = path.join(ROOT, 'docs/evals.md')
 const START = '<!-- evals:start -->'
 const END = '<!-- evals:end -->'
 
@@ -44,10 +44,10 @@ const section = [
   START,
   '| Suite | What it checks | Result |',
   '| --- | --- | --- |',
-  ...suites.map(s => `| [${s.name}](${s.link}) | ${s.what} | ${result(s)} |`),
+  ...suites.map(s => `| [${s.name}](../${s.link}) | ${s.what} | ${result(s)} |`),
   '',
   ...(rules ? [
-    `How often Claude kept rules from [\`CLAUDE.md\`](CLAUDE.md) from ${rules.from} to ${rules.to}, in ${rules.sessions} of my own sessions and the commits of the ${rules.repos} repositories they worked in, counted by [\`test/rules/adherence.mjs\`](test/rules/adherence.mjs):`,
+    `How often Claude kept rules from [\`CLAUDE.md\`](../CLAUDE.md) from ${rules.from} to ${rules.to}, in ${rules.sessions} of my own sessions and the commits of the ${rules.repos} repositories they worked in, counted by [\`test/rules/adherence.mjs\`](../test/rules/adherence.mjs):`,
     '',
     '| Rule | Kept |',
     '| --- | --- |',
@@ -60,20 +60,20 @@ for (const s of suites) console.log(`${s.name}: ${result(s)}`)
 if (rules) for (const r of rules.rules) console.log(`${r.name}: ${share(r)}, ${rules.from} to ${rules.to}`)
 else console.log('Rule counts: not made')
 
-if (process.argv.includes('--readme')) {
-  const text = fs.readFileSync(README, 'utf8')
+if (process.argv.includes('--write')) {
+  const text = fs.readFileSync(EVALS, 'utf8')
   const a = text.indexOf(START), b = text.indexOf(END)
   if (a < 0 || b < a) {
-    console.error(`README.md has no ${START} ... ${END} block`)
+    console.error(`docs/evals.md has no ${START} ... ${END} block`)
     process.exit(2)
   }
   const old = text.slice(a, b + END.length)
   const undated = s => s.replace(/\d{4}-\d\d-\d\d/g, '')
   if (undated(old) === undated(section)) {
-    console.log('README.md: the numbers are unchanged, so the file stays as it is')
+    console.log('docs/evals.md: the numbers are unchanged, so the file stays as it is')
   } else {
-    fs.writeFileSync(README, text.slice(0, a) + section + text.slice(b + END.length))
-    console.log('README.md: updated')
+    fs.writeFileSync(EVALS, text.slice(0, a) + section + text.slice(b + END.length))
+    console.log('docs/evals.md: updated')
   }
 }
 process.exit(suites.some(s => s.error || s.fail) || !rules ? 1 : 0)
