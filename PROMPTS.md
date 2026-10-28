@@ -5,9 +5,21 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Give the teammate prompt only for a teammate's problem
+## Show only what changed in a table of changes
 
 2026-10-28, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**5.**
+> dont show things that havent changed just blank or delete whole row
+> if even frontned didnt change. also cant you render tables in your
+> responses?
+
+(Claude asked how tables should show from now on)
+> Render to read
+
+## Give the teammate prompt only for a teammate's problem
+
+2026-10-28, commit [fabc504](https://github.com/zululima/dotclaude/commit/fabc504d286a465c0a48644910d62d85c48063ed), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > [two questions about a downstream project left out] also no need for

@@ -340,6 +340,8 @@ apply to one repository belong in that repository's project memory.
   was counted from, such as 3 of 4 issues closed or 1 of 5 data reads moved. A figure that is a
   judgement is called one and names the facts it weighs. When a count and a judgement disagree,
   both are given.
+- A table of what changed since a point, such as progress since the last meeting, shows only the
+  changes: a value that stayed the same is left blank, and a row where nothing changed is left out.
 - Steps written for a person outside a PR, in a README, a setup section or chat, are run here
   before they are written down, and a menu, tab or button they name is taken from the installed
   version, such as the app's localized strings or the tool's `--help`, never from memory. A step
