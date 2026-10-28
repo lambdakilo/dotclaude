@@ -24,6 +24,12 @@ downstream names redacted in public and upstream repositories.
   it explains a behaviour or a decision. Tests, translations and documentation stay out unless they
   are a purpose of the PR. Uncommitted changes are left out. The list is rebuilt with the sentence
   whenever a push changes what the PR does.
+- The closing line names the parent of a closed issue too when this PR closes the last of its
+  sub-issues still open, since GitHub leaves a parent open after its last sub-issue closes. The
+  issue's `parent` and that parent's `subIssues` with their states come from `gh api graphql`, and
+  the check runs again whenever the closing line is written or the body refreshed, as a sub-issue
+  may close elsewhere in the meantime. A parent whose body names work that none of its sub-issues
+  covers stays off the line, and the reply says why.
 - The two blocks come straight after the closing line and above the rest of the template. They
   are a TL;DR for the reviewer.
 - First block: a fenced code block holding the URL of the public configuration repository

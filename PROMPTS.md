@@ -5,9 +5,37 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
+## Close a parent with its last sub-issue, patch teammates' copies
+
+2026-10-28, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+
+**2.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+
+**3.** Quoted under [55fb3db](https://github.com/zululima/dotclaude/commit/55fb3db3aa4bd4b4fcdc78fce09856ca5904538e).
+
+**4.** Quoted under [8f63649](https://github.com/zululima/dotclaude/commit/8f6364920b100a9d53dedb44ef924140fa0c665c).
+
+**5.** Quoted under [55fb3db](https://github.com/zululima/dotclaude/commit/55fb3db3aa4bd4b4fcdc78fce09856ca5904538e).
+
+**6.** Quoted under [b64c518](https://github.com/zululima/dotclaude/commit/b64c518cc4b49d4b4a4d1b20421f0bf705799cc8).
+
+**7.**
+> [an ask about a downstream project left out]
+
+**8.**
+> is there a bug in my dotclaude as in why didnt [a teammate's]
+> dotclaude close those off too when merging
+
+**9.** (the last part answers whether to add the parent issue rule)
+> in the future also give a prompt i can give to [a teammate] so that i
+> can "patch" their claude too without them having to fetch any changes
+> themselves. yes add it
+
 ## Give plain Slack drafts in the reply, not on the clipboard
 
-2026-10-27, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [2390716](https://github.com/zululima/dotclaude/commit/2390716b47c32ade6428a5758d65408a4f345f9c), model claude-opus-5-5, effort xhigh.
 
 **10.**
 > if the slack text is something that will survive a copypaste without
