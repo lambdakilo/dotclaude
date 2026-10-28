@@ -291,10 +291,13 @@ apply to one repository belong in that repository's project memory.
   words, never pointed to as sent above. A file kept for a command or a later session is named in
   one line beside it and never stands in for it. A Slack draft on the clipboard stays the exception
   that Running things names.
-- A term that a session, a script or a workflow coined, such as a name for a unit of work, a role,
-  an option or a step label, is explained in plain words where a reply first uses it, or plain words
-  stand in its place. The reader saw neither the code nor the run that gave the term its meaning,
-  and a step that leans on a word they cannot read is a step they skip.
+- A term or shorthand that a session, a script or a workflow coined, such as a name for a unit of
+  work, a role, an option, a step label or a pair of figures like `85/85`, is explained in plain
+  words where a reply first uses it, or plain words stand in its place. A next-step box question,
+  its buttons and an AskUserQuestion question are read on their own, so each spells out its figures
+  and terms, such as "backend 85%, frontend 85%", whatever the reply above explained. The reader saw
+  neither the code nor the run that gave the term its meaning, and a step that leans on a word they
+  cannot read is a step they skip, or a button they click blind.
 - A reply to a message that set a format, such as a list of figures to confirm or update, a
   template or a set of questions, answers in that format: the same items in the same order, with
   the same nesting, labels, case and units, the new values in place of the old, and nothing

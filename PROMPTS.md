@@ -5,9 +5,25 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Check the VPN is on before naming it as a cause
+## Spell out figures in next-step questions and buttons
 
 2026-10-28, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+
+**2.** (answers the next-step question)
+> [a reply about a downstream project's figures left out]
+
+**3.**
+> counted as 85/85 100/100 what do these even mean i just clicekd
+> recommended last prompt
+
+(Claude asked again, in plain words, how to report two areas' figures)
+> the recommended option for both
+
+## Check the VPN is on before naming it as a cause
+
+2026-10-28, commit [6807241](https://github.com/zululima/dotclaude/commit/6807241dc459cfe40e3371bef3fc65a7409f968b), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about a game map of a workplace left out]
