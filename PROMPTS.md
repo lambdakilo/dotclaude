@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Show only what changed in a table of changes
+## Draft Slack messages only when asked, and list their send once
 
 2026-10-28, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**21.**
+> dont recommend me a slack draft if i dont ask so. [an ask about a
+> guide left out]
+
+## Show only what changed in a table of changes
+
+2026-10-28, commit [68ebf61](https://github.com/zululima/dotclaude/commit/68ebf6169d824037b19a82debc3900ddf11038ee), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > dont show things that havent changed just blank or delete whole row
