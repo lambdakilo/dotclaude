@@ -5,9 +5,26 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Close a parent with its last sub-issue, patch teammates' copies
+## Check the VPN is on before naming it as a cause
 
 2026-10-28, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [a question about a game map of a workplace left out]
+
+**2.**
+> [a follow-up about building plans for that map left out]
+
+**3.** (answer to a next-step box question)
+> Yes, look it up
+
+(Asked whether to retry with the VPN off after a DNS failure)
+> i dont have vpn on. always check if my vpn is even on before asking
+> that. also always try builtin browser if curling etc fails
+
+## Close a parent with its last sub-issue, patch teammates' copies
+
+2026-10-28, commit [4b4ca60](https://github.com/zululima/dotclaude/commit/4b4ca60fa933fb70eb808a23a75126d0d713a0dd), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 

@@ -488,11 +488,16 @@ apply to one repository belong in that repository's project memory.
 - Probe before spending quota on rate-limited APIs. Read retry-after, no blind retry loops.
 - A request that fails in a way the user's VPN could cause, such as a timeout, a refused or reset
   connection, a DNS or TLS error, or a block page, captcha or 403 from a site that should answer,
-  is named in the reply with its error and the hunch that the VPN may be the cause, hunch or not.
-  Before any retry, workaround or other route, AskUserQuestion asks whether to retry once the VPN is
-  off or lets the request through, with going on through the VPN as the other option. The user
-  switches the VPN; a session never turns it off or on, since it is a security setting. Once the
-  retried request has its answer, the next reply opens by saying the VPN can go back on.
+  goes to the built-in browser pane first when curl, WebFetch or another fetch made it. When the
+  pane fails too, the session checks whether the VPN is on before it names the VPN: `scutil --nc
+  list` marks each VPN service Connected or Disconnected, and `route -n get default` names a `utun`
+  interface while a tunnel carries the default route. With the VPN off, the VPN is not named or
+  asked about, and the session goes on to find the cause. With it on, the reply names the error and
+  the hunch that the VPN may be the cause, hunch or not, and before any retry, workaround or other
+  route, AskUserQuestion asks whether to retry once the VPN is off or lets the request through, with
+  going on through the VPN as the other option. The user switches the VPN; a session never turns it
+  off or on, since it is a security setting. Once the retried request has its answer, the next reply
+  opens by saying the VPN can go back on.
 - A `PreToolUse` hook, `~/.claude/hooks/calendar-free-busy-only.sh`, refuses to list or read
   events on another person's calendar, which carry titles, attendees and meeting links, so
   finding a time with other people goes through the connector's `suggest_time`, which reads
@@ -513,21 +518,22 @@ apply to one repository belong in that repository's project memory.
   states what was true when they were written.
 - Browser work runs in the built-in browser pane, which the user also calls the built-in chrome
   and is signed in to. A page, a file or an upload is tried there before a reply calls it out of
-  reach. Rendering is browser work too: no session starts the Google Chrome app, headless or not,
-  also not to turn a page into an image or a PDF. Playwright's own Chromium, which a project's tests
-  and the `pull-requests` skill's screenshots run on, is not that app. A page that has to become a
-  file draws it on a canvas in the pane, an HTML layout through an SVG `foreignObject` with each
-  font named by its installed family or inlined as a data URL, never a keyword such as
-  `-apple-system` or a linked web font, and posts the blob to a small local server that the session
-  starts with `preview_start` and that writes it to disk. A job the pane cannot do this way is asked
-  about first through AskUserQuestion, which names the Chrome app. When a step needs the user in the
-  pane, such as a sign-in, personal data to type or a click the session may not make, the session
-  opens the page that step happens on and calls `show_pane` with `preview` in the same turn as the
-  ask, so the pane is open beside the reply. `show_pane` acts only while the session is in a window
-  and never takes one from another session. When it answers that the session is in none, a
-  `PushNotification` names the page that waits, the reply opens with that ask, and every later turn
-  calls `show_pane` again first while the step still waits. A deny rule in `settings.json` blocks
-  Claude in Chrome, which the user does not want.
+  reach, and an address that curl, WebFetch or another fetch could not reach is tried there next,
+  before any question or other route. Rendering is browser work too: no session starts the Google
+  Chrome app, headless or not, also not to turn a page into an image or a PDF. Playwright's own
+  Chromium, which a project's tests and the `pull-requests` skill's screenshots run on, is not that
+  app. A page that has to become a file draws it on a canvas in the pane, an HTML layout through an
+  SVG `foreignObject` with each font named by its installed family or inlined as a data URL, never a
+  keyword such as `-apple-system` or a linked web font, and posts the blob to a small local server
+  that the session starts with `preview_start` and that writes it to disk. A job the pane cannot do
+  this way is asked about first through AskUserQuestion, which names the Chrome app. When a step
+  needs the user in the pane, such as a sign-in, personal data to type or a click the session may
+  not make, the session opens the page that step happens on and calls `show_pane` with `preview` in
+  the same turn as the ask, so the pane is open beside the reply. `show_pane` acts only while the
+  session is in a window and never takes one from another session. When it answers that the session
+  is in none, a `PushNotification` names the page that waits, the reply opens with that ask, and
+  every later turn calls `show_pane` again first while the step still waits. A deny rule in
+  `settings.json` blocks Claude in Chrome, which the user does not want.
 - Once the browser pane, the iOS simulator panel or a simulator has done its job in a turn, the
   session closes it before the reply: each pane tab with `tabs_close`, then the pane with
   `close_pane` and `preview`, since closing the last tab leaves the empty pane on screen; the panel
