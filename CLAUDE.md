@@ -672,14 +672,16 @@ apply to one repository belong in that repository's project memory.
   changes another mirrored file, run `sync.sh` and read the diff, write the commit message to a file
   in the scratchpad, and run `sync.sh --commit <file> <path>...` in the same turn, naming only the
   files this session changed.
-- The reply that reports such a push also gives a prompt the user can hand to a teammate who runs a
-  copy of this setup, in a `text` block of its own, so the teammate fetches nothing. It carries the
-  change itself: each new or rewritten rule as it now reads, or a new or changed script whole, with
-  the file and the section or neighbouring rule it goes beside, since their copy may be older and
-  its lines differ. It tells the teammate's Claude Code to put each one in place in their own copy
-  under `~/.claude`, to keep their local changes, and then, if they keep a mirror of their own, to
-  commit and push it as their `dotclaude` skill says, and it says go, which their copy of these
-  rules waits for. It names no project, client or person, so it can be passed on as it is.
+- When the user asked why a problem still shows in a teammate's work or setup, such as issues a
+  teammate's merge left open, the reply that reports the push also gives a prompt the user can hand
+  to that teammate, who runs a copy of this setup, and other pushes give none. It stands in a `text`
+  block of its own, so the teammate fetches nothing. It carries the change itself: each new or
+  rewritten rule as it now reads, or a new or changed script whole, with the file and the section or
+  neighbouring rule it goes beside, since their copy may be older and its lines differ. It tells the
+  teammate's Claude Code to put each one in place in their own copy under `~/.claude`, to keep their
+  local changes, and then, if they keep a mirror of their own, to commit and push it as their
+  `dotclaude` skill says, and it says go, which their copy of these rules waits for. It names no
+  project, client or person, so it can be passed on as it is.
 - Every push to the checkout is followed in the same turn by a pass over the user's open PRs,
   listed with `gh search prs --author @me --state open`. Each PR whose body carries a block the
   `pull-requests` skill puts there, the configuration link or the prompts block, gets the link

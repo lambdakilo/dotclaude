@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Spell out figures in next-step questions and buttons
+## Give the teammate prompt only for a teammate's problem
 
 2026-10-28, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> [two questions about a downstream project left out] also no need for
+> the prompt since theres nothing [a teammate] should fix in their
+> future work
+
+(Claude asked whether skipping the teammate prompt holds from now on)
+> only when i say why does a problem x still exist in like the closing
+> of issues was
+
+## Spell out figures in next-step questions and buttons
+
+2026-10-28, commit [c3b6af0](https://github.com/zululima/dotclaude/commit/c3b6af0e8e206cdd5cd11d5637623938454376eb), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
