@@ -83,11 +83,13 @@ apply to one repository belong in that repository's project memory.
   `git log` reflows long lines, so they break the rendering.
 - The message proper comes first: the subject, a blank line, then a body that says what changed
   and why. The prompts follow after another blank line, never before the body. PR bodies are the
-  other way round, as the `pull-requests` skill describes. Trailers, such as `Signed-off-by`,
-  `Co-authored-by` and `Reviewed-by`, come last, as a paragraph of their own after a blank line, and
-  are written into the message file, a sign-off with the name and address `git config` gives. Git
-  reads the `Abbreviations:` lines as trailers, so `git commit -s` alone appends the sign-off to
-  them, and once the file holds it, `-s` adds no second one.
+  other way round, as the `pull-requests` skill describes. Trailers, such as `Co-authored-by` and
+  `Reviewed-by`, come last, as a paragraph of their own after a blank line, and are written into the
+  message file. A `Signed-off-by` trailer goes only into a repository whose contributing guide or CI
+  asks for one, such as a Developer Certificate of Origin check, and no other commit carries one.
+  Where one is asked for, it goes into the message file with the name and address `git config`
+  gives. Git reads the `Abbreviations:` lines as trailers, so `git commit -s` alone appends the
+  sign-off to them, and once the file holds it, `-s` adds no second one.
 - The prompt section opens with two lines. The first is
   `Prompts behind this commit, as given to Claude Code` and the second is
   `(model <id>, effort <level>):`, with the model id and effort level of the running session,

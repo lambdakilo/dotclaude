@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Open the tasks pane for every background run
+## Sign off only where a repository asks for it
 
 2026-10-29, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**2.**
+> i just checked the commit messages why is there a signed off thingy?
+> should be only on [a project] etc because it has the app store
+> clause thingy. where else is that commit message a thing
+
+## Open the tasks pane for every background run
+
+2026-10-29, commit [12fbf82](https://github.com/zululima/dotclaude/commit/12fbf8212fefa6a253ecbde17964eac667b0c74e), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [7102d15](https://github.com/zululima/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
 
