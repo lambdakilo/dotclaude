@@ -5,9 +5,28 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Sign off only where a repository asks for it
+## Say why the browser pane is not on screen
 
 2026-10-29, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask about other work left out]
+
+**2.**
+> [an ask about other work left out]
+
+**3.**
+> [an ask about other work left out]
+
+**4.**
+> [an ask about other work left out]
+
+**5.**
+> my guy why did you not open the builtin browser pane for me
+
+## Sign off only where a repository asks for it
+
+2026-10-29, commit [b3378a9](https://github.com/zululima/dotclaude/commit/b3378a9df61b7af210bc2f72e16f59d2f8c954ec), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > i just checked the commit messages why is there a signed off thingy?
@@ -16,7 +35,7 @@ so a change by hand is lost at the next commit.
 
 ## Open the tasks pane for every background run
 
-2026-10-29, commit [12fbf82](https://github.com/zululima/dotclaude/commit/12fbf8212fefa6a253ecbde17964eac667b0c74e), model claude-opus-5-5, effort xhigh.
+2026-10-29, commit [05edd94](https://github.com/zululima/dotclaude/commit/05edd941981f613960b92a145e40ebe69a66c5c2), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [7102d15](https://github.com/zululima/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
 
@@ -67,7 +86,7 @@ so a change by hand is lost at the next commit.
 
 ## List every row of a change table, and say why a figure is short
 
-2026-10-29, commit [a16ffe6](https://github.com/zululima/dotclaude/commit/a16ffe6342b18eb0f222227951fc22f537438ad9), model claude-opus-5-5, effort xhigh.
+2026-10-29, commit [ca26192](https://github.com/zululima/dotclaude/commit/ca26192e7d051a5d01b10bd35d97ce909c2bd0eb), model claude-opus-5-5, effort xhigh.
 
 **9.**
 > [an ask about a downstream project left out]
@@ -90,7 +109,7 @@ so a change by hand is lost at the next commit.
 
 ## Take the one-screen check unscrolled
 
-2026-10-29, commit [297d1f0](https://github.com/zululima/dotclaude/commit/297d1f03893a1cbcb21e10739c09fdd45ca9ae1f), model claude-opus-5-5, effort xhigh.
+2026-10-29, commit [a317778](https://github.com/zululima/dotclaude/commit/a317778c5619e38161bdf0402ef149bf3694a58e), model claude-opus-5-5, effort xhigh.
 
 **7.**
 > [pasted: a screenshot of a page in a browser, its last line cut off
@@ -99,7 +118,7 @@ so a change by hand is lost at the next commit.
 
 ## Wait in the session for every CI run a push sets off
 
-2026-10-29, commit [2d58a05](https://github.com/zululima/dotclaude/commit/2d58a05254b29cb9d74dc423ba5344c9d3c0111b), model claude-opus-5-5, effort xhigh.
+2026-10-29, commit [2a713be](https://github.com/zululima/dotclaude/commit/2a713be00decab38deda8f2db7adc0005cbb05a4), model claude-opus-5-5, effort xhigh.
 
 **6.**
 > its green why didnt it wake you up
@@ -110,7 +129,7 @@ so a change by hand is lost at the next commit.
 
 ## Draft Slack messages only when asked, and list their send once
 
-2026-10-28, commit [71ca10e](https://github.com/zululima/dotclaude/commit/71ca10e21a56bef3406ff51d62741643107f89e5), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [3d0d861](https://github.com/zululima/dotclaude/commit/3d0d8613d4804ca41167ddffc76abc59ec923abb), model claude-opus-5-5, effort xhigh.
 
 **21.**
 > dont recommend me a slack draft if i dont ask so. [an ask about a
@@ -118,7 +137,7 @@ so a change by hand is lost at the next commit.
 
 ## Show only what changed in a table of changes
 
-2026-10-28, commit [68ebf61](https://github.com/zululima/dotclaude/commit/68ebf6169d824037b19a82debc3900ddf11038ee), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [4189f70](https://github.com/zululima/dotclaude/commit/4189f7082463258db6a00cf5d8b2bbe23e8db771), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > dont show things that havent changed just blank or delete whole row
@@ -130,7 +149,7 @@ so a change by hand is lost at the next commit.
 
 ## Give the teammate prompt only for a teammate's problem
 
-2026-10-28, commit [fabc504](https://github.com/zululima/dotclaude/commit/fabc504d286a465c0a48644910d62d85c48063ed), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [6c043c4](https://github.com/zululima/dotclaude/commit/6c043c40a409fcd7fc7bbe2f5e8047067be6d07a), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > [two questions about a downstream project left out] also no need for
@@ -143,7 +162,7 @@ so a change by hand is lost at the next commit.
 
 ## Spell out figures in next-step questions and buttons
 
-2026-10-28, commit [c3b6af0](https://github.com/zululima/dotclaude/commit/c3b6af0e8e206cdd5cd11d5637623938454376eb), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [5156ade](https://github.com/zululima/dotclaude/commit/5156adebec410a7743df57da7f772e6f2c4c0492), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
@@ -159,7 +178,7 @@ so a change by hand is lost at the next commit.
 
 ## Check the VPN is on before naming it as a cause
 
-2026-10-28, commit [6807241](https://github.com/zululima/dotclaude/commit/6807241dc459cfe40e3371bef3fc65a7409f968b), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [f7c6bbc](https://github.com/zululima/dotclaude/commit/f7c6bbc2b7e5936871d1ceb4bb30324edd7f1018), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about a game map of a workplace left out]
@@ -176,7 +195,7 @@ so a change by hand is lost at the next commit.
 
 ## Close a parent with its last sub-issue, patch teammates' copies
 
-2026-10-28, commit [4b4ca60](https://github.com/zululima/dotclaude/commit/4b4ca60fa933fb70eb808a23a75126d0d713a0dd), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [5dca0f6](https://github.com/zululima/dotclaude/commit/5dca0f6e31f883c96aa868e72df57366f5ecdc0b), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
@@ -204,7 +223,7 @@ so a change by hand is lost at the next commit.
 
 ## Give plain Slack drafts in the reply, not on the clipboard
 
-2026-10-27, commit [2390716](https://github.com/zululima/dotclaude/commit/2390716b47c32ade6428a5758d65408a4f345f9c), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [6099cf2](https://github.com/zululima/dotclaude/commit/6099cf232838c055f0f4e8f409506c57e0b94a99), model claude-opus-5-5, effort xhigh.
 
 **10.**
 > if the slack text is something that will survive a copypaste without
@@ -212,7 +231,7 @@ so a change by hand is lost at the next commit.
 
 ## Keep link text and company forms to shared Slack channels
 
-2026-10-27, commit [8bfaf66](https://github.com/zululima/dotclaude/commit/8bfaf66ad231b665018ee34d54b6ed38983aff20), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [c0df483](https://github.com/zululima/dotclaude/commit/c0df483acb284b846c1859962a7252d67a63f727), model claude-opus-5-5, effort xhigh.
 
 **9.**
 > [an ask about the draft's content left out] dont use oy in non ext
@@ -223,7 +242,7 @@ so a change by hand is lost at the next commit.
 
 ## Point the clone addresses at zululima
 
-2026-10-27, commit [f3c36cb](https://github.com/zululima/dotclaude/commit/f3c36cbe19538fddab4c418797fd32041dd76c08), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [6cda127](https://github.com/zululima/dotclaude/commit/6cda127a097ca74f9be0bbbf5505a5a52be18200), model claude-opus-5-5, effort xhigh.
 
 **8.** (answer to whether the rename and the account are done)
 > i renamed to zululima, made the lambdakilo account, created
@@ -232,7 +251,7 @@ so a change by hand is lost at the next commit.
 
 ## Flag a first prompt that does not fit its folder
 
-2026-10-27, commit [3dab69a](https://github.com/zululima/dotclaude/commit/3dab69a58da2d046a8fbcd795ec27260ae1ce6a2), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [235714b](https://github.com/zululima/dotclaude/commit/235714bd84eaa8bac5f637c725479d9c31680918), model claude-opus-5-5, effort xhigh.
 
 **17.**
 > yeah leave it but in the future are you able to de-folder it in the
@@ -244,7 +263,7 @@ so a change by hand is lost at the next commit.
 
 ## Say what This computer in the sidebar is
 
-2026-10-27, commit [c443c34](https://github.com/zululima/dotclaude/commit/c443c3433197a921df1e72f1af4c2bc357b7967d), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [b538f71](https://github.com/zululima/dotclaude/commit/b538f71a7a4041eae8623d9b239c64b085d353cd), model claude-opus-5-5, effort xhigh.
 
 **14.**
 > can you move this from [a project] to this computer
