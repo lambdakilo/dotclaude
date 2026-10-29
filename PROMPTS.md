@@ -5,9 +5,60 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## List every row of a change table, and say why a figure is short
+## Open the tasks pane for every background run
 
 2026-10-29, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [7102d15](https://github.com/zululima/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
+
+**2.** Quoted under [7102d15](https://github.com/zululima/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
+
+**3.**
+> [a question about the previous reply left out]
+
+**4.** Quoted under [7102d15](https://github.com/zululima/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
+
+**5.** Quoted under [7102d15](https://github.com/zululima/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
+
+**6.**
+> [a question about a downstream project left out]
+
+**7.** Quoted under [b64c518](https://github.com/zululima/dotclaude/commit/b64c518cc4b49d4b4a4d1b20421f0bf705799cc8).
+
+**8.**
+> [a question about a downstream project left out]
+
+**9.**
+> [a question about a downstream project left out]
+
+**10.**
+> [a question about a downstream project left out]
+
+**11.**
+> [a question about a downstream project left out]
+
+**12.**
+> [an ask about a downstream project left out]
+
+**13.**
+> [a question about a downstream project left out]
+
+**14.**
+> [a question about a downstream project left out]
+
+**15.**
+> [a question about a downstream project left out]
+
+**16.** (answer to whether to start building it)
+> [an ask about a downstream project left out]
+
+**17.**
+> can you open in the future background tasks if you put some
+> background tasks there?
+
+## List every row of a change table, and say why a figure is short
+
+2026-10-29, commit [a16ffe6](https://github.com/zululima/dotclaude/commit/a16ffe6342b18eb0f222227951fc22f537438ad9), model claude-opus-5-5, effort xhigh.
 
 **9.**
 > [an ask about a downstream project left out]

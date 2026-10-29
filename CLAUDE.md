@@ -557,6 +557,11 @@ apply to one repository belong in that repository's project memory.
   `close_pane` acts only while the session is in a window, so when it answers that the session is in
   none, every later turn calls it again first until it closes the pane. A tab or panel where a step
   waits on the user stays open.
+- A run a session starts in the background, with the Bash tool's `run_in_background`, a `Monitor` or
+  a workflow, is opened for the user in the same turn with `show_pane` and `tasks`, so it shows
+  beside the reply while it runs. When `show_pane` answers that the session is in no window, the
+  reply names the run and says it is in the session's tasks pane, and every later turn calls
+  `show_pane` with `tasks` again first while a run the session started still goes on.
 - A `Stop` hook, `~/.claude/hooks/stop-unreachable-claim.sh`, sends a turn back once when its
   closing message says in the first person that something could not be opened, read, reached or
   uploaded, and no browser pane tool ran since the prompt. Its phrase list is a heuristic that backs
