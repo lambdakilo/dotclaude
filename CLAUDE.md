@@ -201,6 +201,14 @@ apply to one repository belong in that repository's project memory.
   `gh pr merge` gets `--delete-branch`. A local branch the merge leaves behind, such as when it
   ran with `--repo` outside the checkout, goes with `git branch -D` once the PR shows as merged,
   and the reply names its last hash, so `git branch <name> <hash>` brings it back.
+- A session that pushes to a branch CI runs on, merges a PR or starts a workflow run waits in that
+  session until each run it set off has finished, and reports the result, a green one too: Auto-fix
+  wakes a session only on a failure, a merge conflict or a review comment, so a pass would reach no
+  one. The wait is one `gh run watch <id> --exit-status` per run, started with the Bash tool's
+  `run_in_background` and its output sent to a file, which costs nothing until it exits and wakes
+  the session then. It is the one wait on CI a session runs, in place of the app's instruction never
+  to poll CI, so no loop, `Monitor`, `CronCreate` or `ScheduleWakeup` of its own. A reply that ends
+  a turn before the run does names the run it waits on.
 - Never post a comment, a review thread reply, a review or an issue comment on GitHub, and never
   draft one for the user to post: every word posted goes out under the user's name, and the user
   writes those. A question about an issue, a comment or a thread is answered in the reply as an

@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
+## Wait in the session for every CI run a push sets off
+
+2026-10-29, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**6.**
+> its green why didnt it wake you up
+
+**7.**
+> [an ask to merge a pull request left out] but next time wait in
+> this session until the cicd finishes?
+
 ## Draft Slack messages only when asked, and list their send once
 
-2026-10-28, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [71ca10e](https://github.com/zululima/dotclaude/commit/71ca10e21a56bef3406ff51d62741643107f89e5), model claude-opus-5-5, effort xhigh.
 
 **21.**
 > dont recommend me a slack draft if i dont ask so. [an ask about a
@@ -3481,6 +3492,7 @@ Stop, add it to dotclaude?)
 - ccbysa4.0: Creative Commons Attribution-ShareAlike 4.0 International
 - cd: change directory, the shell command
 - char: character
+- cicd: CI/CD, continuous integration and delivery
 - co2: carbon dioxide
 - cs: computer science
 - cuz: because
