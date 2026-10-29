@@ -373,12 +373,13 @@ apply to one repository belong in that repository's project memory.
   README, as its readme-ov-file link shows it, fits one MacBook screen without scrolling: a table or
   columns in place of a long list, and one line per row or bar. Check it, and every other page a
   session makes for the user to open in a browser, such as a PR's review page, with a viewport
-  screenshot at 1440x730, about the browser area of a 13-inch MacBook Air, never with a taller or
-  full-page one alone. On a page the user works through, the first screen reaches what they act on
-  first, what stays in view sits at the side or in a thin bar, and a part they call too long gets
-  shorter, not folded behind a toggle. A document modelled on another keeps its page size and page
-  count: a copy of a one-page A4 landscape PDF is one A4 landscape page, never a page stretched to
-  fit the content.
+  screenshot at 1440x730, about the browser area of a 13-inch MacBook Air, taken as the page first
+  opens, unscrolled, with the site's own header above the content, never after scrolling the content
+  into view and never with a taller or full-page one alone. On a page the user works through, the
+  first screen reaches what they act on first, what stays in view sits at the side or in a thin bar,
+  and a part they call too long gets shorter, not folded behind a toggle. A document modelled on
+  another keeps its page size and page count: a copy of a one-page A4 landscape PDF is one A4
+  landscape page, never a page stretched to fit the content.
 
 ## Prompt feedback
 
