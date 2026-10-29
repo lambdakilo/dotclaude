@@ -5,9 +5,32 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Take the one-screen check unscrolled
+## List every row of a change table, and say why a figure is short
 
 2026-10-29, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**9.**
+> [an ask about a downstream project left out]
+
+**10.** (answer to whether to list the work that moved no figure)
+> Yes, list them
+
+**11.**
+> ok in the future list all areas including [an area of a downstream
+> project] and also now
+
+(How should an unchanged row show?)
+> Today's figures (Recommended)
+
+(Which figures stand for the areas a teammate reports?)
+> [the reported ones, changed only where work moved them] (Recommended)
+
+**12.**
+> also always explain why not something has not moved to 100% yet
+
+## Take the one-screen check unscrolled
+
+2026-10-29, commit [297d1f0](https://github.com/zululima/dotclaude/commit/297d1f03893a1cbcb21e10739c09fdd45ca9ae1f), model claude-opus-5-5, effort xhigh.
 
 **7.**
 > [pasted: a screenshot of a page in a browser, its last line cut off
