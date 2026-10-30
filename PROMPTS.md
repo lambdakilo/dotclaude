@@ -5,9 +5,19 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Say plainly why the browser pane stays shut
+## Say how a local file reaches a site in the browser pane
 
 2026-10-30, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.**
+> [a note on a local server left out]
+
+**4.**
+> just drive the telegram it says uncompressed not as phtoo
+
+## Say plainly why the browser pane stays shut
+
+2026-10-30, commit [b728d20](https://github.com/zululima/dotclaude/commit/b728d201636bcecc7b1f5b45c385aad92d6f601a), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about a downstream task left out]
