@@ -5,9 +5,24 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Say how a local file reaches a site in the browser pane
+## Keep a Slack draft from repeating the page it links
 
 2026-10-30, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> [an ask for a chat draft left out]
+
+**5.**
+> [a correction about a head count left out] also first link is
+> repetition just direct them to the [guides on github]
+
+**6.**
+> [a correction about a tier and a call to action left out] asking for
+> [a colleague] is also repetiion from guide
+
+## Say how a local file reaches a site in the browser pane
+
+2026-10-30, commit [6c5ef04](https://github.com/zululima/dotclaude/commit/6c5ef046d7757d1b4ba65bb6b7c8ef90e065a934), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > [a note on a local server left out]

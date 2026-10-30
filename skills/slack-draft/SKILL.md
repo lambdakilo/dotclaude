@@ -8,6 +8,11 @@ description: Draft a Slack message for the user to paste and send themselves, wi
 Claude never sends a Slack message, as `~/.claude/CLAUDE.md` says. It drafts, and the user pastes
 and sends. The CLAUDE.md rule on reading every source before drafting still holds.
 
+A draft that links a guide, a page or a document says only what the link does not: that it exists
+or changed, and what the reader should do with it. A step, a sign-in, a person to ask or an address
+that the linked page already gives stays out of the draft, and so does a list of what the page
+holds.
+
 ## Why the clipboard
 
 Slack's message box turns neither `[text](url)` nor `<url|text>` into a link. That syntax works only
