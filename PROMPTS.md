@@ -5,9 +5,25 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
+## Give a local file for an HTML request, never an Artifact
+
+2026-10-30, [the commit that last changed this file](https://github.com/lambdakilo/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [pasted: a list of places from a game guide]
+>
+> make a html [the details of the page left out]
+
+**2.**
+> never do artifacts like that also fetch my dotclaude here now.
+> [an ask about a game guide left out]
+
+**3.**
+> authed with gh
+
 ## Push to the phone only while the Mac is locked
 
-2026-10-30, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+2026-10-30, commit [e6254f2](https://github.com/lambdakilo/dotclaude/commit/e6254f2287b38fc7c51172b11658663a97fae0c2), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > you seem to notify my phone a lot even though im not afk. for example
@@ -15,7 +31,7 @@ so a change by hand is lost at the next commit.
 
 ## Keep a Slack draft from repeating the page it links
 
-2026-10-30, commit [b107263](https://github.com/zululima/dotclaude/commit/b1072631c964a8e34159204f28212de5e89aa3d6), model claude-opus-5-5, effort xhigh.
+2026-10-30, commit [b107263](https://github.com/lambdakilo/dotclaude/commit/b1072631c964a8e34159204f28212de5e89aa3d6), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > [an ask for a chat draft left out]
@@ -30,7 +46,7 @@ so a change by hand is lost at the next commit.
 
 ## Say how a local file reaches a site in the browser pane
 
-2026-10-30, commit [6c5ef04](https://github.com/zululima/dotclaude/commit/6c5ef046d7757d1b4ba65bb6b7c8ef90e065a934), model claude-opus-5-5, effort xhigh.
+2026-10-30, commit [6c5ef04](https://github.com/lambdakilo/dotclaude/commit/6c5ef046d7757d1b4ba65bb6b7c8ef90e065a934), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > [a note on a local server left out]
@@ -40,7 +56,7 @@ so a change by hand is lost at the next commit.
 
 ## Say plainly why the browser pane stays shut
 
-2026-10-30, commit [b728d20](https://github.com/zululima/dotclaude/commit/b728d201636bcecc7b1f5b45c385aad92d6f601a), model claude-opus-5-5, effort xhigh.
+2026-10-30, commit [b728d20](https://github.com/lambdakilo/dotclaude/commit/b728d201636bcecc7b1f5b45c385aad92d6f601a), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about a downstream task left out]
@@ -51,7 +67,7 @@ so a change by hand is lost at the next commit.
 
 ## Keep learning work the user's own, taught by norms
 
-2026-10-30, commit [257295d](https://github.com/zululima/dotclaude/commit/257295d3549cc4f789eeac5be6c9fcbf1715e27d), model claude-opus-5-5, effort xhigh.
+2026-10-30, commit [257295d](https://github.com/lambdakilo/dotclaude/commit/257295d3549cc4f789eeac5be6c9fcbf1715e27d), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about setting up a design portfolio left out]
@@ -73,7 +89,7 @@ so a change by hand is lost at the next commit.
 
 ## Copy the files sync-private.txt lists into the mirrors only
 
-2026-10-30, commit [aa0af1d](https://github.com/zululima/dotclaude/commit/aa0af1de3d035256f6b049e1fa1461c091b86cd0), model claude-opus-5-5, effort xhigh.
+2026-10-30, commit [aa0af1d](https://github.com/lambdakilo/dotclaude/commit/aa0af1de3d035256f6b049e1fa1461c091b86cd0), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a run of the morning routine left out]
@@ -91,7 +107,7 @@ so a change by hand is lost at the next commit.
 
 ## Say why the browser pane is not on screen
 
-2026-10-29, commit [be53eb7](https://github.com/zululima/dotclaude/commit/be53eb7b18143a232e6a7b1846fb3d8d848bb76c), model claude-opus-5-5, effort xhigh.
+2026-10-29, commit [be53eb7](https://github.com/lambdakilo/dotclaude/commit/be53eb7b18143a232e6a7b1846fb3d8d848bb76c), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about other work left out]
@@ -110,7 +126,7 @@ so a change by hand is lost at the next commit.
 
 ## Sign off only where a repository asks for it
 
-2026-10-29, commit [b3378a9](https://github.com/zululima/dotclaude/commit/b3378a9df61b7af210bc2f72e16f59d2f8c954ec), model claude-opus-5-5, effort xhigh.
+2026-10-29, commit [b3378a9](https://github.com/lambdakilo/dotclaude/commit/b3378a9df61b7af210bc2f72e16f59d2f8c954ec), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > i just checked the commit messages why is there a signed off thingy?
@@ -119,23 +135,23 @@ so a change by hand is lost at the next commit.
 
 ## Open the tasks pane for every background run
 
-2026-10-29, commit [05edd94](https://github.com/zululima/dotclaude/commit/05edd941981f613960b92a145e40ebe69a66c5c2), model claude-opus-5-5, effort xhigh.
+2026-10-29, commit [05edd94](https://github.com/lambdakilo/dotclaude/commit/05edd941981f613960b92a145e40ebe69a66c5c2), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [7102d15](https://github.com/zululima/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
+**1.** Quoted under [7102d15](https://github.com/lambdakilo/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
 
-**2.** Quoted under [7102d15](https://github.com/zululima/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
+**2.** Quoted under [7102d15](https://github.com/lambdakilo/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
 
 **3.**
 > [a question about the previous reply left out]
 
-**4.** Quoted under [7102d15](https://github.com/zululima/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
+**4.** Quoted under [7102d15](https://github.com/lambdakilo/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
 
-**5.** Quoted under [7102d15](https://github.com/zululima/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
+**5.** Quoted under [7102d15](https://github.com/lambdakilo/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5).
 
 **6.**
 > [a question about a downstream project left out]
 
-**7.** Quoted under [b64c518](https://github.com/zululima/dotclaude/commit/b64c518cc4b49d4b4a4d1b20421f0bf705799cc8).
+**7.** Quoted under [b64c518](https://github.com/lambdakilo/dotclaude/commit/b64c518cc4b49d4b4a4d1b20421f0bf705799cc8).
 
 **8.**
 > [a question about a downstream project left out]
@@ -170,7 +186,7 @@ so a change by hand is lost at the next commit.
 
 ## List every row of a change table, and say why a figure is short
 
-2026-10-29, commit [ca26192](https://github.com/zululima/dotclaude/commit/ca26192e7d051a5d01b10bd35d97ce909c2bd0eb), model claude-opus-5-5, effort xhigh.
+2026-10-29, commit [ca26192](https://github.com/lambdakilo/dotclaude/commit/ca26192e7d051a5d01b10bd35d97ce909c2bd0eb), model claude-opus-5-5, effort xhigh.
 
 **9.**
 > [an ask about a downstream project left out]
@@ -193,7 +209,7 @@ so a change by hand is lost at the next commit.
 
 ## Take the one-screen check unscrolled
 
-2026-10-29, commit [a317778](https://github.com/zululima/dotclaude/commit/a317778c5619e38161bdf0402ef149bf3694a58e), model claude-opus-5-5, effort xhigh.
+2026-10-29, commit [a317778](https://github.com/lambdakilo/dotclaude/commit/a317778c5619e38161bdf0402ef149bf3694a58e), model claude-opus-5-5, effort xhigh.
 
 **7.**
 > [pasted: a screenshot of a page in a browser, its last line cut off
@@ -202,7 +218,7 @@ so a change by hand is lost at the next commit.
 
 ## Wait in the session for every CI run a push sets off
 
-2026-10-29, commit [2a713be](https://github.com/zululima/dotclaude/commit/2a713be00decab38deda8f2db7adc0005cbb05a4), model claude-opus-5-5, effort xhigh.
+2026-10-29, commit [2a713be](https://github.com/lambdakilo/dotclaude/commit/2a713be00decab38deda8f2db7adc0005cbb05a4), model claude-opus-5-5, effort xhigh.
 
 **6.**
 > its green why didnt it wake you up
@@ -213,7 +229,7 @@ so a change by hand is lost at the next commit.
 
 ## Draft Slack messages only when asked, and list their send once
 
-2026-10-28, commit [3d0d861](https://github.com/zululima/dotclaude/commit/3d0d8613d4804ca41167ddffc76abc59ec923abb), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [3d0d861](https://github.com/lambdakilo/dotclaude/commit/3d0d8613d4804ca41167ddffc76abc59ec923abb), model claude-opus-5-5, effort xhigh.
 
 **21.**
 > dont recommend me a slack draft if i dont ask so. [an ask about a
@@ -221,7 +237,7 @@ so a change by hand is lost at the next commit.
 
 ## Show only what changed in a table of changes
 
-2026-10-28, commit [4189f70](https://github.com/zululima/dotclaude/commit/4189f7082463258db6a00cf5d8b2bbe23e8db771), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [4189f70](https://github.com/lambdakilo/dotclaude/commit/4189f7082463258db6a00cf5d8b2bbe23e8db771), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > dont show things that havent changed just blank or delete whole row
@@ -233,7 +249,7 @@ so a change by hand is lost at the next commit.
 
 ## Give the teammate prompt only for a teammate's problem
 
-2026-10-28, commit [6c043c4](https://github.com/zululima/dotclaude/commit/6c043c40a409fcd7fc7bbe2f5e8047067be6d07a), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [6c043c4](https://github.com/lambdakilo/dotclaude/commit/6c043c40a409fcd7fc7bbe2f5e8047067be6d07a), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > [two questions about a downstream project left out] also no need for
@@ -246,9 +262,9 @@ so a change by hand is lost at the next commit.
 
 ## Spell out figures in next-step questions and buttons
 
-2026-10-28, commit [5156ade](https://github.com/zululima/dotclaude/commit/5156adebec410a7743df57da7f772e6f2c4c0492), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [5156ade](https://github.com/lambdakilo/dotclaude/commit/5156adebec410a7743df57da7f772e6f2c4c0492), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+**1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
 **2.** (answers the next-step question)
 > [a reply about a downstream project's figures left out]
@@ -262,7 +278,7 @@ so a change by hand is lost at the next commit.
 
 ## Check the VPN is on before naming it as a cause
 
-2026-10-28, commit [f7c6bbc](https://github.com/zululima/dotclaude/commit/f7c6bbc2b7e5936871d1ceb4bb30324edd7f1018), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [f7c6bbc](https://github.com/lambdakilo/dotclaude/commit/f7c6bbc2b7e5936871d1ceb4bb30324edd7f1018), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about a game map of a workplace left out]
@@ -279,19 +295,19 @@ so a change by hand is lost at the next commit.
 
 ## Close a parent with its last sub-issue, patch teammates' copies
 
-2026-10-28, commit [5dca0f6](https://github.com/zululima/dotclaude/commit/5dca0f6e31f883c96aa868e72df57366f5ecdc0b), model claude-opus-5-5, effort xhigh.
+2026-10-28, commit [5dca0f6](https://github.com/lambdakilo/dotclaude/commit/5dca0f6e31f883c96aa868e72df57366f5ecdc0b), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+**1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
-**2.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+**2.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
-**3.** Quoted under [55fb3db](https://github.com/zululima/dotclaude/commit/55fb3db3aa4bd4b4fcdc78fce09856ca5904538e).
+**3.** Quoted under [55fb3db](https://github.com/lambdakilo/dotclaude/commit/55fb3db3aa4bd4b4fcdc78fce09856ca5904538e).
 
-**4.** Quoted under [8f63649](https://github.com/zululima/dotclaude/commit/8f6364920b100a9d53dedb44ef924140fa0c665c).
+**4.** Quoted under [8f63649](https://github.com/lambdakilo/dotclaude/commit/8f6364920b100a9d53dedb44ef924140fa0c665c).
 
-**5.** Quoted under [55fb3db](https://github.com/zululima/dotclaude/commit/55fb3db3aa4bd4b4fcdc78fce09856ca5904538e).
+**5.** Quoted under [55fb3db](https://github.com/lambdakilo/dotclaude/commit/55fb3db3aa4bd4b4fcdc78fce09856ca5904538e).
 
-**6.** Quoted under [b64c518](https://github.com/zululima/dotclaude/commit/b64c518cc4b49d4b4a4d1b20421f0bf705799cc8).
+**6.** Quoted under [b64c518](https://github.com/lambdakilo/dotclaude/commit/b64c518cc4b49d4b4a4d1b20421f0bf705799cc8).
 
 **7.**
 > [an ask about a downstream project left out]
@@ -307,7 +323,7 @@ so a change by hand is lost at the next commit.
 
 ## Give plain Slack drafts in the reply, not on the clipboard
 
-2026-10-27, commit [6099cf2](https://github.com/zululima/dotclaude/commit/6099cf232838c055f0f4e8f409506c57e0b94a99), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [6099cf2](https://github.com/lambdakilo/dotclaude/commit/6099cf232838c055f0f4e8f409506c57e0b94a99), model claude-opus-5-5, effort xhigh.
 
 **10.**
 > if the slack text is something that will survive a copypaste without
@@ -315,7 +331,7 @@ so a change by hand is lost at the next commit.
 
 ## Keep link text and company forms to shared Slack channels
 
-2026-10-27, commit [c0df483](https://github.com/zululima/dotclaude/commit/c0df483acb284b846c1859962a7252d67a63f727), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [c0df483](https://github.com/lambdakilo/dotclaude/commit/c0df483acb284b846c1859962a7252d67a63f727), model claude-opus-5-5, effort xhigh.
 
 **9.**
 > [an ask about the draft's content left out] dont use oy in non ext
@@ -326,7 +342,7 @@ so a change by hand is lost at the next commit.
 
 ## Point the clone addresses at zululima
 
-2026-10-27, commit [6cda127](https://github.com/zululima/dotclaude/commit/6cda127a097ca74f9be0bbbf5505a5a52be18200), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [6cda127](https://github.com/lambdakilo/dotclaude/commit/6cda127a097ca74f9be0bbbf5505a5a52be18200), model claude-opus-5-5, effort xhigh.
 
 **8.** (answer to whether the rename and the account are done)
 > i renamed to zululima, made the lambdakilo account, created
@@ -335,7 +351,7 @@ so a change by hand is lost at the next commit.
 
 ## Flag a first prompt that does not fit its folder
 
-2026-10-27, commit [235714b](https://github.com/zululima/dotclaude/commit/235714bd84eaa8bac5f637c725479d9c31680918), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [235714b](https://github.com/lambdakilo/dotclaude/commit/235714bd84eaa8bac5f637c725479d9c31680918), model claude-opus-5-5, effort xhigh.
 
 **17.**
 > yeah leave it but in the future are you able to de-folder it in the
@@ -347,7 +363,7 @@ so a change by hand is lost at the next commit.
 
 ## Say what This computer in the sidebar is
 
-2026-10-27, commit [b538f71](https://github.com/zululima/dotclaude/commit/b538f71a7a4041eae8623d9b239c64b085d353cd), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [b538f71](https://github.com/lambdakilo/dotclaude/commit/b538f71a7a4041eae8623d9b239c64b085d353cd), model claude-opus-5-5, effort xhigh.
 
 **14.**
 > can you move this from [a project] to this computer
@@ -367,27 +383,27 @@ so a change by hand is lost at the next commit.
 
 ## Have the dream project audit send hand setup to docs
 
-2026-10-27, commit [35517c5](https://github.com/zululima/dotclaude/commit/35517c5c93afcf120511f80b6e44fb40cd12fe06), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [35517c5](https://github.com/lambdakilo/dotclaude/commit/35517c5c93afcf120511f80b6e44fb40cd12fe06), model claude-opus-5-5, effort xhigh.
 
 **2.** (answer to whether to fix the dream prompt)
 > yes fix the dream prompt that still says setup goes in the readme
 
 ## Keep the README's newcomer prompt clear of the copy button
 
-2026-10-27, commit [9884fae](https://github.com/zululima/dotclaude/commit/9884fae323812d14d05b916d18b610b45ae6e295), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [9884fae](https://github.com/lambdakilo/dotclaude/commit/9884fae323812d14d05b916d18b610b45ae6e295), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d265fb0](https://github.com/zululima/dotclaude/commit/d265fb0b4a78ca9943f3dbee8578e5eea06ffbb6).
+**1.** Quoted under [d265fb0](https://github.com/lambdakilo/dotclaude/commit/d265fb0b4a78ca9943f3dbee8578e5eea06ffbb6).
 
 ## Fit the README on one screen, the rest in docs
 
-2026-10-27, commit [d265fb0](https://github.com/zululima/dotclaude/commit/d265fb0b4a78ca9943f3dbee8578e5eea06ffbb6), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [d265fb0](https://github.com/lambdakilo/dotclaude/commit/d265fb0b4a78ca9943f3dbee8578e5eea06ffbb6), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dotclaude compact the readme to a screenful like my other repos
 
 ## Say that only the closing message is read
 
-2026-10-27, commit [12080eb](https://github.com/zululima/dotclaude/commit/12080ebdb95bfce5e94421ca22c52d78f4c49dfe), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [12080eb](https://github.com/lambdakilo/dotclaude/commit/12080ebdb95bfce5e94421ca22c52d78f4c49dfe), model claude-opus-5-5, effort xhigh.
 
 **9.** (with a screenshot of the end of a reply)
 > [an answer about a downstream project left out] btw im never reading
@@ -396,7 +412,7 @@ so a change by hand is lost at the next commit.
 
 ## Keep each task's files in one Downloads folder
 
-2026-10-27, commit [1b5b94d](https://github.com/zululima/dotclaude/commit/1b5b94d6d8c4c78799b9cec2c7b5c7bb670452fc), model claude-opus-5-5, effort xhigh.
+2026-10-27, commit [1b5b94d](https://github.com/lambdakilo/dotclaude/commit/1b5b94d6d8c4c78799b9cec2c7b5c7bb670452fc), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about a study programme left out]
@@ -453,7 +469,7 @@ so a change by hand is lost at the next commit.
 
 ## Name a draft's Slack thread in words, without a link
 
-2026-10-26, commit [5c5695d](https://github.com/zululima/dotclaude/commit/5c5695d8772c27a1b817c475257635e37a844faa), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [5c5695d](https://github.com/lambdakilo/dotclaude/commit/5c5695d8772c27a1b817c475257635e37a844faa), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask to draft a Slack reply for a downstream project left out]
@@ -473,7 +489,7 @@ so a change by hand is lost at the next commit.
 
 ## Never draft GitHub comments for the user to post
 
-2026-10-26, commit [b2b6cae](https://github.com/zululima/dotclaude/commit/b2b6cae1e53a701a5008783745ee68f4a64f03dc), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [b2b6cae](https://github.com/lambdakilo/dotclaude/commit/b2b6cae1e53a701a5008783745ee68f4a64f03dc), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about a downstream project's issue comment left out]
@@ -483,7 +499,7 @@ so a change by hand is lost at the next commit.
 
 ## Keep client material out of shared memory notes
 
-2026-10-26, commit [8665fe4](https://github.com/zululima/dotclaude/commit/8665fe42c92806036bd54aa3a87163e31d9435cf), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [8665fe4](https://github.com/lambdakilo/dotclaude/commit/8665fe42c92806036bd54aa3a87163e31d9435cf), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about a client contract left out]
@@ -500,7 +516,7 @@ so a change by hand is lost at the next commit.
 
 ## Keep rendering in the browser pane, not the Chrome app
 
-2026-10-26, commit [edc5916](https://github.com/zululima/dotclaude/commit/edc591678b5a6503f4822066761190370746ef2c), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [edc5916](https://github.com/lambdakilo/dotclaude/commit/edc591678b5a6503f4822066761190370746ef2c), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > who opened my google chrome and why?
@@ -513,7 +529,7 @@ so a change by hand is lost at the next commit.
 
 ## Number review steps across the page and show section headings
 
-2026-10-26, commit [1505c80](https://github.com/zululima/dotclaude/commit/1505c80e722654394be0bba6687e7ead623b5dc5), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [1505c80](https://github.com/lambdakilo/dotclaude/commit/1505c80e722654394be0bba6687e7ead623b5dc5), model claude-opus-5-5, effort xhigh.
 
 **26.**
 > moving from step 3 to step 4 which is btw not correct it says step 1
@@ -521,7 +537,7 @@ so a change by hand is lost at the next commit.
 
 ## Keep the review page's focused step alone on the screen
 
-2026-10-26, commit [d915bc3](https://github.com/zululima/dotclaude/commit/d915bc331c47e200abaaa39d68247524eb1c45e9), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [d915bc3](https://github.com/lambdakilo/dotclaude/commit/d915bc331c47e200abaaa39d68247524eb1c45e9), model claude-opus-5-5, effort xhigh.
 
 **25.** (with a screenshot of the review page)
 > hmmm i can see the next step too a bit. is there some css trick that
@@ -529,7 +545,7 @@ so a change by hand is lost at the next commit.
 
 ## Hide what sits above the review page's focused step
 
-2026-10-26, commit [27c6125](https://github.com/zululima/dotclaude/commit/27c6125669d8c04a17c1861cebce001035ac5875), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [27c6125](https://github.com/lambdakilo/dotclaude/commit/27c6125669d8c04a17c1861cebce001035ac5875), model claude-opus-5-5, effort xhigh.
 
 **24.** (with a screenshot of the review page)
 > its not completely top theres still some leftover from last step in
@@ -537,21 +553,21 @@ so a change by hand is lost at the next commit.
 
 ## Move the review page on to the next step when x ticks one
 
-2026-10-26, commit [9f72aad](https://github.com/zululima/dotclaude/commit/9f72aad621b0f714e7ebfdbeef10527d469db1a8), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [9f72aad](https://github.com/lambdakilo/dotclaude/commit/9f72aad621b0f714e7ebfdbeef10527d469db1a8), model claude-opus-5-5, effort xhigh.
 
 **23.**
 > pressing x should move on to next step
 
 ## Scroll the review page's next step to the top of the window
 
-2026-10-26, commit [fec4f8f](https://github.com/zululima/dotclaude/commit/fec4f8f914518a8a40d61b7d8a9d6618d2100c23), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [fec4f8f](https://github.com/lambdakilo/dotclaude/commit/fec4f8f914518a8a40d61b7d8a9d6618d2100c23), model claude-opus-5-5, effort xhigh.
 
 **22.**
 > oof when going to next step put it to the top since im using a laptop
 
 ## Drop the review rail and open the page on its first step
 
-2026-10-26, commit [3a61517](https://github.com/zululima/dotclaude/commit/3a6151769ccfaefde800a99c576d0c912ff677d0), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [3a61517](https://github.com/lambdakilo/dotclaude/commit/3a6151769ccfaefde800a99c576d0c912ff677d0), model claude-opus-5-5, effort xhigh.
 
 **21.**
 > the n next open is gay. also
@@ -568,7 +584,7 @@ so a change by hand is lost at the next commit.
 
 ## Centre the review steps and leave fixed findings off the page
 
-2026-10-26, commit [f4b9b3c](https://github.com/zululima/dotclaude/commit/f4b9b3cdd7073fd6a4d0158dd8670f3687649b4a), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [f4b9b3c](https://github.com/lambdakilo/dotclaude/commit/f4b9b3cdd7073fd6a4d0158dd8670f3687649b4a), model claude-opus-5-5, effort xhigh.
 
 **20.** (with a screenshot of the review page)
 > its still not centered. you can move the left side bar a lot to left
@@ -581,7 +597,7 @@ so a change by hand is lost at the next commit.
 
 ## Put review findings first and show keys on the current step
 
-2026-10-26, commit [cb18719](https://github.com/zululima/dotclaude/commit/cb18719cae6c7370a4837c40d42dc3f39c4db731), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [cb18719](https://github.com/lambdakilo/dotclaude/commit/cb18719cae6c7370a4837c40d42dc3f39c4db731), model claude-opus-5-5, effort xhigh.
 
 **19.**
 > ok so. i want the current step centered. no need for the big ass
@@ -599,7 +615,7 @@ so a change by hand is lost at the next commit.
 
 ## Show the gm alias and the restart in the start of day section
 
-2026-10-26, commit [4bfacaa](https://github.com/zululima/dotclaude/commit/4bfacaa8b7e615bbd36c4698b234ced04f0d99c4), model claude-opus-5-5, effort xhigh.
+2026-10-26, commit [4bfacaa](https://github.com/lambdakilo/dotclaude/commit/4bfacaa8b7e615bbd36c4698b234ced04f0d99c4), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > can you alias s to gm instead the bin sod that is, you can actually
@@ -618,7 +634,7 @@ so a change by hand is lost at the next commit.
 
 ## Give a README's newcomer a prompt that clones the repository
 
-2026-10-25, commit [7073814](https://github.com/zululima/dotclaude/commit/70738149a8fd6fec4165a04803b2df8e2b40a906), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [7073814](https://github.com/lambdakilo/dotclaude/commit/70738149a8fd6fec4165a04803b2df8e2b40a906), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > [pasted: a README sentence on what Claude Code reads]
@@ -634,14 +650,14 @@ so a change by hand is lost at the next commit.
 
 ## Mask a Linux home path in printed prompts too
 
-2026-10-25, commit [139bc5e](https://github.com/zululima/dotclaude/commit/139bc5ee412fbe26dafeaefc3a738ef6f7ab1bfb), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [139bc5e](https://github.com/lambdakilo/dotclaude/commit/139bc5ee412fbe26dafeaefc3a738ef6f7ab1bfb), model claude-opus-5-5, effort xhigh.
 
 **3.** (answer to whether to fix the masking too)
 > also fix prompt-log.sh so it masks /home paths, here
 
 ## Keep the same abbreviation case in PROMPTS.md on Linux and macOS
 
-2026-10-25, commit [3f8f767](https://github.com/zululima/dotclaude/commit/3f8f7678ea4dc817423aaa569bb38adc5680b4ec), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [3f8f767](https://github.com/lambdakilo/dotclaude/commit/3f8f7678ea4dc817423aaa569bb38adc5680b4ec), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about model sizes left out] also fetch my whole ass
@@ -652,7 +668,7 @@ so a change by hand is lost at the next commit.
 
 ## Leave the VPN switch to the user, then say it can go back on
 
-2026-10-25, commit [590df15](https://github.com/zululima/dotclaude/commit/590df1559b9bc73cbde8878c4314e93fbd235d56), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [590df15](https://github.com/lambdakilo/dotclaude/commit/590df1559b9bc73cbde8878c4314e93fbd235d56), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > do you remember to still pause and tell me if my proton vpn is the
@@ -661,7 +677,7 @@ so a change by hand is lost at the next commit.
 
 ## Keep asking an open question until it is answered
 
-2026-10-25, commit [7425554](https://github.com/zululima/dotclaude/commit/7425554fa5ce938ffeff2c0d0f9604f428a9502a), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [7425554](https://github.com/lambdakilo/dotclaude/commit/7425554fa5ce938ffeff2c0d0f9604f428a9502a), model claude-opus-5-5, effort xhigh.
 
 **38.**
 > [a question about an IDE sign-in left out]
@@ -675,7 +691,7 @@ so a change by hand is lost at the next commit.
 
 ## Fit the whole README on one screen, setup in docs
 
-2026-10-25, commit [6a0a0da](https://github.com/zululima/dotclaude/commit/6a0a0daad6e45634f36036453e25420846b5e7fa), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [6a0a0da](https://github.com/lambdakilo/dotclaude/commit/6a0a0daad6e45634f36036453e25420846b5e7fa), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > readme is not short rn. make it so that the readmovfile link shows
@@ -688,7 +704,7 @@ so a change by hand is lost at the next commit.
 
 ## Count simulator processes in the crash rule
 
-2026-10-25, commit [05a61d8](https://github.com/zululima/dotclaude/commit/05a61d87c40c7ea6ceadde2906b5ae298e52e608), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [05a61d8](https://github.com/lambdakilo/dotclaude/commit/05a61d87c40c7ea6ceadde2906b5ae298e52e608), model claude-opus-5-5, effort xhigh.
 
 **36.**
 > [an ask about an app's log left out]
@@ -698,7 +714,7 @@ so a change by hand is lost at the next commit.
 
 ## Leave settings the user turned on as they are
 
-2026-10-25, commit [4ad0136](https://github.com/zululima/dotclaude/commit/4ad0136cf90a5313919e9333c9fd2f0bd8ccdae1), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [4ad0136](https://github.com/lambdakilo/dotclaude/commit/4ad0136cf90a5313919e9333c9fd2f0bd8ccdae1), model claude-opus-5-5, effort xhigh.
 
 **31.**
 > [a question about a store review left out]
@@ -721,7 +737,7 @@ so a change by hand is lost at the next commit.
 
 ## Ping the user when the browser pane cannot be shown
 
-2026-10-25, commit [e9533e7](https://github.com/zululima/dotclaude/commit/e9533e7dfb37105c260b8c821617be2c5ab9e18a), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [e9533e7](https://github.com/lambdakilo/dotclaude/commit/e9533e7dfb37105c260b8c821617be2c5ab9e18a), model claude-opus-5-5, effort xhigh.
 
 **11.**
 > my guy. if you need something from me from the pane in the future
@@ -730,7 +746,7 @@ so a change by hand is lost at the next commit.
 
 ## Show tokens and dollars only in the final dream report
 
-2026-10-25, commit [5aa28d3](https://github.com/zululima/dotclaude/commit/5aa28d3877a55ae1f6933256bec28443d5c5ddb4), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [5aa28d3](https://github.com/lambdakilo/dotclaude/commit/5aa28d3877a55ae1f6933256bec28443d5c5ddb4), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > remove dollars and token amounts from taskbar but keep them in the
@@ -741,7 +757,7 @@ so a change by hand is lost at the next commit.
 
 ## Close the browser pane and simulators when done
 
-2026-10-25, commit [ae13644](https://github.com/zululima/dotclaude/commit/ae13644dbd93edced0ad9da1a21a80e0a7c6349c), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [ae13644](https://github.com/lambdakilo/dotclaude/commit/ae13644dbd93edced0ad9da1a21a80e0a7c6349c), model claude-opus-5-5, effort xhigh.
 
 **30.**
 > can you close the browser and simulation windows when theyre done
@@ -749,7 +765,7 @@ so a change by hand is lost at the next commit.
 
 ## Ask before relaunching an app that crashed
 
-2026-10-25, commit [ad4d6ba](https://github.com/zululima/dotclaude/commit/ad4d6ba042abb7c2918b0d6bc994206377bbcde1), model claude-opus-5-5, effort xhigh.
+2026-10-25, commit [ad4d6ba](https://github.com/lambdakilo/dotclaude/commit/ad4d6ba042abb7c2918b0d6bc994206377bbcde1), model claude-opus-5-5, effort xhigh.
 
 **24.**
 > [a feature request for an app left out]
@@ -771,7 +787,7 @@ so a change by hand is lost at the next commit.
 
 ## Check a service's claims against its docs before repeating them
 
-2026-10-24, commit [938ef43](https://github.com/zululima/dotclaude/commit/938ef43c98dcd7ae1d37b659a7b1b4228aac5e19), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [938ef43](https://github.com/lambdakilo/dotclaude/commit/938ef43c98dcd7ae1d37b659a7b1b4228aac5e19), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > [questions doubting the service's privacy and data residency claims
@@ -783,7 +799,7 @@ so a change by hand is lost at the next commit.
 
 ## Read a setup's own docs before naming what it cannot do
 
-2026-10-24, commit [ed9a4e7](https://github.com/zululima/dotclaude/commit/ed9a4e7d6275021d2446c082671c09348be507df), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [ed9a4e7](https://github.com/lambdakilo/dotclaude/commit/ed9a4e7d6275021d2446c082671c09348be507df), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about a hosted agent service left out]
@@ -801,23 +817,23 @@ so a change by hand is lost at the next commit.
 
 ## Refuse git identity overrides with a hook
 
-2026-10-24, commit [7bed059](https://github.com/zululima/dotclaude/commit/7bed05993d53078e591c23b004996f8383fec34e), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [7bed059](https://github.com/lambdakilo/dotclaude/commit/7bed05993d53078e591c23b004996f8383fec34e), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
-**2.** (asking why a dream step was put to the user) Quoted under [12dd424](https://github.com/zululima/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d).
+**2.** (asking why a dream step was put to the user) Quoted under [12dd424](https://github.com/lambdakilo/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d).
 
 ## Block a commit only for CLAUDE.md changes that bear on it
 
-2026-10-24, commit [b1b0ad5](https://github.com/zululima/dotclaude/commit/b1b0ad5d73d17834044b1c6c1a5f4a04d1d01ee6), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [b1b0ad5](https://github.com/lambdakilo/dotclaude/commit/b1b0ad5d73d17834044b1c6c1a5f4a04d1d01ee6), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
-**2.** (asking why a dream step was put to the user) Quoted under [12dd424](https://github.com/zululima/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d).
+**2.** (asking why a dream step was put to the user) Quoted under [12dd424](https://github.com/lambdakilo/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d).
 
 ## Open the dream reply with weekly points a run left unspent
 
-2026-10-24, commit [d048675](https://github.com/zululima/dotclaude/commit/d048675fb86c8d56b1c716e9d9c5d21c3b172d51), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [d048675](https://github.com/lambdakilo/dotclaude/commit/d048675fb86c8d56b1c716e9d9c5d21c3b172d51), model claude-opus-5-5, effort xhigh.
 
 **3.** (asking why the weekly usage stood at 67% near the reset)
 > holdup what the weekly usage is reseting soon but i see only 67
@@ -829,15 +845,15 @@ so a change by hand is lost at the next commit.
 
 ## Let the CLAUDE.md watcher replace the manual re-read
 
-2026-10-24, commit [16dae55](https://github.com/zululima/dotclaude/commit/16dae55afce06277bef33e20793001213c40d5fd), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [16dae55](https://github.com/lambdakilo/dotclaude/commit/16dae55afce06277bef33e20793001213c40d5fd), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
-**2.** (asking why a dream step was put to the user) Quoted under [12dd424](https://github.com/zululima/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d).
+**2.** (asking why a dream step was put to the user) Quoted under [12dd424](https://github.com/lambdakilo/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d).
 
 ## Hand the dream review to a new session when the user is away
 
-2026-10-24, commit [fbb41ac](https://github.com/zululima/dotclaude/commit/fbb41acd298799383fa6778a6e989b636015d8ec), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [fbb41ac](https://github.com/lambdakilo/dotclaude/commit/fbb41acd298799383fa6778a6e989b636015d8ec), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream
@@ -845,26 +861,26 @@ so a change by hand is lost at the next commit.
 (Add p9, hand the dream review to a new session?)
 > Add it (Recommended)
 
-**2.** (asking why a dream step was put to the user) Quoted under [12dd424](https://github.com/zululima/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d).
+**2.** (asking why a dream step was put to the user) Quoted under [12dd424](https://github.com/lambdakilo/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d).
 
 ## Run dream agents without the always-loaded CLAUDE.md
 
-2026-10-24, commit [5ea9c06](https://github.com/zululima/dotclaude/commit/5ea9c069ef12a2dd325223d294139fb94449f2bb), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [5ea9c06](https://github.com/lambdakilo/dotclaude/commit/5ea9c069ef12a2dd325223d294139fb94449f2bb), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
-**2.** (asking why a dream step was put to the user) Quoted under [12dd424](https://github.com/zululima/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d).
+**2.** (asking why a dream step was put to the user) Quoted under [12dd424](https://github.com/lambdakilo/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d).
 
 ## Ask in a dream review only about private details, not shared repos
 
-2026-10-24, commit [12dd424](https://github.com/zululima/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [12dd424](https://github.com/lambdakilo/dotclaude/commit/12dd424b38f38135fb83d65d11214707f462d44d), model claude-opus-5-5, effort xhigh.
 
 **2.** (asking why a dream step was put to the user)
 > wait why you ask it was not shady nor behavior
 
 ## Make sync.sh --commit take only the paths a session names
 
-2026-10-24, commit [3acfa5c](https://github.com/zululima/dotclaude/commit/3acfa5c996984fd40384cf675abefce06155bbf9), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [3acfa5c](https://github.com/lambdakilo/dotclaude/commit/3acfa5c996984fd40384cf675abefce06155bbf9), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream
@@ -874,92 +890,92 @@ so a change by hand is lost at the next commit.
 
 ## Hold back a commit that drops an abbreviation expanded before
 
-2026-10-24, commit [b6a04c3](https://github.com/zululima/dotclaude/commit/b6a04c38813fdb0a7b4c5d52abe5becb7f9b6eb9), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [b6a04c3](https://github.com/lambdakilo/dotclaude/commit/b6a04c38813fdb0a7b4c5d52abe5becb7f9b6eb9), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Hold back a commit that leaves PROMPTS.md unrebuilt
 
-2026-10-24, commit [f7193a3](https://github.com/zululima/dotclaude/commit/f7193a395713d980d78f860afad8e7fca2bce7d0), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [f7193a3](https://github.com/lambdakilo/dotclaude/commit/f7193a395713d980d78f860afad8e7fca2bce7d0), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Leave notices and the compaction note out of prompt-log.sh print
 
-2026-10-24, commit [0fb383a](https://github.com/zululima/dotclaude/commit/0fb383a6ef030d07da44f41134bada3d98896ac8), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [0fb383a](https://github.com/lambdakilo/dotclaude/commit/0fb383a6ef030d07da44f41134bada3d98896ac8), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Refuse a grep -a whose pattern opens with a counted window
 
-2026-10-24, commit [a4494ba](https://github.com/zululima/dotclaude/commit/a4494baac2f468e38bd4f133e14a0954cfc365b3), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [a4494ba](https://github.com/lambdakilo/dotclaude/commit/a4494baac2f468e38bd4f133e14a0954cfc365b3), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Look through the session history before making up an example
 
-2026-10-24, commit [bc7da4d](https://github.com/zululima/dotclaude/commit/bc7da4dcde1018caef7de15c25f87563062e041a), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [bc7da4d](https://github.com/lambdakilo/dotclaude/commit/bc7da4dcde1018caef7de15c25f87563062e041a), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Count an edit chained with sync.sh as the session's own
 
-2026-10-24, commit [1e5097f](https://github.com/zululima/dotclaude/commit/1e5097f05d8c98ced634d33c92f9c191d060d3d4), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [1e5097f](https://github.com/lambdakilo/dotclaude/commit/1e5097f05d8c98ced634d33c92f9c191d060d3d4), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Add reflow.sh to rewrap the paragraphs an edit touched
 
-2026-10-24, commit [2baa204](https://github.com/zululima/dotclaude/commit/2baa204dd1a0b5459ccbc696b52cb0b4b229a4f1), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [2baa204](https://github.com/lambdakilo/dotclaude/commit/2baa204dd1a0b5459ccbc696b52cb0b4b229a4f1), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Name the presence folder among the mirrored parts
 
-2026-10-24, commit [f144ac4](https://github.com/zululima/dotclaude/commit/f144ac470cb2d1ea60a2ba4ec4dd467a158bdb47), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [f144ac4](https://github.com/lambdakilo/dotclaude/commit/f144ac470cb2d1ea60a2ba4ec4dd467a158bdb47), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Match an unanchored correction to what just changed first
 
-2026-10-24, commit [ee853ef](https://github.com/zululima/dotclaude/commit/ee853ef47cf0a2fa9549cd96a1c50bb000636764), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [ee853ef](https://github.com/lambdakilo/dotclaude/commit/ee853ef47cf0a2fa9549cd96a1c50bb000636764), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Split a long command with line continuations in the command rule
 
-2026-10-24, commit [bc7e15a](https://github.com/zululima/dotclaude/commit/bc7e15a43df585bd0525b738bbd8ca05b3880ae9), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [bc7e15a](https://github.com/lambdakilo/dotclaude/commit/bc7e15a43df585bd0525b738bbd8ca05b3880ae9), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Check every page made for the user at 1440x730
 
-2026-10-24, commit [3e67088](https://github.com/zululima/dotclaude/commit/3e67088569e6a98b97d8290ca30f7092b7ed4133), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [3e67088](https://github.com/lambdakilo/dotclaude/commit/3e67088569e6a98b97d8290ca30f7092b7ed4133), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Own a tool's mistake in Prompt feedback and keep a bare run bare
 
-2026-10-24, commit [1cb91bc](https://github.com/zululima/dotclaude/commit/1cb91bc1281371a8c1b893ecf1be80a3db4e9197), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [1cb91bc](https://github.com/lambdakilo/dotclaude/commit/1cb91bc1281371a8c1b893ecf1be80a3db4e9197), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Check a PR against what reviewers corrected on recent PRs
 
-2026-10-24, commit [34ec29d](https://github.com/zululima/dotclaude/commit/34ec29d25ffa17fb0c1e7f24e86c3ca6bd9c9a9b), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [34ec29d](https://github.com/lambdakilo/dotclaude/commit/34ec29d25ffa17fb0c1e7f24e86c3ca6bd9c9a9b), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
+**1.** Quoted under [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd).
 
 ## Refresh the README evals block after the 2026-10-24 dream run
 
-2026-10-24, commit [d509ffb](https://github.com/zululima/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [d509ffb](https://github.com/lambdakilo/dotclaude/commit/d509ffba63465b54dae1031f35aa4020500768fd), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream
 
 ## Keep one open draft PR per repository
 
-2026-10-24, commit [cbd7e8e](https://github.com/zululima/dotclaude/commit/cbd7e8e2971316319b575f3d10ee4ebb66511562), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [cbd7e8e](https://github.com/lambdakilo/dotclaude/commit/cbd7e8e2971316319b575f3d10ee4ebb66511562), model claude-opus-5-5, effort xhigh.
 
 **18.**
 > theres still two pr drafts on my end open on [a project's] frontend
@@ -967,7 +983,7 @@ so a change by hand is lost at the next commit.
 
 ## Leave a person's own entry in a shared document to them
 
-2026-10-24, commit [3cab280](https://github.com/zululima/dotclaude/commit/3cab280dbd201a4e522f62b3a97b92755d4f7bb2), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [3cab280](https://github.com/lambdakilo/dotclaude/commit/3cab280dbd201a4e522f62b3a97b92755d4f7bb2), model claude-opus-5-5, effort xhigh.
 
 **10.**
 > Do this task here: "Carry two new wiki edits into the intra handbook"
@@ -980,14 +996,14 @@ expense app paragraph, land in the handbook repository?)
 
 ## Keep a change to a shared file in the PR in play, with no offer
 
-2026-10-24, commit [3036182](https://github.com/zululima/dotclaude/commit/3036182b0420854a7eb6c875138ae0814958174a), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [3036182](https://github.com/lambdakilo/dotclaude/commit/3036182b0420854a7eb6c875138ae0814958174a), model claude-opus-5-5, effort xhigh.
 
 **17.**
 > bro what. just incorporate always the things to the same pr
 
 ## Keep the review page's PR, progress and review in a side column
 
-2026-10-24, commit [c4bd0fe](https://github.com/zululima/dotclaude/commit/c4bd0fe8a44cb4644ca4102356dd1661212e0cd4), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [c4bd0fe](https://github.com/lambdakilo/dotclaude/commit/c4bd0fe8a44cb4644ca4102356dd1661212e0cd4), model claude-opus-5-5, effort xhigh.
 
 **16.**
 > bruh now its hidden in more. also the header takes a lot of screen
@@ -996,13 +1012,13 @@ expense app paragraph, land in the handbook repository?)
 
 ## Refresh the README evals block after the 2026-10-23 dream review
 
-2026-10-24, commit [4bef872](https://github.com/zululima/dotclaude/commit/4bef8724aee77a16ba346427a667173ab558f782), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [4bef872](https://github.com/lambdakilo/dotclaude/commit/4bef8724aee77a16ba346427a667173ab558f782), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Start the review page at no step, fold the review, link addresses
 
-2026-10-24, commit [7f326bb](https://github.com/zululima/dotclaude/commit/7f326bbeb020e22e14b3d63537cb4b49f348d9fc), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [7f326bb](https://github.com/lambdakilo/dotclaude/commit/7f326bbeb020e22e14b3d63537cb4b49f348d9fc), model claude-opus-5-5, effort xhigh.
 
 **15.**
 > [a screenshot of the review page open in a browser]
@@ -1012,25 +1028,25 @@ expense app paragraph, land in the handbook repository?)
 
 ## Number any steps the reader takes in order
 
-2026-10-24, commit [40bb88c](https://github.com/zululima/dotclaude/commit/40bb88cd941bed5861ce7275183e2c83f76ee25e), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [40bb88c](https://github.com/lambdakilo/dotclaude/commit/40bb88cd941bed5861ce7275183e2c83f76ee25e), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Give the commit-msg hook install step in the README
 
-2026-10-24, commit [c6d5bb8](https://github.com/zululima/dotclaude/commit/c6d5bb80220c88e3a8f4e459fae6edc31e2ff811), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [c6d5bb8](https://github.com/lambdakilo/dotclaude/commit/c6d5bb80220c88e3a8f4e459fae6edc31e2ff811), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Point a new machine at the README's Install section
 
-2026-10-24, commit [1d2e084](https://github.com/zululima/dotclaude/commit/1d2e084b586a283014bddec4f1accddd479650db), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [1d2e084](https://github.com/lambdakilo/dotclaude/commit/1d2e084b586a283014bddec4f1accddd479650db), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Ask in a dream review only about security, privacy or a new habit
 
-2026-10-24, commit [60f3bf1](https://github.com/zululima/dotclaude/commit/60f3bf1e3f2ebc11cf96571936dde3ed936dcc94), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [60f3bf1](https://github.com/lambdakilo/dotclaude/commit/60f3bf1e3f2ebc11cf96571936dde3ed936dcc94), model claude-opus-5-5, effort xhigh.
 
 **9.**
 > ok these are pretty esoteric. in the future just ask me a input if
@@ -1039,7 +1055,7 @@ expense app paragraph, land in the handbook repository?)
 
 ## Hold the fenced-command rule to Markdown a person reads
 
-2026-10-24, commit [d1a5e8a](https://github.com/zululima/dotclaude/commit/d1a5e8ab24dd717dd9a2fce83a0f0be0ade12fb9), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [d1a5e8a](https://github.com/lambdakilo/dotclaude/commit/d1a5e8ab24dd717dd9a2fce83a0f0be0ade12fb9), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
@@ -1050,7 +1066,7 @@ it?)
 
 ## Keep only what a session does about the stack hooks in CLAUDE.md
 
-2026-10-24, commit [871f637](https://github.com/zululima/dotclaude/commit/871f6372f656ea691b8ff4f1bf80f39b797f2ef5), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [871f637](https://github.com/lambdakilo/dotclaude/commit/871f6372f656ea691b8ff4f1bf80f39b797f2ef5), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
@@ -1061,7 +1077,7 @@ entry for each new hook, add it?)
 
 ## Keep a PR's review page as a local file with a link
 
-2026-10-24, commit [3d4cb0f](https://github.com/zululima/dotclaude/commit/3d4cb0fddbabe13c6ed4890950e3ba22c5d8727d), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [3d4cb0f](https://github.com/lambdakilo/dotclaude/commit/3d4cb0fddbabe13c6ed4890950e3ba22c5d8727d), model claude-opus-5-5, effort xhigh.
 
 **13.**
 > nah bro no artifacts create a local html in appropriate place and
@@ -1069,7 +1085,7 @@ entry for each new hook, add it?)
 
 ## Move the dotclaude mirroring mechanics into a dotclaude skill
 
-2026-10-24, commit [6d60275](https://github.com/zululima/dotclaude/commit/6d6027541fb4ee250085683eb4729f0a2e111f2a), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [6d60275](https://github.com/lambdakilo/dotclaude/commit/6d6027541fb4ee250085683eb4729f0a2e111f2a), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
@@ -1080,7 +1096,7 @@ skill, add it?)
 
 ## Compact sessions at 400k tokens instead of about 967k
 
-2026-10-24, commit [1d9861a](https://github.com/zululima/dotclaude/commit/1d9861ac524118136a5005307a0db1f67269fe70), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [1d9861a](https://github.com/lambdakilo/dotclaude/commit/1d9861ac524118136a5005307a0db1f67269fe70), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
@@ -1090,7 +1106,7 @@ skill, add it?)
 
 ## Commit the fixes a check on the user's own PR recommends
 
-2026-10-24, commit [49d562d](https://github.com/zululima/dotclaude/commit/49d562dceb1192275bf84a44bcd72658f6cd56b4), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [49d562d](https://github.com/lambdakilo/dotclaude/commit/49d562dceb1192275bf84a44bcd72658f6cd56b4), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
@@ -1101,7 +1117,7 @@ it to dotclaude?)
 
 ## Show each dream review question's place among the questions
 
-2026-10-24, commit [c163935](https://github.com/zululima/dotclaude/commit/c163935d777b193c676cf149cb929894d41cff4f), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [c163935](https://github.com/lambdakilo/dotclaude/commit/c163935d777b193c676cf149cb929894d41cff4f), model claude-opus-5-5, effort xhigh.
 
 **8.**
 > oof can you add a p12 out of something so ican see how manyproposals
@@ -1109,7 +1125,7 @@ it to dotclaude?)
 
 ## Say that the Bash tool runs zsh, and which pitfalls remain
 
-2026-10-24, commit [a984b3e](https://github.com/zululima/dotclaude/commit/a984b3e4cd94fa83c05c16194ecb2f53f397d6a7), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [a984b3e](https://github.com/lambdakilo/dotclaude/commit/a984b3e4cd94fa83c05c16194ecb2f53f397d6a7), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
@@ -1120,7 +1136,7 @@ bullet on zsh, add it?)
 
 ## Put a PR review's steps on a review page
 
-2026-10-24, commit [a74e0d8](https://github.com/zululima/dotclaude/commit/a74e0d872d4ecaecfa79ef61ad24d140e0c91c83), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [a74e0d8](https://github.com/lambdakilo/dotclaude/commit/a74e0d872d4ecaecfa79ef61ad24d140e0c91c83), model claude-opus-5-5, effort xhigh.
 
 **11.**
 > lets start doing a new way to review prs. theres a mismatch between
@@ -1131,7 +1147,7 @@ bullet on zsh, add it?)
 
 ## Have sync.sh parse scripts, require README entries and cap widths
 
-2026-10-24, commit [81f40fa](https://github.com/zululima/dotclaude/commit/81f40fa82e1328cc309c036e7dc6a66903ce541c), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [81f40fa](https://github.com/lambdakilo/dotclaude/commit/81f40fa82e1328cc309c036e7dc6a66903ce541c), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
@@ -1142,7 +1158,7 @@ and cap prose at 100 columns, add it?)
 
 ## Deny seven tools no session has ever called
 
-2026-10-24, commit [d72016d](https://github.com/zululima/dotclaude/commit/d72016dcd7626a059c3fc7b270d149a271043588), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [d72016d](https://github.com/lambdakilo/dotclaude/commit/d72016dcd7626a059c3fc7b270d149a271043588), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
@@ -1153,19 +1169,19 @@ dotclaude?)
 
 ## Keep the history example in dream's review text generic
 
-2026-10-24, commit [4fccd4e](https://github.com/zululima/dotclaude/commit/4fccd4ec21e2e9d39d066002f9ad6faaeef691c0), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [4fccd4e](https://github.com/lambdakilo/dotclaude/commit/4fccd4ec21e2e9d39d066002f9ad6faaeef691c0), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [01f7bfc](https://github.com/zululima/dotclaude/commit/01f7bfc02b23fae2ff12f3e609ad6749798f54c2).
+**4.** Quoted under [01f7bfc](https://github.com/lambdakilo/dotclaude/commit/01f7bfc02b23fae2ff12f3e609ad6749798f54c2).
 
 ## Name real examples from history when explaining a dream step
 
-2026-10-24, commit [7c27206](https://github.com/zululima/dotclaude/commit/7c272065817f2303fb71628f90fa0b6490c6ec25), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [7c27206](https://github.com/lambdakilo/dotclaude/commit/7c272065817f2303fb71628f90fa0b6490c6ec25), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [01f7bfc](https://github.com/zululima/dotclaude/commit/01f7bfc02b23fae2ff12f3e609ad6749798f54c2).
+**4.** Quoted under [01f7bfc](https://github.com/lambdakilo/dotclaude/commit/01f7bfc02b23fae2ff12f3e609ad6749798f54c2).
 
 ## Say when remote deployment tooling may run
 
-2026-10-24, commit [01f7bfc](https://github.com/zululima/dotclaude/commit/01f7bfc02b23fae2ff12f3e609ad6749798f54c2), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [01f7bfc](https://github.com/lambdakilo/dotclaude/commit/01f7bfc02b23fae2ff12f3e609ad6749798f54c2), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
@@ -1177,19 +1193,19 @@ allows only an asked-for action and target, add it to dotclaude?)
 
 ## Add the explain-first sentence that debda14 left out
 
-2026-10-24, commit [f709146](https://github.com/zululima/dotclaude/commit/f709146dd30677c61a060c2ce9a9456b702bbfca), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [f709146](https://github.com/lambdakilo/dotclaude/commit/f709146dd30677c61a060c2ce9a9456b702bbfca), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [a18fc01](https://github.com/zululima/dotclaude/commit/a18fc01ec8b103a749af569818613bff38936b30).
+**4.** Quoted under [a18fc01](https://github.com/lambdakilo/dotclaude/commit/a18fc01ec8b103a749af569818613bff38936b30).
 
 ## Explain each dream step from the beginning before asking about it
 
-2026-10-24, commit [debda14](https://github.com/zululima/dotclaude/commit/debda14d57573acdcdfe49e782b1e9f3f2feed23), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [debda14](https://github.com/lambdakilo/dotclaude/commit/debda14d57573acdcdfe49e782b1e9f3f2feed23), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [a18fc01](https://github.com/zululima/dotclaude/commit/a18fc01ec8b103a749af569818613bff38936b30).
+**4.** Quoted under [a18fc01](https://github.com/lambdakilo/dotclaude/commit/a18fc01ec8b103a749af569818613bff38936b30).
 
 ## Write the closing reply after the next-step box, check it on Stop
 
-2026-10-24, commit [a18fc01](https://github.com/zululima/dotclaude/commit/a18fc01ec8b103a749af569818613bff38936b30), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [a18fc01](https://github.com/lambdakilo/dotclaude/commit/a18fc01ec8b103a749af569818613bff38936b30), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
@@ -1203,7 +1219,7 @@ Stop, add it to dotclaude?)
 
 ## Record the list of changes under the PR summary sentence
 
-2026-10-24, commit [f76c0d0](https://github.com/zululima/dotclaude/commit/f76c0d01c8e131eec76efbc2256db67ccac3a31e), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [f76c0d0](https://github.com/lambdakilo/dotclaude/commit/f76c0d01c8e131eec76efbc2256db67ccac3a31e), model claude-opus-5-5, effort xhigh.
 
 **7.**
 > whats the current "prompt" that writes my pr descriptions currently.
@@ -1218,115 +1234,115 @@ Stop, add it to dotclaude?)
 
 ## Name the Claude Code binary in dream's ground rules
 
-2026-10-24, commit [0b234e8](https://github.com/zululima/dotclaude/commit/0b234e8a0dc1a5dac0189c32aa3f4f1912e350d3), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [0b234e8](https://github.com/lambdakilo/dotclaude/commit/0b234e8a0dc1a5dac0189c32aa3f4f1912e350d3), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## List the carried unchecked proposals in the backlog note
 
-2026-10-24, commit [e2fdbc4](https://github.com/zululima/dotclaude/commit/e2fdbc44ed24dcf1d1471e5cb132a78aca4ab70f), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [e2fdbc4](https://github.com/lambdakilo/dotclaude/commit/e2fdbc44ed24dcf1d1471e5cb132a78aca4ab70f), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Have the reviewing session carry out a no-script step
 
-2026-10-24, commit [9786c64](https://github.com/zululima/dotclaude/commit/9786c64045e50ecc2d50cbd67054d9de0e794ccb), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [9786c64](https://github.com/lambdakilo/dotclaude/commit/9786c64045e50ecc2d50cbd67054d9de0e794ccb), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Give the dream readers the closed backlog too
 
-2026-10-24, commit [9f9a104](https://github.com/zululima/dotclaude/commit/9f9a1047a3df95c0c7f1dea4830bf4160610d902), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [9f9a104](https://github.com/lambdakilo/dotclaude/commit/9f9a1047a3df95c0c7f1dea4830bf4160610d902), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Have one dream agent read the window's Prompt feedback
 
-2026-10-24, commit [9175bcf](https://github.com/zululima/dotclaude/commit/9175bcf15a4c01073db9e6647c87eb7e1523e8c2), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [9175bcf](https://github.com/lambdakilo/dotclaude/commit/9175bcf15a4c01073db9e6647c87eb7e1523e8c2), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Read a forked transcript only from its fork point
 
-2026-10-24, commit [cf41759](https://github.com/zululima/dotclaude/commit/cf41759313c5e7e544426f47c9005d2d429cc992), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [cf41759](https://github.com/lambdakilo/dotclaude/commit/cf41759313c5e7e544426f47c9005d2d429cc992), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Stop the CLAUDE.md watcher matching git commit-tree
 
-2026-10-24, commit [83f998c](https://github.com/zululima/dotclaude/commit/83f998c35034653e482569158c9a2a4aa5ddc21e), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [83f998c](https://github.com/lambdakilo/dotclaude/commit/83f998c35034653e482569158c9a2a4aa5ddc21e), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Point a failed Slack user search at the shared channels
 
-2026-10-24, commit [87e7c9e](https://github.com/zululima/dotclaude/commit/87e7c9e3b592e7d4fc479192c82e6eac03707660), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [87e7c9e](https://github.com/lambdakilo/dotclaude/commit/87e7c9e3b592e7d4fc479192c82e6eac03707660), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Tell a session when its permission mode changed
 
-2026-10-24, commit [4bf2aaf](https://github.com/zululima/dotclaude/commit/4bf2aafc59866124030b754d5a87c70f2ef750ae), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [4bf2aaf](https://github.com/lambdakilo/dotclaude/commit/4bf2aafc59866124030b754d5a87c70f2ef750ae), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Refuse foreground wait loops on a background job
 
-2026-10-24, commit [78f55fa](https://github.com/zululima/dotclaude/commit/78f55fae828fac88116f992bf4f61d4c14072c52), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [78f55fa](https://github.com/lambdakilo/dotclaude/commit/78f55fae828fac88116f992bf4f61d4c14072c52), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Send back a give-up reply that never tried the browser pane
 
-2026-10-24, commit [d3d65e8](https://github.com/zululima/dotclaude/commit/d3d65e8d8bf491ffce3907b9a2d71972fd3cf097), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [d3d65e8](https://github.com/lambdakilo/dotclaude/commit/d3d65e8d8bf491ffce3907b9a2d71972fd3cf097), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Name a removal's target as a literal path
 
-2026-10-24, commit [f5a83f9](https://github.com/zululima/dotclaude/commit/f5a83f910243889186f44db6a2686c533755dda2), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [f5a83f9](https://github.com/lambdakilo/dotclaude/commit/f5a83f910243889186f44db6a2686c533755dda2), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Keep Prompt feedback from blaming the prompt for a misread
 
-2026-10-24, commit [8240afe](https://github.com/zululima/dotclaude/commit/8240afe189583aeeeb21b8f00a397af4bdf7255d), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [8240afe](https://github.com/lambdakilo/dotclaude/commit/8240afe189583aeeeb21b8f00a397af4bdf7255d), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Hand over prompts that run in order as one prompt
 
-2026-10-24, commit [fbb71b8](https://github.com/zululima/dotclaude/commit/fbb71b8e830590abbd0fabf7cc52c45c8a392b28), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [fbb71b8](https://github.com/lambdakilo/dotclaude/commit/fbb71b8e830590abbd0fabf7cc52c45c8a392b28), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Write out in the reply whatever the user is to read
 
-2026-10-24, commit [47bc411](https://github.com/zululima/dotclaude/commit/47bc4113202c4f4e5a2c3780900e03c1ff6603e6), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [47bc411](https://github.com/lambdakilo/dotclaude/commit/47bc4113202c4f4e5a2c3780900e03c1ff6603e6), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Say when a repo-wide change rides on the feature PR
 
-2026-10-24, commit [856554b](https://github.com/zululima/dotclaude/commit/856554b2aa2d84c2487de05079c20c533683a08a), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [856554b](https://github.com/lambdakilo/dotclaude/commit/856554b2aa2d84c2487de05079c20c533683a08a), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Explain a term a session coined, or use plain words
 
-2026-10-24, commit [f74e173](https://github.com/zululima/dotclaude/commit/f74e1734809297adff9891052dbc78c22ba5392b), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [f74e173](https://github.com/lambdakilo/dotclaude/commit/f74e1734809297adff9891052dbc78c22ba5392b), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Let a session's own CLAUDE.md edit through the watcher
 
-2026-10-24, commit [7ca211e](https://github.com/zululima/dotclaude/commit/7ca211ed1c7f6be6b69fd3eb5e62fae58ee5a33d), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [7ca211e](https://github.com/lambdakilo/dotclaude/commit/7ca211ed1c7f6be6b69fd3eb5e62fae58ee5a33d), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Ask before working around a failure the VPN could cause
 
-2026-10-24, commit [fb0545a](https://github.com/zululima/dotclaude/commit/fb0545aee388530e010236923cd5045f12aa2e8b), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [fb0545a](https://github.com/lambdakilo/dotclaude/commit/fb0545aee388530e010236923cd5045f12aa2e8b), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > dotclaude always tell me and do the ask dialogue if you have a hunch
@@ -1334,44 +1350,44 @@ Stop, add it to dotclaude?)
 
 ## Fit glance pages on one screen, and watch the skill too
 
-2026-10-24, commit [1c85586](https://github.com/zululima/dotclaude/commit/1c85586789d0cd3fbdab9716fa1a054f7a5e862c), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [1c85586](https://github.com/lambdakilo/dotclaude/commit/1c85586789d0cd3fbdab9716fa1a054f7a5e862c), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Open the memory note an index line names before its step
 
-2026-10-24, commit [25fa6f5](https://github.com/zululima/dotclaude/commit/25fa6f5e7aceda7489fdf4f6a3d3dbbc29b7aa62), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [25fa6f5](https://github.com/lambdakilo/dotclaude/commit/25fa6f5e7aceda7489fdf4f6a3d3dbbc29b7aa62), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Read each earlier workflow run from its journal first
 
-2026-10-24, commit [9b94b7b](https://github.com/zululima/dotclaude/commit/9b94b7bba599565e4e5150b087698906d665098b), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [9b94b7b](https://github.com/lambdakilo/dotclaude/commit/9b94b7bba599565e4e5150b087698906d665098b), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Commit each dream step alone during a review
 
-2026-10-24, commit [8d80617](https://github.com/zululima/dotclaude/commit/8d8061791877680499fc532f3ef14ca088513c8f), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [8d80617](https://github.com/lambdakilo/dotclaude/commit/8d8061791877680499fc532f3ef14ca088513c8f), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
+**4.** Quoted under [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81).
 
 ## Have a tool built for the user run bare and pick its own mode
 
-2026-10-24, commit [eee020a](https://github.com/zululima/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [eee020a](https://github.com/lambdakilo/dotclaude/commit/eee020afd844b6bcfff03d3e6a8e953d4248ea81), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > dream review
 
 ## Refresh the README evals block after the 2026-10-23 dream run
 
-2026-10-24, commit [9e3cc9e](https://github.com/zululima/dotclaude/commit/9e3cc9eccbe42942172fb05b4969e890653ae595), model claude-opus-5-5, effort xhigh.
+2026-10-24, commit [9e3cc9e](https://github.com/lambdakilo/dotclaude/commit/9e3cc9eccbe42942172fb05b4969e890653ae595), model claude-opus-5-5, effort xhigh.
 
-**3.** Quoted under [5c100c9](https://github.com/zululima/dotclaude/commit/5c100c9f6ee285bed1c25c439b448b801d739871).
+**3.** Quoted under [5c100c9](https://github.com/lambdakilo/dotclaude/commit/5c100c9f6ee285bed1c25c439b448b801d739871).
 
 ## Quote AskUserQuestion answers as pairs, nothing nested
 
-2026-10-23, commit [fb29876](https://github.com/zululima/dotclaude/commit/fb2987626a91ed8018cbdb481f5174d8c5e2cf45), model claude-opus-5-5, effort xhigh.
+2026-10-23, commit [fb29876](https://github.com/lambdakilo/dotclaude/commit/fb2987626a91ed8018cbdb481f5174d8c5e2cf45), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [pasted: the prompts section of 5c100c9, with the questions and
@@ -1384,15 +1400,15 @@ Stop, add it to dotclaude?)
 
 ## Apply clean dream steps without asking, and ask about the rest
 
-2026-10-23, commit [32a32d7](https://github.com/zululima/dotclaude/commit/32a32d79367f28b1fa5f9543e024fc67071074a9), model claude-opus-5-5, effort xhigh.
+2026-10-23, commit [32a32d7](https://github.com/lambdakilo/dotclaude/commit/32a32d79367f28b1fa5f9543e024fc67071074a9), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [5c100c9](https://github.com/zululima/dotclaude/commit/5c100c9f6ee285bed1c25c439b448b801d739871).
+**2.** Quoted under [5c100c9](https://github.com/lambdakilo/dotclaude/commit/5c100c9f6ee285bed1c25c439b448b801d739871).
 
-**3.** Quoted under [5c100c9](https://github.com/zululima/dotclaude/commit/5c100c9f6ee285bed1c25c439b448b801d739871).
+**3.** Quoted under [5c100c9](https://github.com/lambdakilo/dotclaude/commit/5c100c9f6ee285bed1c25c439b448b801d739871).
 
 ## Apply 27 steps of the 2026-10-17 dream report in a review
 
-2026-10-23, commit [5c100c9](https://github.com/zululima/dotclaude/commit/5c100c9f6ee285bed1c25c439b448b801d739871), model claude-opus-5-5, effort xhigh.
+2026-10-23, commit [5c100c9](https://github.com/lambdakilo/dotclaude/commit/5c100c9f6ee285bed1c25c439b448b801d739871), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream review
@@ -1431,14 +1447,14 @@ Stop, add it to dotclaude?)
 
 ## Repeat the text to paste in every reply, clipboard or not
 
-2026-10-23, commit [8e1a04e](https://github.com/zululima/dotclaude/commit/8e1a04ed1b112b3578c7fedb7f121da1252af518), model claude-opus-5-5, effort xhigh.
+2026-10-23, commit [8e1a04e](https://github.com/lambdakilo/dotclaude/commit/8e1a04ed1b112b3578c7fedb7f121da1252af518), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > what? you gave me nothing to copy
 
 ## Read a screenshot to its edges before blaming the prompt
 
-2026-10-23, commit [9a5644c](https://github.com/zululima/dotclaude/commit/9a5644ce53e4e18266e6c33a9e9efa33992f1da3), model claude-opus-5-5, effort xhigh.
+2026-10-23, commit [9a5644c](https://github.com/lambdakilo/dotclaude/commit/9a5644ce53e4e18266e6c33a9e9efa33992f1da3), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask to rewrite a note left out]
@@ -1451,7 +1467,7 @@ Stop, add it to dotclaude?)
 
 ## Put every Slack draft on the clipboard, never in the reply
 
-2026-10-23, commit [038b327](https://github.com/zululima/dotclaude/commit/038b327a8105f77b990512a7b7d110f1597fc666), model claude-opus-5-5, effort xhigh.
+2026-10-23, commit [038b327](https://github.com/lambdakilo/dotclaude/commit/038b327a8105f77b990512a7b7d110f1597fc666), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about a Slack draft for work left out]
@@ -1471,7 +1487,7 @@ Stop, add it to dotclaude?)
 
 ## Give only the copy command for clipboard Slack drafts
 
-2026-10-23, commit [ddc0bb5](https://github.com/zululima/dotclaude/commit/ddc0bb58ea40c37b83f643e7a4b081243976e725), model claude-opus-5-5, effort xhigh.
+2026-10-23, commit [ddc0bb5](https://github.com/lambdakilo/dotclaude/commit/ddc0bb58ea40c37b83f643e7a4b081243976e725), model claude-opus-5-5, effort xhigh.
 
 **10.**
 > [a shell command the user ran left out]
@@ -1482,12 +1498,12 @@ Stop, add it to dotclaude?)
 
 ## Link Slack draft evidence inline and format code as code
 
-2026-10-23, commit [b17576c](https://github.com/zululima/dotclaude/commit/b17576c9fe8cefef50c2b00e3b8a7078c6493379), model claude-opus-5-5, effort xhigh.
+2026-10-23, commit [b17576c](https://github.com/lambdakilo/dotclaude/commit/b17576c9fe8cefef50c2b00e3b8a7078c6493379), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > [a shell command the user ran left out]
 
-**6.** Quoted under [b64c518](https://github.com/zululima/dotclaude/commit/b64c518cc4b49d4b4a4d1b20421f0bf705799cc8).
+**6.** Quoted under [b64c518](https://github.com/lambdakilo/dotclaude/commit/b64c518cc4b49d4b4a4d1b20421f0bf705799cc8).
 
 **7.**
 > [a correction about a downstream project's channel left out]
@@ -1503,11 +1519,11 @@ Stop, add it to dotclaude?)
 
 ## Ask before a command opens a window on the screen
 
-2026-10-23, commit [40bd746](https://github.com/zululima/dotclaude/commit/40bd746b2185eb22f7e409513215b601c602f2c2), model claude-opus-5-5, effort xhigh.
+2026-10-23, commit [40bd746](https://github.com/lambdakilo/dotclaude/commit/40bd746b2185eb22f7e409513215b601c602f2c2), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+**1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
-**2.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+**2.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
 **3.**
 > [a question about opening a downstream project's file left out]
@@ -1518,14 +1534,14 @@ Stop, add it to dotclaude?)
 
 ## Move How I work into the README
 
-2026-10-23, commit [f38a703](https://github.com/zululima/dotclaude/commit/f38a70342d5b5264d7c3f9537f331bc9774469e0), model claude-opus-5-5, effort xhigh.
+2026-10-23, commit [f38a703](https://github.com/lambdakilo/dotclaude/commit/f38a70342d5b5264d7c3f9537f331bc9774469e0), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > maybe it should be on readme instead
 
 ## Read earlier draft prompts before drafting a message
 
-2026-10-23, commit [a2cad92](https://github.com/zululima/dotclaude/commit/a2cad921a128a0fc8ace18cf59ad88b8ccbfad0c), model claude-opus-5-5, effort xhigh.
+2026-10-23, commit [a2cad92](https://github.com/lambdakilo/dotclaude/commit/a2cad921a128a0fc8ace18cf59ad88b8ccbfad0c), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a research ask about a university course left out]
@@ -1543,7 +1559,7 @@ Stop, add it to dotclaude?)
 
 ## Add how-i-work.md on the daily and weekend routine
 
-2026-10-23, commit [3a5aff5](https://github.com/zululima/dotclaude/commit/3a5aff5b15da295da3a042b9e246674ebd8efc70), model claude-opus-5-5, effort xhigh.
+2026-10-23, commit [3a5aff5](https://github.com/lambdakilo/dotclaude/commit/3a5aff5b15da295da3a042b9e246674ebd8efc70), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dotclaude i should add a how i work .md file there as well that
@@ -1556,7 +1572,7 @@ Stop, add it to dotclaude?)
 
 ## Test every hook, count rule slips, publish evals in README
 
-2026-10-22, commit [539cb34](https://github.com/zululima/dotclaude/commit/539cb3408ca4e175dfea07d389184b45aad0d922), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [539cb34](https://github.com/lambdakilo/dotclaude/commit/539cb3408ca4e175dfea07d389184b45aad0d922), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > is it even possible to do any evals on dotclaude?
@@ -1578,7 +1594,7 @@ Stop, add it to dotclaude?)
 
 ## Let dream propose what derived projects take over from upstreams
 
-2026-10-22, commit [6a5818e](https://github.com/zululima/dotclaude/commit/6a5818ed25b795bbfafb16ab7098100631cd1689), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [6a5818e](https://github.com/lambdakilo/dotclaude/commit/6a5818ed25b795bbfafb16ab7098100631cd1689), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dreaming should also include [a shared AI library], [a CLI] and
@@ -1587,7 +1603,7 @@ Stop, add it to dotclaude?)
 
 ## Allow short company names in internal Slack, drop the Finnish joo
 
-2026-10-22, commit [95ed02e](https://github.com/zululima/dotclaude/commit/95ed02e97d9d28866372e2fdec469aeb0a8447bb), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [95ed02e](https://github.com/lambdakilo/dotclaude/commit/95ed02e97d9d28866372e2fdec469aeb0a8447bb), model claude-opus-5-5, effort xhigh.
 
 **7.**
 > kirjakieli also only in [a downstream channel]
@@ -1601,12 +1617,12 @@ Stop, add it to dotclaude?)
 
 ## Keep Slack drafts off the clipboard unless memory names the channel
 
-2026-10-22, commit [55fb3db](https://github.com/zululima/dotclaude/commit/55fb3db3aa4bd4b4fcdc78fce09856ca5904538e), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [55fb3db](https://github.com/lambdakilo/dotclaude/commit/55fb3db3aa4bd4b4fcdc78fce09856ca5904538e), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > [an ask about a downstream project left out]
 
-**4.** Quoted under [8f63649](https://github.com/zululima/dotclaude/commit/8f6364920b100a9d53dedb44ef924140fa0c665c).
+**4.** Quoted under [8f63649](https://github.com/lambdakilo/dotclaude/commit/8f6364920b100a9d53dedb44ef924140fa0c665c).
 
 **5.**
 > [an ask about a downstream project left out]
@@ -1619,9 +1635,9 @@ Stop, add it to dotclaude?)
 
 ## Answer in the format the asking message set
 
-2026-10-22, commit [ffd6ec3](https://github.com/zululima/dotclaude/commit/ffd6ec328ad6bfc9ab712551cb344966fa831e8a), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [ffd6ec3](https://github.com/lambdakilo/dotclaude/commit/ffd6ec328ad6bfc9ab712551cb344966fa831e8a), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+**1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
 **2.**
 > what. in future i wanna see the same format as asked in your replies:
@@ -1632,7 +1648,7 @@ Stop, add it to dotclaude?)
 
 ## Repeat every pending step in every reply, complete on its own
 
-2026-10-22, commit [83f4ebf](https://github.com/zululima/dotclaude/commit/83f4ebf4511ef77760f01ed40826355a4215876e), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [83f4ebf](https://github.com/lambdakilo/dotclaude/commit/83f4ebf4511ef77760f01ed40826355a4215876e), model claude-opus-5-5, effort xhigh.
 
 **29.**
 > again with the things being in other replies. dotclaude fix. next
@@ -1641,9 +1657,9 @@ Stop, add it to dotclaude?)
 
 ## Keep Slack draft HTML in ~/.claude/drafts, not Downloads
 
-2026-10-22, commit [9e28119](https://github.com/zululima/dotclaude/commit/9e281190bd04863f9e03568ac9380cd52e3759a0), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [9e28119](https://github.com/lambdakilo/dotclaude/commit/9e281190bd04863f9e03568ac9380cd52e3759a0), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+**1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
 **2.**
 > [a question about a draft for a downstream project left out]
@@ -1655,7 +1671,7 @@ Stop, add it to dotclaude?)
 
 ## Say in the README why this setup is public
 
-2026-10-22, commit [3ebb7db](https://github.com/zululima/dotclaude/commit/3ebb7dbeb9b5a3e71e5e798e51aaca143030c6a2), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [3ebb7db](https://github.com/lambdakilo/dotclaude/commit/3ebb7dbeb9b5a3e71e5e798e51aaca143030c6a2), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > make the description oneliner. also topics only oneliner. use builtin
@@ -1666,7 +1682,7 @@ Stop, add it to dotclaude?)
 
 ## Rename the session after each prompt in the desktop app
 
-2026-10-22, commit [db33bc4](https://github.com/zululima/dotclaude/commit/db33bc436ccb01850f94bae26c06626c3ab6d8fc), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [db33bc4](https://github.com/lambdakilo/dotclaude/commit/db33bc436ccb01850f94bae26c06626c3ab6d8fc), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > can claude code still not rename sessions here?
@@ -1688,7 +1704,7 @@ Stop, add it to dotclaude?)
 
 ## Drop the one-off push rule
 
-2026-10-22, commit [8b750ae](https://github.com/zululima/dotclaude/commit/8b750ae1f27b17c8c4f8e4e60c92801dc10e8bfe), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [8b750ae](https://github.com/lambdakilo/dotclaude/commit/8b750ae1f27b17c8c4f8e4e60c92801dc10e8bfe), model claude-opus-5-5, effort xhigh.
 
 **6.**
 > what is that dead weight rule? also explain that new session
@@ -1699,7 +1715,7 @@ Stop, add it to dotclaude?)
 
 ## Point two hooks at ~/Projects instead of the ~/src symlink
 
-2026-10-22, commit [d7e83e0](https://github.com/zululima/dotclaude/commit/d7e83e0a4c3361e7cb5820e643a07f6b744288e1), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [d7e83e0](https://github.com/lambdakilo/dotclaude/commit/d7e83e0a4c3361e7cb5820e643a07f6b744288e1), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > can you remove src even though its just symlink and removing it
@@ -1711,7 +1727,7 @@ Stop, add it to dotclaude?)
 
 ## Allow the push and the sync that a session was refused
 
-2026-10-22, commit [cfdf0b3](https://github.com/zululima/dotclaude/commit/cfdf0b363038c44590f9a9b216a68bfb546d853f), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [cfdf0b3](https://github.com/lambdakilo/dotclaude/commit/cfdf0b363038c44590f9a9b216a68bfb546d853f), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > [an ask to push a downstream project's work straight to its default
@@ -1728,7 +1744,7 @@ Stop, add it to dotclaude?)
 
 ## Rewrite the README for readers who do not read code
 
-2026-10-22, commit [8c0bcdc](https://github.com/zululima/dotclaude/commit/8c0bcdcc69461f268bc0e8e4e0ba5f52601047b6), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [8c0bcdc](https://github.com/lambdakilo/dotclaude/commit/8c0bcdcc69461f268bc0e8e4e0ba5f52601047b6), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > could we get human readable readme in dotclaude? its very long, too
@@ -1740,7 +1756,7 @@ Stop, add it to dotclaude?)
 
 ## List the open PRs pinned to an older commit after a push
 
-2026-10-22, commit [bfc2d36](https://github.com/zululima/dotclaude/commit/bfc2d36bd8763d439cb4c5ecadbc065f023523d6), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [bfc2d36](https://github.com/lambdakilo/dotclaude/commit/bfc2d36bd8763d439cb4c5ecadbc065f023523d6), model claude-opus-5-5, effort xhigh.
 
 **2.** (answering whether sync.sh should list the PRs pinned to an older commit)
 > yes, make sync.sh --commit list my open prs that carry the dotclaude
@@ -1748,7 +1764,7 @@ Stop, add it to dotclaude?)
 
 ## Check the open PRs after every push to the checkout
 
-2026-10-22, commit [4f8fc53](https://github.com/zululima/dotclaude/commit/4f8fc53dd365a951b298fffbebd8215a6f220e1f), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [4f8fc53](https://github.com/lambdakilo/dotclaude/commit/4f8fc53dd365a951b298fffbebd8215a6f220e1f), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dotclaude when i make edits to dotclaude remember to check all my
@@ -1757,14 +1773,14 @@ Stop, add it to dotclaude?)
 
 ## Keep commit dates when the memory hook rebases
 
-2026-10-22, commit [92d1e9c](https://github.com/zululima/dotclaude/commit/92d1e9cca82f90820c86f05fdebc4991fdc43403), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [92d1e9c](https://github.com/lambdakilo/dotclaude/commit/92d1e9cca82f90820c86f05fdebc4991fdc43403), model claude-opus-5-5, effort xhigh.
 
 **3.** (answer: the user ran Claude's sed edit of the hook, which auto    mode had refused to make)
 > ran
 
 ## Rebase each mirror onto its remote instead of a fast-forward pull
 
-2026-10-22, commit [0b9780d](https://github.com/zululima/dotclaude/commit/0b9780df3061cae8484ac7b1abab6589d8439cff), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [0b9780d](https://github.com/lambdakilo/dotclaude/commit/0b9780df3061cae8484ac7b1abab6589d8439cff), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about a fast-forward error in another repository left out]
@@ -1775,7 +1791,7 @@ Stop, add it to dotclaude?)
 
 ## Keep commit dates on every rebase
 
-2026-10-22, commit [49b8a20](https://github.com/zululima/dotclaude/commit/49b8a20d84480fcbd8f8f7e1aed02d8fb072f864), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [49b8a20](https://github.com/lambdakilo/dotclaude/commit/49b8a20d84480fcbd8f8f7e1aed02d8fb072f864), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > when i rebase something i force push as in rewrite history does git
@@ -1789,7 +1805,7 @@ Stop, add it to dotclaude?)
 
 ## Put every Slack draft on the clipboard with a re-copy command
 
-2026-10-22, commit [16d04eb](https://github.com/zululima/dotclaude/commit/16d04eb97b95fe9cac79be33499eac9425774b33), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [16d04eb](https://github.com/lambdakilo/dotclaude/commit/16d04eb97b95fe9cac79be33499eac9425774b33), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about a work task left out]
@@ -1800,7 +1816,7 @@ Stop, add it to dotclaude?)
 
 ## docs: say what a status figure was counted from
 
-2026-10-22, commit [7102d15](https://github.com/zululima/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [7102d15](https://github.com/lambdakilo/dotclaude/commit/7102d15a5941c6938129c0f6d75e0b971a2730f5), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about a downstream project left out]
@@ -1808,7 +1824,7 @@ Stop, add it to dotclaude?)
 **2.**
 > [a question about a downstream project left out]
 
-**3.** Quoted under [c558028](https://github.com/zululima/dotclaude/commit/c5580280d88009eaee4bebd8703b6ba173c54888).
+**3.** Quoted under [c558028](https://github.com/lambdakilo/dotclaude/commit/c5580280d88009eaee4bebd8703b6ba173c54888).
 
 **4.**
 > [a question about a downstream project left out]
@@ -1821,7 +1837,7 @@ Stop, add it to dotclaude?)
 
 ## Write the user's steps in the order they are done
 
-2026-10-22, commit [df95b19](https://github.com/zululima/dotclaude/commit/df95b19a6d0f61124ba7cd48de1ea2d90595c88d), model claude-opus-5-5, effort xhigh.
+2026-10-22, commit [df95b19](https://github.com/lambdakilo/dotclaude/commit/df95b19a6d0f61124ba7cd48de1ea2d90595c88d), model claude-opus-5-5, effort xhigh.
 
 **28.**
 > dotclaude you instructions were in wrong order. you first told me to
@@ -1830,15 +1846,15 @@ Stop, add it to dotclaude?)
 
 ## Add the library source to dream.js itself
 
-2026-10-21, commit [a174303](https://github.com/zululima/dotclaude/commit/a17430310606a36b7a63f2c5dd18a6d2f21ca2ac), model claude-opus-5-5, effort xhigh.
+2026-10-21, commit [a174303](https://github.com/lambdakilo/dotclaude/commit/a17430310606a36b7a63f2c5dd18a6d2f21ca2ac), model claude-opus-5-5, effort xhigh.
 
-**20.** Quoted under [1538093](https://github.com/zululima/dotclaude/commit/15380931d79035caefc4095a2014ef66a6d44baa).
+**20.** Quoted under [1538093](https://github.com/lambdakilo/dotclaude/commit/15380931d79035caefc4095a2014ef66a6d44baa).
 
-**23.** Quoted under [1538093](https://github.com/zululima/dotclaude/commit/15380931d79035caefc4095a2014ef66a6d44baa).
+**23.** Quoted under [1538093](https://github.com/lambdakilo/dotclaude/commit/15380931d79035caefc4095a2014ef66a6d44baa).
 
 ## Review the shared memory repository in dream runs
 
-2026-10-21, commit [1538093](https://github.com/zululima/dotclaude/commit/15380931d79035caefc4095a2014ef66a6d44baa), model claude-opus-5-5, effort xhigh.
+2026-10-21, commit [1538093](https://github.com/lambdakilo/dotclaude/commit/15380931d79035caefc4095a2014ef66a6d44baa), model claude-opus-5-5, effort xhigh.
 
 **20.**
 > also can you make dreaming also analyze the [shared repository] in
@@ -1851,7 +1867,7 @@ Stop, add it to dotclaude?)
 
 ## Let a session place handed-over facts and rules itself
 
-2026-10-21, commit [0a5b6b1](https://github.com/zululima/dotclaude/commit/0a5b6b152c4e3d6649bb69b66d35d40a842fb5fe), model claude-opus-5-5, effort xhigh.
+2026-10-21, commit [0a5b6b1](https://github.com/lambdakilo/dotclaude/commit/0a5b6b152c4e3d6649bb69b66d35d40a842fb5fe), model claude-opus-5-5, effort xhigh.
 
 **7.**
 > put these to the appropriate context (when i say in future context
@@ -1866,13 +1882,13 @@ Stop, add it to dotclaude?)
 
 ## Read share: no in any form and key memory to the session's folder
 
-2026-10-21, commit [05ac304](https://github.com/zululima/dotclaude/commit/05ac30415d015f365b2d6a53e2b10cdc14b8246f), model claude-opus-5-5, effort xhigh.
+2026-10-21, commit [05ac304](https://github.com/lambdakilo/dotclaude/commit/05ac30415d015f365b2d6a53e2b10cdc14b8246f), model claude-opus-5-5, effort xhigh.
 
-**15.** Quoted under [9294539](https://github.com/zululima/dotclaude/commit/9294539af47dbf80e3af9902a9897278ef108103).
+**15.** Quoted under [9294539](https://github.com/lambdakilo/dotclaude/commit/9294539af47dbf80e3af9902a9897278ef108103).
 
 ## Share project memory with colleagues through a hook
 
-2026-10-21, commit [9294539](https://github.com/zululima/dotclaude/commit/9294539af47dbf80e3af9902a9897278ef108103), model claude-opus-5-5, effort xhigh.
+2026-10-21, commit [9294539](https://github.com/lambdakilo/dotclaude/commit/9294539af47dbf80e3af9902a9897278ef108103), model claude-opus-5-5, effort xhigh.
 
 **13.**
 > can i just poke a hole in the automode so it can exfil info to
@@ -1905,7 +1921,7 @@ Stop, add it to dotclaude?)
 
 ## Add a slack-draft skill that copies drafts as rich text
 
-2026-10-21, commit [b64c518](https://github.com/zululima/dotclaude/commit/b64c518cc4b49d4b4a4d1b20421f0bf705799cc8), model claude-opus-5-5, effort xhigh.
+2026-10-21, commit [b64c518](https://github.com/lambdakilo/dotclaude/commit/b64c518cc4b49d4b4a4d1b20421f0bf705799cc8), model claude-opus-5-5, effort xhigh.
 
 **6.**
 > [an ask about a downstream project left out]
@@ -1930,14 +1946,14 @@ Stop, add it to dotclaude?)
 
 ## Read every source before drafting a message for the user
 
-2026-10-21, commit [c558028](https://github.com/zululima/dotclaude/commit/c5580280d88009eaee4bebd8703b6ba173c54888), model claude-opus-5-5, effort xhigh.
+2026-10-21, commit [c558028](https://github.com/lambdakilo/dotclaude/commit/c5580280d88009eaee4bebd8703b6ba173c54888), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+**2.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
 **3.**
 > [a question about a downstream project left out]
 
-**4.** Quoted under [8f63649](https://github.com/zululima/dotclaude/commit/8f6364920b100a9d53dedb44ef924140fa0c665c).
+**4.** Quoted under [8f63649](https://github.com/lambdakilo/dotclaude/commit/8f6364920b100a9d53dedb44ef924140fa0c665c).
 
 **5.**
 > did you check the [a deployed test environment], [a legacy app] and
@@ -1945,7 +1961,7 @@ Stop, add it to dotclaude?)
 
 ## Never send a Slack message on the user's behalf
 
-2026-10-21, commit [319428f](https://github.com/zululima/dotclaude/commit/319428f1d0c5e3bc7bb5c4ff4ff319ea23d6f35b), model claude-opus-5-5, effort xhigh.
+2026-10-21, commit [319428f](https://github.com/lambdakilo/dotclaude/commit/319428f1d0c5e3bc7bb5c4ff4ff319ea23d6f35b), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about a downstream project's chat thread left out] never
@@ -1953,7 +1969,7 @@ Stop, add it to dotclaude?)
 
 ## Refuse whole-disk and home-wide searches with a PreToolUse hook
 
-2026-10-20, commit [daa423d](https://github.com/zululima/dotclaude/commit/daa423d3bc90296211719dc02544c286c6ca0fce), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [daa423d](https://github.com/lambdakilo/dotclaude/commit/daa423d3bc90296211719dc02544c286c6ca0fce), model claude-opus-5-5, effort xhigh.
 
 **6.**
 > your example was not clear and concrete enough
@@ -1963,7 +1979,7 @@ Stop, add it to dotclaude?)
 
 ## Keep a dotclaude ask whole in Prompt feedback
 
-2026-10-20, commit [99a557c](https://github.com/zululima/dotclaude/commit/99a557c7430a116984f37c74a9555211c1cd0a73), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [99a557c](https://github.com/lambdakilo/dotclaude/commit/99a557c7430a116984f37c74a9555211c1cd0a73), model claude-opus-5-5, effort xhigh.
 
 **6.**
 > your example was not clear and concrete enough
@@ -1973,14 +1989,14 @@ Stop, add it to dotclaude?)
 
 ## Show a dream review example as the exchange itself, before and after
 
-2026-10-20, commit [3450279](https://github.com/zululima/dotclaude/commit/34502791a229031fda2ef48906a8ab5713864e18), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [3450279](https://github.com/lambdakilo/dotclaude/commit/34502791a229031fda2ef48906a8ab5713864e18), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > your example was not clear and concrete enough
 
 ## Run the dream workflow's agents as dream-worker, with only their tools
 
-2026-10-20, commit [3216b16](https://github.com/zululima/dotclaude/commit/3216b16e7c0f92d2ea07760b726a4a2547702657), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [3216b16](https://github.com/lambdakilo/dotclaude/commit/3216b16e7c0f92d2ea07760b726a4a2547702657), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > give an example of p12 then ask again from me
@@ -1990,21 +2006,21 @@ Stop, add it to dotclaude?)
 
 ## Show the draft in the question that asks to confirm it
 
-2026-10-20, commit [992d9b7](https://github.com/zululima/dotclaude/commit/992d9b7d0667c88e6f1f8399b12be89d1327f3a4), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [992d9b7](https://github.com/lambdakilo/dotclaude/commit/992d9b7d0667c88e6f1f8399b12be89d1327f3a4), model claude-opus-5-5, effort xhigh.
 
 **12.**
 > you didnt tell me the issue names. fix in the future and now
 
 ## Show each dream review step's example above its question
 
-2026-10-20, commit [7684d53](https://github.com/zululima/dotclaude/commit/7684d5371b26f2a44d092475dd6e9cc9d16b9f83), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [7684d53](https://github.com/lambdakilo/dotclaude/commit/7684d5371b26f2a44d092475dd6e9cc9d16b9f83), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > give an example of p12 then ask again from me
 
 ## Keep dots out of file names but before the extension
 
-2026-10-20, commit [bf29ab3](https://github.com/zululima/dotclaude/commit/bf29ab3ccf3d38b24a22453fd02b8e07c079e59a), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [bf29ab3](https://github.com/lambdakilo/dotclaude/commit/bf29ab3ccf3d38b24a22453fd02b8e07c079e59a), model claude-opus-5-5, effort xhigh.
 
 **11.**
 > also dont say dot in the filename if not necessary for example 20-oct
@@ -2012,7 +2028,7 @@ Stop, add it to dotclaude?)
 
 ## Name dream review steps by p-number, and label a made-up example
 
-2026-10-20, commit [d1a6ed5](https://github.com/zululima/dotclaude/commit/d1a6ed5724089591f1799f98d7a04bc798294373), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [d1a6ed5](https://github.com/lambdakilo/dotclaude/commit/d1a6ed5724089591f1799f98d7a04bc798294373), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > what does w mean here? also if you dont have any examples stored
@@ -2020,7 +2036,7 @@ Stop, add it to dotclaude?)
 
 ## Name one session's moment, not a total, as a dream preview example
 
-2026-10-20, commit [7c32637](https://github.com/zululima/dotclaude/commit/7c326372af1a572a63446ffdce3c5328eb96e6cd), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [7c32637](https://github.com/lambdakilo/dotclaude/commit/7c326372af1a572a63446ffdce3c5328eb96e6cd), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream review
@@ -2031,14 +2047,14 @@ Stop, add it to dotclaude?)
 
 ## Name files with dashes, never underscores
 
-2026-10-20, commit [bf06b4e](https://github.com/zululima/dotclaude/commit/bf06b4e55eeb8614500cd3458d3e68a19672e7ca), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [bf06b4e](https://github.com/lambdakilo/dotclaude/commit/bf06b4e55eeb8614500cd3458d3e68a19672e7ca), model claude-opus-5-5, effort xhigh.
 
 **9.**
 > also never use underscores in the filenames you can use dashes -
 
 ## Pin the PR body's dotclaude link to the commit of its last edit
 
-2026-10-20, commit [c0a94a8](https://github.com/zululima/dotclaude/commit/c0a94a8b001eb36e602c8153c3f9b244f8ba617f), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [c0a94a8](https://github.com/lambdakilo/dotclaude/commit/c0a94a8b001eb36e602c8153c3f9b244f8ba617f), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dotclaude maybe add in my prs instead of link to my dotclaude add
@@ -2046,7 +2062,7 @@ Stop, add it to dotclaude?)
 
 ## Mark a warm and a cold cache with fire and ice in the usage line
 
-2026-10-20, commit [6fe58fc](https://github.com/zululima/dotclaude/commit/6fe58fc92ee0470ef33142da6cf38d66572df2eb), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [6fe58fc](https://github.com/lambdakilo/dotclaude/commit/6fe58fc92ee0470ef33142da6cf38d66572df2eb), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > restart the session so i see it
@@ -2057,7 +2073,7 @@ Stop, add it to dotclaude?)
 
 ## Name the session-usage mod usage for a shorter status label
 
-2026-10-20, commit [34e7c44](https://github.com/zululima/dotclaude/commit/34e7c4469e6517285cb9f70beb36fe21ac80bd5e), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [34e7c44](https://github.com/lambdakilo/dotclaude/commit/34e7c4469e6517285cb9f70beb36fe21ac80bd5e), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > is the text session-usage necessary in statusline?
@@ -2066,7 +2082,7 @@ Stop, add it to dotclaude?)
 
 ## Give a review's serious findings a short reproduction
 
-2026-10-20, commit [e619ae3](https://github.com/zululima/dotclaude/commit/e619ae3269a98e035b228708c3ca5b8c8185d53c), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [e619ae3](https://github.com/lambdakilo/dotclaude/commit/e619ae3269a98e035b228708c3ca5b8c8185d53c), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > if somethings medium or high (anything not low) give me shortest
@@ -2075,7 +2091,7 @@ Stop, add it to dotclaude?)
 
 ## Put the cache first in a 40-character session-usage line
 
-2026-10-20, commit [363d13f](https://github.com/zululima/dotclaude/commit/363d13fa463330111c2dd592923a2a6113e13ac5), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [363d13f](https://github.com/lambdakilo/dotclaude/commit/363d13fa463330111c2dd592923a2a6113e13ac5), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > [pasted: a screenshot of the status line cut off after the cost]
@@ -2085,7 +2101,7 @@ Stop, add it to dotclaude?)
 
 ## Count the prompt cache down in the session-usage status line
 
-2026-10-20, commit [c27220d](https://github.com/zululima/dotclaude/commit/c27220d053762f91e5955e7c0ce1b8832ed3b34b), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [c27220d](https://github.com/lambdakilo/dotclaude/commit/c27220d053762f91e5955e7c0ce1b8832ed3b34b), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > add to the status line warm cache until num Month then the time
@@ -2095,7 +2111,7 @@ Stop, add it to dotclaude?)
 
 ## Log every response's usage and total a week of all sessions
 
-2026-10-20, commit [53bed44](https://github.com/zululima/dotclaude/commit/53bed4461543a227f344574cad9eb9c40e3aab33), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [53bed44](https://github.com/lambdakilo/dotclaude/commit/53bed4461543a227f344574cad9eb9c40e3aab33), model claude-opus-5-5, effort xhigh.
 
 **16.**
 > dont add p9 and also add co2 and kwh at the end of dreaming. add also
@@ -2108,7 +2124,7 @@ Stop, add it to dotclaude?)
 
 ## Make review steps type what the PR's pictures show
 
-2026-10-20, commit [23969ef](https://github.com/zululima/dotclaude/commit/23969ef2bdc4d713452da2bad71ade1a4eca6130), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [23969ef](https://github.com/lambdakilo/dotclaude/commit/23969ef2bdc4d713452da2bad71ade1a4eca6130), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > [a note that a review step named other test data than the PR's
@@ -2116,14 +2132,14 @@ Stop, add it to dotclaude?)
 
 ## Delete the head branch of every merged PR
 
-2026-10-20, commit [4368f4d](https://github.com/zululima/dotclaude/commit/4368f4d6f0f6d3887899e100ff1d43ac0c5b5764), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [4368f4d](https://github.com/lambdakilo/dotclaude/commit/4368f4d6f0f6d3887899e100ff1d43ac0c5b5764), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > always delete merged branches
 
 ## Allow gh pr ready and gh pr merge
 
-2026-10-20, commit [428a710](https://github.com/zululima/dotclaude/commit/428a710eab1273207444596f67694d050dd1e32e), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [428a710](https://github.com/lambdakilo/dotclaude/commit/428a710eab1273207444596f67694d050dd1e32e), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask to merge a pull request in a downstream project left out]
@@ -2133,7 +2149,7 @@ Stop, add it to dotclaude?)
 
 ## Estimate energy and CO2e in the session-usage status line
 
-2026-10-20, commit [648b928](https://github.com/zululima/dotclaude/commit/648b928861137977c38315a06c7c1d9a7557a0e6), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [648b928](https://github.com/lambdakilo/dotclaude/commit/648b928861137977c38315a06c7c1d9a7557a0e6), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dotclaude add estimates of kilowatthours and co2 grams to the
@@ -2143,7 +2159,7 @@ Stop, add it to dotclaude?)
 
 ## Show the tokens and dollars a dream run spent
 
-2026-10-20, commit [c224c07](https://github.com/zululima/dotclaude/commit/c224c07ab907b4a044e4d86c36adbeea762f8f00), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [c224c07](https://github.com/lambdakilo/dotclaude/commit/c224c07ab907b4a044e4d86c36adbeea762f8f00), model claude-opus-5-5, effort xhigh.
 
 **15.**
 > after dreaming is done does it say how many tokens and usd were
@@ -2151,7 +2167,7 @@ Stop, add it to dotclaude?)
 
 ## Make a review show where each bug it finds can be seen
 
-2026-10-20, commit [9d08ba7](https://github.com/zululima/dotclaude/commit/9d08ba71f1c7a33717509d06ac7aee3391886841), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [9d08ba7](https://github.com/lambdakilo/dotclaude/commit/9d08ba71f1c7a33717509d06ac7aee3391886841), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a review of a pull request in a downstream project left out]
@@ -2162,20 +2178,20 @@ Stop, add it to dotclaude?)
 
 ## Rewrap the dream entry of the README
 
-2026-10-20, commit [8aca51a](https://github.com/zululima/dotclaude/commit/8aca51a75fe2e0402e802aa5aa1bb9ac730eb7f7), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [8aca51a](https://github.com/lambdakilo/dotclaude/commit/8aca51a75fe2e0402e802aa5aa1bb9ac730eb7f7), model claude-opus-5-5, effort xhigh.
 
-**14.** Quoted under [15d672a](https://github.com/zululima/dotclaude/commit/15d672a63f759a420755dd034ab79c406754f0ca).
+**14.** Quoted under [15d672a](https://github.com/lambdakilo/dotclaude/commit/15d672a63f759a420755dd034ab79c406754f0ca).
 
 ## Let /dream review ask about the open backlog without a run
 
-2026-10-20, commit [15d672a](https://github.com/zululima/dotclaude/commit/15d672a63f759a420755dd034ab79c406754f0ca), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [15d672a](https://github.com/lambdakilo/dotclaude/commit/15d672a63f759a420755dd034ab79c406754f0ca), model claude-opus-5-5, effort xhigh.
 
 **14.**
 > ok but how do i continue working with the previous dream results now?
 
 ## Show each dream proposal's exact change with a before and after
 
-2026-10-20, commit [bef9337](https://github.com/zululima/dotclaude/commit/bef9337832d86bc7b11923b599e14a6e3a6ec8bc), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [bef9337](https://github.com/lambdakilo/dotclaude/commit/bef9337832d86bc7b11923b599e14a6e3a6ec8bc), model claude-opus-5-5, effort xhigh.
 
 **13.**
 > theres a lot of proposals after every dream. let alone after fri and
@@ -2186,7 +2202,7 @@ Stop, add it to dotclaude?)
 
 ## Leave the desktop app's window layout to the user
 
-2026-10-20, commit [1732363](https://github.com/zululima/dotclaude/commit/17323634c20c635a17fe9665f4bb21fec2269443), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [1732363](https://github.com/lambdakilo/dotclaude/commit/17323634c20c635a17fe9665f4bb21fec2269443), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > lets test the usage line
@@ -2196,7 +2212,7 @@ Stop, add it to dotclaude?)
 
 ## Show session usage as a status line, not a notice
 
-2026-10-20, commit [0dbf3f0](https://github.com/zululima/dotclaude/commit/0dbf3f04f897ffc163dd1202f2d95d82c3d6aa77), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [0dbf3f0](https://github.com/lambdakilo/dotclaude/commit/0dbf3f04f897ffc163dd1202f2d95d82c3d6aa77), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [pasted: a screenshot of the usage line in a Claude Code notice]
@@ -2213,13 +2229,13 @@ Stop, add it to dotclaude?)
 
 ## Keep the copy block rule to what the reader copies
 
-2026-10-20, commit [44b93de](https://github.com/zululima/dotclaude/commit/44b93dee9a81e0269249c6ffae774aaa599f985f), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [44b93de](https://github.com/lambdakilo/dotclaude/commit/44b93dee9a81e0269249c6ffae774aaa599f985f), model claude-opus-5-5, effort xhigh.
 
-**19.** Quoted under [49e41eb](https://github.com/zululima/dotclaude/commit/49e41eb3e9df74aede4aba8afb2b97d35a3f99e6).
+**19.** Quoted under [49e41eb](https://github.com/lambdakilo/dotclaude/commit/49e41eb3e9df74aede4aba8afb2b97d35a3f99e6).
 
 ## Put everything the reader copies in a code block
 
-2026-10-20, commit [49e41eb](https://github.com/zululima/dotclaude/commit/49e41eb3e9df74aede4aba8afb2b97d35a3f99e6), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [49e41eb](https://github.com/lambdakilo/dotclaude/commit/49e41eb3e9df74aede4aba8afb2b97d35a3f99e6), model claude-opus-5-5, effort xhigh.
 
 **19.**
 > also when you say copy something put that in a triple backquote
@@ -2230,7 +2246,7 @@ Stop, add it to dotclaude?)
 
 ## Infer the scope of corrections, show usage after each turn
 
-2026-10-20, commit [74a5666](https://github.com/zululima/dotclaude/commit/74a5666afbbee8a2cb63ca6128740e02f68e7980), model claude-opus-5-5, effort xhigh.
+2026-10-20, commit [74a5666](https://github.com/lambdakilo/dotclaude/commit/74a5666afbbee8a2cb63ca6128740e02f68e7980), model claude-opus-5-5, effort xhigh.
 
 **16.**
 > [an ask about a downstream project left out]
@@ -2254,7 +2270,7 @@ Stop, add it to dotclaude?)
 
 ## Give document headings a clear pause in text-to-speech
 
-2026-10-19, commit [e1d30be](https://github.com/zululima/dotclaude/commit/e1d30be3c0c868abcb574f7d879307518da23045), model claude-opus-5-5, effort xhigh.
+2026-10-19, commit [e1d30be](https://github.com/lambdakilo/dotclaude/commit/e1d30be3c0c868abcb574f7d879307518da23045), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask to turn a book into audio left out]
@@ -2272,7 +2288,7 @@ Stop, add it to dotclaude?)
 
 ## Apply the dream's high-impact proposals and ask about each step
 
-2026-10-19, commit [656a92e](https://github.com/zululima/dotclaude/commit/656a92ee75437d2c8161af0b3f81a640aaf7d838), model claude-opus-5-5, effort xhigh.
+2026-10-19, commit [656a92e](https://github.com/lambdakilo/dotclaude/commit/656a92ee75437d2c8161af0b3f81a640aaf7d838), model claude-opus-5-5, effort xhigh.
 
 **12.**
 > its now monday and im looking at the session limit message. any stats
@@ -2290,7 +2306,7 @@ Stop, add it to dotclaude?)
 
 ## Move the checkouts from ~/src to ~/Projects
 
-2026-10-19, commit [6c05d5d](https://github.com/zululima/dotclaude/commit/6c05d5d898c661f0068ca0e29425f7909dfedb50), model claude-opus-5-5, effort xhigh.
+2026-10-19, commit [6c05d5d](https://github.com/lambdakilo/dotclaude/commit/6c05d5d898c661f0068ca0e29425f7909dfedb50), model claude-opus-5-5, effort xhigh.
 
 **14.**
 > [an ask about a downstream project left out]
@@ -2302,7 +2318,7 @@ Stop, add it to dotclaude?)
 
 ## Keep a dream run's results when its last steps run out of usage
 
-2026-10-19, commit [5df2771](https://github.com/zululima/dotclaude/commit/5df27717a4add62c1287b9aff059dae0c4f4d0cf), model claude-opus-5-5, effort xhigh.
+2026-10-19, commit [5df2771](https://github.com/lambdakilo/dotclaude/commit/5df27717a4add62c1287b9aff059dae0c4f4d0cf), model claude-opus-5-5, effort xhigh.
 
 **11.**
 > dream
@@ -2317,23 +2333,23 @@ Stop, add it to dotclaude?)
 
 ## Read the prompts heading that names the model in PROMPTS.md
 
-2026-10-17, commit [4feb84f](https://github.com/zululima/dotclaude/commit/4feb84fb181efea2f8dfa44320b4031c334e54a7), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [4feb84f](https://github.com/lambdakilo/dotclaude/commit/4feb84fb181efea2f8dfa44320b4031c334e54a7), model claude-opus-5-5, effort xhigh.
 
-**3.** Quoted under [ff9d05b](https://github.com/zululima/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027).
+**3.** Quoted under [ff9d05b](https://github.com/lambdakilo/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027).
 
-**4.** Quoted under [ff9d05b](https://github.com/zululima/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027).
+**4.** Quoted under [ff9d05b](https://github.com/lambdakilo/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027).
 
 ## Stop PROMPTS.md reading a sign-off as an abbreviation
 
-2026-10-17, commit [992ac4c](https://github.com/zululima/dotclaude/commit/992ac4c55455cd76a7244a5f0b60c92009c6bf1d), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [992ac4c](https://github.com/lambdakilo/dotclaude/commit/992ac4c55455cd76a7244a5f0b60c92009c6bf1d), model claude-opus-5-5, effort xhigh.
 
-**3.** Quoted under [ff9d05b](https://github.com/zululima/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027).
+**3.** Quoted under [ff9d05b](https://github.com/lambdakilo/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027).
 
-**4.** Quoted under [ff9d05b](https://github.com/zululima/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027).
+**4.** Quoted under [ff9d05b](https://github.com/lambdakilo/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027).
 
 ## Recover the effort PROMPTS.md dropped from a settings object
 
-2026-10-17, commit [ff9d05b](https://github.com/zululima/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [ff9d05b](https://github.com/lambdakilo/dotclaude/commit/ff9d05b22983b199b532d3f14cb4a0c5e9136027), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > not bad. [a question about which repositories could use a PROMPTS.md
@@ -2345,7 +2361,7 @@ Stop, add it to dotclaude?)
 
 ## Generate PROMPTS.md from the prompts in commit messages
 
-2026-10-17, commit [4f5472e](https://github.com/zululima/dotclaude/commit/4f5472e517e030bb77578bf6c25b5bf3769aa354), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [4f5472e](https://github.com/lambdakilo/dotclaude/commit/4f5472e517e030bb77578bf6c25b5bf3769aa354), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > what sort of file name would be good for for example dotclaude
@@ -2358,7 +2374,7 @@ Stop, add it to dotclaude?)
 
 ## Keep steps the session can take out of the user's hands
 
-2026-10-17, commit [3a679ab](https://github.com/zululima/dotclaude/commit/3a679abd411ef118793c92336dfcefb957134e7b), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [3a679ab](https://github.com/lambdakilo/dotclaude/commit/3a679abd411ef118793c92336dfcefb957134e7b), model claude-opus-5-5, effort xhigh.
 
 **25.**
 > [a note about a project left out] dotclaude if not personal dont tell
@@ -2372,7 +2388,7 @@ Stop, add it to dotclaude?)
 
 ## Cover review fixes in a PR's verify steps and summary
 
-2026-10-17, commit [64b0e44](https://github.com/zululima/dotclaude/commit/64b0e44fc5a0a6972a67b9bb883bbe23081fb5f2), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [64b0e44](https://github.com/lambdakilo/dotclaude/commit/64b0e44fc5a0a6972a67b9bb883bbe23081fb5f2), model claude-opus-5-5, effort xhigh.
 
 **11.**
 > [an ask about a downstream project left out]
@@ -2386,7 +2402,7 @@ Stop, add it to dotclaude?)
 
 ## Leave the steps after a long run for the reply that follows it
 
-2026-10-17, commit [7171229](https://github.com/zululima/dotclaude/commit/7171229501dc940c4c928028312b9244334d692d), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [7171229](https://github.com/lambdakilo/dotclaude/commit/7171229501dc940c4c928028312b9244334d692d), model claude-opus-5-5, effort xhigh.
 
 **9.**
 > dotclaude dont give me those instructions 2 and 3 since theyll anyway
@@ -2400,7 +2416,7 @@ Stop, add it to dotclaude?)
 
 ## End a dream run with a usage check and the steps to take
 
-2026-10-17, commit [cdcd62e](https://github.com/zululima/dotclaude/commit/cdcd62e2ce4de06b5f7115431717089fce1d7618), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [cdcd62e](https://github.com/lambdakilo/dotclaude/commit/cdcd62e2ce4de06b5f7115431717089fce1d7618), model claude-opus-5-5, effort xhigh.
 
 **9.**
 > dotclaude dont give me those instructions 2 and 3 since theyll anyway
@@ -2413,7 +2429,7 @@ Stop, add it to dotclaude?)
 
 ## Say that commands for the user must work pasted into a new terminal
 
-2026-10-17, commit [4b564c1](https://github.com/zululima/dotclaude/commit/4b564c1f32aef7358f92718bc84e44e573735d85), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [4b564c1](https://github.com/lambdakilo/dotclaude/commit/4b564c1f32aef7358f92718bc84e44e573735d85), model claude-opus-5-5, effort xhigh.
 
 **21.**
 > dotclaude always give the commands like i could paste them from home
@@ -2425,7 +2441,7 @@ Stop, add it to dotclaude?)
 
 ## List every step still to do after changing given steps
 
-2026-10-17, commit [489399d](https://github.com/zululima/dotclaude/commit/489399d42452cdd8a9c2e499ee9e0ca1d359669c), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [489399d](https://github.com/lambdakilo/dotclaude/commit/489399d42452cdd8a9c2e499ee9e0ca1d359669c), model claude-opus-5-5, effort xhigh.
 
 **6.**
 > [an ask about a weekly usage recap in the dream report left out] also
@@ -2437,13 +2453,13 @@ Stop, add it to dotclaude?)
 **7.** (answering whether to add the rule as drafted)
 > go, add the full to-do list rule to CLAUDE.md as drafted
 
-**8.** (answering whether to commit p1 to p4 and the new rule as two commits) Quoted under [2250924](https://github.com/zululima/dotclaude/commit/2250924accb02788f5fab1a707dea2e4b1fbfe60).
+**8.** (answering whether to commit p1 to p4 and the new rule as two commits) Quoted under [2250924](https://github.com/lambdakilo/dotclaude/commit/2250924accb02788f5fab1a707dea2e4b1fbfe60).
 
 ## Apply dream proposals on prompt logs, shared stacks and the browser
 
-2026-10-17, commit [2250924](https://github.com/zululima/dotclaude/commit/2250924accb02788f5fab1a707dea2e4b1fbfe60), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [2250924](https://github.com/lambdakilo/dotclaude/commit/2250924accb02788f5fab1a707dea2e4b1fbfe60), model claude-opus-5-5, effort xhigh.
 
-**4.** Quoted under [5d38f18](https://github.com/zululima/dotclaude/commit/5d38f18b7d5ddc97beb218d493c9b173f26231d2).
+**4.** Quoted under [5d38f18](https://github.com/lambdakilo/dotclaude/commit/5d38f18b7d5ddc97beb218d493c9b173f26231d2).
 
 **8.** (answering whether to commit p1 to p4 and the new rule as two commits)
 > yes, commit p1 to p4 first and then the new rule, as two commits, and
@@ -2451,7 +2467,7 @@ Stop, add it to dotclaude?)
 
 ## End the dream report with a weekly usage recap
 
-2026-10-17, commit [dfc134f](https://github.com/zululima/dotclaude/commit/dfc134f18076a3177029e6253ac18ca3b77da7a4), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [dfc134f](https://github.com/lambdakilo/dotclaude/commit/dfc134f18076a3177029e6253ac18ca3b77da7a4), model claude-opus-5-5, effort xhigh.
 
 **7.**
 > weekly usage history should be a nice recap in the chat in the end of
@@ -2461,7 +2477,7 @@ Stop, add it to dotclaude?)
 
 ## Check carried proposals first and pick transcripts by last use
 
-2026-10-17, commit [5d38f18](https://github.com/zululima/dotclaude/commit/5d38f18b7d5ddc97beb218d493c9b173f26231d2), model claude-opus-5-5, effort xhigh.
+2026-10-17, commit [5d38f18](https://github.com/lambdakilo/dotclaude/commit/5d38f18b7d5ddc97beb218d493c9b173f26231d2), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > run the dream workflow now
@@ -2477,7 +2493,7 @@ Stop, add it to dotclaude?)
 
 ## Read the Claude Platform release notes and Managed Agents docs
 
-2026-10-16, commit [bc05825](https://github.com/zululima/dotclaude/commit/bc05825849de8742c5928c6a6f5205e807d87ee0), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [bc05825](https://github.com/lambdakilo/dotclaude/commit/bc05825849de8742c5928c6a6f5205e807d87ee0), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > also have you put the documentation etc of claude dream etc [pasted:
@@ -2487,7 +2503,7 @@ Stop, add it to dotclaude?)
 
 ## Pick the dream mode from the weekly reset and rank its work in tiers
 
-2026-10-16, commit [a999519](https://github.com/zululima/dotclaude/commit/a9995191f446a32e554cb56f1bf027b765e26f28), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [a999519](https://github.com/lambdakilo/dotclaude/commit/a9995191f446a32e554cb56f1bf027b765e26f28), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > you said my weekly usage wont even fill up currently with my dreaming
@@ -2516,7 +2532,7 @@ Stop, add it to dotclaude?)
 
 ## Move the pull request procedures into a skill
 
-2026-10-16, commit [c4657b7](https://github.com/zululima/dotclaude/commit/c4657b7632a40e9ef3e73847144a29807fbba955), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [c4657b7](https://github.com/lambdakilo/dotclaude/commit/c4657b7632a40e9ef3e73847144a29807fbba955), model claude-opus-5-5, effort xhigh.
 
 **27.**
 > regenerate p26 from the weekly report
@@ -2526,14 +2542,14 @@ Stop, add it to dotclaude?)
 
 ## Keep session transcripts for 90 days
 
-2026-10-16, commit [2360937](https://github.com/zululima/dotclaude/commit/23609376c9cabe2346ecc23b7e8acd709b5f8735), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [2360937](https://github.com/lambdakilo/dotclaude/commit/23609376c9cabe2346ecc23b7e8acd709b5f8735), model claude-opus-5-5, effort xhigh.
 
 **26.**
 > keep transcripts for 90 days
 
 ## Spend what is left of the week with a weekend dream
 
-2026-10-16, commit [e4194a7](https://github.com/zululima/dotclaude/commit/e4194a7ad38d5a608e1fad1a0fcc256a6d014832), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [e4194a7](https://github.com/lambdakilo/dotclaude/commit/e4194a7ad38d5a608e1fad1a0fcc256a6d014832), model claude-opus-5-5, effort xhigh.
 
 **25.**
 > could we do it so that a dream with weekend as parameter so it burns
@@ -2541,7 +2557,7 @@ Stop, add it to dotclaude?)
 
 ## Let a dream run fill the 5-hour limit by default
 
-2026-10-16, commit [0b253b5](https://github.com/zululima/dotclaude/commit/0b253b516b3d310ea2fe437acda82e3a3bbbb4d0), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [0b253b5](https://github.com/lambdakilo/dotclaude/commit/0b253b516b3d310ea2fe437acda82e3a3bbbb4d0), model claude-opus-5-5, effort xhigh.
 
 **24.**
 > arent all dream workflows overnight? why do i need to say that again
@@ -2549,7 +2565,7 @@ Stop, add it to dotclaude?)
 
 ## Rename the weekly workflow to dream for idle-time runs
 
-2026-10-16, commit [6f5bea1](https://github.com/zululima/dotclaude/commit/6f5bea1d48e8f90e111375f33eb3ffe8e084dcdb), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [6f5bea1](https://github.com/lambdakilo/dotclaude/commit/6f5bea1d48e8f90e111375f33eb3ffe8e084dcdb), model claude-opus-5-5, effort xhigh.
 
 **17.**
 > i didnt understand the habit of p10 so i didnt run the bash command.
@@ -2591,9 +2607,9 @@ Stop, add it to dotclaude?)
 
 ## Retry a connector file once, then read it in the browser
 
-2026-10-16, commit [0cf6598](https://github.com/zululima/dotclaude/commit/0cf659810b905a3f36d9ab01aff631b4245f05b6), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [0cf6598](https://github.com/lambdakilo/dotclaude/commit/0cf659810b905a3f36d9ab01aff631b4245f05b6), model claude-opus-5-5, effort xhigh.
 
-**1.** Quoted under [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
+**1.** Quoted under [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237).
 
 **2.** (answer to which message was meant)
 > [an ask about a downstream project left out]
@@ -2616,114 +2632,114 @@ Stop, add it to dotclaude?)
 
 ## Audit in the agent and leave no probe sessions in the weekly run
 
-2026-10-16, commit [5239b0d](https://github.com/zululima/dotclaude/commit/5239b0dd1c8e20901a39f9ef196830ba2b40811b), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [5239b0d](https://github.com/lambdakilo/dotclaude/commit/5239b0dd1c8e20901a39f9ef196830ba2b40811b), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Update submodules after every branch switch with a hook
 
-2026-10-16, commit [d6a6580](https://github.com/zululima/dotclaude/commit/d6a65808309a6fb882b5b353f4a5805c0a4b60e5), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [d6a6580](https://github.com/lambdakilo/dotclaude/commit/d6a65808309a6fb882b5b353f4a5805c0a4b60e5), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Check properly before reporting pass, fail or blocked
 
-2026-10-16, commit [6d420c0](https://github.com/zululima/dotclaude/commit/6d420c091987e6c6c3ea04ddc57f49ff279901fd), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [6d420c0](https://github.com/lambdakilo/dotclaude/commit/6d420c091987e6c6c3ea04ddc57f49ff279901fd), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Commit on the default branch where the user is the only collaborator
 
-2026-10-16, commit [5542c3b](https://github.com/zululima/dotclaude/commit/5542c3be5ac9783e34b599edc11c240312a4d4f0), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [5542c3b](https://github.com/lambdakilo/dotclaude/commit/5542c3be5ac9783e34b599edc11c240312a4d4f0), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Turn off the ultracode keyword trigger
 
-2026-10-16, commit [9d48081](https://github.com/zululima/dotclaude/commit/9d480816e94d1ded6109689f9eeb7a5aa61b636d), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [9d48081](https://github.com/lambdakilo/dotclaude/commit/9d480816e94d1ded6109689f9eeb7a5aa61b636d), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Weekdays from date, complete result lists, free/busy for others
 
-2026-10-16, commit [dddd06c](https://github.com/zululima/dotclaude/commit/dddd06c897e02a2979bdd965f241e73907e399a9), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [dddd06c](https://github.com/lambdakilo/dotclaude/commit/dddd06c897e02a2979bdd965f241e73907e399a9), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Commit and push the checkout and every mirror with sync.sh --commit
 
-2026-10-16, commit [fac48a0](https://github.com/zululima/dotclaude/commit/fac48a0070d5aa6555565eb10e24090e6e1aee08), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [fac48a0](https://github.com/lambdakilo/dotclaude/commit/fac48a0070d5aa6555565eb10e24090e6e1aee08), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > regenerate p18 from the weekly report
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Prune patch-equivalent gone branches and tell the user once
 
-2026-10-16, commit [57ae11d](https://github.com/zululima/dotclaude/commit/57ae11dfc696f2ae89f95d652a88b4eb69680504), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [57ae11d](https://github.com/lambdakilo/dotclaude/commit/57ae11dfc696f2ae89f95d652a88b4eb69680504), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Make CLAUDE.md edits in auto mode, and start sessions in auto
 
-2026-10-16, commit [f49c2be](https://github.com/zululima/dotclaude/commit/f49c2be0a3132bbcfec5bdc31464a783df7b75dc), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [f49c2be](https://github.com/lambdakilo/dotclaude/commit/f49c2be0a3132bbcfec5bdc31464a783df7b75dc), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Print the prompts block from a prompt log
 
-2026-10-16, commit [022aead](https://github.com/zululima/dotclaude/commit/022aead8a652c7c9b96072c2a962ad36cf79a8e9), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [022aead](https://github.com/lambdakilo/dotclaude/commit/022aead8a652c7c9b96072c2a962ad36cf79a8e9), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Cover No folder sessions and keep organisation names local
 
-2026-10-16, commit [8136ad9](https://github.com/zululima/dotclaude/commit/8136ad9df272725cccd82cdf626219baeb964087), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [8136ad9](https://github.com/lambdakilo/dotclaude/commit/8136ad9df272725cccd82cdf626219baeb964087), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Skip prompt feedback on turns the user did not prompt
 
-2026-10-16, commit [b744ac0](https://github.com/zululima/dotclaude/commit/b744ac0f48c98de1bcf35e5b685f84cc3408da0d), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [b744ac0](https://github.com/lambdakilo/dotclaude/commit/b744ac0f48c98de1bcf35e5b685f84cc3408da0d), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Memory notes state what holds now, with a hook for em dashes
 
-2026-10-16, commit [ee21883](https://github.com/zululima/dotclaude/commit/ee21883b9c9c6a765fc91bef2441407250282a5a), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [ee21883](https://github.com/lambdakilo/dotclaude/commit/ee21883b9c9c6a765fc91bef2441407250282a5a), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**2.** Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
-**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
+**3.** (answer to whether the scripts in the terminal were done) Quoted under [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7).
 
 ## Hand a shared branch's change to its session, and add a Stop hook
 
-2026-10-16, commit [bd95b64](https://github.com/zululima/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7), model claude-opus-5-5, effort xhigh.
+2026-10-16, commit [bd95b64](https://github.com/lambdakilo/dotclaude/commit/bd95b6426fb77b507c5ad6c9d4b32a5244633ed7), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > go, run p18 and commit and push dotclaude
@@ -2734,65 +2750,65 @@ Stop, add it to dotclaude?)
 
 ## Steps and pictures show what the reader will really see
 
-2026-10-15, commit [8974a1e](https://github.com/zululima/dotclaude/commit/8974a1e241e82f871d503447e5e7432434254afe), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [8974a1e](https://github.com/lambdakilo/dotclaude/commit/8974a1e241e82f871d503447e5e7432434254afe), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > regenerate p9 from the weekly report
 
-**2.** Quoted under [168c498](https://github.com/zululima/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
 
 ## Run steps for a person first, and keep setup in the README
 
-2026-10-15, commit [2363a7e](https://github.com/zululima/dotclaude/commit/2363a7e5978e60fd0c2bbeb843295c7f40a00d37), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [2363a7e](https://github.com/lambdakilo/dotclaude/commit/2363a7e5978e60fd0c2bbeb843295c7f40a00d37), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [168c498](https://github.com/zululima/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
 
 ## Rewrite the PR review rule as one bullet
 
-2026-10-15, commit [b2d761e](https://github.com/zululima/dotclaude/commit/b2d761eaa157a147e849f425ec5b86ee04c54e16), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [b2d761e](https://github.com/lambdakilo/dotclaude/commit/b2d761eaa157a147e849f425ec5b86ee04c54e16), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [168c498](https://github.com/zululima/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
 
 ## Quote corrections in memory and keep a note's qualifiers
 
-2026-10-15, commit [e03c79c](https://github.com/zululima/dotclaude/commit/e03c79c78832d4c601bec435060a8f6a9f84d040), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [e03c79c](https://github.com/lambdakilo/dotclaude/commit/e03c79c78832d4c601bec435060a8f6a9f84d040), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [168c498](https://github.com/zululima/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
 
 ## Change the rules only on a go, and draft rules from corrections
 
-2026-10-15, commit [125e1b5](https://github.com/zululima/dotclaude/commit/125e1b5790bb650bb525eac4faff256869a8cb27), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [125e1b5](https://github.com/lambdakilo/dotclaude/commit/125e1b5790bb650bb525eac4faff256869a8cb27), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [168c498](https://github.com/zululima/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
 
 ## Tell a running session when CLAUDE.md changed under it
 
-2026-10-15, commit [dfc4754](https://github.com/zululima/dotclaude/commit/dfc4754fea3a87030a855e1e0b9cdf2ca38f9ece), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [dfc4754](https://github.com/lambdakilo/dotclaude/commit/dfc4754fea3a87030a855e1e0b9cdf2ca38f9ece), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [168c498](https://github.com/zululima/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
 
 ## Ask before installing software or adding CI
 
-2026-10-15, commit [9c39a2c](https://github.com/zululima/dotclaude/commit/9c39a2c72d682e165a714a9c01459d7f13faf9c8), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [9c39a2c](https://github.com/lambdakilo/dotclaude/commit/9c39a2c72d682e165a714a9c01459d7f13faf9c8), model claude-opus-5-5, effort xhigh.
 
-**2.** Quoted under [168c498](https://github.com/zululima/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
+**2.** Quoted under [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7).
 
 ## Refuse GitHub posts as the user with a PreToolUse hook
 
-2026-10-15, commit [168c498](https://github.com/zululima/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [168c498](https://github.com/lambdakilo/dotclaude/commit/168c49830747761824e49988c91f5bf7942ebcd7), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > go, run p9 and commit and push dotclaude
 
 ## Print weekly script diffs without a pager
 
-2026-10-15, commit [6f9607e](https://github.com/zululima/dotclaude/commit/6f9607e806418bf77109b9a9447ba9f134e82b60), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [6f9607e](https://github.com/lambdakilo/dotclaude/commit/6f9607e806418bf77109b9a9447ba9f134e82b60), model claude-opus-5-5, effort xhigh.
 
-**16.** Quoted under [696018f](https://github.com/zululima/dotclaude/commit/696018f01f529914df58ac1e0e70fe83305e5480).
+**16.** Quoted under [696018f](https://github.com/lambdakilo/dotclaude/commit/696018f01f529914df58ac1e0e70fe83305e5480).
 
 ## Number weekly changes in apply order, with commands
 
-2026-10-15, commit [696018f](https://github.com/zululima/dotclaude/commit/696018f01f529914df58ac1e0e70fe83305e5480), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [696018f](https://github.com/lambdakilo/dotclaude/commit/696018f01f529914df58ac1e0e70fe83305e5480), model claude-opus-5-5, effort xhigh.
 
 **16.**
 > force push with lease to dotclaude. dotclaude add commands that i can
@@ -2804,7 +2820,7 @@ Stop, add it to dotclaude?)
 
 ## Open PR bodies with the summary, verify in two command steps
 
-2026-10-15, commit [e576a66](https://github.com/zululima/dotclaude/commit/e576a66d8b11c959030351f47c58a6e6b1ef74fc), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [e576a66](https://github.com/lambdakilo/dotclaude/commit/e576a66d8b11c959030351f47c58a6e6b1ef74fc), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > why 5 commands and not 2 like other two prs had? dotclaude fix.
@@ -2816,13 +2832,13 @@ Stop, add it to dotclaude?)
 
 ## Size the weekly report for the chat, scripts apart
 
-2026-10-15, commit [6650f14](https://github.com/zululima/dotclaude/commit/6650f1462af28730ee4681706f40b98fe04e8762), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [6650f14](https://github.com/lambdakilo/dotclaude/commit/6650f1462af28730ee4681706f40b98fe04e8762), model claude-opus-5-5, effort xhigh.
 
-**15.** Quoted under [24b09c5](https://github.com/zululima/dotclaude/commit/24b09c5646bc77097b3bf4702c6fc45bd46fa095).
+**15.** Quoted under [24b09c5](https://github.com/lambdakilo/dotclaude/commit/24b09c5646bc77097b3bf4702c6fc45bd46fa095).
 
 ## Keep private project terms out of the published files
 
-2026-10-15, commit [24b09c5](https://github.com/zululima/dotclaude/commit/24b09c5646bc77097b3bf4702c6fc45bd46fa095), model claude-opus-5-5, effort xhigh.
+2026-10-15, commit [24b09c5](https://github.com/lambdakilo/dotclaude/commit/24b09c5646bc77097b3bf4702c6fc45bd46fa095), model claude-opus-5-5, effort xhigh.
 
 **15.**
 > fix the two things. anonymize and dotclaude so that it doesnt happen
@@ -2831,7 +2847,7 @@ Stop, add it to dotclaude?)
 
 ## Record the session's effort in the weekly usage history
 
-2026-10-14, commit [ae4d0d9](https://github.com/zululima/dotclaude/commit/ae4d0d9fc2899d3cc24738c8e5a135706e7227ee), model claude-opus-5-5, effort xhigh.
+2026-10-14, commit [ae4d0d9](https://github.com/lambdakilo/dotclaude/commit/ae4d0d9fc2899d3cc24738c8e5a135706e7227ee), model claude-opus-5-5, effort xhigh.
 
 **12.**
 > do you think this particular workflow should be js then instead of
@@ -2846,7 +2862,7 @@ Stop, add it to dotclaude?)
 
 ## Rename the weekly review workflow to weekly
 
-2026-10-14, commit [c397f0f](https://github.com/zululima/dotclaude/commit/c397f0f06df2cf76ba98979aa96b0ce944de910a), model claude-opus-5-5, effort xhigh.
+2026-10-14, commit [c397f0f](https://github.com/lambdakilo/dotclaude/commit/c397f0f06df2cf76ba98979aa96b0ce944de910a), model claude-opus-5-5, effort xhigh.
 
 **10.**
 > remove [a person] and [another person] from the workflow
@@ -2857,7 +2873,7 @@ Stop, add it to dotclaude?)
 
 ## Keep the weekly review under the plan usage limits
 
-2026-10-14, commit [cce004a](https://github.com/zululima/dotclaude/commit/cce004af276ace537c579da9003f7d4823393896), model claude-opus-5-5, effort xhigh.
+2026-10-14, commit [cce004a](https://github.com/lambdakilo/dotclaude/commit/cce004af276ace537c579da9003f7d4823393896), model claude-opus-5-5, effort xhigh.
 
 **7.**
 > github plugin removed from claude.ai. how much will opus 5.5.
@@ -2876,13 +2892,13 @@ Stop, add it to dotclaude?)
 
 ## Run the weekly review's checks on the desktop build
 
-2026-10-14, commit [4f573a5](https://github.com/zululima/dotclaude/commit/4f573a5a37fb80707ecf2108a98191e21b73a635), model claude-opus-5-5, effort xhigh.
+2026-10-14, commit [4f573a5](https://github.com/lambdakilo/dotclaude/commit/4f573a5a37fb80707ecf2108a98191e21b73a635), model claude-opus-5-5, effort xhigh.
 
-**6.** Quoted under [67172c0](https://github.com/zululima/dotclaude/commit/67172c0c9d3b2ecda466bda68dc0dbc10dfb0af4).
+**6.** Quoted under [67172c0](https://github.com/lambdakilo/dotclaude/commit/67172c0c9d3b2ecda466bda68dc0dbc10dfb0af4).
 
 ## Turn the Figma plugin off by default
 
-2026-10-14, commit [67172c0](https://github.com/zululima/dotclaude/commit/67172c0c9d3b2ecda466bda68dc0dbc10dfb0af4), model claude-opus-5-5, effort xhigh.
+2026-10-14, commit [67172c0](https://github.com/lambdakilo/dotclaude/commit/67172c0c9d3b2ecda466bda68dc0dbc10dfb0af4), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > do i need the terminal claude to anything? are you srue github
@@ -2898,7 +2914,7 @@ Stop, add it to dotclaude?)
 
 ## Upload screenshots through the built-in browser when Chrome is out
 
-2026-10-14, commit [03071ff](https://github.com/zululima/dotclaude/commit/03071ff9bb77435cde111d9cb86f64168cf02ffa), model claude-opus-5-5, effort xhigh.
+2026-10-14, commit [03071ff](https://github.com/lambdakilo/dotclaude/commit/03071ff9bb77435cde111d9cb86f64168cf02ffa), model claude-opus-5-5, effort xhigh.
 
 **6.**
 > [pasted: a review of why the screenshot upload stalled, asking for the
@@ -2907,7 +2923,7 @@ Stop, add it to dotclaude?)
 
 ## Upload a PR's screenshots without asking first
 
-2026-10-14, commit [8f63649](https://github.com/zululima/dotclaude/commit/8f6364920b100a9d53dedb44ef924140fa0c665c), model claude-opus-5-5, effort xhigh.
+2026-10-14, commit [8f63649](https://github.com/lambdakilo/dotclaude/commit/8f6364920b100a9d53dedb44ef924140fa0c665c), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > [an ask about a downstream project left out]
@@ -2918,7 +2934,7 @@ Stop, add it to dotclaude?)
 
 ## Add a weekly review workflow
 
-2026-10-14, commit [c97a0a4](https://github.com/zululima/dotclaude/commit/c97a0a4ef3cbabad47e53bc2d76bd285fd1a8fda), model claude-opus-5-5, effort xhigh.
+2026-10-14, commit [c97a0a4](https://github.com/lambdakilo/dotclaude/commit/c97a0a4ef3cbabad47e53bc2d76bd285fd1a8fda), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > will / doctor analyze deprecations based on my claude history or
@@ -2943,14 +2959,14 @@ Stop, add it to dotclaude?)
 
 ## Never post on GitHub as the user
 
-2026-10-13, commit [bf8105e](https://github.com/zululima/dotclaude/commit/bf8105ede233e8a03059f2011a14ea165b838dbd), model claude-fable-5-1, effort xhigh.
+2026-10-13, commit [bf8105e](https://github.com/lambdakilo/dotclaude/commit/bf8105ede233e8a03059f2011a14ea165b838dbd), model claude-fable-5-1, effort xhigh.
 
 **15.**
 > dotclaude never reply to anyone on behalf of me on github
 
 ## Stop the stack before every reply
 
-2026-10-13, commit [27b102b](https://github.com/zululima/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237), model claude-fable-5-1, effort xhigh.
+2026-10-13, commit [27b102b](https://github.com/lambdakilo/dotclaude/commit/27b102be9389750bc51481b956fdba27e2348237), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > [an ask about a downstream project left out]
@@ -2963,7 +2979,7 @@ Stop, add it to dotclaude?)
 
 ## Delete the template box that does not apply
 
-2026-10-13, commit [e2a5a2a](https://github.com/zululima/dotclaude/commit/e2a5a2ace218c0fb7ee1b289b08ace485e441f1d), model claude-fable-5-1, effort xhigh.
+2026-10-13, commit [e2a5a2a](https://github.com/lambdakilo/dotclaude/commit/e2a5a2ace218c0fb7ee1b289b08ace485e441f1d), model claude-fable-5-1, effort xhigh.
 
 **13.**
 > dotclaude so i want the other non checked box to be deleted isntead
@@ -2971,14 +2987,14 @@ Stop, add it to dotclaude?)
 
 ## Manual steps give a page's full local address
 
-2026-10-13, commit [33f590f](https://github.com/zululima/dotclaude/commit/33f590f3bfd8f624ce9c13da3ed5a3c52b2c2e00), model claude-fable-5-1, effort xhigh.
+2026-10-13, commit [33f590f](https://github.com/lambdakilo/dotclaude/commit/33f590f3bfd8f624ce9c13da3ed5a3c52b2c2e00), model claude-fable-5-1, effort xhigh.
 
 **12.**
 > dotclaude you didnt put url localhost etc in the pr description
 
 ## Pictures on their own line under the step number
 
-2026-10-13, commit [95b332c](https://github.com/zululima/dotclaude/commit/95b332c57e2bbd2243862a51abb6ab2d26fa04b0), model claude-fable-5-1, effort xhigh.
+2026-10-13, commit [95b332c](https://github.com/lambdakilo/dotclaude/commit/95b332c57e2bbd2243862a51abb6ab2d26fa04b0), model claude-fable-5-1, effort xhigh.
 
 **11.**
 > dotclaude put the images and videos under the step number not at the
@@ -2986,7 +3002,7 @@ Stop, add it to dotclaude?)
 
 ## Pictures at the start of their steps, recordings slowed
 
-2026-10-13, commit [4b45b7b](https://github.com/zululima/dotclaude/commit/4b45b7bee1e8e349beb1c70d957c13a9ca35956c), model claude-fable-5-1, effort xhigh.
+2026-10-13, commit [4b45b7b](https://github.com/lambdakilo/dotclaude/commit/4b45b7bee1e8e349beb1c70d957c13a9ca35956c), model claude-fable-5-1, effort xhigh.
 
 **10.**
 > dotclaude pull out the screenshots and videos from the detail element
@@ -2997,7 +3013,7 @@ Stop, add it to dotclaude?)
 
 ## One draft PR per session
 
-2026-10-13, commit [644646a](https://github.com/zululima/dotclaude/commit/644646a6e1fa047880bfc6c0ee684aad2fde968b), model claude-fable-5-1, effort xhigh.
+2026-10-13, commit [644646a](https://github.com/lambdakilo/dotclaude/commit/644646a6e1fa047880bfc6c0ee684aad2fde968b), model claude-fable-5-1, effort xhigh.
 
 **8.**
 > [an ask about a downstream project left out] dotclaude dont open two
@@ -3005,7 +3021,7 @@ Stop, add it to dotclaude?)
 
 ## Name the PR's picture before the click, paste the command steps
 
-2026-10-12, commit [36b2e16](https://github.com/zululima/dotclaude/commit/36b2e16a6458d3228fefd914f2972dd1db8beab1), model claude-fable-5-1, effort xhigh.
+2026-10-12, commit [36b2e16](https://github.com/lambdakilo/dotclaude/commit/36b2e16a6458d3228fefd914f2972dd1db8beab1), model claude-fable-5-1, effort xhigh.
 
 **11.**
 > dotclaude. a step’s screenshot is named at the start of the step and
@@ -3024,7 +3040,7 @@ Stop, add it to dotclaude?)
 
 ## Review replies are one list with commands, subshells for cd
 
-2026-10-12, commit [d5727d3](https://github.com/zululima/dotclaude/commit/d5727d375dcb9272c5922d1a4553439d2f531c31), model claude-fable-5-1, effort xhigh.
+2026-10-12, commit [d5727d3](https://github.com/lambdakilo/dotclaude/commit/d5727d375dcb9272c5922d1a4553439d2f531c31), model claude-fable-5-1, effort xhigh.
 
 **7.**
 > dotclaude give me the steps you would have given me to test things.
@@ -3049,7 +3065,7 @@ Stop, add it to dotclaude?)
 
 ## Quote only the configuration part of a prompt, redacted
 
-2026-10-12, commit [719067c](https://github.com/zululima/dotclaude/commit/719067cac511c51c5d4caa5d4490bc8ffa8bfa9b), model claude-fable-5-1, effort xhigh.
+2026-10-12, commit [719067c](https://github.com/lambdakilo/dotclaude/commit/719067cac511c51c5d4caa5d4490bc8ffa8bfa9b), model claude-fable-5-1, effort xhigh.
 
 **6.**
 > [a mirror] now has commit message such as "[a content type] with a
@@ -3060,7 +3076,7 @@ Stop, add it to dotclaude?)
 
 ## Review corrections are short prose, nothing to paste
 
-2026-10-12, commit [986a428](https://github.com/zululima/dotclaude/commit/986a4286d280d22e3e01d368b38ee043ab6e78cc), model claude-fable-5-1, effort xhigh.
+2026-10-12, commit [986a428](https://github.com/lambdakilo/dotclaude/commit/986a4286d280d22e3e01d368b38ee043ab6e78cc), model claude-fable-5-1, effort xhigh.
 
 **5.**
 > no. dotclaude dont put copypastable things to pr reviews. just tell
@@ -3068,7 +3084,7 @@ Stop, add it to dotclaude?)
 
 ## Shell scripts for the user, corrected steps in a review
 
-2026-10-12, commit [a9604bf](https://github.com/zululima/dotclaude/commit/a9604bfd3d563c42d77eb918e87e695d429d4de0), model claude-fable-5-1, effort xhigh.
+2026-10-12, commit [a9604bf](https://github.com/lambdakilo/dotclaude/commit/a9604bfd3d563c42d77eb918e87e695d429d4de0), model claude-fable-5-1, effort xhigh.
 
 **4.**
 > [pasted: the previous script's terminal output]
@@ -3082,7 +3098,7 @@ Stop, add it to dotclaude?)
 
 ## Review a PR by correcting its own test steps
 
-2026-10-12, commit [b45b966](https://github.com/zululima/dotclaude/commit/b45b966a13bd3f898d2dea7518831412e507561a), model claude-fable-5-1, effort xhigh.
+2026-10-12, commit [b45b966](https://github.com/lambdakilo/dotclaude/commit/b45b966a13bd3f898d2dea7518831412e507561a), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > review pr 110 here only give manual testing instructions
@@ -3110,7 +3126,7 @@ Stop, add it to dotclaude?)
 
 ## Let the user's own name stand in the public repository's history
 
-2026-10-10, commit [92bccf0](https://github.com/zululima/dotclaude/commit/92bccf01e2c7e4a85049f5d5f2f6e9c4b65629fd), model claude-fable-5-1, effort xhigh.
+2026-10-10, commit [92bccf0](https://github.com/lambdakilo/dotclaude/commit/92bccf01e2c7e4a85049f5d5f2f6e9c4b65629fd), model claude-fable-5-1, effort xhigh.
 
 **2.**
 > well then change the rules of the checkout local identity. my name is
@@ -3118,7 +3134,7 @@ Stop, add it to dotclaude?)
 
 ## Copy the published files into the directories sync-mirrors.txt lists
 
-2026-10-10, commit [9d7fdc6](https://github.com/zululima/dotclaude/commit/9d7fdc65ae8a0facfc9ad519d83c025b3359dddc), model claude-fable-5-1, effort xhigh.
+2026-10-10, commit [9d7fdc6](https://github.com/lambdakilo/dotclaude/commit/9d7fdc65ae8a0facfc9ad519d83c025b3359dddc), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > add local project memory to sync also to [a directory in a second
@@ -3130,7 +3146,7 @@ Stop, add it to dotclaude?)
 
 ## Plain characters, shortest test names, no implied actions
 
-2026-10-10, commit [aa3cc21](https://github.com/zululima/dotclaude/commit/aa3cc21b7aae36e5daa780b0dbd018bbd1ca38b9), model claude-fable-5-1, effort xhigh.
+2026-10-10, commit [aa3cc21](https://github.com/lambdakilo/dotclaude/commit/aa3cc21b7aae36e5daa780b0dbd018bbd1ca38b9), model claude-fable-5-1, effort xhigh.
 
 **4.**
 > › what in gods name is this character. dotclaude dont output chars
@@ -3147,7 +3163,7 @@ Stop, add it to dotclaude?)
 
 ## Manual steps follow the screen and name controls by label
 
-2026-10-10, commit [8a2f66e](https://github.com/zululima/dotclaude/commit/8a2f66eacdf49e712d484639c42d8a5e001d22e2), model claude-fable-5-1, effort xhigh.
+2026-10-10, commit [8a2f66e](https://github.com/lambdakilo/dotclaude/commit/8a2f66eacdf49e712d484639c42d8a5e001d22e2), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > review pr 12 and give manual testing instructions here
@@ -3177,7 +3193,7 @@ Stop, add it to dotclaude?)
 
 ## Letter alternatives, number only ordered steps
 
-2026-10-09, commit [59970a4](https://github.com/zululima/dotclaude/commit/59970a4cc683b8601d1a2f087e609c31c7422335), model claude-fable-5-1, effort xhigh.
+2026-10-09, commit [59970a4](https://github.com/lambdakilo/dotclaude/commit/59970a4cc683b8601d1a2f087e609c31c7422335), model claude-fable-5-1, effort xhigh.
 
 **7.**
 > global ruling: if theres two ways to do something dont say 1, 2 etc.
@@ -3187,7 +3203,7 @@ Stop, add it to dotclaude?)
 
 ## Put screenshots of a visual change in the PR body
 
-2026-10-09, commit [a6451f2](https://github.com/zululima/dotclaude/commit/a6451f2fd82238dfd7c52d157eb17b186b0dcf3c), model claude-fable-5-1, effort xhigh.
+2026-10-09, commit [a6451f2](https://github.com/lambdakilo/dotclaude/commit/a6451f2fd82238dfd7c52d157eb17b186b0dcf3c), model claude-fable-5-1, effort xhigh.
 
 **6.**
 > are you able to take screenshots or screen recordings of when for
@@ -3205,7 +3221,7 @@ Stop, add it to dotclaude?)
 
 ## Hand over the allow rule script on a classifier refusal
 
-2026-10-08, commit [5f8d268](https://github.com/zululima/dotclaude/commit/5f8d2681ae9f6df128cb2f7fce027dd9d821e3bd), model claude-fable-5-1, effort xhigh.
+2026-10-08, commit [5f8d268](https://github.com/lambdakilo/dotclaude/commit/5f8d2681ae9f6df128cb2f7fce027dd9d821e3bd), model claude-fable-5-1, effort xhigh.
 
 **4.**
 > global ruling: if classifier refuses something i can fix with giving
@@ -3216,7 +3232,7 @@ Stop, add it to dotclaude?)
 
 ## Allow gh issue and pull request edits from a session
 
-2026-10-08, commit [f3b322b](https://github.com/zululima/dotclaude/commit/f3b322b4da4d01e795e5447ede80065430f21094), model claude-fable-5-1, effort xhigh.
+2026-10-08, commit [f3b322b](https://github.com/lambdakilo/dotclaude/commit/f3b322b4da4d01e795e5447ede80065430f21094), model claude-fable-5-1, effort xhigh.
 
 **2.**
 > ok lets continue working on the [a feature of a downstream project].
@@ -3227,14 +3243,14 @@ Stop, add it to dotclaude?)
 
 ## Count the merge prompt among a PR's prompts
 
-2026-10-08, commit [f1fa780](https://github.com/zululima/dotclaude/commit/f1fa7807b86c6ae2a44f7510838ee616aba466bb), model claude-fable-5-1, effort xhigh.
+2026-10-08, commit [f1fa780](https://github.com/lambdakilo/dotclaude/commit/f1fa7807b86c6ae2a44f7510838ee616aba466bb), model claude-fable-5-1, effort xhigh.
 
 **14.**
 > global ruling: put the merge prompt also to the pr when i say merge
 
 ## Assign the user to the issues a PR closes
 
-2026-10-08, commit [280fcd7](https://github.com/zululima/dotclaude/commit/280fcd7b982c597180d7661d6caceaae41eb1472), model claude-fable-5-1, effort xhigh.
+2026-10-08, commit [280fcd7](https://github.com/lambdakilo/dotclaude/commit/280fcd7b982c597180d7661d6caceaae41eb1472), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > [a question about a downstream project's backlog and next task]
@@ -3244,7 +3260,7 @@ Stop, add it to dotclaude?)
 
 ## Allow sessions to start and stop the local stack
 
-2026-10-08, commit [1dc8ca2](https://github.com/zululima/dotclaude/commit/1dc8ca287f247b6063eee9e89051bbd339b1b960), model claude-fable-5-1, effort xhigh.
+2026-10-08, commit [1dc8ca2](https://github.com/lambdakilo/dotclaude/commit/1dc8ca287f247b6063eee9e89051bbd339b1b960), model claude-fable-5-1, effort xhigh.
 
 **7.**
 > also you always start the stack not me. also so hotspot is now ok
@@ -3267,7 +3283,7 @@ Stop, add it to dotclaude?)
 
 ## Add a length rule to the Prose section
 
-2026-10-07, commit [8d49c37](https://github.com/zululima/dotclaude/commit/8d49c37df94399d6ecd77f8c3d64d9e7af9ae2a9), model claude-fable-5-1, effort xhigh.
+2026-10-07, commit [8d49c37](https://github.com/lambdakilo/dotclaude/commit/8d49c37df94399d6ecd77f8c3d64d9e7af9ae2a9), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > whats that one chatgpt session where this mathematician speaks very
@@ -3285,7 +3301,7 @@ Stop, add it to dotclaude?)
 
 ## Put end to end before the manual pass in test steps
 
-2026-10-07, commit [867d6f2](https://github.com/zululima/dotclaude/commit/867d6f2d3cc362b51f1385e87d0991aa19a45a82), model claude-fable-5-1, effort xhigh.
+2026-10-07, commit [867d6f2](https://github.com/lambdakilo/dotclaude/commit/867d6f2d3cc362b51f1385e87d0991aa19a45a82), model claude-fable-5-1, effort xhigh.
 
 **6.**
 > global memory: dont put e2e tests then never after manual testing in
@@ -3293,7 +3309,7 @@ Stop, add it to dotclaude?)
 
 ## End review test steps with the last check
 
-2026-10-07, commit [f4cb122](https://github.com/zululima/dotclaude/commit/f4cb122373bbddad02f9a0d432375d698d2d5655), model claude-fable-5-1, effort xhigh.
+2026-10-07, commit [f4cb122](https://github.com/lambdakilo/dotclaude/commit/f4cb122373bbddad02f9a0d432375d698d2d5655), model claude-fable-5-1, effort xhigh.
 
 **5.**
 > global memory: dont tell me step 9 again pr review scenarios or
@@ -3304,7 +3320,7 @@ Stop, add it to dotclaude?)
 
 ## Run the submodule update unconditionally after a switch
 
-2026-10-07, commit [1e889d4](https://github.com/zululima/dotclaude/commit/1e889d448510d355a56ea61448944daa9ebc839f), model claude-fable-5-1, effort xhigh.
+2026-10-07, commit [1e889d4](https://github.com/lambdakilo/dotclaude/commit/1e889d448510d355a56ea61448944daa9ebc839f), model claude-fable-5-1, effort xhigh.
 
 **4.**
 > global ruling: no if conditions on like that on submodule. just
@@ -3317,7 +3333,7 @@ Stop, add it to dotclaude?)
 
 ## Update submodules after every branch switch
 
-2026-10-07, commit [62b6d96](https://github.com/zululima/dotclaude/commit/62b6d96caeb1438795b6a0d99ab6a4c161a70065), model claude-fable-5-1, effort xhigh.
+2026-10-07, commit [62b6d96](https://github.com/lambdakilo/dotclaude/commit/62b6d96caeb1438795b6a0d99ab6a4c161a70065), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > review pr 104 and tell me how to test locally
@@ -3332,7 +3348,7 @@ Stop, add it to dotclaude?)
 
 ## Pair a cd with an explicit cd back, not a subshell
 
-2026-10-07, commit [a861b43](https://github.com/zululima/dotclaude/commit/a861b43cb424c84afe5aaf69e61ffd495fa42167), model claude-fable-5-1, effort xhigh.
+2026-10-07, commit [a861b43](https://github.com/lambdakilo/dotclaude/commit/a861b43cb424c84afe5aaf69e61ffd495fa42167), model claude-fable-5-1, effort xhigh.
 
 **4.**
 > the cd playwright thingy is again without the cd back. also no need
@@ -3340,7 +3356,7 @@ Stop, add it to dotclaude?)
 
 ## Return to the starting directory after a cd
 
-2026-10-07, commit [5af1440](https://github.com/zululima/dotclaude/commit/5af14406eee61fba2ea6993ee4bbd3a13638d336), model claude-fable-5-1, effort xhigh.
+2026-10-07, commit [5af1440](https://github.com/lambdakilo/dotclaude/commit/5af14406eee61fba2ea6993ee4bbd3a13638d336), model claude-fable-5-1, effort xhigh.
 
 **2.**
 > global ruling: when doing cd operations remember to cd back to the
@@ -3355,7 +3371,7 @@ Stop, add it to dotclaude?)
 
 ## Delete gone local branches safely at session start
 
-2026-10-06, commit [2fbeea0](https://github.com/zululima/dotclaude/commit/2fbeea048415d4d0f6a6419208725ae684e69249), model claude-fable-5-1, effort xhigh.
+2026-10-06, commit [2fbeea0](https://github.com/lambdakilo/dotclaude/commit/2fbeea048415d4d0f6a6419208725ae684e69249), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > i would like claude to remove stale branches i.e. that dont have pr
@@ -3371,14 +3387,14 @@ Stop, add it to dotclaude?)
 
 ## Allow gh repo create without a prompt
 
-2026-10-06, commit [0dbe828](https://github.com/zululima/dotclaude/commit/0dbe8285052c3fd32dd88686ce441987744e8033), model claude-fable-5-1, effort xhigh.
+2026-10-06, commit [0dbe828](https://github.com/lambdakilo/dotclaude/commit/0dbe8285052c3fd32dd88686ce441987744e8033), model claude-fable-5-1, effort xhigh.
 
 **2.**
 > add gh repo create for bash in my claude code settings
 
 ## Scope the draft PR rule to one per feature
 
-2026-10-03, commit [d246b5c](https://github.com/zululima/dotclaude/commit/d246b5ca70b42f686d41cb273d064bd88ccf0790), model claude-fable-5-1, effort xhigh.
+2026-10-03, commit [d246b5c](https://github.com/lambdakilo/dotclaude/commit/d246b5ca70b42f686d41cb273d064bd88ccf0790), model claude-fable-5-1, effort xhigh.
 
 **2.**
 > put the places where to check to project memory so that i i can just
@@ -3391,14 +3407,14 @@ Stop, add it to dotclaude?)
 
 ## Allow semicolons in prose again
 
-2026-10-03, commit [0e6c226](https://github.com/zululima/dotclaude/commit/0e6c2262d405b0e12a073c9b2d2ee7f94379fed9), model claude-fable-5-1, effort xhigh.
+2026-10-03, commit [0e6c226](https://github.com/lambdakilo/dotclaude/commit/0e6c2262d405b0e12a073c9b2d2ee7f94379fed9), model claude-fable-5-1, effort xhigh.
 
 **7.**
 > global claude rule you can use semicolons
 
 ## Scope the lowercase rule to the rewritten prompt only
 
-2026-10-03, commit [b05ac24](https://github.com/zululima/dotclaude/commit/b05ac24812476c1ea650bc461aa72b6d09eb2a3a), model claude-fable-5-1, effort xhigh.
+2026-10-03, commit [b05ac24](https://github.com/lambdakilo/dotclaude/commit/b05ac24812476c1ea650bc461aa72b6d09eb2a3a), model claude-fable-5-1, effort xhigh.
 
 **3.**
 > global ruling: you can still use " quotes in the prompt feedback and
@@ -3411,7 +3427,7 @@ Stop, add it to dotclaude?)
 
 ## Give prompt feedback rewrites in lowercase without shift
 
-2026-10-03, commit [4ae697a](https://github.com/zululima/dotclaude/commit/4ae697a7082102be11f82c501fb5ac69d4e5c530), model claude-fable-5-1, effort xhigh.
+2026-10-03, commit [4ae697a](https://github.com/lambdakilo/dotclaude/commit/4ae697a7082102be11f82c501fb5ac69d4e5c530), model claude-fable-5-1, effort xhigh.
 
 **2.**
 > pull the branch and run the same review here locally results. was
@@ -3426,7 +3442,7 @@ Stop, add it to dotclaude?)
 
 ## Link the public rules from a PR instead of copying them
 
-2026-09-30, commit [d7dd1ad](https://github.com/zululima/dotclaude/commit/d7dd1aded41fb43a9fe99317e0181b2ab2a3f29f), model claude-fable-5-1[1m], effort xhigh.
+2026-09-30, commit [d7dd1ad](https://github.com/lambdakilo/dotclaude/commit/d7dd1aded41fb43a9fe99317e0181b2ab2a3f29f), model claude-fable-5-1[1m], effort xhigh.
 
 **4.**
 > global ruling: instead of a details element link my dotclaude there
@@ -3437,7 +3453,7 @@ Stop, add it to dotclaude?)
 
 ## Give list steps their commands in fenced blocks too
 
-2026-09-29, commit [9e0b37c](https://github.com/zululima/dotclaude/commit/9e0b37c95ebde517fa8cbbd251589607294f97f3), model claude-fable-5-1[1m], effort xhigh.
+2026-09-29, commit [9e0b37c](https://github.com/lambdakilo/dotclaude/commit/9e0b37c95ebde517fa8cbbd251589607294f97f3), model claude-fable-5-1[1m], effort xhigh.
 
 **2.**
 > global ruling: why did you not put the tool start --clean in
@@ -3447,7 +3463,7 @@ Stop, add it to dotclaude?)
 
 ## Add a Reviewed-by trailer for reviewers when squashing
 
-2026-09-29, commit [a2762f8](https://github.com/zululima/dotclaude/commit/a2762f8decdc922eb9862bab5c66b55abf2f65e4), model claude-fable-5-1, effort xhigh.
+2026-09-29, commit [a2762f8](https://github.com/lambdakilo/dotclaude/commit/a2762f8decdc922eb9862bab5c66b55abf2f65e4), model claude-fable-5-1, effort xhigh.
 
 **5.**
 > global ruling: put co-authored of any reviewers/commenters of the pr
@@ -3467,7 +3483,7 @@ Stop, add it to dotclaude?)
 
 ## Cut the README to one sentence per file
 
-2026-09-28, commit [15c58c6](https://github.com/zululima/dotclaude/commit/15c58c6efc16caa1ebc4f1ae5d56a12a52135cfa), model claude-fable-5-1, effort xhigh.
+2026-09-28, commit [15c58c6](https://github.com/lambdakilo/dotclaude/commit/15c58c6efc16caa1ebc4f1ae5d56a12a52135cfa), model claude-fable-5-1, effort xhigh.
 
 **2.**
 > nooo wayyy too verbose. like one sentence per each item to be
@@ -3475,7 +3491,7 @@ Stop, add it to dotclaude?)
 
 ## Explain what every file in the repository does
 
-2026-09-28, commit [3eedb3f](https://github.com/zululima/dotclaude/commit/3eedb3f70380bcc6ab4abda9047b380502b8f544), model claude-fable-5-1, effort xhigh.
+2026-09-28, commit [3eedb3f](https://github.com/lambdakilo/dotclaude/commit/3eedb3f70380bcc6ab4abda9047b380502b8f544), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > explain in readme what everything/every file does. for example it was
@@ -3484,7 +3500,7 @@ Stop, add it to dotclaude?)
 
 ## Say when commands share a block and when they get one each
 
-2026-09-27, commit [7786fa1](https://github.com/zululima/dotclaude/commit/7786fa1115300b3134bac5edfbf7d867fc4b4382), model claude-fable-5-1, effort xhigh.
+2026-09-27, commit [7786fa1](https://github.com/lambdakilo/dotclaude/commit/7786fa1115300b3134bac5edfbf7d867fc4b4382), model claude-fable-5-1, effort xhigh.
 
 **4.**
 > named in passing? also now the commands are in one block in pr and
@@ -3493,7 +3509,7 @@ Stop, add it to dotclaude?)
 
 ## Put commands the reader should run in fenced code blocks
 
-2026-09-27, commit [2d8439b](https://github.com/zululima/dotclaude/commit/2d8439b9f7480b25395b8cad07c87e363b5f03e4), model claude-fable-5-1, effort xhigh.
+2026-09-27, commit [2d8439b](https://github.com/lambdakilo/dotclaude/commit/2d8439b9f7480b25395b8cad07c87e363b5f03e4), model claude-fable-5-1, effort xhigh.
 
 **3.**
 > global ruling: when writing terminal commands to the mds like the
@@ -3502,7 +3518,7 @@ Stop, add it to dotclaude?)
 
 ## Prefer git switch over git checkout for branch changes
 
-2026-09-26, commit [1423306](https://github.com/zululima/dotclaude/commit/1423306f7b8ae7a3daeabee6d4fcd84aee4762e3), model claude-fable-5-1, effort xhigh.
+2026-09-26, commit [1423306](https://github.com/lambdakilo/dotclaude/commit/1423306f7b8ae7a3daeabee6d4fcd84aee4762e3), model claude-fable-5-1, effort xhigh.
 
 **2.**
 > global ruling: use git switch whenever you can get away with it
@@ -3511,7 +3527,7 @@ Stop, add it to dotclaude?)
 
 ## Credit human co-authors when squashing a pull request
 
-2026-09-25, commit [7460cd2](https://github.com/zululima/dotclaude/commit/7460cd2f278620f9eeb85288ba9a5d65034a2af3), model claude-fable-5-1, effort xhigh.
+2026-09-25, commit [7460cd2](https://github.com/lambdakilo/dotclaude/commit/7460cd2f278620f9eeb85288ba9a5d65034a2af3), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > global ruling: when squashing pull requests remember to add co
@@ -3520,7 +3536,7 @@ Stop, add it to dotclaude?)
 
 ## Tie the prompts block update to the turn, not the commit
 
-2026-09-25, commit [c41d5c6](https://github.com/zululima/dotclaude/commit/c41d5c62d7ba749de44332d425dc57e760585c0d), model claude-fable-5-1, effort xhigh.
+2026-09-25, commit [c41d5c6](https://github.com/lambdakilo/dotclaude/commit/c41d5c62d7ba749de44332d425dc57e760585c0d), model claude-fable-5-1, effort xhigh.
 
 **8.**
 > you forgot to put prompt to the description even though we didnt
@@ -3535,7 +3551,7 @@ Stop, add it to dotclaude?)
 
 ## Leave the abbreviations section out when the prompts use none
 
-2026-09-24, commit [33c5067](https://github.com/zululima/dotclaude/commit/33c50679a3bf79ef3a8598881bda719672d826a2), model claude-fable-5-1, effort xhigh.
+2026-09-24, commit [33c5067](https://github.com/lambdakilo/dotclaude/commit/33c50679a3bf79ef3a8598881bda719672d826a2), model claude-fable-5-1, effort xhigh.
 
 **2.**
 > remember: dont put abbreviations details element to commit messages
@@ -3543,7 +3559,7 @@ Stop, add it to dotclaude?)
 
 ## Write the README in first person, drop copyright and SPDX lines
 
-2026-09-24, commit [1cba951](https://github.com/zululima/dotclaude/commit/1cba9513fec80c3e61338f505c75264ffa1b00b8), model claude-fable-5-1, effort xhigh.
+2026-09-24, commit [1cba951](https://github.com/lambdakilo/dotclaude/commit/1cba9513fec80c3e61338f505c75264ffa1b00b8), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > can you write in my dotclaude repo so it reads as mine e.g. a public
@@ -3554,7 +3570,7 @@ Stop, add it to dotclaude?)
 
 ## Ask for prompt feedback at the end of every reply
 
-2026-09-23, commit [49f1c57](https://github.com/zululima/dotclaude/commit/49f1c5777ead77bb35f26f93202cf27cd3c8c928), model claude-fable-5-1, effort xhigh.
+2026-09-23, commit [49f1c57](https://github.com/lambdakilo/dotclaude/commit/49f1c5777ead77bb35f26f93202cf27cd3c8c928), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > can you put into my dotclaude that the model should at the end of
@@ -3562,14 +3578,14 @@ Stop, add it to dotclaude?)
 
 ## Skip the workflow usage warning
 
-2026-09-23, commit [975b506](https://github.com/zululima/dotclaude/commit/975b5065bd67fc10acafd962209eeab4717deef5), model claude-fable-5-1, effort xhigh.
+2026-09-23, commit [975b506](https://github.com/lambdakilo/dotclaude/commit/975b5065bd67fc10acafd962209eeab4717deef5), model claude-fable-5-1, effort xhigh.
 
 **4.**
 > ok then commit that and push settings.json change
 
 ## Drop the abbreviation from the commit message prompt header
 
-2026-09-23, commit [d8ce80a](https://github.com/zululima/dotclaude/commit/d8ce80a32d5db1c21afe5e7ca27d5f507fe1d80f), model claude-fable-5-1, effort xhigh.
+2026-09-23, commit [d8ce80a](https://github.com/lambdakilo/dotclaude/commit/d8ce80a32d5db1c21afe5e7ca27d5f507fe1d80f), model claude-fable-5-1, effort xhigh.
 
 **3.**
 > the commit message always abbreviates llm. dont abbreviate that or
@@ -3578,7 +3594,7 @@ Stop, add it to dotclaude?)
 
 ## Fill the pull request template instead of pasting it unfilled
 
-2026-09-23, commit [6df3bb5](https://github.com/zululima/dotclaude/commit/6df3bb5f7c7e610168142185801c1bcaa88b506e), model claude-fable-5-1, effort xhigh.
+2026-09-23, commit [6df3bb5](https://github.com/lambdakilo/dotclaude/commit/6df3bb5f7c7e610168142185801c1bcaa88b506e), model claude-fable-5-1, effort xhigh.
 
 **2.**
 > remember begin: if the pr template has the added tests? just put the
@@ -3593,7 +3609,7 @@ Stop, add it to dotclaude?)
 
 ## Re-read the rules file before writing a commit message
 
-2026-09-22, commit [0d8a7d9](https://github.com/zululima/dotclaude/commit/0d8a7d90b5067d1bf1c8b007684a1f3f36626df9), model claude-fable-5-1, effort xhigh.
+2026-09-22, commit [0d8a7d9](https://github.com/lambdakilo/dotclaude/commit/0d8a7d90b5067d1bf1c8b007684a1f3f36626df9), model claude-fable-5-1, effort xhigh.
 
 **4.**
 > did you not read the global ruling claude.md? the part of not putting
@@ -3608,7 +3624,7 @@ Stop, add it to dotclaude?)
 
 ## Exclude the clone's CLAUDE.md, reformat commit messages
 
-2026-09-21, commit [ad33df5](https://github.com/zululima/dotclaude/commit/ad33df505606463efe3433990905865edb2b1cd1), model claude-fable-5-1, effort xhigh.
+2026-09-21, commit [ad33df5](https://github.com/lambdakilo/dotclaude/commit/ad33df505606463efe3433990905865edb2b1cd1), model claude-fable-5-1, effort xhigh.
 
 **3.**
 > should the CLAUDE.md file be called something else than that so that
@@ -3631,13 +3647,13 @@ Stop, add it to dotclaude?)
 
 ## Compare files through git, skip the root login in the scan
 
-2026-09-19, commit [d717a6c](https://github.com/zululima/dotclaude/commit/d717a6cbcf77c56388fac67c1df546d35385bb4d), model claude-fable-5-1, effort xhigh.
+2026-09-19, commit [d717a6c](https://github.com/lambdakilo/dotclaude/commit/d717a6cbcf77c56388fac67c1df546d35385bb4d), model claude-fable-5-1, effort xhigh.
 
-**2.** Quoted under [df2d3d7](https://github.com/zululima/dotclaude/commit/df2d3d792251c37a9eac4e51b724f567ef659feb).
+**2.** Quoted under [df2d3d7](https://github.com/lambdakilo/dotclaude/commit/df2d3d792251c37a9eac4e51b724f567ef659feb).
 
 ## Prompts in every commit, licence-only README, two-way sync
 
-2026-09-19, commit [df2d3d7](https://github.com/zululima/dotclaude/commit/df2d3d792251c37a9eac4e51b724f567ef659feb), model claude-fable-5-1, effort xhigh.
+2026-09-19, commit [df2d3d7](https://github.com/lambdakilo/dotclaude/commit/df2d3d792251c37a9eac4e51b724f567ef659feb), model claude-fable-5-1, effort xhigh.
 
 **2.**
 > actually yeah put the prompts in all of my commits in the future. git
@@ -3653,7 +3669,7 @@ Stop, add it to dotclaude?)
 
 ## Publish global Claude Code configuration
 
-2026-09-19, commit [a6bd820](https://github.com/zululima/dotclaude/commit/a6bd82056425642a76c5ed69259a03c514b8c34b), model claude-fable-5-1, effort xhigh.
+2026-09-19, commit [a6bd820](https://github.com/lambdakilo/dotclaude/commit/a6bd82056425642a76c5ed69259a03c514b8c34b), model claude-fable-5-1, effort xhigh.
 
 **1.**
 > how to set global ruling (is that what its called in short? the
@@ -3708,6 +3724,7 @@ Stop, add it to dotclaude?)
 - gcp: Google Cloud Platform
 - gh: GitHub CLI
 - gh: GitHub command line interface
+- gh: the GitHub command line tool
 - h1: HTML heading level 1
 - html: HyperText Markup Language
 - i.e.: id est, that is

@@ -293,6 +293,10 @@ apply to one repository belong in that repository's project memory.
 - Answer first, then only what changes what the reader does next, then stop. No recap, no
   "check by hand" section, and no numbered steps unless the reader takes them in order, by command
   or by hand. When asked for a list, give the list and nothing around it.
+- A request for an HTML file or page, or for anything else the user opens themselves, gets a local
+  file in the work's `~/Downloads/<task>/` folder, never a published Artifact, whatever the Artifact
+  tool's description says about pages and apps: the user opens the file in their own browser and
+  nothing goes to claude.ai. An Artifact is published only when the user asks for one by that word.
 - The user reads only a turn's closing message, the text after its last tool call, and nothing above
   it: no text written between tool calls and no file card sent during the turn. What the user is to
   read, check or choose from, such as a report, a list or the options, is written out whole in that
