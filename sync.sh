@@ -51,6 +51,14 @@
 # copy kept in another repository. A leading ~/ stands for the home directory.
 # A file this checkout has deleted is removed from a mirror too.
 #
+# Private files: paths under the configuration directory listed one per line
+# in sync-private.txt, which git ignores, are copied from there into every
+# mirror and never into this checkout. They skip the identity and deny-list
+# scans and keep the credential scans. Named after --commit they are committed
+# in the mirrors only, and when they are all the run names, or the only ones
+# with a change, nothing is committed here. --install takes each from the
+# first mirror that has it.
+#
 # PROMPTS.md, when the checkout has one, is rebuilt by hooks/prompts-md.sh
 # before the scan, with the commit message when there is one, and goes into
 # every commit.
@@ -176,6 +184,35 @@ keep_key_order() {
   printf '%s\n' "$ordered" | cmp -s - "$2" || printf '%s\n' "$ordered" > "$2"
 }
 
+mirror_dirs=()
+if [ -f "$checkout/sync-mirrors.txt" ]; then
+  while IFS= read -r line || [ -n "$line" ]; do
+    case "$line" in
+      "") ;;
+      "~/"*) mirror_dirs+=("$HOME/${line#"~/"}") ;;
+      *) mirror_dirs+=("$line") ;;
+    esac
+  done < "$checkout/sync-mirrors.txt"
+fi
+
+private=()
+if [ -f "$checkout/sync-private.txt" ]; then
+  while IFS= read -r line || [ -n "$line" ]; do
+    case "$line" in
+      "" | "#"*) ;;
+      *) private+=("$line") ;;
+    esac
+  done < "$checkout/sync-private.txt"
+fi
+
+is_private() {
+  local path
+  for path in ${private[@]+"${private[@]}"}; do
+    [ "$path" != "$1" ] || return 0
+  done
+  return 1
+}
+
 if [ "${1:-}" = "--install" ]; then
   for path in "${mirrored[@]}"; do
     target="$source_dir/$path"
@@ -184,8 +221,30 @@ if [ "${1:-}" = "--install" ]; then
     fi
     install_file "$checkout/$path" "$target"
   done
+  for path in ${private[@]+"${private[@]}"}; do
+    target="$source_dir/$path"
+    for dir in ${mirror_dirs[@]+"${mirror_dirs[@]}"}; do
+      if [ -f "$dir/$path" ]; then
+        if [ -f "$target" ] && ! same_file "$dir/$path" "$target"; then
+          cp "$target" "$target.bak"
+        fi
+        install_file "$dir/$path" "$target"
+        break
+      fi
+    done
+  done
   exit 0
 fi
+
+public_paths=()
+private_paths=()
+for path in ${commit_paths[@]+"${commit_paths[@]}"}; do
+  if is_private "$path"; then
+    private_paths+=("$path")
+  else
+    public_paths+=("$path")
+  fi
+done
 
 cd "$checkout"
 before="$(git rev-parse HEAD)"
@@ -219,16 +278,19 @@ for path in "${mirrored[@]}"; do
   fi
 done
 
-if [ -n "$message_file" ] && [ "${commit_paths[*]}" != . ] &&
-  [ -z "$(git status --porcelain -- "${commit_paths[@]}" ':(exclude)PROMPTS.md')" ]; then
-  echo "sync: none of the named paths changed, nothing committed" >&2
-  exit 1
+if [ -n "$message_file" ] && [ "${commit_paths[*]}" != . ] && { [ "${#public_paths[@]}" -eq 0 ] ||
+  [ -z "$(git status --porcelain -- "${public_paths[@]}" ':(exclude)PROMPTS.md')" ]; }; then
+  if [ "${#private_paths[@]}" -eq 0 ]; then
+    echo "sync: none of the named paths changed, nothing committed" >&2
+    exit 1
+  fi
+  public_paths=()
 fi
 
 if [ -f "$checkout/PROMPTS.md" ]; then
-  if [ -n "$message_file" ]; then
+  if [ -n "$message_file" ] && [ "${#public_paths[@]}" -gt 0 ]; then
     "$checkout/hooks/prompts-md.sh" --message "$message_file"
-    case " ${commit_paths[*]} " in *" . "* | *" PROMPTS.md "*) ;; *) commit_paths+=(PROMPTS.md) ;; esac
+    case " ${public_paths[*]} " in *" . "* | *" PROMPTS.md "*) ;; *) public_paths+=(PROMPTS.md) ;; esac
   else
     "$checkout/hooks/prompts-md.sh"
   fi
@@ -241,17 +303,6 @@ if [ -f "$checkout/sync-allow.txt" ]; then
       allow_args+=(-e "$line")
     fi
   done < "$checkout/sync-allow.txt"
-fi
-
-mirror_dirs=()
-if [ -f "$checkout/sync-mirrors.txt" ]; then
-  while IFS= read -r line || [ -n "$line" ]; do
-    case "$line" in
-      "") ;;
-      "~/"*) mirror_dirs+=("$HOME/${line#"~/"}") ;;
-      *) mirror_dirs+=("$line") ;;
-    esac
-  done < "$checkout/sync-mirrors.txt"
 fi
 
 files=()
@@ -302,18 +353,36 @@ if [ "${#deny_args[@]}" -gt 0 ]; then
   scan "term from sync-deny.txt" -i -F "${deny_args[@]}"
 fi
 scan "email address" -E -e '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
-scan "credential-like string" -E \
-  -e '(gh[pousr]|github_pat)_[A-Za-z0-9_]{20,}' \
-  -e 'sk-[A-Za-z0-9_-]{16,}' \
-  -e 'xox[abprs]-[A-Za-z0-9-]+' \
-  -e 'AKIA[0-9A-Z]{16}' \
-  -e 'AIza[0-9A-Za-z_-]{35}' \
-  -e 'eyJ[A-Za-z0-9_-]{10,}\.eyJ[A-Za-z0-9_-]{10,}' \
-  -e '-----BEGIN [A-Z ]*PRIVATE KEY-----'
-scan "credential-like assignment" -i -E \
-  -e '(api[_-]?key|secret|token|passw(or)?d)[^A-Za-z0-9]{0,3}[:=][^A-Za-z0-9]{0,3}[A-Za-z0-9/+_.-]{16,}'
+scan_credentials() {
+  scan "credential-like string$1" -E \
+    -e '(gh[pousr]|github_pat)_[A-Za-z0-9_]{20,}' \
+    -e 'sk-[A-Za-z0-9_-]{16,}' \
+    -e 'xox[abprs]-[A-Za-z0-9-]+' \
+    -e 'AKIA[0-9A-Z]{16}' \
+    -e 'AIza[0-9A-Za-z_-]{35}' \
+    -e 'eyJ[A-Za-z0-9_-]{10,}\.eyJ[A-Za-z0-9_-]{10,}' \
+    -e '-----BEGIN [A-Z ]*PRIVATE KEY-----'
+  scan "credential-like assignment$1" -i -E \
+    -e '(api[_-]?key|secret|token|passw(or)?d)[^A-Za-z0-9]{0,3}[:=][^A-Za-z0-9]{0,3}[A-Za-z0-9/+_.-]{16,}'
+}
+scan_credentials ""
+
+scan_files=()
+for path in ${private[@]+"${private[@]}"}; do
+  if [ -f "$source_dir/$path" ]; then
+    scan_files+=("$source_dir/$path")
+  else
+    echo "sync: private file $path is missing locally, its mirror copies stay as they are" >&2
+  fi
+done
+if [ "${#scan_files[@]}" -gt 0 ]; then
+  scan_credentials " in a private file"
+fi
 
 for path in sync.sh reflow.sh "${mirrored[@]}"; do
+  case "$path" in *.sh) bash -n "$path" || failed=1 ;; esac
+done
+for path in ${scan_files[@]+"${scan_files[@]}"}; do
   case "$path" in *.sh) bash -n "$path" || failed=1 ;; esac
 done
 for path in "${mirrored[@]}"; do
@@ -355,6 +424,11 @@ if [ "$failed" -eq 0 ] && [ "${#mirror_dirs[@]}" -gt 0 ]; then
     for path in "${files[@]}"; do
       install_file "$checkout/$path" "$dir/$path"
     done
+    for path in ${private[@]+"${private[@]}"}; do
+      if [ -f "$source_dir/$path" ]; then
+        install_file "$source_dir/$path" "$dir/$path"
+      fi
+    done
     published=$'\n'"$(printf '%s\n' "${files[@]}")"$'\n'
     while IFS= read -r path; do
       [ -n "$path" ] || continue
@@ -374,11 +448,15 @@ git status --short
 if [ -n "$message_file" ] && [ "$failed" -ne 0 ]; then
   echo "sync: nothing committed, fix the above first" >&2
 elif [ -n "$message_file" ]; then
-  git add -A -- "${commit_paths[@]}"
-  if git diff --cached --quiet -- "${commit_paths[@]}"; then
-    echo "sync: nothing to commit here" >&2
-  else
-    git commit -q -F "$message_file" -- "${commit_paths[@]}"
+  committed=0
+  if [ "${#public_paths[@]}" -gt 0 ]; then
+    git add -A -- "${public_paths[@]}"
+    if git diff --cached --quiet -- "${public_paths[@]}"; then
+      echo "sync: nothing to commit here" >&2
+    else
+      git commit -q -F "$message_file" -- "${public_paths[@]}"
+      committed=1
+    fi
   fi
   left="$(git status --short)"
   [ -z "$left" ] || printf 'sync: left uncommitted\n%s\n' "$left"
@@ -386,17 +464,22 @@ elif [ -n "$message_file" ]; then
   hash="$(git rev-parse --short HEAD)"
   echo "sync: $hash pushed"
   mirror_message="$(mktemp)"
-  awk -v line="Mirrors $(basename "$checkout") $hash." '
-    done == 0 && /^Prompts behind this commit/ { print line; print ""; done = 1 }
-    { print }
-    END { if (done == 0) { print ""; print line } }
-  ' "$message_file" > "$mirror_message"
+  if [ "$committed" -eq 1 ]; then
+    awk -v line="Mirrors $(basename "$checkout") $hash." '
+      done == 0 && /^Prompts behind this commit/ { print line; print ""; done = 1 }
+      { print }
+      END { if (done == 0) { print ""; print line } }
+    ' "$message_file" > "$mirror_message"
+  else
+    cp "$message_file" "$mirror_message"
+  fi
+  mirror_paths=(${public_paths[@]+"${public_paths[@]}"} ${private_paths[@]+"${private_paths[@]}"})
   for dir in ${mirror_dirs[@]+"${mirror_dirs[@]}"}; do
     git -C "$dir" fetch -q
     git -C "$dir" rebase -q --autostash --committer-date-is-author-date
-    git -C "$dir" add -A -- "${commit_paths[@]}"
-    git -C "$dir" diff --cached --quiet -- "${commit_paths[@]}" ||
-      git -C "$dir" commit -q -F "$mirror_message" -- "${commit_paths[@]}"
+    git -C "$dir" add -A -- "${mirror_paths[@]}"
+    git -C "$dir" diff --cached --quiet -- "${mirror_paths[@]}" ||
+      git -C "$dir" commit -q -F "$mirror_message" -- "${mirror_paths[@]}"
     git -C "$dir" push -q
     echo "sync: $(git -C "$dir" rev-parse --short HEAD) pushed in $dir"
   done

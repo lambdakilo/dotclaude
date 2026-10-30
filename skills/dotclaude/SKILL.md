@@ -58,6 +58,14 @@ mirrored file states what holds now.
   every copy. Which directories those are and what each is for lives in the dotclaude checkout's
   project memory, never in this skill, in `CLAUDE.md` or in another tracked file, so the public
   repository shows the mechanism and nothing it points at.
+- A file under `~/.claude` that names a project, client or person can still reach the mirrors:
+  `sync-private.txt`, beside `sync.sh` and ignored by git, lists such files one per line, and
+  `sync.sh` copies each from `~/.claude` into every mirror, never into the checkout, scanning it
+  for credentials alone. Named after `--commit`, they are committed in the mirrors only, and a run
+  that names no other changed path commits nothing in the checkout. The mirrors' commit-msg hook
+  still checks the deny list, so the message names such a file by what it does. A file that no
+  copy may hold, such as one with a contract's figures, stays off the list. Which files the list
+  names lives in the checkout's project memory, and each of them ends by saying it is mirrored.
 
 ## Identity and contents
 

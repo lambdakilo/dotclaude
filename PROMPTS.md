@@ -5,9 +5,27 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
+## Copy the files sync-private.txt lists into the mirrors only
+
+2026-10-30, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [a run of the morning routine left out]
+
+**2.** (answer to whether the hours check should draft internal hours on a day with none)
+> yess add it also extend the thingy before 11 always and extend
+> backwards the thing after 11:30 so that it begins at 1130
+
+**3.**
+> if the [hours] skill isnt in my dotclaude i think it should be in
+> [the private mirror] though? some ignore file too?
+
+(Should the contract figures in that skill go to the mirror too?)
+> Keep them local (Recommended)
+
 ## Say why the browser pane is not on screen
 
-2026-10-29, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+2026-10-29, commit [be53eb7](https://github.com/zululima/dotclaude/commit/be53eb7b18143a232e6a7b1846fb3d8d848bb76c), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about other work left out]

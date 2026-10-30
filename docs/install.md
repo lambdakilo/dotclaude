@@ -60,3 +60,10 @@ for dir in ~/Projects/dotclaude $(sed "s|^~|$HOME|" ~/Projects/dotclaude/sync-mi
     chmod +x "$hook"
 done
 ```
+
+Two more files beside `sync.sh`, both ignored by git, keep a second copy in another repository, such
+as a private one your team shares. `sync-mirrors.txt` lists the folders that get a copy of every
+published file. `sync-private.txt` lists files under `~/.claude` that go to those folders only and
+never into your public copy, such as a skill that names a project you work on; `sync.sh` scans them
+for credentials alone, and `sync.sh --commit` commits them in the folders only. A file left off both
+lists stays on your machine.
