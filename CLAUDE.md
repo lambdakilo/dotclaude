@@ -550,9 +550,12 @@ apply to one repository belong in that repository's project memory.
   the same turn as the ask, so the pane is open beside the reply. `show_pane` acts only while the
   session is in a window and never takes one from another session. When it answers that the session
   is in none, a `PushNotification` names the page that waits, and the reply opens with that ask and
-  with why the pane is not on screen: the session was in no window when it tried, and the user's
-  next message opens it, since every later turn calls `show_pane` again first while the step still
-  waits. A deny rule in `settings.json` blocks Claude in Chrome, which the user does not want.
+  with why the pane is not on screen, in the user's terms: the app opens a pane only beside a
+  session that one of its windows shows, and none showed this one when it tried, as when another
+  session is in front or the user follows from the phone. Every later turn calls `show_pane` again
+  first while the step still waits, so the pane opens with the first turn that finds the session in
+  a window, and no reply promises that the next message opens it. A deny rule in `settings.json`
+  blocks Claude in Chrome, which the user does not want.
 - Once the browser pane, the iOS simulator panel or a simulator has done its job in a turn, the
   session closes it before the reply: each pane tab with `tabs_close`, then the pane with
   `close_pane` and `preview`, since closing the last tab leaves the empty pane on screen; the panel

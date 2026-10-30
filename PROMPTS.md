@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep learning work the user's own, taught by norms
+## Say plainly why the browser pane stays shut
 
 2026-10-30, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask about a downstream task left out]
+
+**2.**
+> [a note on that task left out] but why didnt you open up the panel
+> for me
+
+## Keep learning work the user's own, taught by norms
+
+2026-10-30, commit [257295d](https://github.com/zululima/dotclaude/commit/257295d3549cc4f789eeac5be6c9fcbf1715e27d), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a question about setting up a design portfolio left out]
