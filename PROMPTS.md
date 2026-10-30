@@ -5,9 +5,31 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Copy the files sync-private.txt lists into the mirrors only
+## Keep learning work the user's own, taught by norms
 
 2026-10-30, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [a question about setting up a design portfolio left out]
+
+**2.**
+> [an ask about a job application left out]
+
+**3.**
+> [an ask about a portfolio piece left out]
+
+**4.** (answer to a next-step question)
+> [a choice of portfolio piece left out]
+
+**5.**
+> right but what am i learning in the penpot thingy? [a question
+> about the tool's setup left out] i kinda feel like i should refer to
+> common design norms when doing those as in to show off my design
+> skills rather than i just did what claude told me to do
+
+## Copy the files sync-private.txt lists into the mirrors only
+
+2026-10-30, commit [aa0af1d](https://github.com/zululima/dotclaude/commit/aa0af1de3d035256f6b049e1fa1461c091b86cd0), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [a run of the morning routine left out]

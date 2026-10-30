@@ -608,6 +608,12 @@ apply to one repository belong in that repository's project memory.
   the browser pane names the button that saves it, and the session reads that page as it stands
   before its first navigate, reload or click away from it, saves what is still unsaved and
   leaves only once the input is saved.
+- Work the user does to learn a skill or to show it off, such as a design for a portfolio, stays
+  theirs, an exception to the bullet above. The session teaches the norms the work rests on, each
+  with its source, such as a grid system, a type scale or a contrast standard, and leaves every
+  choice to the user, so that each choice in the finished work names the norm behind it. It hands
+  over no recipe of values to copy. Its own part is what the user asks of it, such as the brief, the
+  copy or a critique of a draft against those norms.
 - Another person's own entry in a shared document, such as their row in a contact list with their
   phone number, title and photo, is theirs to add, change or remove. A session never writes one or
   carries it over for them, also when it shows up in another copy such as an old wiki, and never
