@@ -53,6 +53,19 @@ const suites = [
     ['denies another person\'s calendar', () => decision(run({ tool_input: { calendarId: address('someone') } })) === 'deny'],
   ]],
 
+  ['push-only-when-locked.sh', run => {
+    const push = { hook_event_name: 'PreToolUse', tool_name: 'PushNotification', tool_input: { message: 'Sign-in waits', status: 'proactive' } }
+    const marker = path.join(home, 'present')
+    return [
+      ['lets a push through with no marker set', () => quiet(run(push))],
+      ['lets a push through while the screen is locked', () => quiet(run(push, { env: { CLAUDE_CLIENT_PRESENCE_FILE: marker } }))],
+      ['denies a push while the screen is unlocked', () => {
+        write(marker, '')
+        return decision(run(push, { env: { CLAUDE_CLIENT_PRESENCE_FILE: marker } })) === 'deny'
+      }],
+    ]
+  }],
+
   ['check-not-piped.sh', run => [
     ['refuses a test run piped into tail', () => refused(run(bash('npm test | tail -5')))],
     ['refuses vitest piped into grep', () => refused(run(bash('npx vitest run 2>&1 | grep FAIL')))],

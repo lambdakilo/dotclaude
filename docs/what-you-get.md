@@ -103,8 +103,10 @@
   for an answer, only while the Mac is locked.
   [`lock-listener.swift`](../presence/lock-listener.swift) keeps the file that
   `CLAUDE_CLIENT_PRESENCE_FILE` in `settings.json` names in step with the screen lock: it is there
-  while the screen is unlocked, and Claude Code skips the push then. Mac only. This builds it and
-  starts it at every login:
+  while the screen is unlocked, and Claude Code skips the push then. The desktop app pushes a
+  session that no window shows even while you work in another one, so
+  [`push-only-when-locked.sh`](../hooks/push-only-when-locked.sh) stops Claude's own pushes while
+  the file is there. Mac only. This builds the listener and starts it at every login:
   ```zsh
   ~/.claude/presence/install.sh
   ```

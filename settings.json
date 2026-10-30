@@ -307,6 +307,16 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "^PushNotification$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/push-only-when-locked.sh\"",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "Stop": [

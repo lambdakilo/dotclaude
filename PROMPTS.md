@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep a Slack draft from repeating the page it links
+## Push to the phone only while the Mac is locked
 
 2026-10-30, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> you seem to notify my phone a lot even though im not afk. for example
+> 10misn ago [a push about another session's task] waits for you
+
+## Keep a Slack draft from repeating the page it links
+
+2026-10-30, commit [b107263](https://github.com/zululima/dotclaude/commit/b1072631c964a8e34159204f28212de5e89aa3d6), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > [an ask for a chat draft left out]
