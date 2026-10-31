@@ -4,8 +4,11 @@ const TURN = { answer: '', durationMs: 1, isAborted: false, turnId: 't1', reason
 const START = { cwd: '/', surface: 'terminal', isInteractive: true } as const
 const FIGURES = '\u{1F9E0} 16%'
 const FIRE = '\u{1F525}'
+const ALARM = '\u23F0'
 const ICE = '\u{1F9CA}'
 const HOURGLASS = '\u23F3'
+const HIT = '\u2705'
+const MISS = '\u{1F4B8}'
 // 12:20 on 20 Oct at UTC+3, and the next midnight there
 const NOW = 1792488000_000
 const MIDNIGHT = 1792530000_000
@@ -66,9 +69,39 @@ test('counts down between turns, then names the day once it is past', async ($, 
   expect(shown).toEqual([
     `${FIRE} 2 min, ${FIGURES}`,
     `${FIRE} 1 min, ${FIGURES}`,
-    `${FIRE} <1 min, ${FIGURES}`,
+    `${ALARM} <1 min, ${FIGURES}`,
     `${ICE} since 12:22, ${FIGURES}`,
     `${ICE} since 20 Oct, ${FIGURES}`,
+  ])
+})
+
+test('marks the last prompt and turns to the alarm and the ice between ticks', async ($, on) => {
+  const shown: (string | undefined)[] = []
+  let mark = HIT
+  const clock = mock.clock(on, { now: NOW })
+  on('session.id', () => ({ value: 'abc' }))
+  on('process.run', ($, e) => {
+    if (e.argv[1] === '--next') return ran('')
+    return ran(`${FIGURES}\n${NOW / 1000 + 65}\n10800\n${mark}\n`)
+  })
+  on('ui.status', ($, e) => {
+    shown.push(e.text)
+    return { value: undefined }
+  })
+  on('session.start', () => ({ cwd: '/' }))
+  on('turn.complete', () => ({ text: '' }))
+
+  await $.session.start(START)
+  mark = MISS
+  await $.turn.complete(TURN)
+  await clock.advance(5_001)
+  await clock.advance(59_999)
+
+  expect(shown).toEqual([
+    `${FIRE} 1 min ${HIT}, ${FIGURES}`,
+    `${FIRE} 1 min ${MISS}, ${FIGURES}`,
+    `${ALARM} <1 min ${MISS}, ${FIGURES}`,
+    `${ICE} since 12:21, ${FIGURES}`,
   ])
 })
 

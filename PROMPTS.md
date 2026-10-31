@@ -5,9 +5,28 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Give text for Slack as a draft, written as a report
+## Mark cache hits and the last warm minute in the usage line
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> ill use this chat as the time being for the next cold session since i
+> cant refresh mods on other sessions yet. give me status
+
+**2.**
+> so does the cache warm refresh at new prompt or when the reply is
+> done? like im not always sure if at 1min i send prompt what happens
+
+**3.**
+> hmmm could it also show an emoji and tell if i still had time to hit
+> the cache or not :D
+
+(what the emoji should tell: before sending, after sending or both)
+> Both (Recommended)
+
+## Give text for Slack as a draft, written as a report
+
+2026-10-31, commit [e748207](https://github.com/zululima/dotclaude/commit/e748207c60211dd5a3af3aeb8e34a7e3ffc3e6bf), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask about scheduling a team event left out]

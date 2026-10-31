@@ -1,11 +1,12 @@
-import type { EngineInterface, Register } from 'claude-code'
+import type { EngineInterface, Register, Timer } from 'claude-code'
 
-type Usage = { figures: string; coldAt: number; offset: number }
+type Usage = { figures: string; coldAt: number; offset: number; mark: string }
 type Other = { coldAt: number; title: string }
 
 const DAY = 86_400_000
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const FIRE = '\u{1F525}'
+const ALARM = '⏰'
 const ICE = '\u{1F9CA}'
 const HOURGLASS = '\u23F3'
 // The desktop app cuts the status line at about this many characters.
@@ -19,15 +20,17 @@ let others: Other[] = []
 let othersReadAt = -Infinity
 let shown: string | undefined
 let isBusy = false
+let flip: Timer | undefined
 
 const pad = (n: number) => String(n).padStart(2, '0')
 
 // The offset is the one usage.sh read from the host's clock, so the UTC
 // getters give local time whatever zone this environment runs in.
-const cache = (now: number, { coldAt, offset }: Usage) => {
+const cache = (now: number, { coldAt, offset, mark }: Usage) => {
   const left = coldAt - now
-  if (left >= 60_000) return `${FIRE} ${Math.floor(left / 60_000)} min`
-  if (left > 0) return `${FIRE} <1 min`
+  const after = mark ? ` ${mark}` : ''
+  if (left >= 60_000) return `${FIRE} ${Math.floor(left / 60_000)} min${after}`
+  if (left > 0) return `${ALARM} <1 min${after}`
 
   const cold = new Date(coldAt + offset)
   const isToday = Math.floor((coldAt + offset) / DAY) === Math.floor((now + offset) / DAY)
@@ -80,17 +83,39 @@ const readOthers = async ($: EngineInterface) => {
   othersReadAt = await $.clock.now()
 }
 
+const redraw = async ($: EngineInterface) => {
+  const text = await line($)
+  if (text === shown) return
+
+  shown = text
+  $.ui.status(text)
+}
+
+// The alarm clock and the ice show the moment they apply, not at the next tick,
+// so the line never says a prompt still makes it when it would not.
+const schedule = async ($: EngineInterface) => {
+  flip?.cancel()
+  flip = undefined
+  if (!usage) return
+  const now = await $.clock.now()
+  const at = [usage.coldAt - 60_000 + 1, usage.coldAt].find(t => t > now)
+  if (at === undefined) return
+
+  flip = $.clock.after(at - now, () => void redraw($).then(() => schedule($)))
+}
+
 const show = async ($: EngineInterface) => {
   const id = await $.session.id()
   const { exitCode, stdout } = await $.process.run([`${$.plugin.root}/usage.sh`, '--status', id])
-  const [figures, coldAt, offset] = stdout.trim().split('\n')
+  const [figures, coldAt, offset, mark = ''] = stdout.trim().split('\n')
   usage =
     exitCode === 0 && figures && coldAt && offset
-      ? { figures, coldAt: Number(coldAt) * 1000, offset: Number(offset) * 1000 }
+      ? { figures, coldAt: Number(coldAt) * 1000, offset: Number(offset) * 1000, mark }
       : undefined
 
   shown = await line($)
   $.ui.status(shown)
+  await schedule($)
 }
 
 // A running turn keeps refreshing the cache, so the transcript is read again.
@@ -98,11 +123,7 @@ const show = async ($: EngineInterface) => {
 const tick = async ($: EngineInterface) => {
   if ((await $.clock.now()) - othersReadAt >= 60_000) await readOthers($)
   if (isBusy) return show($)
-  const text = await line($)
-  if (text === shown) return
-
-  shown = text
-  $.ui.status(text)
+  await redraw($)
 }
 
 export const register: Register = on => {

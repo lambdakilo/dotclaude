@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 # Prints the status line of the usage mod: a fire and the minutes the prompt
-# cache stays warm, or an ice cube and since when it is cold, then how full the
-# context window is. The other modes total tokens, what they would cost at the
+# cache stays warm, an alarm clock in its last minute, or an ice cube and since
+# when it is cold, with a check mark when the last prompt read the cache or
+# money with wings when it wrote it again, then how full the context window
+# is. The other modes total tokens, what they would cost at the
 # first-party API list prices and their energy. The transcript repeats a
 # response's usage on every streamed block, so each response id counts once. A
 # model missing from the price table adds tokens but no cost, and the totals
@@ -12,8 +14,9 @@
 #   usage.sh <transcript>   a transcript file
 #   usage.sh --status <session id or transcript>
 #                           the context figure, the second the cache goes
-#                           cold and the UTC offset then in seconds, a line
-#                           each, for the mod to count down from
+#                           cold, the UTC offset then in seconds and the last
+#                           prompt's mark, a line each, for the mod to count
+#                           down from
 #   usage.sh --next <session id>
 #                           the other sessions of the last hour whose cache is
 #                           still warm, soonest cold first: the second it goes
@@ -44,20 +47,41 @@ common='
   def secs: (.[0:19] + "Z" | fromdateiso8601) + ((.[20:23] | tonumber?) // 0) / 1000;
   def all_in: (.input_tokens | n) + (.cache_creation_input_tokens | n)
     + (.cache_read_input_tokens | n) + (.output_tokens | n);
-  def responses($main): reduce (inputs | fromjson? | select(.timestamp != null)) as $e ({seen: {}, r: []};
+  def scan($main): reduce (inputs | fromjson? | select(.timestamp != null)) as $e ({seen: {}, r: [], prompts: []};
       (if $e.uuid != null then .seen[$e.uuid] = ($e.timestamp | secs) else . end)
       | if $e.type == "assistant" and $e.message.usage != null
           and $e.message.model != "<synthetic>" and $e.message.id != null
         then .r += [{id: $e.message.id, model: $e.message.model, u: $e.message.usage,
           at: ($e.timestamp | secs), parent: $e.parentUuid, main: (input_filename == $main)}]
-        else . end)
-    | .seen as $seen
+        elif $e.type == "user" and $e.isMeta != true and $e.isCompactSummary != true
+          and ($e.origin.kind // "human") == "human"
+          and ($e.message.content | type == "string" or (type == "array" and any(.[]; .type == "text")))
+        then .prompts += [$e.timestamp | secs]
+        else . end);
+
+  # A request goes out once the entry it answers is written, and the cache
+  # stays warm from then. The response is stamped when its first block is
+  # done, seconds later, minutes after a long thought.
+  def grouped: .seen as $seen
     | .r | group_by(.id)
     | map(min_by(.at) as $first
-      | {id: .[0].id, model: .[0].model, u: .[-1].u, at: $first.at, main: .[0].main,
-         busy: ([(map(.at) | max) - ($seen[$first.parent // empty] // $first.at), 0] | max)});
+      | ($seen[$first.parent // empty] // $first.at) as $sent
+      | {id: .[0].id, model: .[0].model, u: .[-1].u, at: $first.at, sent: $sent, main: .[0].main,
+         busy: ([(map(.at) | max) - $sent, 0] | max)});
+  def responses($main): scan($main) | grouped;
   def cold_at: (if any(.[]; (.u.cache_creation.ephemeral_1h_input_tokens | n) > 0)
-    then 3600 else 300 end) as $ttl | max_by(.at).at + $ttl | floor;
+    then 3600 else 300 end) as $ttl | (map(.sent) | max) + $ttl | floor;
+
+  # A prompt read the cache when its first response read at least 80% of the
+  # request before it from there. One that missed reads only the system prompt
+  # other sessions keep warm.
+  def mark($prompts): ($prompts | max) as $p
+    | (map(select(.at < $p)) | max_by(.at)) as $before
+    | (map(select(.at > $p)) | min_by(.at)) as $first
+    | if $p == null or $before == null or $first == null then ""
+      elif ($first.u.cache_read_input_tokens | n) >= 0.8 * ($before.u | (.input_tokens | n)
+        + (.cache_creation_input_tokens | n) + (.cache_read_input_tokens | n)) then "✅"
+      else "💸" end;
 
   # Energy: the seconds from the entry a response answers to its last block,
   # times the share of one request in an 8-GPU H100 node as "How Hungry is AI?"
@@ -161,8 +185,9 @@ if [ "${1:-}" = --next ]; then
       IFS=$'\t' read -r _ archived title < <(printf '%s\n' "$known" | grep -F "$id	")
       [ "$archived" = true ] && continue
       [ -n "$title" ] || title=$(grep '"type":"custom-title"' "$f" | tail -1 | jq -r '.customTitle // empty' 2>/dev/null)
-      # Only responses carry usage, and they are a tenth of a long transcript.
-      cold=$(grep '"type":"assistant"' "$f" | jq -nrR "$common"'responses("") | select(length > 0) | cold_at' 2>/dev/null)
+      # Only responses and the entries they answer count, a part of a long
+      # transcript.
+      cold=$(grep -E '"type":"(assistant|user|attachment)"' "$f" | jq -nrR "$common"'responses("") | select(length > 0) | cold_at' 2>/dev/null)
       [ -n "$cold" ] && [ "$cold" -gt "$now" ] && printf '%s\t%s\n' "$cold" "${title:-${id:0:8}}"
     done | sort -n
   exit 0
@@ -179,12 +204,12 @@ if [ -n "$transcript" ] && [ ! -f "$transcript" ]; then
 fi
 [ -f "$transcript" ] || exit 0
 
-read -r ctx window warm < <(jq -nrR --arg main "$transcript" "$common"'
-  responses($main)
+read -r ctx window warm mark < <(jq -nrR --arg main "$transcript" "$common"'
+  scan($main) | .prompts as $prompts | grouped
   | select(length > 0)
   | max_by(.at) as $last
   | ($last.model | if test("haiku-4|claude-3") then 200000 else 1000000 end) as $window
-  | "\($last.u | all_in) \($window) \(cold_at)"
+  | "\($last.u | all_in) \($window) \(cold_at) \(mark($prompts))"
 ' "$transcript" 2>/dev/null)
 [ -n "${warm:-}" ] || exit 0
 
@@ -195,17 +220,18 @@ figures="$brain $(awk -v c="$ctx" -v w="$window" 'BEGIN { printf "%d", c * 100 /
 
 if [ "$status" = true ]; then
   z=$(at "$warm" +%z)
-  printf '%s\n%s\n%s\n' "$figures" "$warm" "$(( ${z:0:1}(10#${z:1:2} * 3600 + 10#${z:3:2} * 60) ))"
+  printf '%s\n%s\n%s\n%s\n' "$figures" "$warm" "$(( ${z:0:1}(10#${z:1:2} * 3600 + 10#${z:3:2} * 60) ))" "${mark:-}"
   exit 0
 fi
 
 fire=$(printf '\360\237\224\245')
+alarm=$(printf '\342\217\260')
 ice=$(printf '\360\237\247\212')
 left=$((warm - $(date +%s)))
 if [ "$left" -ge 60 ]; then
-  echo "$fire $((left / 60)) min, $figures"
+  echo "$fire $((left / 60)) min${mark:+ $mark}, $figures"
 elif [ "$left" -gt 0 ]; then
-  echo "$fire <1 min, $figures"
+  echo "$alarm <1 min${mark:+ $mark}, $figures"
 elif [ "$(at "$warm" +%F)" = "$(date +%F)" ]; then
   echo "$ice since $(at "$warm" +%H:%M), $figures"
 else
