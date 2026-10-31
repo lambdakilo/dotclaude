@@ -468,6 +468,14 @@ const suites = [
         return quiet(run(stop('Committed.')))
       }],
       ['lets a turn through that a task notification opened', () => { jsonl(t, [human('fix the bug'), says(feedback), notification, says('The build passed.')]); return quiet(run(stop('The build passed.'))) }],
+      ['lets a turn through that a button opened by its label', () => {
+        jsonl(t, [human('fix the bug'), says(feedback), box([{ label: 'Commit', message: 'commit it' }]), human('Commit'), says('Committed.')])
+        return quiet(run(stop('Committed.')))
+      }],
+      ['lets a turn through that a button opened after a system reminder', () => {
+        jsonl(t, [human('fix the bug'), says(feedback), box([{ label: 'Commit' }]), human([{ type: 'text', text: '<\system-reminder>\nThe folder changed.\n<\/system-reminder>' }, { type: 'text', text: 'Commit' }]), says('Committed.')])
+        return quiet(run(stop('Committed.')))
+      }],
       ['no longer refuses a box with a question', () => {
         jsonl(t, [human('fix the bug'), says('Fixed it.')])
         return quiet(run({ hook_event_name: 'PreToolUse', transcript_path: t, tool_use_id: 'toolu_box', tool_input: { recap: 'r', ask: 'Commit it?' } }))
@@ -477,6 +485,10 @@ const suites = [
         return /repeats a reply button/.test(context(run({ hook_event_name: 'UserPromptSubmit', transcript_path: t, prompt: 'commit it' })))
       }],
       ['says nothing about a prompt the user typed', () => quiet(run({ hook_event_name: 'UserPromptSubmit', transcript_path: t, prompt: 'now push it' }))],
+      ['tells Claude when a prompt repeats a button label after a system reminder', () => {
+        jsonl(t, [human('fix the bug'), says('Fixed it.'), box([{ label: 'Commit', message: 'commit it' }])])
+        return /repeats a reply button/.test(context(run({ hook_event_name: 'UserPromptSubmit', transcript_path: t, prompt: '<\system-reminder>\nThe folder changed.\n<\/system-reminder>\n\n\nCommit\n' })))
+      }],
     ]
   }],
 

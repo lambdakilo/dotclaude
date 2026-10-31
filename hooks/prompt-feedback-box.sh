@@ -25,9 +25,10 @@ if [ "$event" = UserPromptSubmit ]; then
   prompt="$(printf '%s' "$input" | jq -r '.prompt // empty' 2>/dev/null)"
   grep -F "\"$box\"" "$transcript" 2>/dev/null | jq -Rn -e --arg box "$box" --arg prompt "$prompt" '
     def trimmed: gsub("^\\s+|\\s+$"; "");
+    def bare: gsub("<(?<t>system-reminder)[\\s>][\\s\\S]*?</\\k<t>\\s*>"; "") | trimmed;
     [inputs | fromjson? // empty | select(.type == "assistant") | .message.content[]?
       | select(.type == "tool_use" and .name == $box)] | last
-    | any(.input.actions[]?; (.message // .label // "") | trimmed == ($prompt | trimmed))
+    | any(.input.actions[]? | .label, .message | strings; trimmed == ($prompt | bare))
   ' >/dev/null 2>&1 || exit 0
   jq -n '{hookSpecificOutput: {hookEventName: "UserPromptSubmit", additionalContext:
     "This prompt repeats a reply button of your last next-step box, words you wrote, so leave the Prompt feedback section out."}}'
@@ -42,14 +43,15 @@ last="$(printf '%s' "$input" | jq -c 'if has("last_assistant_message") then .las
 jq -Rn -e --arg box "$box" --argjson last "$last" '
   def text: if type == "string" then . else [.[]? | select(.type == "text") | .text] | join("\n") end;
   def trimmed: gsub("^\\s+|\\s+$"; "");
+  def bare: gsub("<(?<t>system-reminder)[\\s>][\\s\\S]*?</\\k<t>\\s*>"; "") | trimmed;
   [inputs | fromjson? // empty] as $lines
   | ([$lines | to_entries[] | select(.value.type == "user" and .value.origin != null) | .key]
      | last) as $turn
-  | ($lines[$turn].message.content | text | trimmed) as $prompt
+  | ($lines[$turn].message.content | text | bare) as $prompt
   | $lines[$turn].origin.kind == "human"
     and ([$lines[:$turn][] | select(.type == "assistant") | .message.content[]?
           | select(.type == "tool_use" and .name == $box)] | last
-         | all(.input.actions[]?; (.message // .label // "") | trimmed != $prompt))
+         | all(.input.actions[]? | .label, .message | strings; trimmed != $prompt))
     and ($last // ([$lines[$turn:][] | select(.type == "assistant") | .message.content[]?
                     | select(.type == "text") | .text] | last // "")
          | test("prompt feedback"; "i") | not)
