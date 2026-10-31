@@ -2,9 +2,10 @@ import { expect, mock, test } from 'claude-code/testing'
 
 const TURN = { answer: '', durationMs: 1, isAborted: false, turnId: 't1', reason: 'answer' } as const
 const START = { cwd: '/', surface: 'terminal', isInteractive: true } as const
-const FIGURES = '16% ctx'
+const FIGURES = '\u{1F9E0} 16%'
 const FIRE = '\u{1F525}'
 const ICE = '\u{1F9CA}'
+const HOURGLASS = '\u23F3'
 // 12:20 on 20 Oct at UTC+3, and the next midnight there
 const NOW = 1792488000_000
 const MIDNIGHT = 1792530000_000
@@ -122,13 +123,14 @@ test('names the other session that goes cold next, cut to fit, read once a minut
 
   expect(nextRuns).toBe(2)
   expect(shown).toEqual([
-    `${FIRE} 59 min, ${FIGURES}, 1m Store status`,
-    `${FIRE} 58 min, ${FIGURES}, 1m Store status`,
-    `${FIRE} 58 min, ${FIGURES}, <1m Store status`,
-    `${FIRE} 57 min, ${FIGURES}, <1m Store status`,
-    `${FIRE} 57 min, ${FIGURES}, 16m October role at`,
+    `${FIRE} 59 min, ${FIGURES}, ${HOURGLASS} 1m Store status`,
+    `${FIRE} 58 min, ${FIGURES}, ${HOURGLASS} 1m Store status`,
+    `${FIRE} 58 min, ${FIGURES}, ${HOURGLASS} <1m Store status`,
+    `${FIRE} 57 min, ${FIGURES}, ${HOURGLASS} <1m Store status`,
+    `${FIRE} 57 min, ${FIGURES}, ${HOURGLASS} 16m October role`,
   ])
-  expect(shown.every(text => (text ?? '').length <= 40)).toBe(true)
+  // Each emoji counted as two columns
+  expect(shown.every(text => [...(text ?? '')].length + 3 <= 40)).toBe(true)
 })
 
 test('leaves a subagent turn alone and clears on no line', async ($, on) => {

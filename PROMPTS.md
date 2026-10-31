@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Take a same-page sign-in before handing a blocked popup to the user
+## Give each part of the status line its own emoji
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.**
+> oh ok so do i need to tell archive for the session so that you and
+> the gui know its archived? also how does the status bar look now?
+> emojis for all three would be nice
+
+## Take a same-page sign-in before handing a blocked popup to the user
+
+2026-10-31, commit [e3ca5b7](https://github.com/zululima/dotclaude/commit/e3ca5b7cac039aa197479be8340506dea229f078), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream review also tell me about this Security flag: [pasted: a

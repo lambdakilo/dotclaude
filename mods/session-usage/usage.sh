@@ -190,7 +190,8 @@ read -r ctx window warm < <(jq -nrR --arg main "$transcript" "$common"'
 
 at() { LC_ALL=C date -r "$1" "$2" 2>/dev/null || LC_ALL=C date -d "@$1" "$2" 2>/dev/null; }
 
-figures="$(awk -v c="$ctx" -v w="$window" 'BEGIN { printf "%d", c * 100 / w }')% ctx"
+brain=$(printf '\360\237\247\240')
+figures="$brain $(awk -v c="$ctx" -v w="$window" 'BEGIN { printf "%d", c * 100 / w }')%"
 
 if [ "$status" = true ]; then
   z=$(at "$warm" +%z)
