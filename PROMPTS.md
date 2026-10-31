@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Let stop-unreachable-claim.sh catch "I couldn't find"
+## Print a forked session's earlier prompts from its parent's log
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [8f605a4](https://github.com/zululima/dotclaude/commit/8f605a4ea1f4e7e2c2a6f75b9df9cc106d42475e).
+
+## Let stop-unreachable-claim.sh catch "I couldn't find"
+
+2026-10-31, commit [dce0b24](https://github.com/zululima/dotclaude/commit/dce0b246c38b59dc3160d9279752ea0c0a44c259), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [8f605a4](https://github.com/zululima/dotclaude/commit/8f605a4ea1f4e7e2c2a6f75b9df9cc106d42475e).
 

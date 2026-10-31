@@ -35,8 +35,12 @@
 # none, the model comes from --model and the effort from --effort, CLAUDE_EFFORT
 # or the model's effortLevel in settings.json. Without a model, or with an
 # effort other than low, medium, high, xhigh or max, print leaves the heading
-# out, prints the prompts and exits 1 with the reason. Prompts the transcript
-# holds from before the log began, as in a fork, count towards the numbers.
+# out, prints the prompts and exits 1 with the reason. A fork's transcript opens
+# with the records it copied from the session it was forked from, under that
+# session's id, so print takes the fork's earlier prompts from that session's
+# log, up to the last record copied from it, and numbers on from there. Where no
+# log holds them, prompts the transcript holds from before the log began count
+# towards the numbers.
 
 set -u
 
@@ -114,6 +118,20 @@ def clean:
   gsub("<(?<t>system-reminder|artifact-view-context|cross-session-message|agent-message|task-notification|teammate-message)[\\s>][\\s\\S]*?</\\k<t>\\s*>"; "")
   | sub("\\A\\s+"; "") | sub("\\s+\\z"; "");'
 
+prior_logs() {
+  [ -n "$transcript" ] || return 0
+  jq -n -r --arg s "$session" '
+    reduce (inputs | select(.isSidechain != true and (.sessionId | type) == "string"
+        and .sessionId != $s and (.timestamp | type) == "string")) as $r
+      ({}; .[$r.sessionId] = ([.[$r.sessionId], $r.timestamp] | max))
+    | to_entries[] | "\(.key)\t\(.value)"' "$transcript" 2>/dev/null \
+    | while IFS=$'\t' read -r sid last; do
+        case "$sid" in ""|*[!A-Za-z0-9_-]*) continue ;; esac
+        jq -c --arg last "$last" 'def epoch: sub("\\.[0-9]+Z\\z"; "Z") | fromdateiso8601;
+          select((.timestamp | epoch) <= ($last | epoch))' "$log_dir/$sid.jsonl" 2>/dev/null
+      done
+}
+
 {
   IFS= read -r -d '' note && IFS= read -r -d '' problem && IFS= read -r -d '' heading || exit 1
   [ -z "$note" ] || echo "prompt-log: $note" >&2
@@ -149,6 +167,7 @@ def clean:
         | select($p | typed)
         | {t: .timestamp, prompt: true}
       else empty end' "$transcript" 2>/dev/null; fi) \
+  --slurpfile prior <(prior_logs) \
   --slurpfile settings <(jq -c '.modelSettings // {}' "$config_dir/settings.json" 2>/dev/null) \
   "$clean"'
   def epoch: sub("\\.[0-9]+Z\\z"; "Z") | fromdateiso8601;
@@ -162,7 +181,7 @@ def clean:
         | "\(.v) for \(if $k > 0 then "" elif .from == .to then "prompt " else "prompts " end)\(.from)\(if .from == .to then "" else " to \(.to)" end)")
       | join(", ") end;
   ($from | tonumber) as $from
-  | ([.[] | {t: (.timestamp | epoch), p: (.prompt // "" | clean
+  | ([($prior | sort_by(.timestamp))[], .[] | {t: (.timestamp | epoch), p: (.prompt // "" | clean
       | gsub("<pasted_content[^>]*>(?<b>[\\s\\S]*?)</pasted_content[^>]*>";
           "[pasted: \(.b | sub("\\A\\s+"; "") | sub("\\s+\\z"; "") | split("\n") | length) lines]"))}
       | select(.p | typed)]

@@ -534,6 +534,19 @@ const suites = [
         return run('', { args: ['print'], env: { PROMPT_LOG_SESSION: 'p2' } }).out === '**2.**\n> second\n\n'
       }],
       ['fails without a log for the session', () => run('', { args: ['print'], env: { PROMPT_LOG_SESSION: 'none' } }).code === 1],
+      ['prints the earlier prompts of a fork from the log it was forked from', () => {
+        jsonl(path.join(config, 'prompt-log/p3.jsonl'), [
+          { timestamp: '2020-01-01T00:00:00Z', prompt: 'start' },
+          { timestamp: '2020-01-01T00:00:05Z', prompt: 'queued' },
+          { timestamp: '2020-01-01T00:01:00Z', prompt: 'after the fork' },
+        ])
+        jsonl(path.join(config, 'projects/x/p4.jsonl'), [
+          { type: 'user', sessionId: 'p3', timestamp: '2020-01-01T00:00:00.100Z', message: { content: 'start' } },
+          { type: 'queue-operation', sessionId: 'p3', timestamp: '2020-01-01T00:00:10.500Z' },
+        ])
+        run({ session_id: 'p4', cwd: '/x', prompt: 'forked' })
+        return run('', { args: ['print'], env: { PROMPT_LOG_SESSION: 'p4' } }).out === '**1.**\n> start\n\n**2.**\n> queued\n\n**3.**\n> forked\n\n'
+      }],
     ]
   }],
 
