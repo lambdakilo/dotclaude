@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Hold CLAUDE.md to a size budget that sync.sh checks
+## Take a same-page sign-in before handing a blocked popup to the user
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dream review also tell me about this Security flag: [pasted: a
+> paragraph from the last dream run's closing message about one of its
+> agents]
+
+(Step p16, 6 of 8: take a same-page sign-in route before handing a
+blocked popup to the user?)
+> yeah add it but also explain n, p and w now
+
+## Hold CLAUDE.md to a size budget that sync.sh checks
+
+2026-10-31, commit [96c8202](https://github.com/zululima/dotclaude/commit/96c820206451be0959dbe107b2992c7d98eaf8d1), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [bf6fec9](https://github.com/zululima/dotclaude/commit/bf6fec937dc184555253743ae2a86abd7d9deda5).
 

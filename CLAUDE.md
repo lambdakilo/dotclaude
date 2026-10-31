@@ -525,18 +525,23 @@ apply to one repository belong in that repository's project memory.
   pane, an HTML layout through an SVG `foreignObject` with each font named by its installed family
   or inlined as a data URL, never a keyword such as `-apple-system` or a linked web font, and posts
   the blob to that script's `/save` from a page the script serves. A job the pane cannot do this way
-  is asked about first through AskUserQuestion, which names the Chrome app. When a step needs the
-  user in the pane, such as a sign-in, personal data to type or a click the session may not make,
-  the session opens the page that step happens on and calls `show_pane` with `preview` in the same
-  turn as the ask, so the pane is open beside the reply. `show_pane` acts only while the session is
-  in a window and never takes one from another session. When it answers that the session is in none,
-  the reply opens with that ask and with why the pane is not on screen, in the user's terms: the app
-  opens a pane only beside a session that one of its windows shows, and none showed this one when it
-  tried, as when another session is in front or the user follows from the phone. The turn ends with
-  `wrap_up` and `blocked`, so the sidebar marks the session as waiting on the user. Every later turn
-  calls `show_pane` again first while the step still waits, so the pane opens with the first turn
-  that finds the session in a window, and no reply promises that the next message opens it. A deny
-  rule in `settings.json` blocks Claude in Chrome, which the user does not want.
+  is asked about first through AskUserQuestion, which names the Chrome app. The pane blocks a popup
+  that the session's own click opens, so a sign-in through one, such as an OAuth consent in Google's
+  APIs Explorer, takes a route that stays on the page before it goes to the user: for a Google API,
+  Google's OAuth 2.0 Playground with the narrowest read-only scope the user said yes to, a grant the
+  session removes under `myaccount.google.com/connections` once the read is done. When a step needs
+  the user in the pane, such as a sign-in, personal data to type or a click the session may not
+  make, the session opens the page that step happens on and calls `show_pane` with `preview` in the
+  same turn as the ask, so the pane is open beside the reply. `show_pane` acts only while the
+  session is in a window and never takes one from another session. When it answers that the session
+  is in none, the reply opens with that ask and with why the pane is not on screen, in the user's
+  terms: the app opens a pane only beside a session that one of its windows shows, and none showed
+  this one when it tried, as when another session is in front or the user follows from the phone.
+  The turn ends with `wrap_up` and `blocked`, so the sidebar marks the session as waiting on the
+  user. Every later turn calls `show_pane` again first while the step still waits, so the pane opens
+  with the first turn that finds the session in a window, and no reply promises that the next
+  message opens it. A deny rule in `settings.json` blocks Claude in Chrome, which the user does not
+  want.
 - A `PushNotification` goes out only while the Mac's screen is locked. A session that no window
   shows says nothing about whether the user is away, since they may be in another session, and while
   the screen is unlocked the reply and the sidebar reach them. The presence listener in
