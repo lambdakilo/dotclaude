@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Give each part of the status line its own emoji
+## Reload the usage mod in desktop sessions when it changes
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> mod? also why not the last thingy not showing in other sessions but
+> the brain icon yes
+
+**5.**
+> Yes, turn it on
+
+## Give each part of the status line its own emoji
+
+2026-10-31, commit [bd86066](https://github.com/zululima/dotclaude/commit/bd860661bf03c9db792c1e6e224d2020ee120ff6), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > oh ok so do i need to tell archive for the session so that you and
