@@ -148,14 +148,9 @@ apply to one repository belong in that repository's project memory.
   answered by the commit that fixes it, and the reply to the user lists, per thread, what changed
   and in which commit, so the user can answer and resolve the threads themselves. Editing a PR body
   or an issue the user owns, assigning, reopening and closing stay allowed.
-- When a PR, draft or not, closes an issue, assign the user to that issue, with
-  `gh issue edit <n> --add-assignee <handle>` and the handle from `gh api user --jq .login`.
-  Do it when the PR is opened and again whenever its `Closes` list changes, and skip the
-  issue silently when the edit is refused for lack of permission. The board then shows who
-  holds the work without a separate step.
-- Public and upstream repositories: never name a downstream project, its client or its
-  customer. Say "a downstream project". Redact them in quoted prompts with square brackets, and
-  redact absolute paths and container names that carry them.
+- Public and upstream repositories: never name a downstream project, its client or its customer. Say
+  "a downstream project". Redact them in quoted prompts with square brackets, and redact absolute
+  paths and container names that carry them.
 - Remote layout decides the flow. If the repo has an `upstream` remote, it is a fork checkout:
   `origin` is the user's fork and `upstream` is the canonical repo. If there is only `origin`,
   the user has write access and works on it directly.
@@ -238,9 +233,10 @@ apply to one repository belong in that repository's project memory.
   or the closing message. What the user is to read, check or choose from, such as a report, a list
   or the options, is written out whole in that message, also when a file holds it too. A picture or
   file sent for them to look at, such as before and after screenshots, is linked in that message by
-  its path, with what it shows said there in words, never pointed to as sent above. A file kept for
-  a command or a later session is named in one line beside it and never stands in for it. A Slack
-  draft on the clipboard stays the exception that Running things names.
+  its path, or given its `open` command when it lies outside the session's folders, with what it
+  shows said there in words, never pointed to as sent above. A file kept for a command or a later
+  session is named in one line beside it and never stands in for it. A Slack draft on the clipboard
+  stays the exception that Running things names.
 - A term or shorthand that a session, a script or a workflow coined, such as a name for a unit of
   work, a role, an option, a step label or a pair of figures like `85/85`, is explained in plain
   words where a reply first uses it, or plain words stand in its place. A next-step box question,
@@ -311,7 +307,11 @@ apply to one repository belong in that repository's project memory.
   "Open this address:" and the block under it, never the address inline in the sentence. An address
   the reader only reads, such as the page that should now open, stays inline. A file in the
   session's folders that the reader opens, such as a PR's review page, is the exception: it gets a
-  Markdown link to its path, which the app opens on a click.
+  Markdown link to its path, which the app opens on a click. A file outside them, such as a
+  deliverable in `~/Downloads/<task>/`, gets the command that opens it in its default app, `open`
+  with its full `~` path, in a `bash` block of its own, whose Run button opens it. It is never sent
+  with SendUserFile or linked, since the app's side pane opens only the session's folders and asks
+  the user to add the folder instead, and the user adds none for this.
 - An emoji the user is to pick in an app, such as one per sticker of a sticker pack, stands beside
   the shortest text, typed from the start of a word of its name, that the app's emoji search finds
   it alone by, with the full name in brackets after it, such as coll (collision), so the user types

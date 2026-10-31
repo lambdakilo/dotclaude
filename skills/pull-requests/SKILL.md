@@ -30,6 +30,10 @@ GitHub, meta prompts left out, and downstream names redacted in public and upstr
   the check runs again whenever the closing line is written or the body refreshed, as a sub-issue
   may close elsewhere in the meantime. A parent whose body names work that none of its sub-issues
   covers stays off the line, and the reply says why.
+- When a PR, draft or not, closes an issue, assign the user to that issue, with `gh issue edit <n>
+  --add-assignee <handle>` and the handle from `gh api user --jq .login`. Do it when the PR is
+  opened and again whenever its `Closes` list changes, and skip the issue silently when the edit is
+  refused for lack of permission. The board then shows who holds the work without a separate step.
 - The two blocks come straight after the closing line and above the rest of the template. They
   are a TL;DR for the reviewer.
 - First block: a fenced code block holding the URL of the public configuration repository

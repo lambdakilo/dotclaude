@@ -5,9 +5,27 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Flag shared memory notes that belong in the repo or help no one
+## Hand over files outside the session with an open command
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**11.**
+> [an ask for a printed sheet for a downstream event left out]
+
+**12.**
+> hmmm maybe dont do that? this session is on this computer but i dont
+> wanna add Downloads as a session folder. how should we do these now
+> and in the future?
+
+(How should a reply hand over a file outside the session's folders?)
+> Open command (Recommended)
+
+(The new rule puts CLAUDE.md over its size budget; what gives way?)
+> Move issue rule (Recommended)
+
+## Flag shared memory notes that belong in the repo or help no one
+
+2026-10-31, commit [518b183](https://github.com/zululima/dotclaude/commit/518b183377a33f3af894e0b0f5f7609284ceb05a), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > does dream now also check that memories in [a shared repository]
