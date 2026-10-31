@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Give the fewest letters that find an emoji, not a whole word
+## Hold CLAUDE.md to a size budget that sync.sh checks
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [bf6fec9](https://github.com/zululima/dotclaude/commit/bf6fec937dc184555253743ae2a86abd7d9deda5).
+
+## Give the fewest letters that find an emoji, not a whole word
+
+2026-10-31, commit [1bf65ff](https://github.com/zululima/dotclaude/commit/1bf65ff91a4d792c1f4ff715a10b5c9f6c643a44), model claude-opus-5-5, effort xhigh.
 
 **9.**
 > nice try but again for example with collision a coll was enough

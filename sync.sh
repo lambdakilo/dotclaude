@@ -34,8 +34,9 @@
 # folder's, and no prose line of CLAUDE.md, README.md, docs/ or the
 # pull-requests skill may pass 100 columns, leaving out front matter, code
 # blocks, tables and the evals block; reflow.sh rewraps the paragraphs an edit
-# touched. A failed check, like a scan hit, stops the mirror copy and the
-# commit.
+# touched. A CLAUDE.md larger than the byte count in claude-md-budget.txt gets
+# its sections listed by size, and fails the check when --commit names it. A
+# failed check, like a scan hit, stops the mirror copy and the commit.
 #
 # Key order: a mirrored JSON file changed locally is first put back into the
 # key order the checkout has, when jq is installed, so a tool that writes the
@@ -426,6 +427,21 @@ if [ -n "$long" ]; then
   printf 'sync: line over 100 columns in\n%s\n' "$long" >&2
   printf 'sync: %s rewraps them, run it on its own\n' "$checkout/reflow.sh" >&2
   failed=1
+fi
+
+if [ -f claude-md-budget.txt ]; then
+  claude_md_size="$(wc -c < CLAUDE.md | tr -d ' ')"
+  claude_md_budget="$(tr -d ' \n' < claude-md-budget.txt)"
+  if [ "$claude_md_size" -gt "$claude_md_budget" ]; then
+    printf 'sync: CLAUDE.md is %s bytes, %s over claude-md-budget.txt, by section:\n' \
+      "$claude_md_size" "$((claude_md_size - claude_md_budget))" >&2
+    LC_ALL=C awk '/^## / { name = $0 } name != "" { size[name] += length($0) + 1 }
+      END { for (s in size) printf "  %6d %s\n", size[s], s }' CLAUDE.md | sort -rn >&2
+    echo "sync: --commit refuses CLAUDE.md until it fits, the dotclaude skill says what to ask" >&2
+    case " ${public_paths[*]+${public_paths[*]}} " in
+      *" . "* | *" CLAUDE.md "* | *" ./CLAUDE.md "*) failed=1 ;;
+    esac
+  fi
 fi
 
 if [ "$failed" -eq 0 ] && [ "${#mirror_dirs[@]}" -gt 0 ]; then

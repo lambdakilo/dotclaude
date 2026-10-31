@@ -42,6 +42,13 @@ mirrored file states what holds now.
   hook that watches `CLAUDE.md` counts the change as the session's own edit. It fills greedily each
   paragraph that differs from the checkout's last commit, in `~/.claude` and in the checkout, from
   the line before the first change, and leaves the other paragraphs as they are.
+- `sync.sh` holds `CLAUDE.md` to the byte count in the checkout's `claude-md-budget.txt`: over it, a
+  run lists the file's sections by size and `--commit` refuses `CLAUDE.md`. Before cutting anything,
+  ask through AskUserQuestion whether to cut a block at least as large as the overage, or move it
+  into the skill that covers its subject, naming the block and recommending it, or to raise the
+  budget. Either way, and after any other change that shrinks the file, write its new size rounded
+  up to the next 1,000 into `claude-md-budget.txt` and commit that file too, so the budget falls
+  with every cut and rises only on the user's yes.
 - `sync.sh --commit <file> <path>...` commits the named paths and pushes them to the default branch,
   then every mirror below. It refuses a run that names no path, or no path with a change. No PR: the
   repository has one owner, though several sessions work in the checkout at once, and every

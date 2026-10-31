@@ -144,7 +144,8 @@
 - [`sync.sh`](../sync.sh): keeps this copy and my own `~/.claude` the same, and checks that nothing
   private gets published. It also stops on a shell script with a syntax error, a file this list
   leaves out, or a line in `CLAUDE.md`, the pull request skill, the README or these docs wider than
-  100 characters. `--install` copies everything onto a new computer.
+  100 characters, and commits no `CLAUDE.md` over the byte count in `claude-md-budget.txt` until I
+  cut something or raise the count. `--install` copies everything onto a new computer.
 - [`reflow.sh`](../reflow.sh): rewraps the paragraphs an edit changed in `CLAUDE.md`, the pull
   request skill, the README or these docs at 100 characters, in this copy and in `~/.claude`.
 - [`test/dream-sim`](../test/dream-sim/): checks how `/dream` spends your usage. Not installed.
