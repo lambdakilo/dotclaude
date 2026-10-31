@@ -5,9 +5,24 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Show the session whose cache goes cold next in the status line
+## Answer a mid-turn question in the next question, not above it
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dream review also tell me about this Security flag: [pasted: a
+> paragraph from the last dream run's closing message about one of its
+> agents]
+
+(Step p13, 5 of 8: give CLAUDE.md a size budget that sync.sh checks?)
+> yeah sure add it but also remember thati dont read lines that happen
+> before "ran 2 commadns" etc because i read those are your thinking
+> steps before that. i only read things after those commands. the
+> explanation of n, p and w were before those
+
+## Show the session whose cache goes cold next in the status line
+
+2026-10-31, commit [eff5852](https://github.com/zululima/dotclaude/commit/eff5852c5b866b95c1f30b5f490eb532fe2e5647), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > was it so that the status bar in claude code is real time? as in
