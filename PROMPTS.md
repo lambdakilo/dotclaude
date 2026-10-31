@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Leave the write-up of finished learning work to Claude
+## Ask before a rule adds a new way to reach the user
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [8f605a4](https://github.com/zululima/dotclaude/commit/8f605a4ea1f4e7e2c2a6f75b9df9cc106d42475e).
+
+## Leave the write-up of finished learning work to Claude
+
+2026-10-31, commit [aa03e7e](https://github.com/zululima/dotclaude/commit/aa03e7e21d648938e3629a2061809e54a5aa400a), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [8f605a4](https://github.com/zululima/dotclaude/commit/8f605a4ea1f4e7e2c2a6f75b9df9cc106d42475e).
 

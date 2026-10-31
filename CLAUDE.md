@@ -856,3 +856,6 @@ apply to one repository belong in that repository's project memory.
   matched against what changed since the last reply outside this session too, such as a new PR in
   `gh pr list` or a peer session in ListAgents. When two readings remain, AskUserQuestion puts both
   with a recommended one before any rule is written, never a guess named in the reply afterwards.
+  Nothing the correction did not ask for that reaches the user outside the reply and the sidebar,
+  such as a phone push or a mail as a fallback, goes into a rule only once the user picks it in
+  AskUserQuestion with a recommended answer; naming it in the reply afterwards is no ask.
