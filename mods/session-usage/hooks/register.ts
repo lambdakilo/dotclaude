@@ -1,13 +1,18 @@
 import type { EngineInterface, Register } from 'claude-code'
 
 type Usage = { figures: string; coldAt: number; offset: number }
+type Other = { coldAt: number; title: string }
 
 const DAY = 86_400_000
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const FIRE = '\u{1F525}'
 const ICE = '\u{1F9CA}'
+// The desktop app cuts the status line at about this many characters.
+const WIDTH = 40
 
 let usage: Usage | undefined
+let others: Other[] = []
+let othersReadAt = -Infinity
 let shown: string | undefined
 let isBusy = false
 
@@ -28,7 +33,48 @@ const cache = (now: number, { coldAt, offset }: Usage) => {
     : `${ICE} since ${cold.getUTCDate()} ${MONTHS[cold.getUTCMonth()]}`
 }
 
-const line = async ($: EngineInterface) => usage && `${cache(await $.clock.now(), usage)}, ${usage.figures}`
+const fit = (title: string, room: number) => {
+  if (title.length <= room) return title
+  const space = title.lastIndexOf(' ', room)
+
+  return title.slice(0, space > 0 ? space : room).replace(/[\s,:;+-]+$/, '')
+}
+
+// The other session that goes cold next, its title cut at a word to fit.
+const next = (now: number, room: number) => {
+  const other = others.find(o => o.coldAt > now)
+  if (!other) return ''
+
+  const left = other.coldAt - now
+  const head = `, ${left >= 60_000 ? Math.floor(left / 60_000) : '<1'}m `
+  const title = fit(other.title, room - head.length)
+
+  return title ? head + title : ''
+}
+
+const line = async ($: EngineInterface) => {
+  if (!usage) return undefined
+  const now = await $.clock.now()
+  const own = `${cache(now, usage)}, ${usage.figures}`
+
+  return own + next(now, WIDTH - own.length)
+}
+
+const readOthers = async ($: EngineInterface) => {
+  const id = await $.session.id()
+  const { exitCode, stdout } = await $.process.run([`${$.plugin.root}/usage.sh`, '--next', id])
+  others =
+    exitCode === 0
+      ? stdout
+          .split('\n')
+          .filter(Boolean)
+          .map(row => {
+            const [coldAt = '', title = ''] = row.split('\t')
+            return { coldAt: Number(coldAt) * 1000, title }
+          })
+      : []
+  othersReadAt = await $.clock.now()
+}
 
 const show = async ($: EngineInterface) => {
   const id = await $.session.id()
@@ -44,7 +90,9 @@ const show = async ($: EngineInterface) => {
 }
 
 // A running turn keeps refreshing the cache, so the transcript is read again.
+// The other sessions are read once a minute, which also drops one archived.
 const tick = async ($: EngineInterface) => {
+  if ((await $.clock.now()) - othersReadAt >= 60_000) await readOthers($)
   if (isBusy) return show($)
   const text = await line($)
   if (text === shown) return
@@ -56,6 +104,7 @@ const tick = async ($: EngineInterface) => {
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     const started = await next(e)
+    await readOthers($)
     await show($)
     $.clock.every(15_000, () => void tick($))
 

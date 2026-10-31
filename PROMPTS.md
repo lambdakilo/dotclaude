@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Let a repository's commit-msg check skip terms it may name
+## Show the session whose cache goes cold next in the status line
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> was it so that the status bar in claude code is real time? as in
+> could it also show me whats the next session which has a warm cache
+> that expires in the least amount of time next
+
+**2.**
+> yeah sure sounds good but for example the october role is archived
+> already
+
+## Let a repository's commit-msg check skip terms it may name
+
+2026-10-31, commit [d053e5c](https://github.com/zululima/dotclaude/commit/d053e5c54f4b9a6f8a3bec18b6fd55f53e386a38), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream review also tell me about this Security flag: [pasted: a

@@ -43,7 +43,8 @@ test('counts down between turns, then names the day once it is past', async ($, 
   let runs = 0
   const clock = mock.clock(on, { now: NOW })
   on('session.id', () => ({ value: 'abc' }))
-  on('process.run', () => {
+  on('process.run', ($, e) => {
+    if (e.argv[1] === '--next') return ran('')
     runs++
     return warmFor(2)
   })
@@ -74,7 +75,8 @@ test('reads the transcript on each tick while a main turn runs', async ($, on) =
   let runs = 0
   const clock = mock.clock(on, { now: NOW })
   on('session.id', () => ({ value: 'abc' }))
-  on('process.run', () => {
+  on('process.run', ($, e) => {
+    if (e.argv[1] === '--next') return ran('')
     runs++
     return warmFor(60)
   })
@@ -95,6 +97,38 @@ test('reads the transcript on each tick while a main turn runs', async ($, on) =
   await $.turn.complete(TURN)
   await clock.advance(30_000)
   expect(runs).toBe(4)
+})
+
+test('names the other session that goes cold next, cut to fit, read once a minute', async ($, on) => {
+  const shown: (string | undefined)[] = []
+  let nextRuns = 0
+  const clock = mock.clock(on, { now: NOW })
+  on('session.id', () => ({ value: 'abc' }))
+  on('process.run', ($, e) => {
+    if (e.argv[1] !== '--next') return warmFor(59)
+    expect(e.argv[2]).toBe('abc')
+    nextRuns++
+    return ran(`${NOW / 1000 + 90}\tStore status\n${NOW / 1000 + 18 * 60}\tOctober role at the office\n`)
+  })
+  on('ui.status', ($, e) => {
+    shown.push(e.text)
+    return { value: undefined }
+  })
+  on('session.start', () => ({ cwd: '/' }))
+
+  await $.session.start(START)
+  await clock.advance(45_000)
+  await clock.advance(45_000)
+
+  expect(nextRuns).toBe(2)
+  expect(shown).toEqual([
+    `${FIRE} 59 min, ${FIGURES}, 1m Store status`,
+    `${FIRE} 58 min, ${FIGURES}, 1m Store status`,
+    `${FIRE} 58 min, ${FIGURES}, <1m Store status`,
+    `${FIRE} 57 min, ${FIGURES}, <1m Store status`,
+    `${FIRE} 57 min, ${FIGURES}, 16m October role at`,
+  ])
+  expect(shown.every(text => (text ?? '').length <= 40)).toBe(true)
 })
 
 test('leaves a subagent turn alone and clears on no line', async ($, on) => {

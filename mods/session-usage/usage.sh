@@ -14,6 +14,10 @@
 #                           the context figure, the second the cache goes
 #                           cold and the UTC offset then in seconds, a line
 #                           each, for the mod to count down from
+#   usage.sh --next <session id>
+#                           the other sessions of the last hour whose cache is
+#                           still warm, soonest cold first: the second it goes
+#                           cold and the title, tab-separated, a line each
 #   usage.sh --run <folder> the tokens, cost and energy of every transcript
 #                           under the folder, such as a workflow run's, by kind
 #                           and model
@@ -52,6 +56,8 @@ common='
     | map(min_by(.at) as $first
       | {id: .[0].id, model: .[0].model, u: .[-1].u, at: $first.at, main: .[0].main,
          busy: ([(map(.at) | max) - ($seen[$first.parent // empty] // $first.at), 0] | max)});
+  def cold_at: (if any(.[]; (.u.cache_creation.ephemeral_1h_input_tokens | n) > 0)
+    then 3600 else 300 end) as $ttl | max_by(.at).at + $ttl | floor;
 
   # Energy: the seconds from the entry a response answers to its last block,
   # times the share of one request in an 8-GPU H100 node as "How Hungry is AI?"
@@ -140,6 +146,28 @@ if [ "${1:-}" = --since ]; then
   exit 0
 fi
 
+# The desktop app's record of a session says whether it is archived; a session
+# without one, such as a terminal's, counts as open. A record changes whenever
+# its session does, so only those of the last hour are read.
+if [ "${1:-}" = --next ]; then
+  now=$(date +%s)
+  known=$(find "$HOME/Library/Application Support/Claude/claude-code-sessions" -name 'local_*.json' \
+    -mmin -65 -type f -exec jq -r '"\(.cliSessionId)\t\(.isArchived == true)\t\(.title // "")"' {} + 2>/dev/null)
+  find "${CLAUDE_CONFIG_DIR:-$HOME/.claude}"/projects -mindepth 2 -maxdepth 2 -name '*.jsonl' -mmin -65 -type f 2>/dev/null |
+    while IFS= read -r f; do
+      id=$(basename "$f" .jsonl)
+      [ "$id" = "${2:-}" ] && continue
+      archived='' title=''
+      IFS=$'\t' read -r _ archived title < <(printf '%s\n' "$known" | grep -F "$id	")
+      [ "$archived" = true ] && continue
+      [ -n "$title" ] || title=$(grep '"type":"custom-title"' "$f" | tail -1 | jq -r '.customTitle // empty' 2>/dev/null)
+      # Only responses carry usage, and they are a tenth of a long transcript.
+      cold=$(grep '"type":"assistant"' "$f" | jq -nrR "$common"'responses("") | select(length > 0) | cold_at' 2>/dev/null)
+      [ -n "$cold" ] && [ "$cold" -gt "$now" ] && printf '%s\t%s\n' "$cold" "${title:-${id:0:8}}"
+    done | sort -n
+  exit 0
+fi
+
 status=false
 [ "${1:-}" = --status ] && { status=true; shift; }
 
@@ -155,10 +183,8 @@ read -r ctx window warm < <(jq -nrR --arg main "$transcript" "$common"'
   responses($main)
   | select(length > 0)
   | max_by(.at) as $last
-  | (if any(.[]; (.u.cache_creation.ephemeral_1h_input_tokens | n) > 0)
-     then 3600 else 300 end) as $ttl
   | ($last.model | if test("haiku-4|claude-3") then 200000 else 1000000 end) as $window
-  | "\($last.u | all_in) \($window) \($last.at + $ttl | floor)"
+  | "\($last.u | all_in) \($window) \(cold_at)"
 ' "$transcript" 2>/dev/null)
 [ -n "${warm:-}" ] || exit 0
 
