@@ -271,7 +271,7 @@ apply to one repository belong in that repository's project memory.
   the draft. Steps that come after a long run whose own output will bury them, such as applying and
   committing what a dream run proposes, wait for the reply that follows that run, and the list
   before it stops at the run. A PR review's steps are the exception: they live on its review page,
-  where the user ticks them off, and each reply gives the page's link in their place, as the
+  where the user ticks them off, and each reply gives the page's address in their place, as the
   `pull-requests` skill says.
 - Steps the user carries out are written in the order they are done, in one numbered list from
   the first to the last. How to do one of them, such as how to start a screen recording, goes
@@ -305,13 +305,16 @@ apply to one repository belong in that repository's project memory.
 - Anything the reader is told to copy, paste or open, an address included, goes in a fenced code
   block of its own, tagged `text` when it is no command, so the copy button takes it in one click:
   "Open this address:" and the block under it, never the address inline in the sentence. An address
-  the reader only reads, such as the page that should now open, stays inline. A file in the
-  session's folders that the reader opens, such as a PR's review page, is the exception: it gets a
-  Markdown link to its path, which the app opens on a click. A file outside them, such as a
-  deliverable in `~/Downloads/<task>/`, gets the command that opens it in its default app, `open`
-  with its full `~` path, in a `bash` block of its own, whose Run button opens it. It is never sent
-  with SendUserFile or linked, since the app's side pane opens only the session's folders and asks
-  the user to add the folder instead, and the user adds none for this.
+  the reader only reads, such as the page that should now open, stays inline. A local HTML page the
+  user opens in a browser, such as a PR's review page or a page in `~/Downloads/<task>/`, gets its
+  `file://` address with the full path from the root in a `text` block of its own, which the user
+  pastes into Firefox's address bar. Any other file in the session's folders that the reader opens
+  gets a Markdown link to its path, which the app opens on a click. Any other file outside them,
+  such as a PDF in `~/Downloads/<task>/`, gets the command that opens it in its default app, `open`
+  with its full `~` path, in a `bash` block of its own, whose Run button opens it. A file outside
+  the session's folders is never sent with SendUserFile or linked, since the app's side pane opens
+  only the session's folders and asks the user to add the folder instead, and the user adds none for
+  this.
 - An emoji the user is to pick in an app, such as one per sticker of a sticker pack, stands beside
   the shortest text, typed from the start of a word of its name, that the app's emoji search finds
   it alone by, with the full name in brackets after it, such as coll (collision), so the user types

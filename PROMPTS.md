@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Name dream steps by p number and agents by title, not tier codes
+## Give a local HTML page as a file:// address for Firefox
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.**
+> hmm instead could you just give the link to the html like pwd instead
+> of open i put on terminal i should just put it to firefox directly
+
+(Which pages get the address: every HTML page or review pages only)
+> Every HTML page (Recommended)
+
+## Name dream steps by p number and agents by title, not tier codes
+
+2026-10-31, commit [2987c07](https://github.com/zululima/dotclaude/commit/2987c07f40ad4cbef56c854c3b44fccb5d3eac81), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > what i dont undersatnd the nwkd at all. should we ditch those? also

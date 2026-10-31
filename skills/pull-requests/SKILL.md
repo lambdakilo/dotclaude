@@ -128,7 +128,7 @@ GitHub, meta prompts left out, and downstream names redacted in public and upstr
 - The user works through the steps on the review page that Reviewing a PR describes, for every PR
   and not only in a review. The session that opens a PR, or pushes a commit that changes its steps
   or what they show, builds the page in the same turn, after the pictures are in the body, with the
-  checks it ran as the overlay's results, and its reply ends with the page's link as a review's
+  checks it ran as the overlay's results, and its reply ends with the page's address as a review's
   reply does.
 
 ## Reviewing a PR
@@ -172,9 +172,10 @@ GitHub, meta prompts left out, and downstream names redacted in public and upstr
   rebuilds the page at the same path and they stay; the session cannot read them, so the reader says
   how far they got.
 - The reply gives the results of the verify command and the end to end run, then the findings and
-  the fixes made, and no step list of its own. It ends with the page's link, a Markdown link to the
-  file's path relative to the checkout, which the app opens on a click, on its last line before
-  Prompt feedback, where the reader's eye is when they go to click it.
+  the fixes made, and no step list of its own. It ends with the page's `file://` address, with the
+  full path from the root, in a `text` block of its own, which the user pastes into Firefox's
+  address bar, as `~/.claude/CLAUDE.md` says for every local HTML page. The block is the last thing
+  before Prompt feedback, where the reader's eye is when they go to copy it.
 - Where the PR's steps fall short, the overlay's `added_steps` put the fix on the page, marked as
   added by the review: the two command steps when the PR lacks them (an empty `after` puts a step
   before the PR's first), a step for a change the PR's steps skip, and the bug steps below. They
