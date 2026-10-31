@@ -599,9 +599,9 @@ apply to one repository belong in that repository's project memory.
   reply names the run and says it is in the session's tasks pane, and every later turn calls
   `show_pane` with `tasks` again first while a run the session started still goes on.
 - A `Stop` hook, `~/.claude/hooks/stop-unreachable-claim.sh`, sends a turn back once when its
-  closing message says in the first person that something could not be opened, read, reached or
-  uploaded, and no browser pane tool ran since the prompt. Its phrase list is a heuristic that backs
-  the rule above.
+  closing message says in the first person that something could not be opened, read, reached, found
+  or uploaded, and no browser pane tool ran since the prompt. Its phrase list is a heuristic that
+  backs the rule above.
 - Before a reply says that a setup cannot do something, such as install a tool, reach a service or
   suit a kind of user, the session reads that setup's own install scripts, README and settings, and
   the guides they point to, such as an onboarding guide in another repository. Before a reply

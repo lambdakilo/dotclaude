@@ -725,6 +725,16 @@ const suites = [
         jsonl(t, [pane, human('draft it'), says(s)])
         return quiet(run(stop(s)))
       }],
+      ['sends back a claim that something could not be found', () => {
+        const s = "I couldn't find the invoice in your mail, so the total is missing."
+        jsonl(t, [pane, human('add up the invoices'), says(s)])
+        return refused(run(stop(s)))
+      }],
+      ['lets a claim through about what Claude cannot see', () => {
+        const s = "I can't see the status line in the app, so check it there."
+        jsonl(t, [pane, human('does it fit now'), says(s)])
+        return quiet(run(stop(s)))
+      }],
       ['lets a session without the pane through', () => {
         jsonl(t, [human('read the pdf'), says(claim)])
         return quiet(run(stop(claim)))
