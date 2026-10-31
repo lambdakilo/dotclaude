@@ -5,9 +5,24 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Refuse a second draft PR in a repository with a hook
+## Name each emoji the user picks by the app's search name
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**5.**
+> [a question about a downstream task left out]
+
+**6.**
+> [a correction about a downstream task left out]
+
+**7.**
+> dotclaude it would have been easier for me to look at the signal
+> table for the official emoji names on top of the symbols themselves
+> when adding to signal
+
+## Refuse a second draft PR in a repository with a hook
+
+2026-10-31, commit [9765244](https://github.com/zululima/dotclaude/commit/97652445f8233943ab543312ae2256807af29d2e), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream review also tell me about this Security flag: [pasted: a
