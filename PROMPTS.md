@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Offer the Trash beside the archive for a finished Downloads folder
+## Keep an HTML page in ~/.claude/pages, not in Downloads
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> [an answer about deleting a page left out]
+
+**5.**
+> bro dont put that in downloads. maybe somewhre in .claude since i
+> dont actually need the html itself firefox remember to location
+
+## Offer the Trash beside the archive for a finished Downloads folder
+
+2026-10-31, commit [1b466f2](https://github.com/zululima/dotclaude/commit/1b466f245b4497012817336ad7efe7178dc8d9cb), model claude-opus-5-5, effort xhigh.
 
 **16.**
 > always put the artifacts i need to personally share soon inDownloads

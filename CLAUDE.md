@@ -222,10 +222,10 @@ apply to one repository belong in that repository's project memory.
   about making that. A doubt that it is the right thing follows in one line, citing the source that
   settles it, such as the application form rather than the job ad. Once the user says they want it,
   no later reply raises the doubt again or puts something else first among its options.
-- A request for an HTML file or page, or for anything else the user opens themselves, gets a local
-  file in the work's `~/Downloads/<task>/` folder, never a published Artifact, whatever the Artifact
-  tool's description says about pages and apps: the user opens the file in their own browser and
-  nothing goes to claude.ai. An Artifact is published only when the user asks for one by that word.
+- A request for an HTML file or page gets a local file in `~/.claude/pages/`, never `~/Downloads` or
+  a published Artifact, whatever the Artifact tool's description says about pages and apps: the user
+  reads it in their own browser, which remembers its address, and nothing goes to claude.ai. An
+  Artifact is published only when the user asks for one by that word.
 - The user reads only a turn's closing message, the text after its last tool call, and nothing above
   it: no text written between tool calls and no file card sent during the turn. The app folds that
   text under counts such as "ran 2 commands", which the user reads as Claude thinking, so an answer
@@ -439,23 +439,23 @@ apply to one repository belong in that repository's project memory.
   directory flag or a subshell, such as `(cd ~/Projects/<repo> && make test)`, also when it is
   quoted from a README whose paths are relative to the checkout. A file such a command reads or
   writes that belongs to no checkout goes in `~/Downloads` unless the user names a folder.
-- `~/Downloads` holds only files the user opens, sends or uploads, such as a PDF or a spreadsheet.
-  Each piece of work puts all of its files there in one folder of its own, named for the work, such
-  as `~/Downloads/<task>/`, never in several folders or as loose files beside each other. Subfolders
-  inside it keep its parts apart, such as one per app a set is made for, and what the work
-  downloaded or unpacked as its source material goes in it too. A later turn or session of the same
-  work adds to that folder instead of starting another, so before a session makes its first file
-  there, it lists `~/Downloads` and `~/.claude/archive` and greps `~/.claude/prompt-log` for the
-  work's words. It builds on what an earlier session left, keeping the names and settings recorded
-  with it unless the user changes them, and its first reply names what it found; when the request
-  points to other files, such as a colleague's new upload, it asks which to build from. Once the
-  work looks done, the closing reply asks in the next-step box whether the session may move the
-  work's folder out of `~/Downloads`, to the Trash or to `~/.claude/archive/<task>/`, at hand for a
-  later session, which moves it back before the user needs a file from it. After any move, the
-  session rewrites the memory notes and background files that name the old path. A working file that
-  only feeds a tool, such as the HTML of a Slack draft that a script puts on the clipboard, goes in
-  `~/.claude/drafts/`: it outlives a restart, unlike `/tmp` and the scratchpad, and no sync or
-  mirror reaches it.
+- `~/Downloads` holds only files the user opens, sends or uploads, such as a PDF or a spreadsheet,
+  never an HTML page. Each piece of work puts all of its files there in one folder of its own, named
+  for the work, such as `~/Downloads/<task>/`, never in several folders or as loose files beside
+  each other. Subfolders inside it keep its parts apart, such as one per app a set is made for, and
+  what the work downloaded or unpacked as its source material goes in it too. A later turn or
+  session of the same work adds to that folder instead of starting another, so before a session
+  makes its first file there, it lists `~/Downloads`, `~/.claude/pages` and `~/.claude/archive` and
+  greps `~/.claude/prompt-log` for the work's words. It builds on what an earlier session left,
+  keeping the names and settings recorded with it unless the user changes them, and its first reply
+  names what it found; when the request points to other files, such as a colleague's new upload, it
+  asks which to build from. Once the work looks done, the closing reply asks in the next-step box
+  whether the session may move the work's folder out of `~/Downloads`, to the Trash or to
+  `~/.claude/archive/<task>/`, at hand for a later session, which moves it back before the user
+  needs a file from it. After any move, the session rewrites the memory notes and background files
+  that name the old path. A working file that only feeds a tool, such as the HTML of a Slack draft
+  that a script puts on the clipboard, goes in `~/.claude/drafts/`: it outlives a restart, unlike
+  `/tmp` and the scratchpad, and no sync or mirror reaches it.
 - Environment or deployment tooling runs against a remote environment, such as a deploy, a
   store upload or submission, or a command on a shared database, only when the user asked for
   that action on that target in the session or said go to a reply that named both. The ask
