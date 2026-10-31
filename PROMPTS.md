@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Move the commit message rules into a commit-messages skill
+## Open a draft PR per issue; side changes join one already open
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dream review also tell me about this Security flag: [pasted: a
+> paragraph from the last dream run's closing message about one of its
+> agents]
+
+(Step w1 of 24 Oct, 3 of 8: one draft PR per issue, side changes on
+one already open?)
+> Add it (Recommended)
+
+## Move the commit message rules into a commit-messages skill
+
+2026-10-31, commit [50909f2](https://github.com/zululima/dotclaude/commit/50909f28ec6da78c84b3c19c457abc71f54801a4), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream review also tell me about this Security flag: [pasted: a

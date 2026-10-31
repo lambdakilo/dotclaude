@@ -20,7 +20,8 @@
 - [`no-github-posts.sh`](../hooks/no-github-posts.sh): stops Claude from posting comments or reviews
   on GitHub, where they would appear under your name.
 - [`one-draft-pr-per-repo.sh`](../hooks/one-draft-pr-per-repo.sh): stops Claude from opening a
-  second draft PR in a repository where you already have one open, so new work joins that PR.
+  second draft PR in a repository where you already have one open, unless you asked to start a new
+  issue, so a side change joins that PR.
 - [`no-home-search.sh`](../hooks/no-home-search.sh): stops searches of your whole disk, which make
   the Mac ask you for permission folder after folder.
 - [`cd-fall-through.sh`](../hooks/cd-fall-through.sh): stops a command from carrying on in the wrong

@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 # Claude Code PreToolUse hook on Bash. Refuses gh pr create once while the user
-# has a draft PR open in the target repository, since ~/.claude/CLAUDE.md keeps
-# one open draft PR per repository. The target is the --repo or -R the command
-# names, else the repository gh finds from the session's working directory. It
-# refuses once per session for the same set of open drafts, and any gh failure
-# lets the command through.
+# has a draft PR open in the target repository, since ~/.claude/CLAUDE.md opens
+# a new one only for an issue or feature the user asked to start and sends
+# every other change to a draft already open. The target is the --repo or -R
+# the command names, else the repository gh finds from the session's working
+# directory. It refuses once per session for the same set of open drafts, and
+# any gh failure lets the command through.
 
 set -u
 
@@ -41,11 +42,12 @@ cat >&2 <<EOF
 Blocked once by ~/.claude/hooks/one-draft-pr-per-repo.sh, so no part of the
 command ran: the user has a draft PR open in this repository:
 $drafts
-~/.claude/CLAUDE.md keeps one open draft PR per repository: commit this change
-to that PR's branch and refresh its body, and when another live session holds
-it, send the change to that session with SendMessage, to the name ListAgents
-prints. A body file this command writes, as with a cat heredoc, was not
-written. Run the command again unchanged only when the user said in this
-session to open a new PR.
+~/.claude/CLAUDE.md opens a draft PR only for an issue or feature the user
+asked to start: commit any other change to the branch of the PR in play, or of
+that draft, and refresh its body, and when another live session holds it, send
+the change to that session with SendMessage, to the name ListAgents prints. A
+body file this command writes, as with a cat heredoc, was not written. Run the
+command again unchanged only when the user asked in this session to start an
+issue or feature, or to open a new PR.
 EOF
 exit 2
