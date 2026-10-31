@@ -55,9 +55,7 @@ GitHub, meta prompts left out, and downstream names redacted in public and upstr
   `commit-messages` skill says, never from memory. Then number every prompt from the session in
   order and quote each verbatim, typos and lowercase included, as a `>` blockquote (`**1.**` on its
   own line, then the `>` quote). Include prompts that produced no commit. Mark answers to questions
-  with a short parenthetical, and give each AskUserQuestion answer as the commit message rules say:
-  after a blank line, the question shortened on a parenthetical line, then the option picked or the
-  text typed on `>` lines of its own, nothing nested.
+  with a short parenthetical after the number, such as `**2.** (answer to: shall I build it?)`.
 - Directly under the model line, before the first prompt, a nested
   `<details><summary>Abbreviations</summary>` block lists every abbreviation used anywhere in the
   quoted prompts with its expansion, one per line, so a reader who does not know one can open

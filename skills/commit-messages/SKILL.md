@@ -27,12 +27,9 @@ running one.
   commit made under the same prompt that prompt again. They keep their session numbers, each on
   its own line followed by the prompt as `>` quoted lines, verbatim, typos and lowercase
   included, wrapped onto further `>` lines at 72 columns. Mark answers to questions with a short
-  parenthetical. Each question an AskUserQuestion call put to that prompt follows it after a
-  blank line, as a pair: the question, shortened in Claude's words, on a parenthetical line, and
-  directly under it the option picked or the text typed on `>` lines of its own. Nothing is
-  nested inside a quote, and a blank line separates the pairs. When
-  those prompts use abbreviations, an `Abbreviations:` section follows with one line per
-  abbreviation and its expansion. When they use none, there is no such section.
+  parenthetical on the number's line, such as `2. (answer to: shall I build it?)`. When those
+  prompts use abbreviations, an `Abbreviations:` section follows with one line per abbreviation
+  and its expansion. When they use none, there is no such section.
 - Text the user pasted into a prompt (a pasted block: a log, code, a file, an address, a message
   from someone else) is never quoted, in a commit message or in a PR body. Replace it where it
   stood with a bracketed description of what it was, such as `[pasted: an email address]` or
@@ -55,7 +52,7 @@ running one.
   `[redacted]`. Then do only what the printout cannot: leave out and redact as the bullets around
   this one say, replace a spawned task's opening prompt, which another session wrote, with `[a task
   another Claude session wrote, left out]`, say what each pasted address or block was, and add the
-  answer marks, the AskUserQuestion selections and the abbreviations. When print leaves the heading
+  answer marks and the abbreviations. When print leaves the heading
   out, it exits 1 and says why: run it again with `--model <id>` and the model id of the session, or
   with `--effort <level>` and the level `get_session` with `self` gives, as the message asks.
 - The PR rules on exclusion and redaction apply to commit messages too: leave out meta prompts,

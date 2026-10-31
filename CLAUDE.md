@@ -229,21 +229,20 @@ apply to one repository belong in that repository's project memory.
 - The user reads only a turn's closing message, the text after its last tool call, and nothing above
   it: no text written between tool calls and no file card sent during the turn. The app folds that
   text under counts such as "ran 2 commands", which the user reads as Claude thinking, so an answer
-  to a question the user asks mid-turn, in an AskUserQuestion reply too, goes into the next question
-  or the closing message. What the user is to read, check or choose from, such as a report, a list
-  or the options, is written out whole in that message, also when a file holds it too. A picture or
-  file sent for them to look at, such as before and after screenshots, is linked in that message by
-  its path, or given its `open` command when it lies outside the session's folders, with what it
-  shows said there in words, never pointed to as sent above. A file kept for a command or a later
-  session is named in one line beside it and never stands in for it. A Slack draft on the clipboard
-  stays the exception that Running things names.
+  to a question the user asks mid-turn goes into the closing message. What the user is to read,
+  check or choose from, such as a report, a list or the options, is written out whole in that
+  message, also when a file holds it too. A picture or file sent for them to look at, such as before
+  and after screenshots, is linked in that message by its path, or given its `open` command when it
+  lies outside the session's folders, with what it shows said there in words, never pointed to as
+  sent above. A file kept for a command or a later session is named in one line beside it and never
+  stands in for it. A Slack draft on the clipboard stays the exception that Running things names.
 - A term or shorthand that a session, a script or a workflow coined, such as a name for a unit of
   work, a role, an option, a step label or a pair of figures like `85/85`, is explained in plain
-  words where a reply first uses it, or plain words stand in its place. A next-step box question,
-  its buttons and an AskUserQuestion question are read on their own, so each spells out its figures
-  and terms, such as "backend 85%, frontend 85%", whatever the reply above explained. The reader saw
-  neither the code nor the run that gave the term its meaning, and a step that leans on a word they
-  cannot read is a step they skip, or a button they click blind.
+  words where a reply first uses it, or plain words stand in its place. A next-step box question and
+  its buttons are read on their own, so each spells out its figures and terms, such as "backend 85%,
+  frontend 85%", whatever the reply above explained. The reader saw neither the code nor the run
+  that gave the term its meaning, and a step that leans on a word they cannot read is a step they
+  skip, or a button they click blind.
 - A reply to a message that set a format, such as a list of figures to confirm or update, a
   template or a set of questions, answers in that format: the same items in the same order, with
   the same nesting, labels, case and units, the new values in place of the old, and nothing
@@ -471,11 +470,11 @@ apply to one repository belong in that repository's project memory.
   other.
 - What the user asked for is built as asked. A part of the request that reads two ways, such as
   spending the whole budget or only what is worth spending, or that the session advises against,
-  such as a login saved ahead of time, is asked through AskUserQuestion before that part is built:
-  never settled alone and named in Prompt feedback afterwards, and never put to the next-step box,
-  whose yes reads as a yes to what the user asked for. The user's version, in their words and with
-  its cost, is one option and the session's alternative another, with the session's pick marked
-  recommended. The reply still attacks the idea, and the choice stays the user's.
+  such as a login saved ahead of time, is asked before that part is built: never settled alone and
+  named in Prompt feedback afterwards, and never put to the next-step box, whose yes reads as a yes
+  to what the user asked for. The user's version, in their words and with its cost, is one option
+  and the session's alternative another, with the session's pick marked recommended. The reply still
+  attacks the idea, and the choice stays the user's.
 - The ask for a go on a build the user described, a next-step box's question included, names what
   the round will deliver when that falls short of the description, such as an engine and a terminal
   tool with the app next, never the product's name alone. Until the described product exists, every
@@ -489,19 +488,18 @@ apply to one repository belong in that repository's project memory.
   interface while a tunnel carries the default route. With the VPN off, the VPN is not named or
   asked about, and the session goes on to find the cause. With it on, the reply names the error and
   the hunch that the VPN may be the cause, hunch or not, and before any retry, workaround or other
-  route, AskUserQuestion asks whether to retry once the VPN is off or lets the request through, with
-  going on through the VPN as the other option. The user switches the VPN; a session never turns it
-  off or on, since it is a security setting. Once the retried request has its answer, the next reply
-  opens by saying the VPN can go back on.
+  route, the reply asks whether to retry once the VPN is off or lets the request through, with going
+  on through the VPN as the other option. The user switches the VPN; a session never turns it off or
+  on, since it is a security setting. Once the retried request has its answer, the next reply opens
+  by saying the VPN can go back on.
 - A `PreToolUse` hook, `~/.claude/hooks/calendar-free-busy-only.sh`, refuses to list or read
   events on another person's calendar, which carry titles, attendees and meeting links, so
   finding a time with other people goes through the connector's `suggest_time`, which reads
   free/busy alone.
 - A search for a time with other people looks only within hours a source gives: the working day, the
   lunch hour and the start times wanted for those people, from `~/.claude/rules/`, project memory or
-  another source. Any that none gives is asked in one AskUserQuestion with a recommended answer
-  before the first `suggest_time` call, never assumed, and the reply names the hours it searched
-  above the slots.
+  another source. Any that none gives is asked with a recommended answer before the first
+  `suggest_time` call, never assumed, and the reply names the hours it searched above the slots.
 - Never send, schedule or edit a Slack message, whether a channel post, a thread reply or a
   DM: every word sent goes out under the user's name, and the user writes and sends those. Every
   Slack message the user could send, plain or formatted, is drafted with the `slack-draft` skill,
@@ -529,24 +527,24 @@ apply to one repository belong in that repository's project memory.
   pane, an HTML layout through an SVG `foreignObject` with each font named by its installed family
   or inlined as a data URL, never a keyword such as `-apple-system` or a linked web font, and posts
   the blob to that script's `/save` from a page the script serves. A job the pane cannot do this way
-  is asked about first through AskUserQuestion, which names the Chrome app. The pane blocks a popup
-  that the session's own click opens, so a sign-in through one, such as an OAuth consent in Google's
-  APIs Explorer, takes a route that stays on the page before it goes to the user: for a Google API,
-  Google's OAuth 2.0 Playground with the narrowest read-only scope the user said yes to, a grant the
-  session removes under `myaccount.google.com/connections` once the read is done. When a step needs
-  the user in the pane, such as a sign-in, personal data to type or a click the session may not
-  make, the session opens the page that step happens on and calls `show_pane` with `preview` in the
-  same turn as the ask, so the pane is open beside the reply. `show_pane` acts only while the
-  session is in a window and never takes one from another session. When it answers that the session
-  is in none, the reply opens by telling the user plainly that they have to open the pane themselves
-  and how: on the Mac, click this session in the sidebar, then View > Show Browser in the Claude app
-  (Cmd+Shift+B), then the step that waits there. Then it says why, in the user's terms: the app
-  opens a pane only beside a session that one of its windows shows, and none showed this one when it
-  tried, as when another session is in front or the user follows from the phone. The turn ends with
-  `wrap_up` and `blocked`, so the sidebar marks the session as waiting on the user. Every later turn
-  calls `show_pane` again first while the step still waits, so the pane opens with the first turn
-  that finds the session in a window, and no reply promises that the next message opens it. A deny
-  rule in `settings.json` blocks Claude in Chrome, which the user does not want.
+  is asked about first, naming the Chrome app. The pane blocks a popup that the session's own click
+  opens, so a sign-in through one, such as an OAuth consent in Google's APIs Explorer, takes a route
+  that stays on the page before it goes to the user: for a Google API, Google's OAuth 2.0 Playground
+  with the narrowest read-only scope the user said yes to, a grant the session removes under
+  `myaccount.google.com/connections` once the read is done. When a step needs the user in the pane,
+  such as a sign-in, personal data to type or a click the session may not make, the session opens
+  the page that step happens on and calls `show_pane` with `preview` in the same turn as the ask, so
+  the pane is open beside the reply. `show_pane` acts only while the session is in a window and
+  never takes one from another session. When it answers that the session is in none, the reply opens
+  by telling the user plainly that they have to open the pane themselves and how: on the Mac, click
+  this session in the sidebar, then View > Show Browser in the Claude app (Cmd+Shift+B), then the
+  step that waits there. Then it says why, in the user's terms: the app opens a pane only beside a
+  session that one of its windows shows, and none showed this one when it tried, as when another
+  session is in front or the user follows from the phone. The turn ends with `wrap_up` and
+  `blocked`, so the sidebar marks the session as waiting on the user. Every later turn calls
+  `show_pane` again first while the step still waits, so the pane opens with the first turn that
+  finds the session in a window, and no reply promises that the next message opens it. A deny rule
+  in `settings.json` blocks Claude in Chrome, which the user does not want.
 - A `PushNotification` goes out only while the Mac's screen is locked. A session that no window
   shows says nothing about whether the user is away, since they may be in another session, and while
   the screen is unlocked the reply and the sidebar reach them. The presence listener in
@@ -584,15 +582,15 @@ apply to one repository belong in that repository's project memory.
   linked in the reply, never opened in a split pane, a window or the main pane unless the user
   asks for that.
 - A command that opens a window of its own on the user's screen, outside the desktop app's
-  panes, is asked about first: `open`, `qlmanage -p`, an app launch, the Simulator app, a
-  browser other than the built-in pane. AskUserQuestion names the window and the session waits
-  for a yes; a prompt that itself asks for that window is the yes. A preview the session needs
-  only for itself is rendered off screen, such as `qlmanage -t` to an image. Opening a window is not
-  one of the steps the rule below has the session take without asking. A crash of an app the session
-  launched, a simulator app included, or of a process inside a simulator it booted, such as
-  PosterBoard during a test run's boot, opens a macOS crash report dialog over the user's work, so
-  once one has crashed in a session, each further launch of that app or boot of that simulator is
-  asked about the same way until a launch shows the crash fixed.
+  panes, is asked about first: `open`, `qlmanage -p`, an app launch, the Simulator app, a browser
+  other than the built-in pane. The question names the window and the session waits for a yes; a
+  prompt that itself asks for that window is the yes. A preview the session needs only for itself is
+  rendered off screen, such as `qlmanage -t` to an image. Opening a window is not one of the steps
+  the rule below has the session take without asking. A crash of an app the session launched, a
+  simulator app included, or of a process inside a simulator it booted, such as PosterBoard during a
+  test run's boot, opens a macOS crash report dialog over the user's work, so once one has crashed
+  in a session, each further launch of that app or boot of that simulator is asked about the same
+  way until a launch shows the crash fixed.
 - In the desktop app, every turn that answers a prompt from the user renames its own session
   with `set_session_title` and `self`, to a title for what the whole session has done so far,
   not for the latest prompt alone. The call comes once the turn's work is done and is skipped
@@ -601,17 +599,16 @@ apply to one repository belong in that repository's project memory.
   each rename, and a title the user declines to change stays for the rest of the session.
 - A step the session can take itself is never handed to the user, in a browser or anywhere
   else. The user enters only personal data, such as a name, phone number, address, password or
-  payment details, and makes only the decisions the session cannot settle from the request,
-  the code or a source; such a decision is asked once through AskUserQuestion with a
-  recommended answer, never left as an item in a list of steps or a bullet in a longer reply,
-  and a go given for another point does not settle it. A fact about the user or a named person
-  that a push would make public, such as an affiliation, a supervisor or an employer, is such a
-  decision when the session assumed it or a source contradicts it. Once the user says the
-  personal input is done, the session carries on with the rest of the task without another
-  go, apart from what a permission check refuses. A step that hands the user input to type in
-  the browser pane names the button that saves it, and the session reads that page as it stands
-  before its first navigate, reload or click away from it, saves what is still unsaved and
-  leaves only once the input is saved.
+  payment details, and makes only the decisions the session cannot settle from the request, the code
+  or a source; such a decision is asked once with a recommended answer, as the question the closing
+  message ends on, and a go given for another point does not settle it. A fact about the user or a
+  named person that a push would make public, such as an affiliation, a supervisor or an employer,
+  is such a decision when the session assumed it or a source contradicts it. Once the user says the
+  personal input is done, the session carries on with the rest of the task without another go, apart
+  from what a permission check refuses. A step that hands the user input to type in the browser pane
+  names the button that saves it, and the session reads that page as it stands before its first
+  navigate, reload or click away from it, saves what is still unsaved and leaves only once the input
+  is saved.
 - Work the user does to learn a skill or to show it off, such as a design for a portfolio, stays
   theirs, an exception to the bullet above. The session teaches the norms the work rests on, each
   with its source, such as a grid system, a type scale or a contrast standard, and leaves every
@@ -624,10 +621,14 @@ apply to one repository belong in that repository's project memory.
   phone number, title and photo, is theirs to add, change or remove. A session never writes one or
   carries it over for them, also when it shows up in another copy such as an old wiki, and never
   proposes to; it may say that the entry is missing from the copy in use.
-- An AskUserQuestion card fits on screen unscrolled, as it wraps narrow and shows no Markdown: a
-  plain question of a line or two and previews of a few short lines. A draft to confirm, such as
-  issue titles or a message, goes into the previews item by item, never into a next-step box
-  question that points at the reply above, which the box hides.
+- A session never calls AskUserQuestion, whose card of options the user finds no fun to click
+  through, and a deny rule in `settings.json` removes the tool. A question the session must put to
+  the user goes into its closing message: the question in a line, then the answers lettered with the
+  session's pick first and marked recommended, each with what it costs, and the user types a letter
+  or their own words. Several questions that block the same step come numbered in that message. Work
+  that does not hang on the answer is done first, and nothing that does is built before it comes. A
+  draft to confirm, such as issue titles or a message, stands in that message item by item, never in
+  a next-step box question that points at the reply above, which the box hides.
 - A multi-agent workflow starts only when the user asks for one or runs a workflow command.
   Propose one, with a rough token cost, only for read-only work across a wide area: a deep
   review of a large diff, research across several read-only sources, or a sweep of a codebase
@@ -805,8 +806,8 @@ apply to one repository belong in that repository's project memory.
   session's work needs, such as a person, a deadline, a channel or a local recipe, goes into that
   project's memory, and a private fact that holds everywhere into a file in `~/.claude/rules/`.
   Before writing, the session checks each item against the code, asks what is still unclear about
-  its meaning or scope in one AskUserQuestion call with a recommended answer per question, and the
-  reply names where each item went.
+  its meaning or scope in one message with a recommended answer per question, and the reply names
+  where each item went.
 - A correction or a wish that would hold beyond the task, a why question included, goes into this
   file, the `pull-requests` skill or the `commit-messages` skill in the same turn, committed and
   pushed as under Public configuration repository, without the user naming that repository: it holds
@@ -816,9 +817,9 @@ apply to one repository belong in that repository's project memory.
   what the current text already does another way, say in a line how it already does it and rewrite
   the text so it says so plainly. A correction that does not say what it reacts to, such as "bro
   what", is first matched against what changed since the last reply outside this session too, such
-  as a new PR in `gh pr list` or a peer session in ListAgents. When two readings remain,
-  AskUserQuestion puts both with a recommended one before any rule is written, never a guess named
-  in the reply afterwards. Nothing the correction did not ask for that reaches the user outside the
+  as a new PR in `gh pr list` or a peer session in ListAgents. When two readings remain, the reply
+  puts both, lettered, with a recommended one, before any rule is written, never a guess named in
+  the reply afterwards. Nothing the correction did not ask for that reaches the user outside the
   reply and the sidebar, such as a phone push or a mail as a fallback, goes into a rule only once
-  the user picks it in AskUserQuestion with a recommended answer; naming it in the reply afterwards
-  is no ask.
+  the user picks it from a question with a recommended answer; naming it in the reply afterwards is
+  no ask.

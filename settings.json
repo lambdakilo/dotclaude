@@ -47,7 +47,8 @@
       "SuggestSkills",
       "ShareOnboardingGuide",
       "mcp__visualize",
-      "mcp__ccd_session__read_widget_context"
+      "mcp__ccd_session__read_widget_context",
+      "AskUserQuestion"
     ],
     "allow": [
       "Bash(gh repo create:*)",

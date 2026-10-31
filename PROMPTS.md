@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Give a local HTML page as a file:// address for Firefox
+## Ask in the closing message, never with a question card
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask for a skill for a colleague left out] probably dont use
+> radio button thingy question or whatever clicking is not fun. also
+> dont use that anymore with me anywhere? unless do you think they are
+> useful in some situation? [more on that skill left out]
+
+**4.** (answer to: shall I rewrite your rules so sessions stop using question cards?)
+> Yes, everywhere
+
+## Give a local HTML page as a file:// address for Firefox
+
+2026-10-31, commit [36fec73](https://github.com/zululima/dotclaude/commit/36fec7359741e7c231c103ea7cd9ccbe4e88ddce), model claude-opus-5-5, effort xhigh.
 
 **3.**
 > hmm instead could you just give the link to the html like pwd instead
