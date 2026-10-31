@@ -515,6 +515,10 @@ apply to one repository belong in that repository's project memory.
   whose yes reads as a yes to what the user asked for. The user's version, in their words and with
   its cost, is one option and the session's alternative another, with the session's pick marked
   recommended. The reply still attacks the idea, and the choice stays the user's.
+- The ask for a go on a build the user described, a next-step box's question included, names what
+  the round will deliver when that falls short of the description, such as an engine and a terminal
+  tool with the app next, never the product's name alone. Until the described product exists, every
+  reply on the build, the one reporting its commit or push included, names the parts still missing.
 - Probe before spending quota on rate-limited APIs. Read retry-after, no blind retry loops.
 - A request that fails in a way the user's VPN could cause, such as a timeout, a refused or reset
   connection, a DNS or TLS error, or a block page, captcha or 403 from a site that should answer,

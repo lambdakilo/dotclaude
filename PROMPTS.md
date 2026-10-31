@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Stop no-home-search.sh reading cd "\<path>" as a bare cd home
+## Name what a build round delivers when the go asks for it
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [8f605a4](https://github.com/zululima/dotclaude/commit/8f605a4ea1f4e7e2c2a6f75b9df9cc106d42475e).
+
+## Stop no-home-search.sh reading cd "\<path>" as a bare cd home
+
+2026-10-31, commit [ab1d97c](https://github.com/zululima/dotclaude/commit/ab1d97c66f20cc8d8a614cfe901334234084133a), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [8f605a4](https://github.com/zululima/dotclaude/commit/8f605a4ea1f4e7e2c2a6f75b9df9cc106d42475e).
 
