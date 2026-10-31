@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Reload the usage mod in desktop sessions when it changes
+## Keep question cards short enough to read without scrolling
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**2.**
+> my guy dont create questiosn (or what are those called) where i have
+> to scroll it. picture for reference. also yes add it. also dont put
+> long this either in the quesiton boxes cuz it has a short wrap value
+> and no markdown parsing. also why are they nwkd for tiers?? also is p
+> proposal?
+
+## Reload the usage mod in desktop sessions when it changes
+
+2026-10-31, commit [ddc1930](https://github.com/zululima/dotclaude/commit/ddc19303fc375b3e7a63c1fb21164abd94b5d6f1), model claude-opus-5-5, effort xhigh.
 
 **4.**
 > mod? also why not the last thingy not showing in other sessions but

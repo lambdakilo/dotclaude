@@ -619,10 +619,10 @@ apply to one repository belong in that repository's project memory.
   phone number, title and photo, is theirs to add, change or remove. A session never writes one or
   carries it over for them, also when it shows up in another copy such as an old wiki, and never
   proposes to; it may say that the entry is missing from the copy in use.
-- A request to confirm something drafted, such as issue titles, a message or names to create,
-  carries the draft itself into the question: AskUserQuestion with every item written out in
-  the question or in an option's preview, never a next-step box question that points at a
-  table in the reply above, which the user may not see while the box is open.
+- An AskUserQuestion card fits on screen unscrolled, as it wraps narrow and shows no Markdown: a
+  plain question of a line or two and previews of a few short lines. A draft to confirm, such as
+  issue titles or a message, goes into the previews item by item, never into a next-step box
+  question that points at the reply above, which the box hides.
 - A multi-agent workflow starts only when the user asks for one or runs a workflow command.
   Propose one, with a rough token cost, only for read-only work across a wide area: a deep
   review of a large diff, research across several read-only sources, or a sweep of a codebase
