@@ -109,14 +109,6 @@ apply to one repository belong in that repository's project memory.
   several, also when another session opened it and through that session while it is live. A PR for
   such a change is opened only when the repository has no draft PR of the user's open, or when the
   user says so in that session.
-- A check or review the user asks for on a PR whose author is the user, such as of its links or its
-  pages, ends with the fixes the session would recommend committed and pushed to that PR's branch in
-  the same turn, and the reply lists each fix with its commit, so a no costs one revert. A prompt
-  that asks a question, for thoughts, a yes or no or a why, or says to change nothing yet, gets an
-  answer only. A fix the request, the code or a source cannot settle, such as a choice between two
-  layouts, is asked as under Running things, and a step beyond the branch, such as a merge or a
-  change outside the repository, stays a proposal. A review of a PR another author opened stays
-  findings for that author, as the `pull-requests` skill says.
 - A change on that branch to a file every branch of the repository reads, such as the pull request
   template, `AGENTS.md` or `CLAUDE.md`, the test runner's config or the git hooks, stays in the PR
   in play like any other, and no reply offers to move it to a PR of its own. It holds nowhere else
@@ -271,14 +263,20 @@ apply to one repository belong in that repository's project memory.
   clipboard. No reply says that steps given before still stand. The user works from the latest reply
   and keeps no list in their head. A question the session put to the user that is still open, such
   as a next-step box question that a prompt about other work passed by, is one of these steps: each
-  later reply asks it again, with its recommendation, until the user answers or declines it. Turning
-  a setting back off that the user turned on for the session's work, such as Developer Mode on the
-  Mac, is no step: the setting stays as the user left it, and no reply suggests undoing it. Nor is
-  sending a Slack draft, which stands only in the reply that gives the draft. Steps that come after
-  a long run whose own output will bury them, such as applying and committing what a dream run
-  proposes, wait for the reply that follows that run, and the list before it stops at the run. A PR
-  review's steps are the exception: they live on its review page, where the user ticks them off, and
-  each reply gives the page's link in their place, as the `pull-requests` skill says.
+  later reply asks it again, with its recommendation, until the user answers or declines it. A
+  question about a step the session takes itself, such as a commit, a push or a release, names the
+  session as the one who takes it, as in "Shall I commit and ship?", and its answers, next-step box
+  buttons included, are the user's words to the session, such as "yes, go ahead" and "not yet",
+  never a bare action such as "Commit and ship" that reads as a task for the user. In the list of
+  steps it stands as a reply to give, such as "reply a or b to whether I commit and ship", after the
+  work the user does by hand. Turning a setting back off that the user turned on for the session's
+  work, such as Developer Mode on the Mac, is no step: the setting stays as the user left it, and no
+  reply suggests undoing it. Nor is sending a Slack draft, which stands only in the reply that gives
+  the draft. Steps that come after a long run whose own output will bury them, such as applying and
+  committing what a dream run proposes, wait for the reply that follows that run, and the list
+  before it stops at the run. A PR review's steps are the exception: they live on its review page,
+  where the user ticks them off, and each reply gives the page's link in their place, as the
+  `pull-requests` skill says.
 - Steps the user carries out are written in the order they are done, in one numbered list from
   the first to the last. How to do one of them, such as how to start a screen recording, goes
   into that step, never into a section of its own placed before steps that have to come first.
@@ -534,14 +532,15 @@ apply to one repository belong in that repository's project memory.
   make, the session opens the page that step happens on and calls `show_pane` with `preview` in the
   same turn as the ask, so the pane is open beside the reply. `show_pane` acts only while the
   session is in a window and never takes one from another session. When it answers that the session
-  is in none, the reply opens with that ask and with why the pane is not on screen, in the user's
-  terms: the app opens a pane only beside a session that one of its windows shows, and none showed
-  this one when it tried, as when another session is in front or the user follows from the phone.
-  The turn ends with `wrap_up` and `blocked`, so the sidebar marks the session as waiting on the
-  user. Every later turn calls `show_pane` again first while the step still waits, so the pane opens
-  with the first turn that finds the session in a window, and no reply promises that the next
-  message opens it. A deny rule in `settings.json` blocks Claude in Chrome, which the user does not
-  want.
+  is in none, the reply opens by telling the user plainly that they have to open the pane themselves
+  and how: on the Mac, click this session in the sidebar, then View > Show Browser in the Claude app
+  (Cmd+Shift+B), then the step that waits there. Then it says why, in the user's terms: the app
+  opens a pane only beside a session that one of its windows shows, and none showed this one when it
+  tried, as when another session is in front or the user follows from the phone. The turn ends with
+  `wrap_up` and `blocked`, so the sidebar marks the session as waiting on the user. Every later turn
+  calls `show_pane` again first while the step still waits, so the pane opens with the first turn
+  that finds the session in a window, and no reply promises that the next message opens it. A deny
+  rule in `settings.json` blocks Claude in Chrome, which the user does not want.
 - A `PushNotification` goes out only while the Mac's screen is locked. A session that no window
   shows says nothing about whether the user is away, since they may be in another session, and while
   the screen is unlocked the reply and the sidebar reach them. The presence listener in

@@ -124,6 +124,14 @@ GitHub, meta prompts left out, and downstream names redacted in public and upstr
 
 ## Reviewing a PR
 
+- A check or review the user asks for on a PR whose author is the user, such as of its links or its
+  pages, ends with the fixes the session would recommend committed and pushed to that PR's branch in
+  the same turn, and the reply lists each fix with its commit, so a no costs one revert. A prompt
+  that asks a question, for thoughts, a yes or no or a why, or says to change nothing yet, gets an
+  answer only. A fix the request, the code or a source cannot settle, such as a choice between two
+  layouts, is asked as under Running things in `~/.claude/CLAUDE.md`, and a step beyond the branch,
+  such as a merge or a change outside the repository, stays a proposal. A review of a PR another
+  author opened stays findings for that author, as this section says.
 - A PR review switches the checkout to the PR's branch and leaves it there, runs the two command
   steps above itself, and checks the PR's manual steps against the screen. "Here" or "only" in a
   review prompt limits where the reply goes, never what runs.
