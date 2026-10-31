@@ -5,9 +5,24 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Build the review page and step pictures for every PR
+## Ask to archive finished Downloads work in ~/.claude
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> my guy the downloads folder is an actual mess rn. for eaxmple the mr
+> krabs is already in memes. you should ask me when you think session
+> is done if you can clean up the downloads and move things to .claude
+> instead. for example [a finished job's folder] is already done for
+> now though i might need it from you later on. just not in downloads
+> type of urgency
+
+(how CLAUDE.md should fit its size budget)
+> Move PR pass out (Recommended)
+
+## Build the review page and step pictures for every PR
+
+2026-10-31, commit [f0ea2c9](https://github.com/zululima/dotclaude/commit/f0ea2c9857b98b154eb2dc471c269633f60138ec), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > always give me the html i can open in firefox like the guide

@@ -442,11 +442,15 @@ apply to one repository belong in that repository's project memory.
   inside it keep its parts apart, such as one per app a set is made for, and what the work
   downloaded or unpacked as its source material goes in it too. A later turn or session of the same
   work adds to that folder instead of starting another, so before a session makes its first file
-  there, it lists `~/Downloads` and greps `~/.claude/prompt-log` for the work's words. It builds on
-  what an earlier session left, keeping the names and settings recorded with it unless the user
-  changes them, and its first reply names what it found; when the request points to other files,
-  such as a colleague's new upload, it asks which to build from. A working file that only feeds a
-  tool, such as the HTML of a Slack draft that a script puts on the clipboard, goes in
+  there, it lists `~/Downloads` and `~/.claude/archive` and greps `~/.claude/prompt-log` for the
+  work's words. It builds on what an earlier session left, keeping the names and settings recorded
+  with it unless the user changes them, and its first reply names what it found; when the request
+  points to other files, such as a colleague's new upload, it asks which to build from. Once the
+  work looks done, the closing reply asks in the next-step box whether the session may move the
+  work's folder to `~/.claude/archive/<task>/`, out of `~/Downloads` but at hand for a later
+  session, which moves it back before the user needs a file from it. After either move, the session
+  rewrites the memory notes and background files that name the old path. A working file that only
+  feeds a tool, such as the HTML of a Slack draft that a script puts on the clipboard, goes in
   `~/.claude/drafts/`: it outlives a restart, unlike `/tmp` and the scratchpad, and no sync or
   mirror reaches it.
 - Environment or deployment tooling runs against a remote environment, such as a deploy, a
@@ -690,8 +694,8 @@ apply to one repository belong in that repository's project memory.
   `commit-messages`, `slack-draft` and `dotclaude` skills. Before changing one of them, adding a
   hook, skill, command or agent under `~/.claude`, or changing anything in that checkout, load the
   `dotclaude` skill, `~/.claude/skills/dotclaude/SKILL.md`, and follow it. It holds what `sync.sh`
-  reconciles, scans and mirrors, the commit and its identity, what the repository may contain, and
-  the setup on a new machine.
+  reconciles, scans and mirrors, the commit and its identity, the pass over open PRs after every
+  push, what the repository may contain, and the setup on a new machine.
 - A change to this file or to a mirrored skill is made only on the user's go: a prompt that says go
   or push, a correction or wish meant to hold beyond the task as the last bullet of Memory hygiene
   describes, or a script from this session that the user says they ran. Then, as whenever a session
@@ -708,20 +712,9 @@ apply to one repository belong in that repository's project memory.
   local changes, and then, if they keep a mirror of their own, to commit and push it as their
   `dotclaude` skill says, and it says go, which their copy of these rules waits for. It names no
   project, client or person, so it can be passed on as it is.
-- Every push to the checkout is followed in the same turn by a pass over the user's open PRs,
-  listed with `gh search prs --author @me --state open`. Each PR whose body carries a block the
-  `pull-requests` skill puts there, the configuration link or the prompts block, gets the link
-  pinned to the commit just pushed and the rest of the body brought into line with the rules as
-  they now stand, as far as the skill lets an edit of the body change it. A PR with neither
-  block was written by hand and stays as it is. Nothing is rebuilt from another session's
-  context: what the new rules need beyond the body, such as prompts, a verify run or new
-  screenshots, is named in the reply under its PR, next to what the edit changed.
-  `sync.sh --commit` ends by listing the open PRs whose body links the repository but not the
-  commit it just pushed. It is a safety net for the pass, not a substitute for it: a PR with
-  only the prompts block is not on that list.
-- A rule in a mirrored file states what holds now. The incident behind it, its date and the
-  wording it replaced go into the commit message, never into the file, and a changed rule is
-  rewritten in place rather than followed by a note on what it used to say.
+- A rule in a mirrored file states what holds now. The incident behind it, its date and the wording
+  it replaced go into the commit message, never into the file, and a changed rule is rewritten in
+  place rather than followed by a note on what it used to say.
 
 ## Memory hygiene
 

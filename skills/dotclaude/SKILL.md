@@ -1,14 +1,13 @@
 ---
 name: dotclaude
-description: How the public mirror of ~/.claude works. Load it before changing ~/.claude/CLAUDE.md, settings.json, a hook, a mirrored skill, a mod, a workflow or the presence listener, before adding a hook, skill, command or agent under ~/.claude, before changing anything in ~/Projects/dotclaude or a directory it mirrors into, and when setting up a new machine. It covers sync.sh with its scan and mirrors, the commit and its identity, and what the repository may contain.
+description: How the public mirror of ~/.claude works. Load it before changing ~/.claude/CLAUDE.md, settings.json, a hook, a mirrored skill, a mod, a workflow or the presence listener, before adding a hook, skill, command or agent under ~/.claude, before changing anything in ~/Projects/dotclaude or a directory it mirrors into, and when setting up a new machine. It covers sync.sh with its scan and mirrors, the commit and its identity, the pass over open PRs after every push, and what the repository may contain.
 ---
 
 # Public configuration repository
 
 These procedures sit beside the Public configuration repository rules in `~/.claude/CLAUDE.md`,
 which still hold: the user's go before a change to that file or a mirrored skill, the `sync.sh` run
-and its commit in the same turn, the pass over the open PRs after every push, and the rule that a
-mirrored file states what holds now.
+and its commit in the same turn, and the rule that a mirrored file states what holds now.
 
 ## The checkout
 
@@ -74,6 +73,19 @@ mirrored file states what holds now.
   still checks the deny list, so the message names such a file by what it does. A file that no
   copy may hold, such as one with a contract's figures, stays off the list. Which files the list
   names lives in the checkout's project memory, and each of them ends by saying it is mirrored.
+
+## After a push
+
+- Every push to the checkout is followed in the same turn by a pass over the user's open PRs,
+  listed with `gh search prs --author @me --state open`. Each PR whose body carries a block the
+  `pull-requests` skill puts there, the configuration link or the prompts block, gets the link
+  pinned to the commit just pushed and the rest of the body brought into line with the rules as they
+  now stand, as far as the skill lets an edit of the body change it. A PR with neither block was
+  written by hand and stays as it is. Nothing is rebuilt from another session's context: what the
+  new rules need beyond the body, such as prompts, a verify run or new screenshots, is named in the
+  reply under its PR, next to what the edit changed. `sync.sh --commit` ends by listing the open PRs
+  whose body links the repository but not the commit it just pushed. It is a safety net for the
+  pass, not a substitute for it: a PR with only the prompts block is not on that list.
 
 ## Identity and contents
 
