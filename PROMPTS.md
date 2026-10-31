@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Hand over files outside the session with an open command
+## Name a misused term in Prompt feedback, with the one that fits
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**2.** (answer to: shall I add both checks to dream's library review) Quoted under [518b183](https://github.com/zululima/dotclaude/commit/518b183377a33f3af894e0b0f5f7609284ceb05a).
+
+## Hand over files outside the session with an open command
+
+2026-10-31, commit [f2bfcc7](https://github.com/zululima/dotclaude/commit/f2bfcc763f31ff835d71b7298e2f317d1e07c1eb), model claude-opus-5-5, effort xhigh.
 
 **11.**
 > [an ask for a printed sheet for a downstream event left out]

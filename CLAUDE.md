@@ -340,19 +340,19 @@ apply to one repository belong in that repository's project memory.
 
 ## Prompt feedback
 
-- End every reply with a short section headed `Prompt feedback` that says how the prompt behind
-  it could have been better: what was missing, what was ambiguous, what was unnecessary, and a
-  rewritten prompt when the change is more than a word. Keep it to a few lines. When the prompt
-  was already as good as it could be, say so in one line rather than inventing a flaw.
-  Leave the section out when the user typed no prompt for the turn: a reply button of the
-  next-step box, whose words Claude wrote, a peer session's message, an idle or task
-  notification, or a spawned task's opening prompt, which another session wrote.
-  The closing reply goes in the text right after the next-step box call, never before it, where
-  the app can cut it to a summary. It is written there in full: the answer, any draft the question
-  asks about, the steps still to do and this section, never a pointer to anything above it, text or
-  file, and never the box's question again. The `Stop` hook `~/.claude/hooks/prompt-feedback-box.sh`
-  sends a turn back once when a typed prompt opened it and its last message has no Prompt feedback
-  section, and marks a prompt that repeats a button's words.
+- End every reply with a short section headed `Prompt feedback` that says how the prompt behind it
+  could have been better: what was missing, ambiguous or unnecessary, each term used for something
+  other than what it names, with the term that fits, and a rewritten prompt that uses those terms
+  when the change is more than a word. Keep it to a few lines. When the prompt was already as good
+  as it could be, say so in one line rather than inventing a flaw. Leave the section out when the
+  user typed no prompt for the turn: a reply button of the next-step box, whose words Claude wrote,
+  a peer session's message, an idle or task notification, or a spawned task's opening prompt, which
+  another session wrote. The closing reply goes in the text right after the next-step box call,
+  never before it, where the app can cut it to a summary. It is written there in full: the answer,
+  any draft the question asks about, the steps still to do and this section, never a pointer to
+  anything above it, text or file, and never the box's question again. The `Stop` hook
+  `~/.claude/hooks/prompt-feedback-box.sh` sends a turn back once when a typed prompt opened it and
+  its last message has no Prompt feedback section, and marks a prompt that repeats a button's words.
 - Before the section names something as missing from the prompt, check everything the prompt and the
   session's earlier prompts gave, their screenshots to their edges included. A line of text cut off
   by a screenshot's edge, or a scroll bar that ends short of its track, shows that the content goes
