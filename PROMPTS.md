@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Ask to archive finished Downloads work in ~/.claude
+## Name dream steps by p number and agents by title, not tier codes
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**3.**
+> what i dont undersatnd the nwkd at all. should we ditch those? also
+> was the thing you fllaged as secruriyt a prompt injection attempt?
+
+**5.** (answer to: hide the tier codes from everything you read?)
+> Yes, hide them
+
+## Ask to archive finished Downloads work in ~/.claude
+
+2026-10-31, commit [b5fe0b5](https://github.com/zululima/dotclaude/commit/b5fe0b55f5b6ef67de985146d5a9911e35daa27e), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > my guy the downloads folder is an actual mess rn. for eaxmple the mr

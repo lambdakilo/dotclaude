@@ -61,8 +61,8 @@ const scenarios = [
   } }, [
     ['the parked item stays out of the plan', (st, r) => !r.plan.some(p => p.includes('(parked)'))],
     ['the due item is in the plan', (st, r) => r.plan.some(p => p.includes('(due)'))],
-    ['the carried unchecked one is checked by reading it from the backlog', st => /Read its whole text first with jq '\.unchecked\[\] \| select\(\.key == "old-n1"\)'/.test(st.prompts['fit old-n1'] || '')],
-    ['the fit check asks for the exact change and both examples', st => /exactChange/.test(st.prompts['fit old-n1'] || '') && /exampleFixed/.test(st.prompts['fit old-n1'] || '')],
+    ['the carried unchecked one is checked by reading it from the backlog', st => /Read its whole text first with jq '\.unchecked\[\] \| select\(\.key == "old-n1"\)'/.test(st.prompts['fit old one'] || '')],
+    ['the fit check asks for the exact change and both examples', st => /exactChange/.test(st.prompts['fit old one'] || '') && /exampleFixed/.test(st.prompts['fit old one'] || '')],
     ['the patch carries the examples', st => /"exampleWrong":"it broke"/.test(st.prompts['backlog patch'] || '') || Object.keys(st.prompts).some(k => k.startsWith('backlog items') && /"exampleWrong":"it broke"/.test(st.prompts[k]))],
     ['the session is told to ask one step at a time with the examples', (st, r) => /one AskUserQuestion call per step/.test(r.forTheSession) && /exampleWrong/.test(r.forTheSession)],
     ['the session is told to show neither the report nor the usage card', (st, r) => /Show neither the report nor any figure/.test(r.forTheSession) && !/get_usage/.test(r.forTheSession) && /Say in one line that \d+ proposals wait/.test(r.forTheSession)],
