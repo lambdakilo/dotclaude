@@ -4,8 +4,9 @@
 # disk or the home folder: find, bfs, fd, rg, tree, du, grep -r or ls -R
 # rooted at /, /Users, /Volumes, a home folder or ~/*, or at . after a cd
 # there, and mdfind without -onlyin. macOS asks the user about each protected
-# folder such a walk reaches, and the command waits for the answer. Quoted
-# strings other than "$HOME" and heredoc bodies are not looked at.
+# folder such a walk reaches, and the command waits for the answer. A quoted
+# string other than "$HOME" counts as one word that is no root, and heredoc
+# bodies are not looked at.
 
 set -u
 
@@ -19,7 +20,7 @@ cmd="${cmd%%<<*}"
 cmd="${cmd//$'\\\n'/ }"
 cmd="$(printf '%s\n' "$cmd" | sed -E \
   -e 's/"\$\{?HOME\}?(\/\*?)?"/$HOME\1/g' -e 's/\$\{HOME\}/$HOME/g' \
-  -e "s/'[^']*'//g" -e 's/"[^"]*"//g')"
+  -e "s/'[^']*'/Q/g" -e 's/"[^"]*"/Q/g')"
 
 at_root=0
 case "$cwd" in "$HOME" | /) at_root=1 ;; esac
