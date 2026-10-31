@@ -13,6 +13,7 @@ const wed = { five: 5, fiveReset: '2026-10-14T21:00:00Z', weekReset: '2026-10-17
 const scenarios = [
   ['eve, real numbers', { ...fri, week: 54, sessions: 48 }, [
     ['mode is eve', (st, r) => r.mode.startsWith('eve')],
+    ['the session is told to show neither the report nor the usage card', (st, r) => /Show neither the report nor any figure/.test(r.forTheSession) && !/get_usage/.test(r.forTheSession)],
     ['weekly stays under 95 minus the reserve, plus a point', st => st.maxWeek <= 95 - 2 * 16.9 + 1],
     ['no window the run touched is open at 08:00 Saturday', st => !st.windows.some(([a, b]) => a <= workAt && workAt < b && st.lastUse >= a)],
     noHits,
@@ -24,7 +25,8 @@ const scenarios = [
   ['final, little work', { ...sat, week: 64, sessions: 6 }, [
     ['mode is final', (st, r) => r.mode.startsWith('final')],
     ['nothing used after the weekly reset', st => st.afterWeekReset === 0],
-    ['the session is told to show the tokens and dollars the run spent', (st, r) => /usage\.sh --run/.test(r.forTheSession) && /the dollars at API list prices/.test(r.forTheSession)],
+    ['the session is told to show the whole report and the usage card', (st, r) => /show all of it in the chat/.test(r.forTheSession) && /get_usage/.test(r.forTheSession)],
+    ['and the tokens and dollars the run spent', (st, r) => /usage\.sh --run/.test(r.forTheSession) && /the dollars at API list prices/.test(r.forTheSession)],
     ['and last week and this week of all sessions, from reset to reset', (st, r) => /usage\.sh --since 2026-10-03T13:59:59\.000Z 2026-10-10T13:59:59\.000Z/.test(r.forTheSession)],
     noHits,
   ]],
@@ -63,9 +65,10 @@ const scenarios = [
     ['the fit check asks for the exact change and both examples', st => /exactChange/.test(st.prompts['fit old-n1'] || '') && /exampleFixed/.test(st.prompts['fit old-n1'] || '')],
     ['the patch carries the examples', st => /"exampleWrong":"it broke"/.test(st.prompts['backlog patch'] || '') || Object.keys(st.prompts).some(k => k.startsWith('backlog items') && /"exampleWrong":"it broke"/.test(st.prompts[k]))],
     ['the session is told to ask one step at a time with the examples', (st, r) => /one AskUserQuestion call per step/.test(r.forTheSession) && /exampleWrong/.test(r.forTheSession)],
-    ['the session is told to show only the energy the run used', (st, r) => /usage\.sh --run/.test(r.forTheSession) && /show only the kWh and CO2e/.test(r.forTheSession) && !/the dollars at API list prices/.test(r.forTheSession)],
+    ['the session is told to show neither the report nor the usage card', (st, r) => /Show neither the report nor any figure/.test(r.forTheSession) && !/get_usage/.test(r.forTheSession) && /Say in one line that \d+ proposals wait/.test(r.forTheSession)],
+    ['and to add the energy to the report file without showing it', (st, r) => /usage\.sh --run/.test(r.forTheSession) && /Show none of it in the chat/.test(r.forTheSession) && !/the dollars at API list prices/.test(r.forTheSession)],
     ['and no week of all sessions, which only a final run shows', (st, r) => !/usage\.sh --since/.test(r.forTheSession)],
-    ['and to refresh the evals of the checkout evals-checkout.txt names, before the walk', (st, r) => /evals-checkout\.txt exists/.test(r.forTheSession) && r.forTheSession.indexOf('evals.mjs --readme') < r.forTheSession.indexOf('one AskUserQuestion call per step')],
+    ['and to refresh the evals of the checkout evals-checkout.txt names, before the walk, naming only the commit', (st, r) => /evals-checkout\.txt exists/.test(r.forTheSession) && /show none of its figures/.test(r.forTheSession) && /say in one line which commit it pushed/.test(r.forTheSession) && r.forTheSession.indexOf('evals.mjs --write') < r.forTheSession.indexOf('one AskUserQuestion call per step')],
     ['and to leave the walk to a new session in the checkout when the user is away', (st, r) => r.forTheSession.includes('start a new session in ~/Projects/dotclaude and type "dream review" there') && r.forTheSession.indexOf('type "dream review" there') < r.forTheSession.indexOf('one AskUserQuestion call per step')],
   ]],
   ['review of the open backlog', { ...wed, week: 30, sessions: 4, args: 'review', backlog: {

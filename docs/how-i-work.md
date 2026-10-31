@@ -129,7 +129,8 @@ around the reset:
 
    On the day before the reset this is an eve run. It spends most of what is left of the week
    overnight, but keeps back two 5-hour windows, one for my work on Saturday and one for the final
-   run, and leaves the 5-hour window that would be open at 08:00 on Saturday untouched.
+   run, and leaves the 5-hour window that would be open at 08:00 on Saturday untouched. In the chat
+   it says only how many proposals wait, and leaves its report and figures to the final run.
 
 2. Saturday: start a new Code session in `~/Projects/dotclaude` and send this there. That session
    reads the steps from their files, while the one that ran overnight would send its whole context
@@ -147,6 +148,7 @@ around the reset:
 3. Saturday, when I am done: connect the charger again and send `/dream` in a new Code session. On
    the reset day this is a final run. It spends the rest of the week, down to 1 percentage point,
    and stops starting work an hour and a quarter before the reset, so everything reports back in
-   time.
+   time. It shows its report in the chat with the week's figures: the usage, what the run spent and
+   the evals.
 
 4. The next time I sit down: go through its proposals as in step 2.

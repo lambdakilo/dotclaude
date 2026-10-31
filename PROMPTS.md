@@ -5,9 +5,26 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Refresh the evals after the 30 Oct dream review
+## Show a dream run's report and figures in the final run only
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**2.**
+> dont give me these numbers  and reports in the first dream run.
+> always give them in the last dream run
+
+(Which dream runs leave the figures and the report out?)
+> All but final (Recommended)
+
+(What does a run that is not the final one show?)
+> Count and steps (Recommended)
+
+(Does such a run still refresh and push the evals?)
+> Yes, name the commit (Recommended)
+
+## Refresh the evals after the 30 Oct dream review
+
+2026-10-31, commit [7712786](https://github.com/zululima/dotclaude/commit/77127869b3b68ac41897ef8967d1d7fb98abc49b), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [8f605a4](https://github.com/zululima/dotclaude/commit/8f605a4ea1f4e7e2c2a6f75b9df9cc106d42475e).
 
