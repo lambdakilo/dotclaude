@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Name each emoji the user picks by the app's search name
+## Move the commit message rules into a commit-messages skill
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dream review also tell me about this Security flag: [pasted: a
+> paragraph from the last dream run's closing message about one of its
+> agents]
+
+(Step n11 of 24 Oct, 2 of 8: move the Commit messages section into a
+skill?)
+> Add it (Recommended)
+
+## Name each emoji the user picks by the app's search name
+
+2026-10-31, commit [d117e99](https://github.com/zululima/dotclaude/commit/d117e996474b958fceafa357cbf32b95d4c0e0fa), model claude-opus-5-5, effort xhigh.
 
 **5.**
 > [a question about a downstream task left out]

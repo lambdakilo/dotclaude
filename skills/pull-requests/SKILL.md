@@ -47,14 +47,13 @@ downstream names redacted in public and upstream repositories.
   the address bar before they go.
 - Second block: `<details><summary>Prompts behind this PR</summary>`. Its first line names the
   model and effort level the session ran with, for example `Model: claude-fable-5-1, effort:
-  medium`. Take them, and the prompts under it, as the bullet on printing the prompts under
-  Commit messages in `~/.claude/CLAUDE.md` says, never from memory. Then number every prompt
-  from the session in order and quote each verbatim, typos and lowercase included, as a `>`
-  blockquote (`**1.**` on its own line, then the `>` quote). Include prompts that produced no
-  commit. Mark answers to questions with a short parenthetical, and give each AskUserQuestion
-  answer as the commit message rules say: after a blank line, the question shortened on a
-  parenthetical line, then the option picked or the text typed on `>` lines of its own, nothing
-  nested.
+  medium`. Take them, and the prompts under it, as the bullet on printing the prompts in the
+  `commit-messages` skill says, never from memory. Then number every prompt from the session in
+  order and quote each verbatim, typos and lowercase included, as a `>` blockquote (`**1.**` on its
+  own line, then the `>` quote). Include prompts that produced no commit. Mark answers to questions
+  with a short parenthetical, and give each AskUserQuestion answer as the commit message rules say:
+  after a blank line, the question shortened on a parenthetical line, then the option picked or the
+  text typed on `>` lines of its own, nothing nested.
 - Directly under the model line, before the first prompt, a nested
   `<details><summary>Abbreviations</summary>` block lists every abbreviation used anywhere in the
   quoted prompts with its expansion, one per line, so a reader who does not know one can open

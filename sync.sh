@@ -146,6 +146,7 @@ mirrored=(
   mods/session-usage/hooks/register.ts
   mods/session-usage/hooks/register.test.ts
   mods/session-usage/usage.sh
+  skills/commit-messages/SKILL.md
   skills/dotclaude/SKILL.md
   skills/pull-requests/SKILL.md
   skills/pull-requests/pane-upload.sh

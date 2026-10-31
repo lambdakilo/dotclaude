@@ -2,18 +2,19 @@
 
 # Claude Code hook for SessionStart, UserPromptSubmit, and PreToolUse and
 # PostToolUse on Bash, Edit, Write and MultiEdit.
-# A session reads CLAUDE.md and the pull-requests skill once, so an edit made
-# from another session while it runs stays invisible to it. This keeps a copy
-# of each file per session and, once one differs from its copy, adds the diff
-# to the next prompt or to the next command that depends on it: a commit or
-# pull request command for CLAUDE.md, a pull request command for the skill.
+# A session reads CLAUDE.md and the pull-requests and commit-messages skills
+# once, so an edit made from another session while it runs stays invisible to
+# it. This keeps a copy of each file per session and, once one differs from
+# its copy, adds the diff to the next prompt or to the next command that
+# depends on it: a commit or pull request command for CLAUDE.md and the
+# commit-messages skill, a pull request command for the pull-requests skill.
 # That command is blocked once with the diff on stderr, unless every change
 # lies in a CLAUDE.md section named in context_only. A tool call that starts
 # while a file matches its copy and changes it within a minute is the
-# session's own edit and updates the copy, apart from an Edit or Write of the
-# other file and a sync.sh run whose log in the checkout's git directory is
-# missing or names the file as installed during the call. Anything else
-# missing lets the prompt or the command through.
+# session's own edit and updates the copy, apart from an Edit or Write of
+# another of the files and a sync.sh run whose log in the checkout's git
+# directory is missing or names the file as installed during the call.
+# Anything else missing lets the prompt or the command through.
 
 set -u
 
@@ -46,8 +47,8 @@ case "$call" in *[^A-Za-z0-9_-]*) call="" ;; esac
 dir="${TMPDIR:-/tmp}/claude-md-snapshots"
 mkdir -p "$dir" 2>/dev/null || exit 0
 
-files=("$config/CLAUDE.md" "$config/skills/pull-requests/SKILL.md")
-suffixes=("" ".pull-requests")
+files=("$config/CLAUDE.md" "$config/skills/pull-requests/SKILL.md" "$config/skills/commit-messages/SKILL.md")
+suffixes=("" ".pull-requests" ".commit-messages")
 installs="$HOME/Projects/dotclaude/.git/sync-installed.log"
 
 # Succeeds when sync.sh keeps no log or installed file $1 at or after epoch $2.
@@ -60,7 +61,7 @@ installed_since() {
 own_markers() {
   local i
   [ -n "$call" ] || return 0
-  for i in 0 1; do
+  for i in 0 1 2; do
     case "$tool" in
       Bash) ;;
       Edit | Write | MultiEdit) [ "$target" = "${files[$i]}" ] || continue ;;
@@ -145,6 +146,7 @@ $changes"
 
 check "~/.claude/CLAUDE.md" "${files[0]}" "${suffixes[0]}" "$guarded"
 check "~/.claude/skills/pull-requests/SKILL.md" "${files[1]}" "${suffixes[1]}" "$pr"
+check "~/.claude/skills/commit-messages/SKILL.md" "${files[2]}" "${suffixes[2]}" "$guarded"
 [ -n "$notes" ] || exit 0
 
 if [ "$event" = PreToolUse ] && [ "$block" = true ]; then

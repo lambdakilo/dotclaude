@@ -81,81 +81,18 @@ apply to one repository belong in that repository's project memory.
 
 - Wrap every line of a commit message at 72 columns, the subject included. Neither GitHub nor
   `git log` reflows long lines, so they break the rendering.
-- The message proper comes first: the subject, a blank line, then a body that says what changed
-  and why. The prompts follow after another blank line, never before the body. PR bodies are the
-  other way round, as the `pull-requests` skill describes. Trailers, such as `Co-authored-by` and
-  `Reviewed-by`, come last, as a paragraph of their own after a blank line, and are written into the
-  message file. A `Signed-off-by` trailer goes only into a repository whose contributing guide or CI
-  asks for one, such as a Developer Certificate of Origin check, and no other commit carries one.
-  Where one is asked for, it goes into the message file with the name and address `git config`
-  gives. Git reads the `Abbreviations:` lines as trailers, so `git commit -s` alone appends the
-  sign-off to them, and once the file holds it, `-s` adds no second one.
-- The prompt section opens with two lines. The first is
-  `Prompts behind this commit, as given to Claude Code` and the second is
-  `(model <id>, effort <level>):`, with the model id and effort level of the running session,
-  taken as the bullet on printing the prompts below says,
-  never from memory. Then come the prompts behind the change: those given since the session's
-  previous commit, every prompt of the session for its first commit, and for a follow-up to a
-  commit made under the same prompt that prompt again. They keep their session numbers, each on
-  its own line followed by the prompt as `>` quoted lines, verbatim, typos and lowercase
-  included, wrapped onto further `>` lines at 72 columns. Mark answers to questions with a short
-  parenthetical. Each question an AskUserQuestion call put to that prompt follows it after a
-  blank line, as a pair: the question, shortened in Claude's words, on a parenthetical line, and
-  directly under it the option picked or the text typed on `>` lines of its own. Nothing is
-  nested inside a quote, and a blank line separates the pairs. When
-  those prompts use abbreviations, an `Abbreviations:` section follows with one line per
-  abbreviation and its expansion. When they use none, there is no such section.
-- Text the user pasted into a prompt (a pasted block: a log, code, a file, an address, a message
-  from someone else) is never quoted, in a commit message or in a PR body. Replace it where it
-  stood with a bracketed description of what it was, such as `[pasted: an email address]` or
-  `[pasted: 40 lines of test output]`.
-- In a public repository, a quoted prompt that gives the user's view of a named person, case or
-  organisation, or a plan they may not want public, is named in the reply before the push or the
-  `gh pr` call that publishes it, with a bracketed note offered in its place, such as
-  `[an aside about the case left out]`. Publishing waits for the user's answer.
-- Print the prompts and their heading, never retype them. The `UserPromptSubmit` hook
-  `prompt-log.sh` in `~/.claude/hooks` appends every prompt to
-  `~/.claude/prompt-log/<session id>.jsonl`, and `~/.claude/hooks/prompt-log.sh print` prints
-  the session's prompts numbered and quoted for a PR body under its `Model:` line, with
-  `--commit` in the commit form above under both heading lines, and with `--from <n>` from prompt n
-  on. It takes the model and effort of each prompt from the session's transcript and names each
-  value with the prompts it ran under when `/model` or `/effort` changed one. For a forked session
-  it also prints the prompts from before the fork, from the log of the session it was forked from,
-  and only when that log is missing counts them without printing them. It leaves out reminders, peer
-  session messages and subagent hand-backs, and prints an address as `[pasted: an address]`, a
-  pasted block as `[pasted: <n> lines]`, a home path with `~` and a password or token value as
-  `[redacted]`. Then do only what the printout cannot: leave out and redact as the bullets around
-  this one say, replace a spawned task's opening prompt, which another session wrote, with `[a task
-  another Claude session wrote, left out]`, say what each pasted address or block was, and add the
-  answer marks, the AskUserQuestion selections and the abbreviations. When print leaves the heading
-  out, it exits 1 and says why: run it again with `--model <id>` and the model id of the session, or
-  with `--effort <level>` and the level `get_session` with `self` gives, as the message asks.
-- The PR rules on exclusion and redaction apply to commit messages too: leave out meta prompts,
-  and in public and upstream repositories redact downstream project, client and customer names
-  with square brackets. The one exception is the public configuration repository, where prompts
-  about this file or about Claude Code settings are the prompts behind the change and stay in.
-  There, and in every directory `sync.sh` mirrors into, internal or not, a quoted prompt keeps
-  only the part about the rules or the settings; the rest becomes a bracketed note such as
-  `[an ask about a downstream project left out]`, and what stays is redacted as for upstream
-  PRs, a content type's name in the project's language included, since it names the project
-  as surely as the project's name does.
-- A repository with a `PROMPTS.md` at its root keeps it current in every commit: write the commit
-  message to a file, run `~/.claude/hooks/prompts-md.sh --message <file>` in the checkout, and
-  commit the rebuilt file with the change, with `git commit -F <file>`. The script writes the
-  file from the prompts sections of the commit messages, newest first, each with its commit and
-  PR, so it is never edited by hand. Each rebuild rewrites the whole file and fills in a hash or
-  PR that an earlier commit could not name yet, so no commit is amended, force-pushed or added
-  only to update the file, and a conflict in it is settled by taking either side. A repository
-  without the file gets one only when the user asks, and before adding it to one that merges
-  through PRs, tell the user that every open PR rebuilding it will conflict with the others once
-  one of them merges. In the public configuration repository `sync.sh` runs the script itself.
-- An edit made to this file or to `~/.claude/skills/pull-requests/SKILL.md` from another session
-  reaches a running one through `~/.claude/hooks/claude-md-changed.sh`, in place of a re-read before
-  a commit message or a PR body: once one differs from the copy the session last saw, the hook adds
-  the diff to the next prompt, or to the next `gh pr` create, edit or merge, and for this file also
-  to the next commit or `sync.sh --commit`. It blocks that command once with the diff, unless every
-  change lies in a section of this file whose rules shape no commit message or PR body, such as
-  Running things.
+- Before writing a commit message, load the `commit-messages` skill,
+  `~/.claude/skills/commit-messages/SKILL.md`, and follow it. It holds the order of the parts and
+  the trailers, the prompts section and the script that prints it, pasted text, what is left out or
+  redacted, and `PROMPTS.md`.
+- An edit made to this file, to `~/.claude/skills/pull-requests/SKILL.md` or to the
+  `commit-messages` skill from another session reaches a running one through
+  `~/.claude/hooks/claude-md-changed.sh`, in place of a re-read before a commit message or a PR
+  body: once one differs from the copy the session last saw, the hook adds the diff to the next
+  prompt, or to the next `gh pr` create, edit or merge, and for this file and the `commit-messages`
+  skill also to the next commit or `sync.sh --commit`. It blocks that command once with the diff,
+  unless every change lies in a section of this file whose rules shape no commit message or PR body,
+  such as Running things.
 
 ## Pull requests
 
@@ -738,11 +675,11 @@ apply to one repository belong in that repository's project memory.
 - The parts of `~/.claude` that help other people learn this workflow are mirrored in a public git
   repository checked out at `~/Projects/dotclaude`: this file, `settings.json`, `hooks/`,
   `presence/`, `workflows/`, `agents/`, the `session-usage` mod and the `pull-requests`,
-  `slack-draft` and `dotclaude` skills. Before changing one of them, adding a hook, skill, command
-  or agent under `~/.claude`, or changing anything in that checkout, load the `dotclaude` skill,
-  `~/.claude/skills/dotclaude/SKILL.md`, and follow it. It holds what `sync.sh` reconciles, scans
-  and mirrors, the commit and its identity, what the repository may contain, and the setup on a new
-  machine.
+  `commit-messages`, `slack-draft` and `dotclaude` skills. Before changing one of them, adding a
+  hook, skill, command or agent under `~/.claude`, or changing anything in that checkout, load the
+  `dotclaude` skill, `~/.claude/skills/dotclaude/SKILL.md`, and follow it. It holds what `sync.sh`
+  reconciles, scans and mirrors, the commit and its identity, what the repository may contain, and
+  the setup on a new machine.
 - A change to this file or to a mirrored skill is made only on the user's go: a prompt that says go
   or push, a correction or wish meant to hold beyond the task as the last bullet of Memory hygiene
   describes, or a script from this session that the user says they ran. Then, as whenever a session
@@ -851,28 +788,29 @@ apply to one repository belong in that repository's project memory.
   one of the four fits" and not "all four fit", and the note is re-read before a plan depends
   on it.
 - When the user hands over facts or rules to keep, such as "put these to the appropriate
-  context", the session picks the place for each item without being told. A rule for every
-  project goes into this file, one about pull requests into the `pull-requests` skill. A rule
-  that a repository's code or design must follow, which its team should share, such as who may
-  see or change what or how a form marks a required field, goes into that repository's docs,
-  indexed from its `AGENTS.md` or `CLAUDE.md`, on the branch of the PR in play or the one the
-  user names. A fact about one project that only the session's work needs, such as a person, a
-  deadline, a channel or a local recipe, goes into that project's memory, and a private fact
-  that holds everywhere into a file in `~/.claude/rules/`. Before writing, the session checks
-  each item against the code, asks what is still unclear about its meaning or scope in one
-  AskUserQuestion call with a recommended answer per question, and the reply names where each
-  item went.
+  context", the session picks the place for each item without being told. A rule for every project
+  goes into this file, one about pull requests into the `pull-requests` skill, one about commit
+  messages into the `commit-messages` skill. A rule that a repository's code or design must follow,
+  which its team should share, such as who may see or change what or how a form marks a required
+  field, goes into that repository's docs, indexed from its `AGENTS.md` or `CLAUDE.md`, on the
+  branch of the PR in play or the one the user names. A fact about one project that only the
+  session's work needs, such as a person, a deadline, a channel or a local recipe, goes into that
+  project's memory, and a private fact that holds everywhere into a file in `~/.claude/rules/`.
+  Before writing, the session checks each item against the code, asks what is still unclear about
+  its meaning or scope in one AskUserQuestion call with a recommended answer per question, and the
+  reply names where each item went.
 - A correction or a wish that would hold beyond the task, a why question included, goes into this
-  file or the `pull-requests` skill in the same turn, committed and pushed as under Public
-  configuration repository, without the user naming that repository: it holds for later prompts and
-  sessions unless the user limits it. A limit the user states sets the scope: this session only
-  writes nothing, this project writes its project memory. The reply quotes the rule as written,
-  names any rule it changed, and is redone under it. When the correction asks for what the current
-  text already does another way, say in a line how it already does it and rewrite the text so it
-  says so plainly. A correction that does not say what it reacts to, such as "bro what", is first
-  matched against what changed since the last reply outside this session too, such as a new PR in
-  `gh pr list` or a peer session in ListAgents. When two readings remain, AskUserQuestion puts both
-  with a recommended one before any rule is written, never a guess named in the reply afterwards.
-  Nothing the correction did not ask for that reaches the user outside the reply and the sidebar,
-  such as a phone push or a mail as a fallback, goes into a rule only once the user picks it in
-  AskUserQuestion with a recommended answer; naming it in the reply afterwards is no ask.
+  file, the `pull-requests` skill or the `commit-messages` skill in the same turn, committed and
+  pushed as under Public configuration repository, without the user naming that repository: it holds
+  for later prompts and sessions unless the user limits it. A limit the user states sets the scope:
+  this session only writes nothing, this project writes its project memory. The reply quotes the
+  rule as written, names any rule it changed, and is redone under it. When the correction asks for
+  what the current text already does another way, say in a line how it already does it and rewrite
+  the text so it says so plainly. A correction that does not say what it reacts to, such as "bro
+  what", is first matched against what changed since the last reply outside this session too, such
+  as a new PR in `gh pr list` or a peer session in ListAgents. When two readings remain,
+  AskUserQuestion puts both with a recommended one before any rule is written, never a guess named
+  in the reply afterwards. Nothing the correction did not ask for that reaches the user outside the
+  reply and the sidebar, such as a phone push or a mail as a fallback, goes into a rule only once
+  the user picks it in AskUserQuestion with a recommended answer; naming it in the reply afterwards
+  is no ask.

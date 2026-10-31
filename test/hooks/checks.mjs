@@ -227,6 +227,13 @@ const suites = [
         const r = run(event('UserPromptSubmit', { session_id: 'md2' }))
         return r.code === 0 && context(r).includes('+- verify') && r.err === ''
       }],
+      ['blocks the next commit once after an edit of the commit-messages skill', () => {
+        const rules = path.join(config, 'skills/commit-messages/SKILL.md')
+        write(rules, '- subject\n'); run(event('SessionStart', { session_id: 'md4' }))
+        write(rules, '- subject\n- prompts\n')
+        const r = run({ ...commit, session_id: 'md4' })
+        return refused(r) && r.err.includes('commit-messages/SKILL.md changed') && r.err.includes('+- prompts') && quiet(run({ ...commit, session_id: 'md4' }))
+      }],
       ['takes the session\'s own Edit of CLAUDE.md as seen', () => {
         const edit = event('PreToolUse', { session_id: 'md3', tool_name: 'Edit', tool_use_id: 'toolu_1', tool_input: { file_path: rules } })
         write(rules, '- one\n'); run(event('SessionStart', { session_id: 'md3' }))

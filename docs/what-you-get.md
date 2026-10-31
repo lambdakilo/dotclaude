@@ -112,6 +112,8 @@
   ```zsh
   ~/.claude/presence/install.sh
   ```
+- [`skills/commit-messages`](../skills/commit-messages/SKILL.md): how Claude writes a commit
+  message: the order of its parts, the prompts behind the change, and what it leaves out or redacts.
 - [`skills/pull-requests`](../skills/pull-requests/SKILL.md): how Claude writes a pull request: the
   description, the steps to test it, screenshots, and how it reviews one.
 - [`skills/pull-requests/pane-upload.sh`](../skills/pull-requests/pane-upload.sh): puts screenshots

@@ -77,8 +77,8 @@ mirrored file states what holds now.
   name may stand in the history, as the author or in a quoted prompt, but in no published file,
   which the scan enforces. No email address either: the disposable address lives in the checkout's
   git config and nowhere else. Redact quoted prompts with square brackets where needed, as for
-  upstream PRs, and quote only the part of a prompt that is about the configuration, as the Commit
-  messages section of `~/.claude/CLAUDE.md` says; the mirrors follow the same rule. An example in a
+  upstream PRs, and quote only the part of a prompt that is about the configuration, as the
+  `commit-messages` skill says; the mirrors follow the same rule. An example in a
   published file is a generic English placeholder, never a label, address, number or tool name from
   the session's project or employer, and a term that slips through goes into `sync-deny.txt`.
 
