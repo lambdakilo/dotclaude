@@ -450,10 +450,10 @@ apply to one repository belong in that repository's project memory.
   with it unless the user changes them, and its first reply names what it found; when the request
   points to other files, such as a colleague's new upload, it asks which to build from. Once the
   work looks done, the closing reply asks in the next-step box whether the session may move the
-  work's folder to `~/.claude/archive/<task>/`, out of `~/Downloads` but at hand for a later
-  session, which moves it back before the user needs a file from it. After either move, the session
-  rewrites the memory notes and background files that name the old path. A working file that only
-  feeds a tool, such as the HTML of a Slack draft that a script puts on the clipboard, goes in
+  work's folder out of `~/Downloads`, to the Trash or to `~/.claude/archive/<task>/`, at hand for a
+  later session, which moves it back before the user needs a file from it. After any move, the
+  session rewrites the memory notes and background files that name the old path. A working file that
+  only feeds a tool, such as the HTML of a Slack draft that a script puts on the clipboard, goes in
   `~/.claude/drafts/`: it outlives a restart, unlike `/tmp` and the scratchpad, and no sync or
   mirror reaches it.
 - Environment or deployment tooling runs against a remote environment, such as a deploy, a

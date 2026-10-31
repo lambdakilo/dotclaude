@@ -5,9 +5,17 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Give a local PDF or image its Firefox address too
+## Offer the Trash beside the archive for a finished Downloads folder
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**16.**
+> always put the artifacts i need to personally share soon inDownloads
+> and then you ask me if you can delete it/move somewhere else
+
+## Give a local PDF or image its Firefox address too
+
+2026-10-31, commit [4574990](https://github.com/zululima/dotclaude/commit/457499003fc574b91e5c686f9579170d33d334ce), model claude-opus-5-5, effort xhigh.
 
 **13.**
 > [a change to a downstream printed sheet left out]
