@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Open a draft PR per issue; side changes join one already open
+## Give the shortest word that finds an emoji, then its name
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**8.**
+> nice try but for example with face with monocle the right word woudl
+> ahve been monocle (face with monocle) because monocle already picks
+> the correct one underestadn?
+
+## Open a draft PR per issue; side changes join one already open
+
+2026-10-31, commit [9d07b06](https://github.com/zululima/dotclaude/commit/9d07b062369170682dc3e9267dec43aac4260b76), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > dream review also tell me about this Security flag: [pasted: a

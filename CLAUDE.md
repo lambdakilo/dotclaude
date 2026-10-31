@@ -313,11 +313,12 @@ apply to one repository belong in that repository's project memory.
   session's folders that the reader opens, such as a PR's review page, is the exception: it gets a
   Markdown link to its path, which the app opens on a click.
 - An emoji the user is to pick in an app, such as one per sticker of a sticker pack, stands beside
-  the name that the app's emoji search finds it by, such as saluting face, so the user types the
-  name instead of scanning the grid for the symbol. The name comes from the app's own emoji data,
-  read from its source where the app is open source, and otherwise is the Unicode CLDR short name,
-  called not checked in that app. Where the name finds more than one emoji, the reply says which
-  others it shows.
+  the shortest whole word of its name that the app's emoji search finds it alone by, with the full
+  name in brackets after it, such as monocle (face with monocle), so the user types one word instead
+  of scanning the grid for the symbol. The names come from the app's own emoji data, read from its
+  source where the app is open source, which also shows how its search matches, and otherwise are
+  the Unicode CLDR short names, called not checked in that app. Where no single word finds the emoji
+  alone, the full name stands; where that too finds others, the reply says which.
 - A project's CLAUDE.md holds what Claude runs, such as build, test, verify, install, launch and
   logs, and the rules the code follows. Setup a person does once by hand goes in a doc under `docs/`
   that CLAUDE.md or AGENTS.md indexes. The README says what the project is, shows its parts, and
