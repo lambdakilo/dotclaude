@@ -791,6 +791,10 @@ apply to one repository belong in that repository's project memory.
   go in a file outside it that a line there names, read when a request needs them.
   The reply says where it went. When the topic is a local project, read its checkout's
   `CLAUDE.md` and its `MEMORY.md` first.
+- A setup a session leaves on the user's machines, such as a tool installed to keep, a login
+  service, a synced folder or a pulled model, is a background fact whatever folder the session
+  started in. It goes into the file for background facts in the same turn, dated and with what is
+  still to set up, without asking, and the reply quotes the line it added.
 - A No folder session asked to start a repository or another project meant to last creates
   `~/Projects/<name>` itself, named exactly as the user wrote it, with `mkdir` and no `-p` so a
   folder that already exists stops it, then moves there with `change_directory` before writing
