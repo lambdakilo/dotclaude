@@ -125,6 +125,11 @@ GitHub, meta prompts left out, and downstream names redacted in public and upstr
   the screen shows a stand-in, such as placeholder data, a mock or an unwired part, or a part
   that ignores the step's input, the step says so. A limitation found while building goes into
   its step, not only into the reply.
+- The user works through the steps on the review page that Reviewing a PR describes, for every PR
+  and not only in a review. The session that opens a PR, or pushes a commit that changes its steps
+  or what they show, builds the page in the same turn, after the pictures are in the body, with the
+  checks it ran as the overlay's results, and its reply ends with the page's link as a review's
+  reply does.
 
 ## Reviewing a PR
 
@@ -209,11 +214,12 @@ GitHub, meta prompts left out, and downstream names redacted in public and upstr
 
 ## Screenshots and recordings
 
-- Screenshots and recordings go into the PR body when the change is visual, anything that
-  alters what a page renders, and the repository asks for a recording or screenshots, in its
-  pull request template or in the agent instructions it keeps in context (`AGENTS.md`,
-  `CLAUDE.md`). A repository may keep such asks out of the template so the body carries only
-  what a reviewer reads, and they bind as much there.
+- Every manual step of How to verify gets a screenshot of the state it describes, in the PR body and
+  so on the review page, whether or not the change alters what a page renders: the reader sees what
+  should happen before acting. A recording comes on top where motion is the point, or where the
+  change is visual and the repository asks for one, in its pull request template or in the agent
+  instructions it keeps in context (`AGENTS.md`, `CLAUDE.md`). A repository may keep such asks out
+  of the template so the body carries only what a reviewer reads, and they bind as much there.
 - Capture them from the local stack on fixture data with a scratch Playwright script in the
   scratchpad, on the repository's Playwright install, never a config change in the repository:
   one PNG per manual step of "How to verify", in the state that step describes, named after the
@@ -241,4 +247,4 @@ GitHub, meta prompts left out, and downstream names redacted in public and upstr
   first step it covers, as a bare attachment URL on its own line, which GitHub renders as a
   player where a `[name](url)` link does not. Write the body back with `gh pr edit`.
 - Redo the set after every push that changes what is on screen, the way the prompts block is
-  refreshed, so no reviewer judges a stale picture.
+  refreshed, so no reviewer judges a stale picture, and rebuild the review page with it.
