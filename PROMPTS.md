@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Check a README on one screen scrolled to its top
+## Give a local PDF or image its Firefox address too
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**13.**
+> [a change to a downstream printed sheet left out]
+
+**14.**
+> [a change to a downstream printed sheet left out]
+
+**15.**
+> just give me the firefox link
+
+## Check a README on one screen scrolled to its top
+
+2026-10-31, commit [dcd3ca2](https://github.com/zululima/dotclaude/commit/dcd3ca244b3d0268ecee12d14263b0a0e47681d3), model claude-opus-5-5, effort xhigh.
 
 **11.**
 > [an ask about a project's repository and its licence left out] also
