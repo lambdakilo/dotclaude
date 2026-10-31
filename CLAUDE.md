@@ -497,13 +497,12 @@ apply to one repository belong in that repository's project memory.
   above the slots.
 - Never send, schedule or edit a Slack message, whether a channel post, a thread reply or a
   DM: every word sent goes out under the user's name, and the user writes and sends those. Every
-  Slack message the user could send, plain or formatted, is drafted with the `slack-draft` skill. A
-  draft that survives a plain paste, with no link text, bold, list or other formatting, goes into
-  the reply in a `text` block. Any other goes on the clipboard as rich text, and the reply gives the
-  command that copies it there again and never the draft itself, in a text block or a quote: the
-  user reads it in Slack after the paste. Drafting never opens the built-in browser pane. A draft
-  comes only when the user asks for one: no reply offers, recommends or asks about a Slack draft or
-  a rewrite of one on the session's own initiative, in its text, its steps or its next-step box.
+  Slack message the user could send, plain or formatted, is drafted with the `slack-draft` skill,
+  which says when a draft goes on the clipboard and what the reply then shows. Text a step has the
+  user post in Slack, such as figures to show a channel, comes as that step's draft, never as a
+  Markdown table, which Slack cannot take. Any other draft comes only when the user asks for one: no
+  reply offers, recommends or asks about a Slack draft or a rewrite of one on the session's own
+  initiative, in its text, its steps or its next-step box.
 - Before drafting a message for the user to send, such as a Slack reply, an email or a chat
   message, read every source the project's memory lists for its subject, every connected source
   that could bear on it, the deployed and legacy environments included, and the user's earlier

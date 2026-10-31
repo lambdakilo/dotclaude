@@ -13,6 +13,10 @@ or changed, and what the reader should do with it. A step, a sign-in, a person t
 that the linked page already gives stays out of the draft, and so does a list of what the page
 holds.
 
+A draft that reports what the session found, such as figures or options for a channel, is the
+session's report in its own words, never written as the user speaking: the user posts it with words
+of their own around it. It holds the findings, and the questions to the readers stay the user's.
+
 ## Why the clipboard
 
 Slack's message box turns neither `[text](url)` nor `<url|text>` into a link. That syntax works only

@@ -5,9 +5,75 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep question cards short enough to read without scrolling
+## Give text for Slack as a draft, written as a report
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask about scheduling a team event left out]
+
+**2.**
+> [a correction about lunch hours left out]
+
+**3.**
+> [a correction about working hours left out]
+
+**4.**
+> [an ask about meeting attendance left out]
+
+**5.**
+> [an ask about meeting attendance left out]
+
+**6.**
+> [an ask about meeting attendance left out]
+
+**7.**
+> [an ask about the event's time slots left out]
+
+**8.**
+> [an ask about colleagues' roles left out]
+
+**9.**
+> [a question about one time slot left out]
+
+**10.**
+> hmm ok. never put emojis in my slack drafts only emoticons i use
+> eniweys. [a plan and a question about the event left out]
+
+**11.**
+> my guy i cant just copy paste that. it should probably be something
+> that slack can parse maybe do your html copy hack for that. [a go for
+> another task left out]
+
+(how to fit the new rule under the byte budget)
+> Cut duplicates (Recommended)
+
+**12.**
+> also dont word the slack text like i said it by as you say it. ill
+> accompany your report with my own words
+
+## Tell the user how to open the pane, word step questions
+
+2026-10-31, commit [8eb06e7](https://github.com/zululima/dotclaude/commit/8eb06e744e79bdb048bd9e042bdbd56502531d33), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> [an ask about a project's store status left out]
+
+**2.**
+> [an ask to fix a bug in a project left out]
+
+**3.**
+> ok. so in the future if you cant open up the pane and you need me to
+> do it. tell me. [an ask to reload the browser pane left out] also
+> commit and ship question sounds like i should do that although i
+> have steps still to do. fix in future
+
+(CLAUDE.md went over its size budget; cut, move or raise it?)
+> Move PR review bullet (Recommended)
+
+## Keep question cards short enough to read without scrolling
+
+2026-10-31, commit [330b360](https://github.com/zululima/dotclaude/commit/330b360f80b0f9d88b8a461a7d928424b4724afe), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > my guy dont create questiosn (or what are those called) where i have
@@ -4016,7 +4082,7 @@ Stop, add it to dotclaude?)
 - gh: GitHub command line interface
 - gh: the GitHub command line tool
 - h1: HTML heading level 1
-- html: HyperText Markup Language
+- HTML: HyperText Markup Language
 - i.e.: id est, that is
 - i.e.: that is
 - ip: intellectual property
