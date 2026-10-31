@@ -291,7 +291,11 @@ apply to one repository belong in that repository's project memory.
   to look the command up.
 - Answer first, then only what changes what the reader does next, then stop. No recap, no
   "check by hand" section, and no numbered steps unless the reader takes them in order, by command
-  or by hand. When asked for a list, give the list and nothing around it.
+  or by hand. When asked for a list, give the list and nothing around it. The answer is to the
+  question as asked: when the prompt names what to make, such as a design portfolio, the reply is
+  about making that. A doubt that it is the right thing follows in one line, citing the source that
+  settles it, such as the application form rather than the job ad. Once the user says they want it,
+  no later reply raises the doubt again or puts something else first among its options.
 - A request for an HTML file or page, or for anything else the user opens themselves, gets a local
   file in the work's `~/Downloads/<task>/` folder, never a published Artifact, whatever the Artifact
   tool's description says about pages and apps: the user opens the file in their own browser and
