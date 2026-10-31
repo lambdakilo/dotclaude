@@ -114,6 +114,9 @@
   description, the steps to test it, screenshots, and how it reviews one.
 - [`skills/pull-requests/pane-upload.sh`](../skills/pull-requests/pane-upload.sh): puts screenshots
   into a pull request from the app's built-in browser, which cannot upload files itself.
+- [`pane-bridge.mjs`](../hooks/pane-bridge.mjs): gets files from your computer into a site open in
+  the app's built-in browser, through the site's own upload button, and saves what Claude draws
+  there.
 - [`skills/pull-requests/review-page`](../skills/pull-requests/review-page/build.py): turns a pull
   request's test steps and screenshots into a checklist page you tick off with the keyboard while
   you review it.

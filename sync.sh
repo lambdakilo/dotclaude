@@ -137,6 +137,7 @@ mirrored=(
   hooks/stop-unreachable-claim.sh
   hooks/no-slow-binary-grep.sh
   hooks/push-only-when-locked.sh
+  hooks/pane-bridge.mjs
   presence/install.sh
   presence/lock-listener.swift
   mods/session-usage/.claude-plugin/plugin.json

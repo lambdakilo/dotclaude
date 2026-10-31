@@ -555,30 +555,26 @@ apply to one repository belong in that repository's project memory.
   and is signed in to. A page, a file or an upload is tried there before a reply calls it out of
   reach, and an address that curl, WebFetch or another fetch could not reach is tried there next,
   before any question or other route. The pane has no file upload tool and blocks other sites from
-  calling localhost, so a local file reaches a site the other way round: a page that a local server
-  started with `preview_start` serves puts the files in `window.name` as data URLs and sends the tab
-  back to the site, which keeps that name, and a script there wraps
-  `HTMLInputElement.prototype.click` so the site's own upload button fills its file input from them
-  through a `DataTransfer` instead of opening the file picker. Rendering is browser work too: no
+  calling localhost, so a local file reaches a site through `~/.claude/hooks/pane-bridge.mjs`,
+  started with `preview_start` and driven as its header says. Rendering is browser work too: no
   session starts the Google Chrome app, headless or not, also not to turn a page into an image or a
   PDF. Playwright's own Chromium, which a project's tests and the `pull-requests` skill's
   screenshots run on, is not that app. A page that has to become a file draws it on a canvas in the
   pane, an HTML layout through an SVG `foreignObject` with each font named by its installed family
   or inlined as a data URL, never a keyword such as `-apple-system` or a linked web font, and posts
-  the blob to a small local server that the session starts with `preview_start` and that writes it
-  to disk. A job the pane cannot do this way is asked about first through AskUserQuestion, which
-  names the Chrome app. When a step needs the user in the pane, such as a sign-in, personal data to
-  type or a click the session may not make, the session opens the page that step happens on and
-  calls `show_pane` with `preview` in the same turn as the ask, so the pane is open beside the
-  reply. `show_pane` acts only while the session is in a window and never takes one from another
-  session. When it answers that the session is in none, the reply opens with that ask and with why
-  the pane is not on screen, in the user's terms: the app opens a pane only beside a session that
-  one of its windows shows, and none showed this one when it tried, as when another session is in
-  front or the user follows from the phone. The turn ends with `wrap_up` and `blocked`, so the
-  sidebar marks the session as waiting on the user. Every later turn calls `show_pane` again first
-  while the step still waits, so the pane opens with the first turn that finds the session in a
-  window, and no reply promises that the next message opens it. A deny rule in `settings.json`
-  blocks Claude in Chrome, which the user does not want.
+  the blob to that script's `/save` from a page the script serves. A job the pane cannot do this way
+  is asked about first through AskUserQuestion, which names the Chrome app. When a step needs the
+  user in the pane, such as a sign-in, personal data to type or a click the session may not make,
+  the session opens the page that step happens on and calls `show_pane` with `preview` in the same
+  turn as the ask, so the pane is open beside the reply. `show_pane` acts only while the session is
+  in a window and never takes one from another session. When it answers that the session is in none,
+  the reply opens with that ask and with why the pane is not on screen, in the user's terms: the app
+  opens a pane only beside a session that one of its windows shows, and none showed this one when it
+  tried, as when another session is in front or the user follows from the phone. The turn ends with
+  `wrap_up` and `blocked`, so the sidebar marks the session as waiting on the user. Every later turn
+  calls `show_pane` again first while the step still waits, so the pane opens with the first turn
+  that finds the session in a window, and no reply promises that the next message opens it. A deny
+  rule in `settings.json` blocks Claude in Chrome, which the user does not want.
 - A `PushNotification` goes out only while the Mac's screen is locked. A session that no window
   shows says nothing about whether the user is away, since they may be in another session, and while
   the screen is unlocked the reply and the sidebar reach them. The presence listener in
