@@ -539,6 +539,11 @@ apply to one repository belong in that repository's project memory.
   events on another person's calendar, which carry titles, attendees and meeting links, so
   finding a time with other people goes through the connector's `suggest_time`, which reads
   free/busy alone.
+- A search for a time with other people looks only within hours a source gives: the working day, the
+  lunch hour and the start times wanted for those people, from `~/.claude/rules/`, project memory or
+  another source. Any that none gives is asked in one AskUserQuestion with a recommended answer
+  before the first `suggest_time` call, never assumed, and the reply names the hours it searched
+  above the slots.
 - Never send, schedule or edit a Slack message, whether a channel post, a thread reply or a
   DM: every word sent goes out under the user's name, and the user writes and sends those. Every
   Slack message the user could send, plain or formatted, is drafted with the `slack-draft` skill. A

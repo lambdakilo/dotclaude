@@ -5,9 +5,15 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Keep the wrong-folder opening line out of No folder sessions
+## Name the hours a meeting slot search assumes before it runs
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.** Quoted under [8f605a4](https://github.com/zululima/dotclaude/commit/8f605a4ea1f4e7e2c2a6f75b9df9cc106d42475e).
+
+## Keep the wrong-folder opening line out of No folder sessions
+
+2026-10-31, commit [3759abc](https://github.com/zululima/dotclaude/commit/3759abc7f70c1f2eb4bf75ad1ee54c563ff7eaeb), model claude-opus-5-5, effort xhigh.
 
 **1.** Quoted under [8f605a4](https://github.com/zululima/dotclaude/commit/8f605a4ea1f4e7e2c2a6f75b9df9cc106d42475e).
 
