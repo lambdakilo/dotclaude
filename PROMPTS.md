@@ -5,9 +5,18 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Move the status line on as soon as a session is prompted
+## Check a README on one screen scrolled to its top
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**11.**
+> [an ask about a project's repository and its licence left out] also
+> readme should be onescreenful describing the process. one screenful
+> means i see the end like in ss here
+
+## Move the status line on as soon as a session is prompted
+
+2026-10-31, commit [29e18ac](https://github.com/zululima/dotclaude/commit/29e18ac11ad00a9a250dc07cc68998c9910d55f9), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > hmmm the status bar is probelmatic in that way that it shows the
