@@ -5,9 +5,24 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Give the shortest word that finds an emoji, then its name
+## Let a repository's commit-msg check skip terms it may name
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dream review also tell me about this Security flag: [pasted: a
+> paragraph from the last dream run's closing message about one of its
+> agents]
+
+(Step p11, 4 of 8: let a mirror's commit-msg check accept the
+employer's own name?)
+> yeah accept it also i dont see a reason why couldnt [the mirror's]
+> people know the customer projects name. Step p11, 4 of 8 also waht
+> does p and w1 mean? proposal? week?
+
+## Give the shortest word that finds an emoji, then its name
+
+2026-10-31, commit [b1608c1](https://github.com/zululima/dotclaude/commit/b1608c17d795c6895ee465e85f5dc3aeb3a93142), model claude-opus-5-5, effort xhigh.
 
 **8.**
 > nice try but for example with face with monocle the right word woudl

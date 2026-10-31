@@ -44,7 +44,9 @@
 # Literals listed one per line in sync-deny.txt, which git ignores, fail the
 # scan wherever they appear, in any case: the names and labels of a private
 # project. sync.sh --check-message <file> checks a commit message against the
-# same list, for a commit-msg hook.
+# same list, for a commit-msg hook, less the literals listed one per line in
+# sync-deny-skip.txt in the git directory of the repository it runs in, such
+# as an employer's name in a repository the employer owns.
 #
 # Mirrors: directories listed one per line in sync-mirrors.txt, which git
 # ignores, get a copy of every published file after a clean scan, for a second
@@ -97,6 +99,14 @@ if [ -f "$checkout/sync-deny.txt" ]; then
 fi
 
 if [ "${1:-}" = "--check-message" ]; then
+  skip="$(git rev-parse --git-common-dir 2>/dev/null || true)/sync-deny-skip.txt"
+  if [ -f "$skip" ] && [ "${#deny_args[@]}" -gt 0 ]; then
+    terms=("${deny_args[@]}")
+    deny_args=()
+    for ((i = 1; i < ${#terms[@]}; i += 2)); do
+      grep -q -i -x -F -e "${terms[i]}" "$skip" || deny_args+=(-e "${terms[i]}")
+    done
+  fi
   if [ "${#deny_args[@]}" -gt 0 ] && grep -v '^#' "$2" | grep -n -i -F "${deny_args[@]}" >&2; then
     echo "sync: the commit message names a term from sync-deny.txt" >&2
     exit 1

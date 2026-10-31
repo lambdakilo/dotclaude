@@ -33,7 +33,8 @@ mirrored file states what holds now.
   per line in `sync-allow.txt`, when that file exists, are exempt. Literals listed one per line in
   the git-ignored `sync-deny.txt` fail the scan in any case, and `sync.sh --check-message`, run from
   the untracked commit-msg hook of the checkout and of each mirror, holds commit messages to the
-  same list.
+  same list, less the literals that `sync-deny-skip.txt` in that repository's git directory lists,
+  such as an employer's name in a repository the employer owns.
 - `CLAUDE.md`, `README.md`, the files under `docs/` and the pull-requests skill wrap prose at 100
   columns, a list item's later lines indented under its text, and a plain `sync.sh` run stops on a
   longer line. After an edit of one of them, run `~/Projects/dotclaude/reflow.sh` bare in place of a
