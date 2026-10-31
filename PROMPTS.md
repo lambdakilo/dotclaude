@@ -5,9 +5,21 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Show a dream run's report and figures in the final run only
+## Refuse a second draft PR in a repository with a hook
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> dream review also tell me about this Security flag: [pasted: a
+> paragraph from the last dream run's closing message about one of its
+> agents]
+
+(Step n7 of 24 Oct, 1 of 8: refuse a second draft PR with a hook?)
+> Add it (Recommended)
+
+## Show a dream run's report and figures in the final run only
+
+2026-10-31, commit [3306885](https://github.com/zululima/dotclaude/commit/3306885f1fd98c959fe949298b09d695c35161dc), model claude-opus-5-5, effort xhigh.
 
 **2.**
 > dont give me these numbers  and reports in the first dream run.

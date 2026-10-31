@@ -125,6 +125,7 @@ mirrored=(
   hooks/stack-held-by-peer.sh
   hooks/claude-md-changed.sh
   hooks/no-github-posts.sh
+  hooks/one-draft-pr-per-repo.sh
   hooks/prompt-feedback-box.sh
   hooks/no-meta-prompts.sh
   hooks/abbreviations-listed.sh

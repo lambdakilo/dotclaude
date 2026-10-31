@@ -90,6 +90,24 @@ const suites = [
     ['lets a PR body edit through', () => quiet(run(bash('gh pr edit 12 --body-file body.md')))],
   ]],
 
+  ['one-draft-pr-per-repo.sh', run => {
+    const fake = path.join(home, 'fake-gh'), args = path.join(home, 'gh-args')
+    fs.chmodSync(write(path.join(fake, 'gh'), `#!/bin/sh\nprintf '%s\\n' "$*" > ${q(args)}\n[ -n "$FAKE_GH" ] && printf '%s\\n' "$FAKE_GH"\nexit \${FAKE_GH_CODE:-0}\n`), 0o755)
+    const env = (drafts, code = 0) => ({ env: { PATH: `${fake}:${ENV.PATH}`, FAKE_GH: drafts, FAKE_GH_CODE: String(code) } })
+    const draft = '  #132 (feat/report) https://github.com/o/r/pull/132'
+    const create = 'gh pr create --repo o/r --draft --base dev --head docs/fix --body-file body.md'
+    return [
+      ['refuses gh pr create while a draft is open', () => { const r = run(bash(create), env(draft)); return refused(r) && r.err.includes('#132 (feat/report)') }],
+      ['asks gh for the user\'s open drafts in the named repository', () => /--draft/.test(fs.readFileSync(args, 'utf8')) && / --repo o\/r$/.test(fs.readFileSync(args, 'utf8').trim())],
+      ['lets the same command through the second time', () => quiet(run(bash(create), env(draft)))],
+      ['refuses again for another set of drafts', () => refused(run(bash(create), env(`${draft}\n  #140 (feat/next) https://github.com/o/r/pull/140`)))],
+      ['lets it through with no draft open', () => quiet(run(bash('gh pr create -R o/s --draft'), env('')))],
+      ['lets it through when gh fails', () => quiet(run(bash('gh pr create -R o/t --draft'), env(draft, 1)))],
+      ['ignores gh pr list and gh pr edit', () => quiet(run(bash('gh pr list --author @me && gh pr edit 3 --body-file b.md'), env(draft)))],
+      ['ignores a gh pr create named in quotes', () => quiet(run(bash("echo 'gh pr create --draft'"), env(draft)))],
+    ]
+  }],
+
   ['no-home-search.sh', run => [
     ['refuses find in the home folder', () => refused(run(bash('find ~ -name x')))],
     ['refuses find in $HOME', () => refused(run(bash('find "$HOME" -name x')))],

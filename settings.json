@@ -169,6 +169,16 @@
         ]
       },
       {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/one-draft-pr-per-repo.sh\"",
+            "timeout": 15
+          }
+        ]
+      },
+      {
         "matcher": "Bash|Edit|Write|MultiEdit",
         "hooks": [
           {
