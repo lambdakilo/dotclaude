@@ -7,8 +7,7 @@ const FIRE = '\u{1F525}'
 const ALARM = '\u23F0'
 const ICE = '\u{1F9CA}'
 const HOURGLASS = '\u23F3'
-const HIT = '\u2705'
-const MISS = '\u{1F4B8}'
+const LATE = '\u{1F4B8}'
 // 12:20 on 20 Oct at UTC+3, and the next midnight there
 const NOW = 1792488000_000
 const MIDNIGHT = 1792530000_000
@@ -75,9 +74,9 @@ test('counts down between turns, then names the day once it is past', async ($, 
   ])
 })
 
-test('marks the last prompt and turns to the alarm and the ice between ticks', async ($, on) => {
+test('marks a prompt sent too late and turns to the alarm and the ice between ticks', async ($, on) => {
   const shown: (string | undefined)[] = []
-  let mark = HIT
+  let mark = ''
   const clock = mock.clock(on, { now: NOW })
   on('session.id', () => ({ value: 'abc' }))
   on('process.run', ($, e) => {
@@ -92,15 +91,15 @@ test('marks the last prompt and turns to the alarm and the ice between ticks', a
   on('turn.complete', () => ({ text: '' }))
 
   await $.session.start(START)
-  mark = MISS
+  mark = LATE
   await $.turn.complete(TURN)
   await clock.advance(5_001)
   await clock.advance(59_999)
 
   expect(shown).toEqual([
-    `${FIRE} 1 min ${HIT}, ${FIGURES}`,
-    `${FIRE} 1 min ${MISS}, ${FIGURES}`,
-    `${ALARM} <1 min ${MISS}, ${FIGURES}`,
+    `${FIRE} 1 min, ${FIGURES}`,
+    `${FIRE} 1 min ${LATE}, ${FIGURES}`,
+    `${ALARM} <1 min ${LATE}, ${FIGURES}`,
     `${ICE} since 12:21, ${FIGURES}`,
   ])
 })

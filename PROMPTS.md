@@ -5,9 +5,20 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Name a misused term in Prompt feedback, with the one that fits
+## Mark only a prompt sent after the cache went cold
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**4.**
+> no need for the checkmark just put that flyign dollar if indeed the
+> prompt was already cold
+
+(show the money after a compaction too, or only when the cache was cold)
+> Only when cold (Recommended)
+
+## Name a misused term in Prompt feedback, with the one that fits
+
+2026-10-31, commit [6817cf8](https://github.com/zululima/dotclaude/commit/6817cf8cbf07fb9b82a53548065263887eeb06da), model claude-opus-5-5, effort xhigh.
 
 **2.** (answer to: shall I add both checks to dream's library review) Quoted under [518b183](https://github.com/zululima/dotclaude/commit/518b183377a33f3af894e0b0f5f7609284ceb05a).
 

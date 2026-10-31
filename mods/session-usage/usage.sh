@@ -2,9 +2,9 @@
 
 # Prints the status line of the usage mod: a fire and the minutes the prompt
 # cache stays warm, an alarm clock in its last minute, or an ice cube and since
-# when it is cold, with a check mark when the last prompt read the cache or
-# money with wings when it wrote it again, then how full the context window
-# is. The other modes total tokens, what they would cost at the
+# when it is cold, with money with wings when the last prompt came after it
+# had gone cold, then how full the context window is. The other modes total
+# tokens, what they would cost at the
 # first-party API list prices and their energy. The transcript repeats a
 # response's usage on every streamed block, so each response id counts once. A
 # model missing from the price table adds tokens but no cost, and the totals
@@ -72,16 +72,17 @@ common='
   def cold_at: (if any(.[]; (.u.cache_creation.ephemeral_1h_input_tokens | n) > 0)
     then 3600 else 300 end) as $ttl | (map(.sent) | max) + $ttl | floor;
 
-  # A prompt read the cache when its first response read at least 80% of the
-  # request before it from there. One that missed reads only the system prompt
-  # other sessions keep warm.
-  def mark($prompts): ($prompts | max) as $p
-    | (map(select(.at < $p)) | max_by(.at)) as $before
+  # A prompt came too late when its request went out after the cache had gone
+  # cold and its first response read less than 80% of the request before it
+  # from there, only the system prompt other sessions keep warm. A compaction
+  # rewrites the cache too, but sending sooner would not have saved it.
+  def late($prompts): ($prompts | max) as $p
+    | map(select(.at < $p)) as $before
     | (map(select(.at > $p)) | min_by(.at)) as $first
-    | if $p == null or $before == null or $first == null then ""
-      elif ($first.u.cache_read_input_tokens | n) >= 0.8 * ($before.u | (.input_tokens | n)
-        + (.cache_creation_input_tokens | n) + (.cache_read_input_tokens | n)) then "✅"
-      else "💸" end;
+    | $p != null and ($before | length) > 0 and $first != null
+      and $first.sent >= ($before | cold_at)
+      and ($first.u.cache_read_input_tokens | n) < 0.8 * ($before | max_by(.at).u
+        | (.input_tokens | n) + (.cache_creation_input_tokens | n) + (.cache_read_input_tokens | n));
 
   # Energy: the seconds from the entry a response answers to its last block,
   # times the share of one request in an 8-GPU H100 node as "How Hungry is AI?"
@@ -204,12 +205,12 @@ if [ -n "$transcript" ] && [ ! -f "$transcript" ]; then
 fi
 [ -f "$transcript" ] || exit 0
 
-read -r ctx window warm mark < <(jq -nrR --arg main "$transcript" "$common"'
+read -r ctx window warm late < <(jq -nrR --arg main "$transcript" "$common"'
   scan($main) | .prompts as $prompts | grouped
   | select(length > 0)
   | max_by(.at) as $last
   | ($last.model | if test("haiku-4|claude-3") then 200000 else 1000000 end) as $window
-  | "\($last.u | all_in) \($window) \(cold_at) \(mark($prompts))"
+  | "\($last.u | all_in) \($window) \(cold_at) \(late($prompts))"
 ' "$transcript" 2>/dev/null)
 [ -n "${warm:-}" ] || exit 0
 
@@ -217,6 +218,8 @@ at() { LC_ALL=C date -r "$1" "$2" 2>/dev/null || LC_ALL=C date -d "@$1" "$2" 2>/
 
 brain=$(printf '\360\237\247\240')
 figures="$brain $(awk -v c="$ctx" -v w="$window" 'BEGIN { printf "%d", c * 100 / w }')%"
+mark=''
+[ "${late:-}" = true ] && mark=$(printf '\360\237\222\270')
 
 if [ "$status" = true ]; then
   z=$(at "$warm" +%z)
