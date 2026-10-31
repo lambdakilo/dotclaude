@@ -5,9 +5,22 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Ask in the closing message, never with a question card
+## Move the status line on as soon as a session is prompted
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> hmmm the status bar is probelmatic in that way that it shows the
+> session that i just sedn prompt to keep the cache warm. ideas on
+> could prompting that already update the status line to the next
+> urgent session
+
+**2.** (answer to: shall I build the beacon into the usage mod?)
+> Yes, build it
+
+## Ask in the closing message, never with a question card
+
+2026-10-31, commit [01434dc](https://github.com/zululima/dotclaude/commit/01434dc068d5aff7f4df26dce13a83b5266e4328), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > [an ask for a skill for a colleague left out] probably dont use

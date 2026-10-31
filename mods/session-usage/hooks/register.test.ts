@@ -165,6 +165,55 @@ test('names the other session that goes cold next, cut to fit, read once a minut
   expect(shown.every(text => [...(text ?? '')].length + 3 <= 40)).toBe(true)
 })
 
+test('reads the other sessions again within seconds of a prompt in one of them', async ($, on) => {
+  const shown: (string | undefined)[] = []
+  const written: string[] = []
+  let beaconAt = NOW - 600_000
+  let nextRuns = 0
+  const clock = mock.clock(on, { now: NOW })
+  mock.env(on, { CLAUDE_CONFIG_DIR: '/config' })
+  on('session.id', () => ({ value: 'abc' }))
+  on('fs.stat', ($, e) => {
+    expect(e.path).toBe('/config/usage-beacon')
+    return { value: { kind: 'file', size: 4, mtimeMs: beaconAt, isLink: false } }
+  })
+  on('fs.write', ($, e) => {
+    written.push(e.path)
+    beaconAt = NOW + 7_000
+    return { value: undefined }
+  })
+  on('process.run', ($, e) => {
+    if (e.argv[1] !== '--next') return warmFor(59)
+    nextRuns++
+    return nextRuns === 1
+      ? ran(`${NOW / 1000 + 90}\tStore status\n${NOW / 1000 + 18 * 60}\tOctober role\n`)
+      : ran(`${NOW / 1000 + 18 * 60}\tOctober role\n`)
+  })
+  on('ui.status', ($, e) => {
+    shown.push(e.text)
+    return { value: undefined }
+  })
+  on('session.start', () => ({ cwd: '/' }))
+  on('turn.start', ($, e) => ({ turnId: e.turnId }))
+
+  await $.session.start(START)
+  await clock.advance(5_000)
+  expect(nextRuns).toBe(1)
+
+  beaconAt = NOW + 6_000
+  await clock.advance(5_000)
+  expect(nextRuns).toBe(2)
+  expect(shown.at(-1)).toBe(`${FIRE} 58 min, ${FIGURES}, ${HOURGLASS} 17m October role`)
+
+  // Its own prompt writes the beacon and reads nothing again.
+  await $.turn.start({ text: 'go', turnId: 't1', agentId: 'sub' })
+  expect(written).toEqual([])
+  await $.turn.start({ text: 'go', turnId: 't2' })
+  expect(written).toEqual(['/config/usage-beacon'])
+  await clock.advance(5_000)
+  expect(nextRuns).toBe(2)
+})
+
 test('leaves a subagent turn alone and clears on no line', async ($, on) => {
   const shown: (string | undefined)[] = []
   mock.clock(on, { now: NOW })

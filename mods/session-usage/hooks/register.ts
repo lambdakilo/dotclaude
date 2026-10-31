@@ -18,6 +18,8 @@ const width = (text: string) => [...text].reduce((n, c) => n + ((c.codePointAt(0
 let usage: Usage | undefined
 let others: Other[] = []
 let othersReadAt = -Infinity
+let beacon: string | undefined
+let beaconHeardAt = 0
 let shown: string | undefined
 let isBusy = false
 let flip: Timer | undefined
@@ -83,6 +85,49 @@ const readOthers = async ($: EngineInterface) => {
   othersReadAt = await $.clock.now()
 }
 
+// Every session's main turn rewrites the beacon, beside the usage log, so the
+// others read again within seconds, not at their next minute.
+const beaconPath = async ($: EngineInterface) => {
+  if (beacon !== undefined) return beacon
+
+  try {
+    const dir = (await $.env.get('CLAUDE_CONFIG_DIR')) ?? (await $.env.get('HOME'))?.concat('/.claude')
+    beacon = dir === undefined ? '' : `${dir}/usage-beacon`
+  } catch {
+    beacon = ''
+  }
+
+  return beacon
+}
+
+const isBeaconNew = async ($: EngineInterface) => {
+  const path = await beaconPath($)
+  if (!path) return false
+
+  const at = await $.fs.stat(path).then(
+    s => s.mtimeMs,
+    () => 0,
+  )
+  if (at <= beaconHeardAt) return false
+
+  beaconHeardAt = at
+  return true
+}
+
+const signal = async ($: EngineInterface) => {
+  const path = await beaconPath($)
+  if (!path) return
+
+  await $.fs.write(path, `${await $.session.id()}\n`).catch(() => undefined)
+  await isBeaconNew($)
+}
+
+const listen = async ($: EngineInterface) => {
+  if (!(await isBeaconNew($))) return
+  await readOthers($)
+  await redraw($)
+}
+
 const redraw = async ($: EngineInterface) => {
   const text = await line($)
   if (text === shown) return
@@ -129,15 +174,20 @@ const tick = async ($: EngineInterface) => {
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     const started = await next(e)
+    await isBeaconNew($)
     await readOthers($)
     await show($)
     $.clock.every(15_000, () => void tick($))
+    if (await beaconPath($)) $.clock.every(5_000, () => void listen($))
 
     return started
   })
 
   on('turn.start', async ($, e, next) => {
-    if (e.agentId === undefined) isBusy = true
+    if (e.agentId === undefined) {
+      isBusy = true
+      await signal($)
+    }
 
     return next(e)
   })

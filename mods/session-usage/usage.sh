@@ -69,8 +69,8 @@ common='
       | {id: .[0].id, model: .[0].model, u: .[-1].u, at: $first.at, sent: $sent, main: .[0].main,
          busy: ([(map(.at) | max) - $sent, 0] | max)});
   def responses($main): scan($main) | grouped;
-  def cold_at: (if any(.[]; (.u.cache_creation.ephemeral_1h_input_tokens | n) > 0)
-    then 3600 else 300 end) as $ttl | (map(.sent) | max) + $ttl | floor;
+  def ttl: if any(.[]; (.u.cache_creation.ephemeral_1h_input_tokens | n) > 0) then 3600 else 300 end;
+  def cold_at: (map(.sent) | max) + ttl | floor;
 
   # A prompt came too late when its request went out after the cache had gone
   # cold and its first response read less than 80% of the request before it
@@ -186,9 +186,12 @@ if [ "${1:-}" = --next ]; then
       IFS=$'\t' read -r _ archived title < <(printf '%s\n' "$known" | grep -F "$id	")
       [ "$archived" = true ] && continue
       [ -n "$title" ] || title=$(grep '"type":"custom-title"' "$f" | tail -1 | jq -r '.customTitle // empty' 2>/dev/null)
-      # Only responses and the entries they answer count, a part of a long
-      # transcript.
-      cold=$(grep -E '"type":"(assistant|user|attachment)"' "$f" | jq -nrR "$common"'responses("") | select(length > 0) | cold_at' 2>/dev/null)
+      # Only responses, the entries they answer and the prompts count, a part
+      # of a long transcript. A prompt warms the cache as it goes out, before
+      # its first response is written.
+      cold=$(grep -E '"type":"(assistant|user|attachment)"' "$f" | jq -nrR "$common"'
+        scan("") | (.prompts | max // 0) as $prompt | grouped | select(length > 0)
+        | ttl as $ttl | [(map(.sent) | max), $prompt] | max + $ttl | floor' 2>/dev/null)
       [ -n "$cold" ] && [ "$cold" -gt "$now" ] && printf '%s\t%s\n' "$cold" "${title:-${id:0:8}}"
     done | sort -n
   exit 0
