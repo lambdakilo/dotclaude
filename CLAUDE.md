@@ -502,9 +502,14 @@ apply to one repository belong in that repository's project memory.
   when run bare. Each choice it can make from what it reads, such as the date, the usage limits
   or its last run, it makes itself. An argument is only for an exception the user named or for
   what it cannot read, such as when the user starts work, and a reply on how to run it names no
-  other. A purpose that reads two ways, such as spending the whole budget or only what is worth
-  spending, is asked through AskUserQuestion before building, never settled alone and named in
-  Prompt feedback afterwards.
+  other.
+- What the user asked for is built as asked. A part of the request that reads two ways, such as
+  spending the whole budget or only what is worth spending, or that the session advises against,
+  such as a login saved ahead of time, is asked through AskUserQuestion before that part is built:
+  never settled alone and named in Prompt feedback afterwards, and never put to the next-step box,
+  whose yes reads as a yes to what the user asked for. The user's version, in their words and with
+  its cost, is one option and the session's alternative another, with the session's pick marked
+  recommended. The reply still attacks the idea, and the choice stays the user's.
 - Probe before spending quota on rate-limited APIs. Read retry-after, no blind retry loops.
 - A request that fails in a way the user's VPN could cause, such as a timeout, a refused or reset
   connection, a DNS or TLS error, or a block page, captcha or 403 from a site that should answer,
