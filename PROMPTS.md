@@ -5,9 +5,24 @@ with its commit and pull request. Square brackets mark what was left out or reda
 commit without a prompts section is left out. This file is generated from the commit messages,
 so a change by hand is lost at the next commit.
 
-## Mark cache hits and the last warm minute in the usage line
+## Flag shared memory notes that belong in the repo or help no one
 
 2026-10-31, [the commit that last changed this file](https://github.com/zululima/dotclaude/commits/main/PROMPTS.md), model claude-opus-5-5, effort xhigh.
+
+**1.**
+> does dream now also check that memories in [a shared repository]
+> only stores data that fits the memory data type? as in not things
+> that [the user's employer] personnel commonly would not benefit from
+> nor things that could be stored in project repos
+
+**2.** (answer to: shall I add both checks to dream's library review)
+> yes also could you add to the prompt feedback terminology better like
+> clearly i used the wrong term of memory type when i meant something
+> else. understand?
+
+## Mark cache hits and the last warm minute in the usage line
+
+2026-10-31, commit [e90c293](https://github.com/zululima/dotclaude/commit/e90c293eaba645c446df43074e6e908c02740517), model claude-opus-5-5, effort xhigh.
 
 **1.**
 > ill use this chat as the time being for the next cold session since i
