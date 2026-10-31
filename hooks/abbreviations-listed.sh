@@ -128,14 +128,18 @@ done <<<"$missing"
 [ "$new" -eq 1 ] || exit 0
 
 cat >&2 <<EOF
-Blocked by ~/.claude/hooks/abbreviations-listed.sh: the quoted prompts use
-abbreviations that earlier commit messages expanded, and this message's
-Abbreviations: section leaves them out. Add these lines to that section, or
-open one with them after the last prompt, before any trailer:
+Blocked by ~/.claude/hooks/abbreviations-listed.sh, so no part of the command
+ran: the quoted prompts use abbreviations that earlier commit messages
+expanded, and this message's Abbreviations: section leaves them out. Add these
+lines to that section, or open one with them after the last prompt, before any
+trailer:
 
 $(printf '%s\n' "$missing" | cut -f 2- | sort -u)
 
-Leave out a line whose word means something else here. Each word is flagged
-once, so the command then goes through.
+A message file this command writes, as with a cat heredoc, was not written and
+holds what it held before, if it exists: add the lines to the command's own
+text, never to the file, and run the whole command again. Leave out a line
+whose word means something else here. Each word is flagged once, so the command
+then goes through.
 EOF
 exit 2

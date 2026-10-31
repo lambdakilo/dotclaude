@@ -89,11 +89,14 @@ mark="$state/$key-$(printf '%s' "$cmd" | cksum | cut -d ' ' -f 1)"
 
 case "$top" in "$HOME"/*) shown="~/${top#"$HOME"/}" ;; *) shown="$top" ;; esac
 cat >&2 <<EOF
-Blocked once by ~/.claude/hooks/prompts-md-current.sh: $shown
+Blocked once by ~/.claude/hooks/prompts-md-current.sh, so no part of the
+command ran: $shown
 keeps PROMPTS.md, and this command neither rebuilds nor stages it.
 ~/.claude/CLAUDE.md keeps the file current in every commit: run
 ~/.claude/hooks/prompts-md.sh --message <file> in that checkout and commit
-PROMPTS.md with the change. When this commit should leave the file as it is,
-run the command again unchanged.
+PROMPTS.md with the change. A message file this command writes, as with a cat
+heredoc, was not written and holds what it held before, if it exists: add the
+rebuild to the command, after the write, and run the whole command again. When
+this commit should leave the file as it is, run the command again unchanged.
 EOF
 exit 2

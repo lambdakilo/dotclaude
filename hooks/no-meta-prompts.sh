@@ -87,12 +87,15 @@ mark="$state/$key-$(printf '%s' "$text" | cksum | cut -d ' ' -f 1)"
 
 case "$hits" in *,*) which="prompts $hits" ;; *) which="prompt $hits" ;; esac
 cat >&2 <<EOF
-Blocked once by ~/.claude/hooks/no-meta-prompts.sh: a sentence in quoted
-$which opens with dotclaude, global ruling, global memory or memory:, the
-words that mark an ask about the Claude Code setup. ~/.claude/CLAUDE.md leaves
-meta prompts out of a project's commits and PR bodies. Replace that part with a
-bracketed note such as [a request about the Claude Code setup left out], and
-leave out a prompt that holds nothing else. When the words are about the change
-itself, run the command again unchanged.
+Blocked once by ~/.claude/hooks/no-meta-prompts.sh, so no part of the command
+ran: a sentence in quoted $which opens with dotclaude, global ruling, global
+memory or memory:, the words that mark an ask about the Claude Code setup.
+~/.claude/CLAUDE.md leaves meta prompts out of a project's commits and PR
+bodies. Replace that part with a bracketed note such as [a request about the
+Claude Code setup left out], and leave out a prompt that holds nothing else. A
+message or body file this command writes, as with a cat heredoc, was not
+written and holds what it held before, if it exists: make the change in the
+command's own text, never in the file, and run the whole command again. When
+the words are about the change itself, run the command again unchanged.
 EOF
 exit 2
